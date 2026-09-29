@@ -62,12 +62,11 @@
     </div>
 
     <!-- Welcome Onboarding Modal -->
-    <div id="onboarding-modal" class="modal" style="display: none; align-items: center; z-index: 10000; opacity: 1; background: rgba(0,0,0,0.8);">
-        <div class="modal-content" style="max-width: 450px; text-align: center;">
-            <i class="fa-solid fa-graduation-cap" style="font-size: 3.5rem; color: var(--primary-color); margin-bottom: 15px;"></i>
-            <h2 style="margin-bottom: 25px;">مرحباً بك في التطبيق! 👋</h2>
-            
-            <div style="text-align: right; margin-bottom: 15px;">
+    <div id="onboarding-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 10000; justify-content: center; align-items: center; backdrop-filter: blur(5px);">
+        <div style="background: var(--card-bg); padding: 30px; border-radius: 15px; width: 90%; max-width: 400px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+            <i class="fa-solid fa-graduation-cap" style="font-size: 3rem; color: var(--primary-color); margin-bottom: 15px;"></i>
+            <h2 style="margin-bottom: 20px;">مرحباً بك يا بطل! 🎯</h2>
+                        <div style="text-align: right; margin-bottom: 15px;">
                 <!-- Role Selection -->
                 <label style="display: block; margin-bottom: 10px; color: var(--text-muted); font-weight: bold;">أنت بتسجل كـ؟</label>
                 <div style="display: flex; gap: 10px; margin-bottom: 20px;">
@@ -75,61 +74,43 @@
                     <button id="role-teacher-btn" class="btn" style="flex: 1; padding: 10px; background: var(--bg-color); color: var(--text-main); border: 1px solid var(--border-color);" onclick="selectRole('teacher')"><i class="fa-solid fa-chalkboard-user"></i> مدرس</button>
                 </div>
                 <input type="hidden" id="onboard-role" value="student">
-
-                <div class="form-group">
-                    <label>الاسم الأول والأخير:</label>
-                    <input type="text" id="onboard-name" placeholder="اكتب اسمك هنا...">
-                </div>
                 
-                <!-- Fields for Student -->
-                <div id="student-fields">
-                    <div class="form-group">
-                        <label>المرحلة الدراسية:</label>
-                        <select id="onboard-stage" onchange="toggleStageFields()">
-                            <option value="" disabled selected>اختر مرحلتك...</option>
-                            <option value="ابتدائي">ابتدائي</option>
-                            <option value="إعدادي">إعدادي</option>
-                            <option value="ثانوي">ثانوي</option>
-                            <option value="جامعة">جامعة</option>
-                        </select>
-                    </div>
-
-                    <div id="stage-school" class="form-group" style="display: none;">
-                        <label>السنة الدراسية:</label>
-                        <select id="onboard-year">
-                            <option value="الصف الأول">الصف الأول</option>
-                            <option value="الصف الثاني">الصف الثاني</option>
-                            <option value="الصف الثالث">الصف الثالث</option>
-                            <option value="الصف الرابع">الصف الرابع</option>
-                            <option value="الصف الخامس">الصف الخامس</option>
-                            <option value="الصف السادس">الصف السادس</option>
-                        </select>
-                    </div>
-
-                    <div id="stage-uni" class="form-group" style="display: none;">
-                        <label>الكلية / التخصص:</label>
-                        <input type="text" id="onboard-uni" placeholder="مثال: كلية الهندسة، طب، حقوق...">
-                    </div>
-
-                    <div class="form-group">
-                        <label>كود المدرس (اختياري):</label>
-                        <input type="text" id="onboard-teacher-code" placeholder="لو معاك كود من مدرسك اكتبه هنا...">
-                    </div>
-                </div>
-
-                <!-- Fields for Teacher -->
                 <div id="teacher-fields" style="display: none;">
                     <div style="background: rgba(56, 176, 0, 0.1); border-left: 4px solid var(--success); padding: 15px; margin-bottom: 15px; border-radius: 8px; font-size: 0.9rem; color: var(--text-main);">
                         <i class="fa-solid fa-circle-info" style="color: var(--success);"></i> 
-                        بصفتك مدرس، سيتم إنشاء <strong>كود خاص بك</strong> بعد التسجيل لتعطيه لطلابك لمتابعتهم وإرسال الامتحانات لهم.
+                        بصفتك مدرس، سيتم إنشاء <strong>كود خاص بك</strong> بعد التسجيل لتعطيه لطلابك لمتابعتهم.
                     </div>
-                    <div class="form-group">
-                        <label>المادة اللي بتدرسها:</label>
-                        <input type="text" id="onboard-teacher-subject" placeholder="مثال: رياضيات، لغة عربية، فيزياء...">
-                    </div>
+                    <label style="display: block; margin-bottom: 5px; color: var(--text-muted);">المادة اللي بتدرسها:</label>
+                    <input type="text" id="onboard-teacher-subject" class="search-input" placeholder="مثال: رياضيات، لغة عربية، فيزياء..." style="width: 100%; margin-bottom: 10px;">
+                </div>
+                
+                <div id="student-fields">
+                <label style="display: block; margin-bottom: 5px; color: var(--text-muted);">اسمك الأول:</label>
+                <input type="text" id="onboard-name" class="search-input" placeholder="اكتب اسمك هنا..." style="width: 100%; margin-bottom: 10px;">
+                
+                <label style="display: block; margin-bottom: 5px; color: var(--text-muted);">المرحلة الدراسية:</label>
+                <select id="onboard-stage" class="search-input" style="width: 100%; margin-bottom: 10px;" onchange="toggleStageFields()">
+                    <option value="" disabled selected>اختر مرحلتك...</option>
+                    <option value="إعدادي">إعدادي</option>
+                    <option value="ثانوي">ثانوي</option>
+                    <option value="جامعة">جامعة</option>
+                </select>
+
+                <div id="stage-school" style="display: none;">
+                    <label style="display: block; margin-bottom: 5px; color: var(--text-muted);">السنة الدراسية:</label>
+                    <select id="onboard-year" class="search-input" style="width: 100%; margin-bottom: 10px;">
+                        <option value="الصف الأول">الصف الأول</option>
+                        <option value="الصف الثاني">الصف الثاني</option>
+                        <option value="الصف الثالث">الصف الثالث</option>
+                    </select>
+                </div>
+
+                <div id="stage-uni" style="display: none;">
+                    <label style="display: block; margin-bottom: 5px; color: var(--text-muted);">الكلية / التخصص:</label>
+                    <input type="text" id="onboard-uni" class="search-input" placeholder="مثال: طب، هندسة، تجارة..." style="width: 100%; margin-bottom: 10px;">
                 </div>
             </div>
-            <button class="btn btn-primary" style="width: 100%; margin-top: 10px; padding: 12px; font-size: 1.1rem;" onclick="saveOnboarding()">ابدأ الاستخدام 🚀</button>
+            <button class="btn btn-primary btn-large" style="width: 100%; margin-top: 10px;" onclick="saveOnboarding()">ابدأ المذاكرة 🚀</button>
         </div>
     </div>
     <script>
@@ -139,6 +120,8 @@
             const teaBtn = document.getElementById('role-teacher-btn');
             const stuFields = document.getElementById('student-fields');
             const teaFields = document.getElementById('teacher-fields');
+            const codeInput = document.getElementById('onboard-teacher-code');
+            const codeLabel = document.getElementById('teacher-code-label');
             
             if (role === 'student') {
                 stuBtn.style.background = 'var(--primary-color)';
@@ -147,6 +130,8 @@
                 teaBtn.style.color = 'var(--text-main)';
                 stuFields.style.display = 'block';
                 teaFields.style.display = 'none';
+                if(codeInput) codeInput.style.display = 'block';
+                if(codeLabel) codeLabel.style.display = 'block';
             } else {
                 teaBtn.style.background = 'var(--primary-color)';
                 teaBtn.style.color = 'white';
@@ -154,18 +139,55 @@
                 stuBtn.style.color = 'var(--text-main)';
                 teaFields.style.display = 'block';
                 stuFields.style.display = 'none';
+                if(codeInput) codeInput.style.display = 'none';
+                if(codeLabel) codeLabel.style.display = 'none';
             }
         }
-
         function toggleStageFields() {
             const stage = document.getElementById('onboard-stage').value;
-            document.getElementById('stage-school').style.display = (stage === 'ابتدائي' || stage === 'إعدادي' || stage === 'ثانوي') ? 'block' : 'none';
+            document.getElementById('stage-school').style.display = (stage === 'إعدادي' || stage === 'ثانوي') ? 'block' : 'none';
             document.getElementById('stage-uni').style.display = (stage === 'جامعة') ? 'block' : 'none';
         }
     </script>
-    
-    <!-- Main Content Area -->
-        <main class="main-content">`n            <!-- Teacher Dashboard Page -->
+
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="logo">
+                <i class="fa-solid fa-graduation-cap"></i>
+                <h2>دليلك للمذاكرة</h2>
+            </div>
+            <ul class="nav-links">
+                <li class="active" data-page="dashboard"><i class="fa-solid fa-chart-pie"></i> لوحة التحكم</li>
+                <li data-page="schedule"><i class="fa-solid fa-calendar-week"></i> جدول الدروس</li>
+                <li data-page="teacher-dashboard" id="nav-teacher" style="display:none;"><i class="fa-solid fa-chalkboard-user"></i> لوحة المدرسين</li>
+                <li data-page="tasks"><i class="fa-solid fa-list-check"></i> مهام المذاكرة</li>
+                <li data-page="subjects"><i class="fa-solid fa-book"></i> المواد الدراسية</li>
+                <li data-page="pomodoro"><i class="fa-solid fa-stopwatch"></i> مؤقت بومودورو</li>
+                <li data-page="exams"><i class="fa-solid fa-file-signature"></i> الامتحانات</li>
+                <li data-page="flashcards"><i class="fa-solid fa-layer-group"></i> البطاقات (Flashcards)</li>
+                <li data-page="ai-assistant"><i class="fa-solid fa-robot"></i> المساعد الذكي 🌟</li>
+                <li data-page="backlog"><i class="fa-solid fa-boxes-stacked"></i> لمّ المتراكم 📦</li>
+                <li data-page="quiz"><i class="fa-solid fa-clipboard-question"></i> اختبر نفسك 🧪</li>
+                <li data-page="statistics"><i class="fa-solid fa-chart-simple"></i> إحصائيات المذاكرة 📊</li>
+                <li data-page="gpa-calc"><i class="fa-solid fa-calculator"></i> حاسبة الـ GPA 🎓</li>
+                <li data-page="alarm"><i class="fa-solid fa-bell"></i> منبه النوم الثقيل ⏰</li>
+                <li data-page="admin" id="nav-admin" style="display:none;"></li>
+            </ul>
+            <div class="sidebar-footer">
+                <button id="theme-toggle-btn" class="theme-btn">
+                    <i class="fa-solid fa-moon"></i> الوضع الليلي
+                </button>
+                <div class="developer-credit" style="margin-top: 15px; text-align: center; font-size: 0.85rem; color: var(--text-muted); padding: 10px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color); user-select: none;">
+                    <i class="fa-solid fa-code"></i> Developer: <strong style="color: var(--primary-color); font-size: 1rem; cursor: pointer;" id="secret-admin-btn">Malak Adel</strong>
+                    <div style="margin-top: 5px; font-size: 0.75rem;"><i class="fa-regular fa-copyright"></i> 2026 All Rights Reserved</div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+                        <!-- Teacher Dashboard Page -->
             <section id="teacher-dashboard" class="page">
                 <header>
                     <div>
@@ -211,6 +233,7 @@
                     </div>
                 </div>
             </section>
+            
             <!-- Dashboard Page -->
             <section id="dashboard" class="page active-page">
                 <header>

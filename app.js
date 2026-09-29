@@ -34,50 +34,27 @@ if (!studyUsername || !studyStage || appVersion !== '2.0') {
 
 window.saveOnboarding = () => {
     let name = document.getElementById('onboard-name').value.trim();
-    let role = document.getElementById('onboard-role').value;
+    if (!name) name = 'طالب'; // Fallback
     
-    if (!name) {
-        alert('أهلاً بك! من فضلك أدخل اسمك أولاً لنتمكن من حفظ بياناتك.');
-        return;
-    }
-
-    let stage = '';
-    let spec = '';
-    let tCode = '';
-    let tSubject = '';
-    let generatedTeacherCode = '';
+    let stage = "";
+    let spec = "";
+    let tCode = "";
+    let generatedTeacherCode = "";
 
     if (role === 'student') {
         stage = document.getElementById('onboard-stage').value;
-        if (!stage) {
-            alert('من فضلك اختر المرحلة الدراسية الخاصة بك.');
-            return;
-        }
+        if (!stage) { alert('من فضلك اختر المرحلة الدراسية'); return; }
         if (stage === 'جامعة') {
-            spec = document.getElementById('onboard-uni').value.trim();
-            if (!spec) {
-                alert('من فضلك أدخل اسم الكلية أو التخصص الخاص بك.');
-                return;
-            }
-        } else if (stage === 'ابتدائي' || stage === 'إعدادي' || stage === 'ثانوي') {
-            spec = document.getElementById('onboard-year').value;
-        }
-        tCode = document.getElementById('onboard-teacher-code').value.trim();
-    } else if (role === 'teacher') {
-        tSubject = document.getElementById('onboard-teacher-subject').value.trim();
-        if (!tSubject) {
-            alert('من فضلك أدخل المادة التي تقوم بتدريسها.');
-            return;
-        }
-        stage = 'مدرس';
-        spec = tSubject;
-        generatedTeacherCode = 'T-' + Math.floor(1000 + Math.random() * 9000);
+        spec = document.getElementById('onboard-uni').value.trim();
+    } else if (stage === 'إعدادي' || stage === 'ثانوي') {
+        spec = document.getElementById('onboard-year').value;
     }
     
     studyUsername = name;
-    studyStage = stage;
-    studySpecialty = spec;
+    studyStage = stage || 'غير محدد';
+    studySpecialty = spec || 'غير محدد';
     
+    // Only create a new ID if the user doesn't already have one
     if (!studyUserId) {
         studyUserId = 'user_' + Date.now().toString();
     }
@@ -86,27 +63,15 @@ window.saveOnboarding = () => {
     localStorage.setItem('study_userid', studyUserId);
     localStorage.setItem('study_stage', studyStage);
     localStorage.setItem('study_specialty', studySpecialty);
-    localStorage.setItem('study_role', role);
-    localStorage.setItem('study_app_version', '2.0');
-    
-    if (role === 'student' && tCode) {
-        localStorage.setItem('study_my_teacher_code', tCode);
-    }
-    if (role === 'teacher') {
-        localStorage.setItem('study_teacher_code', generatedTeacherCode);
-    }
+    localStorage.setItem('study_app_version', '2.0'); // Force save new version
     
     document.getElementById('onboarding-modal').style.display = 'none';
     syncToCloud();
-    
-    if (role === 'teacher') {
-        alert('أهلاً بك يا أستاذ ' + name + '\n\nكود المدرس الخاص بك هو:\n[ ' + generatedTeacherCode + ' ]\n\nقم بإعطاء هذا الكود لطلابك ليرتبطوا بك.');
-    }
-    
     setTimeout(() => {
         window.location.reload();
     }, 800);
 };
+
 // Force a sync on app load for returning users so the admin sees them even if they don't add tasks
 if (studyUserId) {
     setTimeout(syncToCloud, 2000);
@@ -1757,17 +1722,12 @@ window.viewAdminUser = (index) => {
     // Render Tasks
     let tasksHtml = '<ul style="list-style:none; padding:0; margin:0;">';
     if(data.tasks && data.tasks.length > 0) {
-                data.tasks.forEach(t => {
-            let subjectName = "";
-            if (t.subjectId && data.subjects) {
-                let subj = data.subjects.find(s => s.id === t.subjectId);
-                if (subj) subjectName = ' | مادة: ' + subj.name;
-            }
-            tasksHtml += <li style="margin-bottom:10px; border-bottom:1px solid var(--border-color); padding-bottom:10px;">
+        data.tasks.forEach(t => {
+            tasksHtml += `<li style="margin-bottom:10px; border-bottom:1px solid var(--border-color); padding-bottom:10px;">
                 <span style="font-size: 1.1rem; margin-left: 10px;">${t.completed ? '✅' : '❌'}</span>
-                <strong>${t.desc}</strong> <span style="color:var(--primary-color); font-size:0.9rem;">${subjectName}</span>
+                <strong>${t.desc}</strong>
                 <br><small style="color:var(--text-muted); margin-right: 35px;">تاريخ المهمة: ${t.date}</small>
-            </li>;
+            </li>`;
         });
     } else {
         tasksHtml += '<li style="color:var(--text-muted);">هذا الطالب لم يضف أي مهام بعد.</li>';
@@ -1782,20 +1742,14 @@ window.viewAdminUser = (index) => {
         // Sort classes by day
         let sortedClasses = [...data.classes].sort((a,b) => parseInt(a.day) - parseInt(b.day));
         
-                sortedClasses.forEach(c => {
+        sortedClasses.forEach(c => {
             let t = c.time.split(':');
             let h = parseInt(t[0]) % 12 || 12;
             let ampm = parseInt(t[0]) >= 12 ? 'م' : 'ص';
-            let subjectName = "مادة غير معروفة";
-            if (c.subjectId && data.subjects) {
-                let subj = data.subjects.find(s => s.id === c.subjectId);
-                if (subj) subjectName = subj.name;
-            }
-            classesHtml += <li style="margin-bottom:10px; border-bottom:1px solid var(--border-color); padding-bottom:10px;">
+            classesHtml += `<li style="margin-bottom:10px; border-bottom:1px solid var(--border-color); padding-bottom:10px;">
                 <i class="fa-solid fa-book-open" style="color:var(--primary-color); margin-left: 10px;"></i>
                 <strong>يوم ${daysArray[c.day]}</strong> - الساعة ${h}:${t[1]} ${ampm}
-                <br><span style="color:var(--primary-color); margin-right: 35px; font-weight: bold;">( ${subjectName} )</span>
-            </li>;
+            </li>`;
         });
     } else {
         classesHtml += '<li style="color:var(--text-muted);">هذا الطالب لم يقم بإضافة أي حصص/محاضرات في جدوله.</li>';
@@ -1824,13 +1778,10 @@ window.addEventListener('load', () => {
     if (localStorage.getItem('study_role') === 'teacher' || localStorage.getItem('study_is_admin') === 'true') {
         let navTeacher = document.getElementById('nav-teacher');
         if (navTeacher) navTeacher.style.display = 'flex';
-        
         let displayCode = document.getElementById('display-teacher-code');
         if (displayCode) displayCode.innerText = localStorage.getItem('study_teacher_code') || 'غير متوفر';
-        
         if (typeof filterTeacherLibrary === 'function') filterTeacherLibrary();
     }
-
     // Show only if onboarding modal is not active
     const onboard = document.getElementById('onboarding-modal');
     if (!onboard || onboard.style.display === 'none') {
@@ -1880,53 +1831,24 @@ if (closeInstallBtn) {
     });
 }
 
-// ====== Teacher Library Data & Logic ======
+// ====== Teacher Library ======
 const dummyLibraryData = [
     { title: "ملزمة المراجعة النهائية - رياضيات", stage: "إعدادي", subject: "رياضيات", type: "pdf", downloads: 124 },
     { title: "بنك أسئلة الوزارة - علوم", stage: "ابتدائي", subject: "علوم", type: "exam", downloads: 89 },
-    { title: "امتحان شامل لغة عربية - نصف العام", stage: "ثانوي", subject: "عربي", type: "exam", downloads: 210 },
-    { title: "أطلس الخرائط التفاعلي", stage: "ابتدائي", subject: "أخرى", type: "pdf", downloads: 56 },
-    { title: "ملخص القوانين والمسائل - فيزياء", stage: "ثانوي", subject: "علوم", type: "pdf", downloads: 340 }
+    { title: "امتحان شامل لغة عربية - نصف العام", stage: "ثانوي", subject: "عربي", type: "exam", downloads: 210 }
 ];
-
 window.filterTeacherLibrary = () => {
-    const stageFilter = document.getElementById('teacher-stage-filter');
-    const subjectFilter = document.getElementById('teacher-subject-filter');
+    const sVal = document.getElementById('teacher-stage-filter')?.value;
+    const subVal = document.getElementById('teacher-subject-filter')?.value;
     const grid = document.getElementById('teacher-library-grid');
-    if(!stageFilter || !grid) return;
-    
-    const sVal = stageFilter.value;
-    const subVal = subjectFilter.value;
+    if(!grid || !sVal || !subVal) return;
     
     grid.innerHTML = '';
-    
-    const filtered = dummyLibraryData.filter(item => {
-        return (sVal === 'all' || item.stage === sVal) && (subVal === 'all' || item.subject === subVal);
-    });
-    
+    const filtered = dummyLibraryData.filter(i => (sVal === 'all' || i.stage === sVal) && (subVal === 'all' || i.subject === subVal));
     if (filtered.length === 0) {
-        grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 20px;">لا توجد ملفات متطابقة مع بحثك حالياً.</p>';
-        return;
+        grid.innerHTML = '<p>لا توجد ملفات متطابقة.</p>'; return;
     }
-    
     filtered.forEach(item => {
-        const icon = item.type === 'pdf' ? '<i class="fa-solid fa-file-pdf" style="color: var(--danger); font-size: 2rem;"></i>' : '<i class="fa-solid fa-file-circle-check" style="color: var(--primary-color); font-size: 2rem;"></i>';
-        const typeText = item.type === 'pdf' ? 'ملزمة / كتاب' : 'امتحان / أسئلة';
-        
-        grid.innerHTML += 
-            <div class="card" style="display: flex; flex-direction: column; justify-content: space-between; border-left: 4px solid var(--primary-color);">
-                <div style="display: flex; gap: 15px; margin-bottom: 15px;">
-                    +icon+
-                    <div>
-                        <h4 style="margin: 0 0 5px 0; color: var(--text-main); font-size: 1.1rem;">+item.title+</h4>
-                        <span style="font-size: 0.8rem; background: var(--bg-color); padding: 3px 8px; border-radius: 8px; color: var(--text-muted);">+item.stage+ | +typeText+</span>
-                    </div>
-                </div>
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px; border-top: 1px dashed var(--border-color); padding-top: 15px;">
-                    <span style="font-size: 0.8rem; color: var(--text-muted);"><i class="fa-solid fa-download"></i> +item.downloads+ تحميل</span>
-                    <button class="btn btn-outline" style="padding: 6px 12px; font-size: 0.9rem;" onclick="alert('سيتم إضافة خاصية التحميل قريباً!')"><i class="fa-solid fa-cloud-arrow-down"></i> تنزيل</button>
-                </div>
-            </div>
-        ;
+        grid.innerHTML += <div class="card"><h4 style="color:var(--primary-color);">+item.title+</h4><p>+item.stage+ | +item.subject+</p><button class="btn btn-outline" onclick="alert('قريباً')">تنزيل</button></div>;
     });
 };
