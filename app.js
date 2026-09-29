@@ -1739,17 +1739,17 @@ window.loadAdminData = async () => {
             const specText = data.specialty ? data.specialty : 'غير محدد';
             const badgeColor = isTeacher ? 'var(--orange)' : 'var(--primary-color)';
             
-            let cardHtml = 
-                <div class="card" style="border-top: 4px solid  + badgeColor + ; cursor: pointer; transition: 0.2s;" onclick="viewAdminUser( + index + )" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+            let cardHtml = `
+                <div class="card" style="border-top: 4px solid ${badgeColor}; cursor: pointer; transition: 0.2s;" onclick="viewAdminUser(${index})" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
                     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
-                        <h3 style="margin:0;"><i class="fa-solid  + (isTeacher ? 'fa-chalkboard-user' : 'fa-user') + "></i>  + data.name + </h3>
-                        <span style="font-size:0.75rem; background: + badgeColor + ; color:white; padding:3px 8px; border-radius:12px;"> + stageText + </span>
+                        <h3 style="margin:0;"><i class="fa-solid ${isTeacher ? 'fa-chalkboard-user' : 'fa-user'}"></i> ${data.name}</h3>
+                        <span style="font-size:0.75rem; background:${badgeColor}; color:white; padding:3px 8px; border-radius:12px;">${stageText}</span>
                     </div>
-                     + (isTeacher ? <p style="font-size:0.85rem; color:var(--text-main); margin-bottom:5px;"><strong>المواد:</strong> +specText+</p><p style="font-size:0.85rem; color:var(--orange); font-weight:bold; margin-bottom:10px;">كود المدرس:  + (data.teacherCode || 'لا يوجد') + </p> : <p style="font-size:0.85rem; color:var(--text-main); margin-bottom:10px;"><strong>التخصص:</strong> +specText+</p>) + 
-                    <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:15px;"><i class="fa-regular fa-clock"></i> آخر ظهور:  + dateStr + </p>
-                    <button class="btn btn-outline" style="width: 100%; border-color:  + badgeColor + ; color:  + badgeColor + ;"><i class="fa-solid fa-eye"></i> عرض التفاصيل</button>
+                    ${isTeacher ? `<p style="font-size:0.85rem; color:var(--text-main); margin-bottom:5px;"><strong>المواد:</strong> ${specText}</p><p style="font-size:0.85rem; color:var(--orange); font-weight:bold; margin-bottom:10px;">كود المدرس: ${data.teacherCode || 'لا يوجد'}</p>` : `<p style="font-size:0.85rem; color:var(--text-main); margin-bottom:10px;"><strong>التخصص:</strong> ${specText}</p>`}
+                    <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:15px;"><i class="fa-regular fa-clock"></i> آخر ظهور: ${dateStr}</p>
+                    <button class="btn btn-outline" style="width: 100%; border-color: ${badgeColor}; color: ${badgeColor};"><i class="fa-solid fa-eye"></i> عرض التفاصيل</button>
                 </div>
-            ;
+            `;
             
             if (isTeacher) {
                 teachersHtml += cardHtml;
@@ -1762,19 +1762,19 @@ window.loadAdminData = async () => {
         
         let finalHtml = '';
         if (tCount > 0) {
-            finalHtml += <div style="grid-column: 1/-1; border-bottom: 2px solid var(--orange); padding-bottom: 10px; margin-bottom: 10px; margin-top: 20px;">
-                <h2 style="color: var(--orange);"><i class="fa-solid fa-chalkboard-user"></i> المدرسين المسجلين ()</h2>
-            </div> + teachersHtml;
+            finalHtml += `<div style="grid-column: 1/-1; border-bottom: 2px solid var(--orange); padding-bottom: 10px; margin-bottom: 10px; margin-top: 20px;">
+                <h2 style="color: var(--orange);"><i class="fa-solid fa-chalkboard-user"></i> المدرسين المسجلين (${tCount})</h2>
+            </div>` + teachersHtml;
         }
         if (sCount > 0) {
-            finalHtml += <div style="grid-column: 1/-1; border-bottom: 2px solid var(--primary-color); padding-bottom: 10px; margin-bottom: 10px; margin-top: 20px;">
-                <h2 style="color: var(--primary-color);"><i class="fa-solid fa-user-graduate"></i> الطلاب المسجلين ()</h2>
-            </div> + studentsHtml;
+            finalHtml += `<div style="grid-column: 1/-1; border-bottom: 2px solid var(--primary-color); padding-bottom: 10px; margin-bottom: 10px; margin-top: 20px;">
+                <h2 style="color: var(--primary-color);"><i class="fa-solid fa-user-graduate"></i> الطلاب المسجلين (${sCount})</h2>
+            </div>` + studentsHtml;
         }
         
         content.innerHTML = finalHtml;
     } catch(e) {
-        content.innerHTML = <p class="text-danger" style="grid-column:1/-1; text-align:center;">حدث خطأ:  + e.message + </p>;
+        content.innerHTML = `<p class="text-danger" style="grid-column:1/-1; text-align:center;">حدث خطأ: ${e.message}</p>`;
     }
 }
 
@@ -1782,27 +1782,26 @@ window.viewAdminUser = (index) => {
     const data = window.adminFetchedUsers[index];
     document.getElementById('admin-modal-name').innerText = data.name + (data.role === 'teacher' ? ' (مدرس)' : ' (طالب)');
     document.getElementById('admin-modal-stage').innerText = (data.stage || 'غير محدد') + ' | ' + (data.specialty || 'غير محدد');
-    document.getElementById('admin-modal-lastseen').innerHTML = <i class="fa-regular fa-clock"></i> آخر ظهور:  + new Date(data.lastUpdated).toLocaleString('ar-EG');
+    document.getElementById('admin-modal-lastseen').innerHTML = `<i class="fa-regular fa-clock"></i> آخر ظهور: ${new Date(data.lastUpdated).toLocaleString('ar-EG')}`;
     
     let detailsHtml = '';
     
     if (data.role === 'teacher') {
-        detailsHtml = 
+        detailsHtml = `
             <div style="background: rgba(247, 127, 0, 0.1); border-right: 4px solid var(--orange); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
                 <h3 style="color: var(--orange); margin-bottom: 10px;"><i class="fa-solid fa-id-badge"></i> بيانات المدرس</h3>
-                <p><strong>الكود الخاص به:</strong> <span style="background: var(--card-bg); padding: 2px 8px; border-radius: 4px; border: 1px solid var(--border-color);"></span></p>
-                <p><strong>المراحل التي يدرسها:</strong> </p>
-                <p><strong>المواد التي يدرسها:</strong> </p>
+                <p><strong>الكود الخاص به:</strong> <span style="background: var(--card-bg); padding: 2px 8px; border-radius: 4px; border: 1px solid var(--border-color);">${data.teacherCode || 'لا يوجد'}</span></p>
+                <p><strong>المراحل التي يدرسها:</strong> ${data.stage || 'غير محدد'}</p>
+                <p><strong>المواد التي يدرسها:</strong> ${data.specialty || 'غير محدد'}</p>
             </div>
-        ;
+        `;
         
-        // Find students using this teacher's code
         let linkedStudents = window.adminFetchedUsers.filter(u => u.role !== 'teacher' && u.linkedTeacher === data.teacherCode);
-        detailsHtml += <h3 style="margin-bottom:15px; border-bottom:1px solid var(--border-color); padding-bottom:5px;"><i class="fa-solid fa-users"></i> الطلاب المرتبطين به ()</h3>;
+        detailsHtml += `<h3 style="margin-bottom:15px; border-bottom:1px solid var(--border-color); padding-bottom:5px;"><i class="fa-solid fa-users"></i> الطلاب المرتبطين به (${linkedStudents.length})</h3>`;
         if (linkedStudents.length > 0) {
             detailsHtml += '<ul style="list-style:none; padding:0; margin:0;">';
             linkedStudents.forEach(stu => {
-                detailsHtml += <li style="margin-bottom:10px; padding:10px; background:var(--bg-color); border-radius:8px;"><i class="fa-solid fa-user-graduate text-primary"></i> <strong></strong> ( | )</li>;
+                detailsHtml += `<li style="margin-bottom:10px; padding:10px; background:var(--bg-color); border-radius:8px;"><i class="fa-solid fa-user-graduate text-primary"></i> <strong>${stu.name}</strong> (${stu.stage} | ${stu.specialty})</li>`;
             });
             detailsHtml += '</ul>';
         } else {
@@ -1810,31 +1809,30 @@ window.viewAdminUser = (index) => {
         }
         
     } else {
-        // Student details
         if (data.linkedTeacher) {
-            detailsHtml += 
+            detailsHtml += `
                 <div style="background: rgba(67, 97, 238, 0.1); border-right: 4px solid var(--primary-color); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
-                    <p style="margin:0;"><strong>مرتبط بمدرس كود:</strong> <span style="background: var(--card-bg); padding: 2px 8px; border-radius: 4px; border: 1px solid var(--border-color);"></span></p>
+                    <p style="margin:0;"><strong>مرتبط بمدرس كود:</strong> <span style="background: var(--card-bg); padding: 2px 8px; border-radius: 4px; border: 1px solid var(--border-color);">${data.linkedTeacher}</span></p>
                 </div>
-            ;
+            `;
         }
         
-        detailsHtml += <h3 style="margin-bottom:15px; border-bottom:1px solid var(--border-color); padding-bottom:5px;"><i class="fa-solid fa-list-check text-primary"></i> المهام المضافة</h3>;
+        detailsHtml += `<h3 style="margin-bottom:15px; border-bottom:1px solid var(--border-color); padding-bottom:5px;"><i class="fa-solid fa-list-check text-primary"></i> المهام المضافة</h3>`;
         if(data.tasks && data.tasks.length > 0) {
             detailsHtml += '<ul style="list-style:none; padding:0; margin:0; margin-bottom: 20px;">';
             data.tasks.forEach(t => {
-                detailsHtml += <li style="margin-bottom:10px; padding-bottom:10px; border-bottom:1px dashed var(--border-color);">
-                    <span style="font-size: 1.1rem; margin-left: 10px;"></span>
-                    <strong></strong>
-                    <br><small style="color:var(--text-muted); margin-right: 35px;">ميعاد التسليم: </small>
-                </li>;
+                detailsHtml += `<li style="margin-bottom:10px; padding-bottom:10px; border-bottom:1px dashed var(--border-color);">
+                    <span style="font-size: 1.1rem; margin-left: 10px;">${t.completed ? '✅' : '⏳'}</span>
+                    <strong>${t.desc}</strong>
+                    <br><small style="color:var(--text-muted); margin-right: 35px;">ميعاد التسليم: ${t.date}</small>
+                </li>`;
             });
             detailsHtml += '</ul>';
         } else {
             detailsHtml += '<p style="color:var(--text-muted); margin-bottom: 20px;">لم يقم بإضافة أي مهام.</p>';
         }
 
-        detailsHtml += <h3 style="margin-bottom:15px; border-bottom:1px solid var(--border-color); padding-bottom:5px;"><i class="fa-solid fa-calendar-week text-primary"></i> جدول الحصص</h3>;
+        detailsHtml += `<h3 style="margin-bottom:15px; border-bottom:1px solid var(--border-color); padding-bottom:5px;"><i class="fa-solid fa-calendar-week text-primary"></i> جدول الحصص</h3>`;
         if(data.classes && data.classes.length > 0) {
             detailsHtml += '<ul style="list-style:none; padding:0; margin:0;">';
             const daysArray = ['الأحد', 'الاثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'];
@@ -1843,10 +1841,10 @@ window.viewAdminUser = (index) => {
                 let t = c.time.split(':');
                 let h = parseInt(t[0]) % 12 || 12;
                 let ampm = parseInt(t[0]) >= 12 ? 'م' : 'ص';
-                detailsHtml += <li style="margin-bottom:10px; padding:10px; background:var(--bg-color); border-radius:8px;">
+                detailsHtml += `<li style="margin-bottom:10px; padding:10px; background:var(--bg-color); border-radius:8px;">
                     <i class="fa-solid fa-book-open text-primary" style="margin-left: 10px;"></i>
-                    <strong>يوم </strong> - الساعة :  ()
-                </li>;
+                    <strong>يوم ${daysArray[c.day]}</strong> - الساعة ${h}:${t[1]} ${ampm} (${c.subject || 'مادة'})
+                </li>`;
             });
             detailsHtml += '</ul>';
         } else {
@@ -1854,12 +1852,11 @@ window.viewAdminUser = (index) => {
         }
     }
     
-    // Clear out old elements and set new content
     const modalTasks = document.getElementById('admin-modal-tasks');
     const modalClasses = document.getElementById('admin-modal-classes');
     
     if (modalTasks) modalTasks.innerHTML = detailsHtml;
-    if (modalClasses) modalClasses.innerHTML = ''; // We put everything in tasks div for simplicity
+    if (modalClasses) modalClasses.innerHTML = '';
 
     openModal('admin-user-modal');
 }
