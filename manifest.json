@@ -2,7 +2,7 @@
   "name": "دليلك للمذاكرة",
   "short_name": "المذاكرة",
   "description": "تطبيق المذاكرة المتكامل للطلاب بخصائص الذكاء الاصطناعي",
-  "start_url": "/",
+  "start_url": "./",
   "display": "standalone",
   "background_color": "#0f172a",
   "theme_color": "#4361ee",
@@ -20,3 +20,4 @@
     }
   ]
 }
+
