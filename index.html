@@ -109,11 +109,22 @@
                     <label style="display: block; margin-bottom: 5px; color: var(--text-muted);">الكلية / التخصص:</label>
                     <input type="text" id="onboard-uni" class="search-input" placeholder="مثال: طب، هندسة، تجارة..." style="width: 100%; margin-bottom: 10px;">
                 </div>
-            </div>
+                            </div> <!-- End student fields div -->
+                <label id="teacher-code-label" style="display: block; margin-bottom: 5px; color: var(--text-muted);">كود المدرس (اختياري):</label>
+                <input type="text" id="onboard-teacher-code" class="search-input" placeholder="لو معاك كود من مدرسك اكتبه هنا..." style="width: 100%; margin-bottom: 10px;">
+            </div> <!-- End outer right aligned div -->
             <button class="btn btn-primary btn-large" style="width: 100%; margin-top: 10px;" onclick="saveOnboarding()">ابدأ المذاكرة 🚀</button>
         </div>
     </div>
     <script>
+        function toggleStageFields() {
+            const stage = document.getElementById('onboard-stage').value;
+            document.getElementById('stage-school').style.display = (stage === 'إعدادي' || stage === 'ثانوي') ? 'block' : 'none';
+            document.getElementById('stage-uni').style.display = (stage === 'جامعة') ? 'block' : 'none';
+        }
+    </script>
+
+        <script>
         function selectRole(role) {
             document.getElementById('onboard-role').value = role;
             const stuBtn = document.getElementById('role-student-btn');
@@ -143,13 +154,7 @@
                 if(codeLabel) codeLabel.style.display = 'none';
             }
         }
-        function toggleStageFields() {
-            const stage = document.getElementById('onboard-stage').value;
-            document.getElementById('stage-school').style.display = (stage === 'إعدادي' || stage === 'ثانوي') ? 'block' : 'none';
-            document.getElementById('stage-uni').style.display = (stage === 'جامعة') ? 'block' : 'none';
-        }
     </script>
-
     <div class="app-container">
         <!-- Sidebar Navigation -->
         <nav class="sidebar">
