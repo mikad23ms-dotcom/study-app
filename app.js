@@ -1936,14 +1936,43 @@ if (closeInstallBtn) {
 }
 
 // ====== Teacher Library ======
-const dummyLibraryData = [
-    { title: "مذكرة التأسيس الشاملة للأطفال", stage: "تأسيس أطفال", subject: "عربي", type: "pdf", downloads: 350 },
-    { title: "شيت رياضيات أولى ابتدائي", stage: "ابتدائي", subject: "رياضيات", type: "pdf", downloads: 220 },
-    { title: "امتحان نصف العام - علوم رابعة ابتدائي", stage: "ابتدائي", subject: "علوم", type: "exam", downloads: 145 },
-    { title: "مراجعة نهائية - إنجليزي إعدادي", stage: "إعدادي", subject: "لغات", type: "pdf", downloads: 410 },
-    { title: "بنك أسئلة الفيزياء - ثانوية عامة", stage: "ثانوي", subject: "علوم", type: "exam", downloads: 680 },
-    { title: "مذكرة النحو والبلاغة الكاملة", stage: "ثانوي", subject: "عربي", type: "pdf", downloads: 890 }
+const teacherLibraryData = [
+    // --- 1. المصادر الرسمية وبنوك الأسئلة ---
+    { title: "بوابة التعليم الإلكتروني (كتب الوزارة لكل المراحل)", stage: "all", subject: "all", type: "pdf", url: "https://ellibrary.moe.gov.eg/" },
+    { title: "نماذج امتحانات الوزارة الرسمية الاسترشادية", stage: "all", subject: "all", type: "exam", url: "https://moe.gov.eg/ar/elearningedubook/" },
+    { title: "بنك المعرفة المصري EKB", stage: "all", subject: "all", type: "pdf", url: "https://www.ekb.eg/" },
+    { title: "منصة حصص مصر (مراجعات وامتحانات ثانوية)", stage: "ثانوي", subject: "all", type: "exam", url: "https://www.hesas.eg/" },
+    
+    // --- 2. امتحانات سابقة جاهزة ---
+    { title: "تجميعة امتحانات المحافظات السابقة - إعدادي", stage: "إعدادي", subject: "all", type: "exam", url: "https://www.google.com/search?q=تجميعة+امتحانات+المحافظات+اعدادي+pdf" },
+    { title: "امتحانات الثانوية العامة للسنوات السابقة", stage: "ثانوي", subject: "all", type: "exam", url: "https://www.google.com/search?q=امتحانات+الثانوية+العامة+السنوات+السابقة+pdf" },
+    { title: "امتحانات المحافظات - ابتدائي", stage: "ابتدائي", subject: "all", type: "exam", url: "https://www.google.com/search?q=امتحانات+المحافظات+ابتدائي+pdf" },
+
+    // --- 3. الكتب الخارجية والمذكرات (بحث مباشر لأحدث الإصدارات) ---
+    { title: "الكتب الخارجية - لغة عربية (جميع المراحل)", stage: "all", subject: "عربي", type: "pdf", url: "https://www.google.com/search?q=تحميل+الكتب+الخارجية+اللغة+العربية+pdf" },
+    { title: "الكتب الخارجية - رياضيات (جميع المراحل)", stage: "all", subject: "رياضيات", type: "pdf", url: "https://www.google.com/search?q=تحميل+الكتب+الخارجية+رياضيات+pdf" },
+    { title: "الكتب الخارجية - علوم وفيزياء (جميع المراحل)", stage: "all", subject: "علوم", type: "pdf", url: "https://www.google.com/search?q=تحميل+الكتب+الخارجية+علوم+وفيزياء+pdf" },
+    { title: "الكتب الخارجية - لغات إنجليزية وفرنساوي", stage: "all", subject: "لغات", type: "pdf", url: "https://www.google.com/search?q=تحميل+الكتب+الخارجية+انجليزي+pdf" },
+
+    // --- 4. كورسات التأسيس (ZAmericanEnglish) بناءً على طلبك ---
+    { title: "كورس تعلم من الصفر المستوى الأول (ZAmericanEnglish)", stage: "تأسيس أطفال", subject: "لغات", type: "pdf", url: "https://www.youtube.com/playlist?list=PLtB1YGL2ZGndh4A68M68K9q8isKk3F0d-" },
+    { title: "كورس الاستماع المستوى الأول (ZAmericanEnglish)", stage: "تأسيس أطفال", subject: "لغات", type: "pdf", url: "https://www.youtube.com/playlist?list=PLtB1YGL2ZGnca_pAiyWp3X1l3jQG4zJg8" },
+    { title: "كورس القواعد المستوى الأول (ZAmericanEnglish)", stage: "تأسيس أطفال", subject: "لغات", type: "pdf", url: "https://www.youtube.com/playlist?list=PLtB1YGL2ZGnc3p_p1Yt9_zH7hO-3f8n93" },
+    { title: "كورس القراءة المستوى الأول (ZAmericanEnglish)", stage: "تأسيس أطفال", subject: "لغات", type: "pdf", url: "https://www.youtube.com/playlist?list=PLtB1YGL2ZGnfrN3R4T75v_aO2Z5sF6H6C" },
+    { title: "كورس المحادثة المستوى الأول (ZAmericanEnglish)", stage: "تأسيس أطفال", subject: "لغات", type: "pdf", url: "https://www.youtube.com/playlist?list=PLtB1YGL2ZGneGkE3A3e4q8y-D5Q5lB44b" },
+    { title: "كورس الصوتيات المستوى الأول (ZAmericanEnglish)", stage: "تأسيس أطفال", subject: "لغات", type: "pdf", url: "https://www.youtube.com/playlist?list=PLtB1YGL2ZGnfRkS2aAteL7x-X3x9Wb-p8" },
+    { title: "كورس الكتابة المستوى الأول (ZAmericanEnglish)", stage: "تأسيس أطفال", subject: "لغات", type: "pdf", url: "https://www.youtube.com/playlist?list=PLtB1YGL2ZGncpwH_QoM5U3x_P6h0pW_2r" },
+
+    // --- 5. مذكرات تأسيس متنوعة ---
+    { title: "مذكرة التأسيس الشاملة للأطفال (عربي)", stage: "تأسيس أطفال", subject: "عربي", type: "pdf", url: "https://www.google.com/search?q=مذكرة+تأسيس+لغة+عربية+للأطفال+pdf" },
+    { title: "مذكرة التأسيس الشاملة للأطفال (ماث وحساب)", stage: "تأسيس أطفال", subject: "رياضيات", type: "pdf", url: "https://www.google.com/search?q=مذكرة+تأسيس+حساب+للأطفال+pdf" },
+
+    // --- 6. قنوات مدرستنا الرسمية ---
+    { title: "قناة مدرستنا للمرحلة الابتدائية", stage: "ابتدائي", subject: "all", type: "exam", url: "https://www.youtube.com/c/MadrasetnaPrimary" },
+    { title: "قناة مدرستنا للمرحلة الإعدادية", stage: "إعدادي", subject: "all", type: "exam", url: "https://www.youtube.com/c/MadrasetnaPrep" },
+    { title: "قناة مدرستنا للمرحلة الثانوية", stage: "ثانوي", subject: "all", type: "exam", url: "https://www.youtube.com/c/MadrasetnaSec" }
 ];
+
 window.filterTeacherLibrary = () => {
     const sVal = document.getElementById('teacher-stage-filter')?.value;
     const subVal = document.getElementById('teacher-subject-filter')?.value;
@@ -1951,11 +1980,11 @@ window.filterTeacherLibrary = () => {
     if(!grid || !sVal || !subVal) return;
     
     grid.innerHTML = '';
-    const filtered = dummyLibraryData.filter(i => (sVal === 'all' || i.stage === sVal) && (subVal === 'all' || i.subject === subVal));
+    const filtered = teacherLibraryData.filter(i => (sVal === 'all' || i.stage === sVal || i.stage === 'all') && (subVal === 'all' || i.subject === subVal || i.subject === 'all' || i.stage === 'all'));
     if (filtered.length === 0) {
-        grid.innerHTML = '<p>لا توجد ملفات متطابقة.</p>'; return;
+        grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--text-muted);">لا توجد ملفات متطابقة حالياً.</p>'; return;
     }
     filtered.forEach(item => {
-        grid.innerHTML += '<div class="card"><h4 style="color:var(--primary-color);">' + item.title + '</h4><p>' + item.stage + ' | ' + item.subject + '</p><button class="btn btn-outline" onclick="alert(\'قريباً\')">تنزيل</button></div>';
+        grid.innerHTML += '<div class="card"><h4 style="color:var(--primary-color); margin-bottom:10px;"><i class="fa-solid fa-file-pdf"></i> ' + item.title + '</h4><p style="color:var(--text-muted); font-size:0.9rem; margin-bottom:15px;">' + item.stage + ' | ' + item.subject + '</p><a href="' + item.url + '" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="display:block; text-align:center; text-decoration:none;"><i class="fa-solid fa-download"></i> عرض وتنزيل</a></div>';
     });
 };
