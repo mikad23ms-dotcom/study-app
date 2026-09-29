@@ -1878,6 +1878,6 @@ window.filterTeacherLibrary = () => {
         grid.innerHTML = '<p>لا توجد ملفات متطابقة.</p>'; return;
     }
     filtered.forEach(item => {
-        grid.innerHTML += <div class="card"><h4 style="color:var(--primary-color);">+item.title+</h4><p>+item.stage+ | +item.subject+</p><button class="btn btn-outline" onclick="alert('قريباً')">تنزيل</button></div>;
+        grid.innerHTML += '<div class="card"><h4 style="color:var(--primary-color);">' + item.title + '</h4><p>' + item.stage + ' | ' + item.subject + '</p><button class="btn btn-outline" onclick="alert(\'قريباً\')">تنزيل</button></div>';
     });
 };
