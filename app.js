@@ -34,7 +34,7 @@ if (!studyUsername || !studyStage || appVersion !== '2.0') {
 
 window.saveOnboarding = () => {
     let name = document.getElementById('onboard-name').value.trim();
-    let role = document.getElementById('onboard-role').value; // 'student' or 'teacher'
+    let role = document.getElementById('onboard-role').value;
     
     if (!name) {
         alert('أهلاً بك! من فضلك أدخل اسمك أولاً لنتمكن من حفظ بياناتك.');
@@ -1821,7 +1821,6 @@ const welcomeQuotes = [
 ];
 
 window.addEventListener('load', () => {
-    // === Teacher Portal Logic ===
     if (localStorage.getItem('study_role') === 'teacher' || localStorage.getItem('study_is_admin') === 'true') {
         let navTeacher = document.getElementById('nav-teacher');
         if (navTeacher) navTeacher.style.display = 'flex';
@@ -1881,26 +1880,19 @@ if (closeInstallBtn) {
     });
 }
 
-// ==========================================
 // ====== Teacher Library Data & Logic ======
-// ==========================================
-
 const dummyLibraryData = [
     { title: "ملزمة المراجعة النهائية - رياضيات", stage: "إعدادي", subject: "رياضيات", type: "pdf", downloads: 124 },
     { title: "بنك أسئلة الوزارة - علوم", stage: "ابتدائي", subject: "علوم", type: "exam", downloads: 89 },
     { title: "امتحان شامل لغة عربية - نصف العام", stage: "ثانوي", subject: "عربي", type: "exam", downloads: 210 },
     { title: "أطلس الخرائط التفاعلي", stage: "ابتدائي", subject: "أخرى", type: "pdf", downloads: 56 },
-    { title: "ملخص القوانين والمسائل - فيزياء", stage: "ثانوي", subject: "علوم", type: "pdf", downloads: 340 },
-    { title: "امتحانات المحافظات السابقة - رياضيات", stage: "إعدادي", subject: "رياضيات", type: "exam", downloads: 175 },
-    { title: "مذكرة التأسيس في النحو", stage: "ابتدائي", subject: "عربي", type: "pdf", downloads: 420 },
-    { title: "قاموس المصطلحات الإنجليزية", stage: "إعدادي", subject: "لغات", type: "pdf", downloads: 112 }
+    { title: "ملخص القوانين والمسائل - فيزياء", stage: "ثانوي", subject: "علوم", type: "pdf", downloads: 340 }
 ];
 
 window.filterTeacherLibrary = () => {
     const stageFilter = document.getElementById('teacher-stage-filter');
     const subjectFilter = document.getElementById('teacher-subject-filter');
     const grid = document.getElementById('teacher-library-grid');
-    
     if(!stageFilter || !grid) return;
     
     const sVal = stageFilter.value;
@@ -1918,11 +1910,11 @@ window.filterTeacherLibrary = () => {
     }
     
     filtered.forEach(item => {
-        const icon = item.type === 'pdf' ? '<i class="fa-solid fa-file-pdf" style="color: #ef4444; font-size: 2rem;"></i>' : '<i class="fa-solid fa-file-circle-check" style="color: var(--primary); font-size: 2rem;"></i>';
+        const icon = item.type === 'pdf' ? '<i class="fa-solid fa-file-pdf" style="color: var(--danger); font-size: 2rem;"></i>' : '<i class="fa-solid fa-file-circle-check" style="color: var(--primary-color); font-size: 2rem;"></i>';
         const typeText = item.type === 'pdf' ? 'ملزمة / كتاب' : 'امتحان / أسئلة';
         
         grid.innerHTML += 
-            <div class="card" style="display: flex; flex-direction: column; justify-content: space-between; border-left: 4px solid var(--primary); padding: 20px;">
+            <div class="card" style="display: flex; flex-direction: column; justify-content: space-between; border-left: 4px solid var(--primary-color);">
                 <div style="display: flex; gap: 15px; margin-bottom: 15px;">
                     +icon+
                     <div>
@@ -1932,7 +1924,7 @@ window.filterTeacherLibrary = () => {
                 </div>
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px; border-top: 1px dashed var(--border-color); padding-top: 15px;">
                     <span style="font-size: 0.8rem; color: var(--text-muted);"><i class="fa-solid fa-download"></i> +item.downloads+ تحميل</span>
-                    <button class="btn btn-outline" style="padding: 8px 15px; font-size: 0.9rem; border: 1px solid var(--primary); color: var(--primary); background: transparent; border-radius: 8px; cursor: pointer;" onclick="alert('سيتم إضافة خاصية التحميل قريباً!')"><i class="fa-solid fa-cloud-arrow-down"></i> تنزيل</button>
+                    <button class="btn btn-outline" style="padding: 6px 12px; font-size: 0.9rem;" onclick="alert('سيتم إضافة خاصية التحميل قريباً!')"><i class="fa-solid fa-cloud-arrow-down"></i> تنزيل</button>
                 </div>
             </div>
         ;
