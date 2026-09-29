@@ -1949,65 +1949,45 @@ if (closeInstallBtn) {
 
 // ====== Teacher Library ======
 const teacherLibraryData = [
-    // --- 1. المصادر الرسمية وبنوك الأسئلة ---
-    { title: "بوابة التعليم الإلكتروني (كتب الوزارة لكل المراحل)", stage: "all", subject: "all", type: "pdf", url: "https://ellibrary.moe.gov.eg/" },
-    { title: "نماذج امتحانات الوزارة الرسمية الاسترشادية", stage: "all", subject: "all", type: "exam", url: "https://moe.gov.eg/ar/elearningedubook/" },
+    // --- 1. المصادر الرسمية لوزارة التربية والتعليم ---
+    { title: "مكتبة الوزارة الإلكترونية (كتب وتفاعليات)", stage: "all", subject: "all", type: "pdf", url: "https://ellibrary.moe.gov.eg/" },
+    { title: "بوابة المناهج لوزارة التربية والتعليم", stage: "all", subject: "all", type: "exam", url: "https://moe.gov.eg/ar/elearningedubook/" },
     { title: "بنك المعرفة المصري EKB", stage: "all", subject: "all", type: "pdf", url: "https://www.ekb.eg/" },
     { title: "منصة البث المباشر (مراجعات وزارة التربية والتعليم)", stage: "ثانوي", subject: "all", type: "exam", url: "https://stream.moe.gov.eg/" },
     
-    // --- 2. امتحانات سابقة جاهزة ---
-    { title: "تجميعة امتحانات المحافظات السابقة - إعدادي", stage: "إعدادي", subject: "all", type: "exam", url: "https://www.google.com/search?q=تجميعة+امتحانات+المحافظات+اعدادي+pdf" },
-    { title: "امتحانات الثانوية العامة للسنوات السابقة", stage: "ثانوي", subject: "all", type: "exam", url: "https://www.google.com/search?q=امتحانات+الثانوية+العامة+السنوات+السابقة+pdf" },
-    { title: "امتحانات المحافظات - ابتدائي", stage: "ابتدائي", subject: "all", type: "exam", url: "https://www.google.com/search?q=امتحانات+المحافظات+ابتدائي+pdf" },
+    // --- 2. مكتبة الكتب الخارجية (مجمعة لكل صف - الروابط التي تم طلبها) ---
+    { title: "تجميعة كتب خارجية - KG 1", stage: "مرحلة تأسيس", subject: "all", type: "pdf", url: "https://www.facebook.com/groups/zakrolykg/posts/1983734125690864/" },
+    { title: "تجميعة كتب خارجية - KG 2", stage: "مرحلة تأسيس", subject: "all", type: "pdf", url: "https://www.facebook.com/groups/zakrolykg/posts/1983993745664902/" },
+    { title: "تجميعة كتب خارجية - 1 ابتدائي", stage: "ابتدائي", subject: "all", type: "pdf", url: "https://www.facebook.com/groups/233269024075082/posts/2064035784331721/" },
+    { title: "تجميعة كتب خارجية - 2 ابتدائي", stage: "ابتدائي", subject: "all", type: "pdf", url: "https://www.facebook.com/groups/zakrolypr2/posts/2211072595967702/" },
+    { title: "تجميعة كتب خارجية - 3 ابتدائي", stage: "ابتدائي", subject: "all", type: "pdf", url: "https://www.facebook.com/groups/zakrolypr3/posts/2469526460115469/" },
+    { title: "تجميعة كتب خارجية - 4 ابتدائي", stage: "ابتدائي", subject: "all", type: "pdf", url: "https://www.facebook.com/groups/zakrolypr4/posts/2509786096082454/" },
+    { title: "تجميعة كتب خارجية - 5 ابتدائي", stage: "ابتدائي", subject: "all", type: "pdf", url: "https://www.facebook.com/groups/zakrolypr5/posts/25513434495018506/" },
+    { title: "تجميعة كتب خارجية - 6 ابتدائي", stage: "ابتدائي", subject: "all", type: "pdf", url: "https://www.facebook.com/groups/zakrolypr6/posts/3342995755875917/" },
+    { title: "تجميعة كتب خارجية - 1 إعدادي", stage: "إعدادي", subject: "all", type: "pdf", url: "https://www.facebook.com/groups/zakrolyprep1/posts/1985630462347481/" },
+    { title: "تجميعة كتب خارجية - 2 إعدادي", stage: "إعدادي", subject: "all", type: "pdf", url: "https://www.facebook.com/groups/zakrolyprep2/posts/2124590038309056/" },
+    { title: "تجميعة كتب خارجية - 3 إعدادي", stage: "إعدادي", subject: "all", type: "pdf", url: "https://www.facebook.com/groups/zakrolyprep3/posts/2336296903461456/" },
+    { title: "تجميعة كتب خارجية - 1 ثانوي", stage: "ثانوي", subject: "all", type: "pdf", url: "https://www.facebook.com/groups/zakrolysec1/posts/1175556341070501/" },
+    { title: "تجميعة كتب خارجية - 2 ثانوي (علمي)", stage: "ثانوي", subject: "علمي", type: "pdf", url: "https://www.facebook.com/groups/zakrolysec2/posts/3785950905047036/" },
+    { title: "تجميعة كتب خارجية - 2 ثانوي (أدبي)", stage: "ثانوي", subject: "أدبي", type: "pdf", url: "https://www.facebook.com/groups/zakrolysec2/posts/3785953631713430/" },
 
-        // --- 3. الكتب الخارجية (بروابط مباشرة حسب طلبك) ---
-    // إعدادي وثانوي رياضيات (المعاصر)
-    { title: "رياضيات المعاصر - أولى إعدادي", stage: "إعدادي", subject: "رياضيات", type: "pdf", url: "https://drive.google.com/file/d/1VIkQNhNCiRPza00Yaqb7cb3wIbdjsamh/view" },
-    { title: "رياضيات المعاصر - تانية إعدادي", stage: "إعدادي", subject: "رياضيات", type: "pdf", url: "https://drive.google.com/file/d/1VMClDmVwpv9WyIg0lBJQkLIQJRLLgDGO/view" },
-    { title: "رياضيات المعاصر - تالتة إعدادي", stage: "إعدادي", subject: "رياضيات", type: "pdf", url: "https://drive.google.com/file/d/1VVdBFHtTYD2xbULgY3G8fpeLzBgpDFui/view" },
-    { title: "رياضيات المعاصر - أولى ثانوي", stage: "ثانوي", subject: "رياضيات", type: "pdf", url: "https://drive.google.com/file/d/1VBKqrcYHnHnmGFjxS-WZm5ncEyi6Fx0X/view" },
-    { title: "رياضيات المعاصر (بحتة) - تانية ثانوي", stage: "ثانوي", subject: "رياضيات", type: "pdf", url: "https://drive.google.com/file/d/1VCtdMNRjxVZwXtBlV72afdfEmjtPmmqj/view" },
-    { title: "رياضيات المعاصر (تطبيقية) - تانية ثانوي", stage: "ثانوي", subject: "رياضيات", type: "pdf", url: "https://drive.google.com/file/d/1VG8n5w2kTWUlPe2xp2cLvePa3naEhSyX/view" },
+    // --- 3. البحث الذكي للكتب (يعمل دائماً كبديل) ---
+    { title: "البحث عن أحدث الكتب للمرحلة الابتدائية", stage: "ابتدائي", subject: "all", type: "exam", url: "https://www.google.com/search?q=تحميل+الكتب+الخارجية+للمرحلة+الابتدائية+pdf" },
+    { title: "البحث عن أحدث الكتب للمرحلة الإعدادية", stage: "إعدادي", subject: "all", type: "exam", url: "https://www.google.com/search?q=تحميل+الكتب+الخارجية+للمرحلة+الاعدادية+pdf" },
+    { title: "البحث عن أحدث الكتب للمرحلة الثانوية", stage: "ثانوي", subject: "all", type: "exam", url: "https://www.google.com/search?q=تحميل+الكتب+الخارجية+للمرحلة+الثانوية+pdf" },
 
-    // ابتدائي رياضيات (ماث وعربي)
-    { title: "ماث 1 ابتدائي (جيم)", stage: "ابتدائي", subject: "لغات", type: "pdf", url: "https://drive.google.com/file/d/1sRi8s38yQCMhntZZEldETvmfOkQ0_ihH/view" },
-    { title: "رياضيات 1 ابتدائي (سلاح التلميذ)", stage: "ابتدائي", subject: "رياضيات", type: "pdf", url: "https://drive.google.com/file/d/1-lrbDz_49Ql4ty2AzUbt1h9FnWCvQ0lq/view" },
-    { title: "ماث المعاصر 1 ابتدائي", stage: "ابتدائي", subject: "لغات", type: "pdf", url: "https://drive.google.com/file/d/1mu27iunlNiS9d8JIXTLWbVbcU9NDPRdq/view" },
-    { title: "رياضيات 2 ابتدائي (قطر الندى)", stage: "ابتدائي", subject: "رياضيات", type: "pdf", url: "https://drive.google.com/file/d/1cDgDeyKhseOJXuXJeKuWh2n6gWXVybji/view" },
-    { title: "رياضيات 3 ابتدائي (الباهر)", stage: "ابتدائي", subject: "رياضيات", type: "pdf", url: "https://drive.google.com/file/d/12XylS3GwPIbY8AcqG6TeFfXw11lZV9_K/view" },
-    { title: "بوني ماث رابعة ابتدائي", stage: "ابتدائي", subject: "لغات", type: "pdf", url: "https://drive.google.com/file/d/1bEcJUtbqDBlhCbgM5-jkBbj6O4kxyaYz/view" },
-    { title: "المعاصر ماث 4 ابتدائي", stage: "ابتدائي", subject: "لغات", type: "pdf", url: "https://drive.google.com/file/d/1yWxv7kTIvly5yN8o7GytCcHsO6y8rgzC/view" },
-    { title: "سلاح التلميذ رياضيات 4 ابتدائي", stage: "ابتدائي", subject: "رياضيات", type: "pdf", url: "https://drive.google.com/file/d/16bKVOQeNGF13xO1Q0GgrfTS2S8WNyNeU/view" },
-    { title: "المعاصر ماث 5 ابتدائي", stage: "ابتدائي", subject: "لغات", type: "pdf", url: "https://drive.google.com/file/d/15tyF26bDEfqnM3V2wWdPvkM-VqoI8h8x/view" },
-    { title: "الأضواء رياضيات 5 ابتدائي", stage: "ابتدائي", subject: "رياضيات", type: "pdf", url: "https://drive.google.com/file/d/1wJRKrbIKxQZNYXMg0qz0L_6w_xGQ8Eg2/view" },
-    { title: "المعاصر ماث 6 ابتدائي", stage: "ابتدائي", subject: "لغات", type: "pdf", url: "https://drive.google.com/file/d/1rKjGjjGXeUs4fIk80BCsvuJ2-xzERuLY/view" },
-    { title: "سلاح التلميذ رياضيات 6 ابتدائي", stage: "ابتدائي", subject: "رياضيات", type: "pdf", url: "https://drive.google.com/file/d/1AOSN7FNaTCilSXrTdceM5JXUbuW3nKQ4/view" },
+    // --- 4. كورسات التأسيس (ZAmericanEnglish) وغيرها ---
+    { title: "كورس تعلم من الصفر المستوى الاول (ZAmericanEnglish)", stage: "مرحلة تأسيس", subject: "لغات", type: "pdf", url: "https://www.youtube.com/playlist?list=PLtB1YGL2ZGndh4A68M68K9q8isKk3F0d-" },
+    { title: "كورس القراءة المستوى الاول (ZAmericanEnglish)", stage: "مرحلة تأسيس", subject: "لغات", type: "pdf", url: "https://www.youtube.com/playlist?list=PLtB1YGL2ZGnca_pAiyWp3X1l3jQG4zJg8" },
+    { title: "كورس الصوتيات المستوى الاول (ZAmericanEnglish)", stage: "مرحلة تأسيس", subject: "لغات", type: "pdf", url: "https://www.youtube.com/playlist?list=PLtB1YGL2ZGnc3p_p1Yt9_zH7hO-3f8n93" },
+    { title: "كورس القواعد المستوى الاول (ZAmericanEnglish)", stage: "مرحلة تأسيس", subject: "لغات", type: "pdf", url: "https://www.youtube.com/playlist?list=PLtB1YGL2ZGnfrN3R4T75v_aO2Z5sF6H6C" },
+    { title: "كورس المحادثة المستوى الاول (ZAmericanEnglish)", stage: "مرحلة تأسيس", subject: "لغات", type: "pdf", url: "https://www.youtube.com/playlist?list=PLtB1YGL2ZGneGkE3A3e4q8y-D5Q5lB44b" },
+    { title: "كورس الاستماع المستوى الاول (ZAmericanEnglish)", stage: "مرحلة تأسيس", subject: "لغات", type: "pdf", url: "https://www.youtube.com/playlist?list=PLtB1YGL2ZGnfRkS2aAteL7x-X3x9Wb-p8" },
+    { title: "كورس الكتابة المستوى الاول (ZAmericanEnglish)", stage: "مرحلة تأسيس", subject: "لغات", type: "pdf", url: "https://www.youtube.com/playlist?list=PLtB1YGL2ZGncpwH_QoM5U3x_P6h0pW_2r" },
 
-    // ثانوية عامة (استاتيكا وديناميكا وجبر وتفاضل)
-    { title: "استاتيكا 3 ثانوي", stage: "ثانوي", subject: "رياضيات", type: "pdf", url: "https://drive.google.com/file/d/1UNJoAhgG4IdkcRXX55BilP1FvtItINRA/view" },
-    { title: "بنك الأسئلة استاتيكا", stage: "ثانوي", subject: "رياضيات", type: "exam", url: "https://drive.google.com/file/d/1Yxo4A5BeFOpPVOL5Wkjy6bUOO4iRe3K0/view" },
-    { title: "ديناميكا 3 ثانوي", stage: "ثانوي", subject: "رياضيات", type: "pdf", url: "https://drive.google.com/file/d/1ppG8Q1VmL5vfLDjc0g_lvPu0HZPMzf0p/view" },
-    { title: "بنك الأسئلة ديناميكا", stage: "ثانوي", subject: "رياضيات", type: "exam", url: "https://drive.google.com/file/d/1YLyJ9hhdNNFz_JsJEAVa_GX9WdiqbHc7/view" },
-    { title: "جبر وهندسة فراغية 3 ثانوي", stage: "ثانوي", subject: "رياضيات", type: "pdf", url: "https://drive.google.com/file/d/1RAZpkApHpXFepP3VnI12IyZwffNR-VP7/view" },
-    { title: "بنك الأسئلة جبر وهندسة فراغية", stage: "ثانوي", subject: "رياضيات", type: "exam", url: "https://drive.google.com/drive/mobile/folders/1NOD5-fQku6FwoaN4TMElcp_Lh9RvOW4U" },
-    { title: "تفاضل وتكامل 3 ثانوي", stage: "ثانوي", subject: "رياضيات", type: "pdf", url: "https://drive.google.com/file/d/17yx_iUtyLRRDAL9ma3xU5sS2EGNYUXIw/view" },
-    { title: "جميع مواد سلاح التلميذ", stage: "ابتدائي", subject: "all", type: "pdf", url: "https://shbabbek.com/show/211706" },
-// --- 4. كورسات التأسيس (ZAmericanEnglish) بناءً على طلبك ---
-    { title: "كورس تعلم من الصفر المستوى الأول (ZAmericanEnglish)", stage: "تأسيس أطفال", subject: "لغات", type: "pdf", url: "https://www.youtube.com/playlist?list=PLtB1YGL2ZGndh4A68M68K9q8isKk3F0d-" },
-    { title: "كورس الاستماع المستوى الأول (ZAmericanEnglish)", stage: "تأسيس أطفال", subject: "لغات", type: "pdf", url: "https://www.youtube.com/playlist?list=PLtB1YGL2ZGnca_pAiyWp3X1l3jQG4zJg8" },
-    { title: "كورس القواعد المستوى الأول (ZAmericanEnglish)", stage: "تأسيس أطفال", subject: "لغات", type: "pdf", url: "https://www.youtube.com/playlist?list=PLtB1YGL2ZGnc3p_p1Yt9_zH7hO-3f8n93" },
-    { title: "كورس القراءة المستوى الأول (ZAmericanEnglish)", stage: "تأسيس أطفال", subject: "لغات", type: "pdf", url: "https://www.youtube.com/playlist?list=PLtB1YGL2ZGnfrN3R4T75v_aO2Z5sF6H6C" },
-    { title: "كورس المحادثة المستوى الأول (ZAmericanEnglish)", stage: "تأسيس أطفال", subject: "لغات", type: "pdf", url: "https://www.youtube.com/playlist?list=PLtB1YGL2ZGneGkE3A3e4q8y-D5Q5lB44b" },
-    { title: "كورس الصوتيات المستوى الأول (ZAmericanEnglish)", stage: "تأسيس أطفال", subject: "لغات", type: "pdf", url: "https://www.youtube.com/playlist?list=PLtB1YGL2ZGnfRkS2aAteL7x-X3x9Wb-p8" },
-    { title: "كورس الكتابة المستوى الأول (ZAmericanEnglish)", stage: "تأسيس أطفال", subject: "لغات", type: "pdf", url: "https://www.youtube.com/playlist?list=PLtB1YGL2ZGncpwH_QoM5U3x_P6h0pW_2r" },
-
-    // --- 5. مذكرات تأسيس متنوعة ---
-    { title: "مذكرة التأسيس الشاملة للأطفال (عربي)", stage: "تأسيس أطفال", subject: "عربي", type: "pdf", url: "https://www.google.com/search?q=مذكرة+تأسيس+لغة+عربية+للأطفال+pdf" },
-    { title: "مذكرة التأسيس الشاملة للأطفال (ماث وحساب)", stage: "تأسيس أطفال", subject: "رياضيات", type: "pdf", url: "https://www.google.com/search?q=مذكرة+تأسيس+حساب+للأطفال+pdf" },
-
-    // --- 6. قنوات مدرستنا الرسمية ---
+    // --- 5. قنوات يوتيوب تعليمية (مدرستنا) ---
     { title: "قناة مدرستنا للمرحلة الابتدائية", stage: "ابتدائي", subject: "all", type: "exam", url: "https://www.youtube.com/results?search_query=قناة+مدرستنا+المرحلة+الابتدائية" },
-    { title: "قناة مدرستنا للمرحلة الإعدادية", stage: "إعدادي", subject: "all", type: "exam", url: "https://www.youtube.com/results?search_query=قناة+مدرستنا+المرحلة+الاعدادية" },
+    { title: "قناة مدرستنا للمرحلة الاعدادية", stage: "إعدادي", subject: "all", type: "exam", url: "https://www.youtube.com/results?search_query=قناة+مدرستنا+المرحلة+الاعدادية" },
     { title: "قناة مدرستنا للمرحلة الثانوية", stage: "ثانوي", subject: "all", type: "exam", url: "https://www.youtube.com/results?search_query=قناة+مدرستنا+المرحلة+الثانوية" }
 ];
 
