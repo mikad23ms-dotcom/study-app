@@ -62,9 +62,14 @@ window.saveOnboarding = () => {
         
     } else if (role === 'teacher') {
         let subjInput = document.getElementById('onboard-teacher-subject');
-        if (!subjInput || !subjInput.value.trim()) { alert('من فضلك أدخل المادة'); return; }
+        if (!subjInput || !subjInput.value.trim()) { alert('من فضلك أدخل المواد التي تدرسها'); return; }
         
-        stage = 'مدرس';
+        let checkboxes = document.querySelectorAll('.t-stage-cb:checked');
+        if (checkboxes.length === 0) { alert('من فضلك اختر مرحلة دراسية واحدة على الأقل'); return; }
+        
+        let selectedStages = Array.from(checkboxes).map(cb => cb.value).join('، ');
+        
+        stage = selectedStages;
         spec = subjInput.value.trim();
         generatedTeacherCode = 'T-' + Math.floor(1000 + Math.random() * 9000);
     }
@@ -152,10 +157,13 @@ function syncToCloud() {
             name: studyUsername || 'مجهول',
             stage: studyStage || 'غير محدد',
             specialty: studySpecialty || 'غير محدد',
-            tasks: tasks,
-            classes: classes,
+            role: localStorage.getItem('study_role') || 'student',
+            teacherCode: localStorage.getItem('study_teacher_code') || '',
+            linkedTeacher: localStorage.getItem('study_my_teacher_code') || '',
+            tasks: tasks || [],
+            classes: classes || [],
             lastUpdated: new Date().toISOString()
-        }).catch(e => console.log("Cloud sync error: ", e));
+        }, { merge: true }).catch(e => console.log("Cloud sync error: ", e));
     } catch(e) {}
 }
 
@@ -1699,22 +1707,26 @@ window.adminFetchedUsers = [];
 
 window.loadAdminData = async () => {
     const content = document.getElementById('admin-content');
-    content.innerHTML = '<div style="grid-column:1/-1; text-align:center;"><i class="fa-solid fa-spinner fa-spin fa-2x text-blue"></i><p>جاري جلب بيانات الأصدقاء...</p></div>';
+    content.innerHTML = '<div style="grid-column:1/-1; text-align:center;"><i class="fa-solid fa-spinner fa-spin fa-2x text-blue"></i><p>جاري سحب البيانات الآمنة...</p></div>';
     
     if (!db) {
-        content.innerHTML = '<p class="text-danger">قاعدة البيانات غير متصلة.</p>';
+        content.innerHTML = '<p class="text-danger">تأكدي من إعدادات الفايربيز.</p>';
         return;
     }
     
     try {
         const snapshot = await db.collection('users_data').get();
-        let html = '';
         window.adminFetchedUsers = [];
         
         if (snapshot.empty) {
-            content.innerHTML = '<p style="grid-column:1/-1; text-align:center; color:var(--text-muted);">لا يوجد بيانات لأي مستخدمين آخرين حتى الآن.</p>';
+            content.innerHTML = '<p style="grid-column:1/-1; text-align:center; color:var(--text-muted);">لا يوجد بيانات بعد.</p>';
             return;
         }
+        
+        let studentsHtml = '';
+        let teachersHtml = '';
+        let sCount = 0;
+        let tCount = 0;
         
         snapshot.forEach(doc => {
             const data = doc.data();
@@ -1722,69 +1734,132 @@ window.loadAdminData = async () => {
             const index = window.adminFetchedUsers.length - 1;
             const dateStr = new Date(data.lastUpdated).toLocaleString('ar-EG');
             
+            const isTeacher = data.role === 'teacher';
             const stageText = data.stage ? data.stage : 'غير محدد';
             const specText = data.specialty ? data.specialty : 'غير محدد';
+            const badgeColor = isTeacher ? 'var(--orange)' : 'var(--primary-color)';
             
-            html += `
-                <div class="card" style="border-top: 4px solid var(--primary-color); cursor: pointer; transition: 0.2s;" onclick="viewAdminUser(${index})" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+            let cardHtml = 
+                <div class="card" style="border-top: 4px solid  + badgeColor + ; cursor: pointer; transition: 0.2s;" onclick="viewAdminUser( + index + )" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
                     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
-                        <h3 style="margin:0;"><i class="fa-solid fa-user"></i> ${data.name}</h3>
-                        <span style="font-size:0.8rem; background:var(--primary-color); color:white; padding:3px 8px; border-radius:12px;">${stageText} | ${specText}</span>
+                        <h3 style="margin:0;"><i class="fa-solid  + (isTeacher ? 'fa-chalkboard-user' : 'fa-user') + "></i>  + data.name + </h3>
+                        <span style="font-size:0.75rem; background: + badgeColor + ; color:white; padding:3px 8px; border-radius:12px;"> + stageText + </span>
                     </div>
-                    <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:15px;"><i class="fa-regular fa-clock"></i> آخر ظهور: ${dateStr}</p>
-                    <button class="btn btn-outline" style="width: 100%; border-color: var(--primary-color); color: var(--primary-color);"><i class="fa-solid fa-eye"></i> عرض التفاصيل الكاملة</button>
+                     + (isTeacher ? <p style="font-size:0.85rem; color:var(--text-main); margin-bottom:5px;"><strong>المواد:</strong> +specText+</p><p style="font-size:0.85rem; color:var(--orange); font-weight:bold; margin-bottom:10px;">كود المدرس:  + (data.teacherCode || 'لا يوجد') + </p> : <p style="font-size:0.85rem; color:var(--text-main); margin-bottom:10px;"><strong>التخصص:</strong> +specText+</p>) + 
+                    <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:15px;"><i class="fa-regular fa-clock"></i> آخر ظهور:  + dateStr + </p>
+                    <button class="btn btn-outline" style="width: 100%; border-color:  + badgeColor + ; color:  + badgeColor + ;"><i class="fa-solid fa-eye"></i> عرض التفاصيل</button>
                 </div>
-            `;
+            ;
+            
+            if (isTeacher) {
+                teachersHtml += cardHtml;
+                tCount++;
+            } else {
+                studentsHtml += cardHtml;
+                sCount++;
+            }
         });
-        content.innerHTML = html;
+        
+        let finalHtml = '';
+        if (tCount > 0) {
+            finalHtml += <div style="grid-column: 1/-1; border-bottom: 2px solid var(--orange); padding-bottom: 10px; margin-bottom: 10px; margin-top: 20px;">
+                <h2 style="color: var(--orange);"><i class="fa-solid fa-chalkboard-user"></i> المدرسين المسجلين ()</h2>
+            </div> + teachersHtml;
+        }
+        if (sCount > 0) {
+            finalHtml += <div style="grid-column: 1/-1; border-bottom: 2px solid var(--primary-color); padding-bottom: 10px; margin-bottom: 10px; margin-top: 20px;">
+                <h2 style="color: var(--primary-color);"><i class="fa-solid fa-user-graduate"></i> الطلاب المسجلين ()</h2>
+            </div> + studentsHtml;
+        }
+        
+        content.innerHTML = finalHtml;
     } catch(e) {
-        content.innerHTML = `<p class="text-danger" style="grid-column:1/-1; text-align:center;">خطأ في جلب البيانات: ${e.message}</p>`;
+        content.innerHTML = <p class="text-danger" style="grid-column:1/-1; text-align:center;">حدث خطأ:  + e.message + </p>;
     }
 }
 
 window.viewAdminUser = (index) => {
     const data = window.adminFetchedUsers[index];
-    document.getElementById('admin-modal-name').innerText = data.name;
-    document.getElementById('admin-modal-stage').innerText = `${data.stage || 'غير محدد'} | ${data.specialty || 'غير محدد'}`;
-    document.getElementById('admin-modal-lastseen').innerHTML = `<i class="fa-regular fa-clock"></i> آخر ظهور: ${new Date(data.lastUpdated).toLocaleString('ar-EG')}`;
+    document.getElementById('admin-modal-name').innerText = data.name + (data.role === 'teacher' ? ' (مدرس)' : ' (طالب)');
+    document.getElementById('admin-modal-stage').innerText = (data.stage || 'غير محدد') + ' | ' + (data.specialty || 'غير محدد');
+    document.getElementById('admin-modal-lastseen').innerHTML = <i class="fa-regular fa-clock"></i> آخر ظهور:  + new Date(data.lastUpdated).toLocaleString('ar-EG');
     
-    // Render Tasks
-    let tasksHtml = '<ul style="list-style:none; padding:0; margin:0;">';
-    if(data.tasks && data.tasks.length > 0) {
-        data.tasks.forEach(t => {
-            tasksHtml += `<li style="margin-bottom:10px; border-bottom:1px solid var(--border-color); padding-bottom:10px;">
-                <span style="font-size: 1.1rem; margin-left: 10px;">${t.completed ? '✅' : '❌'}</span>
-                <strong>${t.desc}</strong>
-                <br><small style="color:var(--text-muted); margin-right: 35px;">تاريخ المهمة: ${t.date}</small>
-            </li>`;
-        });
-    } else {
-        tasksHtml += '<li style="color:var(--text-muted);">هذا الطالب لم يضف أي مهام بعد.</li>';
-    }
-    tasksHtml += '</ul>';
-    document.getElementById('admin-modal-tasks').innerHTML = tasksHtml;
-
-    // Render Classes
-    let classesHtml = '<ul style="list-style:none; padding:0; margin:0;">';
-    if(data.classes && data.classes.length > 0) {
-        const daysArray = ['الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'];
-        // Sort classes by day
-        let sortedClasses = [...data.classes].sort((a,b) => parseInt(a.day) - parseInt(b.day));
+    let detailsHtml = '';
+    
+    if (data.role === 'teacher') {
+        detailsHtml = 
+            <div style="background: rgba(247, 127, 0, 0.1); border-right: 4px solid var(--orange); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <h3 style="color: var(--orange); margin-bottom: 10px;"><i class="fa-solid fa-id-badge"></i> بيانات المدرس</h3>
+                <p><strong>الكود الخاص به:</strong> <span style="background: var(--card-bg); padding: 2px 8px; border-radius: 4px; border: 1px solid var(--border-color);"></span></p>
+                <p><strong>المراحل التي يدرسها:</strong> </p>
+                <p><strong>المواد التي يدرسها:</strong> </p>
+            </div>
+        ;
         
-        sortedClasses.forEach(c => {
-            let t = c.time.split(':');
-            let h = parseInt(t[0]) % 12 || 12;
-            let ampm = parseInt(t[0]) >= 12 ? 'م' : 'ص';
-            classesHtml += `<li style="margin-bottom:10px; border-bottom:1px solid var(--border-color); padding-bottom:10px;">
-                <i class="fa-solid fa-book-open" style="color:var(--primary-color); margin-left: 10px;"></i>
-                <strong>يوم ${daysArray[c.day]}</strong> - الساعة ${h}:${t[1]} ${ampm}
-            </li>`;
-        });
+        // Find students using this teacher's code
+        let linkedStudents = window.adminFetchedUsers.filter(u => u.role !== 'teacher' && u.linkedTeacher === data.teacherCode);
+        detailsHtml += <h3 style="margin-bottom:15px; border-bottom:1px solid var(--border-color); padding-bottom:5px;"><i class="fa-solid fa-users"></i> الطلاب المرتبطين به ()</h3>;
+        if (linkedStudents.length > 0) {
+            detailsHtml += '<ul style="list-style:none; padding:0; margin:0;">';
+            linkedStudents.forEach(stu => {
+                detailsHtml += <li style="margin-bottom:10px; padding:10px; background:var(--bg-color); border-radius:8px;"><i class="fa-solid fa-user-graduate text-primary"></i> <strong></strong> ( | )</li>;
+            });
+            detailsHtml += '</ul>';
+        } else {
+            detailsHtml += '<p style="color:var(--text-muted);">لا يوجد طلاب مسجلين بكود هذا المدرس حتى الآن.</p>';
+        }
+        
     } else {
-        classesHtml += '<li style="color:var(--text-muted);">هذا الطالب لم يقم بإضافة أي حصص/محاضرات في جدوله.</li>';
+        // Student details
+        if (data.linkedTeacher) {
+            detailsHtml += 
+                <div style="background: rgba(67, 97, 238, 0.1); border-right: 4px solid var(--primary-color); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                    <p style="margin:0;"><strong>مرتبط بمدرس كود:</strong> <span style="background: var(--card-bg); padding: 2px 8px; border-radius: 4px; border: 1px solid var(--border-color);"></span></p>
+                </div>
+            ;
+        }
+        
+        detailsHtml += <h3 style="margin-bottom:15px; border-bottom:1px solid var(--border-color); padding-bottom:5px;"><i class="fa-solid fa-list-check text-primary"></i> المهام المضافة</h3>;
+        if(data.tasks && data.tasks.length > 0) {
+            detailsHtml += '<ul style="list-style:none; padding:0; margin:0; margin-bottom: 20px;">';
+            data.tasks.forEach(t => {
+                detailsHtml += <li style="margin-bottom:10px; padding-bottom:10px; border-bottom:1px dashed var(--border-color);">
+                    <span style="font-size: 1.1rem; margin-left: 10px;"></span>
+                    <strong></strong>
+                    <br><small style="color:var(--text-muted); margin-right: 35px;">ميعاد التسليم: </small>
+                </li>;
+            });
+            detailsHtml += '</ul>';
+        } else {
+            detailsHtml += '<p style="color:var(--text-muted); margin-bottom: 20px;">لم يقم بإضافة أي مهام.</p>';
+        }
+
+        detailsHtml += <h3 style="margin-bottom:15px; border-bottom:1px solid var(--border-color); padding-bottom:5px;"><i class="fa-solid fa-calendar-week text-primary"></i> جدول الحصص</h3>;
+        if(data.classes && data.classes.length > 0) {
+            detailsHtml += '<ul style="list-style:none; padding:0; margin:0;">';
+            const daysArray = ['الأحد', 'الاثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'];
+            let sortedClasses = [...data.classes].sort((a,b) => parseInt(a.day) - parseInt(b.day));
+            sortedClasses.forEach(c => {
+                let t = c.time.split(':');
+                let h = parseInt(t[0]) % 12 || 12;
+                let ampm = parseInt(t[0]) >= 12 ? 'م' : 'ص';
+                detailsHtml += <li style="margin-bottom:10px; padding:10px; background:var(--bg-color); border-radius:8px;">
+                    <i class="fa-solid fa-book-open text-primary" style="margin-left: 10px;"></i>
+                    <strong>يوم </strong> - الساعة :  ()
+                </li>;
+            });
+            detailsHtml += '</ul>';
+        } else {
+            detailsHtml += '<p style="color:var(--text-muted);">لم يقم بإضافة أي حصص.</p>';
+        }
     }
-    classesHtml += '</ul>';
-    document.getElementById('admin-modal-classes').innerHTML = classesHtml;
+    
+    // Clear out old elements and set new content
+    const modalTasks = document.getElementById('admin-modal-tasks');
+    const modalClasses = document.getElementById('admin-modal-classes');
+    
+    if (modalTasks) modalTasks.innerHTML = detailsHtml;
+    if (modalClasses) modalClasses.innerHTML = ''; // We put everything in tasks div for simplicity
 
     openModal('admin-user-modal');
 }
@@ -1862,9 +1937,12 @@ if (closeInstallBtn) {
 
 // ====== Teacher Library ======
 const dummyLibraryData = [
-    { title: "ملزمة المراجعة النهائية - رياضيات", stage: "إعدادي", subject: "رياضيات", type: "pdf", downloads: 124 },
-    { title: "بنك أسئلة الوزارة - علوم", stage: "ابتدائي", subject: "علوم", type: "exam", downloads: 89 },
-    { title: "امتحان شامل لغة عربية - نصف العام", stage: "ثانوي", subject: "عربي", type: "exam", downloads: 210 }
+    { title: "مذكرة التأسيس الشاملة للأطفال", stage: "تأسيس أطفال", subject: "عربي", type: "pdf", downloads: 350 },
+    { title: "شيت رياضيات أولى ابتدائي", stage: "ابتدائي", subject: "رياضيات", type: "pdf", downloads: 220 },
+    { title: "امتحان نصف العام - علوم رابعة ابتدائي", stage: "ابتدائي", subject: "علوم", type: "exam", downloads: 145 },
+    { title: "مراجعة نهائية - إنجليزي إعدادي", stage: "إعدادي", subject: "لغات", type: "pdf", downloads: 410 },
+    { title: "بنك أسئلة الفيزياء - ثانوية عامة", stage: "ثانوي", subject: "علوم", type: "exam", downloads: 680 },
+    { title: "مذكرة النحو والبلاغة الكاملة", stage: "ثانوي", subject: "عربي", type: "pdf", downloads: 890 }
 ];
 window.filterTeacherLibrary = () => {
     const sVal = document.getElementById('teacher-stage-filter')?.value;

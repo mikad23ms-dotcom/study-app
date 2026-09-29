@@ -67,6 +67,9 @@
             <i class="fa-solid fa-graduation-cap" style="font-size: 3rem; color: var(--primary-color); margin-bottom: 15px;"></i>
             <h2 style="margin-bottom: 20px;">مرحباً بك يا بطل! 🎯</h2>
                         <div style="text-align: right; margin-bottom: 15px;">
+                                <label style="display: block; margin-bottom: 5px; color: var(--text-muted);">الاسم بالكامل:</label>
+                <input type="text" id="onboard-name" class="search-input" placeholder="اكتب اسمك هنا..." style="width: 100%; margin-bottom: 15px;">
+                
                 <!-- Role Selection -->
                 <label style="display: block; margin-bottom: 10px; color: var(--text-muted); font-weight: bold;">أنت بتسجل كـ؟</label>
                 <div style="display: flex; gap: 10px; margin-bottom: 20px;">
@@ -78,15 +81,23 @@
                 <div id="teacher-fields" style="display: none;">
                     <div style="background: rgba(56, 176, 0, 0.1); border-left: 4px solid var(--success); padding: 15px; margin-bottom: 15px; border-radius: 8px; font-size: 0.9rem; color: var(--text-main);">
                         <i class="fa-solid fa-circle-info" style="color: var(--success);"></i> 
-                        بصفتك مدرس، سيتم إنشاء <strong>كود خاص بك</strong> بعد التسجيل لتعطيه لطلابك لمتابعتهم.
+                        بصفتك مدرس، سيتم إنشاء <strong>كود خاص بك</strong>.
                     </div>
-                    <label style="display: block; margin-bottom: 5px; color: var(--text-muted);">المادة اللي بتدرسها:</label>
-                    <input type="text" id="onboard-teacher-subject" class="search-input" placeholder="مثال: رياضيات، لغة عربية، فيزياء..." style="width: 100%; margin-bottom: 10px;">
+                    
+                    <label style="display: block; margin-bottom: 5px; color: var(--text-muted);">المواد التي تدرسها (يمكن إضافة أكثر من مادة):</label>
+                    <input type="text" id="onboard-teacher-subject" class="search-input" placeholder="مثال: لغة عربية ودين..." style="width: 100%; margin-bottom: 15px;">
+                    
+                    <label style="display: block; margin-bottom: 10px; color: var(--text-muted);">المراحل والصفوف التي تدرس لها:</label>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; text-align: right; background: var(--bg-color); padding: 15px; border-radius: 8px; border: 1px solid var(--border-color);">
+                        <label style="cursor:pointer; display:flex; align-items:center; gap:8px;"><input type="checkbox" class="t-stage-cb" value="ابتدائي"> مرحلة ابتدائية</label>
+                        <label style="cursor:pointer; display:flex; align-items:center; gap:8px;"><input type="checkbox" class="t-stage-cb" value="إعدادي"> مرحلة إعدادية</label>
+                        <label style="cursor:pointer; display:flex; align-items:center; gap:8px;"><input type="checkbox" class="t-stage-cb" value="ثانوي"> مرحلة ثانوية</label>
+                        <label style="cursor:pointer; display:flex; align-items:center; gap:8px;"><input type="checkbox" class="t-stage-cb" value="لغات وتجريبي"> لغات وتجريبي</label>
+                        <label style="cursor:pointer; display:flex; align-items:center; gap:8px; grid-column: 1/-1;"><input type="checkbox" class="t-stage-cb" value="تأسيس أطفال"> تأسيس أطفال</label>
+                    </div>
                 </div>
                 
                 <div id="student-fields">
-                <label style="display: block; margin-bottom: 5px; color: var(--text-muted);">اسمك الأول:</label>
-                <input type="text" id="onboard-name" class="search-input" placeholder="اكتب اسمك هنا..." style="width: 100%; margin-bottom: 10px;">
                 
                 <label style="display: block; margin-bottom: 5px; color: var(--text-muted);">المرحلة الدراسية:</label>
                 <select id="onboard-stage" class="search-input" style="width: 100%; margin-bottom: 10px;" onchange="toggleStageFields()">
