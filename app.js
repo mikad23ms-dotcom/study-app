@@ -38,7 +38,7 @@ window.saveOnboarding = () => {
     let role = roleElem ? roleElem.value : 'student';
     
     if (!name) {
-        alert('أهلاً بك! من فضلك أدخل اسمك أولاً لنتمكن من حفظ بياناتك.');
+        alert('عفواً، يجب كتابة اسمك أولاً لإنشاء حسابك!');
         return;
     }
     
@@ -154,7 +154,7 @@ function syncToCloud() {
     if (!db || !studyUserId) return;
     try {
         db.collection('users_data').doc(studyUserId).set({
-            name: studyUsername || 'مجهول',
+            name: studyUsername || '',
             stage: studyStage || 'غير محدد',
             specialty: studySpecialty || 'غير محدد',
             role: localStorage.getItem('study_role') || 'student',
@@ -162,8 +162,11 @@ function syncToCloud() {
             linkedTeacher: localStorage.getItem('study_my_teacher_code') || '',
             tasks: tasks || [],
             classes: classes || [],
+            subjects: subjects || [],
             lastUpdated: new Date().toISOString()
         }, { merge: true }).catch(e => console.log("Cloud sync error: ", e));
+    } catch(e) {}
+}, { merge: true }).catch(e => console.log("Cloud sync error: ", e));
     } catch(e) {}
 }
 
@@ -1718,11 +1721,6 @@ window.loadAdminData = async () => {
         const snapshot = await db.collection('users_data').get();
         window.adminFetchedUsers = [];
         
-        if (snapshot.empty) {
-            content.innerHTML = '<p style="grid-column:1/-1; text-align:center; color:var(--text-muted);">لا يوجد بيانات بعد.</p>';
-            return;
-        }
-        
         let studentsHtml = '';
         let teachersHtml = '';
         let sCount = 0;
@@ -1730,6 +1728,14 @@ window.loadAdminData = async () => {
         
         snapshot.forEach(doc => {
             const data = doc.data();
+            
+            // فلترة وحذف الحسابات اللي بدون اسم أو المتكررة الفاضية
+            if (!data.name || data.name === 'بدون اسم' || data.name.trim() === '') {
+                // Remove from Firebase directly so it doesn't duplicate
+                db.collection('users_data').doc(doc.id).delete();
+                return; // Skip rendering
+            }
+            
             window.adminFetchedUsers.push(data);
             const index = window.adminFetchedUsers.length - 1;
             const dateStr = new Date(data.lastUpdated).toLocaleString('ar-EG');
@@ -1772,6 +1778,9 @@ window.loadAdminData = async () => {
             </div>` + studentsHtml;
         }
         
+        if (tCount === 0 && sCount === 0) {
+            finalHtml = '<p style="grid-column:1/-1; text-align:center; color:var(--text-muted);">لا يوجد بيانات مسجلة حالياً.</p>';
+        }
         content.innerHTML = finalHtml;
     } catch(e) {
         content.innerHTML = `<p class="text-danger" style="grid-column:1/-1; text-align:center;">حدث خطأ: ${e.message}</p>`;
@@ -1785,6 +1794,13 @@ window.viewAdminUser = (index) => {
     document.getElementById('admin-modal-lastseen').innerHTML = `<i class="fa-regular fa-clock"></i> آخر ظهور: ${new Date(data.lastUpdated).toLocaleString('ar-EG')}`;
     
     let detailsHtml = '';
+    
+    // Helper to resolve subject ID to Name
+    const getSubjectName = (subId) => {
+        if (!data.subjects || data.subjects.length === 0) return 'مادة';
+        const s = data.subjects.find(x => x.id === subId);
+        return s ? s.name : 'مادة';
+    };
     
     if (data.role === 'teacher') {
         detailsHtml = `
@@ -1821,9 +1837,10 @@ window.viewAdminUser = (index) => {
         if(data.tasks && data.tasks.length > 0) {
             detailsHtml += '<ul style="list-style:none; padding:0; margin:0; margin-bottom: 20px;">';
             data.tasks.forEach(t => {
+                let subName = getSubjectName(t.subjectId);
                 detailsHtml += `<li style="margin-bottom:10px; padding-bottom:10px; border-bottom:1px dashed var(--border-color);">
                     <span style="font-size: 1.1rem; margin-left: 10px;">${t.completed ? '✅' : '⏳'}</span>
-                    <strong>${t.desc}</strong>
+                    <strong>${t.desc}</strong> <span style="font-size: 0.8rem; background: var(--primary-color); color: white; padding: 2px 6px; border-radius: 4px; margin-right: 10px;">${subName}</span>
                     <br><small style="color:var(--text-muted); margin-right: 35px;">ميعاد التسليم: ${t.date}</small>
                 </li>`;
             });
@@ -1841,9 +1858,10 @@ window.viewAdminUser = (index) => {
                 let t = c.time.split(':');
                 let h = parseInt(t[0]) % 12 || 12;
                 let ampm = parseInt(t[0]) >= 12 ? 'م' : 'ص';
+                let subName = getSubjectName(c.subjectId);
                 detailsHtml += `<li style="margin-bottom:10px; padding:10px; background:var(--bg-color); border-radius:8px;">
                     <i class="fa-solid fa-book-open text-primary" style="margin-left: 10px;"></i>
-                    <strong>يوم ${daysArray[c.day]}</strong> - الساعة ${h}:${t[1]} ${ampm} (${c.subject || 'مادة'})
+                    <strong>يوم ${daysArray[c.day]}</strong> - الساعة ${h}:${t[1]} ${ampm} <span style="font-size: 0.8rem; background: var(--orange); color: white; padding: 2px 6px; border-radius: 4px; margin-right: 10px;">${subName}</span>
                 </li>`;
             });
             detailsHtml += '</ul>';
@@ -1938,20 +1956,46 @@ const teacherLibraryData = [
     { title: "بوابة التعليم الإلكتروني (كتب الوزارة لكل المراحل)", stage: "all", subject: "all", type: "pdf", url: "https://ellibrary.moe.gov.eg/" },
     { title: "نماذج امتحانات الوزارة الرسمية الاسترشادية", stage: "all", subject: "all", type: "exam", url: "https://moe.gov.eg/ar/elearningedubook/" },
     { title: "بنك المعرفة المصري EKB", stage: "all", subject: "all", type: "pdf", url: "https://www.ekb.eg/" },
-    { title: "منصة حصص مصر (مراجعات وامتحانات ثانوية)", stage: "ثانوي", subject: "all", type: "exam", url: "https://www.hesas.eg/" },
+    { title: "منصة البث المباشر (مراجعات وزارة التربية والتعليم)", stage: "ثانوي", subject: "all", type: "exam", url: "https://stream.moe.gov.eg/" },
     
     // --- 2. امتحانات سابقة جاهزة ---
     { title: "تجميعة امتحانات المحافظات السابقة - إعدادي", stage: "إعدادي", subject: "all", type: "exam", url: "https://www.google.com/search?q=تجميعة+امتحانات+المحافظات+اعدادي+pdf" },
     { title: "امتحانات الثانوية العامة للسنوات السابقة", stage: "ثانوي", subject: "all", type: "exam", url: "https://www.google.com/search?q=امتحانات+الثانوية+العامة+السنوات+السابقة+pdf" },
     { title: "امتحانات المحافظات - ابتدائي", stage: "ابتدائي", subject: "all", type: "exam", url: "https://www.google.com/search?q=امتحانات+المحافظات+ابتدائي+pdf" },
 
-    // --- 3. الكتب الخارجية والمذكرات (بحث مباشر لأحدث الإصدارات) ---
-    { title: "الكتب الخارجية - لغة عربية (جميع المراحل)", stage: "all", subject: "عربي", type: "pdf", url: "https://www.google.com/search?q=تحميل+الكتب+الخارجية+اللغة+العربية+pdf" },
-    { title: "الكتب الخارجية - رياضيات (جميع المراحل)", stage: "all", subject: "رياضيات", type: "pdf", url: "https://www.google.com/search?q=تحميل+الكتب+الخارجية+رياضيات+pdf" },
-    { title: "الكتب الخارجية - علوم وفيزياء (جميع المراحل)", stage: "all", subject: "علوم", type: "pdf", url: "https://www.google.com/search?q=تحميل+الكتب+الخارجية+علوم+وفيزياء+pdf" },
-    { title: "الكتب الخارجية - لغات إنجليزية وفرنساوي", stage: "all", subject: "لغات", type: "pdf", url: "https://www.google.com/search?q=تحميل+الكتب+الخارجية+انجليزي+pdf" },
+        // --- 3. الكتب الخارجية (بروابط مباشرة حسب طلبك) ---
+    // إعدادي وثانوي رياضيات (المعاصر)
+    { title: "رياضيات المعاصر - أولى إعدادي", stage: "إعدادي", subject: "رياضيات", type: "pdf", url: "https://drive.google.com/file/d/1VIkQNhNCiRPza00Yaqb7cb3wIbdjsamh/view" },
+    { title: "رياضيات المعاصر - تانية إعدادي", stage: "إعدادي", subject: "رياضيات", type: "pdf", url: "https://drive.google.com/file/d/1VMClDmVwpv9WyIg0lBJQkLIQJRLLgDGO/view" },
+    { title: "رياضيات المعاصر - تالتة إعدادي", stage: "إعدادي", subject: "رياضيات", type: "pdf", url: "https://drive.google.com/file/d/1VVdBFHtTYD2xbULgY3G8fpeLzBgpDFui/view" },
+    { title: "رياضيات المعاصر - أولى ثانوي", stage: "ثانوي", subject: "رياضيات", type: "pdf", url: "https://drive.google.com/file/d/1VBKqrcYHnHnmGFjxS-WZm5ncEyi6Fx0X/view" },
+    { title: "رياضيات المعاصر (بحتة) - تانية ثانوي", stage: "ثانوي", subject: "رياضيات", type: "pdf", url: "https://drive.google.com/file/d/1VCtdMNRjxVZwXtBlV72afdfEmjtPmmqj/view" },
+    { title: "رياضيات المعاصر (تطبيقية) - تانية ثانوي", stage: "ثانوي", subject: "رياضيات", type: "pdf", url: "https://drive.google.com/file/d/1VG8n5w2kTWUlPe2xp2cLvePa3naEhSyX/view" },
 
-    // --- 4. كورسات التأسيس (ZAmericanEnglish) بناءً على طلبك ---
+    // ابتدائي رياضيات (ماث وعربي)
+    { title: "ماث 1 ابتدائي (جيم)", stage: "ابتدائي", subject: "لغات", type: "pdf", url: "https://drive.google.com/file/d/1sRi8s38yQCMhntZZEldETvmfOkQ0_ihH/view" },
+    { title: "رياضيات 1 ابتدائي (سلاح التلميذ)", stage: "ابتدائي", subject: "رياضيات", type: "pdf", url: "https://drive.google.com/file/d/1-lrbDz_49Ql4ty2AzUbt1h9FnWCvQ0lq/view" },
+    { title: "ماث المعاصر 1 ابتدائي", stage: "ابتدائي", subject: "لغات", type: "pdf", url: "https://drive.google.com/file/d/1mu27iunlNiS9d8JIXTLWbVbcU9NDPRdq/view" },
+    { title: "رياضيات 2 ابتدائي (قطر الندى)", stage: "ابتدائي", subject: "رياضيات", type: "pdf", url: "https://drive.google.com/file/d/1cDgDeyKhseOJXuXJeKuWh2n6gWXVybji/view" },
+    { title: "رياضيات 3 ابتدائي (الباهر)", stage: "ابتدائي", subject: "رياضيات", type: "pdf", url: "https://drive.google.com/file/d/12XylS3GwPIbY8AcqG6TeFfXw11lZV9_K/view" },
+    { title: "بوني ماث رابعة ابتدائي", stage: "ابتدائي", subject: "لغات", type: "pdf", url: "https://drive.google.com/file/d/1bEcJUtbqDBlhCbgM5-jkBbj6O4kxyaYz/view" },
+    { title: "المعاصر ماث 4 ابتدائي", stage: "ابتدائي", subject: "لغات", type: "pdf", url: "https://drive.google.com/file/d/1yWxv7kTIvly5yN8o7GytCcHsO6y8rgzC/view" },
+    { title: "سلاح التلميذ رياضيات 4 ابتدائي", stage: "ابتدائي", subject: "رياضيات", type: "pdf", url: "https://drive.google.com/file/d/16bKVOQeNGF13xO1Q0GgrfTS2S8WNyNeU/view" },
+    { title: "المعاصر ماث 5 ابتدائي", stage: "ابتدائي", subject: "لغات", type: "pdf", url: "https://drive.google.com/file/d/15tyF26bDEfqnM3V2wWdPvkM-VqoI8h8x/view" },
+    { title: "الأضواء رياضيات 5 ابتدائي", stage: "ابتدائي", subject: "رياضيات", type: "pdf", url: "https://drive.google.com/file/d/1wJRKrbIKxQZNYXMg0qz0L_6w_xGQ8Eg2/view" },
+    { title: "المعاصر ماث 6 ابتدائي", stage: "ابتدائي", subject: "لغات", type: "pdf", url: "https://drive.google.com/file/d/1rKjGjjGXeUs4fIk80BCsvuJ2-xzERuLY/view" },
+    { title: "سلاح التلميذ رياضيات 6 ابتدائي", stage: "ابتدائي", subject: "رياضيات", type: "pdf", url: "https://drive.google.com/file/d/1AOSN7FNaTCilSXrTdceM5JXUbuW3nKQ4/view" },
+
+    // ثانوية عامة (استاتيكا وديناميكا وجبر وتفاضل)
+    { title: "استاتيكا 3 ثانوي", stage: "ثانوي", subject: "رياضيات", type: "pdf", url: "https://drive.google.com/file/d/1UNJoAhgG4IdkcRXX55BilP1FvtItINRA/view" },
+    { title: "بنك الأسئلة استاتيكا", stage: "ثانوي", subject: "رياضيات", type: "exam", url: "https://drive.google.com/file/d/1Yxo4A5BeFOpPVOL5Wkjy6bUOO4iRe3K0/view" },
+    { title: "ديناميكا 3 ثانوي", stage: "ثانوي", subject: "رياضيات", type: "pdf", url: "https://drive.google.com/file/d/1ppG8Q1VmL5vfLDjc0g_lvPu0HZPMzf0p/view" },
+    { title: "بنك الأسئلة ديناميكا", stage: "ثانوي", subject: "رياضيات", type: "exam", url: "https://drive.google.com/file/d/1YLyJ9hhdNNFz_JsJEAVa_GX9WdiqbHc7/view" },
+    { title: "جبر وهندسة فراغية 3 ثانوي", stage: "ثانوي", subject: "رياضيات", type: "pdf", url: "https://drive.google.com/file/d/1RAZpkApHpXFepP3VnI12IyZwffNR-VP7/view" },
+    { title: "بنك الأسئلة جبر وهندسة فراغية", stage: "ثانوي", subject: "رياضيات", type: "exam", url: "https://drive.google.com/drive/mobile/folders/1NOD5-fQku6FwoaN4TMElcp_Lh9RvOW4U" },
+    { title: "تفاضل وتكامل 3 ثانوي", stage: "ثانوي", subject: "رياضيات", type: "pdf", url: "https://drive.google.com/file/d/17yx_iUtyLRRDAL9ma3xU5sS2EGNYUXIw/view" },
+    { title: "جميع مواد سلاح التلميذ", stage: "ابتدائي", subject: "all", type: "pdf", url: "https://shbabbek.com/show/211706" },
+// --- 4. كورسات التأسيس (ZAmericanEnglish) بناءً على طلبك ---
     { title: "كورس تعلم من الصفر المستوى الأول (ZAmericanEnglish)", stage: "تأسيس أطفال", subject: "لغات", type: "pdf", url: "https://www.youtube.com/playlist?list=PLtB1YGL2ZGndh4A68M68K9q8isKk3F0d-" },
     { title: "كورس الاستماع المستوى الأول (ZAmericanEnglish)", stage: "تأسيس أطفال", subject: "لغات", type: "pdf", url: "https://www.youtube.com/playlist?list=PLtB1YGL2ZGnca_pAiyWp3X1l3jQG4zJg8" },
     { title: "كورس القواعد المستوى الأول (ZAmericanEnglish)", stage: "تأسيس أطفال", subject: "لغات", type: "pdf", url: "https://www.youtube.com/playlist?list=PLtB1YGL2ZGnc3p_p1Yt9_zH7hO-3f8n93" },
@@ -1965,9 +2009,9 @@ const teacherLibraryData = [
     { title: "مذكرة التأسيس الشاملة للأطفال (ماث وحساب)", stage: "تأسيس أطفال", subject: "رياضيات", type: "pdf", url: "https://www.google.com/search?q=مذكرة+تأسيس+حساب+للأطفال+pdf" },
 
     // --- 6. قنوات مدرستنا الرسمية ---
-    { title: "قناة مدرستنا للمرحلة الابتدائية", stage: "ابتدائي", subject: "all", type: "exam", url: "https://www.youtube.com/c/MadrasetnaPrimary" },
-    { title: "قناة مدرستنا للمرحلة الإعدادية", stage: "إعدادي", subject: "all", type: "exam", url: "https://www.youtube.com/c/MadrasetnaPrep" },
-    { title: "قناة مدرستنا للمرحلة الثانوية", stage: "ثانوي", subject: "all", type: "exam", url: "https://www.youtube.com/c/MadrasetnaSec" }
+    { title: "قناة مدرستنا للمرحلة الابتدائية", stage: "ابتدائي", subject: "all", type: "exam", url: "https://www.youtube.com/results?search_query=قناة+مدرستنا+المرحلة+الابتدائية" },
+    { title: "قناة مدرستنا للمرحلة الإعدادية", stage: "إعدادي", subject: "all", type: "exam", url: "https://www.youtube.com/results?search_query=قناة+مدرستنا+المرحلة+الاعدادية" },
+    { title: "قناة مدرستنا للمرحلة الثانوية", stage: "ثانوي", subject: "all", type: "exam", url: "https://www.youtube.com/results?search_query=قناة+مدرستنا+المرحلة+الثانوية" }
 ];
 
 window.filterTeacherLibrary = () => {
