@@ -166,10 +166,7 @@ function syncToCloud() {
             lastUpdated: new Date().toISOString()
         }, { merge: true }).catch(e => console.log("Cloud sync error: ", e));
     } catch(e) {}
-}, { merge: true }).catch(e => console.log("Cloud sync error: ", e));
-    } catch(e) {}
 }
-
 // --- Navigation ---
 const navItems = document.querySelectorAll('.nav-links li');
 const pages = document.querySelectorAll('.page');
