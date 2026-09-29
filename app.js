@@ -1949,46 +1949,41 @@ if (closeInstallBtn) {
 
 // ====== Teacher Library ======
 const teacherLibraryData = [
-    // --- 1. المصادر الرسمية لوزارة التربية والتعليم ---
-    { title: "مكتبة الوزارة الإلكترونية (كتب وتفاعليات)", stage: "all", subject: "all", type: "pdf", url: "https://ellibrary.moe.gov.eg/" },
-    { title: "بوابة المناهج لوزارة التربية والتعليم", stage: "all", subject: "all", type: "exam", url: "https://moe.gov.eg/ar/elearningedubook/" },
-    { title: "بنك المعرفة المصري EKB", stage: "all", subject: "all", type: "pdf", url: "https://www.ekb.eg/" },
-    { title: "منصة البث المباشر (مراجعات وزارة التربية والتعليم)", stage: "ثانوي", subject: "all", type: "exam", url: "https://stream.moe.gov.eg/" },
+    { title: "مكتبة الوزارة الإلكترونية (كتب وتفاعليات)", stage: "all", subject: "all", type: "pdf", url: "https://ellibrary.moe.gov.eg/", category: "المصادر الرسمية وبنك المعرفة" },
+    { title: "بوابة المناهج لوزارة التربية والتعليم", stage: "all", subject: "all", type: "exam", url: "https://moe.gov.eg/ar/elearningedubook/", category: "المصادر الرسمية وبنك المعرفة" },
+    { title: "بنك المعرفة المصري EKB", stage: "all", subject: "all", type: "pdf", url: "https://www.ekb.eg/", category: "المصادر الرسمية وبنك المعرفة" },
+    { title: "منصة البث المباشر (مراجعات وزارة التربية والتعليم)", stage: "ثانوي", subject: "all", type: "exam", url: "https://stream.moe.gov.eg/", category: "المصادر الرسمية وبنك المعرفة" },
     
-    // --- 2. مكتبة الكتب الخارجية (مجمعة لكل صف - الروابط التي تم طلبها) ---
-    { title: "تجميعة كتب خارجية - KG 1", stage: "مرحلة تأسيس", subject: "all", type: "pdf", url: "https://www.facebook.com/groups/zakrolykg/posts/1983734125690864/" },
-    { title: "تجميعة كتب خارجية - KG 2", stage: "مرحلة تأسيس", subject: "all", type: "pdf", url: "https://www.facebook.com/groups/zakrolykg/posts/1983993745664902/" },
-    { title: "تجميعة كتب خارجية - 1 ابتدائي", stage: "ابتدائي", subject: "all", type: "pdf", url: "https://www.facebook.com/groups/233269024075082/posts/2064035784331721/" },
-    { title: "تجميعة كتب خارجية - 2 ابتدائي", stage: "ابتدائي", subject: "all", type: "pdf", url: "https://www.facebook.com/groups/zakrolypr2/posts/2211072595967702/" },
-    { title: "تجميعة كتب خارجية - 3 ابتدائي", stage: "ابتدائي", subject: "all", type: "pdf", url: "https://www.facebook.com/groups/zakrolypr3/posts/2469526460115469/" },
-    { title: "تجميعة كتب خارجية - 4 ابتدائي", stage: "ابتدائي", subject: "all", type: "pdf", url: "https://www.facebook.com/groups/zakrolypr4/posts/2509786096082454/" },
-    { title: "تجميعة كتب خارجية - 5 ابتدائي", stage: "ابتدائي", subject: "all", type: "pdf", url: "https://www.facebook.com/groups/zakrolypr5/posts/25513434495018506/" },
-    { title: "تجميعة كتب خارجية - 6 ابتدائي", stage: "ابتدائي", subject: "all", type: "pdf", url: "https://www.facebook.com/groups/zakrolypr6/posts/3342995755875917/" },
-    { title: "تجميعة كتب خارجية - 1 إعدادي", stage: "إعدادي", subject: "all", type: "pdf", url: "https://www.facebook.com/groups/zakrolyprep1/posts/1985630462347481/" },
-    { title: "تجميعة كتب خارجية - 2 إعدادي", stage: "إعدادي", subject: "all", type: "pdf", url: "https://www.facebook.com/groups/zakrolyprep2/posts/2124590038309056/" },
-    { title: "تجميعة كتب خارجية - 3 إعدادي", stage: "إعدادي", subject: "all", type: "pdf", url: "https://www.facebook.com/groups/zakrolyprep3/posts/2336296903461456/" },
-    { title: "تجميعة كتب خارجية - 1 ثانوي", stage: "ثانوي", subject: "all", type: "pdf", url: "https://www.facebook.com/groups/zakrolysec1/posts/1175556341070501/" },
-    { title: "تجميعة كتب خارجية - 2 ثانوي (علمي)", stage: "ثانوي", subject: "علمي", type: "pdf", url: "https://www.facebook.com/groups/zakrolysec2/posts/3785950905047036/" },
-    { title: "تجميعة كتب خارجية - 2 ثانوي (أدبي)", stage: "ثانوي", subject: "أدبي", type: "pdf", url: "https://www.facebook.com/groups/zakrolysec2/posts/3785953631713430/" },
+    { title: "تجميعة كتب خارجية - KG 1", stage: "مرحلة تأسيس", subject: "all", type: "pdf", url: "https://www.facebook.com/groups/zakrolykg/posts/1983734125690864/", category: "المكتبة الشاملة (كتب وتقييمات)" },
+    { title: "تجميعة كتب خارجية - KG 2", stage: "مرحلة تأسيس", subject: "all", type: "pdf", url: "https://www.facebook.com/groups/zakrolykg/posts/1983993745664902/", category: "المكتبة الشاملة (كتب وتقييمات)" },
+    { title: "تجميعة كتب خارجية - 1 ابتدائي", stage: "ابتدائي", subject: "all", type: "pdf", url: "https://www.facebook.com/groups/233269024075082/posts/2064035784331721/", category: "المكتبة الشاملة (كتب وتقييمات)" },
+    { title: "تجميعة كتب خارجية - 2 ابتدائي", stage: "ابتدائي", subject: "all", type: "pdf", url: "https://www.facebook.com/groups/zakrolypr2/posts/2211072595967702/", category: "المكتبة الشاملة (كتب وتقييمات)" },
+    { title: "تجميعة كتب خارجية - 3 ابتدائي", stage: "ابتدائي", subject: "all", type: "pdf", url: "https://www.facebook.com/groups/zakrolypr3/posts/2469526460115469/", category: "المكتبة الشاملة (كتب وتقييمات)" },
+    { title: "تجميعة كتب خارجية - 4 ابتدائي", stage: "ابتدائي", subject: "all", type: "pdf", url: "https://www.facebook.com/groups/zakrolypr4/posts/2509786096082454/", category: "المكتبة الشاملة (كتب وتقييمات)" },
+    { title: "تجميعة كتب خارجية - 5 ابتدائي", stage: "ابتدائي", subject: "all", type: "pdf", url: "https://www.facebook.com/groups/zakrolypr5/posts/25513434495018506/", category: "المكتبة الشاملة (كتب وتقييمات)" },
+    { title: "تجميعة كتب خارجية - 6 ابتدائي", stage: "ابتدائي", subject: "all", type: "pdf", url: "https://www.facebook.com/groups/zakrolypr6/posts/3342995755875917/", category: "المكتبة الشاملة (كتب وتقييمات)" },
+    { title: "تجميعة كتب خارجية - 1 إعدادي", stage: "إعدادي", subject: "all", type: "pdf", url: "https://www.facebook.com/groups/zakrolyprep1/posts/1985630462347481/", category: "المكتبة الشاملة (كتب وتقييمات)" },
+    { title: "تجميعة كتب خارجية - 2 إعدادي", stage: "إعدادي", subject: "all", type: "pdf", url: "https://www.facebook.com/groups/zakrolyprep2/posts/2124590038309056/", category: "المكتبة الشاملة (كتب وتقييمات)" },
+    { title: "تجميعة كتب خارجية - 3 إعدادي", stage: "إعدادي", subject: "all", type: "pdf", url: "https://www.facebook.com/groups/zakrolyprep3/posts/2336296903461456/", category: "المكتبة الشاملة (كتب وتقييمات)" },
+    { title: "تجميعة كتب خارجية - 1 ثانوي", stage: "ثانوي", subject: "all", type: "pdf", url: "https://www.facebook.com/groups/zakrolysec1/posts/1175556341070501/", category: "المكتبة الشاملة (كتب وتقييمات)" },
+    { title: "تجميعة كتب خارجية - 2 ثانوي (علمي)", stage: "ثانوي", subject: "علمي", type: "pdf", url: "https://www.facebook.com/groups/zakrolysec2/posts/3785950905047036/", category: "المكتبة الشاملة (كتب وتقييمات)" },
+    { title: "تجميعة كتب خارجية - 2 ثانوي (أدبي)", stage: "ثانوي", subject: "أدبي", type: "pdf", url: "https://www.facebook.com/groups/zakrolysec2/posts/3785953631713430/", category: "المكتبة الشاملة (كتب وتقييمات)" },
 
-    // --- 3. البحث الذكي للكتب (يعمل دائماً كبديل) ---
-    { title: "البحث عن أحدث الكتب للمرحلة الابتدائية", stage: "ابتدائي", subject: "all", type: "exam", url: "https://www.google.com/search?q=تحميل+الكتب+الخارجية+للمرحلة+الابتدائية+pdf" },
-    { title: "البحث عن أحدث الكتب للمرحلة الإعدادية", stage: "إعدادي", subject: "all", type: "exam", url: "https://www.google.com/search?q=تحميل+الكتب+الخارجية+للمرحلة+الاعدادية+pdf" },
-    { title: "البحث عن أحدث الكتب للمرحلة الثانوية", stage: "ثانوي", subject: "all", type: "exam", url: "https://www.google.com/search?q=تحميل+الكتب+الخارجية+للمرحلة+الثانوية+pdf" },
+    { title: "البحث عن أحدث الكتب للمرحلة الابتدائية", stage: "ابتدائي", subject: "all", type: "exam", url: "https://www.google.com/search?q=تحميل+الكتب+الخارجية+للمرحلة+الابتدائية+pdf", category: "البحث السريع (لجميع الكتب والمراحل)" },
+    { title: "البحث عن أحدث الكتب للمرحلة الإعدادية", stage: "إعدادي", subject: "all", type: "exam", url: "https://www.google.com/search?q=تحميل+الكتب+الخارجية+للمرحلة+الاعدادية+pdf", category: "البحث السريع (لجميع الكتب والمراحل)" },
+    { title: "البحث عن أحدث الكتب للمرحلة الثانوية", stage: "ثانوي", subject: "all", type: "exam", url: "https://www.google.com/search?q=تحميل+الكتب+الخارجية+للمرحلة+الثانوية+pdf", category: "البحث السريع (لجميع الكتب والمراحل)" },
 
-    // --- 4. كورسات التأسيس (ZAmericanEnglish) وغيرها ---
-    { title: "كورس تعلم من الصفر المستوى الاول (ZAmericanEnglish)", stage: "مرحلة تأسيس", subject: "لغات", type: "pdf", url: "https://www.youtube.com/playlist?list=PLtB1YGL2ZGndh4A68M68K9q8isKk3F0d-" },
-    { title: "كورس القراءة المستوى الاول (ZAmericanEnglish)", stage: "مرحلة تأسيس", subject: "لغات", type: "pdf", url: "https://www.youtube.com/playlist?list=PLtB1YGL2ZGnca_pAiyWp3X1l3jQG4zJg8" },
-    { title: "كورس الصوتيات المستوى الاول (ZAmericanEnglish)", stage: "مرحلة تأسيس", subject: "لغات", type: "pdf", url: "https://www.youtube.com/playlist?list=PLtB1YGL2ZGnc3p_p1Yt9_zH7hO-3f8n93" },
-    { title: "كورس القواعد المستوى الاول (ZAmericanEnglish)", stage: "مرحلة تأسيس", subject: "لغات", type: "pdf", url: "https://www.youtube.com/playlist?list=PLtB1YGL2ZGnfrN3R4T75v_aO2Z5sF6H6C" },
-    { title: "كورس المحادثة المستوى الاول (ZAmericanEnglish)", stage: "مرحلة تأسيس", subject: "لغات", type: "pdf", url: "https://www.youtube.com/playlist?list=PLtB1YGL2ZGneGkE3A3e4q8y-D5Q5lB44b" },
-    { title: "كورس الاستماع المستوى الاول (ZAmericanEnglish)", stage: "مرحلة تأسيس", subject: "لغات", type: "pdf", url: "https://www.youtube.com/playlist?list=PLtB1YGL2ZGnfRkS2aAteL7x-X3x9Wb-p8" },
-    { title: "كورس الكتابة المستوى الاول (ZAmericanEnglish)", stage: "مرحلة تأسيس", subject: "لغات", type: "pdf", url: "https://www.youtube.com/playlist?list=PLtB1YGL2ZGncpwH_QoM5U3x_P6h0pW_2r" },
+    { title: "كورس تعلم من الصفر المستوى الاول", stage: "مرحلة تأسيس", subject: "لغات", type: "pdf", url: "https://www.youtube.com/playlist?list=PLtB1YGL2ZGndh4A68M68K9q8isKk3F0d-", category: "كورسات التأسيس واللغات" },
+    { title: "كورس القراءة المستوى الاول", stage: "مرحلة تأسيس", subject: "لغات", type: "pdf", url: "https://www.youtube.com/playlist?list=PLtB1YGL2ZGnca_pAiyWp3X1l3jQG4zJg8", category: "كورسات التأسيس واللغات" },
+    { title: "كورس الصوتيات المستوى الاول", stage: "مرحلة تأسيس", subject: "لغات", type: "pdf", url: "https://www.youtube.com/playlist?list=PLtB1YGL2ZGnc3p_p1Yt9_zH7hO-3f8n93", category: "كورسات التأسيس واللغات" },
+    { title: "كورس القواعد المستوى الاول", stage: "مرحلة تأسيس", subject: "لغات", type: "pdf", url: "https://www.youtube.com/playlist?list=PLtB1YGL2ZGnfrN3R4T75v_aO2Z5sF6H6C", category: "كورسات التأسيس واللغات" },
+    { title: "كورس المحادثة المستوى الاول", stage: "مرحلة تأسيس", subject: "لغات", type: "pdf", url: "https://www.youtube.com/playlist?list=PLtB1YGL2ZGneGkE3A3e4q8y-D5Q5lB44b", category: "كورسات التأسيس واللغات" },
+    { title: "كورس الاستماع المستوى الاول", stage: "مرحلة تأسيس", subject: "لغات", type: "pdf", url: "https://www.youtube.com/playlist?list=PLtB1YGL2ZGnfRkS2aAteL7x-X3x9Wb-p8", category: "كورسات التأسيس واللغات" },
+    { title: "كورس الكتابة المستوى الاول", stage: "مرحلة تأسيس", subject: "لغات", type: "pdf", url: "https://www.youtube.com/playlist?list=PLtB1YGL2ZGncpwH_QoM5U3x_P6h0pW_2r", category: "كورسات التأسيس واللغات" },
 
-    // --- 5. قنوات يوتيوب تعليمية (مدرستنا) ---
-    { title: "قناة مدرستنا للمرحلة الابتدائية", stage: "ابتدائي", subject: "all", type: "exam", url: "https://www.youtube.com/results?search_query=قناة+مدرستنا+المرحلة+الابتدائية" },
-    { title: "قناة مدرستنا للمرحلة الاعدادية", stage: "إعدادي", subject: "all", type: "exam", url: "https://www.youtube.com/results?search_query=قناة+مدرستنا+المرحلة+الاعدادية" },
-    { title: "قناة مدرستنا للمرحلة الثانوية", stage: "ثانوي", subject: "all", type: "exam", url: "https://www.youtube.com/results?search_query=قناة+مدرستنا+المرحلة+الثانوية" }
+    { title: "قناة مدرستنا للمرحلة الابتدائية", stage: "ابتدائي", subject: "all", type: "exam", url: "https://www.youtube.com/results?search_query=قناة+مدرستنا+المرحلة+الابتدائية", category: "قنوات يوتيوب تعليمية" },
+    { title: "قناة مدرستنا للمرحلة الاعدادية", stage: "إعدادي", subject: "all", type: "exam", url: "https://www.youtube.com/results?search_query=قناة+مدرستنا+المرحلة+الاعدادية", category: "قنوات يوتيوب تعليمية" },
+    { title: "قناة مدرستنا للمرحلة الثانوية", stage: "ثانوي", subject: "all", type: "exam", url: "https://www.youtube.com/results?search_query=قناة+مدرستنا+المرحلة+الثانوية", category: "قنوات يوتيوب تعليمية" }
 ];
 
 window.filterTeacherLibrary = () => {
@@ -1999,10 +1994,71 @@ window.filterTeacherLibrary = () => {
     
     grid.innerHTML = '';
     const filtered = teacherLibraryData.filter(i => (sVal === 'all' || i.stage === sVal || i.stage === 'all') && (subVal === 'all' || i.subject === subVal || i.subject === 'all' || i.stage === 'all'));
+    
     if (filtered.length === 0) {
-        grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--text-muted);">لا توجد ملفات متطابقة حالياً.</p>'; return;
+        grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--text-muted);">لا يوجد مصادر تطابق بحثك حالياً.</p>'; 
+        return;
     }
+
+    // Group items by category
+    const grouped = {};
     filtered.forEach(item => {
-        grid.innerHTML += '<div class="card"><h4 style="color:var(--primary-color); margin-bottom:10px;"><i class="fa-solid fa-file-pdf"></i> ' + item.title + '</h4><p style="color:var(--text-muted); font-size:0.9rem; margin-bottom:15px;">' + item.stage + ' | ' + item.subject + '</p><a href="' + item.url + '" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="display:block; text-align:center; text-decoration:none;"><i class="fa-solid fa-download"></i> عرض وتنزيل</a></div>';
+        const cat = item.category || "مصادر عامة";
+        if (!grouped[cat]) grouped[cat] = [];
+        grouped[cat].push(item);
     });
+
+    // Render grouped items
+    for (const [category, items] of Object.entries(grouped)) {
+        grid.innerHTML += `<div style="grid-column: 1/-1; border-bottom: 2px solid var(--primary-color); padding-bottom: 5px; margin-top: 20px; margin-bottom: 10px;">
+            <h3 style="color: var(--primary-color);"><i class="fa-solid fa-layer-group"></i> ${category}</h3>
+        </div>`;
+        
+        items.forEach(item => {
+            let icon = item.type === 'pdf' ? 'fa-file-pdf' : 'fa-link';
+            grid.innerHTML += `
+            <div class="card">
+                <h4 style="color:var(--primary-color); margin-bottom:10px;"><i class="fa-solid ${icon}"></i> ${item.title}</h4>
+                <p style="color:var(--text-muted); font-size:0.9rem; margin-bottom:15px;">${item.stage} | ${item.subject}</p>
+                <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="display:block; text-align:center; text-decoration:none;"><i class="fa-solid fa-download"></i> عرض وتنزيل</a>
+            </div>`;
+        });
+    }
+};
+
+// PDF Upload Handler for AI
+window.handlePdfUpload = async (e) => {
+    const file = e.target.files[0];
+    if(!file) return;
+    const statusEl = document.getElementById('pdf-upload-status');
+    const inputEl = document.getElementById('ai-input');
+    
+    statusEl.innerText = 'جاري قراءة الملف...';
+    
+    try {
+        const arrayBuffer = await file.arrayBuffer();
+        if (!window.pdfjsLib) {
+            statusEl.innerText = 'مكتبة PDF غير متوفرة. تأكد من اتصال الإنترنت.';
+            return;
+        }
+        
+        window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
+        const pdf = await window.pdfjsLib.getDocument({data: arrayBuffer}).promise;
+        
+        let fullText = '';
+        const maxPages = Math.min(pdf.numPages, 10); // Limit to 10 pages to avoid token explosion
+        for(let i = 1; i <= maxPages; i++) {
+            const page = await pdf.getPage(i);
+            const content = await page.getTextContent();
+            const strings = content.items.map(item => item.str);
+            fullText += strings.join(' ') + '\n';
+        }
+        
+        statusEl.innerText = 'تم رفع الملف بنجاح! اضغط إرسال للتلخيص.';
+        inputEl.value = "لخص هذا النص وأخرج منه أهم الأسئلة:\n\n" + fullText;
+        
+    } catch (err) {
+        statusEl.innerText = 'حدث خطأ أثناء قراءة الملف.';
+        console.error(err);
+    }
 };
