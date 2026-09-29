@@ -34,7 +34,13 @@ if (!studyUsername || !studyStage || appVersion !== '2.0') {
 
 window.saveOnboarding = () => {
     let name = document.getElementById('onboard-name').value.trim();
-    if (!name) name = 'طالب'; // Fallback
+    let roleElem = document.getElementById('onboard-role');
+    let role = roleElem ? roleElem.value : 'student';
+    
+    if (!name) {
+        alert('أهلاً بك! من فضلك أدخل اسمك أولاً لنتمكن من حفظ بياناتك.');
+        return;
+    }
     
     let stage = "";
     let spec = "";
@@ -44,17 +50,29 @@ window.saveOnboarding = () => {
     if (role === 'student') {
         stage = document.getElementById('onboard-stage').value;
         if (!stage) { alert('من فضلك اختر المرحلة الدراسية'); return; }
+        
         if (stage === 'جامعة') {
-        spec = document.getElementById('onboard-uni').value.trim();
-    } else if (stage === 'إعدادي' || stage === 'ثانوي') {
-        spec = document.getElementById('onboard-year').value;
+            spec = document.getElementById('onboard-uni').value.trim();
+        } else if (stage === 'ابتدائي' || stage === 'إعدادي' || stage === 'ثانوي') {
+            spec = document.getElementById('onboard-year').value;
+        }
+        
+        let codeInput = document.getElementById('onboard-teacher-code');
+        if (codeInput) tCode = codeInput.value.trim();
+        
+    } else if (role === 'teacher') {
+        let subjInput = document.getElementById('onboard-teacher-subject');
+        if (!subjInput || !subjInput.value.trim()) { alert('من فضلك أدخل المادة'); return; }
+        
+        stage = 'مدرس';
+        spec = subjInput.value.trim();
+        generatedTeacherCode = 'T-' + Math.floor(1000 + Math.random() * 9000);
     }
     
     studyUsername = name;
     studyStage = stage || 'غير محدد';
     studySpecialty = spec || 'غير محدد';
     
-    // Only create a new ID if the user doesn't already have one
     if (!studyUserId) {
         studyUserId = 'user_' + Date.now().toString();
     }
@@ -63,10 +81,21 @@ window.saveOnboarding = () => {
     localStorage.setItem('study_userid', studyUserId);
     localStorage.setItem('study_stage', studyStage);
     localStorage.setItem('study_specialty', studySpecialty);
-    localStorage.setItem('study_app_version', '2.0'); // Force save new version
+    localStorage.setItem('study_role', role);
+    localStorage.setItem('study_app_version', '2.0');
     
-    document.getElementById('onboarding-modal').style.display = 'none';
-    syncToCloud();
+    if (role === 'student' && tCode) localStorage.setItem('study_my_teacher_code', tCode);
+    if (role === 'teacher') localStorage.setItem('study_teacher_code', generatedTeacherCode);
+    
+    let modal = document.getElementById('onboarding-modal');
+    if (modal) modal.style.display = 'none';
+    
+    if (typeof syncToCloud === 'function') syncToCloud();
+    
+    if (role === 'teacher') {
+        alert('أهلاً بك يا أستاذ ' + name + '\nكود المدرس الخاص بك هو:\n[ ' + generatedTeacherCode + ' ]');
+    }
+    
     setTimeout(() => {
         window.location.reload();
     }, 800);
