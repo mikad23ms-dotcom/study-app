@@ -12,11 +12,11 @@
 }
 
 [data-theme="dark"] {
-    --bg-color: #0b0914;
-    --card-bg: rgba(255, 255, 255, 0.03);
+    --bg-color: #121212;
+    --card-bg: #1e1e1e;
     --text-main: #f1f1f1;
     --text-muted: #a0a0a0;
-    --border-color: rgba(255, 255, 255, 0.05);
+    --border-color: #333333;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Tajawal', sans-serif; }
@@ -57,7 +57,7 @@ body {
 .nav-links li:hover, .nav-links li.active { background-color: var(--primary-color); color: white; }
 .sidebar-footer { padding: 20px; border-top: 1px solid var(--border-color); }
 .theme-btn { width: 100%; background: transparent; border: 1px solid var(--border-color); color: var(--text-main); padding: 10px; border-radius: 8px; cursor: pointer; font-weight: 600; display: flex; justify-content: center; align-items: center; gap: 8px; transition: 0.3s; }
-.theme-btn:hover { background: var(--bg-color) !important; }
+.theme-btn:hover { background: var(--bg-color); }
 
 .main-content { flex: 1; padding: 30px; overflow-y: auto; }
 .page { display: none; animation: fadeIn 0.4s ease; }
@@ -71,13 +71,13 @@ header p { color: var(--text-muted); font-size: 1.1rem; margin-top: 5px; }
 
 /* Dashboard */
 .progress-section { background: var(--card-bg); padding: 20px; border-radius: 12px; margin-bottom: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
-.progress-bar-bg { width: 100%; height: 12px; background: var(--bg-color) !important; border-radius: 10px; overflow: hidden; }
+.progress-bar-bg { width: 100%; height: 12px; background: var(--bg-color); border-radius: 10px; overflow: hidden; }
 .progress-bar-fill { height: 100%; background: linear-gradient(90deg, var(--success), #70e000); border-radius: 10px; transition: width 0.5s ease; }
 .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
 .card { background: var(--card-bg); padding: 20px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
 .card h3 { margin-bottom: 20px; display: flex; justify-content: space-between; border-bottom: 2px solid var(--bg-color); padding-bottom: 10px; }
 .item-list { list-style: none; }
-.list-item { padding: 15px; background: var(--bg-color) !important; margin-bottom: 10px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; border-right: 4px solid var(--primary-color); }
+.list-item { padding: 15px; background: var(--bg-color); margin-bottom: 10px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; border-right: 4px solid var(--primary-color); }
 .list-item.completed .task-text { text-decoration: line-through; color: var(--text-muted); }
 .task-actions button { background: none; border: none; cursor: pointer; font-size: 1.1rem; margin-right: 10px; }
 .task-actions .check-btn { color: var(--success); }
@@ -107,7 +107,7 @@ header p { color: var(--text-muted); font-size: 1.1rem; margin-top: 5px; }
 
 /* Exams */
 .exams-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 15px; }
-.exam-card { background: var(--bg-color) !important; border-radius: 12px; padding: 20px; border: 1px solid var(--border-color); position: relative; overflow: hidden; }
+.exam-card { background: var(--bg-color); border-radius: 12px; padding: 20px; border: 1px solid var(--border-color); position: relative; overflow: hidden; }
 .exam-card::before { content: ''; position: absolute; right: 0; top: 0; bottom: 0; width: 6px; }
 .exam-countdown { margin-top: 15px; font-size: 1.5rem; font-weight: bold; color: var(--danger); display: flex; align-items: center; gap: 10px; }
 .exam-actions { position: absolute; left: 15px; top: 15px; }
@@ -121,7 +121,7 @@ header p { color: var(--text-muted); font-size: 1.1rem; margin-top: 5px; }
 .flashcard-front { background-color: var(--card-bg); color: var(--text-main); border-right-width: 6px; }
 .flashcard-back { background-color: var(--primary-color); color: white; transform: rotateY(180deg); }
 .fc-delete { position: absolute; top: 10px; left: 10px; background: rgba(0,0,0,0.1); border: none; color: white; border-radius: 50%; width: 30px; height: 30px; cursor: pointer; z-index: 10; }
-.flashcard-front .fc-delete { color: var(--danger); background: var(--bg-color) !important; }
+.flashcard-front .fc-delete { color: var(--danger); background: var(--bg-color); }
 
 /* AI Assistant */
 .ai-container { background: var(--card-bg); padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
@@ -133,8 +133,8 @@ header p { color: var(--text-muted); font-size: 1.1rem; margin-top: 5px; }
 .ai-tab-btn.active { color: var(--primary-color); border-bottom-color: var(--primary-color); }
 .ai-tab-content { display: none; }
 .ai-tab-content.active { display: block; animation: fadeIn 0.4s ease; }
-textarea { width: 100%; height: 200px; padding: 15px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--bg-color) !important; color: var(--text-main); font-size: 1rem; resize: vertical; font-family: inherit; }
-.ai-output { background: var(--bg-color) !important; padding: 25px; border-radius: 8px; border: 1px solid var(--border-color); margin-top: 20px; line-height: 1.8; font-size: 1.1rem; }
+textarea { width: 100%; height: 200px; padding: 15px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--bg-color); color: var(--text-main); font-size: 1rem; resize: vertical; font-family: inherit; }
+.ai-output { background: var(--bg-color); padding: 25px; border-radius: 8px; border: 1px solid var(--border-color); margin-top: 20px; line-height: 1.8; font-size: 1.1rem; }
 .ai-output h1, .ai-output h2, .ai-output h3 { color: var(--primary-color); margin-top: 20px; margin-bottom: 10px; }
 .ai-output ul { margin-right: 20px; margin-bottom: 15px; }
 
@@ -151,217 +151,219 @@ textarea { width: 100%; height: 200px; padding: 15px; border-radius: 8px; border
 .filter-btn { background: transparent; border: 1px solid var(--primary-color); color: var(--primary-color); padding: 6px 15px; border-radius: 20px; cursor: pointer; }
 .filter-btn.active, .filter-btn:hover { background: var(--primary-color); color: white; }
 
-
-/* =========================================
-   PREMIUM MOBILE DESIGN OVERHAUL (Creative & Unique)
-   ========================================= */
-
-/* Hide new elements on desktop */
-@media (min-width: 769px) {
-    .d-mobile { display: none !important; }
+@media (max-width: 768px) {
+    .app-container { flex-direction: column; height: auto; min-height: 100vh; overflow: visible; }
+    .sidebar { width: 100%; border-left: none; border-bottom: 1px solid var(--border-color); padding: 10px; flex-direction: row; justify-content: space-between; align-items: center; flex-wrap: wrap; height: auto; position: relative; }
+    .sidebar .logo { padding: 0; margin-bottom: 0; width: 100%; text-align: center; }
+    .nav-links { display: flex; flex-wrap: wrap; gap: 5px; width: 100%; justify-content: center; margin-top: 10px; }
+    .nav-links li { padding: 8px 12px; font-size: 0.9rem; margin: 2px; }
+    .sidebar-footer { padding: 10px; border-top: none; width: 100%; display: flex; justify-content: center; }
+    .theme-btn { padding: 8px; width: auto; }
+    .main-content { padding: 15px; height: auto; overflow-y: visible; }
+    .timer-display { font-size: 4rem; }
+    .ai-tabs { flex-direction: column; }
 }
 
-@media (max-width: 768px) {
-    /* Base Body Enhancements for Mobile */
-    [data-theme="dark"] body {
-        background: linear-gradient(135deg, #0d0b1a 0%, #1a153a 100%) !important;
-        background-attachment: fixed !important;
-        color: #fff;
-    }
-    body {
-        background: var(--bg-color) !important;
-        color: var(--text-main);
+/* Prayer Times */
+.prayer-times { display: flex; justify-content: space-between; margin-top: 15px; flex-wrap: wrap; gap: 10px; }
+.prayer-time-box { background: var(--bg-color); padding: 10px; border-radius: 8px; text-align: center; flex: 1; min-width: 60px; border: 1px solid var(--border-color); }
+.prayer-time-box strong { display: block; font-size: 0.9rem; color: var(--text-muted); margin-bottom: 5px; }
+.prayer-time-box span { font-weight: bold; font-size: 1.1rem; color: var(--text-main); }
+.prayer-time-box.qiyam { border-color: var(--primary-color); background: rgba(67, 97, 238, 0.05); }
+.prayer-time-box.qiyam strong { color: var(--primary-color); }
+
+/* Toast Notification */
+.toast {
+    position: fixed;
+    bottom: -100px;
+    left: 20px;
+    background: var(--card-bg);
+    color: var(--text-main);
+    padding: 15px 25px;
+    border-radius: 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    transition: bottom 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    z-index: 9999;
+    border: 2px solid var(--primary-color);
+}
+.toast.show { bottom: 30px; }
+
+/* =========================================
+   Mobile Responsiveness (Responsive Design)
+   ========================================= */
+@media screen and (max-width: 768px) {
+    /* ????? ????? ?????? ???? ?????? ??? ???? ??? */
+    .app-container {
+        flex-direction: column;
     }
 
-    /* Floating Orbs Background (Unique Touch) */
-    body::before {
-        content: '';
-        position: fixed;
-        top: -10%; left: -10%;
-        width: 300px; height: 300px;
-        background: radial-gradient(circle, rgba(67, 97, 238, 0.4) 0%, rgba(0,0,0,0) 70%);
-        border-radius: 50%;
-        z-index: -1;
-        pointer-events: none;
-    }
-    body::after {
-        content: '';
-        position: fixed;
-        bottom: 10%; right: -10%;
-        width: 350px; height: 350px;
-        background: radial-gradient(circle, rgba(247, 37, 133, 0.25) 0%, rgba(0,0,0,0) 70%);
-        border-radius: 50%;
-        z-index: -1;
-        pointer-events: none;
-    }
-
-    /* Mobile Header */
-    .mobile-top-header {
-        display: flex !important;
-        justify-content: space-between;
-        align-items: center;
-        padding: 15px 20px;
-        background: rgba(15, 12, 29, 0.6);
-        backdrop-filter: blur(15px);
-        -webkit-backdrop-filter: blur(15px);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        position: sticky;
-        top: 0;
-        z-index: 990;
-    }
-
-    .user-profile-header {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-    }
-
-    .avatar-circle {
-        width: 45px; height: 45px;
-        border-radius: 50%;
-        background: linear-gradient(45deg, var(--primary-color), var(--purple));
-        display: flex; justify-content: center; align-items: center;
-        font-size: 1.2rem; color: white;
-        box-shadow: 0 4px 15px rgba(67, 97, 238, 0.4);
-    }
-
-    .user-info-header {
-        display: flex; flex-direction: column;
-    }
-    .user-info-header .greeting { font-size: 0.75rem; color: rgba(255,255,255,0.7); }
-    .user-info-header .name { font-size: 1rem; font-weight: bold; color: white; }
-
-    .icon-btn {
-        background: rgba(255,255,255,0.05);
-        border: 1px solid rgba(255,255,255,0.1);
-        border-radius: 12px;
-        width: 40px; height: 40px;
-        display: flex; justify-content: center; align-items: center;
-        color: white; font-size: 1.2rem; cursor: pointer;
-    }
-
-    /* Hide Desktop Header in Dashboard */
-    #dashboard > header { display: none; }
-
-    /* The Drawer Sidebar */
+    /* ????? ?????? ??? ????? ???? ???? ?? ??????? ???????? */
     .sidebar {
-        position: fixed !important;
-        top: 0; right: -320px;
-        width: 280px !important;
-        height: 100vh !important;
-        flex-direction: column !important;
-        background: linear-gradient(180deg, rgba(20,15,40,0.95) 0%, rgba(10,8,25,0.98) 100%) !important;
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        border-left: 1px solid rgba(255,255,255,0.05) !important;
-        border-top: none !important;
-        border-bottom: none !important;
-        z-index: 10001 !important;
-        transition: right 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
-        overflow-y: auto;
-        padding-top: 20px !important;
-        box-shadow: -10px 0 30px rgba(0,0,0,0.5) !important;
-    }
-    .sidebar.open { right: 0; }
-    
-    .sidebar .logo { display: flex !important; justify-content: space-between; padding: 0 20px; }
-    .sidebar-footer { display: flex !important; flex-direction: column !important; padding: 20px; background: transparent !important; }
-
-    .close-sidebar-btn {
-        background: transparent; border: none; color: white; font-size: 1.5rem; cursor: pointer;
-    }
-
-    /* Nav Links inside Drawer */
-    .nav-links {
-        flex-direction: column !important;
-        overflow: visible !important;
-        padding: 20px 10px !important;
-    }
-    .nav-links li {
-        width: 100% !important;
-        flex-direction: row !important;
-        justify-content: flex-start !important;
-        text-align: right !important;
-        padding: 12px 20px !important;
-        margin: 5px 0 !important;
-        font-size: 1rem !important;
-        border-radius: 12px !important;
-    }
-    .nav-links li i { margin-left: 15px; font-size: 1.2rem; }
-
-    #sidebar-overlay {
-        display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-        background: rgba(0,0,0,0.6); backdrop-filter: blur(3px); z-index: 10000; opacity: 0; transition: opacity 0.3s;
-    }
-
-    /* Floating Premium Bottom Nav */
-    .mobile-bottom-nav {
+        width: 100%;
         position: fixed;
-        bottom: 20px;
-        left: 5%; right: 5%;
-        width: 90%;
+        bottom: 0;
+        left: 0;
+        right: 0;
         height: 70px;
-        background: rgba(20, 15, 40, 0.85);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        border: 1px solid rgba(255,255,255,0.1);
-        border-radius: 25px;
+        flex-direction: row;
+        padding: 0;
+        z-index: 9999;
+        border-left: none;
+        border-top: 1px solid var(--border-color);
+        box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+        overflow-x: auto;
+    }
+
+    /* ????? ?????? ????? ????? ?? ?????? ?????? ?????? ??????? */
+    .sidebar .logo, .sidebar-footer {
+        display: none;
+    }
+
+    .nav-links {
         display: flex;
-        justify-content: space-around;
+        flex-direction: row;
+        width: 100%;
+        padding: 0 5px;
         align-items: center;
-        z-index: 990;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.4), inset 0 1px 1px rgba(255,255,255,0.1);
+    }
+
+    .nav-links li {
+        flex: 1;
+        min-width: 70px;
+        padding: 8px 5px;
+        margin: 0 2px;
+        flex-direction: column; /* ???????? ??? ?????? */
+        font-size: 0.75rem;
+        gap: 5px;
+        text-align: center;
+        justify-content: center;
+    }
+
+    .nav-links li i {
+        font-size: 1.2rem;
+    }
+
+    /* ????? ??????? ??????? ???? ??????? ??????? ?????? */
+    .main-content {
+        padding: 15px;
+        padding-bottom: 90px; /* ????? ?????? ?????? */
+    }
+
+    /* ????? ???????? ?? ???????? */
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    header h1 {
+        font-size: 1.5rem;
+    }
+
+    /* ????? ??? ???? ?????????? */
+    .timer-display {
+        font-size: 3.5rem; /* ????? ?????? ???? ?????? ??? ?????? */
     }
     
-    [data-theme="light"] .mobile-bottom-nav {
-        background: rgba(255, 255, 255, 0.9);
-        border: 1px solid rgba(0,0,0,0.05);
-        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    .pomodoro-container {
+        padding: 20px;
     }
 
-    .mobile-bottom-nav .nav-item {
-        display: flex; flex-direction: column; align-items: center; justify-content: center;
-        color: rgba(255,255,255,0.5); font-size: 0.7rem; gap: 4px; cursor: pointer; transition: 0.3s;
-        width: 20%;
+    .pomodoro-modes {
+        flex-wrap: wrap;
     }
-    [data-theme="light"] .mobile-bottom-nav .nav-item { color: rgba(0,0,0,0.5); }
-
-    .mobile-bottom-nav .nav-item i { font-size: 1.3rem; transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
     
-    .mobile-bottom-nav .nav-item.active { color: var(--primary-color); }
-    .mobile-bottom-nav .nav-item.active i { transform: translateY(-3px) scale(1.1); }
-
-    /* The Magical AI Center FAB */
-    .mobile-bottom-nav .ai-fab { position: relative; top: -25px; }
-    .mobile-bottom-nav .fab-inner {
-        width: 60px; height: 60px; border-radius: 50%;
-        background: linear-gradient(135deg, var(--primary-color), var(--orange));
-        display: flex; justify-content: center; align-items: center;
-        color: white; font-size: 1.8rem;
-        box-shadow: 0 10px 20px rgba(247, 37, 133, 0.4), inset 0 -3px 5px rgba(0,0,0,0.2);
-        border: 4px solid #140f28; /* Matches bottom nav bg to look cutout */
-        transition: transform 0.3s;
-    }
-    [data-theme="light"] .mobile-bottom-nav .fab-inner { border-color: white; }
-    .mobile-bottom-nav .ai-fab.active .fab-inner { transform: scale(1.1) rotate(10deg); box-shadow: 0 10px 25px rgba(247, 37, 133, 0.6); }
-
-    /* Cards Redesign for Mobile (Glass effect) */
-    .card {
-        background: rgba(255, 255, 255, 0.03) !important;
-        backdrop-filter: blur(10px) !important;
-        -webkit-backdrop-filter: blur(10px) !important;
-        border: 1px solid rgba(255, 255, 255, 0.05) !important;
-        border-radius: 20px !important;
-        box-shadow: 0 8px 32px rgba(0,0,0,0.2) !important;
-    }
-    [data-theme="light"] .card {
-        background: white !important;
-        border: 1px solid rgba(0,0,0,0.05) !important;
-        box-shadow: 0 8px 20px rgba(0,0,0,0.05) !important;
+    .pomo-mode-btn {
+        font-size: 0.85rem;
+        padding: 6px 12px;
     }
 
-    /* Padding for main content to avoid bottom nav */
-    .main-content { padding-bottom: 120px !important; padding-top: 15px !important; }
+    /* ????? ?????? (???????) ???? ???? ?????? */
+    .dashboard-grid, .days-grid, .subjects-grid {
+        grid-template-columns: 1fr; /* ?? ?????? ???? ??? ????? */
+    }
+    
+    /* ????? ?????? ????????? */
+    .ai-tabs {
+        flex-direction: column;
+    }
+    .ai-tab-btn {
+        width: 100%;
+        margin-bottom: 5px;
+    }
+}
+
+/* =========================================================
+   💎 PREMIUM UI ENHANCEMENTS (Lighting, Glows, Shadows) 💎
+   ========================================================= */
+
+/* 1. Glowing Buttons */
+.btn-primary {
+    box-shadow: 0 4px 15px rgba(67, 97, 238, 0.35);
+    position: relative;
+    overflow: hidden;
+}
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(67, 97, 238, 0.5);
+}
+.btn-primary:active {
+    transform: translateY(1px);
+}
+
+/* Big Start Button Animation */
+.btn-large {
+    animation: premiumPulse 2s infinite;
+}
+@keyframes premiumPulse {
+    0% { box-shadow: 0 0 0 0 rgba(67, 97, 238, 0.6); }
+    70% { box-shadow: 0 0 0 15px rgba(67, 97, 238, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(67, 97, 238, 0); }
+}
+
+/* 2. Card Floating Effects */
+.card, .day-card, .task-item {
+    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+}
+.card:hover, .day-card:hover, .task-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.12) !important;
+    border-color: rgba(67, 97, 238, 0.3);
+}
+
+/* Dark mode specific subtle glows */
+[data-theme="dark"] .card:hover, [data-theme="dark"] .day-card:hover {
+    box-shadow: 0 12px 30px rgba(67, 97, 238, 0.15) !important;
+    border-color: rgba(67, 97, 238, 0.5);
+}
+
+/* 3. Header Text Gradient Magic */
+.page header h1 {
+    background: linear-gradient(45deg, var(--primary-color), #f72585);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+}
+
+
+
+/* 5. Inputs Focus Glow */
+.search-input:focus, textarea:focus, select:focus {
+    box-shadow: 0 0 0 4px rgba(67, 97, 238, 0.15);
+    border-color: var(--primary-color) !important;
+}
+
+/* 6. Modal Premium Glass Feel */
+.modal-content {
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+[data-theme="dark"] .modal-content {
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8), 0 0 20px rgba(67, 97, 238, 0.2) !important;
 }
 
 /* ========================================================================= */
@@ -382,8 +384,8 @@ textarea { width: 100%; height: 200px; padding: 15px; border-radius: 8px; border
 /* 2. Global Resets & Typography */
 body {
     transition: background-color 0.3s ease;
+    overflow-x: hidden;
 }
-
 [data-theme="dark"] body {
     background-color: var(--bg-color) !important;
     background-image: none !important;
@@ -394,7 +396,6 @@ body {
     position: relative;
     z-index: 1;
 }
-
 .main-content::before {
     content: '';
     position: absolute;
@@ -403,40 +404,66 @@ body {
     background: linear-gradient(135deg, #4731d1, #6b4cfa);
     border-radius: 0 0 50px 50px;
     z-index: -1;
-    /* Subtle geometric watermarks */
     background-image: 
         radial-gradient(circle at 10% 20%, rgba(255,255,255,0.08) 0%, transparent 200px),
         radial-gradient(circle at 90% 60%, rgba(255,255,255,0.05) 0%, transparent 250px);
 }
 
-/* On Desktop, make the curve fit the floating panel */
-@media (min-width: 769px) {
-    .main-content::before {
-        border-radius: 24px 24px 60px 60px;
-    }
-}
-
 /* 4. Sleek Solid Cards (No cheap glassmorphism, just solid elegance) */
 [data-theme="dark"] .card, 
 [data-theme="dark"] .dashboard-widget, 
-[data-theme="dark"] .prayer-time-box, 
 [data-theme="dark"] .day-card, 
 [data-theme="dark"] .list-item, 
-[data-theme="dark"] .alert {
+[data-theme="dark"] .alert,
+[data-theme="dark"] .prayer-time-box {
     background: var(--card-bg) !important;
     border: 1px solid var(--border-color) !important;
     border-radius: 20px !important;
     box-shadow: 0 10px 20px rgba(0,0,0,0.2) !important;
-    backdrop-filter: none !important; /* Remove old blur */
+    backdrop-filter: none !important;
 }
-
-/* Inner elements shouldn't have nested thick borders unless intentional */
 [data-theme="dark"] .list-item {
     border-right: 4px solid var(--primary-color) !important;
 }
 
-/* 5. The Mobile Bottom Nav (Cutout Effect) */
+/* Base transitions */
+.card, .dashboard-widget, .task-item, .day-card, .btn, .fab-inner, .nav-links li, .prayer-time-box {
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+}
+
+/* Lift up and Glow for Cards on Hover */
+.card:hover, .dashboard-widget:hover, .task-item:hover, .day-card:hover, .prayer-time-box:hover {
+    transform: translateY(-5px) !important;
+    box-shadow: 0 15px 30px rgba(93, 95, 239, 0.15) !important;
+    border-color: rgba(93, 95, 239, 0.3) !important;
+}
+[data-theme="dark"] .card:hover, 
+[data-theme="dark"] .dashboard-widget:hover, 
+[data-theme="dark"] .task-item:hover, 
+[data-theme="dark"] .day-card:hover,
+[data-theme="dark"] .prayer-time-box:hover {
+    box-shadow: 0 15px 35px rgba(93, 95, 239, 0.4) !important;
+    border-color: rgba(93, 95, 239, 0.6) !important;
+}
+.btn-primary:hover, .btn-large:hover, .mobile-bottom-nav .fab-inner:hover {
+    transform: translateY(-3px) scale(1.05) !important;
+    box-shadow: 0 10px 20px rgba(93, 95, 239, 0.6) !important;
+}
+
+/* 5. Mobile Specific Fixes (Edge-to-Edge & Nav Notch) */
 @media (max-width: 768px) {
+    .app-container {
+        padding: 0 !important;
+        margin: 0 !important;
+        width: 100vw !important;
+    }
+    .main-content {
+        padding: 15px !important;
+        padding-top: 20px !important;
+        padding-bottom: 120px !important; /* Space for bottom nav */
+    }
+    
+    /* Bottom Nav Cutout/Notch Effect */
     [data-theme="dark"] .mobile-bottom-nav {
         background: var(--card-bg) !important;
         border: none !important;
@@ -447,72 +474,63 @@ body {
         left: 0 !important;
         right: 0 !important;
         box-shadow: 0 -10px 30px rgba(0,0,0,0.5) !important;
-        backdrop-filter: none !important;
     }
-
     [data-theme="dark"] .mobile-bottom-nav .ai-fab {
         top: -35px !important;
     }
-    
     [data-theme="dark"] .mobile-bottom-nav .fab-inner {
         width: 65px !important;
         height: 65px !important;
         background: linear-gradient(135deg, #6b4cfa, #4731d1) !important;
-        border: 8px solid var(--bg-color) !important; /* This creates the seamless cutout notch! */
+        border: 8px solid var(--bg-color) !important;
         box-shadow: 0 10px 20px rgba(71, 49, 209, 0.4) !important;
     }
-
-    /* Vibrant Sidebar matching Image 4 */
+    
+    /* Vibrant Sidebar */
     [data-theme="dark"] .sidebar {
         background: linear-gradient(180deg, #5143d6, #6b4cfa) !important;
         border: none !important;
-        /* Circles watermark */
         background-image: 
             radial-gradient(circle at 80% 10%, rgba(255,255,255,0.08) 0%, transparent 150px),
-            radial-gradient(circle at 20% 50%, rgba(255,255,255,0.05) 0%, transparent 200px),
-            radial-gradient(circle at 90% 90%, rgba(255,255,255,0.05) 0%, transparent 150px) !important;
+            radial-gradient(circle at 20% 50%, rgba(255,255,255,0.05) 0%, transparent 200px) !important;
     }
-
-    [data-theme="dark"] .nav-links li {
-        color: white !important;
-    }
-    [data-theme="dark"] .nav-links li:hover, 
-    [data-theme="dark"] .nav-links li.active {
-        background: rgba(255, 255, 255, 0.15) !important;
-    }
+    [data-theme="dark"] .nav-links li { color: white !important; }
+    
+    .toast.show { bottom: 100px !important; }
 }
 
-/* 6. Desktop Structural Layout */
+/* 6. Desktop Specific Fixes (Edge-to-Edge FULL SCREEN Layout) */
 @media (min-width: 769px) {
     body {
-        overflow: hidden !important; /* Stop whole page scrolling */
+        overflow: hidden !important; /* Stop whole page scrolling, use inner scroll */
     }
     .app-container {
-        padding: 2vh 2vw !important;
-        gap: 25px !important;
-        max-width: 1600px;
-        margin: 0 auto;
-        height: 100vh;
+        padding: 0 !important;
+        margin: 0 !important;
+        max-width: 100vw !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        display: flex;
     }
     .sidebar {
-        border-radius: 24px !important;
-        height: calc(100vh - 4vh) !important;
         margin: 0 !important;
-        box-shadow: 0 15px 35px rgba(0,0,0,0.3) !important;
-        border: 1px solid var(--border-color) !important;
-        overflow-y: auto !important;
+        border-radius: 0 !important;
+        height: 100vh !important;
+        border-top: none !important;
+        border-bottom: none !important;
+        border-right: none !important;
+        border-left: 1px solid var(--border-color) !important;
     }
     .main-content {
-        border-radius: 24px !important;
-        height: calc(100vh - 4vh) !important;
         margin: 0 !important;
-        box-shadow: 0 15px 35px rgba(0,0,0,0.3) !important;
-        border: 1px solid var(--border-color) !important;
-        overflow-y: auto !important;
+        border-radius: 0 !important;
+        height: 100vh !important;
+        border: none !important;
+        padding: 40px !important;
         background-color: var(--bg-color) !important;
     }
 
-    /* Make the desktop sidebar vibrant in dark mode too */
+    /* Vibrant Sidebar on Desktop too */
     [data-theme="dark"] .sidebar {
         background: linear-gradient(180deg, #5143d6, #6b4cfa) !important;
         border: none !important;
@@ -523,17 +541,35 @@ body {
     [data-theme="dark"] .sidebar .nav-links li { color: white !important; }
     [data-theme="dark"] .sidebar .nav-links li:hover,
     [data-theme="dark"] .sidebar .nav-links li.active { background: rgba(255,255,255,0.15) !important; }
+
+    /* Fix Dhikr Toast position on Desktop (Top Left Corner) */
+    .toast {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        z-index: 10000;
+    }
     
-    /* Scrollbars */
+    /* Scrollbar fixes to attach cleanly to the edges */
     ::-webkit-scrollbar { width: 8px; }
     ::-webkit-scrollbar-track { background: transparent; }
     ::-webkit-scrollbar-thumb { background: rgba(107, 76, 250, 0.4); border-radius: 10px; }
     ::-webkit-scrollbar-thumb:hover { background: var(--primary-color); }
 }
 
-/* Toast fix so it doesn't overlap the new 75px bottom nav */
-@media (max-width: 768px) {
-    .toast.show {
-        bottom: 100px !important; 
-    }
+/* Sidebar Menu Links Hover Effect */
+.nav-links li {
+    margin: 8px 15px !important;
+    border-radius: 14px !important;
+    padding: 12px 20px !important;
+}
+.nav-links li:hover {
+    background: rgba(93, 95, 239, 0.15) !important;
+    transform: translateX(-5px) !important;
+}
+.nav-links li.active {
+    background: var(--primary-color) !important;
+    color: white !important;
+    box-shadow: 0 5px 15px rgba(93, 95, 239, 0.4) !important;
+    transform: translateX(-2px) !important;
 }
