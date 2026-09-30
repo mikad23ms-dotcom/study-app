@@ -365,86 +365,175 @@ textarea { width: 100%; height: 200px; padding: 15px; border-radius: 8px; border
 }
 
 /* ========================================================================= */
-/* 💎 لمسات الفخامة الخاصة بالكمبيوتر (تأثيرات وخلفيات متحركة) 💎 */
+/* 🚀 THE REAL PREMIUM UI (DEEP NAVY & VIBRANT GRADIENTS) 🚀 */
 /* ========================================================================= */
+
+/* 1. Deep Modern Colors for Dark Theme */
+[data-theme="dark"] {
+    --bg-color: #0f1015 !important;
+    --card-bg: #1c1d2b !important;
+    --primary-color: #5d5fef !important;
+    --secondary-color: #4b4ce6 !important;
+    --border-color: #2a2b3d !important;
+    --text-main: #ffffff !important;
+    --text-muted: #8c8c9a !important;
+}
+
+/* 2. Global Resets & Typography */
+body {
+    transition: background-color 0.3s ease;
+}
+
+[data-theme="dark"] body {
+    background-color: var(--bg-color) !important;
+    background-image: none !important;
+}
+
+/* 3. The Top Curved Header (Mobile & Desktop) */
+.main-content {
+    position: relative;
+    z-index: 1;
+}
+
+.main-content::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 260px;
+    background: linear-gradient(135deg, #4731d1, #6b4cfa);
+    border-radius: 0 0 50px 50px;
+    z-index: -1;
+    /* Subtle geometric watermarks */
+    background-image: 
+        radial-gradient(circle at 10% 20%, rgba(255,255,255,0.08) 0%, transparent 200px),
+        radial-gradient(circle at 90% 60%, rgba(255,255,255,0.05) 0%, transparent 250px);
+}
+
+/* On Desktop, make the curve fit the floating panel */
 @media (min-width: 769px) {
-    /* 1. Animated Gradient Background Behind Everything */
-    body::before {
-        content: "";
-        position: fixed;
-        top: 0; left: 0; right: 0; bottom: 0;
-        z-index: -1;
-        background: linear-gradient(-45deg, #e2eafc, #edf2fb, #fdfbfb, #d7e3fc);
-        background-size: 400% 400%;
-        animation: premiumBG 15s ease infinite;
-        opacity: 0.8;
+    .main-content::before {
+        border-radius: 24px 24px 60px 60px;
     }
-    body[data-theme="dark"]::before {
-        background: linear-gradient(-45deg, #090710, #130f26, #1c1543, #0a0616);
-        background-size: 400% 400%;
-        opacity: 1;
+}
+
+/* 4. Sleek Solid Cards (No cheap glassmorphism, just solid elegance) */
+[data-theme="dark"] .card, 
+[data-theme="dark"] .dashboard-widget, 
+[data-theme="dark"] .prayer-time-box, 
+[data-theme="dark"] .day-card, 
+[data-theme="dark"] .list-item, 
+[data-theme="dark"] .alert {
+    background: var(--card-bg) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: 20px !important;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2) !important;
+    backdrop-filter: none !important; /* Remove old blur */
+}
+
+/* Inner elements shouldn't have nested thick borders unless intentional */
+[data-theme="dark"] .list-item {
+    border-right: 4px solid var(--primary-color) !important;
+}
+
+/* 5. The Mobile Bottom Nav (Cutout Effect) */
+@media (max-width: 768px) {
+    [data-theme="dark"] .mobile-bottom-nav {
+        background: var(--card-bg) !important;
+        border: none !important;
+        border-radius: 30px 30px 0 0 !important;
+        bottom: 0 !important;
+        height: 75px !important;
+        width: 100% !important;
+        left: 0 !important;
+        right: 0 !important;
+        box-shadow: 0 -10px 30px rgba(0,0,0,0.5) !important;
+        backdrop-filter: none !important;
+    }
+
+    [data-theme="dark"] .mobile-bottom-nav .ai-fab {
+        top: -35px !important;
     }
     
-    @keyframes premiumBG {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
+    [data-theme="dark"] .mobile-bottom-nav .fab-inner {
+        width: 65px !important;
+        height: 65px !important;
+        background: linear-gradient(135deg, #6b4cfa, #4731d1) !important;
+        border: 8px solid var(--bg-color) !important; /* This creates the seamless cutout notch! */
+        box-shadow: 0 10px 20px rgba(71, 49, 209, 0.4) !important;
     }
 
-    /* 2. Floating Animated Orbs for depth */
-    body::after {
-        content: "";
-        position: fixed;
-        width: 60vw;
-        height: 60vh;
-        background: radial-gradient(circle, rgba(67, 97, 238, 0.15) 0%, transparent 70%);
-        top: -10vh;
-        left: -10vw;
-        z-index: -1;
-        animation: floatOrb 20s ease-in-out infinite alternate;
-        pointer-events: none;
-    }
-    @keyframes floatOrb {
-        0% { transform: translate(0, 0) scale(1); }
-        100% { transform: translate(10vw, 5vh) scale(1.2); }
+    /* Vibrant Sidebar matching Image 4 */
+    [data-theme="dark"] .sidebar {
+        background: linear-gradient(180deg, #5143d6, #6b4cfa) !important;
+        border: none !important;
+        /* Circles watermark */
+        background-image: 
+            radial-gradient(circle at 80% 10%, rgba(255,255,255,0.08) 0%, transparent 150px),
+            radial-gradient(circle at 20% 50%, rgba(255,255,255,0.05) 0%, transparent 200px),
+            radial-gradient(circle at 90% 90%, rgba(255,255,255,0.05) 0%, transparent 150px) !important;
     }
 
-    /* 3. Make main content layout feel like floating glass panels */
+    [data-theme="dark"] .nav-links li {
+        color: white !important;
+    }
+    [data-theme="dark"] .nav-links li:hover, 
+    [data-theme="dark"] .nav-links li.active {
+        background: rgba(255, 255, 255, 0.15) !important;
+    }
+}
+
+/* 6. Desktop Structural Layout */
+@media (min-width: 769px) {
+    body {
+        overflow: hidden !important; /* Stop whole page scrolling */
+    }
     .app-container {
-        padding: 3vh 3vw !important;
-        gap: 30px !important;
-        background: transparent !important;
+        padding: 2vh 2vw !important;
+        gap: 25px !important;
+        max-width: 1600px;
+        margin: 0 auto;
+        height: 100vh;
     }
-    .sidebar, .main-content {
+    .sidebar {
         border-radius: 24px !important;
-        border: 1px solid rgba(255, 255, 255, 0.4) !important;
-        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15) !important;
-        background-color: rgba(255, 255, 255, 0.85) !important;
-        backdrop-filter: blur(20px) !important;
-        -webkit-backdrop-filter: blur(20px) !important;
-        height: 94vh !important;
-        margin-top: 0 !important;
+        height: calc(100vh - 4vh) !important;
+        margin: 0 !important;
+        box-shadow: 0 15px 35px rgba(0,0,0,0.3) !important;
+        border: 1px solid var(--border-color) !important;
         overflow-y: auto !important;
     }
-    body[data-theme="dark"] .sidebar, 
-    body[data-theme="dark"] .main-content {
-        background-color: rgba(20, 15, 30, 0.75) !important;
-        border: 1px solid rgba(255, 255, 255, 0.08) !important;
-        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5) !important;
+    .main-content {
+        border-radius: 24px !important;
+        height: calc(100vh - 4vh) !important;
+        margin: 0 !important;
+        box-shadow: 0 15px 35px rgba(0,0,0,0.3) !important;
+        border: 1px solid var(--border-color) !important;
+        overflow-y: auto !important;
+        background-color: var(--bg-color) !important;
     }
+
+    /* Make the desktop sidebar vibrant in dark mode too */
+    [data-theme="dark"] .sidebar {
+        background: linear-gradient(180deg, #5143d6, #6b4cfa) !important;
+        border: none !important;
+        background-image: 
+            radial-gradient(circle at 80% 10%, rgba(255,255,255,0.08) 0%, transparent 150px),
+            radial-gradient(circle at 20% 50%, rgba(255,255,255,0.05) 0%, transparent 200px) !important;
+    }
+    [data-theme="dark"] .sidebar .nav-links li { color: white !important; }
+    [data-theme="dark"] .sidebar .nav-links li:hover,
+    [data-theme="dark"] .sidebar .nav-links li.active { background: rgba(255,255,255,0.15) !important; }
     
-    /* Elegant Scrollbars for Desktop */
+    /* Scrollbars */
     ::-webkit-scrollbar { width: 8px; }
     ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb { background: rgba(67, 97, 238, 0.3); border-radius: 10px; }
+    ::-webkit-scrollbar-thumb { background: rgba(107, 76, 250, 0.4); border-radius: 10px; }
     ::-webkit-scrollbar-thumb:hover { background: var(--primary-color); }
 }
 
-/* ========================================================================= */
-/* 📱 تصليح تداخل رسالة التنبيه (Toast) مع القائمة السفلية في الموبايل */
-/* ========================================================================= */
+/* Toast fix so it doesn't overlap the new 75px bottom nav */
 @media (max-width: 768px) {
     .toast.show {
-        bottom: 110px !important; 
+        bottom: 100px !important; 
     }
 }
