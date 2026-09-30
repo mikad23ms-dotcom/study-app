@@ -169,7 +169,7 @@
     <div class="app-container">
         <!-- Sidebar Navigation -->
         <nav class="sidebar">
-            <div class="logo">
+            <div class="logo">`n                <button class="close-sidebar-btn d-mobile" onclick="toggleSidebar()"><i class="fa-solid fa-xmark"></i></button>
                 <i class="fa-solid fa-graduation-cap"></i>
                 <h2>دليلك للمذاكرة</h2>
             </div>
@@ -206,6 +206,19 @@
 
         <!-- Main Content Area -->
         <main class="main-content">
+        <!-- Mobile Premium Header -->
+        <div class="mobile-top-header d-mobile">
+            <div class="user-profile-header">
+                <div class="avatar-circle"><i class="fa-solid fa-user-graduate"></i></div>
+                <div class="user-info-header">
+                    <span class="greeting">مرحباً بك</span>
+                    <span id="mobile-welcome-name" class="name">يا بطل</span>
+                </div>
+            </div>
+            <div class="header-actions">
+                <button class="icon-btn" onclick="toggleSidebar()"><i class="fa-solid fa-bars"></i></button>
+            </div>
+        </div>
                         <!-- Teacher Dashboard Page -->
             <section id="teacher-dashboard" class="page">
                 <header>

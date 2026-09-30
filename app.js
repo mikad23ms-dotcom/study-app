@@ -2077,3 +2077,61 @@ window.logoutAccount = () => {
         location.reload();
     }
 };
+// --- Premium Mobile UX Navigation ---
+window.toggleSidebar = () => {
+    const sidebar = document.querySelector('.sidebar');
+    const overlay = document.getElementById('sidebar-overlay');
+    sidebar.classList.toggle('open');
+    if (sidebar.classList.contains('open')) {
+        overlay.style.display = 'block';
+        setTimeout(() => overlay.style.opacity = '1', 10);
+    } else {
+        overlay.style.opacity = '0';
+        setTimeout(() => overlay.style.display = 'none', 300);
+    }
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Sync username to mobile header
+    if (studyUsername) {
+        const mName = document.getElementById('mobile-welcome-name');
+        if (mName) mName.innerText = studyUsername;
+    }
+
+    // Mobile Bottom Nav Logic
+    const bottomNavItems = document.querySelectorAll('.mobile-bottom-nav .nav-item[data-page]');
+    const allPages = document.querySelectorAll('.page');
+    
+    bottomNavItems.forEach(item => {
+        item.addEventListener('click', () => {
+            // Remove active from all nav items
+            document.querySelectorAll('.nav-links li, .mobile-bottom-nav .nav-item').forEach(n => n.classList.remove('active'));
+            
+            // Add active to clicked item and corresponding sidebar item
+            item.classList.add('active');
+            const pageId = item.getAttribute('data-page');
+            const sideItem = document.querySelector(.nav-links li[data-page=" + pageId + "]);
+            if (sideItem) sideItem.classList.add('active');
+            
+            // Show page
+            allPages.forEach(p => p.classList.remove('active-page'));
+            document.getElementById(pageId).classList.add('active-page');
+        });
+    });
+
+    // Make sidebar links update bottom nav too
+    const sideNavItems = document.querySelectorAll('.nav-links li[data-page]');
+    sideNavItems.forEach(item => {
+        item.addEventListener('click', () => {
+            document.querySelectorAll('.mobile-bottom-nav .nav-item').forEach(n => n.classList.remove('active'));
+            const pageId = item.getAttribute('data-page');
+            const botItem = document.querySelector(.mobile-bottom-nav .nav-item[data-page=" + pageId + "]);
+            if (botItem) botItem.classList.add('active');
+            
+            // Auto close sidebar on mobile after clicking
+            if (window.innerWidth <= 768) {
+                toggleSidebar();
+            }
+        });
+    });
+});
