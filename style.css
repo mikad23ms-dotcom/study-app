@@ -490,4 +490,126 @@ textarea { width: 100%; height: 200px; padding: 15px; border-radius: 8px; border
 }
 #mic-btn.recording {
     animation: pulse-red 1.5s infinite !important;
+}/* =========================================================
+   💎 DESKTOP ULTRA PREMIUM OVERHAUL (Mesh Gradients & Glass) 💎
+   ========================================================= */
+
+/* Animated Mesh Gradient Backgrounds */
+body {
+    background: linear-gradient(-45deg, #fdfbfb, #ebedee, #e2eafc, #f8f9fa) !important;
+    background-size: 400% 400% !important;
+    animation: premiumBG 15s ease infinite !important;
+    background-attachment: fixed !important;
+}
+
+[data-theme="dark"] body {
+    background: linear-gradient(-45deg, #090710, #130f26, #1c1543, #0f0a1c) !important;
+    background-size: 400% 400% !important;
+    animation: premiumBG 15s ease infinite !important;
+    background-attachment: fixed !important;
+}
+
+@keyframes premiumBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Subtle Animated Orbs (Pseudo-elements on Body) */
+body::before, body::after {
+    content: '';
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(80px);
+    z-index: -1;
+    opacity: 0.5;
+    animation: floatOrbs 20s ease-in-out infinite alternate;
+}
+
+body::before {
+    width: 400px;
+    height: 400px;
+    background: rgba(67, 97, 238, 0.3);
+    top: -100px;
+    left: -100px;
+}
+
+body::after {
+    width: 500px;
+    height: 500px;
+    background: rgba(247, 127, 0, 0.2);
+    bottom: -150px;
+    right: -100px;
+    animation-delay: -10s;
+}
+
+[data-theme="dark"] body::before { background: rgba(67, 97, 238, 0.15); }
+[data-theme="dark"] body::after { background: rgba(247, 127, 0, 0.1); }
+
+@keyframes floatOrbs {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(100px, 50px) scale(1.2); }
+}
+
+/* Desktop App Container Layout */
+@media (min-width: 769px) {
+    body {
+        overflow: hidden; /* Prevent body scroll, scroll inside main-content */
+    }
+    
+    .app-container {
+        padding: 20px !important;
+        gap: 20px !important;
+        height: 100vh;
+        max-width: 1600px;
+        margin: 0 auto;
+    }
+    
+    .sidebar {
+        border-radius: 24px !important;
+        height: calc(100vh - 40px) !important;
+        margin: 0 !important;
+        border: 1px solid var(--border-color) !important;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.08) !important;
+        background: var(--card-bg) !important;
+        backdrop-filter: blur(20px) !important;
+        -webkit-backdrop-filter: blur(20px) !important;
+        overflow-y: auto;
+    }
+    
+    [data-theme="dark"] .sidebar {
+        box-shadow: 0 20px 40px rgba(0,0,0,0.4) !important;
+    }
+
+    .main-content {
+        border-radius: 24px !important;
+        height: calc(100vh - 40px) !important;
+        overflow-y: auto !important;
+        background: var(--card-bg) !important;
+        backdrop-filter: blur(20px) !important;
+        -webkit-backdrop-filter: blur(20px) !important;
+        border: 1px solid var(--border-color) !important;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.08) !important;
+        padding: 40px !important;
+        position: relative;
+    }
+    
+    [data-theme="dark"] .main-content {
+        box-shadow: 0 20px 40px rgba(0,0,0,0.4) !important;
+    }
+
+    /* Custom Scrollbar for Desktop */
+    .main-content::-webkit-scrollbar, .sidebar::-webkit-scrollbar {
+        width: 8px;
+    }
+    .main-content::-webkit-scrollbar-track, .sidebar::-webkit-scrollbar-track {
+        background: transparent;
+    }
+    .main-content::-webkit-scrollbar-thumb, .sidebar::-webkit-scrollbar-thumb {
+        background: rgba(67, 97, 238, 0.3);
+        border-radius: 10px;
+    }
+    .main-content::-webkit-scrollbar-thumb:hover, .sidebar::-webkit-scrollbar-thumb:hover {
+        background: rgba(67, 97, 238, 0.6);
+    }
 }
