@@ -13,7 +13,7 @@
 
 [data-theme="dark"] {
     --bg-color: #0b0914;
-    --card-bg: #1a1625;
+    --card-bg: rgba(255, 255, 255, 0.03);
     --text-main: #f1f1f1;
     --text-muted: #a0a0a0;
     --border-color: rgba(255, 255, 255, 0.05);
@@ -57,7 +57,7 @@ body {
 .nav-links li:hover, .nav-links li.active { background-color: var(--primary-color); color: white; }
 .sidebar-footer { padding: 20px; border-top: 1px solid var(--border-color); }
 .theme-btn { width: 100%; background: transparent; border: 1px solid var(--border-color); color: var(--text-main); padding: 10px; border-radius: 8px; cursor: pointer; font-weight: 600; display: flex; justify-content: center; align-items: center; gap: 8px; transition: 0.3s; }
-.theme-btn:hover { background: var(--bg-color); }
+.theme-btn:hover { background: var(--bg-color) !important; }
 
 .main-content { flex: 1; padding: 30px; overflow-y: auto; }
 .page { display: none; animation: fadeIn 0.4s ease; }
@@ -71,13 +71,13 @@ header p { color: var(--text-muted); font-size: 1.1rem; margin-top: 5px; }
 
 /* Dashboard */
 .progress-section { background: var(--card-bg); padding: 20px; border-radius: 12px; margin-bottom: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
-.progress-bar-bg { width: 100%; height: 12px; background: var(--bg-color); border-radius: 10px; overflow: hidden; }
+.progress-bar-bg { width: 100%; height: 12px; background: var(--bg-color) !important; border-radius: 10px; overflow: hidden; }
 .progress-bar-fill { height: 100%; background: linear-gradient(90deg, var(--success), #70e000); border-radius: 10px; transition: width 0.5s ease; }
 .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
 .card { background: var(--card-bg); padding: 20px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
 .card h3 { margin-bottom: 20px; display: flex; justify-content: space-between; border-bottom: 2px solid var(--bg-color); padding-bottom: 10px; }
 .item-list { list-style: none; }
-.list-item { padding: 15px; background: var(--bg-color); margin-bottom: 10px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; border-right: 4px solid var(--primary-color); }
+.list-item { padding: 15px; background: var(--bg-color) !important; margin-bottom: 10px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; border-right: 4px solid var(--primary-color); }
 .list-item.completed .task-text { text-decoration: line-through; color: var(--text-muted); }
 .task-actions button { background: none; border: none; cursor: pointer; font-size: 1.1rem; margin-right: 10px; }
 .task-actions .check-btn { color: var(--success); }
@@ -107,7 +107,7 @@ header p { color: var(--text-muted); font-size: 1.1rem; margin-top: 5px; }
 
 /* Exams */
 .exams-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 15px; }
-.exam-card { background: var(--bg-color); border-radius: 12px; padding: 20px; border: 1px solid var(--border-color); position: relative; overflow: hidden; }
+.exam-card { background: var(--bg-color) !important; border-radius: 12px; padding: 20px; border: 1px solid var(--border-color); position: relative; overflow: hidden; }
 .exam-card::before { content: ''; position: absolute; right: 0; top: 0; bottom: 0; width: 6px; }
 .exam-countdown { margin-top: 15px; font-size: 1.5rem; font-weight: bold; color: var(--danger); display: flex; align-items: center; gap: 10px; }
 .exam-actions { position: absolute; left: 15px; top: 15px; }
@@ -121,7 +121,7 @@ header p { color: var(--text-muted); font-size: 1.1rem; margin-top: 5px; }
 .flashcard-front { background-color: var(--card-bg); color: var(--text-main); border-right-width: 6px; }
 .flashcard-back { background-color: var(--primary-color); color: white; transform: rotateY(180deg); }
 .fc-delete { position: absolute; top: 10px; left: 10px; background: rgba(0,0,0,0.1); border: none; color: white; border-radius: 50%; width: 30px; height: 30px; cursor: pointer; z-index: 10; }
-.flashcard-front .fc-delete { color: var(--danger); background: var(--bg-color); }
+.flashcard-front .fc-delete { color: var(--danger); background: var(--bg-color) !important; }
 
 /* AI Assistant */
 .ai-container { background: var(--card-bg); padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
@@ -133,8 +133,8 @@ header p { color: var(--text-muted); font-size: 1.1rem; margin-top: 5px; }
 .ai-tab-btn.active { color: var(--primary-color); border-bottom-color: var(--primary-color); }
 .ai-tab-content { display: none; }
 .ai-tab-content.active { display: block; animation: fadeIn 0.4s ease; }
-textarea { width: 100%; height: 200px; padding: 15px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--bg-color); color: var(--text-main); font-size: 1rem; resize: vertical; font-family: inherit; }
-.ai-output { background: var(--bg-color); padding: 25px; border-radius: 8px; border: 1px solid var(--border-color); margin-top: 20px; line-height: 1.8; font-size: 1.1rem; }
+textarea { width: 100%; height: 200px; padding: 15px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--bg-color) !important; color: var(--text-main); font-size: 1rem; resize: vertical; font-family: inherit; }
+.ai-output { background: var(--bg-color) !important; padding: 25px; border-radius: 8px; border: 1px solid var(--border-color); margin-top: 20px; line-height: 1.8; font-size: 1.1rem; }
 .ai-output h1, .ai-output h2, .ai-output h3 { color: var(--primary-color); margin-top: 20px; margin-bottom: 10px; }
 .ai-output ul { margin-right: 20px; margin-bottom: 15px; }
 
@@ -169,7 +169,7 @@ textarea { width: 100%; height: 200px; padding: 15px; border-radius: 8px; border
         color: #fff;
     }
     body {
-        background: var(--bg-color);
+        background: var(--bg-color) !important;
         color: var(--text-main);
     }
 
@@ -364,54 +364,87 @@ textarea { width: 100%; height: 200px; padding: 15px; border-radius: 8px; border
     .main-content { padding-bottom: 120px !important; padding-top: 15px !important; }
 }
 
-/* ================== SAFE DESKTOP ENHANCEMENTS ================== */
-/* 1. Animated Background only for body (doesn't touch cards) */
-body {
-    background: linear-gradient(-45deg, #fdfbfb, #ebedee, #e2eafc, #f8f9fa);
-    background-size: 400% 400%;
-    animation: premiumBG 15s ease infinite;
-}
-body[data-theme="dark"] {
-    background: linear-gradient(-45deg, #090710, #130f26, #1c1543, #0f0a1c);
-    background-size: 400% 400%;
-    animation: premiumBG 15s ease infinite;
-}
-@keyframes premiumBG {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
-/* 2. Desktop Floating Layout (Doesn't touch mobile) */
+/* ========================================================================= */
+/* 💎 لمسات الفخامة الخاصة بالكمبيوتر (تأثيرات وخلفيات متحركة) 💎 */
+/* ========================================================================= */
 @media (min-width: 769px) {
-    body { overflow: hidden; }
+    /* 1. Animated Gradient Background Behind Everything */
+    body::before {
+        content: "";
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        z-index: -1;
+        background: linear-gradient(-45deg, #e2eafc, #edf2fb, #fdfbfb, #d7e3fc);
+        background-size: 400% 400%;
+        animation: premiumBG 15s ease infinite;
+        opacity: 0.8;
+    }
+    body[data-theme="dark"]::before {
+        background: linear-gradient(-45deg, #090710, #130f26, #1c1543, #0a0616);
+        background-size: 400% 400%;
+        opacity: 1;
+    }
+    
+    @keyframes premiumBG {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    /* 2. Floating Animated Orbs for depth */
+    body::after {
+        content: "";
+        position: fixed;
+        width: 60vw;
+        height: 60vh;
+        background: radial-gradient(circle, rgba(67, 97, 238, 0.15) 0%, transparent 70%);
+        top: -10vh;
+        left: -10vw;
+        z-index: -1;
+        animation: floatOrb 20s ease-in-out infinite alternate;
+        pointer-events: none;
+    }
+    @keyframes floatOrb {
+        0% { transform: translate(0, 0) scale(1); }
+        100% { transform: translate(10vw, 5vh) scale(1.2); }
+    }
+
+    /* 3. Make main content layout feel like floating glass panels */
     .app-container {
-        padding: 2vh 2vw;
-        gap: 20px;
-        height: 100vh;
-        max-width: 1600px;
-        margin: 0 auto;
+        padding: 3vh 3vw !important;
+        gap: 30px !important;
+        background: transparent !important;
     }
-    .sidebar {
-        border-radius: 20px;
-        height: calc(100vh - 4vh);
-        border: 1px solid var(--border-color);
-        box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-        overflow-y: auto;
+    .sidebar, .main-content {
+        border-radius: 24px !important;
+        border: 1px solid rgba(255, 255, 255, 0.4) !important;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15) !important;
+        background-color: rgba(255, 255, 255, 0.85) !important;
+        backdrop-filter: blur(20px) !important;
+        -webkit-backdrop-filter: blur(20px) !important;
+        height: 94vh !important;
+        margin-top: 0 !important;
+        overflow-y: auto !important;
     }
-    .main-content {
-        border-radius: 20px;
-        height: calc(100vh - 4vh);
-        border: 1px solid var(--border-color);
-        box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-        background-color: var(--bg-color); /* Restores original card color */
-        overflow-y: auto;
+    body[data-theme="dark"] .sidebar, 
+    body[data-theme="dark"] .main-content {
+        background-color: rgba(20, 15, 30, 0.75) !important;
+        border: 1px solid rgba(255, 255, 255, 0.08) !important;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5) !important;
     }
+    
+    /* Elegant Scrollbars for Desktop */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(67, 97, 238, 0.3); border-radius: 10px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--primary-color); }
 }
 
-/* 3. Fix Toast Overlapping Mobile Nav */
+/* ========================================================================= */
+/* 📱 تصليح تداخل رسالة التنبيه (Toast) مع القائمة السفلية في الموبايل */
+/* ========================================================================= */
 @media (max-width: 768px) {
     .toast.show {
-        bottom: 110px !important; /* Raises it above the bottom nav */
+        bottom: 110px !important; 
     }
 }
