@@ -120,6 +120,13 @@ let flashcards = JSON.parse(localStorage.getItem('study_flashcards')) || [];
 let geminiApiKey = localStorage.getItem('study_gemini_api') || '';
 let isDarkMode = localStorage.getItem('study_theme') === 'dark';
 
+// Set User Name in Dashboard
+document.addEventListener('DOMContentLoaded', () => {
+    if (studyUsername && document.getElementById('welcome-user')) {
+        document.getElementById('welcome-user').innerText = studyUsername;
+    }
+});
+
 const daysOfWeek = ['الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'];
 
 // Initialize Theme
