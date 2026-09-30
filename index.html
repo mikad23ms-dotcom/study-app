@@ -491,7 +491,12 @@
 
                     <!-- Mindmap Tab -->
                     <div id="mindmap-tab" class="ai-tab-content active">
-                        <textarea id="ai-lesson-text" placeholder="ألصق هنا نص الدرس أو الفقرة التي تريد تلخيصها وتحويلها لخريطة ذهنية وشفرات لحفظها بسهولة..."></textarea>
+                        <div style="position: relative;">
+                            <textarea id="ai-lesson-text" placeholder="ألصق هنا نص الدرس أو سجل بصوتك أي شيء تريد تلخيصه وتحويله لخرائط ذهنية وشفرات..."></textarea>
+                            <button id="mic-btn" title="تحدث وسيقوم الذكاء الاصطناعي بكتابة ما تقوله" style="position: absolute; left: 15px; bottom: 15px; background: var(--primary-color); color: white; border: none; border-radius: 50%; width: 45px; height: 45px; font-size: 1.2rem; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.2); transition: 0.3s; z-index: 10;">
+                                <i class="fa-solid fa-microphone"></i>
+                            </button>
+                        </div>
                         <button class="btn btn-primary" id="btn-generate-mindmap" onclick="generateMindmap()" style="width: 100%; margin-top: 10px; font-size: 1.1rem;">
                             <i class="fa-solid fa-wand-magic-sparkles"></i> سحر المذاكرة (لخّص واصنع خريطة)
                         </button>

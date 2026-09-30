@@ -122,6 +122,7 @@ let isDarkMode = localStorage.getItem('study_theme') === 'dark';
 
 // Set User Name in Dashboard
 document.addEventListener('DOMContentLoaded', () => {
+    setupVoiceRecognition();
     if (studyUsername && document.getElementById('welcome-user')) {
         document.getElementById('welcome-user').innerText = studyUsername;
     }
@@ -648,13 +649,14 @@ async function callGeminiAPI(parts) {
     }
 }
 
-function processAIOutput(text) {
-    const mermaidRegex = /```mermaid\n([\s\S]*?)```/;
-    const match = text.match(mermaidRegex);
+async function processAIOutput(text) {
+    const strictMermaidRegex = /`(?:mermaid)?[^\n]*\n([\s\S]*?)`/i;
+    const matchStrict = text.match(strictMermaidRegex);
     let mermaidCode = '';
-    if(match) {
-        mermaidCode = match[1];
-        text = text.replace(mermaidRegex, ''); 
+    
+    if(matchStrict && (text.includes('mermaid') || matchStrict[1].includes('graph') || matchStrict[1].includes('flowchart') || matchStrict[1].includes('mindmap'))) {
+        mermaidCode = matchStrict[1];
+        text = text.replace(strictMermaidRegex, ''); 
     }
     
     document.getElementById('ai-output-container').style.display = 'block';
@@ -663,10 +665,15 @@ function processAIOutput(text) {
     const mermaidContainer = document.getElementById('mermaid-container');
     if(mermaidCode) {
         mermaidContainer.style.display = 'block';
-        mermaidContainer.innerHTML = '';
-        mermaid.mermaidAPI.render('mermaid-graph', mermaidCode, svgCode => {
-            mermaidContainer.innerHTML = '<h3>الخريطة الذهنية 🧠</h3>' + svgCode;
-        });
+        mermaidContainer.innerHTML = '<div style="text-align:center;"><i class="fa-solid fa-spinner fa-spin"></i> جاري رسم الخريطة...</div>';
+        try {
+            mermaid.initialize({ startOnLoad: false, theme: 'default' });
+            const { svg } = await mermaid.render('mermaid-graph-' + Date.now(), mermaidCode.trim());
+            mermaidContainer.innerHTML = '<h3 style="color:var(--primary-color); margin-bottom:15px;"><i class="fa-solid fa-project-diagram"></i> الخريطة الذهنية</h3><div style="overflow-x:auto; background:white; padding:10px; border-radius:10px;">' + svg + '</div>';
+        } catch (err) {
+            console.error('Mermaid render error:', err);
+            mermaidContainer.innerHTML = '<h3 style="color:var(--primary-color);"><i class="fa-solid fa-project-diagram"></i> الخريطة الذهنية</h3><div style="background:var(--bg-color); padding:10px; border-radius:8px; overflow-x:auto;"><pre style="color:var(--text-main); text-align:left;" dir="ltr"><code>' + mermaidCode.trim() + '</code></pre><p style="color:red; font-size:0.8rem;">حدث خطأ في رسم الخريطة، يرجى نسخ الكود أعلاه.</p></div>';
+        }
     } else {
         mermaidContainer.style.display = 'none';
     }
@@ -2092,6 +2099,7 @@ window.toggleSidebar = () => {
 };
 
 document.addEventListener('DOMContentLoaded', () => {
+    setupVoiceRecognition();
     // Sync username to mobile header
     if (studyUsername) {
         const mName = document.getElementById('mobile-welcome-name');
@@ -2135,3 +2143,74 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+// --- Voice Recognition Logic ---
+function setupVoiceRecognition() {
+    const micBtn = document.getElementById('mic-btn');
+    const aiInput = document.getElementById('ai-lesson-text');
+    
+    if (!micBtn || !aiInput) return;
+
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    
+    if (!SpeechRecognition) {
+        micBtn.style.display = 'none'; // Hide if browser doesn't support it
+        console.log('Speech Recognition not supported in this browser.');
+        return;
+    }
+
+    const recognition = new SpeechRecognition();
+    recognition.lang = 'ar-EG'; // Arabic language
+    recognition.interimResults = true; // Show results while talking
+    recognition.maxAlternatives = 1;
+    recognition.continuous = true; // Keep listening
+
+    let isRecording = false;
+    let finalTranscript = '';
+
+    micBtn.addEventListener('click', () => {
+        if (isRecording) {
+            recognition.stop();
+            return;
+        }
+        
+        finalTranscript = aiInput.value;
+        if(finalTranscript && !finalTranscript.endsWith(' ')) finalTranscript += ' ';
+        recognition.start();
+    });
+
+    recognition.onstart = () => {
+        isRecording = true;
+        micBtn.classList.add('recording');
+        micBtn.innerHTML = '<i class="fa-solid fa-microphone-lines fa-fade"></i>';
+        micBtn.style.backgroundColor = 'var(--danger)';
+        micBtn.style.boxShadow = '0 0 15px rgba(239, 35, 60, 0.6)';
+    };
+
+    recognition.onresult = (event) => {
+        let interimTranscript = '';
+        for (let i = event.resultIndex; i < event.results.length; ++i) {
+            if (event.results[i].isFinal) {
+                finalTranscript += event.results[i][0].transcript + ' ';
+            } else {
+                interimTranscript += event.results[i][0].transcript;
+            }
+        }
+        aiInput.value = finalTranscript + interimTranscript;
+    };
+
+    recognition.onerror = (event) => {
+        console.error('Speech recognition error: ' + event.error);
+        if(event.error === 'not-allowed') {
+            alert('الرجاء إعطاء صلاحية استخدام الميكروفون للمتصفح حتى تتمكن من التسجيل.');
+        }
+    };
+
+    recognition.onend = () => {
+        isRecording = false;
+        micBtn.classList.remove('recording');
+        micBtn.innerHTML = '<i class="fa-solid fa-microphone"></i>';
+        micBtn.style.backgroundColor = 'var(--primary-color)';
+        micBtn.style.boxShadow = '0 4px 10px rgba(0,0,0,0.2)';
+    };
+}
