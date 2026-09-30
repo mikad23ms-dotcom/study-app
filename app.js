@@ -2062,3 +2062,11 @@ window.handlePdfUpload = async (e) => {
         console.error(err);
     }
 };
+
+// --- Logout Logic ---
+window.logoutAccount = () => {
+    if (confirm('هل أنت متأكد من تسجيل الخروج؟ سيتم مسح بياناتك من هذا الجهاز لتسجيل حساب جديد.')) {
+        localStorage.clear();
+        location.reload();
+    }
+};
