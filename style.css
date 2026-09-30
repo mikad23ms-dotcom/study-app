@@ -362,151 +362,30 @@ textarea { width: 100%; height: 200px; padding: 15px; border-radius: 8px; border
 
     /* Padding for main content to avoid bottom nav */
     .main-content { padding-bottom: 120px !important; padding-top: 15px !important; }
-}/* =========================================================
-   💎 PREMIUM UI ENHANCEMENTS (Lighting, Glows, Shadows) 💎
+}
+/* =========================================================
+   💎 ULTRA PREMIUM UI (FLAWLESS CONTRAST & GLASSMORPHISM) 💎
    ========================================================= */
 
-/* 1. Glowing Buttons */
-.btn-primary {
-    box-shadow: 0 4px 15px rgba(67, 97, 238, 0.35);
-    position: relative;
-    overflow: hidden;
-}
-.btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(67, 97, 238, 0.5);
-}
-.btn-primary:active {
-    transform: translateY(1px);
+:root {
+    --bg-light: linear-gradient(-45deg, #fdfbfb, #ebedee, #e2eafc, #f8f9fa);
+    --bg-dark: linear-gradient(-45deg, #090710, #130f26, #1c1543, #0f0a1c);
+    --card-light: rgba(255, 255, 255, 0.7);
+    --card-dark: rgba(20, 20, 30, 0.6);
+    --border-light: rgba(255, 255, 255, 0.5);
+    --border-dark: rgba(255, 255, 255, 0.08);
 }
 
-/* Big Start Button Animation */
-.btn-large {
-    animation: premiumPulse 2s infinite;
-}
-@keyframes premiumPulse {
-    0% { box-shadow: 0 0 0 0 rgba(67, 97, 238, 0.6); }
-    70% { box-shadow: 0 0 0 15px rgba(67, 97, 238, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(67, 97, 238, 0); }
-}
-
-/* 2. Card Floating Effects */
-.card, .day-card, .task-item {
-    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
-}
-.card:hover, .day-card:hover, .task-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 24px rgba(0,0,0,0.12) !important;
-    border-color: rgba(67, 97, 238, 0.3);
-}
-
-/* Dark mode specific subtle glows */
-[data-theme="dark"] .card:hover, [data-theme="dark"] .day-card:hover {
-    box-shadow: 0 12px 30px rgba(67, 97, 238, 0.15) !important;
-    border-color: rgba(67, 97, 238, 0.5);
-}
-
-/* 5. Inputs Focus Glow */
-.search-input:focus, textarea:focus, select:focus {
-    box-shadow: 0 0 0 4px rgba(67, 97, 238, 0.15);
-    border-color: var(--primary-color) !important;
-}
-
-/* 6. Modal Premium Glass Feel */
-.modal-content {
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4) !important;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-[data-theme="dark"] .modal-content {
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8), 0 0 20px rgba(67, 97, 238, 0.2) !important;
-}
-
-/* Fix for install banner */
-.install-banner, #install-banner, #a2hs-banner { top: 20px !important; bottom: auto !important; z-index: 10000; }
-
-/* Prayer Times */
-.prayer-times { display: flex; justify-content: space-between; margin-top: 15px; flex-wrap: wrap; gap: 10px; }
-.prayer-time-box { background: var(--bg-color); padding: 10px; border-radius: 8px; text-align: center; flex: 1; min-width: 60px; border: 1px solid var(--border-color); }
-.prayer-time-box strong { display: block; font-size: 0.9rem; color: var(--text-muted); margin-bottom: 5px; }
-.prayer-time-box span { font-weight: bold; font-size: 1.1rem; color: var(--text-main); }
-.prayer-time-box.qiyam { border-color: var(--primary-color); background: rgba(67, 97, 238, 0.05); }
-.prayer-time-box.qiyam strong { color: var(--primary-color); }
-
-/* Toast Notification */
-.toast {
-    position: fixed;
-    bottom: -100px;
-    left: 20px;
-    background: var(--card-bg);
-    color: var(--text-main);
-    padding: 15px 25px;
-    border-radius: 30px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    font-size: 1.1rem;
-    font-weight: 600;
-    transition: bottom 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    z-index: 9999;
-    border: 2px solid var(--primary-color);
-}
-.toast.show { bottom: 30px; }
-
-/* Global Premium Background for Dark Mode */
-[data-theme="dark"] body {
-    background: linear-gradient(135deg, #0b0914 0%, #161224 100%) !important;
-    background-attachment: fixed !important;
-}
-
-/* Glassmorphism Cards Globally */
-.card, .prayer-time-box, .task-item, .day-card {
-    background: var(--card-bg) !important;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid var(--border-color) !important;
-    border-radius: 20px !important;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.05) !important;
-}
-[data-theme="dark"] .card, [data-theme="dark"] .prayer-time-box, [data-theme="dark"] .task-item {
-    box-shadow: 0 8px 32px rgba(0,0,0,0.2) !important;
-}
-
-/* Desktop Sidebar Enhancements */
-@media (min-width: 769px) {
-    .sidebar {
-        background: var(--card-bg);
-        backdrop-filter: blur(15px);
-        -webkit-backdrop-filter: blur(15px);
-        border-left: 1px solid var(--border-color);
-    }
-}
-
-/* Microphone Pulse Animation */
-@keyframes pulse-red {
-    0% { box-shadow: 0 0 0 0 rgba(239, 35, 60, 0.7); }
-    70% { box-shadow: 0 0 0 15px rgba(239, 35, 60, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(239, 35, 60, 0); }
-}
-#mic-btn.recording {
-    animation: pulse-red 1.5s infinite !important;
-}/* =========================================================
-   💎 DESKTOP ULTRA PREMIUM OVERHAUL (Mesh Gradients & Glass) 💎
-   ========================================================= */
-
-/* Animated Mesh Gradient Backgrounds */
 body {
-    background: linear-gradient(-45deg, #fdfbfb, #ebedee, #e2eafc, #f8f9fa) !important;
+    background: var(--bg-light) !important;
     background-size: 400% 400% !important;
     animation: premiumBG 15s ease infinite !important;
     background-attachment: fixed !important;
 }
 
-[data-theme="dark"] body {
-    background: linear-gradient(-45deg, #090710, #130f26, #1c1543, #0f0a1c) !important;
+body[data-theme="dark"] {
+    background: var(--bg-dark) !important;
     background-size: 400% 400% !important;
-    animation: premiumBG 15s ease infinite !important;
-    background-attachment: fixed !important;
 }
 
 @keyframes premiumBG {
@@ -515,7 +394,7 @@ body {
     100% { background-position: 0% 50%; }
 }
 
-/* Subtle Animated Orbs (Pseudo-elements on Body) */
+/* Subtle Animated Orbs */
 body::before, body::after {
     content: '';
     position: fixed;
@@ -525,37 +404,58 @@ body::before, body::after {
     opacity: 0.5;
     animation: floatOrbs 20s ease-in-out infinite alternate;
 }
-
-body::before {
-    width: 400px;
-    height: 400px;
-    background: rgba(67, 97, 238, 0.3);
-    top: -100px;
-    left: -100px;
-}
-
-body::after {
-    width: 500px;
-    height: 500px;
-    background: rgba(247, 127, 0, 0.2);
-    bottom: -150px;
-    right: -100px;
-    animation-delay: -10s;
-}
-
-[data-theme="dark"] body::before { background: rgba(67, 97, 238, 0.15); }
-[data-theme="dark"] body::after { background: rgba(247, 127, 0, 0.1); }
+body::before { width: 400px; height: 400px; background: rgba(67, 97, 238, 0.3); top: -100px; left: -100px; }
+body::after { width: 500px; height: 500px; background: rgba(247, 127, 0, 0.2); bottom: -150px; right: -100px; animation-delay: -10s; }
+body[data-theme="dark"]::before { background: rgba(67, 97, 238, 0.15); }
+body[data-theme="dark"]::after { background: rgba(247, 127, 0, 0.1); }
 
 @keyframes floatOrbs {
     0% { transform: translate(0, 0) scale(1); }
     100% { transform: translate(100px, 50px) scale(1.2); }
 }
 
+/* Glassmorphism for ALL Panels */
+.sidebar, .main-content, .card, .prayer-time-box, .task-item, .day-card, .dashboard-widget, .alert, .modal-content, .feature-box, .mobile-bottom-nav {
+    background: var(--card-light) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    border: 1px solid var(--border-light) !important;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05) !important;
+    color: #2b2d42 !important; /* Force text color in light mode */
+}
+
+body[data-theme="dark"] .sidebar, 
+body[data-theme="dark"] .main-content, 
+body[data-theme="dark"] .card, 
+body[data-theme="dark"] .prayer-time-box, 
+body[data-theme="dark"] .task-item, 
+body[data-theme="dark"] .day-card, 
+body[data-theme="dark"] .dashboard-widget, 
+body[data-theme="dark"] .alert, 
+body[data-theme="dark"] .modal-content, 
+body[data-theme="dark"] .feature-box,
+body[data-theme="dark"] .mobile-bottom-nav {
+    background: var(--card-dark) !important;
+    border: 1px solid var(--border-dark) !important;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4) !important;
+    color: #f1f1f1 !important; /* Force text color in dark mode */
+}
+
+/* Fix specific texts */
+.prayer-time-box span, .prayer-time-box strong, h1, h2, h3, p, label {
+    color: inherit;
+}
+
+.text-muted {
+    color: #6c757d !important;
+}
+body[data-theme="dark"] .text-muted {
+    color: #a0a0a0 !important;
+}
+
 /* Desktop App Container Layout */
 @media (min-width: 769px) {
-    body {
-        overflow: hidden; /* Prevent body scroll, scroll inside main-content */
-    }
+    body { overflow: hidden !important; }
     
     .app-container {
         padding: 20px !important;
@@ -569,47 +469,21 @@ body::after {
         border-radius: 24px !important;
         height: calc(100vh - 40px) !important;
         margin: 0 !important;
-        border: 1px solid var(--border-color) !important;
-        box-shadow: 0 20px 40px rgba(0,0,0,0.08) !important;
-        background: var(--card-bg) !important;
-        backdrop-filter: blur(20px) !important;
-        -webkit-backdrop-filter: blur(20px) !important;
         overflow-y: auto;
-    }
-    
-    [data-theme="dark"] .sidebar {
-        box-shadow: 0 20px 40px rgba(0,0,0,0.4) !important;
     }
 
     .main-content {
         border-radius: 24px !important;
         height: calc(100vh - 40px) !important;
         overflow-y: auto !important;
-        background: var(--card-bg) !important;
-        backdrop-filter: blur(20px) !important;
-        -webkit-backdrop-filter: blur(20px) !important;
-        border: 1px solid var(--border-color) !important;
-        box-shadow: 0 20px 40px rgba(0,0,0,0.08) !important;
         padding: 40px !important;
-        position: relative;
-    }
-    
-    [data-theme="dark"] .main-content {
-        box-shadow: 0 20px 40px rgba(0,0,0,0.4) !important;
     }
 
     /* Custom Scrollbar for Desktop */
-    .main-content::-webkit-scrollbar, .sidebar::-webkit-scrollbar {
-        width: 8px;
-    }
-    .main-content::-webkit-scrollbar-track, .sidebar::-webkit-scrollbar-track {
-        background: transparent;
-    }
+    .main-content::-webkit-scrollbar, .sidebar::-webkit-scrollbar { width: 8px; }
+    .main-content::-webkit-scrollbar-track, .sidebar::-webkit-scrollbar-track { background: transparent; }
     .main-content::-webkit-scrollbar-thumb, .sidebar::-webkit-scrollbar-thumb {
-        background: rgba(67, 97, 238, 0.3);
+        background: rgba(67, 97, 238, 0.4);
         border-radius: 10px;
-    }
-    .main-content::-webkit-scrollbar-thumb:hover, .sidebar::-webkit-scrollbar-thumb:hover {
-        background: rgba(67, 97, 238, 0.6);
     }
 }

@@ -1,4 +1,4 @@
-﻿const CACHE_NAME = 'study-app-v36';
+﻿const CACHE_NAME = 'study-app-v37';
 const urlsToCache = [
   '/',
   '/index.html',
