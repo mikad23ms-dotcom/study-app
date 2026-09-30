@@ -45,7 +45,7 @@
 </head>
 <body>
     <!-- ????? ????? ??????? -->
-    <div id="install-banner" style="display: none; position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 400px; background: #4361ee; color: white; padding: 20px; text-align: center; z-index: 9999; box-shadow: 0 10px 25px rgba(0,0,0,0.5); border-radius: 15px; border: 2px solid white;">
+    <div id="install-banner" style="display: none; position: fixed; top: 20px; bottom: auto; left: 50%; transform: translateX(-50%); width: 90%; max-width: 400px; background: #4361ee; color: white; padding: 20px; text-align: center; z-index: 9999; box-shadow: 0 10px 25px rgba(0,0,0,0.5); border-radius: 15px; border: 2px solid white;">
         <i class="fa-solid fa-download" style="font-size: 2rem; margin-bottom: 10px;"></i>
         <h3 style="margin: 0 0 10px 0;">??? ??????? ??? ?????!</h3>
         <p style="margin: 0 0 15px 0; font-size: 0.9rem;">?????? ?????? ???????? ????? ?? ?????? ??????? ??? ????? ????????.</p>
@@ -55,7 +55,7 @@
     <!-- Welcome Quote Overlay -->
     <div id="welcome-quote-overlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:var(--bg-color); z-index:9999; justify-content:center; align-items:center; flex-direction:column; padding:20px; text-align:center;">
         <div style="max-width: 600px; padding: 40px; border-radius: 15px; background: rgba(67, 97, 238, 0.05); border: 1px solid var(--primary-color); box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
-            <i class="fa-solid fa-quote-right" style="font-size: 3rem; color: var(--primary-color); margin-bottom: 20px; opacity: 0.5;"></i>
+            <i class="fa-solid fa-quote-right" style="font-size: 3rem; color: var(--primary-color); margin-top: 20px; bottom: auto; opacity: 0.5;"></i>
             <h2 id="quote-text" style="font-size: 1.8rem; line-height: 1.6; margin-bottom: 30px; font-weight: 500; color: var(--text-main);">...</h2>
             <button class="btn btn-primary btn-large" style="width: 100%; font-size: 1.2rem; padding: 15px;" onclick="document.getElementById('welcome-quote-overlay').style.display='none'">يلا نبدأ المذاكرة 💪</button>
         </div>
@@ -65,14 +65,14 @@
     <div id="onboarding-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 10000; justify-content: center; align-items: center; backdrop-filter: blur(5px);">
         <div style="background: var(--card-bg); padding: 30px; border-radius: 15px; width: 90%; max-width: 400px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
             <i class="fa-solid fa-graduation-cap" style="font-size: 3rem; color: var(--primary-color); margin-bottom: 15px;"></i>
-            <h2 style="margin-bottom: 20px;">مرحباً بك يا بطل! 🎯</h2>
+            <h2 style="margin-top: 20px; bottom: auto;">مرحباً بك يا بطل! 🎯</h2>
                         <div style="text-align: right; margin-bottom: 15px;">
                                 <label style="display: block; margin-bottom: 5px; color: var(--text-muted);">الاسم بالكامل:</label>
                 <input type="text" id="onboard-name" class="search-input" placeholder="اكتب اسمك هنا..." style="width: 100%; margin-bottom: 15px;">
                 
                 <!-- Role Selection -->
                 <label style="display: block; margin-bottom: 10px; color: var(--text-muted); font-weight: bold;">أنت بتسجل كـ؟</label>
-                <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+                <div style="display: flex; gap: 10px; margin-top: 20px; bottom: auto;">
                     <button id="role-student-btn" class="btn btn-primary" style="flex: 1; padding: 10px;" onclick="selectRole('student')"><i class="fa-solid fa-user-graduate"></i> طالب</button>
                     <button id="role-teacher-btn" class="btn" style="flex: 1; padding: 10px; background: var(--bg-color); color: var(--text-main); border: 1px solid var(--border-color);" onclick="selectRole('teacher')"><i class="fa-solid fa-chalkboard-user"></i> مدرس</button>
                 </div>
@@ -229,7 +229,7 @@
                 </div>
 
                 <div class="card" style="margin-bottom: 30px;">
-                    <h3 style="margin-bottom: 20px; border-bottom:2px solid var(--bg-color); padding-bottom:10px;"><i class="fa-solid fa-book-bookmark text-primary"></i> بنك المصادر والملازم</h3>
+                    <h3 style="margin-top: 20px; bottom: auto; border-bottom:2px solid var(--bg-color); padding-bottom:10px;"><i class="fa-solid fa-book-bookmark text-primary"></i> بنك المصادر والملازم</h3>
                     <div class="filters" style="display: flex; gap: 15px; flex-wrap: wrap; margin-bottom: 25px;">
                         <select id="teacher-stage-filter" class="search-input" style="flex: 1; min-width: 200px;">
                             <option value="all">كل المراحل الدراسية</option>
@@ -420,7 +420,7 @@
                     <h1>البطاقات التعليمية (Flashcards) 🗂️</h1>
                     <button class="btn btn-primary" onclick="openModal('flashcard-modal')">إضافة بطاقة جديدة</button>
                 </header>
-                <p style="color:var(--text-muted); margin-bottom: 20px;">استخدم البطاقات للمراجعة السريعة وتثبيت الحفظ. انقر على البطاقة لقلبها ورؤية الإجابة.</p>
+                <p style="color:var(--text-muted); margin-top: 20px; bottom: auto;">استخدم البطاقات للمراجعة السريعة وتثبيت الحفظ. انقر على البطاقة لقلبها ورؤية الإجابة.</p>
                 <div class="flashcards-grid" id="flashcards-grid"></div>
             </section>
 
@@ -626,7 +626,7 @@
                     <h1>إحصائيات المذاكرة 📊</h1>
                     <p>متابعة أداءك اليومي يجعلك أقرب لحلمك! استمر ولا تتوقف.</p>
                 </header>
-                <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:20px; margin-bottom: 20px;">
+                <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:20px; margin-top: 20px; bottom: auto;">
                     <div class="card" style="text-align:center; padding:30px; border-bottom: 4px solid var(--orange);">
                         <i class="fa-solid fa-fire text-orange" style="font-size:3rem; margin-bottom:15px; color: var(--orange);"></i>
                         <h2 id="stat-streak" style="font-size: 2.5rem; margin-bottom: 5px;">0</h2>
@@ -689,7 +689,7 @@
                     <p>نغمة مزعجة وقوية صُممت خصيصاً لإيقاظك مهما كان نومك ثقيلاً!</p>
                 </header>
                 <div class="card" style="max-width: 500px; margin: 40px auto; text-align: center; padding: 40px;">
-                    <i class="fa-solid fa-bed" style="font-size: 4rem; color: var(--primary-color); margin-bottom: 20px;"></i>
+                    <i class="fa-solid fa-bed" style="font-size: 4rem; color: var(--primary-color); margin-top: 20px; bottom: auto;"></i>
                     <h3>متى تريدين الاستيقاظ؟</h3>
                     <input type="time" id="alarm-time-input" style="font-size: 3rem; padding: 15px; margin: 20px 0; border-radius: 12px; border: 2px solid var(--primary-color); width: 100%; text-align: center; background: var(--bg-color); color: var(--text-main);">
                     
@@ -741,7 +741,7 @@
             </div>
             
             <h3 style="margin-bottom:10px;"><i class="fa-solid fa-list-check text-success"></i> مهام المذاكرة (To-Do)</h3>
-            <div id="admin-modal-tasks" style="background: var(--bg-color); padding: 15px; border-radius: 8px; margin-bottom: 20px; border: 1px solid var(--border-color);"></div>
+            <div id="admin-modal-tasks" style="background: var(--bg-color); padding: 15px; border-radius: 8px; margin-top: 20px; bottom: auto; border: 1px solid var(--border-color);"></div>
             
             <h3 style="margin-bottom:10px;"><i class="fa-solid fa-calendar-week text-blue"></i> جدول الدروس</h3>
             <div id="admin-modal-classes" style="background: var(--bg-color); padding: 15px; border-radius: 8px; border: 1px solid var(--border-color);"></div>
@@ -754,7 +754,7 @@
             <span class="close" onclick="closeModal('prayer-alert-modal')">&times;</span>
             <i class="fa-solid fa-mosque" style="font-size: 4rem; color: var(--primary-color); margin-bottom: 15px;"></i>
             <h2 id="prayer-alert-title" style="margin-bottom: 10px;">حان الآن موعد الأذان! 🕌</h2>
-            <p id="prayer-alert-msg" style="font-size: 1.1rem; line-height: 1.6; color: var(--text-muted); margin-bottom: 20px;">النجاح والتوفيق بِيَدِ الله.. اتركي المذاكرة الآن لدقائق، وقومي للصلاة لتنالي البركة والفهم.</p>
+            <p id="prayer-alert-msg" style="font-size: 1.1rem; line-height: 1.6; color: var(--text-muted); margin-top: 20px; bottom: auto;">النجاح والتوفيق بِيَدِ الله.. اتركي المذاكرة الآن لدقائق، وقومي للصلاة لتنالي البركة والفهم.</p>
             <button class="btn btn-primary btn-large" onclick="closeModal('prayer-alert-modal')" style="width: 100%;">سأقوم للصلاة فوراً 🤍</button>
         </div>
     </div>

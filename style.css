@@ -175,7 +175,7 @@ textarea { width: 100%; height: 200px; padding: 15px; border-radius: 8px; border
 /* Toast Notification */
 .toast {
     position: fixed;
-    bottom: -100px;
+    top: -100px; bottom: auto;
     left: 20px;
     background: var(--card-bg);
     color: var(--text-main);
@@ -191,7 +191,7 @@ textarea { width: 100%; height: 200px; padding: 15px; border-radius: 8px; border
     z-index: 9999;
     border: 2px solid var(--primary-color);
 }
-.toast.show { bottom: 30px; }
+.toast.show { top: 30px; bottom: auto; }
 
 /* =========================================
    Mobile Responsiveness (Responsive Design)
@@ -365,3 +365,6 @@ textarea { width: 100%; height: 200px; padding: 15px; border-radius: 8px; border
 [data-theme="dark"] .modal-content {
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8), 0 0 20px rgba(67, 97, 238, 0.2) !important;
 }
+
+/* Fix for install banner */
+.install-banner, #install-banner, #a2hs-banner { top: 20px !important; bottom: auto !important; z-index: 10000; }
