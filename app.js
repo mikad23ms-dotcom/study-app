@@ -588,7 +588,7 @@ async function callGeminiAPI(parts) {
     }
 
     try {
-        const url = https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:streamGenerateContent?alt=sse&key= + geminiApiKey;
+        const url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:streamGenerateContent?alt=sse&key=" + geminiApiKey;
         const payload = {
             contents: [{ parts: parts }],
             generationConfig: { temperature: 0.7 }
@@ -655,7 +655,7 @@ async function callGeminiAPI(parts) {
 }
 
 async function processAIOutput(text) {
-    const strictMermaidRegex = /`(?:mermaid)?[^\n]*\n([\s\S]*?)`/i;
+    const strictMermaidRegex = /```(?:mermaid)?[^\n]*\n([\s\S]*?)```/i;
     const matchStrict = text.match(strictMermaidRegex);
     let mermaidCode = '';
     
