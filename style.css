@@ -12,11 +12,11 @@
 }
 
 [data-theme="dark"] {
-    --bg-color: #121212;
-    --card-bg: #1e1e1e;
+    --bg-color: #0b0914;
+    --card-bg: rgba(255, 255, 255, 0.03);
     --text-main: #f1f1f1;
     --text-muted: #a0a0a0;
-    --border-color: #333333;
+    --border-color: rgba(255, 255, 255, 0.05);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Tajawal', sans-serif; }
@@ -423,3 +423,61 @@ textarea { width: 100%; height: 200px; padding: 15px; border-radius: 8px; border
 
 /* Fix for install banner */
 .install-banner, #install-banner, #a2hs-banner { top: 20px !important; bottom: auto !important; z-index: 10000; }
+
+/* Prayer Times */
+.prayer-times { display: flex; justify-content: space-between; margin-top: 15px; flex-wrap: wrap; gap: 10px; }
+.prayer-time-box { background: var(--bg-color); padding: 10px; border-radius: 8px; text-align: center; flex: 1; min-width: 60px; border: 1px solid var(--border-color); }
+.prayer-time-box strong { display: block; font-size: 0.9rem; color: var(--text-muted); margin-bottom: 5px; }
+.prayer-time-box span { font-weight: bold; font-size: 1.1rem; color: var(--text-main); }
+.prayer-time-box.qiyam { border-color: var(--primary-color); background: rgba(67, 97, 238, 0.05); }
+.prayer-time-box.qiyam strong { color: var(--primary-color); }
+
+/* Toast Notification */
+.toast {
+    position: fixed;
+    bottom: -100px;
+    left: 20px;
+    background: var(--card-bg);
+    color: var(--text-main);
+    padding: 15px 25px;
+    border-radius: 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    transition: bottom 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    z-index: 9999;
+    border: 2px solid var(--primary-color);
+}
+.toast.show { bottom: 30px; }
+
+/* Global Premium Background for Dark Mode */
+[data-theme="dark"] body {
+    background: linear-gradient(135deg, #0b0914 0%, #161224 100%) !important;
+    background-attachment: fixed !important;
+}
+
+/* Glassmorphism Cards Globally */
+.card, .prayer-time-box, .task-item, .day-card {
+    background: var(--card-bg) !important;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--border-color) !important;
+    border-radius: 20px !important;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.05) !important;
+}
+[data-theme="dark"] .card, [data-theme="dark"] .prayer-time-box, [data-theme="dark"] .task-item {
+    box-shadow: 0 8px 32px rgba(0,0,0,0.2) !important;
+}
+
+/* Desktop Sidebar Enhancements */
+@media (min-width: 769px) {
+    .sidebar {
+        background: var(--card-bg);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        border-left: 1px solid var(--border-color);
+    }
+}
