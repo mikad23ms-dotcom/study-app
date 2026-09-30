@@ -2110,7 +2110,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Add active to clicked item and corresponding sidebar item
             item.classList.add('active');
             const pageId = item.getAttribute('data-page');
-            const sideItem = document.querySelector(.nav-links li[data-page=" + pageId + "]);
+            const sideItem = document.querySelector(`.nav-links li[data-page="${pageId}"]`);
             if (sideItem) sideItem.classList.add('active');
             
             // Show page
@@ -2125,7 +2125,7 @@ document.addEventListener('DOMContentLoaded', () => {
         item.addEventListener('click', () => {
             document.querySelectorAll('.mobile-bottom-nav .nav-item').forEach(n => n.classList.remove('active'));
             const pageId = item.getAttribute('data-page');
-            const botItem = document.querySelector(.mobile-bottom-nav .nav-item[data-page=" + pageId + "]);
+            const botItem = document.querySelector(`.mobile-bottom-nav .nav-item[data-page="${pageId}"]`);
             if (botItem) botItem.classList.add('active');
             
             // Auto close sidebar on mobile after clicking
