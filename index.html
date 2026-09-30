@@ -61,6 +61,33 @@
         </div>
     </div>
 
+            <!-- Premium Floating Bottom Nav -->
+        <nav class="mobile-bottom-nav d-mobile">
+            <div class="nav-item active" data-page="dashboard">
+                <i class="fa-solid fa-house"></i>
+                <span>الرئيسية</span>
+            </div>
+            <div class="nav-item" data-page="subjects">
+                <i class="fa-solid fa-book-open"></i>
+                <span>المكتبة</span>
+            </div>
+            <div class="nav-item ai-fab" data-page="ai-assistant">
+                <div class="fab-inner">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                </div>
+            </div>
+            <div class="nav-item" data-page="classes">
+                <i class="fa-solid fa-calendar-days"></i>
+                <span>الجدول</span>
+            </div>
+            <div class="nav-item" onclick="toggleSidebar()">
+                <i class="fa-solid fa-bars-staggered"></i>
+                <span>المزيد</span>
+            </div>
+        </nav>
+        
+        <!-- Sidebar Overlay -->
+        <div id="sidebar-overlay" onclick="toggleSidebar()"></div>
     <!-- Welcome Onboarding Modal -->
     <div id="onboarding-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 10000; justify-content: center; align-items: center; backdrop-filter: blur(5px);">
         <div style="background: var(--card-bg); padding: 30px; border-radius: 15px; width: 90%; max-width: 400px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
