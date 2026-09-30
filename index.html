@@ -539,16 +539,22 @@
                                 </button>
                             </div>
 
-                            <!-- Dictation Section -->
+                                                        <!-- Audio File & Dictation Section -->
                             <div class="feature-box" style="padding: 20px; border: 1px dashed var(--border-color); border-radius: 8px; text-align: center;">
-                                <h3><i class="fa-solid fa-microphone-lines"></i> المستمع الذكي للدروس</h3>
-                                <p style="font-size: 0.9rem; color: var(--text-muted); margin: 10px 0;">اكتبي وراء المدرس تلقائياً لعمل ملخص.</p>
-                                <button class="btn" id="btn-dictation" onclick="toggleDictation()" style="width: 100%; background-color: var(--danger); color: white; margin-bottom: 10px;">
-                                    <i class="fa-solid fa-microphone"></i> ابدأ الاستماع والتسجيل
+                                <h3><i class="fa-solid fa-microphone-lines"></i> تلخيص الريكوردات والمحاضرات</h3>
+                                <p style="font-size: 0.9rem; color: var(--text-muted); margin: 10px 0;">ارفعي ريكورد (تسجيل صوتي) للمدرس، والذكاء الاصطناعي هيسمعه ويلخصهولك!</p>
+                                <input type="file" id="ai-audio-upload" accept="audio/*" style="width: 100%; margin-bottom: 10px; padding: 5px;">
+                                <button class="btn btn-primary" onclick="summarizeAudio()" style="width: 100%; margin-bottom: 15px; background-color: var(--danger);">
+                                    <i class="fa-solid fa-headphones"></i> اسمع الريكورد ولخّصه
                                 </button>
-                                <textarea id="dictation-text" placeholder="سيظهر كلام المدرس هنا تلقائياً..." style="height: 100px; font-size: 0.9rem; margin-bottom: 10px;"></textarea>
+                                <hr style="border:0; border-top:1px solid var(--border-color); margin:15px 0;">
+                                <p style="font-size: 0.8rem; color: var(--text-muted); margin: 10px 0;">أو افتحي المايك واكتبي ورا المدرس مباشرة:</p>
+                                <button class="btn" id="btn-dictation" onclick="toggleDictation()" style="width: 100%; background-color: var(--bg-color); color: var(--primary-color); border: 1px solid var(--primary-color); margin-bottom: 10px;">
+                                    <i class="fa-solid fa-microphone"></i> المايك المباشر
+                                </button>
+                                <textarea id="dictation-text" placeholder="سيظهر كلام المدرس هنا تلقائياً..." style="height: 60px; font-size: 0.9rem; margin-bottom: 10px;"></textarea>
                                 <button class="btn btn-primary" onclick="summarizeDictation()" style="width: 100%;">
-                                    <i class="fa-solid fa-file-lines"></i> تلخيص الكلام المكتوب
+                                    <i class="fa-solid fa-wand-magic-sparkles"></i> لخص الكلام
                                 </button>
                             </div>
                         </div>

@@ -568,84 +568,89 @@ window.switchAITab = tabId => {
     document.getElementById(tabId).classList.add('active');
 }
 
-// === حيلة تخطي حماية Neocities (Iframe Proxy) ===
-const proxyUrl = "https://crazy-pony-6010.mikad23ms-dotcom.deno.net";
-const aiProxy = document.createElement('iframe');
-aiProxy.style.display = 'none';
-aiProxy.src = proxyUrl;
-document.body.appendChild(aiProxy);
-
-// تسجيل الطلبات المعلقة
-const pendingRequests = {};
-
-window.addEventListener('message', (event) => {
-    if (event.origin !== new URL(proxyUrl).origin) return;
-    
-    const data = event.data;
-    if (data && data.id && pendingRequests[data.id]) {
-        pendingRequests[data.id].resolve(data.result || data);
-        delete pendingRequests[data.id];
-    }
-});
-
-function callProxy(payload) {
-    return new Promise((resolve, reject) => {
-        const id = 'req_' + Date.now() + Math.random();
-        pendingRequests[id] = { resolve, reject };
-        
-        payload.id = id;
-        aiProxy.contentWindow.postMessage(payload, proxyUrl);
-        
-        // مهلة 60 ثانية
-        setTimeout(() => {
-            if (pendingRequests[id]) {
-                reject(new Error("انتهت المهلة، السيرفر لم يرد"));
-                delete pendingRequests[id];
-            }
-        }, 60000);
-    });
-}
-
-// === الدالة الرئيسية للذكاء الاصطناعي ===
+// --- AI Streaming Fetch Logic ---
 async function callGeminiAPI(parts) {
     document.getElementById('ai-loading').style.display = 'block';
     const outputContainer = document.getElementById('ai-output-container');
-    if (outputContainer) outputContainer.style.display = 'none';
+    if (outputContainer) outputContainer.style.display = 'block';
     
+    const contentBox = document.getElementById('ai-result-content');
+    contentBox.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> جاري التفكير والكتابة...';
+    
+    // Hide mermaid container until done
+    const mermaidContainer = document.getElementById('mermaid-container');
+    if(mermaidContainer) mermaidContainer.style.display = 'none';
+
+    if (!geminiApiKey) {
+        alert("يرجى إدخال مفتاح API الخاص بك في إعدادات التطبيق أولاً!");
+        document.getElementById('ai-loading').style.display = 'none';
+        return null;
+    }
+
     try {
-        if (!geminiApiKey) {
-            alert("يرجى إدخال مفتاح API الخاص بك في إعدادات التطبيق أولاً!");
+        const url = https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:streamGenerateContent?alt=sse&key= + geminiApiKey;
+        const payload = {
+            contents: [{ parts: parts }],
+            generationConfig: { temperature: 0.7 }
+        };
+
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        });
+
+        if (!response.ok) {
+            const err = await response.json();
+            if(response.status === 503 || response.status === 429) {
+                alert("السيرفرات عليها ضغط حالياً أو تم استهلاك الحد الأقصى! جربي مرة تانية بعد ثواني.");
+            } else {
+                alert("حدث خطأ: " + (err.error?.message || response.statusText));
+            }
             document.getElementById('ai-loading').style.display = 'none';
             return null;
         }
-        
-        const payload = { 
-            contents: [{ parts: parts }],
-            apiKey: geminiApiKey 
-        };
-        const data = await callProxy(payload);
-        
-        if (data.error) {
-            if (data.error.code === 503) {
-                alert("سيرفرات الذكاء الاصطناعي عليها ضغط حالياً. حاولي تاني بعد لحظات.");
-            } else {
-                alert("حدث خطأ: " + data.error.message);
+
+        const reader = response.body.getReader();
+        const decoder = new TextDecoder();
+        let fullText = '';
+        let isFirstChunk = true;
+
+        while (true) {
+            const { done, value } = await reader.read();
+            if (done) break;
+            
+            const chunk = decoder.decode(value, { stream: true });
+            const lines = chunk.split('\n');
+            
+            for(let line of lines) {
+                if(line.startsWith('data: ')) {
+                    const dataStr = line.replace('data: ', '').trim();
+                    if(dataStr) {
+                        try {
+                            const dataObj = JSON.parse(dataStr);
+                            const textPart = dataObj.candidates[0].content.parts[0].text;
+                            fullText += textPart;
+                            if(isFirstChunk) {
+                                document.getElementById('ai-loading').style.display = 'none';
+                                isFirstChunk = false;
+                            }
+                            // Real-time render
+                            contentBox.innerHTML = marked.parse(fullText + ' ✍️');
+                        } catch(e) {}
+                    }
+                }
             }
-            return null;
         }
         
-        if (data.candidates && data.candidates[0]) {
-            return data.candidates[0].content.parts[0].text;
-        }
-        
-        alert("لم يتم الحصول على رد. جربي تاني.");
-        return null;
+        // Done streaming! Now process final output to extract mermaid
+        return fullText;
+
     } catch (e) {
         console.error("AI Error:", e);
         alert('حدث خطأ في الاتصال: ' + e.message);
-        return null;
-    } finally {
         document.getElementById('ai-loading').style.display = 'none';
+        return null;
     }
 }
 
@@ -790,8 +795,10 @@ window.summarizeImage = async () => {
     reader.onload = async (e) => {
         const base64Data = e.target.result.split(',')[1];
         const mimeType = file.type;
-        const promptText = `أنت مساعد مذاكرة للطلاب. هذه صورة (سكرين شوت) من منصة تعليمية (قد تحتوي على سبورة، عرض تقديمي، أو شرح).
-قم بقراءة النص الموجود في الصورة واشرح الدرس الموجود فيها بوضوح ولخص أهم النقاط، واقترح 'شفرة' لحفظها بسهولة.`;
+                const promptText = `أنت مساعد مذاكرة ذكي للطلاب. هذا تسجيل صوتي لدرس أو محاضرة.
+استمع إلى التسجيل بتركيز، ثم قم بتلخيص أهم النقاط التي قالها المدرس بشكل منظم ومرتب في نقاط.
+وإذا أمكن، استخرج شفرات حفظ أو طرق سهلة لتذكر المعلومات التي ذكرها.
+ملاحظة: إذا كان التسجيل غير واضح، اشرح ما تمكنت من فهمه فقط.`;
         const parts = [{ text: promptText }, { inlineData: { mimeType: mimeType, data: base64Data } }];
         const res = await callGeminiAPI(parts);
         if(res) processAIOutput(res);
@@ -2214,3 +2221,48 @@ function setupVoiceRecognition() {
         micBtn.style.boxShadow = '0 4px 10px rgba(0,0,0,0.2)';
     };
 }
+// --- Audio Upload Logic ---
+window.summarizeAudio = async () => {
+    const fileInput = document.getElementById('ai-audio-upload');
+    if(fileInput.files.length === 0) return alert('يرجى اختيار ملف صوتي أولاً!');
+    
+    const file = fileInput.files[0];
+    
+    // Check size limit to avoid base64 huge payload crashing the browser
+    if(file.size > 50 * 1024 * 1024) { // 50MB limit
+        return alert('حجم الملف كبير جداً! أقصى حجم مسموح به هو 50 ميجابايت (حوالي ساعة من التسجيل).');
+    }
+    if(file.size > 15 * 1024 * 1024) {
+        // Just a warning
+        console.log("الملف كبير، قد يستغرق الرفع وقتاً.");
+    }
+
+    document.getElementById('ai-loading').style.display = 'block';
+    
+    const reader = new FileReader();
+    reader.onload = async (e) => {
+        const base64Data = e.target.result.split(',')[1];
+        let mimeType = file.type || "audio/mp3";
+        
+        // Some devices don't set mime type correctly or set unsupported ones
+        if(!mimeType.startsWith('audio/')) {
+            mimeType = 'audio/mp3'; // fallback
+        }
+
+                const promptText = `أنت مساعد مذاكرة ذكي للطلاب. هذا تسجيل صوتي لدرس أو محاضرة.
+استمع إلى التسجيل بتركيز، ثم قم بتلخيص أهم النقاط التي قالها المدرس بشكل منظم ومرتب في نقاط.
+وإذا أمكن، استخرج شفرات حفظ أو طرق سهلة لتذكر المعلومات التي ذكرها.
+ملاحظة: إذا كان التسجيل غير واضح، اشرح ما تمكنت من فهمه فقط.`;
+        
+        const parts = [{ text: promptText }, { inlineData: { mimeType: mimeType, data: base64Data } }];
+        const res = await callGeminiAPI(parts);
+        if(res) processAIOutput(res);
+    };
+    
+    reader.onerror = () => {
+        alert("حدث خطأ أثناء قراءة الملف الصوتي.");
+        document.getElementById('ai-loading').style.display = 'none';
+    };
+    
+    reader.readAsDataURL(file);
+};
