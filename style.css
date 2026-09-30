@@ -367,209 +367,63 @@ textarea { width: 100%; height: 200px; padding: 15px; border-radius: 8px; border
 }
 
 /* ========================================================================= */
-/* 🚀 THE REAL PREMIUM UI (DEEP NAVY & VIBRANT GRADIENTS) 🚀 */
+/* ✨ تأثيرات التفاعل (Hover Effects - Lift & Glow) ✨ */
 /* ========================================================================= */
 
-/* 1. Deep Modern Colors for Dark Theme */
-[data-theme="dark"] {
-    --bg-color: #0f1015 !important;
-    --card-bg: #1c1d2b !important;
-    --primary-color: #5d5fef !important;
-    --secondary-color: #4b4ce6 !important;
-    --border-color: #2a2b3d !important;
-    --text-main: #ffffff !important;
-    --text-muted: #8c8c9a !important;
-}
-
-/* 2. Global Resets & Typography */
-body {
-    transition: background-color 0.3s ease;
-    overflow-x: hidden;
-}
-[data-theme="dark"] body {
-    background-color: var(--bg-color) !important;
-    background-image: none !important;
-}
-
-/* 3. The Top Curved Header (Mobile & Desktop) */
-.main-content {
-    position: relative;
-    z-index: 1;
-}
-.main-content::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 260px;
-    background: linear-gradient(135deg, #4731d1, #6b4cfa);
-    border-radius: 0 0 50px 50px;
-    z-index: -1;
-    background-image: 
-        radial-gradient(circle at 10% 20%, rgba(255,255,255,0.08) 0%, transparent 200px),
-        radial-gradient(circle at 90% 60%, rgba(255,255,255,0.05) 0%, transparent 250px);
-}
-
-/* 4. Sleek Solid Cards (No cheap glassmorphism, just solid elegance) */
-[data-theme="dark"] .card, 
-[data-theme="dark"] .dashboard-widget, 
-[data-theme="dark"] .day-card, 
-[data-theme="dark"] .list-item, 
-[data-theme="dark"] .alert,
-[data-theme="dark"] .prayer-time-box {
-    background: var(--card-bg) !important;
-    border: 1px solid var(--border-color) !important;
-    border-radius: 20px !important;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.2) !important;
-    backdrop-filter: none !important;
-}
-[data-theme="dark"] .list-item {
-    border-right: 4px solid var(--primary-color) !important;
-}
-
-/* Base transitions */
-.card, .dashboard-widget, .task-item, .day-card, .btn, .fab-inner, .nav-links li, .prayer-time-box {
+/* 1. Base transition for smooth animations */
+.card, .dashboard-widget, .prayer-time-box, .task-item, .day-card, .btn, .fab-inner, .nav-links li {
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
 }
 
-/* Lift up and Glow for Cards on Hover */
-.card:hover, .dashboard-widget:hover, .task-item:hover, .day-card:hover, .prayer-time-box:hover {
-    transform: translateY(-5px) !important;
-    box-shadow: 0 15px 30px rgba(93, 95, 239, 0.15) !important;
+/* 2. Lift up and Glow for Cards on Hover */
+.card:hover, .dashboard-widget:hover, .prayer-time-box:hover, .task-item:hover, .day-card:hover {
+    transform: translateY(-8px) !important;
+    box-shadow: 0 20px 40px rgba(93, 95, 239, 0.15) !important;
     border-color: rgba(93, 95, 239, 0.3) !important;
 }
+
+/* Stronger glow in Dark Mode */
 [data-theme="dark"] .card:hover, 
 [data-theme="dark"] .dashboard-widget:hover, 
+[data-theme="dark"] .prayer-time-box:hover, 
 [data-theme="dark"] .task-item:hover, 
-[data-theme="dark"] .day-card:hover,
-[data-theme="dark"] .prayer-time-box:hover {
+[data-theme="dark"] .day-card:hover {
     box-shadow: 0 15px 35px rgba(93, 95, 239, 0.4) !important;
     border-color: rgba(93, 95, 239, 0.6) !important;
 }
+
+/* 3. Buttons and FAB Glow */
 .btn-primary:hover, .btn-large:hover, .mobile-bottom-nav .fab-inner:hover {
-    transform: translateY(-3px) scale(1.05) !important;
-    box-shadow: 0 10px 20px rgba(93, 95, 239, 0.6) !important;
+    transform: translateY(-5px) scale(1.05) !important;
+    box-shadow: 0 12px 25px rgba(93, 95, 239, 0.6) !important;
 }
 
-/* 5. Mobile Specific Fixes (Edge-to-Edge & Nav Notch) */
-@media (max-width: 768px) {
-    .app-container {
-        padding: 0 !important;
-        margin: 0 !important;
-        width: 100vw !important;
-    }
-    .main-content {
-        padding: 15px !important;
-        padding-top: 20px !important;
-        padding-bottom: 120px !important; /* Space for bottom nav */
-    }
-    
-    /* Bottom Nav Cutout/Notch Effect */
-    [data-theme="dark"] .mobile-bottom-nav {
-        background: var(--card-bg) !important;
-        border: none !important;
-        border-radius: 30px 30px 0 0 !important;
-        bottom: 0 !important;
-        height: 75px !important;
-        width: 100% !important;
-        left: 0 !important;
-        right: 0 !important;
-        box-shadow: 0 -10px 30px rgba(0,0,0,0.5) !important;
-    }
-    [data-theme="dark"] .mobile-bottom-nav .ai-fab {
-        top: -35px !important;
-    }
-    [data-theme="dark"] .mobile-bottom-nav .fab-inner {
-        width: 65px !important;
-        height: 65px !important;
-        background: linear-gradient(135deg, #6b4cfa, #4731d1) !important;
-        border: 8px solid var(--bg-color) !important;
-        box-shadow: 0 10px 20px rgba(71, 49, 209, 0.4) !important;
-    }
-    
-    /* Vibrant Sidebar */
-    [data-theme="dark"] .sidebar {
-        background: linear-gradient(180deg, #5143d6, #6b4cfa) !important;
-        border: none !important;
-        background-image: 
-            radial-gradient(circle at 80% 10%, rgba(255,255,255,0.08) 0%, transparent 150px),
-            radial-gradient(circle at 20% 50%, rgba(255,255,255,0.05) 0%, transparent 200px) !important;
-    }
-    [data-theme="dark"] .nav-links li { color: white !important; }
-    
-    .toast.show { bottom: 100px !important; }
-}
-
-/* 6. Desktop Specific Fixes (Edge-to-Edge FULL SCREEN Layout) */
-@media (min-width: 769px) {
-    body {
-        overflow: hidden !important; /* Stop whole page scrolling, use inner scroll */
-    }
-    .app-container {
-        padding: 0 !important;
-        margin: 0 !important;
-        max-width: 100vw !important;
-        width: 100vw !important;
-        height: 100vh !important;
-        display: flex;
-    }
-    .sidebar {
-        margin: 0 !important;
-        border-radius: 0 !important;
-        height: 100vh !important;
-        border-top: none !important;
-        border-bottom: none !important;
-        border-right: none !important;
-        border-left: 1px solid var(--border-color) !important;
-    }
-    .main-content {
-        margin: 0 !important;
-        border-radius: 0 !important;
-        height: 100vh !important;
-        border: none !important;
-        padding: 40px !important;
-        background-color: var(--bg-color) !important;
-    }
-
-    /* Vibrant Sidebar on Desktop too */
-    [data-theme="dark"] .sidebar {
-        background: linear-gradient(180deg, #5143d6, #6b4cfa) !important;
-        border: none !important;
-        background-image: 
-            radial-gradient(circle at 80% 10%, rgba(255,255,255,0.08) 0%, transparent 150px),
-            radial-gradient(circle at 20% 50%, rgba(255,255,255,0.05) 0%, transparent 200px) !important;
-    }
-    [data-theme="dark"] .sidebar .nav-links li { color: white !important; }
-    [data-theme="dark"] .sidebar .nav-links li:hover,
-    [data-theme="dark"] .sidebar .nav-links li.active { background: rgba(255,255,255,0.15) !important; }
-
-    /* Fix Dhikr Toast position on Desktop (Top Left Corner) */
-    .toast {
-        position: fixed;
-        top: 20px;
-        left: 20px;
-        z-index: 10000;
-    }
-    
-    /* Scrollbar fixes to attach cleanly to the edges */
-    ::-webkit-scrollbar { width: 8px; }
-    ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb { background: rgba(107, 76, 250, 0.4); border-radius: 10px; }
-    ::-webkit-scrollbar-thumb:hover { background: var(--primary-color); }
-}
-
-/* Sidebar Menu Links Hover Effect */
+/* 4. Menu links (Sidebar) inside a beautiful box */
 .nav-links li {
     margin: 8px 15px !important;
-    border-radius: 14px !important;
+    border-radius: 12px !important;
     padding: 12px 20px !important;
 }
 .nav-links li:hover {
     background: rgba(93, 95, 239, 0.15) !important;
-    transform: translateX(-5px) !important;
+    transform: translateX(-5px) !important; /* Slide gently left (RTL) */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+[data-theme="dark"] .nav-links li:hover,
+[data-theme="dark"] .nav-links li.active {
+    background: rgba(255, 255, 255, 0.15) !important;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2) !important;
 }
 .nav-links li.active {
     background: var(--primary-color) !important;
     color: white !important;
-    box-shadow: 0 5px 15px rgba(93, 95, 239, 0.4) !important;
+    box-shadow: 0 8px 20px rgba(93, 95, 239, 0.4) !important;
     transform: translateX(-2px) !important;
+}
+
+/* 5. Mobile Toast Fix */
+@media (max-width: 768px) {
+    .toast.show {
+        bottom: 100px !important;
+    }
 }
