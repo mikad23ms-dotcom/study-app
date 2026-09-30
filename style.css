@@ -13,7 +13,7 @@
 
 [data-theme="dark"] {
     --bg-color: #0b0914;
-    --card-bg: rgba(255, 255, 255, 0.03);
+    --card-bg: #1a1625;
     --text-main: #f1f1f1;
     --text-muted: #a0a0a0;
     --border-color: rgba(255, 255, 255, 0.05);
@@ -363,127 +363,55 @@ textarea { width: 100%; height: 200px; padding: 15px; border-radius: 8px; border
     /* Padding for main content to avoid bottom nav */
     .main-content { padding-bottom: 120px !important; padding-top: 15px !important; }
 }
-/* =========================================================
-   💎 ULTRA PREMIUM UI (FLAWLESS CONTRAST & GLASSMORPHISM) 💎
-   ========================================================= */
 
-:root {
-    --bg-light: linear-gradient(-45deg, #fdfbfb, #ebedee, #e2eafc, #f8f9fa);
-    --bg-dark: linear-gradient(-45deg, #090710, #130f26, #1c1543, #0f0a1c);
-    --card-light: rgba(255, 255, 255, 0.7);
-    --card-dark: rgba(20, 20, 30, 0.6);
-    --border-light: rgba(255, 255, 255, 0.5);
-    --border-dark: rgba(255, 255, 255, 0.08);
-}
-
+/* ================== SAFE DESKTOP ENHANCEMENTS ================== */
+/* 1. Animated Background only for body (doesn't touch cards) */
 body {
-    background: var(--bg-light) !important;
-    background-size: 400% 400% !important;
-    animation: premiumBG 15s ease infinite !important;
-    background-attachment: fixed !important;
+    background: linear-gradient(-45deg, #fdfbfb, #ebedee, #e2eafc, #f8f9fa);
+    background-size: 400% 400%;
+    animation: premiumBG 15s ease infinite;
 }
-
 body[data-theme="dark"] {
-    background: var(--bg-dark) !important;
-    background-size: 400% 400% !important;
+    background: linear-gradient(-45deg, #090710, #130f26, #1c1543, #0f0a1c);
+    background-size: 400% 400%;
+    animation: premiumBG 15s ease infinite;
 }
-
 @keyframes premiumBG {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
 }
 
-/* Subtle Animated Orbs */
-body::before, body::after {
-    content: '';
-    position: fixed;
-    border-radius: 50%;
-    filter: blur(80px);
-    z-index: -1;
-    opacity: 0.5;
-    animation: floatOrbs 20s ease-in-out infinite alternate;
-}
-body::before { width: 400px; height: 400px; background: rgba(67, 97, 238, 0.3); top: -100px; left: -100px; }
-body::after { width: 500px; height: 500px; background: rgba(247, 127, 0, 0.2); bottom: -150px; right: -100px; animation-delay: -10s; }
-body[data-theme="dark"]::before { background: rgba(67, 97, 238, 0.15); }
-body[data-theme="dark"]::after { background: rgba(247, 127, 0, 0.1); }
-
-@keyframes floatOrbs {
-    0% { transform: translate(0, 0) scale(1); }
-    100% { transform: translate(100px, 50px) scale(1.2); }
-}
-
-/* Glassmorphism for ALL Panels */
-.sidebar, .main-content, .card, .prayer-time-box, .task-item, .day-card, .dashboard-widget, .alert, .modal-content, .feature-box, .mobile-bottom-nav {
-    background: var(--card-light) !important;
-    backdrop-filter: blur(20px) !important;
-    -webkit-backdrop-filter: blur(20px) !important;
-    border: 1px solid var(--border-light) !important;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.05) !important;
-    color: #2b2d42 !important; /* Force text color in light mode */
-}
-
-body[data-theme="dark"] .sidebar, 
-body[data-theme="dark"] .main-content, 
-body[data-theme="dark"] .card, 
-body[data-theme="dark"] .prayer-time-box, 
-body[data-theme="dark"] .task-item, 
-body[data-theme="dark"] .day-card, 
-body[data-theme="dark"] .dashboard-widget, 
-body[data-theme="dark"] .alert, 
-body[data-theme="dark"] .modal-content, 
-body[data-theme="dark"] .feature-box,
-body[data-theme="dark"] .mobile-bottom-nav {
-    background: var(--card-dark) !important;
-    border: 1px solid var(--border-dark) !important;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.4) !important;
-    color: #f1f1f1 !important; /* Force text color in dark mode */
-}
-
-/* Fix specific texts */
-.prayer-time-box span, .prayer-time-box strong, h1, h2, h3, p, label {
-    color: inherit;
-}
-
-.text-muted {
-    color: #6c757d !important;
-}
-body[data-theme="dark"] .text-muted {
-    color: #a0a0a0 !important;
-}
-
-/* Desktop App Container Layout */
+/* 2. Desktop Floating Layout (Doesn't touch mobile) */
 @media (min-width: 769px) {
-    body { overflow: hidden !important; }
-    
+    body { overflow: hidden; }
     .app-container {
-        padding: 20px !important;
-        gap: 20px !important;
+        padding: 2vh 2vw;
+        gap: 20px;
         height: 100vh;
         max-width: 1600px;
         margin: 0 auto;
     }
-    
     .sidebar {
-        border-radius: 24px !important;
-        height: calc(100vh - 40px) !important;
-        margin: 0 !important;
+        border-radius: 20px;
+        height: calc(100vh - 4vh);
+        border: 1px solid var(--border-color);
+        box-shadow: 0 15px 35px rgba(0,0,0,0.1);
         overflow-y: auto;
     }
-
     .main-content {
-        border-radius: 24px !important;
-        height: calc(100vh - 40px) !important;
-        overflow-y: auto !important;
-        padding: 40px !important;
+        border-radius: 20px;
+        height: calc(100vh - 4vh);
+        border: 1px solid var(--border-color);
+        box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        background-color: var(--bg-color); /* Restores original card color */
+        overflow-y: auto;
     }
+}
 
-    /* Custom Scrollbar for Desktop */
-    .main-content::-webkit-scrollbar, .sidebar::-webkit-scrollbar { width: 8px; }
-    .main-content::-webkit-scrollbar-track, .sidebar::-webkit-scrollbar-track { background: transparent; }
-    .main-content::-webkit-scrollbar-thumb, .sidebar::-webkit-scrollbar-thumb {
-        background: rgba(67, 97, 238, 0.4);
-        border-radius: 10px;
+/* 3. Fix Toast Overlapping Mobile Nav */
+@media (max-width: 768px) {
+    .toast.show {
+        bottom: 110px !important; /* Raises it above the bottom nav */
     }
 }
