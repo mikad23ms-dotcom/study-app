@@ -615,6 +615,8 @@ async function callGroqAPI(parts, modelIndex = 0) {
     if (modelIndex >= modelsList.length) {
         alert("عذراً، فشلت جميع نماذج Groq. آخر خطأ كان: " + (window.lastGroqError || "غير معروف") + "\n\nتأكدي إنك مش مشغلة VPN بيتعارض مع Groq.");
         document.getElementById('ai-loading').style.display = 'none';
+        const contentBox = document.getElementById('ai-result-content');
+        if(contentBox) contentBox.innerHTML = '<div style="color:var(--danger); text-align:center; padding:20px;">فشل الاتصال بالذكاء الاصطناعي. مفتاحك غير صالح.</div>';
         return null;
     }
 
@@ -726,7 +728,9 @@ async function callGeminiAPICore(parts, modelIndex = 0) {
     const models = ["gemini-1.5-flash", "gemini-1.5-pro", "gemini-1.5-flash-latest", "gemini-1.0-pro"];
     if (modelIndex >= models.length) {
         alert("للأسف، لم نتمكن من الوصول لأي نموذج ذكاء اصطناعي متاح حالياً. يرجى التأكد من صلاحية مفتاح API الخاص بك.");
-        document.getElementById("ai-loading").style.display = "none";
+        document.getElementById('ai-loading').style.display = 'none';
+        const contentBox = document.getElementById('ai-result-content');
+        if(contentBox) contentBox.innerHTML = '<div style="color:var(--danger); text-align:center; padding:20px;">فشل الاتصال بـ Gemini. مفتاحك غير صالح أو محظور.</div>';
         return null;
     }
 
