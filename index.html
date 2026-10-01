@@ -487,12 +487,29 @@
                 
                 <div class="ai-container">
                     <!-- API Key Alert -->
-                    <div id="api-key-alert" class="alert alert-warning" style="display:none;">
-                        <strong><i class="fa-solid fa-triangle-exclamation"></i> تنبيه:</strong> يجب إدخال مفتاح Gemini API ليعمل المساعد الذكي.
-                        <br><a href="https://aistudio.google.com/app/apikey" target="_blank" style="color: var(--primary-color);">اضغط هنا للحصول على مفتاح مجاني من Google</a>
-                        <div style="margin-top: 10px; display: flex; gap: 10px;">
-                            <input type="password" id="api-key-input" placeholder="ألصق مفتاح الـ API هنا..." style="flex:1; padding: 8px; border-radius: 4px; border: 1px solid var(--border-color);">
-                            <button class="btn btn-primary" onclick="saveApiKey()">حفظ المفتاح</button>
+                                        <div id="api-key-alert" style="background: var(--card-bg); padding: 20px; border-radius: 12px; margin-bottom: 20px; border: 1px solid var(--border-color);">
+                        <h3 style="margin-top:0; color:var(--primary-color);">إعدادات الذكاء الاصطناعي 🤖</h3>
+                        <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 15px;">
+                            اختر محرك الذكاء الاصطناعي المفضل لديك وأدخل المفتاح الخاص به. (البيانات تُحفظ في جهازك فقط لضمان الخصوصية).
+                        </p>
+                
+                        <label style="display:block; margin-bottom:5px; color:var(--text-main);">المحرك المفضل:</label>
+                        <select id="ai-provider-select" class="search-input" style="width:100%; margin-bottom:15px;" onchange="toggleApiInputs()">
+                            <option value="gemini">Google Gemini (يدعم الصور والملفات - موصى به)</option>
+                            <option value="groq">Groq Llama 3 (سريع جداً - نصوص فقط)</option>
+                        </select>
+                
+                        <div id="gemini-input-group">
+                            <input type="password" id="gemini-api-key-input" class="search-input" placeholder="مفتاح Google Gemini API..." style="width: 100%; margin-bottom: 10px;">
+                        </div>
+                
+                        <div id="groq-input-group" style="display:none;">
+                            <input type="password" id="groq-api-key-input" class="search-input" placeholder="مفتاح Groq API..." style="width: 100%; margin-bottom: 10px;">
+                        </div>
+                
+                        <div style="display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap;">
+                            <button onclick="saveApiKeys()" class="btn btn-primary" style="flex: 1; min-width: 150px;">حفظ الإعدادات</button>
+                            <button onclick="openApiInstructions()" class="btn" style="flex: 1; min-width: 150px; background: var(--bg-color); border: 1px solid var(--primary-color); color: var(--primary-color);">كيف أحصل على مفتاح مجاني؟</button>
                         </div>
                     </div>
 
