@@ -1303,7 +1303,7 @@ window.generateQuiz = async () => {
     document.getElementById('quiz-container').style.display = 'none';
     document.getElementById('quiz-result').style.display = 'none';
     
-    const prompt = بناءً على النص التالي، قم بتوليد عدد  سؤال من نوع: .
+    const prompt = `بناءً على النص التالي، قم بتوليد عدد ${quizCount} سؤال من نوع: ${typeMap[quizType]}.
 
 قم بإرجاع JSON فقط بدون أي نصوص أخرى. الهيكل:
 [
@@ -1326,14 +1326,14 @@ window.generateQuiz = async () => {
 ]
 
 النص:
-;
+${text}`;
     
     try {
         const res = await callGeminiAPI([{ text: prompt }]);
         document.getElementById("quiz-loading").style.display = "none";
         if (res) {
             try {
-                const cleaned = res.replace(/`json/gi, "").replace(/`/g, "").trim();
+                const cleaned = res.replace(/```json/gi, "").replace(/```/g, "").trim();
                 quizData = JSON.parse(cleaned);
                 renderQuiz();
             } catch(e) {
@@ -1354,31 +1354,40 @@ document.getElementById('ai-schedule-form').onsubmit = async (e) => {
     
     document.getElementById('ai-schedule-loading').style.display = 'block';
     
-    const prompt = أنت خبير تنظيم وقت ودراسة.\nأحتاج إلى جدول مذاكرة يومي ذكي بالمعطيات التالية:\n1. الوقت المفضل للمذاكرة: \n2. إجمالي ساعات المذاكرة المستهدفة:  ساعة\n3. المواد المراد مذاكرتها: \n\nالمطلوب:\nقسم لي الوقت بتقنية البومودورو (Time-blocking) وتوزيع فترات الراحة بشكل ذكي. قدم الجدول مفصلاً.\nاكتب الجدول بشكل مريح للعين باستخدام تنسيقات Markdown (بدون أي رسومات بيانية).\nأضف نصيحة تحفيزية في البداية ونصيحة للمراجعة في النهاية.;
+    const prompt = `أنت خبير تنظيم وقت ودراسة.
+أحتاج إلى جدول مذاكرة يومي ذكي بالمعطيات التالية:
+1. الوقت المفضل للمذاكرة: ${timePref}
+2. إجمالي ساعات المذاكرة المستهدفة: ${hours} ساعة
+3. المواد المراد مذاكرتها: ${subjectsInput}
+
+المطلوب:
+قسم لي الوقت بتقنية البومودورو (Time-blocking) وتوزيع فترات الراحة بشكل ذكي. قدم الجدول مفصلاً.
+اكتب الجدول بشكل مريح للعين باستخدام تنسيقات Markdown (بدون أي رسومات بيانية).
+أضف نصيحة تحفيزية في البداية ونصيحة للمراجعة في النهاية.`;
 
     try {
         const res = await callGeminiAPI([{ text: prompt }]);
-        document.getElementById('ai-schedule-loading').style.display = 'none';
-        closeModal('ai-schedule-modal');
+        document.getElementById("ai-schedule-loading").style.display = "none";
+        closeModal("ai-schedule-modal");
         
         if (res) {
-            const resultContainer = document.getElementById('schedule-ai-result');
-            const resultContent = document.getElementById('schedule-ai-content');
+            const resultContainer = document.getElementById("schedule-ai-result");
+            const resultContent = document.getElementById("schedule-ai-content");
             if (resultContainer && resultContent) {
-                resultContainer.style.display = 'block';
+                resultContainer.style.display = "block";
                 resultContent.innerHTML = marked.parse(res);
-                resultContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                resultContainer.scrollIntoView({ behavior: "smooth", block: "start" });
             } else {
-                document.querySelectorAll('.nav-links li').forEach(n => n.classList.remove('active'));
-                document.querySelectorAll('.page').forEach(p => p.classList.remove('active-page'));
-                document.querySelector('[data-page="ai-assistant"]').classList.add('active');
-                document.getElementById('ai-assistant').classList.add('active-page');
+                document.querySelectorAll(".nav-links li").forEach(n => n.classList.remove("active"));
+                document.querySelectorAll(".page").forEach(p => p.classList.remove("active-page"));
+                document.querySelector('[data-page="ai-assistant"]').classList.add("active");
+                document.getElementById("ai-assistant").classList.add("active-page");
                 processAIOutput(res);
             }
         }
     } catch(e) {
-        document.getElementById('ai-schedule-loading').style.display = 'none';
-        alert('حدث خطأ أثناء إنشاء الجدول. حاول مرة أخرى!');
+        document.getElementById("ai-schedule-loading").style.display = "none";
+        alert("حدث خطأ أثناء إنشاء الجدول. حاول مرة أخرى!");
     }
 };
 
