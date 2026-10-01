@@ -1,4 +1,4 @@
-﻿const CACHE_NAME = 'study-app-v53';
+﻿const CACHE_NAME = 'study-app-v54';
 const urlsToCache = [
   '/',
   '/index.html',
@@ -6,33 +6,18 @@ const urlsToCache = [
   '/app.js'
 ];
 
-// Install Event
 self.addEventListener('install', event => {
+  self.skipWaiting(); // Force the waiting service worker to become the active service worker.
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(cache => {
-        console.log('Opened cache');
         return cache.addAll(urlsToCache);
       })
   );
 });
 
-// Fetch Event (Serves files from cache if offline)
-self.addEventListener('fetch', event => {
-  event.respondWith(
-    caches.match(event.request)
-      .then(response => {
-        // Cache hit - return response
-        if (response) {
-          return response;
-        }
-        return fetch(event.request);
-      })
-  );
-});
-
-// Activate Event (Cleans up old caches)
 self.addEventListener('activate', event => {
+  event.waitUntil(self.clients.claim()); // Claim clients immediately
   const cacheWhitelist = [CACHE_NAME];
   event.waitUntil(
     caches.keys().then(cacheNames => {
@@ -47,3 +32,21 @@ self.addEventListener('activate', event => {
   );
 });
 
+// Network-First Strategy for faster updates during dev
+self.addEventListener('fetch', event => {
+  event.respondWith(
+    fetch(event.request)
+      .then(response => {
+        // If network fetch is successful, update cache
+        const resClone = response.clone();
+        caches.open(CACHE_NAME).then(cache => {
+          cache.put(event.request, resClone);
+        });
+        return response;
+      })
+      .catch(() => {
+        // Fallback to cache if network fails
+        return caches.match(event.request);
+      })
+  );
+});
