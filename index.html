@@ -1004,7 +1004,7 @@
             });
         }
     </script>
-    <script src="app.js"></script>
+    <script>window.onerror = function(msg, url, line, col, error) { document.body.innerHTML = "<h1 style='color:red'>ERROR: " + msg + " at line " + line + "</h1>"; };</script><script src="app.js"></script>
     <!-- API Instructions Modal -->
     <div id="api-instructions-modal" class="modal">
         <div class="modal-content" style="max-width: 500px; text-align: right;">
