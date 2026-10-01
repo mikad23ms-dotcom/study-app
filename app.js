@@ -1979,7 +1979,8 @@ document.addEventListener('DOMContentLoaded', () => {
             
             // Show page
             allPages.forEach(p => p.classList.remove('active-page'));
-            document.getElementById(pageId).classList.add('active-page');
+            const t = document.getElementById(pageId);
+            if(t) t.classList.add('active-page');
         });
     });
 
