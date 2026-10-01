@@ -2466,3 +2466,40 @@ window.loadTeacherStudents = async () => {
         listElement.innerHTML = '<li class="list-item" style="justify-content:center; color:var(--danger);">حدث خطأ أثناء الاتصال بقاعدة البيانات. تأكد من تفعيل Firestore.</li>';
     }
 };
+// --- AI Providers Settings ---
+window.toggleApiInputs = () => {
+    const provider = document.getElementById('ai-provider-select').value;
+    if(provider === 'gemini') {
+        document.getElementById('gemini-input-group').style.display = 'block';
+        document.getElementById('groq-input-group').style.display = 'none';
+    } else {
+        document.getElementById('gemini-input-group').style.display = 'none';
+        document.getElementById('groq-input-group').style.display = 'block';
+    }
+};
+
+window.saveApiKeys = () => {
+    const aiProviderEl = document.getElementById('ai-provider-select');
+    if(aiProviderEl) aiProvider = aiProviderEl.value;
+    
+    const geminiEl = document.getElementById('gemini-api-key-input');
+    if(geminiEl) geminiApiKey = geminiEl.value.trim();
+    
+    const groqEl = document.getElementById('groq-api-key-input');
+    if(groqEl) groqApiKey = groqEl.value.trim();
+
+    localStorage.setItem('study_ai_provider', aiProvider);
+    localStorage.setItem('study_gemini_api', geminiApiKey);
+    localStorage.setItem('study_groq_api', groqApiKey);
+
+    alert('تم حفظ إعدادات الذكاء الاصطناعي بنجاح!');
+};
+
+window.openApiInstructions = () => {
+    const modal = document.getElementById('api-instructions-modal');
+    if (modal) {
+        modal.style.display = 'flex';
+    } else {
+        alert('حدث خطأ: لم يتم العثور على نافذة التعليمات.');
+    }
+};
