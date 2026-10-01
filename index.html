@@ -270,9 +270,17 @@
                     </div>
                     <div class="card" style="text-align: center; border-bottom: 4px solid var(--success);">
                         <h3 style="color: var(--text-muted); font-size: 1rem; border:none; justify-content:center;">الطلاب المسجلين بكودك</h3>
-                        <h2 style="color: var(--success); font-size: 2.2rem; margin: 15px 0;">قريباً</h2>
-                        <p style="font-size: 0.85rem; color:var(--text-muted);">سيتم التفعيل في التحديث القادم</p>
+                        <h2 id="teacher-students-count" style="color: var(--success); font-size: 2.2rem; margin: 15px 0;">0</h2>
+                        <button onclick="loadTeacherStudents()" class="btn btn-primary" style="font-size:0.8rem; padding: 5px 10px;">تحديث القائمة</button>
                     </div>
+                </div>
+                
+                <div class="card" style="margin-bottom: 30px;">
+                    <h3 style="margin-top: 20px; bottom: auto; border-bottom:2px solid var(--bg-color); padding-bottom:10px;"><i class="fa-solid fa-users text-success"></i> قائمة طلابك</h3>
+                    <ul class="item-list" id="teacher-students-list">
+                        <li class="list-item" style="justify-content:center; color:var(--text-muted);">لا يوجد طلاب مسجلين حتى الآن.</li>
+                    </ul>
+                </div>
                 </div>
 
                 <div class="card" style="margin-bottom: 30px;">

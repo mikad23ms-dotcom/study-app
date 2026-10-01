@@ -588,7 +588,7 @@ async function callGeminiAPI(parts) {
     }
 
     try {
-        const url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:streamGenerateContent?alt=sse&key=" + geminiApiKey;
+        const url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:streamGenerateContent?alt=sse&key=" + geminiApiKey;
         const payload = {
             contents: [{ parts: parts }],
             generationConfig: { temperature: 0.7 }
@@ -2265,4 +2265,53 @@ window.summarizeAudio = async () => {
     };
     
     reader.readAsDataURL(file);
+};
+// --- Teacher Dashboard: Load Students from Firebase ---
+window.loadTeacherStudents = async () => {
+    let tCode = localStorage.getItem('study_teacher_code');
+    let role = localStorage.getItem('study_role');
+    
+    if (role !== 'teacher' || !tCode) return;
+    
+    const listElement = document.getElementById('teacher-students-list');
+    const countElement = document.getElementById('teacher-students-count');
+    
+    if (!listElement) return;
+    
+    listElement.innerHTML = '<li class="list-item" style="justify-content:center; color:var(--text-muted);"><i class="fa-solid fa-spinner fa-spin"></i> جاري جلب الطلاب...</li>';
+    
+    try {
+        const snapshot = await db.collection('teachers').doc(tCode).collection('students').orderBy('joinedAt', 'desc').get();
+        
+        if (snapshot.empty) {
+            listElement.innerHTML = '<li class="list-item" style="justify-content:center; color:var(--text-muted);">لا يوجد طلاب مسجلين بكودك حتى الآن.</li>';
+            if(countElement) countElement.textContent = "0";
+            return;
+        }
+        
+        listElement.innerHTML = '';
+        let count = 0;
+        
+        snapshot.forEach(doc => {
+            count++;
+            const student = doc.data();
+            const li = document.createElement('li');
+            li.className = 'list-item';
+            li.style.borderRight = '4px solid var(--primary-color)';
+            
+            li.innerHTML = 
+                <div class="task-content">
+                    <div class="task-text" style="font-weight:bold; font-size:1.1rem;"><i class="fa-solid fa-user-graduate text-primary"></i>  + student.name + </div>
+                    <div class="task-meta" style="margin-top:5px;">المرحلة:  + student.stage +  | التخصص:  + student.spec + </div>
+                </div>
+            ;
+            listElement.appendChild(li);
+        });
+        
+        if(countElement) countElement.textContent = count;
+        
+    } catch (error) {
+        console.error("Error fetching students: ", error);
+        listElement.innerHTML = '<li class="list-item" style="justify-content:center; color:var(--danger);">حدث خطأ أثناء الاتصال بقاعدة البيانات. تأكد من تفعيل Firestore.</li>';
+    }
 };
