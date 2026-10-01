@@ -1,4 +1,4 @@
-﻿// --- Firebase Setup ---
+// --- Firebase Setup ---
 const firebaseConfig = {
   apiKey: "AIzaSyAaV59AdAZOXi1Q7KoDn2BhdsFIz_TrLYY",
   authDomain: "studyapp-659cc.firebaseapp.com",
@@ -434,7 +434,7 @@ clockInterval = setInterval(() => {
     const now = new Date();
     const hours = now.getHours().toString().padStart(2, '0');
     const minutes = now.getMinutes().toString().padStart(2, '0');
-    const currentTimeStr = `${hours}:${minutes}`;
+    const currentTimeStr = `$:${minutes}`;
     
     if (currentTimeStr === alarmTime && now.getSeconds() < 2) {
         triggerLoudAlarm();
@@ -1346,7 +1346,7 @@ ${text}`;
     }
 };
 
-document.getElementById('ai-schedule-form').onsubmit = async (e) => {
+﻿document.getElementById('ai-schedule-form').onsubmit = async (e) => {
     e.preventDefault();
     const timePref = document.getElementById('ai-schedule-time').value;
     const hours = document.getElementById('ai-schedule-hours').value;
@@ -1354,14 +1354,16 @@ document.getElementById('ai-schedule-form').onsubmit = async (e) => {
     
     document.getElementById('ai-schedule-loading').style.display = 'block';
     
-    const prompt = \أنت خبير تنظيم وقت ودراسة.
+    const prompt = أنت خبير تنظيم وقت ودراسة.
 أحتاج إلى جدول مذاكرة يومي ذكي بالمعطيات التالية:
-1. الوقت المفضل للمذاكرة: 2. إجمالي ساعات المذاكرة المستهدفة: \ ساعة
+1. الوقت المفضل للمذاكرة: 
+2. إجمالي ساعات المذاكرة المستهدفة:  ساعة
 3. المواد المراد مذاكرتها: 
+
 المطلوب:
 قسم لي الوقت بتقنية البومودورو (Time-blocking) وتوزيع فترات الراحة بشكل ذكي. قدم الجدول مفصلاً.
 اكتب الجدول بشكل مريح للعين باستخدام تنسيقات Markdown (بدون أي رسومات بيانية).
-أضف نصيحة تحفيزية في البداية ونصيحة للمراجعة في النهاية.\;
+أضف نصيحة تحفيزية في البداية ونصيحة للمراجعة في النهاية.;
 
     try {
         const res = await callGeminiAPI([{ text: prompt }]);
@@ -1378,7 +1380,7 @@ document.getElementById('ai-schedule-form').onsubmit = async (e) => {
             } else {
                 document.querySelectorAll(".nav-links li").forEach(n => n.classList.remove("active"));
                 document.querySelectorAll(".page").forEach(p => p.classList.remove("active-page"));
-                document.querySelector("[data-page=\"ai-assistant\"]").classList.add("active");
+                document.querySelector('[data-page="ai-assistant"]').classList.add("active");
                 document.getElementById("ai-assistant").classList.add("active-page");
                 processAIOutput(res);
             }
@@ -1386,8 +1388,8 @@ document.getElementById('ai-schedule-form').onsubmit = async (e) => {
     } catch(e) {
         document.getElementById("ai-schedule-loading").style.display = "none";
         alert("حدث خطأ أثناء إنشاء الجدول. حاول مرة أخرى!");
-    }};
-
+    }
+};
 mermaid.initialize({ startOnLoad: false, theme: 'default', fontFamily: 'Tajawal' });
 renderAll();
 
