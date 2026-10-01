@@ -118,11 +118,25 @@ let tasks = JSON.parse(localStorage.getItem('study_tasks')) || [];
 let exams = JSON.parse(localStorage.getItem('study_exams')) || [];
 let flashcards = JSON.parse(localStorage.getItem('study_flashcards')) || [];
 let geminiApiKey = localStorage.getItem('study_gemini_api') || '';
+let groqApiKey = localStorage.getItem('study_groq_api') || '';
+let aiProvider = localStorage.getItem('study_ai_provider') || 'gemini';
 let isDarkMode = localStorage.getItem('study_theme') === 'dark';
 
 // Set User Name in Dashboard
 document.addEventListener('DOMContentLoaded', () => {
     setupVoiceRecognition();
+    
+    // Setup AI Settings inputs
+    const providerSelect = document.getElementById('ai-provider-select');
+    if (providerSelect) providerSelect.value = aiProvider;
+    
+    const geminiInput = document.getElementById('gemini-api-key-input');
+    if (geminiInput) geminiInput.value = geminiApiKey;
+    
+    const groqInput = document.getElementById('groq-api-key-input');
+    if (groqInput) groqInput.value = groqApiKey;
+    
+    if(window.toggleApiInputs) toggleApiInputs();
     if (studyUsername && document.getElementById('welcome-user')) {
         document.getElementById('welcome-user').innerText = studyUsername;
     }
@@ -568,8 +582,126 @@ window.switchAITab = tabId => {
     document.getElementById(tabId).classList.add('active');
 }
 
+async function callGeminiAPI(parts) {
+    const hasMedia = parts.some(p => p.inlineData);
+
+    if (aiProvider === 'gemini' || hasMedia || !groqApiKey) {
+        if (!geminiApiKey) {
+            alert("يرجى إدخال مفتاح Google Gemini في إعدادات الذكاء الاصطناعي!");
+            document.getElementById('ai-loading').style.display = 'none';
+            return null;
+        }
+        if (aiProvider === 'groq' && hasMedia) {
+            alert("Groq لا يدعم قراءة الصور والملفات حالياً. سيتم استخدام Gemini لهذا الطلب.");
+        }
+        return await callGeminiAPICore(parts);
+    } else {
+        if (!groqApiKey) {
+            alert("يرجى إدخال مفتاح Groq في إعدادات الذكاء الاصطناعي!");
+            document.getElementById('ai-loading').style.display = 'none';
+            return null;
+        }
+        return await callGroqAPI(parts);
+    }
+}
+
+async function callGroqAPI(parts) {
+    const textPrompt = parts.map(p => p.text).join('\n');
+
+    document.getElementById('ai-loading').style.display = 'block';
+    const outputContainer = document.getElementById('ai-output-container');
+    if (outputContainer) outputContainer.style.display = 'block';
+
+    const contentBox = document.getElementById('ai-result-content');
+    if(contentBox) contentBox.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> جاري التفكير باستعمال Groq...';
+
+    const mermaidContainer = document.getElementById('mermaid-container');
+    if(mermaidContainer) mermaidContainer.style.display = 'none';
+
+    try {
+        const payload = {
+            model: "llama3-8b-8192",
+            messages: [{ role: "user", content: textPrompt }],
+            temperature: 0.7,
+            stream: true
+        };
+
+        const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': Bearer  + groqApiKey
+            },
+            body: JSON.stringify(payload)
+        });
+
+        if (!response.ok) {
+            const err = await response.json();
+            alert("حدث خطأ في Groq: " + (err.error?.message || response.statusText));
+            document.getElementById('ai-loading').style.display = 'none';
+            return null;
+        }
+
+        const reader = response.body.getReader();
+        const decoder = new TextDecoder();
+        let fullText = '';
+        let isFirstChunk = true;
+
+        while (true) {
+            const { done, value } = await reader.read();
+            if (done) break;
+
+            const chunk = decoder.decode(value, { stream: true });
+            const lines = chunk.split('\n');
+
+            for (const line of lines) {
+                if (line.startsWith('data: ') && line !== 'data: [DONE]') {
+                    try {
+                        const data = JSON.parse(line.substring(6));
+                        const textChunk = data.choices[0]?.delta?.content || '';
+                        fullText += textChunk;
+
+                        if (isFirstChunk) {
+                            if(contentBox) contentBox.innerHTML = '';
+                            isFirstChunk = false;
+                        }
+
+                        if(contentBox) {
+                            contentBox.innerHTML = marked.parse(fullText);
+                        }
+                    } catch (e) { }
+                }
+            }
+        }
+        
+        // Handle Mermaid logic for Groq too
+        if (fullText.includes('`mermaid')) {
+            const match = fullText.match(/`mermaid\n([\s\S]*?)`/);
+            if (match && match[1]) {
+                const mermaidCode = match[1].trim();
+                const cleanText = fullText.replace(/`mermaid\n[\s\S]*?`/, '').trim();
+                if(contentBox) contentBox.innerHTML = marked.parse(cleanText);
+                
+                if (mermaidContainer) {
+                    mermaidContainer.style.display = 'block';
+                    mermaidContainer.innerHTML = '<div class="mermaid">' + mermaidCode + '</div>';
+                    mermaid.init(undefined, document.querySelectorAll('.mermaid'));
+                }
+            }
+        }
+
+        document.getElementById('ai-loading').style.display = 'none';
+        return fullText;
+
+    } catch (e) {
+        alert("حدث خطأ أثناء الاتصال بـ Groq: " + e.message);
+        document.getElementById('ai-loading').style.display = 'none';
+        return null;
+    }
+}
+
 // --- AI Streaming Fetch Logic ---
-async function callGeminiAPI(parts, modelIndex = 0) {
+async function callGeminiAPICore(parts, modelIndex = 0) {
     const models = ["gemini-1.5-flash-latest", "gemini-1.5-pro-latest", "gemini-1.5-flash", "gemini-pro", "gemini-1.5-flash-8b"];
     if (modelIndex >= models.length) {
         alert("للأسف، لم نتمكن من الوصول لأي نموذج ذكاء اصطناعي متاح حالياً. يرجى التأكد من صلاحية مفتاح API الخاص بك.");

@@ -971,6 +971,35 @@
         }
     </script>
     <script src="app.js"></script>
+    <!-- API Instructions Modal -->
+    <div id="api-instructions-modal" class="modal">
+        <div class="modal-content" style="max-width: 500px; text-align: right;">
+            <span class="close" onclick="closeModal('api-instructions-modal')">&times;</span>
+            <h2 style="color: var(--primary-color); margin-bottom: 15px;">طريقة الحصول على المفاتيح المجانية 🔑</h2>
+
+            <div style="background: rgba(67, 97, 238, 0.1); padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+                <h3 style="color: #4361ee; margin-top: 0;">1. مفتاح Google Gemini</h3>
+                <ol style="padding-right: 20px; font-size: 0.9rem; color: var(--text-main); margin-bottom: 0; line-height: 1.6;">
+                    <li>ادخل على موقع: <a href="https://aistudio.google.com/app/apikey" target="_blank" style="color:#4361ee; font-weight:bold;">Google AI Studio</a></li>
+                    <li>سجل دخول بحساب جوجل بتاعك (هتلاقي زرار Create API Key).</li>
+                    <li>لو ظهرتلك رسالة اضغط Get API key وبعدين Create API key in new project.</li>
+                    <li>انسخ الكود الطويل اللي هيظهر، والصقه في التطبيق.</li>
+                </ol>
+            </div>
+
+            <div style="background: rgba(247, 127, 0, 0.1); padding: 15px; border-radius: 8px;">
+                <h3 style="color: #f77f00; margin-top: 0;">2. مفتاح Groq (Llama 3)</h3>
+                <ol style="padding-right: 20px; font-size: 0.9rem; color: var(--text-main); margin-bottom: 0; line-height: 1.6;">
+                    <li>ادخل على موقع: <a href="https://console.groq.com/keys" target="_blank" style="color:#f77f00; font-weight:bold;">Groq Cloud</a></li>
+                    <li>سجل دخول بحساب جوجل أو جيت هاب.</li>
+                    <li>اضغط على <strong>Create API Key</strong>.</li>
+                    <li>اكتب أي اسم (مثلا StudyApp) وانسخ المفتاح.</li>
+                </ol>
+            </div>
+
+            <button onclick="closeModal('api-instructions-modal')" class="btn btn-primary" style="width: 100%; margin-top: 20px;">فهمت، شكراً!</button>
+        </div>
+    </div>
 </body>
 </html>
 
