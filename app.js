@@ -602,13 +602,25 @@ async function callGeminiAPI(parts) {
     }
 }
 
-async function callGroqAPI(parts) {
+async function callGroqAPI(parts, modelIndex = 0) {
     const hasMedia = parts.some(p => p.inlineData);
-    let groqModel = "llama-3.1-8b-instant";
     let messageContent = [];
 
+    // Fallback Models List (The Final Solution)
+    const textModels = ["llama-3.1-70b-versatile", "llama-3.1-8b-instant", "llama3-70b-8192", "mixtral-8x7b-32768", "gemma2-9b-it"];
+    const visionModels = ["llama-3.2-11b-vision-preview", "llama-3.2-90b-vision-preview"];
+    
+    const modelsList = hasMedia ? visionModels : textModels;
+
+    if (modelIndex >= modelsList.length) {
+        alert("عذراً، جميع نماذج Groq غير متاحة أو مفتاحك غير صالح. يرجى تجربة المفتاح مرة أخرى أو استخدام Gemini.");
+        document.getElementById('ai-loading').style.display = 'none';
+        return null;
+    }
+
+    const groqModel = modelsList[modelIndex];
+
     if (hasMedia) {
-        groqModel = "llama-3.2-11b-vision-preview"; // Use Groq Vision for images
         parts.forEach(p => {
             if (p.text) {
                 messageContent.push({ type: "text", text: p.text });
@@ -620,20 +632,21 @@ async function callGroqAPI(parts) {
             }
         });
     } else {
-        groqModel = "llama-3.1-8b-instant";
         const textPrompt = parts.map(p => p.text).join('\n');
-        messageContent = textPrompt; // Simple string for text models
+        messageContent = textPrompt;
     }
 
-    document.getElementById('ai-loading').style.display = 'block';
-    const outputContainer = document.getElementById('ai-output-container');
-    if (outputContainer) outputContainer.style.display = 'block';
+    if (modelIndex === 0) {
+        document.getElementById('ai-loading').style.display = 'block';
+        const outputContainer = document.getElementById('ai-output-container');
+        if (outputContainer) outputContainer.style.display = 'block';
 
-    const contentBox = document.getElementById('ai-result-content');
-    if(contentBox) contentBox.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> جاري التفكير باستعمال Groq...';
+        const contentBox = document.getElementById('ai-result-content');
+        if(contentBox) contentBox.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> جاري التفكير باستعمال Groq...';
 
-    const mermaidContainer = document.getElementById('mermaid-container');
-    if(mermaidContainer) mermaidContainer.style.display = 'none';
+        const mermaidContainer = document.getElementById('mermaid-container');
+        if(mermaidContainer) mermaidContainer.style.display = 'none';
+    }
 
     try {
         const payload = {
@@ -654,7 +667,15 @@ async function callGroqAPI(parts) {
 
         if (!response.ok) {
             const err = await response.json();
-            alert("حدث خطأ في Groq: " + (err.error?.message || response.statusText));
+            const errMsg = err.error?.message || response.statusText;
+            
+            // AUTOMATIC FALLBACK LOGIC
+            if (response.status === 404 || response.status === 400 || response.status === 403 || errMsg.toLowerCase().includes("does not exist") || errMsg.toLowerCase().includes("not found")) {
+                console.warn(groqModel + " failed. Trying next Groq model...");
+                return await callGroqAPI(parts, modelIndex + 1);
+            }
+
+            alert("حدث خطأ في Groq: " + errMsg);
             document.getElementById('ai-loading').style.display = 'none';
             return null;
         }
@@ -691,25 +712,7 @@ async function callGroqAPI(parts) {
             }
         }
         
-        // Handle Mermaid logic for Groq too
-        if (fullText.includes('`mermaid')) {
-            const match = fullText.match(/`mermaid\n([\s\S]*?)`/);
-            if (match && match[1]) {
-                const mermaidCode = match[1].trim();
-                const cleanText = fullText.replace(/`mermaid\n[\s\S]*?`/, '').trim();
-                if(contentBox) contentBox.innerHTML = marked.parse(cleanText);
-                
-                if (mermaidContainer) {
-                    mermaidContainer.style.display = 'block';
-                    mermaidContainer.innerHTML = '<div class="mermaid">' + mermaidCode + '</div>';
-                    mermaid.init(undefined, document.querySelectorAll('.mermaid'));
-                }
-            }
-        }
-
-        document.getElementById('ai-loading').style.display = 'none';
         return fullText;
-
     } catch (e) {
         alert("حدث خطأ أثناء الاتصال بـ Groq: " + e.message);
         document.getElementById('ai-loading').style.display = 'none';
