@@ -569,45 +569,63 @@ window.switchAITab = tabId => {
 }
 
 // --- AI Streaming Fetch Logic ---
-async function callGeminiAPI(parts) {
-    document.getElementById('ai-loading').style.display = 'block';
-    const outputContainer = document.getElementById('ai-output-container');
-    if (outputContainer) outputContainer.style.display = 'block';
-    
-    const contentBox = document.getElementById('ai-result-content');
-    contentBox.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> جاري التفكير والكتابة...';
-    
-    // Hide mermaid container until done
-    const mermaidContainer = document.getElementById('mermaid-container');
-    if(mermaidContainer) mermaidContainer.style.display = 'none';
+async function callGeminiAPI(parts, modelIndex = 0) {
+    const models = ["gemini-1.5-flash-latest", "gemini-1.5-pro-latest", "gemini-1.5-flash", "gemini-pro", "gemini-1.5-flash-8b"];
+    if (modelIndex >= models.length) {
+        alert("للأسف، لم نتمكن من الوصول لأي نموذج ذكاء اصطناعي متاح حالياً. يرجى التأكد من صلاحية مفتاح API الخاص بك.");
+        document.getElementById("ai-loading").style.display = "none";
+        return null;
+    }
+
+    const currentModel = models[modelIndex];
+
+    if (modelIndex === 0) {
+        document.getElementById("ai-loading").style.display = "block";
+        const outputContainer = document.getElementById("ai-output-container");
+        if (outputContainer) outputContainer.style.display = "block";
+        
+        const contentBox = document.getElementById("ai-result-content");
+        if(contentBox) contentBox.innerHTML = "<i class=\"fa-solid fa-spinner fa-spin\"></i> جاري التفكير واستخراج الإجابة...";
+        
+        const mermaidContainer = document.getElementById("mermaid-container");
+        if(mermaidContainer) mermaidContainer.style.display = "none";
+    }
 
     if (!geminiApiKey) {
-        alert("يرجى إدخال مفتاح API الخاص بك في إعدادات التطبيق أولاً!");
-        document.getElementById('ai-loading').style.display = 'none';
+        alert("برجاء إدخال مفتاح API الخاص بك من إعدادات الذكاء الاصطناعي أولاً!");
+        document.getElementById("ai-loading").style.display = "none";
         return null;
     }
 
     try {
-        const url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:streamGenerateContent?alt=sse&key=" + geminiApiKey;
+        const url = "https://generativelanguage.googleapis.com/v1beta/models/" + currentModel + ":streamGenerateContent?alt=sse&key=" + geminiApiKey;
         const payload = {
             contents: [{ parts: parts }],
             generationConfig: { temperature: 0.7 }
         };
 
         const response = await fetch(url, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify(payload)
         });
 
         if (!response.ok) {
             const err = await response.json();
-            if(response.status === 503 || response.status === 429) {
-                alert("السيرفرات عليها ضغط حالياً أو تم استهلاك الحد الأقصى! جربي مرة تانية بعد ثواني.");
-            } else {
-                alert("حدث خطأ: " + (err.error?.message || response.statusText));
+            const errMsg = err.error?.message || response.statusText;
+            
+            // If the model is not found or unsupported, fallback to the next model automatically
+            if (response.status === 404 || response.status === 400 || errMsg.toLowerCase().includes("not found") || errMsg.toLowerCase().includes("not supported")) {
+                console.warn(currentModel + " failed. Trying next model...");
+                return await callGeminiAPI(parts, modelIndex + 1);
             }
-            document.getElementById('ai-loading').style.display = 'none';
+            
+            if(response.status === 503 || response.status === 429) {
+                alert("السيرفرات عليها ضغط دلوقتي أو تم الوصول للحد الأقصى! جرب تاني كمان دقيقة.");
+            } else {
+                alert("حدث خطأ: " + errMsg);
+            }
+            document.getElementById("ai-loading").style.display = "none";
             return null;
         }
 
