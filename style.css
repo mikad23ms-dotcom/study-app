@@ -393,9 +393,74 @@ textarea { width: 100%; height: 200px; padding: 15px; border-radius: 8px; border
 }
 
 /* 3. Buttons and FAB Glow */
-.btn-primary:hover, .btn-large:hover, .mobile-bottom-nav .fab-inner:hover {
+.btn:hover, .mobile-bottom-nav .fab-inner:hover {
     transform: translateY(-5px) scale(1.05) !important;
     box-shadow: 0 12px 25px rgba(93, 95, 239, 0.6) !important;
+    filter: brightness(1.1);
+}
+.btn:active, .mobile-bottom-nav .fab-inner:active {
+    transform: translateY(2px) scale(0.98) !important;
+    box-shadow: 0 5px 15px rgba(93, 95, 239, 0.4) !important;
+}
+
+/* --- Added Extra Hover Magic & Shimmer Effects --- */
+/* Headers and Titles Hover */
+header h1 {
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: inline-block;
+    cursor: default;
+}
+header h1:hover {
+    transform: scale(1.05) translateY(-3px);
+    color: var(--primary-color);
+    text-shadow: 0 5px 20px rgba(93, 95, 239, 0.5);
+}
+
+/* Sidebar Logo Hover */
+.sidebar .logo {
+    cursor: pointer;
+}
+.sidebar .logo h2, .sidebar .logo i {
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.sidebar .logo:hover h2 {
+    color: var(--primary-color);
+    transform: scale(1.05) translateY(-3px);
+    text-shadow: 0 5px 15px rgba(93, 95, 239, 0.4);
+}
+.sidebar .logo:hover i {
+    color: var(--orange);
+    transform: rotate(15deg) scale(1.2);
+    text-shadow: 0 5px 15px rgba(247, 37, 133, 0.5);
+}
+
+/* Progress Bar Shimmer & Glow */
+.progress-fill {
+    position: relative;
+    overflow: hidden;
+    transition: width 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.progress-fill::after {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 50%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent);
+    animation: shimmer 2s infinite linear;
+}
+@keyframes shimmer {
+    0% { left: -100%; }
+    100% { left: 200%; }
+}
+.progress-bar {
+    transition: all 0.3s ease;
+}
+.progress-bar:hover {
+    transform: scale(1.02);
+    box-shadow: 0 5px 15px rgba(16, 185, 129, 0.4);
+}
+.progress-bar:hover .progress-fill {
+    filter: brightness(1.2);
 }
 
 /* 4. Menu links (Sidebar) inside a beautiful box */
@@ -415,13 +480,13 @@ textarea { width: 100%; height: 200px; padding: 15px; border-radius: 8px; border
     border: 1px solid rgba(0,0,0,0.05) !important;
     box-shadow: 0 4px 6px rgba(0,0,0,0.02) !important;
 }
-.nav-links li:hover {
+.nav-links li:hover, .nav-links li:active {
     background: rgba(93, 95, 239, 0.1) !important;
-    transform: translateY(-3px) translateX(-5px) !important; /* Lift up and slide left */
+    transform: translateY(-4px) !important; /* Lift up and slide left */
     box-shadow: 0 8px 15px rgba(93, 95, 239, 0.15) !important;
     border-color: rgba(93, 95, 239, 0.3) !important;
 }
-[data-theme="dark"] .nav-links li:hover,
+[data-theme="dark"] .nav-links li:hover, [data-theme="dark"] .nav-links li:active,
 [data-theme="dark"] .nav-links li.active {
     background: rgba(93, 95, 239, 0.2) !important;
     box-shadow: 0 8px 20px rgba(93, 95, 239, 0.3) !important;
@@ -432,7 +497,7 @@ textarea { width: 100%; height: 200px; padding: 15px; border-radius: 8px; border
     color: white !important;
     box-shadow: 0 8px 20px rgba(93, 95, 239, 0.4) !important;
     border: none !important;
-    transform: translateX(-2px) !important;
+    transform: translateY(-2px) !important;
 }
 
 /* 5. Mobile Toast Fix */
