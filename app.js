@@ -588,14 +588,11 @@ window.switchAITab = tabId => {
 async function callGeminiAPI(parts) {
     const hasMedia = parts.some(p => p.inlineData);
 
-    if (aiProvider === 'gemini' || hasMedia || !groqApiKey) {
+    if (aiProvider === 'gemini' || !groqApiKey) {
         if (!geminiApiKey) {
             alert("يرجى إدخال مفتاح Google Gemini في إعدادات الذكاء الاصطناعي!");
             document.getElementById('ai-loading').style.display = 'none';
             return null;
-        }
-        if (aiProvider === 'groq' && hasMedia) {
-            alert("Groq لا يدعم قراءة الصور والملفات حالياً. سيتم استخدام Gemini لهذا الطلب.");
         }
         return await callGeminiAPICore(parts);
     } else {
@@ -609,7 +606,27 @@ async function callGeminiAPI(parts) {
 }
 
 async function callGroqAPI(parts) {
-    const textPrompt = parts.map(p => p.text).join('\n');
+    const hasMedia = parts.some(p => p.inlineData);
+    let groqModel = "llama-3.1-8b-instant";
+    let messageContent = [];
+
+    if (hasMedia) {
+        groqModel = "llama-3.2-11b-vision-preview"; // Use Groq Vision for images
+        parts.forEach(p => {
+            if (p.text) {
+                messageContent.push({ type: "text", text: p.text });
+            } else if (p.inlineData) {
+                messageContent.push({ 
+                    type: "image_url", 
+                    image_url: { url: "data:" + p.inlineData.mimeType + ";base64," + p.inlineData.data } 
+                });
+            }
+        });
+    } else {
+        groqModel = "llama3-8b-8192";
+        const textPrompt = parts.map(p => p.text).join('\n');
+        messageContent = textPrompt; // Simple string for text models
+    }
 
     document.getElementById('ai-loading').style.display = 'block';
     const outputContainer = document.getElementById('ai-output-container');
@@ -623,8 +640,8 @@ async function callGroqAPI(parts) {
 
     try {
         const payload = {
-            model: "llama3-8b-8192",
-            messages: [{ role: "user", content: textPrompt }],
+            model: groqModel,
+            messages: [{ role: "user", content: messageContent }],
             temperature: 0.7,
             stream: true
         };
@@ -633,7 +650,7 @@ async function callGroqAPI(parts) {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': Bearer  + groqApiKey
+                'Authorization': "Bearer " + groqApiKey
             },
             body: JSON.stringify(payload)
         });
