@@ -607,7 +607,7 @@ async function callGroqAPI(parts, modelIndex = 0) {
     let messageContent = [];
 
     // Fallback Models List (The Final Solution)
-    const textModels = ["llama-3.2-3b-preview", "llama-3.2-1b-preview", "llama-3.1-8b-instant", "llama-3.1-70b-versatile", "mixtral-8x7b-32768"];
+    const textModels = ["llama-3.3-70b-versatile", "llama-3.1-8b-instant"];
     const visionModels = ["llama-3.2-11b-vision-preview", "llama-3.2-90b-vision-preview"];
     
     const modelsList = hasMedia ? visionModels : textModels;
@@ -670,7 +670,7 @@ async function callGroqAPI(parts, modelIndex = 0) {
             const errMsg = err.error?.message || response.statusText;
             
             // AUTOMATIC FALLBACK LOGIC
-            window.lastGroqError = errMsg;
+            window.lastGroqError = groqModel + ": " + errMsg;
             if (response.status === 404 || response.status === 400 || response.status === 403 || errMsg.toLowerCase().includes("does not exist") || errMsg.toLowerCase().includes("not found")) {
                 console.warn(groqModel + " failed. Trying next Groq model...");
                 return await callGroqAPI(parts, modelIndex + 1);
