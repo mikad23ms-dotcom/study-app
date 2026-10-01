@@ -620,7 +620,7 @@ async function callGroqAPI(parts) {
             }
         });
     } else {
-        groqModel = "llama3-8b-8192";
+        groqModel = "llama-3.1-8b-instant";
         const textPrompt = parts.map(p => p.text).join('\n');
         messageContent = textPrompt; // Simple string for text models
     }
