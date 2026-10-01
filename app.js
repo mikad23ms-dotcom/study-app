@@ -607,7 +607,7 @@ async function callGroqAPI(parts, modelIndex = 0) {
     let messageContent = [];
 
     // Fallback Models List (The Final Solution)
-    const textModels = ["llama-3.1-70b-versatile", "llama-3.1-8b-instant", "llama3-70b-8192", "mixtral-8x7b-32768", "gemma2-9b-it"];
+    const textModels = ["llama-3.2-3b-preview", "llama-3.2-1b-preview", "llama-3.1-8b-instant", "llama-3.1-70b-versatile", "mixtral-8x7b-32768"];
     const visionModels = ["llama-3.2-11b-vision-preview", "llama-3.2-90b-vision-preview"];
     
     const modelsList = hasMedia ? visionModels : textModels;
