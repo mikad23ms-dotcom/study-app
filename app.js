@@ -1282,11 +1282,11 @@ window.generateQuiz = async () => {
                 text += content.items.map(item => item.str).join(' ') + ' ';
             }
         } catch (e) {
-            return alert('خطأ في قراءة الـ PDF: ' + e.message);
+            return alert('حدث خطأ أثناء قراءة الـ PDF: ' + e.message);
         }
     }
     
-    if (!text) return alert('ألصق نص الدرس أو ارفع ملف PDF أولاً!');
+    if (!text) return alert('الرجاء كتابة نص أو رفع ملف PDF أولاً!');
     if (text.length > 20000) text = text.substring(0, 20000);
     
     const quizType = document.getElementById('quiz-type').value;
@@ -1294,23 +1294,23 @@ window.generateQuiz = async () => {
     
     const typeMap = {
         'mcq': 'اختيار من متعدد (4 خيارات لكل سؤال)',
-        'truefalse': 'صح وغلط',
-        'fill': 'أكمل الفراغات',
-        'mixed': 'خليط من اختيار من متعدد وصح وغلط وأكمل الفراغات'
+        'truefalse': 'صح وخطأ',
+        'fill': 'إكمال الفراغات',
+        'mixed': 'مزيج من الأنواع (بعضها اختيار وبعضها صح وخطأ)'
     };
     
     document.getElementById('quiz-loading').style.display = 'block';
     document.getElementById('quiz-container').style.display = 'none';
     document.getElementById('quiz-result').style.display = 'none';
     
-    const prompt = `أنت مُعلم ذكي. بناءً على النص التالي، أنشئ ${quizCount} سؤال من نوع: ${typeMap[quizType]}.
+    const prompt = بناءً على النص التالي، قم بتوليد عدد  سؤال من نوع: .
 
-أجب بصيغة JSON فقط بدون أي نص إضافي. الصيغة:
+قم بإرجاع JSON فقط بدون أي نصوص أخرى. الهيكل:
 [
   {
     "type": "mcq",
     "question": "نص السؤال",
-    "options": ["خيار أ", "خيار ب", "خيار ج", "خيار د"],
+    "options": ["خيار 1", "خيار 2", "خيار 3", "خيار 4"],
     "correct": 0
   },
   {
@@ -1320,20 +1320,20 @@ window.generateQuiz = async () => {
   },
   {
     "type": "fill",
-    "question": "الجملة مع _____ للفراغ",
+    "question": "السؤال مع _____ كفراغ",
     "correct": "الإجابة الصحيحة"
   }
 ]
 
 النص:
-${text}`;
+;
     
     try {
         const res = await callGeminiAPI([{ text: prompt }]);
         document.getElementById("quiz-loading").style.display = "none";
         if (res) {
             try {
-                const cleaned = res.replace(/```json/gi, "").replace(/```/g, "").trim();
+                const cleaned = res.replace(/`json/gi, "").replace(/`/g, "").trim();
                 quizData = JSON.parse(cleaned);
                 renderQuiz();
             } catch(e) {
@@ -1346,7 +1346,7 @@ ${text}`;
     }
 };
 
-﻿document.getElementById('ai-schedule-form').onsubmit = async (e) => {
+document.getElementById('ai-schedule-form').onsubmit = async (e) => {
     e.preventDefault();
     const timePref = document.getElementById('ai-schedule-time').value;
     const hours = document.getElementById('ai-schedule-hours').value;
@@ -1354,42 +1354,34 @@ ${text}`;
     
     document.getElementById('ai-schedule-loading').style.display = 'block';
     
-    const prompt = أنت خبير تنظيم وقت ودراسة.
-أحتاج إلى جدول مذاكرة يومي ذكي بالمعطيات التالية:
-1. الوقت المفضل للمذاكرة: 
-2. إجمالي ساعات المذاكرة المستهدفة:  ساعة
-3. المواد المراد مذاكرتها: 
-
-المطلوب:
-قسم لي الوقت بتقنية البومودورو (Time-blocking) وتوزيع فترات الراحة بشكل ذكي. قدم الجدول مفصلاً.
-اكتب الجدول بشكل مريح للعين باستخدام تنسيقات Markdown (بدون أي رسومات بيانية).
-أضف نصيحة تحفيزية في البداية ونصيحة للمراجعة في النهاية.;
+    const prompt = أنت خبير تنظيم وقت ودراسة.\nأحتاج إلى جدول مذاكرة يومي ذكي بالمعطيات التالية:\n1. الوقت المفضل للمذاكرة: \n2. إجمالي ساعات المذاكرة المستهدفة:  ساعة\n3. المواد المراد مذاكرتها: \n\nالمطلوب:\nقسم لي الوقت بتقنية البومودورو (Time-blocking) وتوزيع فترات الراحة بشكل ذكي. قدم الجدول مفصلاً.\nاكتب الجدول بشكل مريح للعين باستخدام تنسيقات Markdown (بدون أي رسومات بيانية).\nأضف نصيحة تحفيزية في البداية ونصيحة للمراجعة في النهاية.;
 
     try {
         const res = await callGeminiAPI([{ text: prompt }]);
-        document.getElementById("ai-schedule-loading").style.display = "none";
-        closeModal("ai-schedule-modal");
+        document.getElementById('ai-schedule-loading').style.display = 'none';
+        closeModal('ai-schedule-modal');
         
         if (res) {
-            const resultContainer = document.getElementById("schedule-ai-result");
-            const resultContent = document.getElementById("schedule-ai-content");
+            const resultContainer = document.getElementById('schedule-ai-result');
+            const resultContent = document.getElementById('schedule-ai-content');
             if (resultContainer && resultContent) {
-                resultContainer.style.display = "block";
+                resultContainer.style.display = 'block';
                 resultContent.innerHTML = marked.parse(res);
-                resultContainer.scrollIntoView({ behavior: "smooth", block: "start" });
+                resultContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
             } else {
-                document.querySelectorAll(".nav-links li").forEach(n => n.classList.remove("active"));
-                document.querySelectorAll(".page").forEach(p => p.classList.remove("active-page"));
-                document.querySelector('[data-page="ai-assistant"]').classList.add("active");
-                document.getElementById("ai-assistant").classList.add("active-page");
+                document.querySelectorAll('.nav-links li').forEach(n => n.classList.remove('active'));
+                document.querySelectorAll('.page').forEach(p => p.classList.remove('active-page'));
+                document.querySelector('[data-page="ai-assistant"]').classList.add('active');
+                document.getElementById('ai-assistant').classList.add('active-page');
                 processAIOutput(res);
             }
         }
     } catch(e) {
-        document.getElementById("ai-schedule-loading").style.display = "none";
-        alert("حدث خطأ أثناء إنشاء الجدول. حاول مرة أخرى!");
+        document.getElementById('ai-schedule-loading').style.display = 'none';
+        alert('حدث خطأ أثناء إنشاء الجدول. حاول مرة أخرى!');
     }
 };
+
 mermaid.initialize({ startOnLoad: false, theme: 'default', fontFamily: 'Tajawal' });
 renderAll();
 
