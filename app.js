@@ -702,7 +702,7 @@ async function callGroqAPI(parts) {
 
 // --- AI Streaming Fetch Logic ---
 async function callGeminiAPICore(parts, modelIndex = 0) {
-    const models = ["gemini-1.5-flash-latest", "gemini-1.5-pro-latest", "gemini-1.5-flash", "gemini-pro", "gemini-1.5-flash-8b"];
+    const models = ["gemini-1.5-flash", "gemini-1.5-pro", "gemini-1.5-flash-latest", "gemini-1.0-pro"];
     if (modelIndex >= models.length) {
         alert("للأسف، لم نتمكن من الوصول لأي نموذج ذكاء اصطناعي متاح حالياً. يرجى التأكد من صلاحية مفتاح API الخاص بك.");
         document.getElementById("ai-loading").style.display = "none";
@@ -749,7 +749,7 @@ async function callGeminiAPICore(parts, modelIndex = 0) {
             // If the model is not found or unsupported, fallback to the next model automatically
             if (response.status === 404 || response.status === 400 || errMsg.toLowerCase().includes("not found") || errMsg.toLowerCase().includes("not supported")) {
                 console.warn(currentModel + " failed. Trying next model...");
-                return await callGeminiAPI(parts, modelIndex + 1);
+                return await callGeminiAPICore(parts, modelIndex + 1);
             }
             
             if(response.status === 503 || response.status === 429) {
