@@ -613,7 +613,7 @@ async function callGroqAPI(parts, modelIndex = 0) {
     const modelsList = hasMedia ? visionModels : textModels;
 
     if (modelIndex >= modelsList.length) {
-        alert("عذراً، جميع نماذج Groq غير متاحة أو مفتاحك غير صالح. يرجى تجربة المفتاح مرة أخرى أو استخدام Gemini.");
+        alert("عذراً، فشلت جميع نماذج Groq. آخر خطأ كان: " + (window.lastGroqError || "غير معروف") + "\n\nتأكدي إنك مش مشغلة VPN بيتعارض مع Groq.");
         document.getElementById('ai-loading').style.display = 'none';
         return null;
     }
@@ -670,6 +670,7 @@ async function callGroqAPI(parts, modelIndex = 0) {
             const errMsg = err.error?.message || response.statusText;
             
             // AUTOMATIC FALLBACK LOGIC
+            window.lastGroqError = errMsg;
             if (response.status === 404 || response.status === 400 || response.status === 403 || errMsg.toLowerCase().includes("does not exist") || errMsg.toLowerCase().includes("not found")) {
                 console.warn(groqModel + " failed. Trying next Groq model...");
                 return await callGroqAPI(parts, modelIndex + 1);
