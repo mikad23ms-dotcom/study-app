@@ -1223,20 +1223,38 @@ window.generateBacklogPlan = async (id) => {
     if (!b) return;
     
     const remaining = b.totalLectures - b.completedLectures;
-    const deadlineInfo = b.deadline ? `الموعد النهائي: ${b.deadline}` : 'لا يوجد موعد نهائي محدد';
+    const deadlineInfo = b.deadline ? `بموعد نهائي: ${b.deadline}` : `من غير موعد نهائي محدد`;
     
-    const prompt = `أنت مخطط دراسي ذكي. طالب عنده مادة "${b.subject}" متراكم عليه ${remaining} محاضرة، كل محاضرة حوالي ${b.lectureDuration} دقيقة. ${deadlineInfo}.
+    const prompt = `أنت خبير جدولة وقت. يوجد مادة باسم "${b.subject}" متبقي منها ${remaining} محاضرات وكل محاضرة مدتها حوالي ${b.lectureDuration} دقيقة. ${deadlineInfo}.
     
-اعمله خطة يومية مفصلة ومنظمة للمّ المتراكم ده بشكل واقعي (مش مرهق)، مع نصائح للتركيز وكيف يقسم وقته. اكتب الخطة بالعامية المصرية بشكل محفز وودود.`;
+كيف يمكنني تقسيم ومذاكرة هذه المحاضرات في الأيام القادمة (مع خطة يومية)؟ مع إضافة نصائح سريعة لعدم الملل. اجعل الإجابة بالتفصيل ومنظمة بشكل مريح للعين.`;
     
+    const resultContainer = document.getElementById("backlog-ai-result");
+    const resultContent = document.getElementById("backlog-ai-content");
+    
+    if (resultContainer && resultContent) {
+        resultContainer.style.display = "block";
+        resultContent.innerHTML = "<div style=\"text-align:center; padding:30px;\"><i class=\"fa-solid fa-spinner fa-spin\" style=\"font-size:2rem; color:var(--primary-color);\"></i><p style=\"margin-top:10px;\">جاري إعداد الخطة الذكية للمادة...</p></div>";
+        resultContainer.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
     const res = await callGeminiAPI([{ text: prompt }]);
+    
     if (res) {
-        // Navigate to AI page to show output
-        document.querySelectorAll('.nav-links li').forEach(n => n.classList.remove('active'));
-        document.querySelectorAll('.page').forEach(p => p.classList.remove('active-page'));
-        document.querySelector('[data-page="ai-assistant"]').classList.add('active');
-        document.getElementById('ai-assistant').classList.add('active-page');
-        processAIOutput(res);
+        if (resultContainer && resultContent) {
+            resultContent.innerHTML = marked.parse(res);
+        } else {
+            // Fallback just in case
+            document.querySelectorAll(".nav-links li").forEach(n => n.classList.remove("active"));
+            document.querySelectorAll(".page").forEach(p => p.classList.remove("active-page"));
+            document.querySelector("[data-page=\"ai-assistant\"]").classList.add("active");
+            document.getElementById("ai-assistant").classList.add("active-page");
+            processAIOutput(res);
+        }
+    } else {
+        if (resultContainer && resultContent) {
+            resultContent.innerHTML = "<div style=\"color:var(--danger); text-align:center; padding:20px;\">فشل إنشاء الخطة. الرجاء المحاولة مرة أخرى أو التأكد من المفتاح.</div>";
+        }
     }
 };
 
@@ -1312,373 +1330,22 @@ ${text}`;
     
     try {
         const res = await callGeminiAPI([{ text: prompt }]);
-        document.getElementById('quiz-loading').style.display = 'none';
-        
-        if (!res) return;
-        
-        // Extract JSON from response
-        let jsonStr = res;
-        const jsonMatch = res.match(/\[[\s\S]*\]/);
-        if (jsonMatch) jsonStr = jsonMatch[0];
-        
-        quizData = JSON.parse(jsonStr);
-        quizAnswers = {};
-        renderQuiz();
-    } catch (e) {
-        document.getElementById('quiz-loading').style.display = 'none';
-        alert('حصل خطأ في تجهيز الأسئلة. جرب مرة تانية!');
-        console.error(e);
-    }
-};
-
-function renderQuiz() {
-    const container = document.getElementById('quiz-container');
-    container.style.display = 'block';
-    container.innerHTML = '';
-    
-    quizData.forEach((q, i) => {
-        let qHtml = `<div class="card" style="margin-bottom:15px; border-right:4px solid var(--primary-color);">
-            <h4 style="margin-bottom:12px;"><span style="background:var(--primary-color); color:white; padding:3px 10px; border-radius:20px; margin-left:8px;">${i + 1}</span> ${q.question}</h4>`;
-        
-        if (q.type === 'mcq' && q.options) {
-            q.options.forEach((opt, j) => {
-                qHtml += `<label style="display:block; padding:10px; margin:5px 0; background:var(--bg-color); border-radius:8px; cursor:pointer; border:2px solid transparent;" 
-                    id="q${i}_opt${j}"
-                    onclick="selectQuizAnswer(${i}, ${j}, 'mcq')">
-                    <input type="radio" name="q${i}" value="${j}" style="margin-left:8px;"> ${opt}
-                </label>`;
-            });
-        } else if (q.type === 'truefalse') {
-            qHtml += `
-                <label style="display:inline-block; padding:10px 25px; margin:5px; background:var(--bg-color); border-radius:8px; cursor:pointer; border:2px solid transparent;"
-                    id="q${i}_opttrue" onclick="selectQuizAnswer(${i}, true, 'truefalse')">
-                    <input type="radio" name="q${i}" value="true" style="margin-left:5px;"> ✅ صح
-                </label>
-                <label style="display:inline-block; padding:10px 25px; margin:5px; background:var(--bg-color); border-radius:8px; cursor:pointer; border:2px solid transparent;"
-                    id="q${i}_optfalse" onclick="selectQuizAnswer(${i}, false, 'truefalse')">
-                    <input type="radio" name="q${i}" value="false" style="margin-left:5px;"> ❌ غلط
-                </label>`;
-        } else if (q.type === 'fill') {
-            qHtml += `<input type="text" id="q${i}_fill" class="search-input" placeholder="اكتب الإجابة..." style="width:100%; margin-top:10px;" oninput="quizAnswers[${i}] = this.value">`;
-        }
-        
-        qHtml += `</div>`;
-        container.innerHTML += qHtml;
-    });
-    
-    container.innerHTML += `<button class="btn btn-primary btn-large" onclick="submitQuiz()" style="width:100%; font-size:1.2rem; margin-top:10px;">
-        <i class="fa-solid fa-paper-plane"></i> تسليم الإجابات
-    </button>`;
-}
-
-window.selectQuizAnswer = (qIndex, value, type) => {
-    quizAnswers[qIndex] = value;
-    // Visual highlight
-    const q = quizData[qIndex];
-    if (type === 'mcq' && q.options) {
-        q.options.forEach((_, j) => {
-            document.getElementById(`q${qIndex}_opt${j}`).style.borderColor = (j === value) ? 'var(--primary-color)' : 'transparent';
-        });
-    } else if (type === 'truefalse') {
-        document.getElementById(`q${qIndex}_opttrue`).style.borderColor = (value === true) ? 'var(--primary-color)' : 'transparent';
-        document.getElementById(`q${qIndex}_optfalse`).style.borderColor = (value === false) ? 'var(--primary-color)' : 'transparent';
-    }
-};
-
-window.submitQuiz = () => {
-    let correct = 0;
-    
-    quizData.forEach((q, i) => {
-        const userAns = quizAnswers[i];
-        let isCorrect = false;
-        
-        if (q.type === 'mcq') {
-            isCorrect = (userAns === q.correct);
-        } else if (q.type === 'truefalse') {
-            isCorrect = (userAns === q.correct);
-        } else if (q.type === 'fill') {
-            isCorrect = userAns && q.correct && userAns.trim().toLowerCase() === q.correct.trim().toLowerCase();
-        }
-        
-        if (isCorrect) correct++;
-    });
-    
-    const total = quizData.length;
-    const pct = Math.round((correct / total) * 100);
-    const emoji = pct >= 80 ? '🏆' : (pct >= 60 ? '👏' : (pct >= 40 ? '💪' : '📚'));
-    const feedback = pct >= 80 ? 'ممتاز! أنت فاهم المادة كويس جداً!' :
-                     pct >= 60 ? 'كويس! بس تحتاج تراجع شوية كمان.' :
-                     pct >= 40 ? 'محتاج تذاكر أكتر شوية. حاول تاني!' :
-                     'لازم تراجع الدرس كويس وتحاول تاني!';
-    
-    document.getElementById('quiz-score').textContent = `${emoji} ${correct} من ${total} (${pct}%)`;
-    document.getElementById('quiz-feedback').textContent = feedback;
-    document.getElementById('quiz-result').style.display = 'block';
-    document.getElementById('quiz-container').style.display = 'none';
-};
-
-
-// --- Focus Sounds Logic ---
-let currentSound = null;
-window.toggleSound = (soundId) => {
-    // Stop all sounds first
-    stopAllSounds();
-    
-    const audio = document.getElementById(`audio-${soundId}`);
-    if(currentSound === soundId) {
-        currentSound = null; // Just toggle off
-    } else {
-        if(audio) {
-            audio.volume = 0.5;
-            audio.play().catch(e => console.log('Audio play error:', e));
-            currentSound = soundId;
-            document.getElementById(`btn-sound-${soundId}`).style.borderColor = 'var(--primary-color)';
-            document.getElementById(`btn-sound-${soundId}`).style.color = 'var(--primary-color)';
-        }
-    }
-};
-
-window.stopAllSounds = () => {
-    ['rain', 'cafe', 'lofi'].forEach(id => {
-        const a = document.getElementById(`audio-${id}`);
-        if(a) { a.pause(); a.currentTime = 0; }
-        const btn = document.getElementById(`btn-sound-${id}`);
-        if(btn) {
-            btn.style.borderColor = 'var(--border-color)';
-            btn.style.color = 'var(--text-main)';
-        }
-    });
-    currentSound = null;
-};
-
-
-// --- Statistics Tracker ---
-let studyStats = JSON.parse(localStorage.getItem('study_stats')) || {
-    streak: 0,
-    lastLogin: null,
-    totalMinutes: 0,
-    completedTasks: 0
-};
-
-function updateStatsDisplay() {
-    const hours = (studyStats.totalMinutes / 60).toFixed(1);
-    document.getElementById('stat-streak').innerText = studyStats.streak;
-    document.getElementById('stat-hours').innerText = hours;
-    document.getElementById('stat-tasks').innerText = studyStats.completedTasks;
-    
-    // Level Logic
-    let level = 'مبتدئ طموح 🌱';
-    const score = (studyStats.totalMinutes / 60) * 10 + studyStats.completedTasks * 5;
-    if(score > 500) level = 'أسطورة المذاكرة 👑';
-    else if(score > 300) level = 'عبقري الجامعة 🎓';
-    else if(score > 150) level = 'طالب مجتهد 🔥';
-    else if(score > 50) level = 'بطل التركيز ⏳';
-    
-    document.getElementById('stat-level').innerText = level;
-}
-
-window.addStudyTime = (mins) => {
-    studyStats.totalMinutes += mins;
-    localStorage.setItem('study_stats', JSON.stringify(studyStats));
-    updateStatsDisplay();
-};
-
-window.addCompletedTask = () => {
-    studyStats.completedTasks += 1;
-    localStorage.setItem('study_stats', JSON.stringify(studyStats));
-    updateStatsDisplay();
-};
-
-function checkDailyStreak() {
-    const todayStr = new Date().toISOString().split('T')[0];
-    if (studyStats.lastLogin !== todayStr) {
-        if (studyStats.lastLogin) {
-            const lastDate = new Date(studyStats.lastLogin);
-            const today = new Date(todayStr);
-            const diffDays = Math.floor((today - lastDate) / (1000 * 60 * 60 * 24));
-            
-            if (diffDays === 1) {
-                studyStats.streak += 1; // Consecutive day
-            } else if (diffDays > 1) {
-                studyStats.streak = 1; // Broken streak, reset
-            }
-        } else {
-            studyStats.streak = 1; // First time
-        }
-        studyStats.lastLogin = todayStr;
-        localStorage.setItem('study_stats', JSON.stringify(studyStats));
-    }
-}
-checkDailyStreak();
-setTimeout(updateStatsDisplay, 500);
-
-
-// --- GPA Calculator Logic ---
-let gpaCourses = JSON.parse(localStorage.getItem('study_gpa_courses')) || [];
-
-function saveGPACourses() {
-    localStorage.setItem('study_gpa_courses', JSON.stringify(gpaCourses));
-    renderGPACourses();
-}
-
-window.addGPACourse = () => {
-    gpaCourses.push({
-        id: Date.now().toString(),
-        name: `مادة ${gpaCourses.length + 1}`,
-        credits: 3,
-        grade: 'A'
-    });
-    saveGPACourses();
-};
-
-window.updateGPACourse = (id, field, value) => {
-    const c = gpaCourses.find(x => x.id === id);
-    if(c) {
-        c[field] = field === 'credits' ? parseFloat(value) : value;
-        saveGPACourses();
-    }
-};
-
-window.deleteGPACourse = (id) => {
-    gpaCourses = gpaCourses.filter(x => x.id !== id);
-    saveGPACourses();
-};
-
-function renderGPACourses() {
-    const list = document.getElementById('gpa-courses-list');
-    list.innerHTML = '';
-    
-    gpaCourses.forEach(c => {
-        list.innerHTML += `
-            <div style="display: grid; grid-template-columns: 2fr 1fr 1fr auto; gap: 10px; margin-bottom: 10px; align-items: center;">
-                <input type="text" class="search-input" value="${c.name}" onchange="updateGPACourse('${c.id}', 'name', this.value)">
-                <input type="number" class="search-input" value="${c.credits}" min="1" max="10" onchange="updateGPACourse('${c.id}', 'credits', this.value)">
-                <select class="search-input" onchange="updateGPACourse('${c.id}', 'grade', this.value)">
-                    <option value="A+" ${c.grade==='A+'?'selected':''}>A+</option>
-                    <option value="A" ${c.grade==='A'?'selected':''}>A</option>
-                    <option value="B+" ${c.grade==='B+'?'selected':''}>B+</option>
-                    <option value="B" ${c.grade==='B'?'selected':''}>B</option>
-                    <option value="C+" ${c.grade==='C+'?'selected':''}>C+</option>
-                    <option value="C" ${c.grade==='C'?'selected':''}>C</option>
-                    <option value="D+" ${c.grade==='D+'?'selected':''}>D+</option>
-                    <option value="D" ${c.grade==='D'?'selected':''}>D</option>
-                    <option value="F" ${c.grade==='F'?'selected':''}>F</option>
-                </select>
-                <button onclick="deleteGPACourse('${c.id}')" style="background:none; border:none; color:var(--danger); cursor:pointer;"><i class="fa-solid fa-trash"></i></button>
-            </div>
-        `;
-    });
-    calculateGPA();
-}
-
-window.calculateGPA = () => {
-    const scale = parseInt(document.getElementById('gpa-scale').value);
-    
-    // Grade points mapping
-    const gradePoints4 = { 'A+': 4.0, 'A': 3.7, 'B+': 3.3, 'B': 3.0, 'C+': 2.7, 'C': 2.4, 'D+': 2.2, 'D': 2.0, 'F': 0.0 };
-    const gradePoints5 = { 'A+': 5.0, 'A': 4.75, 'B+': 4.5, 'B': 4.0, 'C+': 3.5, 'C': 3.0, 'D+': 2.5, 'D': 2.0, 'F': 0.0 };
-    
-    const pointsMap = scale === 5 ? gradePoints5 : gradePoints4;
-    
-    let totalPoints = 0;
-    let totalCredits = 0;
-    
-    gpaCourses.forEach(c => {
-        totalPoints += (pointsMap[c.grade] * c.credits);
-        totalCredits += c.credits;
-    });
-    
-    const gpa = totalCredits > 0 ? (totalPoints / totalCredits).toFixed(2) : "0.00";
-    document.getElementById('gpa-result').innerText = gpa;
-};
-setTimeout(renderGPACourses, 500);
-
-
-
-// --- Quran Wird Logic ---
-let quranData = JSON.parse(localStorage.getItem('study_quran')) || {
-    goal: '',
-    doneCount: 0,
-    lastDate: ''
-};
-
-function initQuran() {
-    const todayStr = new Date().toISOString().split('T')[0];
-    if(quranData.lastDate !== todayStr) {
-        quranData.doneCount = 0;
-        quranData.lastDate = todayStr;
-        localStorage.setItem('study_quran', JSON.stringify(quranData));
-    }
-    document.getElementById('quran-goal-display').innerText = quranData.goal || 'لم يتم التحديد';
-    document.getElementById('quran-done-display').innerText = quranData.doneCount;
-}
-
-document.getElementById('quran-form').onsubmit = (e) => {
-    e.preventDefault();
-    const selectVal = document.getElementById('quran-goal-select').value;
-    const customVal = document.getElementById('custom-quran-goal').value;
-    quranData.goal = selectVal === 'custom' ? customVal : selectVal;
-    localStorage.setItem('study_quran', JSON.stringify(quranData));
-    initQuran();
-    closeModal('quran-modal');
-};
-
-window.updateQuranWird = (val) => {
-    quranData.doneCount = Math.max(0, quranData.doneCount + val);
-    localStorage.setItem('study_quran', JSON.stringify(quranData));
-    initQuran();
-};
-
-window.completeQuranWird = () => {
-    document.getElementById('btn-complete-quran').innerHTML = '<i class="fa-solid fa-check-double"></i> بارك الله فيك';
-    setTimeout(() => {
-        document.getElementById('btn-complete-quran').innerHTML = '<i class="fa-solid fa-check"></i> أتممت الورد';
-    }, 3000);
-    // Send a gentle visual confetti or toast? Let's just use alert for now.
-    alert('تقبل الله طاعتك! استمر على هذا الورد يومياً 🤍');
-};
-
-initQuran();
-
-// --- Prayer Monitor (Auto-Pause) ---
-let notifiedPrayers = {}; // Track which prayers we already notified today
-
-setInterval(() => {
-    if(window.dailyPrayers) {
-        const now = new Date();
-        const currentHHMM = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
-        const todayStr = now.toISOString().split('T')[0];
-        
-        // Reset notified prayers on new day
-        if(notifiedPrayers.date !== todayStr) {
-            notifiedPrayers = { date: todayStr };
-        }
-        
-        for(const [name, time] of Object.entries(window.dailyPrayers)) {
-            if(time === currentHHMM && !notifiedPrayers[name]) {
-                notifiedPrayers[name] = true;
-                
-                // Show Notification
-                if ('Notification' in window && Notification.permission === 'granted') {
-                    new Notification('وقت الصلاة! 🕌', {
-                        body: `حان الآن موعد صلاة ${name}. قوم صلي وارجع كمل مذاكرة!`,
-                        icon: 'https://cdn-icons-png.flaticon.com/512/3429/3429930.png'
-                    });
-                } else {
-                    alert(`🕌 حان الآن موعد صلاة ${name}. قوم صلي وارجع كمل!`);
-                }
-                
-                // Auto Pause Pomodoro
-                if(typeof isRunning !== 'undefined' && isRunning) {
-                    toggleTimer(); // This will pause it because it's running
-                    alert('تم إيقاف مؤقت المذاكرة تلقائياً بسبب وقت الصلاة. تقبل الله!');
-                }
+        document.getElementById("quiz-loading").style.display = "none";
+        if (res) {
+            try {
+                const cleaned = res.replace(/```json/gi, "").replace(/```/g, "").trim();
+                quizData = JSON.parse(cleaned);
+                renderQuiz();
+            } catch(e) {
+                alert("فشل الذكاء الاصطناعي في تنسيق الاختبار. حاول مرة أخرى.");
             }
         }
+    } catch(e) {
+        document.getElementById("quiz-loading").style.display = "none";
+        alert("حدث خطأ أثناء الاتصال بالذكاء الاصطناعي.");
     }
-}, 30000); // Check every 30 seconds
+};
 
-// --- AI Schedule Generator ---
 document.getElementById('ai-schedule-form').onsubmit = async (e) => {
     e.preventDefault();
     const timePref = document.getElementById('ai-schedule-time').value;
@@ -1687,35 +1354,39 @@ document.getElementById('ai-schedule-form').onsubmit = async (e) => {
     
     document.getElementById('ai-schedule-loading').style.display = 'block';
     
-    const prompt = `أنت مخطط دراسي خبير للطلاب.
-الطالب طلب جدول مذاكرة لليوم بهذه المواصفات:
-1. الوقت المفضل للمذاكرة: ${timePref}
-2. إجمالي ساعات المذاكرة المطلوبة: ${hours} ساعات
-3. المواد المراد مذاكرتها: ${subjectsInput}
-
+    const prompt = \أنت خبير تنظيم وقت ودراسة.
+أحتاج إلى جدول مذاكرة يومي ذكي بالمعطيات التالية:
+1. الوقت المفضل للمذاكرة: 2. إجمالي ساعات المذاكرة المستهدفة: \ ساعة
+3. المواد المراد مذاكرتها: 
 المطلوب:
-اكتب له جدول مقسم بالساعات (Time-blocking) بطريقة واقعية جداً، يتخلله فترات راحة (Pomodoro)، ووقت للصلاة والأكل.
-اجعل الجدول يبدو جميلاً ومنظماً باستخدام Markdown (جداول أو قوائم منسقة).
-اكتب رسالة تشجيعية في النهاية بالعامية المصرية.`;
+قسم لي الوقت بتقنية البومودورو (Time-blocking) وتوزيع فترات الراحة بشكل ذكي. قدم الجدول مفصلاً.
+اكتب الجدول بشكل مريح للعين باستخدام تنسيقات Markdown (بدون أي رسومات بيانية).
+أضف نصيحة تحفيزية في البداية ونصيحة للمراجعة في النهاية.\;
 
     try {
         const res = await callGeminiAPI([{ text: prompt }]);
-        document.getElementById('ai-schedule-loading').style.display = 'none';
-        closeModal('ai-schedule-modal');
+        document.getElementById("ai-schedule-loading").style.display = "none";
+        closeModal("ai-schedule-modal");
         
         if (res) {
-            // Navigate to AI page to show output
-            document.querySelectorAll('.nav-links li').forEach(n => n.classList.remove('active'));
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active-page'));
-            document.querySelector('[data-page="ai-assistant"]').classList.add('active');
-            document.getElementById('ai-assistant').classList.add('active-page');
-            processAIOutput(res);
+            const resultContainer = document.getElementById("schedule-ai-result");
+            const resultContent = document.getElementById("schedule-ai-content");
+            if (resultContainer && resultContent) {
+                resultContainer.style.display = "block";
+                resultContent.innerHTML = marked.parse(res);
+                resultContainer.scrollIntoView({ behavior: "smooth", block: "start" });
+            } else {
+                document.querySelectorAll(".nav-links li").forEach(n => n.classList.remove("active"));
+                document.querySelectorAll(".page").forEach(p => p.classList.remove("active-page"));
+                document.querySelector("[data-page=\"ai-assistant\"]").classList.add("active");
+                document.getElementById("ai-assistant").classList.add("active-page");
+                processAIOutput(res);
+            }
         }
     } catch(e) {
-        document.getElementById('ai-schedule-loading').style.display = 'none';
-        alert('حدث خطأ أثناء إنشاء الجدول. حاول مرة أخرى!');
-    }
-};
+        document.getElementById("ai-schedule-loading").style.display = "none";
+        alert("حدث خطأ أثناء إنشاء الجدول. حاول مرة أخرى!");
+    }};
 
 mermaid.initialize({ startOnLoad: false, theme: 'default', fontFamily: 'Tajawal' });
 renderAll();

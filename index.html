@@ -393,6 +393,14 @@
                         <button class="btn" style="background: var(--orange); color: white;" onclick="openModal('ai-schedule-modal')"><i class="fa-solid fa-wand-magic-sparkles"></i> جدول الذكاء الاصطناعي</button>
                     </div>
                 </header>
+                <!-- AI Result Container for Schedule -->
+                <div id="schedule-ai-result" style="display:none; margin-bottom:20px; background:var(--bg-color); padding:20px; border-radius:12px; border:1px solid var(--border-color); box-shadow:0 4px 15px rgba(0,0,0,0.1);">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px; border-bottom:1px solid var(--border-color); padding-bottom:10px;">
+                        <h3 style="color:var(--orange); margin:0;"><i class="fa-solid fa-wand-magic-sparkles"></i> جدول المذاكرة الذكي</h3>
+                        <button onclick="document.getElementById('schedule-ai-result').style.display='none'" class="btn" style="background:var(--danger); color:white; padding:5px 10px;"><i class="fa-solid fa-xmark"></i> إغلاق</button>
+                    </div>
+                    <div id="schedule-ai-content" style="line-height:1.8; color:var(--text-main);"></div>
+                </div>
                 <div class="days-grid" id="schedule-grid"></div>
             </section>
 
@@ -644,6 +652,15 @@
                     <i class="fa-solid fa-face-smile-beam" style="font-size:3rem; margin-bottom:15px; color:var(--success);"></i>
                     <h3>مفيش حاجة متراكمة! 🎉</h3>
                     <p>لو عندك مواد متراكمة، ضيفها وهنساعدك تلمها!</p>
+                </div>
+            
+                <!-- AI Result Container for Backlog -->
+                <div id="backlog-ai-result" style="display:none; margin-top:20px; background:var(--bg-color); padding:20px; border-radius:12px; border:1px solid var(--border-color); box-shadow:0 4px 15px rgba(0,0,0,0.1);">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px; border-bottom:1px solid var(--border-color); padding-bottom:10px;">
+                        <h3 style="color:var(--primary-color); margin:0;"><i class="fa-solid fa-wand-magic-sparkles"></i> الخطة الذكية المقترحة</h3>
+                        <button onclick="document.getElementById('backlog-ai-result').style.display='none'" class="btn" style="background:var(--danger); color:white; padding:5px 10px;"><i class="fa-solid fa-xmark"></i> إغلاق</button>
+                    </div>
+                    <div id="backlog-ai-content" style="line-height:1.8; color:var(--text-main);"></div>
                 </div>
             </section>
 
