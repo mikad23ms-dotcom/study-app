@@ -2281,6 +2281,7 @@ window.loadTeacherStudents = async () => {
     listElement.innerHTML = '<li class="list-item" style="justify-content:center; color:var(--text-muted);"><i class="fa-solid fa-spinner fa-spin"></i> جاري جلب الطلاب...</li>';
     
     try {
+        if (!db) throw new Error("Database not connected");
         const snapshot = await db.collection('teachers').doc(tCode).collection('students').orderBy('joinedAt', 'desc').get();
         
         if (snapshot.empty) {
@@ -2299,12 +2300,12 @@ window.loadTeacherStudents = async () => {
             li.className = 'list-item';
             li.style.borderRight = '4px solid var(--primary-color)';
             
-            li.innerHTML = 
+                        li.innerHTML = `
                 <div class="task-content">
-                    <div class="task-text" style="font-weight:bold; font-size:1.1rem;"><i class="fa-solid fa-user-graduate text-primary"></i>  + student.name + </div>
-                    <div class="task-meta" style="margin-top:5px;">المرحلة:  + student.stage +  | التخصص:  + student.spec + </div>
+                    <div class="task-text" style="font-weight:bold; font-size:1.1rem;"><i class="fa-solid fa-user-graduate text-primary"></i> ` + student.name + `</div>
+                    <div class="task-meta" style="margin-top:5px;">المرحلة: ` + student.stage + ` | التخصص: ` + student.spec + `</div>
                 </div>
-            ;
+            `;
             listElement.appendChild(li);
         });
         
