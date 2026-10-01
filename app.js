@@ -568,7 +568,10 @@ window.toggleTask = id => {
 
 // --- AI Assistant Logic ---
 function checkApiKey() {
-    if(geminiApiKey) { document.getElementById('api-key-alert').style.display = 'none'; }
+    // DO NOTHING! Keep the settings panel always visible so users can switch providers!
+    const alertBox = document.getElementById("api-key-alert");
+    if(alertBox) alertBox.style.display = "block";
+}
     else { document.getElementById('api-key-alert').style.display = 'block'; }
 }
 window.saveApiKey = () => {
