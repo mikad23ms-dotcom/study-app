@@ -687,3 +687,30 @@ header h1:hover {
         display: none !important;
     }
 }
+/* ========================================================== */
+/* UNIFIED MAGIC HOVER EFFECTS FOR ALL CARDS AND WIDGETS      */
+/* ========================================================== */
+.progress-section, .subject-card, .pomodoro-container, .ai-container, .card, .day-card, .task-item, .dashboard-widget, .prayer-time-box {
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease, border-color 0.3s ease !important;
+    border: 1px solid transparent; /* Ensure border exists for transition */
+}
+
+.progress-section:hover, .subject-card:hover, .pomodoro-container:hover, .ai-container:hover, .card:hover, .day-card:hover, .task-item:hover, .dashboard-widget:hover, .prayer-time-box:hover {
+    transform: translateY(-8px) !important;
+    box-shadow: 0 20px 40px rgba(93, 95, 239, 0.15) !important;
+    border-color: rgba(93, 95, 239, 0.3) !important;
+}
+
+/* Dark Mode Magic Glow */
+[data-theme="dark"] .progress-section:hover, 
+[data-theme="dark"] .subject-card:hover, 
+[data-theme="dark"] .pomodoro-container:hover, 
+[data-theme="dark"] .ai-container:hover, 
+[data-theme="dark"] .card:hover, 
+[data-theme="dark"] .day-card:hover, 
+[data-theme="dark"] .task-item:hover, 
+[data-theme="dark"] .dashboard-widget:hover, 
+[data-theme="dark"] .prayer-time-box:hover {
+    box-shadow: 0 15px 35px rgba(93, 95, 239, 0.4) !important;
+    border-color: rgba(93, 95, 239, 0.6) !important;
+}
