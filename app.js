@@ -120,8 +120,6 @@ let flashcards = JSON.parse(localStorage.getItem('study_flashcards')) || [];
 let geminiApiKey = localStorage.getItem('study_gemini_api') || '';
 let groqApiKey = localStorage.getItem('study_groq_api') || '';
 let aiProvider = localStorage.getItem('study_ai_provider') || 'gemini';
-let isDarkMode = localStorage.getItem('study_theme') === 'dark';
-
 // Set User Name in Dashboard
 document.addEventListener('DOMContentLoaded', () => {
     setupVoiceRecognition();
@@ -144,23 +142,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 const daysOfWeek = ['الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'];
 
-// Initialize Theme
-if (isDarkMode) document.body.setAttribute('data-theme', 'dark');
-const themeBtn = document.getElementById('theme-toggle-btn');
-themeBtn.innerHTML = isDarkMode ? '<i class="fa-solid fa-sun"></i> الوضع النهاري' : '<i class="fa-solid fa-moon"></i> الوضع الليلي';
-
-themeBtn.addEventListener('click', () => {
-    isDarkMode = !isDarkMode;
-    if (isDarkMode) {
-        document.body.setAttribute('data-theme', 'dark');
-        themeBtn.innerHTML = '<i class="fa-solid fa-sun"></i> الوضع النهاري';
-        localStorage.setItem('study_theme', 'dark');
-    } else {
-        document.body.removeAttribute('data-theme');
-        themeBtn.innerHTML = '<i class="fa-solid fa-moon"></i> الوضع الليلي';
-        localStorage.setItem('study_theme', 'light');
-    }
-});
+document.body.setAttribute('data-theme', 'dark');
 
 function saveData() {
     localStorage.setItem('study_subjects', JSON.stringify(subjects));

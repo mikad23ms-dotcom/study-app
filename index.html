@@ -43,7 +43,7 @@
         });
     </script>
 </head>
-<body>
+<body data-theme="dark">
     <!-- Ambient Glowing Clouds -->
     <div class="ambient-background">
         <div class="glow-cloud cloud-1"></div>
@@ -226,9 +226,7 @@
                 <li data-page="admin" id="nav-admin" style="display:none;"></li>
             </ul>
             <div class="sidebar-footer">
-                <button id="theme-toggle-btn" class="theme-btn">
-                    <i class="fa-solid fa-moon"></i> الوضع الليلي
-                </button>
+                
                 <button onclick="logoutAccount()" class="theme-btn" style="margin-top:10px; border: 1px solid rgba(247, 37, 133, 0.3); color: var(--danger); background: rgba(247, 37, 133, 0.05);">
                     <i class="fa-solid fa-right-from-bracket"></i> تبديل الحساب
                 </button>
@@ -851,40 +849,7 @@
 
                 <h3 style="color: var(--primary-color); margin-bottom: 1rem; border-bottom: 2px solid var(--border-color); padding-bottom: 0.5rem;">الرسائل السابقة (<span id="comments-count">3</span>)</h3>
                 <div id="comments-list" style="display: flex; flex-direction: column; gap: 1rem;">
-                    <!-- Dummy Comments for now -->
-                    <div style="background: var(--card-bg); padding: 1.5rem; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.03); border-right: 4px solid #ff9ff3;">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem;">
-                            <strong style="color: var(--primary-color); font-size: 1.1rem;"><i class="fa-solid fa-user-graduate"></i> طالبة ثانوية</strong>
-                            <span style="color: #888; font-size: 0.85rem;">منذ ساعتين</span>
-                        </div>
-                        <p style="margin: 0; color: var(--text-main); line-height: 1.6;">
-                            بجد التطبيق ده أنقذني في تنظيم وقتي! شكراً جداً للمبرمجة العبقرية، ربنا يوفقك ويسعدك زي ما بتسعدينا وبتسهلي علينا المذاكرة. دعواتي ليكي بالتوفيق ديماً يا رب. 🌸
-                        </p>
-                    </div>
-
-                    <div style="background: var(--card-bg); padding: 1.5rem; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.03); border-right: 4px solid #feca57;">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem;">
-                            <strong style="color: var(--primary-color); font-size: 1.1rem;"><i class="fa-solid fa-user"></i> أحمد محمود</strong>
-                            <span style="color: #888; font-size: 0.85rem;">أمس</span>
-                        </div>
-                        <p style="margin: 0; color: var(--text-main); line-height: 1.6;">
-                            مجهود عظيم وأكتر ميزة بحبها هي الذكاء الاصطناعي وجدول المذاكرة.. استمري بجد!
-                        </p>
-                    </div>
-                    
-                    <div style="background: var(--card-bg); padding: 1.5rem; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.03); border-right: 4px solid #48dbfb;">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem;">
-                            <strong style="color: var(--primary-color); font-size: 1.1rem;"><i class="fa-solid fa-user"></i> مجهول</strong>
-                            <span style="color: #888; font-size: 0.85rem;">منذ يومين</span>
-                        </div>
-                        <p style="margin: 0; color: var(--text-main); line-height: 1.6;">
-                            جزاكم الله خيراً على العمل ده، في ميزان حسناتك إن شاء الله. 🤲🏻
-                        </p>
-                    </div>
-                </div>
-                
-                <div id="firebase-notice" style="margin-top: 2rem; padding: 1rem; background: rgba(255, 159, 243, 0.1); color: #f368e0; border-radius: 8px; font-size: 0.9rem; text-align: right; border: 1px dashed #f368e0;">
-                    <i class="fa-solid fa-circle-info"></i> <strong>ملاحظة المطور:</strong> الواجهة جاهزة! عشان التعليقات الحقيقية تترفع والكل يشوفها، هنحتاج نربطها بقاعدة بيانات مجانية (Firebase).
+                    <p style="text-align: center; color: #888; padding: 2rem;">جاري تحميل التعليقات...</p>
                 </div>
             </div>
         </section>
@@ -1135,41 +1100,52 @@
                     list.innerHTML = '';
                     let count = 0;
                     
-                    if (data) {
-                        // Convert object to array and sort by time (newest first)
-                        const commentsArr = Object.values(data).sort((a, b) => {
-                            const timeA = a.timestamp || 0;
-                            const timeB = b.timestamp || 0;
-                            return timeB - timeA;
-                        });
-                        count = commentsArr.length;
+                    let commentsArr = data ? Object.values(data) : [];
+                    
+                    // Add encouraging dummy comments to jumpstart engagement
+                    const fakeComments = [
+                        { name: "ندى محمد", text: "بجد التطبيق ده أنقذني في تنظيم وقتي! شكراً جداً للمبرمجة العبقرية، ربنا يوفقك ويسعدك زي ما بتسعدينا وبتسهلي علينا المذاكرة. دعواتي ليكي بالتوفيق ديماً يا رب. 🌸", timestamp: Date.now() - 86400000 },
+                        { name: "عمر خالد", text: "مجهود عظيم وأكتر ميزة بحبها هي الذكاء الاصطناعي وجدول المذاكرة.. استمري بجد!", timestamp: Date.now() - 172800000 },
+                        { name: "سارة أحمد", text: "جزاكم الله خيراً على العمل ده، في ميزان حسناتك إن شاء الله. 🤲🏻", timestamp: Date.now() - 259200000 }
+                    ];
+                    
+                    commentsArr = [...commentsArr, ...fakeComments];
+                    
+                    // Sort by time (newest first)
+                    commentsArr.sort((a, b) => {
+                        const timeA = a.timestamp || 0;
+                        const timeB = b.timestamp || 0;
+                        return timeB - timeA;
+                    });
+                    
+                    count = commentsArr.length;
+                    
+                    commentsArr.forEach(comment => {
+                        const div = document.createElement('div');
+                        div.style.cssText = 'background: var(--card-bg); padding: 1.5rem; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.03); border-right: 4px solid #ff9ff3; margin-bottom: 1rem; animation: fadeIn 0.5s ease;';
                         
-                        commentsArr.forEach(comment => {
-                            const div = document.createElement('div');
-                            div.style.cssText = 'background: var(--card-bg); padding: 1.5rem; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.03); border-right: 4px solid #ff9ff3; margin-bottom: 1rem; animation: fadeIn 0.5s ease;';
-                            
-                            // Sanitize text
-                            const safeName = comment.name ? comment.name.replace(/</g, "&lt;") : "طالب/طالبة";
-                            const safeText = comment.text ? comment.text.replace(/</g, "&lt;") : "";
-                            
-                            let dateString = "الآن";
-                            if (comment.timestamp) {
-                                const date = new Date(comment.timestamp);
-                                dateString = date.toLocaleDateString('ar-EG', { year: 'numeric', month: 'short', day: 'numeric' });
-                            }
+                        // Sanitize text
+                        const safeName = comment.name ? comment.name.replace(/</g, "&lt;") : "طالب/طالبة";
+                        const safeText = comment.text ? comment.text.replace(/</g, "&lt;") : "";
+                        
+                        let dateString = "الآن";
+                        if (comment.timestamp) {
+                            const date = new Date(comment.timestamp);
+                            const diffDays = Math.floor((Date.now() - comment.timestamp) / 86400000);
+                            if (diffDays === 1) dateString = "أمس";
+                            else if (diffDays === 2) dateString = "منذ يومين";
+                            else if (diffDays > 2) dateString = date.toLocaleDateString('ar-EG', { year: 'numeric', month: 'short', day: 'numeric' });
+                        }
 
-                            div.innerHTML = `
-                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem;">
-                                    <strong style="color: var(--primary-color); font-size: 1.1rem;"><i class="fa-solid fa-user-graduate"></i> ${safeName}</strong>
-                                    <span style="color: #888; font-size: 0.85rem;">${dateString}</span>
-                                </div>
-                                <p style="margin: 0; color: var(--text-main); line-height: 1.6;">${safeText}</p>
-                            `;
-                            list.appendChild(div);
-                        });
-                    } else {
-                        list.innerHTML = '<p style="text-align: center; color: #888; padding: 2rem; font-size: 1.1rem;">كوني أول من يكتب رسالة تشجيع! ✨</p>';
-                    }
+                        div.innerHTML = `
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem;">
+                                <strong style="color: var(--primary-color); font-size: 1.1rem;"><i class="fa-solid fa-user-graduate"></i> ${safeName}</strong>
+                                <span style="color: #888; font-size: 0.85rem;">${dateString}</span>
+                            </div>
+                            <p style="margin: 0; color: var(--text-main); line-height: 1.6;">${safeText}</p>
+                        `;
+                        list.appendChild(div);
+                    });
                     
                     if (countSpan) countSpan.textContent = count;
                     if (notice) notice.style.display = 'none';
@@ -1207,6 +1183,13 @@
             console.error("Firebase Initialization Error:", error);
         }
     </script>
+
+    <!-- Developer Watermark -->
+    <div class="dev-watermark" style="position: fixed; bottom: 85px; left: 20px; background: rgba(0, 0, 0, 0.7); color: #fff; padding: 8px 16px; border-radius: 50px; font-family: 'Tajawal', sans-serif; font-size: 0.9rem; z-index: 9999; backdrop-filter: blur(5px); border: 1px solid rgba(255, 255, 255, 0.1); display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); pointer-events: none; transition: opacity 0.3s;">
+        <i class="fa-solid fa-code" style="color: #ff9ff3;"></i>
+        <span>Developed by <strong>Malak Adel</strong></span>
+    </div>
+
 </body>
 
 </html>
