@@ -222,6 +222,7 @@
                 <li data-page="statistics"><i class="fa-solid fa-chart-simple"></i> إحصائيات المذاكرة 📊</li>
                 <li data-page="gpa-calc"><i class="fa-solid fa-calculator"></i> حاسبة الـ GPA 🎓</li>
                 <li data-page="alarm"><i class="fa-solid fa-bell"></i> منبه النوم الثقيل ⏰</li>
+                <li data-page="comments-wall"><i class="fa-solid fa-comments" style="color: #ff9ff3;"></i> كلمة تشجعني ✨</li>
                 <li data-page="admin" id="nav-admin" style="display:none;"></li>
             </ul>
             <div class="sidebar-footer">
@@ -821,7 +822,74 @@
                 </div>
             </section>
 
-        </main>
+        
+        
+
+    
+        <!-- Comments Wall Section -->
+        <section id="comments-wall" class="page">
+            <div class="comments-container" style="max-width: 800px; margin: 2rem auto; padding: 0 1rem;">
+                <div style="text-align: center; margin-bottom: 2rem;">
+                    <i class="fa-solid fa-heart-pulse" style="font-size: 3rem; color: #ff9ff3; margin-bottom: 1rem;"></i>
+                    <h2 style="color: var(--primary-color); font-family: 'Tajawal', sans-serif;">كلمة تشجعني ✨</h2>
+                    <p style="color: var(--text-main); font-size: 1.1rem; line-height: 1.6;">
+                        المساحة دي مخصصة ليكم! سيبوا رأيكم، رسالة تشجيع، أو دعوة حلوة.<br>
+                        كلامكم هو اللي بيدي طاقة إيجابية وبيشجع على الاستمرار. 💖
+                    </p>
+                </div>
+                
+                <div style="background: var(--card-bg); padding: 1.5rem; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin-bottom: 2rem; border: 1px solid var(--border-color);">
+                    <h3 style="margin-top: 0; color: var(--primary-color); margin-bottom: 1rem;"><i class="fa-solid fa-pen-nib"></i> اكتب رسالتك</h3>
+                    <form id="comment-form" style="display: flex; flex-direction: column; gap: 1rem;">
+                        <input type="text" id="comment-name" placeholder="اسمك (اختياري) أو اللقب" style="width: 100%; padding: 0.8rem; border: 2px solid var(--border-color); border-radius: 10px; font-family: 'Tajawal'; background: var(--bg-color); color: var(--text-main);">
+                        <textarea id="comment-text" required placeholder="رسالتك أو دعوتك..." style="width: 100%; padding: 0.8rem; border: 2px solid var(--border-color); border-radius: 10px; font-family: 'Tajawal'; min-height: 100px; resize: vertical; background: var(--bg-color); color: var(--text-main);"></textarea>
+                        <button type="submit" style="background: linear-gradient(135deg, #ff9ff3, #f368e0); color: white; border: none; padding: 0.8rem; border-radius: 10px; font-size: 1.1rem; font-weight: bold; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 0.5rem; transition: transform 0.3s;">
+                            <i class="fa-solid fa-paper-plane"></i> نشر الرسالة
+                        </button>
+                    </form>
+                </div>
+
+                <h3 style="color: var(--primary-color); margin-bottom: 1rem; border-bottom: 2px solid var(--border-color); padding-bottom: 0.5rem;">الرسائل السابقة (<span id="comments-count">3</span>)</h3>
+                <div id="comments-list" style="display: flex; flex-direction: column; gap: 1rem;">
+                    <!-- Dummy Comments for now -->
+                    <div style="background: var(--card-bg); padding: 1.5rem; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.03); border-right: 4px solid #ff9ff3;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem;">
+                            <strong style="color: var(--primary-color); font-size: 1.1rem;"><i class="fa-solid fa-user-graduate"></i> طالبة ثانوية</strong>
+                            <span style="color: #888; font-size: 0.85rem;">منذ ساعتين</span>
+                        </div>
+                        <p style="margin: 0; color: var(--text-main); line-height: 1.6;">
+                            بجد التطبيق ده أنقذني في تنظيم وقتي! شكراً جداً للمبرمجة العبقرية، ربنا يوفقك ويسعدك زي ما بتسعدينا وبتسهلي علينا المذاكرة. دعواتي ليكي بالتوفيق ديماً يا رب. 🌸
+                        </p>
+                    </div>
+
+                    <div style="background: var(--card-bg); padding: 1.5rem; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.03); border-right: 4px solid #feca57;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem;">
+                            <strong style="color: var(--primary-color); font-size: 1.1rem;"><i class="fa-solid fa-user"></i> أحمد محمود</strong>
+                            <span style="color: #888; font-size: 0.85rem;">أمس</span>
+                        </div>
+                        <p style="margin: 0; color: var(--text-main); line-height: 1.6;">
+                            مجهود عظيم وأكتر ميزة بحبها هي الذكاء الاصطناعي وجدول المذاكرة.. استمري بجد!
+                        </p>
+                    </div>
+                    
+                    <div style="background: var(--card-bg); padding: 1.5rem; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.03); border-right: 4px solid #48dbfb;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem;">
+                            <strong style="color: var(--primary-color); font-size: 1.1rem;"><i class="fa-solid fa-user"></i> مجهول</strong>
+                            <span style="color: #888; font-size: 0.85rem;">منذ يومين</span>
+                        </div>
+                        <p style="margin: 0; color: var(--text-main); line-height: 1.6;">
+                            جزاكم الله خيراً على العمل ده، في ميزان حسناتك إن شاء الله. 🤲🏻
+                        </p>
+                    </div>
+                </div>
+                
+                <div id="firebase-notice" style="margin-top: 2rem; padding: 1rem; background: rgba(255, 159, 243, 0.1); color: #f368e0; border-radius: 8px; font-size: 0.9rem; text-align: right; border: 1px dashed #f368e0;">
+                    <i class="fa-solid fa-circle-info"></i> <strong>ملاحظة المطور:</strong> الواجهة جاهزة! عشان التعليقات الحقيقية تترفع والكل يشوفها، هنحتاج نربطها بقاعدة بيانات مجانية (Firebase).
+                </div>
+            </div>
+        </section>
+
+    </main>
     </div>
 
     <!-- Modals -->
@@ -1034,6 +1102,112 @@
             <button onclick="closeModal('api-instructions-modal')" class="btn btn-primary" style="width: 100%; margin-top: 20px;">فهمت، شكراً!</button>
         </div>
     </div>
+
+    <!-- Firebase Comments Integration -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+        import { getDatabase, ref, push, onValue, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAav59AdAZOXi1Q7KoDn2BhdsFiZ_TrLYY",
+            authDomain: "studyapp-659cc.firebaseapp.com",
+            projectId: "studyapp-659cc",
+            storageBucket: "studyapp-659cc.firebasestorage.app",
+            messagingSenderId: "978388176644",
+            appId: "1:978388176644:web:bff410bb3027427312ca51",
+            measurementId: "G-PVQQ77351J"
+        };
+
+        try {
+            const app = initializeApp(firebaseConfig);
+            const db = getDatabase(app);
+            const commentsRef = ref(db, 'comments');
+
+            const list = document.getElementById('comments-list');
+            const countSpan = document.getElementById('comments-count');
+            const form = document.getElementById('comment-form');
+            const notice = document.getElementById('firebase-notice');
+
+            if (form) {
+                // Listen for new comments
+                onValue(commentsRef, (snapshot) => {
+                    const data = snapshot.val();
+                    list.innerHTML = '';
+                    let count = 0;
+                    
+                    if (data) {
+                        // Convert object to array and sort by time (newest first)
+                        const commentsArr = Object.values(data).sort((a, b) => {
+                            const timeA = a.timestamp || 0;
+                            const timeB = b.timestamp || 0;
+                            return timeB - timeA;
+                        });
+                        count = commentsArr.length;
+                        
+                        commentsArr.forEach(comment => {
+                            const div = document.createElement('div');
+                            div.style.cssText = 'background: var(--card-bg); padding: 1.5rem; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.03); border-right: 4px solid #ff9ff3; margin-bottom: 1rem; animation: fadeIn 0.5s ease;';
+                            
+                            // Sanitize text
+                            const safeName = comment.name ? comment.name.replace(/</g, "&lt;") : "طالب/طالبة";
+                            const safeText = comment.text ? comment.text.replace(/</g, "&lt;") : "";
+                            
+                            let dateString = "الآن";
+                            if (comment.timestamp) {
+                                const date = new Date(comment.timestamp);
+                                dateString = date.toLocaleDateString('ar-EG', { year: 'numeric', month: 'short', day: 'numeric' });
+                            }
+
+                            div.innerHTML = `
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem;">
+                                    <strong style="color: var(--primary-color); font-size: 1.1rem;"><i class="fa-solid fa-user-graduate"></i> ${safeName}</strong>
+                                    <span style="color: #888; font-size: 0.85rem;">${dateString}</span>
+                                </div>
+                                <p style="margin: 0; color: var(--text-main); line-height: 1.6;">${safeText}</p>
+                            `;
+                            list.appendChild(div);
+                        });
+                    } else {
+                        list.innerHTML = '<p style="text-align: center; color: #888; padding: 2rem; font-size: 1.1rem;">كوني أول من يكتب رسالة تشجيع! ✨</p>';
+                    }
+                    
+                    if (countSpan) countSpan.textContent = count;
+                    if (notice) notice.style.display = 'none';
+                });
+
+                // Write new comment
+                form.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const btn = form.querySelector('button');
+                    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> جاري النشر...';
+                    btn.disabled = true;
+
+                    const nameInput = document.getElementById('comment-name').value.trim() || 'فاعل خير';
+                    const textInput = document.getElementById('comment-text').value.trim();
+
+                    if (!textInput) return;
+
+                    push(commentsRef, {
+                        name: nameInput,
+                        text: textInput,
+                        timestamp: serverTimestamp()
+                    }).then(() => {
+                        form.reset();
+                        btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> نشر الرسالة';
+                        btn.disabled = false;
+                    }).catch((error) => {
+                        console.error("Firebase Error: ", error);
+                        alert("عفواً، حدث خطأ. تأكدي إنك عملتي قاعدة البيانات (Realtime Database) في وضع الاختبار (Test Mode) وإن القواعد بتسمح بالكتابة.");
+                        btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> نشر الرسالة';
+                        btn.disabled = false;
+                    });
+                });
+            }
+        } catch (error) {
+            console.error("Firebase Initialization Error:", error);
+        }
+    </script>
 </body>
+
 </html>
 

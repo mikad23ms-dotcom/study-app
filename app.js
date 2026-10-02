@@ -847,7 +847,9 @@ async function processAIOutput(text) {
         mermaidContainer.style.display = 'block';
         mermaidContainer.innerHTML = '<div style="text-align:center;"><i class="fa-solid fa-spinner fa-spin"></i> جاري رسم الخريطة...</div>';
         try {
-            mermaid.initialize({ startOnLoad: false, theme: 'default' });
+            
+
+mermaid.initialize({ startOnLoad: false, theme: 'default' });
             const { svg } = await mermaid.render('mermaid-graph-' + Date.now(), mermaidCode.trim());
             mermaidContainer.innerHTML = '<h3 style="color:var(--primary-color); margin-bottom:15px;"><i class="fa-solid fa-project-diagram"></i> الخريطة الذهنية</h3><div style="overflow-x:auto; background:white; padding:10px; border-radius:10px;">' + svg + '</div>';
         } catch (err) {
@@ -1390,6 +1392,8 @@ document.getElementById('ai-schedule-form').onsubmit = async (e) => {
         alert("حدث خطأ أثناء إنشاء الجدول. حاول مرة أخرى!");
     }
 };
+
+
 
 mermaid.initialize({ startOnLoad: false, theme: 'default', fontFamily: 'Tajawal' });
 renderAll();
