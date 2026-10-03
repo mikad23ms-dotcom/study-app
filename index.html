@@ -222,6 +222,8 @@
                 <li data-page="statistics"><i class="fa-solid fa-chart-simple"></i> إحصائيات المذاكرة 📊</li>
                 <li data-page="gpa-calc"><i class="fa-solid fa-calculator"></i> حاسبة الـ GPA 🎓</li>
                 <li data-page="alarm"><i class="fa-solid fa-bell"></i> منبه النوم الثقيل ⏰</li>
+                <li data-page="notifications-settings"><i class="fa-solid fa-bell" style="color: #feca57;"></i> الإشعارات الذكية 🔔</li>
+                <li data-page="challenges"><i class="fa-solid fa-gamepad" style="color: #ff9ff3;"></i> تحديات المذاكرة 🎮</li>
                 <li data-page="comments-wall"><i class="fa-solid fa-comments" style="color: #ff9ff3;"></i> كلمة تشجعني ✨</li>
                 <li data-page="admin" id="nav-admin" style="display:none;"></li>
             </ul>
@@ -314,6 +316,20 @@
                         <p id="current-date">اليوم هو...</p>
                     </div>
                 </header>
+
+                
+                <!-- My Dream Banner -->
+                <div class="card hover-glow-box" style="background: linear-gradient(135deg, rgba(255, 159, 243, 0.1), rgba(243, 104, 224, 0.05)); border: 2px dashed #ff9ff3; text-align: center; margin-bottom: 2rem;">
+                    <h3 style="color: var(--primary-color); margin-top: 0;"><i class="fa-solid fa-star" style="color: #feca57;"></i> حلمي اللي بسعى عشانه</h3>
+                    <div id="dream-display-container">
+                        <p id="dream-text" style="font-size: 1.3rem; font-weight: bold; color: var(--text-main); margin: 1rem 0; min-height: 30px;">لم تكتب حلمك بعد..</p>
+                        <button onclick="editDream()" class="theme-btn" style="background: rgba(255, 159, 243, 0.2); color: #ff9ff3; padding: 0.5rem 1rem;"><i class="fa-solid fa-pen"></i> تعديل</button>
+                    </div>
+                    <div id="dream-edit-container" style="display: none; flex-direction: column; gap: 1rem; align-items: center;">
+                        <input type="text" id="dream-input" placeholder="نفسك تطلع إيه؟ إيه الكلية اللي بتحلم بيها؟" style="width: 80%; padding: 0.8rem; border: 2px solid var(--border-color); border-radius: 10px; font-family: 'Tajawal'; background: var(--bg-color); color: var(--text-main); text-align: center; font-size: 1.1rem;">
+                        <button onclick="saveDream()" class="theme-btn" style="background: linear-gradient(135deg, #ff9ff3, #f368e0); color: white; padding: 0.6rem 2rem;"><i class="fa-solid fa-check"></i> حفظ</button>
+                    </div>
+                </div>
 
                 <div class="progress-section">
                     <h3>معدل إنجاز مهام اليوم</h3>
@@ -797,6 +813,14 @@
                     
                     <p id="alarm-status" style="margin-top: 20px; font-size: 1.2rem; font-weight: bold; color: var(--success); display: none;"></p>
                     
+                    
+                    <!-- Nightstand Note -->
+                    <div class="card hover-glow-box" style="margin-top: 2rem; text-align: center; border: 1px dashed #feca57; background: rgba(254, 202, 87, 0.05); padding: 1.5rem;">
+                        <h4 style="color: #feca57; margin-top: 0; font-size: 1.2rem;"><i class="fa-solid fa-moon"></i> وضع النوم (مهم جداً لضمان الرنين)</h4>
+                        <p style="color: var(--text-main); font-size: 1rem; line-height: 1.6;">عشان المنبه يرن الصبح بصوت عالي بدون ما نظام الموبايل يقفله، لازم المتصفح يفضل شغال. بعد ما تظبط المنبه فوق، اضغط على الزرار اللي تحت وسيب الموبايل على الشاحن، الشاشة هتسود بالكامل عشان تحافظ على البطارية والتطبيق هيفضل صاحي عشان يصحيك!</p>
+                        <button onclick="startNightstand()" class="theme-btn btn-hover-glow" style="background: #2d3436; color: #ff9ff3; padding: 0.8rem 2rem; border-radius: 10px; font-size: 1.1rem; border: 1px solid #ff9ff3; margin-top: 1rem;"><i class="fa-solid fa-bed"></i> تفعيل وضع النوم الآن</button>
+                    </div>
+
                     <div id="stop-alarm-container" style="display: none; margin-top: 30px;">
                         <p style="color: var(--danger); font-size: 2rem; font-weight: bold; margin-bottom: 15px; animation: pulse 1s infinite;">استيقظي الآن!!! 🚨</p>
                         <button class="btn btn-danger btn-large" onclick="stopAlarmSound()" style="width: 100%; font-size: 1.5rem; padding: 20px;">
@@ -932,6 +956,144 @@
                         <p style="margin: 0; color: var(--text-main); line-height: 1.6;">جزاكم الله خيراً على العمل ده، في ميزان حسناتك إن شاء الله. 🤲🏻</p>
                     </div>
 
+                </div>
+            </div>
+        </section>
+
+    
+        <!-- Notifications Settings Section -->
+        <section id="notifications-settings" class="page">
+            <div style="max-width: 600px; margin: 2rem auto; padding: 0 1rem;">
+                <div style="text-align: center; margin-bottom: 2rem;">
+                    <i class="fa-solid fa-bell" style="font-size: 3rem; color: #feca57; margin-bottom: 1rem;"></i>
+                    <h2 style="color: var(--primary-color); font-family: 'Tajawal', sans-serif;">الإشعارات الذكية 🔔</h2>
+                    <p style="color: var(--text-main); font-size: 1.05rem; line-height: 1.6;">
+                        خلّي التطبيق يفكّرك بمواعيد الصلاة ويشجعك على المذاكرة حتى لو مش فاتح التطبيق!
+                    </p>
+                </div>
+
+                <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+                    <!-- Motivational Notifications -->
+                    <div style="background: var(--card-bg); padding: 1.5rem; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center;">
+                        <div style="flex: 1;">
+                            <h3 style="color: var(--primary-color); margin: 0 0 0.5rem 0; font-size: 1.1rem;">
+                                <i class="fa-solid fa-fire" style="color: #ff6b6b;"></i> إشعارات التشجيع والتحفيز
+                            </h3>
+                            <p style="color: var(--text-main); margin: 0; font-size: 0.9rem; opacity: 0.8;">
+                                رسائل تحفيزية كل ساعة ونص تشجعك تذاكر وتعمل اللي عليك 💪
+                            </p>
+                        </div>
+                        <label class="switch" style="position: relative; width: 60px; height: 30px; flex-shrink: 0; margin-right: 1rem;">
+                            <input type="checkbox" id="motiv-notif-toggle" style="opacity: 0; width: 0; height: 0;">
+                            <span style="position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #555; border-radius: 30px; transition: 0.3s;"></span>
+                        </label>
+                    </div>
+
+                    <!-- Prayer Notifications -->
+                    <div style="background: var(--card-bg); padding: 1.5rem; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center;">
+                        <div style="flex: 1;">
+                            <h3 style="color: var(--primary-color); margin: 0 0 0.5rem 0; font-size: 1.1rem;">
+                                <i class="fa-solid fa-mosque" style="color: #1dd1a1;"></i> إشعارات مواعيد الصلاة
+                            </h3>
+                            <p style="color: var(--text-main); margin: 0; font-size: 0.9rem; opacity: 0.8;">
+                                تنبيه قبل كل صلاة بدقيقتين عشان متنساش 🤲
+                            </p>
+                        </div>
+                        <label class="switch" style="position: relative; width: 60px; height: 30px; flex-shrink: 0; margin-right: 1rem;">
+                            <input type="checkbox" id="prayer-notif-toggle" style="opacity: 0; width: 0; height: 0;">
+                            <span style="position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #555; border-radius: 30px; transition: 0.3s;"></span>
+                        </label>
+                    </div>
+
+                    <!-- Test Button -->
+                    <button onclick="if(Notification.permission==='granted'){new Notification('تجربة! 🔔',{body:'الإشعارات شغالة تمام! 🎉',dir:'rtl'});}else{Notification.requestPermission().then(p=>{if(p==='granted')new Notification('تجربة! 🔔',{body:'الإشعارات شغالة تمام! 🎉',dir:'rtl'});else alert('يرجى السماح بالإشعارات من إعدادات المتصفح');});}" style="background: linear-gradient(135deg, #feca57, #ff9f43); color: #333; border: none; padding: 1rem; border-radius: 12px; font-size: 1.1rem; font-weight: bold; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 0.5rem; width: 100%; transition: transform 0.3s;">
+                        <i class="fa-solid fa-bell"></i> جرب الإشعارات
+                    </button>
+                </div>
+
+                <style>
+                    .switch input:checked + span {
+                        background: linear-gradient(135deg, #4361ee, #7209b7) !important;
+                    }
+                    .switch input:checked + span::before {
+                        transform: translateX(30px);
+                    }
+                    .switch span::before {
+                        content: "";
+                        position: absolute;
+                        height: 24px;
+                        width: 24px;
+                        left: 3px;
+                        bottom: 3px;
+                        background-color: white;
+                        border-radius: 50%;
+                        transition: 0.3s;
+                    }
+                </style>
+            </div>
+        </section>
+
+    
+        <!-- Unconventional Challenges Section -->
+        <section id="challenges" class="page">
+            <div style="max-width: 800px; margin: 2rem auto; padding: 0 1rem;">
+                <div style="text-align: center; margin-bottom: 2rem;" class="hover-glow-box">
+                    <i class="fa-solid fa-gamepad" style="font-size: 3rem; color: #ff9ff3; margin-bottom: 1rem;"></i>
+                    <h2 style="color: var(--primary-color); font-family: 'Tajawal', sans-serif;">تحديات المذاكرة المجنونة 🎮</h2>
+                    <p style="color: var(--text-main); font-size: 1.1rem; line-height: 1.6;">
+                        زهقت من المذاكرة التقليدية؟ جرب الطرق دي عشان تكسر الملل وتتحدى نفسك!
+                    </p>
+                </div>
+
+                <!-- Ice Cube Challenge -->
+                <div class="card hover-glow-box" style="margin-bottom: 1.5rem; border-left: 4px solid #74b9ff;">
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                        <i class="fa-solid fa-icicles" style="font-size: 2.5rem; color: #74b9ff;"></i>
+                        <div>
+                            <h3 style="margin: 0; color: #74b9ff;">تحدي كوباية التلج 🧊</h3>
+                            <p style="margin: 5px 0 0 0; color: var(--text-muted); font-size: 0.9rem;">املى كوباية تلج وحطها قدامك.. هدفك تذاكر بتركيز لحد ما التلج كله يدوب!</p>
+                        </div>
+                    </div>
+                    <div style="text-align: center; margin-top: 1rem;">
+                        <p style="color: var(--text-main); margin-bottom: 1rem;">(بتاخد تقريباً من 15 لـ 20 دقيقة)</p>
+                        <button onclick="startIceChallenge()" id="ice-btn" class="theme-btn btn-hover-glow" style="background: linear-gradient(135deg, #74b9ff, #0984e3); color: white; border: none; padding: 0.8rem 2rem; border-radius: 10px; font-size: 1.1rem;"><i class="fa-solid fa-play"></i> ابدأ التحدي دلوقتي</button>
+                    </div>
+                </div>
+
+                <!-- Flight Challenge -->
+                <div class="card hover-glow-box" style="margin-bottom: 1.5rem; border-left: 4px solid #00b894;">
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                        <i class="fa-solid fa-plane-departure" style="font-size: 2.5rem; color: #00b894;"></i>
+                        <div>
+                            <h3 style="margin: 0; color: #00b894;">تحدي رحلة الطيران ✈️</h3>
+                            <p style="margin: 5px 0 0 0; color: var(--text-muted); font-size: 0.9rem;">اختار بلد وسافر ليها! هتذاكر طول مدة الرحلة بدون مقاطعة لحد ما الطيارة توصل.</p>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
+                        <select id="flight-destination" style="flex: 1; padding: 0.8rem; border: 2px solid var(--border-color); border-radius: 10px; font-family: 'Tajawal'; background: var(--bg-color); color: var(--text-main);">
+                            <option value="120">مصر إلى السعودية (ساعتين)</option>
+                            <option value="210">مصر إلى الإمارات (3.5 ساعات)</option>
+                            <option value="240">مصر إلى فرنسا (4 ساعات)</option>
+                            <option value="60">مصر إلى الأردن (ساعة واحدة)</option>
+                            <option value="600">مصر إلى أمريكا (10 ساعات - للوحوش بس!)</option>
+                        </select>
+                    </div>
+                    <div style="text-align: center;">
+                        <button onclick="startFlightChallenge()" id="flight-btn" class="theme-btn btn-hover-glow" style="background: linear-gradient(135deg, #00b894, #00cec9); color: white; border: none; padding: 0.8rem 2rem; border-radius: 10px; font-size: 1.1rem;"><i class="fa-solid fa-plane"></i> إقلاع!</button>
+                    </div>
+                    
+                    <!-- Flight Progress -->
+                    <div id="flight-progress-container" style="display: none; margin-top: 1.5rem;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem; color: var(--text-main);">
+                            <span>🛫 الإقلاع</span>
+                            <span id="flight-time-left" style="font-weight: bold; color: #00b894;">00:00</span>
+                            <span>الوصول 🛬</span>
+                        </div>
+                        <div class="progress-bar-bg" style="height: 20px; background: rgba(0,0,0,0.1); border-radius: 10px; overflow: hidden; position: relative;">
+                            <div id="flight-progress-fill" style="height: 100%; width: 0%; background: linear-gradient(90deg, #00b894, #55efc4); transition: width 1s linear;"></div>
+                            <i id="flight-icon" class="fa-solid fa-plane" style="position: absolute; top: 2px; left: 0%; color: #2d3436; transition: left 1s linear; transform: scaleX(-1);"></i>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -1295,6 +1457,59 @@
     <div class="dev-watermark" style="position: fixed; bottom: 85px; left: 20px; background: rgba(0, 0, 0, 0.7); color: #fff; padding: 8px 16px; border-radius: 50px; font-family: 'Tajawal', sans-serif; font-size: 0.9rem; z-index: 9999; backdrop-filter: blur(5px); border: 1px solid rgba(255, 255, 255, 0.1); display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); pointer-events: none; transition: opacity 0.3s;">
         <i class="fa-solid fa-code" style="color: #ff9ff3;"></i>
         <span>Developed by <strong>Malak Adel</strong></span>
+    </div>
+
+
+    <!-- Nightstand Screensaver -->
+    <div id="nightstand-mode" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: black; z-index: 999999; flex-direction: column; justify-content: center; align-items: center; cursor: pointer;">
+        <h1 id="nightstand-time" style="color: #ff9ff3; font-size: 5rem; font-family: monospace; text-shadow: 0 0 20px rgba(255,159,243,0.5); margin:0;">00:00</h1>
+        <p style="color: #888; font-size: 1.5rem; margin-top: 10px;">المنبه يعمل في الخلفية ⏰</p>
+        <p style="color: #555; margin-top: 2rem; font-size: 1.2rem;">(اضغط في أي مكان للإلغاء والعودة)</p>
+        <p style="color: #444; font-size: 0.9rem; position: absolute; bottom: 30px; text-align: center; padding: 0 20px;">الرجاء ترك الهاتف موصلاً بالشاحن وعدم قفل الشاشة يدوياً.<br>هذه الشاشة السوداء موفرة جداً للبطارية وتضمن رنين المنبه بقوة.</p>
+    </div>
+
+
+    <!-- What's New Modal -->
+    <div id="whats-new-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.8); z-index: 10000; justify-content: center; align-items: center; backdrop-filter: blur(5px);">
+        <div style="background: var(--card-bg); padding: 2rem; border-radius: 20px; max-width: 90%; width: 500px; border: 2px solid #ff9ff3; box-shadow: 0 10px 30px rgba(255,159,243,0.3); animation: slideUpGlow 0.5s ease;">
+            <h2 style="color: var(--primary-color); margin-top: 0; text-align: center;"><i class="fa-solid fa-bullhorn" style="color: #feca57; font-size: 2rem; margin-bottom:10px; display:block;"></i>تحديث جديد وصل!</h2>
+            <p style="color: var(--text-muted); text-align: center; font-size: 1rem; margin-bottom: 2rem;">ضفنا مميزات خرافية عشان نساعدك تذاكر أحسن وتكسر الملل!</p>
+            <div style="display: flex; flex-direction: column; gap: 1.2rem;">
+                
+                <div style="display: flex; gap: 1rem; align-items: flex-start;">
+                    <div style="background: rgba(254, 202, 87, 0.2); padding: 10px; border-radius: 12px; width: 45px; text-align: center;"><i class="fa-solid fa-star" style="color: #feca57; font-size: 1.3rem;"></i></div>
+                    <div>
+                        <strong style="color: var(--text-main); font-size: 1.1rem;">حلمك قدام عينك ✨</strong>
+                        <p style="color: var(--text-muted); margin: 5px 0 0 0; font-size: 0.95rem; line-height: 1.5;">صندوق جديد في الرئيسية، اكتب فيه حلمك (مثلاً: دكتورة) عشان يفضل دايماً يحفزك.</p>
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 1rem; align-items: flex-start;">
+                    <div style="background: rgba(255, 159, 243, 0.2); padding: 10px; border-radius: 12px; width: 45px; text-align: center;"><i class="fa-solid fa-bell" style="color: #ff9ff3; font-size: 1.3rem;"></i></div>
+                    <div>
+                        <strong style="color: var(--text-main); font-size: 1.1rem;">إشعارات الصلاة والتحفيز 🔔</strong>
+                        <p style="color: var(--text-muted); margin: 5px 0 0 0; font-size: 0.95rem; line-height: 1.5;">فعلها من القائمة الجانبية (الإشعارات الذكية)، وهيبعتلك رسايل تشجيع ومواعيد صلاة!</p>
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 1rem; align-items: flex-start;">
+                    <div style="background: rgba(0, 206, 201, 0.2); padding: 10px; border-radius: 12px; width: 45px; text-align: center;"><i class="fa-solid fa-gamepad" style="color: #00cec9; font-size: 1.3rem;"></i></div>
+                    <div>
+                        <strong style="color: var(--text-main); font-size: 1.1rem;">تحديات المذاكرة 🎮</strong>
+                        <p style="color: var(--text-muted); margin: 5px 0 0 0; font-size: 0.95rem; line-height: 1.5;">زهقت؟ جرب "تحدي كوباية التلج" أو "رحلة الطيران" من القائمة الجانبية.</p>
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 1rem; align-items: flex-start;">
+                    <div style="background: rgba(116, 185, 255, 0.2); padding: 10px; border-radius: 12px; width: 45px; text-align: center;"><i class="fa-solid fa-moon" style="color: #74b9ff; font-size: 1.3rem;"></i></div>
+                    <div>
+                        <strong style="color: var(--text-main); font-size: 1.1rem;">وضع النوم للمنبه 🌙</strong>
+                        <p style="color: var(--text-muted); margin: 5px 0 0 0; font-size: 0.95rem; line-height: 1.5;">عشان تضمن إن المنبه يرن الصبح.. فعل "وضع النوم" وسيب الموبايل على الشاحن.</p>
+                    </div>
+                </div>
+            </div>
+            <button onclick="closeWhatsNew()" class="theme-btn btn-hover-glow" style="width: 100%; background: linear-gradient(135deg, #ff9ff3, #f368e0); color: white; padding: 1rem; border-radius: 10px; font-size: 1.2rem; font-weight: bold; border: none; cursor: pointer; margin-top: 2rem;">يلا نجرب! 🚀</button>
+        </div>
     </div>
 
 </body>

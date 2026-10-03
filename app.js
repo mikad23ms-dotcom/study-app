@@ -831,6 +831,213 @@ async function processAIOutput(text) {
         try {
             
 
+
+// ====== Notifications System (Motivational + Prayer Times) ======
+(function() {
+    // Motivational messages
+    const motivationalMsgs = [
+        { title: "قوم ذاكر! 📚", body: "كل دقيقة بتضيعها مش هترجع.. قوم ابدأ دلوقتي!" },
+        { title: "فاكر حلمك؟ 🌟", body: "النجاح مش بييجي لوحده.. قوم اعمل اللي عليك!" },
+        { title: "وقت المذاكرة! ⏰", body: "ربع ساعة بس ابدأ بيها وهتلاقي نفسك كملت!" },
+        { title: "أنت قدها! 💪", body: "ثق في نفسك وابدأ.. مفيش حاجة صعبة على اللي بيحاول!" },
+        { title: "ذاكر شوية 📖", body: "المذاكرة اليومية ولو بسيطة أحسن من التراكم!" },
+        { title: "تحفيز! 🔥", body: "اللي بيذاكر كل يوم شوية بيلاقي نفسه متفوق آخر السنة!" },
+        { title: "قوم يا بطل! 🏆", body: "كل ما تذاكر دلوقتي هتشكر نفسك بعدين!" },
+        { title: "ورد يومك! 📝", body: "خلصت مذاكرة النهاردة؟ لسه فاضل وقت ابدأ!" },
+        { title: "فكرة حلوة 💡", body: "راجع اللي ذاكرته امبارح 10 دقائق بس.. هيفرق معاك!" },
+        { title: "ما تنساش! 🎯", body: "هدفك قريب.. بس محتاج منك شوية مجهود كمان!" }
+    ];
+
+    // Prayer names
+    const prayerNames = {
+        Fajr: "الفجر 🌅",
+        Sunrise: "الشروق ☀️",
+        Dhuhr: "الظهر 🕐",
+        Asr: "العصر 🌤️",
+        Maghrib: "المغرب 🌅",
+        Isha: "العشاء 🌙"
+    };
+
+    // Request notification permission
+    async function requestNotifPermission() {
+        if (!("Notification" in window)) return false;
+        if (Notification.permission === "granted") return true;
+        if (Notification.permission === "denied") return false;
+        const perm = await Notification.requestPermission();
+        return perm === "granted";
+    }
+
+    // Show notification
+    function showNotification(title, body, icon) {
+        if (Notification.permission !== "granted") return;
+        
+        if (navigator.serviceWorker && navigator.serviceWorker.controller) {
+            navigator.serviceWorker.ready.then(reg => {
+                reg.showNotification(title, {
+                    body: body,
+                    icon: icon || "icons/icon-192.png",
+                    badge: "icons/icon-192.png",
+                    vibrate: [200, 100, 200],
+                    dir: "rtl",
+                    lang: "ar",
+                    tag: title,
+                    renotify: true
+                });
+            });
+        } else {
+            new Notification(title, { body: body, icon: icon || "icons/icon-192.png", dir: "rtl" });
+        }
+    }
+
+    // Fetch prayer times
+    async function fetchPrayerTimes() {
+        try {
+            const saved = localStorage.getItem("study_prayer_times");
+            const savedDate = localStorage.getItem("study_prayer_date");
+            const today = new Date().toDateString();
+            
+            if (saved && savedDate === today) {
+                return JSON.parse(saved);
+            }
+
+            // Try geolocation first
+            let lat = 30.0444, lng = 31.2357; // Default: Cairo
+            try {
+                const pos = await new Promise((resolve, reject) => {
+                    navigator.geolocation.getCurrentPosition(resolve, reject, { timeout: 5000 });
+                });
+                lat = pos.coords.latitude;
+                lng = pos.coords.longitude;
+            } catch(e) {}
+
+            const res = await fetch("https://api.aladhan.com/v1/timings/" + Math.floor(Date.now()/1000) + "?latitude=" + lat + "&longitude=" + lng + "&method=5");
+            const data = await res.json();
+            
+            if (data.code === 200) {
+                const timings = data.data.timings;
+                localStorage.setItem("study_prayer_times", JSON.stringify(timings));
+                localStorage.setItem("study_prayer_date", today);
+                return timings;
+            }
+        } catch(e) {
+            console.log("Prayer times fetch error:", e);
+        }
+        return null;
+    }
+
+    // Check prayer times
+    let notifiedPrayers = JSON.parse(localStorage.getItem("study_notified_prayers") || "{}");
+    
+    async function checkPrayerTimes() {
+        if (localStorage.getItem("study_prayer_notif") !== "true") return;
+        
+        const timings = await fetchPrayerTimes();
+        if (!timings) return;
+
+        const now = new Date();
+        const today = now.toDateString();
+        
+        // Reset notified prayers for new day
+        if (notifiedPrayers._date !== today) {
+            notifiedPrayers = { _date: today };
+        }
+
+        const prayers = ["Fajr", "Dhuhr", "Asr", "Maghrib", "Isha"];
+        
+        for (const prayer of prayers) {
+            if (notifiedPrayers[prayer]) continue;
+            
+            const pTime = timings[prayer];
+            if (!pTime) continue;
+            
+            const [h, m] = pTime.split(":").map(Number);
+            const prayerMinutes = h * 60 + m;
+            const nowMinutes = now.getHours() * 60 + now.getMinutes();
+            
+            // Notify 2 minutes before prayer
+            if (nowMinutes >= prayerMinutes - 2 && nowMinutes <= prayerMinutes + 5) {
+                showNotification(
+                    "حان وقت صلاة " + prayerNames[prayer],
+                    "قم للصلاة.. الصلاة خير من كل شيء 🤲",
+                    "icons/icon-192.png"
+                );
+                notifiedPrayers[prayer] = true;
+                localStorage.setItem("study_notified_prayers", JSON.stringify(notifiedPrayers));
+            }
+        }
+    }
+
+    // Send motivational notification
+    let lastMotivTime = parseInt(localStorage.getItem("study_last_motiv") || "0");
+    
+    function checkMotivational() {
+        if (localStorage.getItem("study_motiv_notif") !== "true") return;
+        
+        const interval = 90 * 60 * 1000; // Every 90 minutes
+        if (Date.now() - lastMotivTime < interval) return;
+        
+        const msg = motivationalMsgs[Math.floor(Math.random() * motivationalMsgs.length)];
+        showNotification(msg.title, msg.body);
+        lastMotivTime = Date.now();
+        localStorage.setItem("study_last_motiv", String(lastMotivTime));
+    }
+
+    // Initialize
+    async function initNotifications() {
+        const hasPermission = await requestNotifPermission();
+        if (!hasPermission) return;
+        
+        // Enable both by default on first visit
+        if (localStorage.getItem("study_motiv_notif") === null) {
+            localStorage.setItem("study_motiv_notif", "true");
+        }
+        if (localStorage.getItem("study_prayer_notif") === null) {
+            localStorage.setItem("study_prayer_notif", "true");
+        }
+
+        // Check every minute
+        setInterval(() => {
+            checkPrayerTimes();
+            checkMotivational();
+        }, 60000);
+
+        // Initial check after 10 seconds
+        setTimeout(() => {
+            checkPrayerTimes();
+            checkMotivational();
+        }, 10000);
+    }
+
+    // Setup notification toggles
+    window.addEventListener("DOMContentLoaded", () => {
+        const motivToggle = document.getElementById("motiv-notif-toggle");
+        const prayerToggle = document.getElementById("prayer-notif-toggle");
+
+        if (motivToggle) {
+            motivToggle.checked = localStorage.getItem("study_motiv_notif") === "true";
+            motivToggle.addEventListener("change", async () => {
+                if (motivToggle.checked) {
+                    const ok = await requestNotifPermission();
+                    if (!ok) { motivToggle.checked = false; alert("يرجى السماح بالإشعارات من إعدادات المتصفح"); return; }
+                }
+                localStorage.setItem("study_motiv_notif", motivToggle.checked ? "true" : "false");
+            });
+        }
+        if (prayerToggle) {
+            prayerToggle.checked = localStorage.getItem("study_prayer_notif") === "true";
+            prayerToggle.addEventListener("change", async () => {
+                if (prayerToggle.checked) {
+                    const ok = await requestNotifPermission();
+                    if (!ok) { prayerToggle.checked = false; alert("يرجى السماح بالإشعارات من إعدادات المتصفح"); return; }
+                }
+                localStorage.setItem("study_prayer_notif", prayerToggle.checked ? "true" : "false");
+            });
+        }
+
+        initNotifications();
+    });
+})();
+
 mermaid.initialize({ startOnLoad: false, theme: 'default' });
             const { svg } = await mermaid.render('mermaid-graph-' + Date.now(), mermaidCode.trim());
             mermaidContainer.innerHTML = '<h3 style="color:var(--primary-color); margin-bottom:15px;"><i class="fa-solid fa-project-diagram"></i> الخريطة الذهنية</h3><div style="overflow-x:auto; background:white; padding:10px; border-radius:10px;">' + svg + '</div>';
@@ -1376,6 +1583,213 @@ document.getElementById('ai-schedule-form').onsubmit = async (e) => {
 };
 
 
+
+
+// ====== Notifications System (Motivational + Prayer Times) ======
+(function() {
+    // Motivational messages
+    const motivationalMsgs = [
+        { title: "قوم ذاكر! 📚", body: "كل دقيقة بتضيعها مش هترجع.. قوم ابدأ دلوقتي!" },
+        { title: "فاكر حلمك؟ 🌟", body: "النجاح مش بييجي لوحده.. قوم اعمل اللي عليك!" },
+        { title: "وقت المذاكرة! ⏰", body: "ربع ساعة بس ابدأ بيها وهتلاقي نفسك كملت!" },
+        { title: "أنت قدها! 💪", body: "ثق في نفسك وابدأ.. مفيش حاجة صعبة على اللي بيحاول!" },
+        { title: "ذاكر شوية 📖", body: "المذاكرة اليومية ولو بسيطة أحسن من التراكم!" },
+        { title: "تحفيز! 🔥", body: "اللي بيذاكر كل يوم شوية بيلاقي نفسه متفوق آخر السنة!" },
+        { title: "قوم يا بطل! 🏆", body: "كل ما تذاكر دلوقتي هتشكر نفسك بعدين!" },
+        { title: "ورد يومك! 📝", body: "خلصت مذاكرة النهاردة؟ لسه فاضل وقت ابدأ!" },
+        { title: "فكرة حلوة 💡", body: "راجع اللي ذاكرته امبارح 10 دقائق بس.. هيفرق معاك!" },
+        { title: "ما تنساش! 🎯", body: "هدفك قريب.. بس محتاج منك شوية مجهود كمان!" }
+    ];
+
+    // Prayer names
+    const prayerNames = {
+        Fajr: "الفجر 🌅",
+        Sunrise: "الشروق ☀️",
+        Dhuhr: "الظهر 🕐",
+        Asr: "العصر 🌤️",
+        Maghrib: "المغرب 🌅",
+        Isha: "العشاء 🌙"
+    };
+
+    // Request notification permission
+    async function requestNotifPermission() {
+        if (!("Notification" in window)) return false;
+        if (Notification.permission === "granted") return true;
+        if (Notification.permission === "denied") return false;
+        const perm = await Notification.requestPermission();
+        return perm === "granted";
+    }
+
+    // Show notification
+    function showNotification(title, body, icon) {
+        if (Notification.permission !== "granted") return;
+        
+        if (navigator.serviceWorker && navigator.serviceWorker.controller) {
+            navigator.serviceWorker.ready.then(reg => {
+                reg.showNotification(title, {
+                    body: body,
+                    icon: icon || "icons/icon-192.png",
+                    badge: "icons/icon-192.png",
+                    vibrate: [200, 100, 200],
+                    dir: "rtl",
+                    lang: "ar",
+                    tag: title,
+                    renotify: true
+                });
+            });
+        } else {
+            new Notification(title, { body: body, icon: icon || "icons/icon-192.png", dir: "rtl" });
+        }
+    }
+
+    // Fetch prayer times
+    async function fetchPrayerTimes() {
+        try {
+            const saved = localStorage.getItem("study_prayer_times");
+            const savedDate = localStorage.getItem("study_prayer_date");
+            const today = new Date().toDateString();
+            
+            if (saved && savedDate === today) {
+                return JSON.parse(saved);
+            }
+
+            // Try geolocation first
+            let lat = 30.0444, lng = 31.2357; // Default: Cairo
+            try {
+                const pos = await new Promise((resolve, reject) => {
+                    navigator.geolocation.getCurrentPosition(resolve, reject, { timeout: 5000 });
+                });
+                lat = pos.coords.latitude;
+                lng = pos.coords.longitude;
+            } catch(e) {}
+
+            const res = await fetch("https://api.aladhan.com/v1/timings/" + Math.floor(Date.now()/1000) + "?latitude=" + lat + "&longitude=" + lng + "&method=5");
+            const data = await res.json();
+            
+            if (data.code === 200) {
+                const timings = data.data.timings;
+                localStorage.setItem("study_prayer_times", JSON.stringify(timings));
+                localStorage.setItem("study_prayer_date", today);
+                return timings;
+            }
+        } catch(e) {
+            console.log("Prayer times fetch error:", e);
+        }
+        return null;
+    }
+
+    // Check prayer times
+    let notifiedPrayers = JSON.parse(localStorage.getItem("study_notified_prayers") || "{}");
+    
+    async function checkPrayerTimes() {
+        if (localStorage.getItem("study_prayer_notif") !== "true") return;
+        
+        const timings = await fetchPrayerTimes();
+        if (!timings) return;
+
+        const now = new Date();
+        const today = now.toDateString();
+        
+        // Reset notified prayers for new day
+        if (notifiedPrayers._date !== today) {
+            notifiedPrayers = { _date: today };
+        }
+
+        const prayers = ["Fajr", "Dhuhr", "Asr", "Maghrib", "Isha"];
+        
+        for (const prayer of prayers) {
+            if (notifiedPrayers[prayer]) continue;
+            
+            const pTime = timings[prayer];
+            if (!pTime) continue;
+            
+            const [h, m] = pTime.split(":").map(Number);
+            const prayerMinutes = h * 60 + m;
+            const nowMinutes = now.getHours() * 60 + now.getMinutes();
+            
+            // Notify 2 minutes before prayer
+            if (nowMinutes >= prayerMinutes - 2 && nowMinutes <= prayerMinutes + 5) {
+                showNotification(
+                    "حان وقت صلاة " + prayerNames[prayer],
+                    "قم للصلاة.. الصلاة خير من كل شيء 🤲",
+                    "icons/icon-192.png"
+                );
+                notifiedPrayers[prayer] = true;
+                localStorage.setItem("study_notified_prayers", JSON.stringify(notifiedPrayers));
+            }
+        }
+    }
+
+    // Send motivational notification
+    let lastMotivTime = parseInt(localStorage.getItem("study_last_motiv") || "0");
+    
+    function checkMotivational() {
+        if (localStorage.getItem("study_motiv_notif") !== "true") return;
+        
+        const interval = 90 * 60 * 1000; // Every 90 minutes
+        if (Date.now() - lastMotivTime < interval) return;
+        
+        const msg = motivationalMsgs[Math.floor(Math.random() * motivationalMsgs.length)];
+        showNotification(msg.title, msg.body);
+        lastMotivTime = Date.now();
+        localStorage.setItem("study_last_motiv", String(lastMotivTime));
+    }
+
+    // Initialize
+    async function initNotifications() {
+        const hasPermission = await requestNotifPermission();
+        if (!hasPermission) return;
+        
+        // Enable both by default on first visit
+        if (localStorage.getItem("study_motiv_notif") === null) {
+            localStorage.setItem("study_motiv_notif", "true");
+        }
+        if (localStorage.getItem("study_prayer_notif") === null) {
+            localStorage.setItem("study_prayer_notif", "true");
+        }
+
+        // Check every minute
+        setInterval(() => {
+            checkPrayerTimes();
+            checkMotivational();
+        }, 60000);
+
+        // Initial check after 10 seconds
+        setTimeout(() => {
+            checkPrayerTimes();
+            checkMotivational();
+        }, 10000);
+    }
+
+    // Setup notification toggles
+    window.addEventListener("DOMContentLoaded", () => {
+        const motivToggle = document.getElementById("motiv-notif-toggle");
+        const prayerToggle = document.getElementById("prayer-notif-toggle");
+
+        if (motivToggle) {
+            motivToggle.checked = localStorage.getItem("study_motiv_notif") === "true";
+            motivToggle.addEventListener("change", async () => {
+                if (motivToggle.checked) {
+                    const ok = await requestNotifPermission();
+                    if (!ok) { motivToggle.checked = false; alert("يرجى السماح بالإشعارات من إعدادات المتصفح"); return; }
+                }
+                localStorage.setItem("study_motiv_notif", motivToggle.checked ? "true" : "false");
+            });
+        }
+        if (prayerToggle) {
+            prayerToggle.checked = localStorage.getItem("study_prayer_notif") === "true";
+            prayerToggle.addEventListener("change", async () => {
+                if (prayerToggle.checked) {
+                    const ok = await requestNotifPermission();
+                    if (!ok) { prayerToggle.checked = false; alert("يرجى السماح بالإشعارات من إعدادات المتصفح"); return; }
+                }
+                localStorage.setItem("study_prayer_notif", prayerToggle.checked ? "true" : "false");
+            });
+        }
+
+        initNotifications();
+    });
+})();
 
 mermaid.initialize({ startOnLoad: false, theme: 'default', fontFamily: 'Tajawal' });
 renderAll();
@@ -2189,3 +2603,190 @@ window.openApiInstructions = () => {
         alert('حدث خطأ: لم يتم العثور على نافذة التعليمات.');
     }
 };
+
+// ====== My Dream Logic ======
+function editDream() {
+    document.getElementById('dream-display-container').style.display = 'none';
+    document.getElementById('dream-edit-container').style.display = 'flex';
+    document.getElementById('dream-input').value = localStorage.getItem('study_dream') || '';
+    document.getElementById('dream-input').focus();
+}
+
+function saveDream() {
+    const val = document.getElementById('dream-input').value.trim();
+    if (val) {
+        localStorage.setItem('study_dream', val);
+    } else {
+        localStorage.removeItem('study_dream');
+    }
+    loadDream();
+}
+
+function loadDream() {
+    const dream = localStorage.getItem('study_dream');
+    const displayContainer = document.getElementById('dream-display-container');
+    const editContainer = document.getElementById('dream-edit-container');
+    const text = document.getElementById('dream-text');
+    
+    if (displayContainer && editContainer && text) {
+        editContainer.style.display = 'none';
+        displayContainer.style.display = 'block';
+        if (dream) {
+            text.innerHTML = '✨ ' + dream + ' ✨';
+            text.style.color = '#ff9ff3';
+        } else {
+            text.innerHTML = 'لم تكتب حلمك بعد..';
+            text.style.color = 'var(--text-muted)';
+        }
+    }
+}
+
+document.addEventListener('DOMContentLoaded', loadDream);
+
+
+// ====== Challenges Logic ======
+let flightInterval;
+
+function startIceChallenge() {
+    const btn = document.getElementById('ice-btn');
+    if (btn.innerText.includes('ابدأ')) {
+        btn.innerHTML = '<i class="fa-solid fa-snowflake"></i> التلج بيدوب... ركز!';
+        btn.style.background = '#0984e3';
+        alert('كوباية التلج قدامك؟ يلا ابدأ المذاكرة وماتقومش غير لما تدوب خالص! 🧊🔥');
+    } else {
+        btn.innerHTML = '<i class="fa-solid fa-play"></i> ابدأ التحدي دلوقتي';
+        btn.style.background = 'linear-gradient(135deg, #74b9ff, #0984e3)';
+    }
+}
+
+function startFlightChallenge() {
+    const dest = document.getElementById('flight-destination');
+    const btn = document.getElementById('flight-btn');
+    const container = document.getElementById('flight-progress-container');
+    const fill = document.getElementById('flight-progress-fill');
+    const icon = document.getElementById('flight-icon');
+    const timeLeftDisplay = document.getElementById('flight-time-left');
+
+    if (btn.innerText.includes('إقلاع')) {
+        const totalMinutes = parseInt(dest.value);
+        let remainingSeconds = totalMinutes * 60;
+        const totalSeconds = remainingSeconds;
+
+        dest.disabled = true;
+        btn.innerHTML = '<i class="fa-solid fa-stop"></i> هبوط اضطراري (إلغاء)';
+        btn.style.background = '#e17055';
+        container.style.display = 'block';
+
+        clearInterval(flightInterval);
+        flightInterval = setInterval(() => {
+            remainingSeconds--;
+            if (remainingSeconds <= 0) {
+                clearInterval(flightInterval);
+                dest.disabled = false;
+                btn.innerHTML = '<i class="fa-solid fa-plane"></i> إقلاع!';
+                btn.style.background = 'linear-gradient(135deg, #00b894, #00cec9)';
+                timeLeftDisplay.innerText = "وصلنا بالسلامة! 🎉";
+                fill.style.width = '100%';
+                icon.style.left = '100%';
+                alert('عاش يا بطل! الطيارة وصلت وأنت خلصت مذاكرة التحدي ده بنجاح! 🛬🏆');
+                return;
+            }
+
+            const m = Math.floor(remainingSeconds / 60);
+            const s = remainingSeconds % 60;
+            timeLeftDisplay.innerText = `${m}:${s < 10 ? '0' : ''}${s}`;
+
+            const percent = ((totalSeconds - remainingSeconds) / totalSeconds) * 100;
+            fill.style.width = percent + '%';
+            // Adjust icon position slightly so it doesn't overflow
+            icon.style.left = `calc(${percent}% - 10px)`;
+        }, 1000);
+
+    } else {
+        clearInterval(flightInterval);
+        dest.disabled = false;
+        btn.innerHTML = '<i class="fa-solid fa-plane"></i> إقلاع!';
+        btn.style.background = 'linear-gradient(135deg, #00b894, #00cec9)';
+        container.style.display = 'none';
+        alert('تم إلغاء الرحلة.. الطيارة رجعت المطار 😅');
+    }
+}
+
+
+// ====== Nightstand / WakeLock ======
+let wakeLock = null;
+let nightstandInterval = null;
+
+async function startNightstand() {
+    const nightstand = document.getElementById('nightstand-mode');
+    if (!nightstand) return;
+    
+    // Request Wake Lock to keep screen on
+    try {
+        if ('wakeLock' in navigator) {
+            wakeLock = await navigator.wakeLock.request('screen');
+        }
+    } catch (err) {
+        console.log("WakeLock error: ", err);
+    }
+    
+    nightstand.style.display = 'flex';
+    if (document.documentElement.requestFullscreen) {
+        document.documentElement.requestFullscreen().catch(e => {});
+    }
+    
+    updateNightstandTime();
+    nightstandInterval = setInterval(updateNightstandTime, 1000);
+    
+    // Click to exit
+    nightstand.onclick = exitNightstand;
+}
+
+function exitNightstand() {
+    const nightstand = document.getElementById('nightstand-mode');
+    if (nightstand) nightstand.style.display = 'none';
+    
+    if (wakeLock !== null) {
+        wakeLock.release().catch(e => {});
+        wakeLock = null;
+    }
+    
+    clearInterval(nightstandInterval);
+    
+    if (document.fullscreenElement) {
+        document.exitFullscreen().catch(e => {});
+    }
+}
+
+function updateNightstandTime() {
+    const timeDisplay = document.getElementById('nightstand-time');
+    if (!timeDisplay) return;
+    const now = new Date();
+    const h = String(now.getHours()).padStart(2, '0');
+    const m = String(now.getMinutes()).padStart(2, '0');
+    timeDisplay.innerText = h + ':' + m;
+    
+    // Move slightly to prevent OLED burn-in
+    const x = Math.floor(Math.random() * 20) - 10;
+    const y = Math.floor(Math.random() * 20) - 10;
+    timeDisplay.style.transform = `translate(${x}px, ${y}px)`;
+}
+
+
+// ====== What's New Modal ======
+function closeWhatsNew() {
+    const modal = document.getElementById('whats-new-modal');
+    if (modal) {
+        modal.style.display = 'none';
+        localStorage.setItem('study_seen_update_v99', 'true');
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (!localStorage.getItem('study_seen_update_v99')) {
+        setTimeout(() => {
+            const modal = document.getElementById('whats-new-modal');
+            if (modal) modal.style.display = 'flex';
+        }, 1500);
+    }
+});
