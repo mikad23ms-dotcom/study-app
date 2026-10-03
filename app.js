@@ -868,7 +868,7 @@ async function processAIOutput(text) {
     }
 
     // Show notification
-    function showNotification(title, body, icon) {
+        function showNotification(title, body, icon) {
         if (Notification.permission !== "granted") return;
         
         if (navigator.serviceWorker) {
@@ -886,21 +886,8 @@ async function processAIOutput(text) {
             });
         } else {
             try {
-                
-        if (navigator.serviceWorker) {
-            navigator.serviceWorker.ready.then(reg => {
-                reg.showNotification(title, { body: body, icon: icon || "icons/icon-192.png", dir: "rtl" });
-            });
-        } else {
-            try {
                 new Notification(title, { body: body, icon: icon || "icons/icon-192.png", dir: "rtl" });
             } catch(e) { console.log(e); }
-        }
-    
-            } catch (e) {
-                console.log("Notification error:", e);
-            }
-        });
         }
     }
 
@@ -1649,7 +1636,7 @@ document.getElementById('ai-schedule-form').onsubmit = async (e) => {
     }
 
     // Show notification
-    function showNotification(title, body, icon) {
+        function showNotification(title, body, icon) {
         if (Notification.permission !== "granted") return;
         
         if (navigator.serviceWorker) {
@@ -1667,21 +1654,8 @@ document.getElementById('ai-schedule-form').onsubmit = async (e) => {
             });
         } else {
             try {
-                
-        if (navigator.serviceWorker) {
-            navigator.serviceWorker.ready.then(reg => {
-                reg.showNotification(title, { body: body, icon: icon || "icons/icon-192.png", dir: "rtl" });
-            });
-        } else {
-            try {
                 new Notification(title, { body: body, icon: icon || "icons/icon-192.png", dir: "rtl" });
             } catch(e) { console.log(e); }
-        }
-    
-            } catch (e) {
-                console.log("Notification error:", e);
-            }
-        });
         }
     }
 
