@@ -871,7 +871,7 @@ async function processAIOutput(text) {
     function showNotification(title, body, icon) {
         if (Notification.permission !== "granted") return;
         
-        if (navigator.serviceWorker && navigator.serviceWorker.controller) {
+        if (navigator.serviceWorker) {
             navigator.serviceWorker.ready.then(reg => {
                 reg.showNotification(title, {
                     body: body,
@@ -885,7 +885,22 @@ async function processAIOutput(text) {
                 });
             });
         } else {
-            new Notification(title, { body: body, icon: icon || "icons/icon-192.png", dir: "rtl" });
+            try {
+                
+        if (navigator.serviceWorker) {
+            navigator.serviceWorker.ready.then(reg => {
+                reg.showNotification(title, { body: body, icon: icon || "icons/icon-192.png", dir: "rtl" });
+            });
+        } else {
+            try {
+                new Notification(title, { body: body, icon: icon || "icons/icon-192.png", dir: "rtl" });
+            } catch(e) { console.log(e); }
+        }
+    
+            } catch (e) {
+                console.log("Notification error:", e);
+            }
+        });
         }
     }
 
@@ -1294,10 +1309,23 @@ function sendStudyNotification() {
     const msg = motivationMessages[Math.floor(Math.random() * motivationMessages.length)];
     
     if ('Notification' in window && Notification.permission === 'granted') {
-        new Notification('تطبيق المذاكرة المتكامل 📚', {
+        
+        if (navigator.serviceWorker) {
+            navigator.serviceWorker.ready.then(reg => {
+                reg.showNotification('تطبيق المذاكرة المتكامل 📚', {
             body: msg,
             icon: 'https://cdn-icons-png.flaticon.com/512/3429/3429930.png'
         });
+            });
+        } else {
+            try {
+                new Notification('تطبيق المذاكرة المتكامل 📚', {
+            body: msg,
+            icon: 'https://cdn-icons-png.flaticon.com/512/3429/3429930.png'
+        });
+            } catch(e) { console.log(e); }
+        }
+    
     }
 }
 
@@ -1624,7 +1652,7 @@ document.getElementById('ai-schedule-form').onsubmit = async (e) => {
     function showNotification(title, body, icon) {
         if (Notification.permission !== "granted") return;
         
-        if (navigator.serviceWorker && navigator.serviceWorker.controller) {
+        if (navigator.serviceWorker) {
             navigator.serviceWorker.ready.then(reg => {
                 reg.showNotification(title, {
                     body: body,
@@ -1638,7 +1666,22 @@ document.getElementById('ai-schedule-form').onsubmit = async (e) => {
                 });
             });
         } else {
-            new Notification(title, { body: body, icon: icon || "icons/icon-192.png", dir: "rtl" });
+            try {
+                
+        if (navigator.serviceWorker) {
+            navigator.serviceWorker.ready.then(reg => {
+                reg.showNotification(title, { body: body, icon: icon || "icons/icon-192.png", dir: "rtl" });
+            });
+        } else {
+            try {
+                new Notification(title, { body: body, icon: icon || "icons/icon-192.png", dir: "rtl" });
+            } catch(e) { console.log(e); }
+        }
+    
+            } catch (e) {
+                console.log("Notification error:", e);
+            }
+        });
         }
     }
 
