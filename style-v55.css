@@ -1,4 +1,4 @@
-﻿:root {
+:root {
     --primary-color: #4361ee;
     --secondary-color: #3f37c9;
     --bg-color: #f8f9fa;
@@ -563,6 +563,8 @@ header h1:hover {
         z-index: 10001 !important;
         transition: bottom 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
         overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 30px !important;
         padding-top: 30px !important;
         box-shadow: 0 -10px 40px rgba(0,0,0,0.6) !important;
     }

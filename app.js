@@ -2373,10 +2373,18 @@ window.toggleSidebar = () => {
 
 document.addEventListener('DOMContentLoaded', () => {
     setupVoiceRecognition();
-    // Sync username to mobile header
+    // Sync username to mobile header and sidebar
     if (studyUsername) {
         const mName = document.getElementById('mobile-welcome-name');
         if (mName) mName.innerText = studyUsername;
+        const sName = document.getElementById('sidebar-user-name');
+        if (sName) sName.innerText = studyUsername;
+    }
+    const sStage = document.getElementById('sidebar-user-stage');
+    if (sStage) {
+        const stage = localStorage.getItem('study_stage') || '';
+        const specialty = localStorage.getItem('study_specialty') || '';
+        sStage.innerText = [stage, specialty].filter(Boolean).join(' - ') || 'طالب';
     }
 
     // Mobile Bottom Nav Logic
@@ -2660,6 +2668,46 @@ function loadDream() {
 
 document.addEventListener('DOMContentLoaded', loadDream);
 
+
+// ====== Test Notification (Mobile Safe) ======
+function testNotification() {
+    if (!('Notification' in window)) {
+        alert('المتصفح ده مش بيدعم الإشعارات');
+        return;
+    }
+    
+    if (Notification.permission === 'granted') {
+        sendSafeNotification('تجربة! 🔔', 'الإشعارات شغالة تمام! 🎉');
+    } else if (Notification.permission === 'denied') {
+        alert('يرجى السماح بالإشعارات من إعدادات المتصفح');
+    } else {
+        Notification.requestPermission().then(p => {
+            if (p === 'granted') {
+                sendSafeNotification('تجربة! 🔔', 'الإشعارات شغالة تمام! 🎉');
+            } else {
+                alert('يرجى السماح بالإشعارات من إعدادات المتصفح');
+            }
+        });
+    }
+}
+
+function sendSafeNotification(title, body) {
+    if (navigator.serviceWorker) {
+        navigator.serviceWorker.ready.then(reg => {
+            reg.showNotification(title, {
+                body: body,
+                icon: 'https://cdn-icons-png.flaticon.com/512/3429/3429930.png',
+                dir: 'rtl'
+            });
+        });
+    } else {
+        try {
+            new Notification(title, { body: body, dir: 'rtl' });
+        } catch(e) {
+            alert(body);
+        }
+    }
+}
 
 // ====== Challenges Logic ======
 let flightInterval;

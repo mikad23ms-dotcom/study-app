@@ -207,6 +207,18 @@
                 <i class="fa-solid fa-graduation-cap"></i>
                 <h2>دليلك للمذاكرة</h2>
             </div>
+            <!-- User Profile in Sidebar -->
+            <div id="sidebar-user-profile" style="padding: 15px 20px; margin: 0 10px 10px; background: linear-gradient(135deg, rgba(67,97,238,0.15), rgba(114,9,183,0.1)); border-radius: 12px; border: 1px solid rgba(67,97,238,0.2);">
+                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+                    <div style="width: 45px; height: 45px; border-radius: 50%; background: var(--primary-color); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                        <i class="fa-solid fa-user-graduate" style="color: white; font-size: 1.2rem;"></i>
+                    </div>
+                    <div>
+                        <div id="sidebar-user-name" style="font-weight: 700; color: var(--text-main); font-size: 1.05rem;">يا بطل</div>
+                        <div id="sidebar-user-stage" style="color: var(--text-muted); font-size: 0.8rem;"></div>
+                    </div>
+                </div>
+            </div>
             <ul class="nav-links">
                 <li class="active" data-page="dashboard"><i class="fa-solid fa-chart-pie"></i> لوحة التحكم</li>
                 <li data-page="schedule"><i class="fa-solid fa-calendar-week"></i> جدول الدروس</li>
@@ -1006,7 +1018,7 @@
                     </div>
 
                     <!-- Test Button -->
-                    <button onclick="if(Notification.permission==='granted'){new Notification('تجربة! 🔔',{body:'الإشعارات شغالة تمام! 🎉',dir:'rtl'});}else{Notification.requestPermission().then(p=>{if(p==='granted')new Notification('تجربة! 🔔',{body:'الإشعارات شغالة تمام! 🎉',dir:'rtl'});else alert('يرجى السماح بالإشعارات من إعدادات المتصفح');});}" style="background: linear-gradient(135deg, #feca57, #ff9f43); color: #333; border: none; padding: 1rem; border-radius: 12px; font-size: 1.1rem; font-weight: bold; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 0.5rem; width: 100%; transition: transform 0.3s;">
+                    <button onclick="testNotification()" style="background: linear-gradient(135deg, #feca57, #ff9f43); color: #333; border: none; padding: 1rem; border-radius: 12px; font-size: 1.1rem; font-weight: bold; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 0.5rem; width: 100%; transition: transform 0.3s;">
                         <i class="fa-solid fa-bell"></i> جرب الإشعارات
                     </button>
                 </div>
@@ -1094,7 +1106,7 @@
                             <i id="flight-icon" class="fa-solid fa-plane" style="position: absolute; top: 2px; left: 0%; color: #2d3436; transition: left 1s linear; transform: scaleX(-1);"></i>
                         </div>
                     </div>
-                </div>\n
+                </div>
                 <!-- Challenge 3: Candle -->
                 <div class="card hover-glow-box" style="margin-bottom: 1.5rem; border-left: 4px solid #e17055;">
                     <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
