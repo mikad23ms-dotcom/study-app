@@ -2790,7 +2790,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 1500);
     }
 });
-\n
+
+
 // ====== Additional Challenges Logic ======
 let marathonInterval, isolationInterval, marsInterval, trainInterval;
 
