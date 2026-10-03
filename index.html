@@ -1215,11 +1215,25 @@
                         
                         let dateString = "الآن";
                         if (comment.timestamp) {
-                            const date = new Date(comment.timestamp);
-                            const diffDays = Math.floor((Date.now() - comment.timestamp) / 86400000);
-                            if (diffDays === 1) dateString = "أمس";
-                            else if (diffDays === 2) dateString = "منذ يومين";
-                            else if (diffDays > 2) dateString = date.toLocaleDateString('ar-EG', { year: 'numeric', month: 'short', day: 'numeric' });
+                            const diffMs = Date.now() - comment.timestamp;
+                            const diffMins = Math.floor(diffMs / 60000);
+                            const diffHours = Math.floor(diffMs / 3600000);
+                            const diffDays = Math.floor(diffMs / 86400000);
+                            
+                            if (diffMins < 1) dateString = "الآن";
+                            else if (diffMins === 1) dateString = "قبل دقيقة";
+                            else if (diffMins === 2) dateString = "قبل دقيقتين";
+                            else if (diffMins < 11) dateString = "قبل " + diffMins + " دقائق";
+                            else if (diffMins < 60) dateString = "قبل " + diffMins + " دقيقة";
+                            else if (diffHours === 1) dateString = "قبل ساعة";
+                            else if (diffHours === 2) dateString = "قبل ساعتين";
+                            else if (diffHours < 11) dateString = "قبل " + diffHours + " ساعات";
+                            else if (diffHours < 24) dateString = "قبل " + diffHours + " ساعة";
+                            else if (diffDays === 1) dateString = "قبل يوم";
+                            else if (diffDays === 2) dateString = "قبل يومين";
+                            else if (diffDays < 11) dateString = "قبل " + diffDays + " أيام";
+                            else if (diffDays < 30) dateString = "قبل " + diffDays + " يوم";
+                            else dateString = new Date(comment.timestamp).toLocaleDateString('ar-EG', { year: 'numeric', month: 'short', day: 'numeric' });
                         }
 
                         div.innerHTML = `
