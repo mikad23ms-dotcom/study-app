@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
@@ -1075,7 +1075,7 @@
                             <option value="210">مصر إلى الإمارات (3.5 ساعات)</option>
                             <option value="240">مصر إلى فرنسا (4 ساعات)</option>
                             <option value="60">مصر إلى الأردن (ساعة واحدة)</option>
-                            <option value="600">مصر إلى أمريكا (10 ساعات - للوحوش بس!)</option>
+                            <option value="900">مصر إلى أمريكا (15 ساعة - ليفيل الوحش!)</option>
                         </select>
                     </div>
                     <div style="text-align: center;">
@@ -1094,7 +1094,193 @@
                             <i id="flight-icon" class="fa-solid fa-plane" style="position: absolute; top: 2px; left: 0%; color: #2d3436; transition: left 1s linear; transform: scaleX(-1);"></i>
                         </div>
                     </div>
+                </div>\n
+                <!-- Challenge 3: Candle -->
+                <div class="card hover-glow-box" style="margin-bottom: 1.5rem; border-left: 4px solid #e17055;">
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                        <i class="fa-solid fa-fire-flame-curved" style="font-size: 2.5rem; color: #e17055;"></i>
+                        <div>
+                            <h3 style="margin: 0; color: #e17055;">تحدي الشمعة 🕯️</h3>
+                            <p style="margin: 5px 0 0 0; color: var(--text-muted); font-size: 0.9rem;">ولع شمعة صغيرة قدامك.. هدفك تذاكر بتركيز تام وماتقومش غير لما الشمعة تطفي لوحدها!</p>
+                        </div>
+                    </div>
+                    <div style="text-align: center; margin-top: 1rem;">
+                        <button onclick="startCandleChallenge()" id="candle-btn" class="theme-btn btn-hover-glow" style="background: linear-gradient(135deg, #e17055, #d63031); color: white; border: none; padding: 0.8rem 2rem; border-radius: 10px; font-size: 1.1rem;"><i class="fa-solid fa-play"></i> ابدأ التحدي دلوقتي</button>
+                    </div>
                 </div>
+
+                <!-- Challenge 4: Marathon -->
+                <div class="card hover-glow-box" style="margin-bottom: 1.5rem; border-left: 4px solid #d63031;">
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                        <i class="fa-solid fa-person-running" style="font-size: 2.5rem; color: #d63031;"></i>
+                        <div>
+                            <h3 style="margin: 0; color: #d63031;">تحدي الماراثون 🏃‍♂️</h3>
+                            <p style="margin: 5px 0 0 0; color: var(--text-muted); font-size: 0.9rem;">مذاكرة مستمرة بدون توقف تماما.. مين هيوصل لخط النهاية بدون ما يستسلم؟</p>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
+                        <select id="marathon-duration" style="flex: 1; padding: 0.8rem; border: 2px solid var(--border-color); border-radius: 10px; font-family: 'Tajawal'; background: var(--bg-color); color: var(--text-main);">
+                            <option value="180">3 ساعات متواصلة</option>
+                            <option value="240">4 ساعات متواصلة</option>
+                            <option value="300">5 ساعات متواصلة</option>
+                            <option value="360">6 ساعات متواصلة</option>
+                        </select>
+                    </div>
+                    <div style="text-align: center;">
+                        <button onclick="startMarathonChallenge()" id="marathon-btn" class="theme-btn btn-hover-glow" style="background: linear-gradient(135deg, #d63031, #c0392b); color: white; border: none; padding: 0.8rem 2rem; border-radius: 10px; font-size: 1.1rem;"><i class="fa-solid fa-play"></i> انطلاق الماراثون!</button>
+                    </div>
+                    <div id="marathon-progress-container" style="display: none; margin-top: 1.5rem; text-align: center;">
+                        <h2 id="marathon-time-left" style="color: #d63031; margin: 0; font-size: 2.5rem;">00:00:00</h2>
+                        <p style="color: var(--text-muted);">باقي على خط النهاية</p>
+                    </div>
+                </div>
+
+                <!-- Challenge 5: Complete Isolation -->
+                <div class="card hover-glow-box" style="margin-bottom: 1.5rem; border-left: 4px solid #2d3436;">
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                        <i class="fa-solid fa-mobile-screen-button" style="font-size: 2.5rem; color: #2d3436;"></i>
+                        <div>
+                            <h3 style="margin: 0; color: #2d3436;">تحدي العزل التام 📵</h3>
+                            <p style="margin: 5px 0 0 0; color: var(--text-muted); font-size: 0.9rem;">اقفل النت، فعل وضع الطيران، واقفل الباب. مفيش أي تواصل مع العالم الخارجي لحد ما تخلص الوقت!</p>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
+                        <select id="isolation-duration" style="flex: 1; padding: 0.8rem; border: 2px solid var(--border-color); border-radius: 10px; font-family: 'Tajawal'; background: var(--bg-color); color: var(--text-main);">
+                            <option value="120">ساعتين عزل</option>
+                            <option value="240">4 ساعات عزل</option>
+                            <option value="360">6 ساعات عزل</option>
+                            <option value="480">8 ساعات عزل</option>
+                        </select>
+                    </div>
+                    <div style="text-align: center;">
+                        <button onclick="startIsolationChallenge()" id="isolation-btn" class="theme-btn btn-hover-glow" style="background: linear-gradient(135deg, #2d3436, #636e72); color: white; border: none; padding: 0.8rem 2rem; border-radius: 10px; font-size: 1.1rem;"><i class="fa-solid fa-power-off"></i> ابدأ العزل!</button>
+                    </div>
+                    <div id="isolation-progress-container" style="display: none; margin-top: 1.5rem; text-align: center;">
+                        <h2 id="isolation-time-left" style="color: #2d3436; margin: 0; font-size: 2.5rem;">00:00:00</h2>
+                    </div>
+                </div>
+
+                <!-- Challenge 6: Battery -->
+                <div class="card hover-glow-box" style="margin-bottom: 1.5rem; border-left: 4px solid #27ae60;">
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                        <i class="fa-solid fa-battery-half" style="font-size: 2.5rem; color: #27ae60;"></i>
+                        <div>
+                            <h3 style="margin: 0; color: #27ae60;">تحدي شحن البطارية 🔋</h3>
+                            <p style="margin: 5px 0 0 0; color: var(--text-muted); font-size: 0.9rem;">افصل شاحن اللاب توب أو الموبايل.. التحدي إنك تخلص التارجت بتاعك قبل ما البطارية تفصل!</p>
+                        </div>
+                    </div>
+                    <div style="text-align: center; margin-top: 1rem;">
+                        <button onclick="startBatteryChallenge()" id="battery-btn" class="theme-btn btn-hover-glow" style="background: linear-gradient(135deg, #27ae60, #2ecc71); color: white; border: none; padding: 0.8rem 2rem; border-radius: 10px; font-size: 1.1rem;"><i class="fa-solid fa-bolt"></i> ابدأ التحدي</button>
+                    </div>
+                </div>
+
+                <!-- Challenge 7: Caveman -->
+                <div class="card hover-glow-box" style="margin-bottom: 1.5rem; border-left: 4px solid #8e44ad;">
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                        <i class="fa-solid fa-campground" style="font-size: 2.5rem; color: #8e44ad;"></i>
+                        <div>
+                            <h3 style="margin: 0; color: #8e44ad;">تحدي رجل الكهف 🪨</h3>
+                            <p style="margin: 5px 0 0 0; color: var(--text-muted); font-size: 0.9rem;">مفيش أجهزة، مفيش نت، مفيش أي حاجة إلكترونية. ورقة وقلم وكتاب وبس!</p>
+                        </div>
+                    </div>
+                    <div style="text-align: center; margin-top: 1rem;">
+                        <button onclick="startCavemanChallenge()" id="caveman-btn" class="theme-btn btn-hover-glow" style="background: linear-gradient(135deg, #8e44ad, #9b59b6); color: white; border: none; padding: 0.8rem 2rem; border-radius: 10px; font-size: 1.1rem;"><i class="fa-solid fa-leaf"></i> اقفل كل حاجة وابدأ</button>
+                    </div>
+                </div>
+
+                <!-- Challenge 8: Mars Mission -->
+                <div class="card hover-glow-box" style="margin-bottom: 1.5rem; border-left: 4px solid #d35400;">
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                        <i class="fa-solid fa-rocket" style="font-size: 2.5rem; color: #d35400;"></i>
+                        <div>
+                            <h3 style="margin: 0; color: #d35400;">تحدي المريخ 🚀</h3>
+                            <p style="margin: 5px 0 0 0; color: var(--text-muted); font-size: 0.9rem;">أطول رحلة تركيز! أنت في طريقك للمريخ ومفيش أي مجال للخطأ (أقصى مدة 15 ساعة).</p>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
+                        <select id="mars-duration" style="flex: 1; padding: 0.8rem; border: 2px solid var(--border-color); border-radius: 10px; font-family: 'Tajawal'; background: var(--bg-color); color: var(--text-main);">
+                            <option value="420">7 ساعات (المرحلة الأولى)</option>
+                            <option value="480">8 ساعات (الغلاف الجوي)</option>
+                            <option value="540">9 ساعات (الهبوط على المريخ)</option>
+                            <option value="900">15 ساعة (ليفيل الوحش الفضائي!)</option>
+                        </select>
+                    </div>
+                    <div style="text-align: center;">
+                        <button onclick="startMarsChallenge()" id="mars-btn" class="theme-btn btn-hover-glow" style="background: linear-gradient(135deg, #d35400, #e67e22); color: white; border: none; padding: 0.8rem 2rem; border-radius: 10px; font-size: 1.1rem;"><i class="fa-solid fa-rocket"></i> إطلاق الصاروخ!</button>
+                    </div>
+                    <div id="mars-progress-container" style="display: none; margin-top: 1.5rem; text-align: center;">
+                        <h2 id="mars-time-left" style="color: #d35400; margin: 0; font-size: 2.5rem;">00:00:00</h2>
+                        <p style="color: var(--text-muted);">باقي على الوصول للمريخ</p>
+                    </div>
+                </div>
+
+                <!-- Challenge 9: 100 Pages -->
+                <div class="card hover-glow-box" style="margin-bottom: 1.5rem; border-left: 4px solid #f39c12;">
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                        <i class="fa-solid fa-book-open" style="font-size: 2.5rem; color: #f39c12;"></i>
+                        <div>
+                            <h3 style="margin: 0; color: #f39c12;">تحدي الـ 100 صفحة 📚</h3>
+                            <p style="margin: 5px 0 0 0; color: var(--text-muted); font-size: 0.9rem;">التحدي مش بالوقت.. التحدي بالكمية! مش هتقوم غير لما تخلص 100 صفحة قراءة أو مذاكرة.</p>
+                        </div>
+                    </div>
+                    <div style="text-align: center; margin-top: 1rem;">
+                        <button onclick="startPagesChallenge()" id="pages-btn" class="theme-btn btn-hover-glow" style="background: linear-gradient(135deg, #f39c12, #f1c40f); color: white; border: none; padding: 0.8rem 2rem; border-radius: 10px; font-size: 1.1rem;"><i class="fa-solid fa-check-double"></i> قبلت التحدي</button>
+                    </div>
+                </div>
+
+                <!-- Challenge 10: Morning Coffee -->
+                <div class="card hover-glow-box" style="margin-bottom: 1.5rem; border-left: 4px solid #7f8c8d;">
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                        <i class="fa-solid fa-mug-hot" style="font-size: 2.5rem; color: #7f8c8d;"></i>
+                        <div>
+                            <h3 style="margin: 0; color: #7f8c8d;">تحدي قهوة الصباح ☕</h3>
+                            <p style="margin: 5px 0 0 0; color: var(--text-muted); font-size: 0.9rem;">اعمل قهوتك، وابدأ مذاكرة. ماتشربش القهوة غير لما تخلص الجزء اللي حددته!</p>
+                        </div>
+                    </div>
+                    <div style="text-align: center; margin-top: 1rem;">
+                        <button onclick="startCoffeeChallenge()" id="coffee-btn" class="theme-btn btn-hover-glow" style="background: linear-gradient(135deg, #7f8c8d, #95a5a6); color: white; border: none; padding: 0.8rem 2rem; border-radius: 10px; font-size: 1.1rem;"><i class="fa-solid fa-mug-hot"></i> القهوة جاهزة</button>
+                    </div>
+                </div>
+
+                <!-- Challenge 11: Midnight Train -->
+                <div class="card hover-glow-box" style="margin-bottom: 1.5rem; border-left: 4px solid #34495e;">
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                        <i class="fa-solid fa-train-subway" style="font-size: 2.5rem; color: #34495e;"></i>
+                        <div>
+                            <h3 style="margin: 0; color: #34495e;">تحدي قطار منتصف الليل 🚆</h3>
+                            <p style="margin: 5px 0 0 0; color: var(--text-muted); font-size: 0.9rem;">رحلة هدوء مسائية بدون توقف لحد ما القطر يوصل المحطة الأخيرة.</p>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
+                        <select id="train-duration" style="flex: 1; padding: 0.8rem; border: 2px solid var(--border-color); border-radius: 10px; font-family: 'Tajawal'; background: var(--bg-color); color: var(--text-main);">
+                            <option value="180">3 ساعات (منتصف الليل)</option>
+                            <option value="240">4 ساعات (رحلة الفجر)</option>
+                            <option value="360">6 ساعات (حتى الصباح)</option>
+                        </select>
+                    </div>
+                    <div style="text-align: center;">
+                        <button onclick="startTrainChallenge()" id="train-btn" class="theme-btn btn-hover-glow" style="background: linear-gradient(135deg, #34495e, #2c3e50); color: white; border: none; padding: 0.8rem 2rem; border-radius: 10px; font-size: 1.1rem;"><i class="fa-solid fa-ticket"></i> قطع التذكرة!</button>
+                    </div>
+                    <div id="train-progress-container" style="display: none; margin-top: 1.5rem; text-align: center;">
+                        <h2 id="train-time-left" style="color: #34495e; margin: 0; font-size: 2.5rem;">00:00:00</h2>
+                        <p style="color: var(--text-muted);">باقي على المحطة الأخيرة</p>
+                    </div>
+                </div>
+
+                <!-- Challenge 12: Active Ant -->
+                <div class="card hover-glow-box" style="margin-bottom: 1.5rem; border-left: 4px solid #e74c3c;">
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                        <i class="fa-solid fa-bug" style="font-size: 2.5rem; color: #e74c3c;"></i>
+                        <div>
+                            <h3 style="margin: 0; color: #e74c3c;">تحدي النملة النشيطة 🐜</h3>
+                            <p style="margin: 5px 0 0 0; color: var(--text-muted); font-size: 0.9rem;">مذاكرة بتركيز ولما تخلص مهمة تقوم تعمل حاجة حركية (ترتيب الأوضة، تمرين ضغط) وترجع تاني!</p>
+                        </div>
+                    </div>
+                    <div style="text-align: center; margin-top: 1rem;">
+                        <button onclick="startAntChallenge()" id="ant-btn" class="theme-btn btn-hover-glow" style="background: linear-gradient(135deg, #e74c3c, #c0392b); color: white; border: none; padding: 0.8rem 2rem; border-radius: 10px; font-size: 1.1rem;"><i class="fa-solid fa-play"></i> ابدأ التحدي</button>
+                    </div>
+                </div>
+
             </div>
         </section>
 

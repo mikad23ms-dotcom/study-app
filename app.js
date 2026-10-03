@@ -2790,3 +2790,230 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 1500);
     }
 });
+\n
+// ====== Additional Challenges Logic ======
+let marathonInterval, isolationInterval, marsInterval, trainInterval;
+
+function formatTimeHHMMSS(totalSeconds) {
+    const h = Math.floor(totalSeconds / 3600);
+    const m = Math.floor((totalSeconds % 3600) / 60);
+    const s = totalSeconds % 60;
+    return `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+}
+
+function startCandleChallenge() {
+    const btn = document.getElementById('candle-btn');
+    if (btn.innerText.includes('ابدأ')) {
+        btn.innerHTML = '<i class="fa-solid fa-fire"></i> الشمعة مولعة... ركز!';
+        btn.style.background = '#c0392b';
+        alert('ولع الشمعة دلوقتي! ماتقومش غير لما تطفي لوحدها 🔥');
+    } else {
+        btn.innerHTML = '<i class="fa-solid fa-play"></i> ابدأ التحدي دلوقتي';
+        btn.style.background = 'linear-gradient(135deg, #e17055, #d63031)';
+    }
+}
+
+function startMarathonChallenge() {
+    const dest = document.getElementById('marathon-duration');
+    const btn = document.getElementById('marathon-btn');
+    const container = document.getElementById('marathon-progress-container');
+    const timeLeftDisplay = document.getElementById('marathon-time-left');
+
+    if (btn.innerText.includes('انطلاق')) {
+        let remainingSeconds = parseInt(dest.value) * 60;
+        dest.disabled = true;
+        btn.innerHTML = '<i class="fa-solid fa-stop"></i> استسلام (إلغاء)';
+        btn.style.background = '#7f8c8d';
+        container.style.display = 'block';
+
+        clearInterval(marathonInterval);
+        marathonInterval = setInterval(() => {
+            remainingSeconds--;
+            if (remainingSeconds <= 0) {
+                clearInterval(marathonInterval);
+                dest.disabled = false;
+                btn.innerHTML = '<i class="fa-solid fa-play"></i> انطلاق الماراثون!';
+                btn.style.background = 'linear-gradient(135deg, #d63031, #c0392b)';
+                timeLeftDisplay.innerText = "وصلت لخط النهاية! 🏆";
+                alert('عاش يا وحش! خلصت الماراثون بنجاح!');
+                return;
+            }
+            timeLeftDisplay.innerText = formatTimeHHMMSS(remainingSeconds);
+        }, 1000);
+    } else {
+        clearInterval(marathonInterval);
+        dest.disabled = false;
+        btn.innerHTML = '<i class="fa-solid fa-play"></i> انطلاق الماراثون!';
+        btn.style.background = 'linear-gradient(135deg, #d63031, #c0392b)';
+        container.style.display = 'none';
+        alert('انسحبت من الماراثون.. حاول تاني بعدين! 🏃‍♂️💨');
+    }
+}
+
+function startIsolationChallenge() {
+    const dest = document.getElementById('isolation-duration');
+    const btn = document.getElementById('isolation-btn');
+    const container = document.getElementById('isolation-progress-container');
+    const timeLeftDisplay = document.getElementById('isolation-time-left');
+
+    if (btn.innerText.includes('ابدأ العزل')) {
+        let remainingSeconds = parseInt(dest.value) * 60;
+        dest.disabled = true;
+        btn.innerHTML = '<i class="fa-solid fa-stop"></i> كسر العزل (إلغاء)';
+        btn.style.background = '#e74c3c';
+        container.style.display = 'block';
+
+        clearInterval(isolationInterval);
+        isolationInterval = setInterval(() => {
+            remainingSeconds--;
+            if (remainingSeconds <= 0) {
+                clearInterval(isolationInterval);
+                dest.disabled = false;
+                btn.innerHTML = '<i class="fa-solid fa-power-off"></i> ابدأ العزل!';
+                btn.style.background = 'linear-gradient(135deg, #2d3436, #636e72)';
+                timeLeftDisplay.innerText = "تمت المهمة بنجاح! 🌍";
+                alert('أهلاً بيك في العالم الخارجي تاني! عملت إنجاز عظيم!');
+                return;
+            }
+            timeLeftDisplay.innerText = formatTimeHHMMSS(remainingSeconds);
+        }, 1000);
+    } else {
+        clearInterval(isolationInterval);
+        dest.disabled = false;
+        btn.innerHTML = '<i class="fa-solid fa-power-off"></i> ابدأ العزل!';
+        btn.style.background = 'linear-gradient(135deg, #2d3436, #636e72)';
+        container.style.display = 'none';
+    }
+}
+
+function startBatteryChallenge() {
+    const btn = document.getElementById('battery-btn');
+    if (btn.innerText.includes('ابدأ')) {
+        btn.innerHTML = '<i class="fa-solid fa-battery-quarter"></i> البطارية بتنقص... استعجل!';
+        btn.style.background = '#c0392b';
+        alert('افصل الشاحن دلوقتي.. وسابق الزمن! ⚡');
+    } else {
+        btn.innerHTML = '<i class="fa-solid fa-bolt"></i> ابدأ التحدي';
+        btn.style.background = 'linear-gradient(135deg, #27ae60, #2ecc71)';
+    }
+}
+
+function startCavemanChallenge() {
+    const btn = document.getElementById('caveman-btn');
+    if (btn.innerText.includes('اقفل')) {
+        btn.innerHTML = '<i class="fa-solid fa-fire"></i> أنت في الكهف حالياً!';
+        btn.style.background = '#7f8c8d';
+        alert('أبعد أي جهاز إلكتروني عنك.. ورقة وقلم وبس! 🪨');
+    } else {
+        btn.innerHTML = '<i class="fa-solid fa-leaf"></i> اقفل كل حاجة وابدأ';
+        btn.style.background = 'linear-gradient(135deg, #8e44ad, #9b59b6)';
+    }
+}
+
+function startMarsChallenge() {
+    const dest = document.getElementById('mars-duration');
+    const btn = document.getElementById('mars-btn');
+    const container = document.getElementById('mars-progress-container');
+    const timeLeftDisplay = document.getElementById('mars-time-left');
+
+    if (btn.innerText.includes('إطلاق')) {
+        let remainingSeconds = parseInt(dest.value) * 60;
+        dest.disabled = true;
+        btn.innerHTML = '<i class="fa-solid fa-stop"></i> إلغاء المهمة';
+        btn.style.background = '#c0392b';
+        container.style.display = 'block';
+
+        clearInterval(marsInterval);
+        marsInterval = setInterval(() => {
+            remainingSeconds--;
+            if (remainingSeconds <= 0) {
+                clearInterval(marsInterval);
+                dest.disabled = false;
+                btn.innerHTML = '<i class="fa-solid fa-rocket"></i> إطلاق الصاروخ!';
+                btn.style.background = 'linear-gradient(135deg, #d35400, #e67e22)';
+                timeLeftDisplay.innerText = "هبطنا على المريخ! 🔴";
+                alert('إنجاز تاريخي! هبطت على المريخ وخلصت أصعب تحدي! 🚀');
+                return;
+            }
+            timeLeftDisplay.innerText = formatTimeHHMMSS(remainingSeconds);
+        }, 1000);
+    } else {
+        clearInterval(marsInterval);
+        dest.disabled = false;
+        btn.innerHTML = '<i class="fa-solid fa-rocket"></i> إطلاق الصاروخ!';
+        btn.style.background = 'linear-gradient(135deg, #d35400, #e67e22)';
+        container.style.display = 'none';
+    }
+}
+
+function startPagesChallenge() {
+    const btn = document.getElementById('pages-btn');
+    if (btn.innerText.includes('قبلت')) {
+        btn.innerHTML = '<i class="fa-solid fa-book-reader"></i> بتقرأ حالياً... ماتقفش!';
+        btn.style.background = '#e67e22';
+        alert('ابدأ من دلوقتي.. الهدف 100 صفحة! 📖');
+    } else {
+        btn.innerHTML = '<i class="fa-solid fa-check-double"></i> قبلت التحدي';
+        btn.style.background = 'linear-gradient(135deg, #f39c12, #f1c40f)';
+    }
+}
+
+function startCoffeeChallenge() {
+    const btn = document.getElementById('coffee-btn');
+    if (btn.innerText.includes('جاهزة')) {
+        btn.innerHTML = '<i class="fa-solid fa-mug-hot"></i> القهوة بتبرد... خلص بسرعة!';
+        btn.style.background = '#e74c3c';
+        alert('القهوة قدامك.. ممنوع الشرب لحد ما تخلص هدفك! ☕');
+    } else {
+        btn.innerHTML = '<i class="fa-solid fa-mug-hot"></i> القهوة جاهزة';
+        btn.style.background = 'linear-gradient(135deg, #7f8c8d, #95a5a6)';
+    }
+}
+
+function startTrainChallenge() {
+    const dest = document.getElementById('train-duration');
+    const btn = document.getElementById('train-btn');
+    const container = document.getElementById('train-progress-container');
+    const timeLeftDisplay = document.getElementById('train-time-left');
+
+    if (btn.innerText.includes('قطع التذكرة')) {
+        let remainingSeconds = parseInt(dest.value) * 60;
+        dest.disabled = true;
+        btn.innerHTML = '<i class="fa-solid fa-stop"></i> النزول في محطة خاطئة';
+        btn.style.background = '#e74c3c';
+        container.style.display = 'block';
+
+        clearInterval(trainInterval);
+        trainInterval = setInterval(() => {
+            remainingSeconds--;
+            if (remainingSeconds <= 0) {
+                clearInterval(trainInterval);
+                dest.disabled = false;
+                btn.innerHTML = '<i class="fa-solid fa-ticket"></i> قطع التذكرة!';
+                btn.style.background = 'linear-gradient(135deg, #34495e, #2c3e50)';
+                timeLeftDisplay.innerText = "وصلنا بالسلامة! 🚉";
+                alert('وصلنا المحطة الأخيرة! رحلة ممتازة! 🚂');
+                return;
+            }
+            timeLeftDisplay.innerText = formatTimeHHMMSS(remainingSeconds);
+        }, 1000);
+    } else {
+        clearInterval(trainInterval);
+        dest.disabled = false;
+        btn.innerHTML = '<i class="fa-solid fa-ticket"></i> قطع التذكرة!';
+        btn.style.background = 'linear-gradient(135deg, #34495e, #2c3e50)';
+        container.style.display = 'none';
+    }
+}
+
+function startAntChallenge() {
+    const btn = document.getElementById('ant-btn');
+    if (btn.innerText.includes('ابدأ')) {
+        btn.innerHTML = '<i class="fa-solid fa-person-running"></i> نشاط مستمر... كمل!';
+        btn.style.background = '#c0392b';
+        alert('ابدأ مذاكرة.. وأول ما تخلص جزء قوم أعمل حاجة حركية! 🐜');
+    } else {
+        btn.innerHTML = '<i class="fa-solid fa-play"></i> ابدأ التحدي';
+        btn.style.background = 'linear-gradient(135deg, #e74c3c, #c0392b)';
+    }
+}
