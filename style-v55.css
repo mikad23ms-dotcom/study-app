@@ -12,12 +12,67 @@
 }
 
 [data-theme="dark"] {
-    --bg-color: #121212;
-    --card-bg: #1e1e1e;
-    --text-main: #f1f1f1;
-    --text-muted: #a0a0a0;
-    --border-color: #333333;
+    --bg-color: #0b0f19;
+    --card-bg: rgba(17, 24, 39, 0.7);
+    --primary-color: #00e5ff;
+    --secondary-color: #3b82f6;
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --border-color: rgba(0, 229, 255, 0.15);
+    --danger: #ef4444;
+    --success: #10b981;
 }
+
+/* --- High-Tech Animated Background --- */
+body[data-theme="dark"] {
+    background-color: var(--bg-color);
+}
+body[data-theme="dark"]::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background-image: 
+        radial-gradient(circle at 50% 0%, rgba(0, 229, 255, 0.15) 0%, transparent 60%),
+        radial-gradient(circle at 80% 100%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+        url('data:image/svg+xml;utf8,<svg width="24" height="24" xmlns="http://www.w3.org/2000/svg"><circle cx="2" cy="2" r="1" fill="rgba(0, 229, 255, 0.15)"/></svg>');
+    background-size: 100% 100%, 100% 100%, 24px 24px;
+    z-index: -1;
+    animation: bgGridMove 40s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes bgGridMove {
+    0% { background-position: 0% 0%, 0% 0%, 0 0; }
+    100% { background-position: 0% 0%, 0% 0%, 0 480px; }
+}
+
+/* Glassmorphism Cards */
+body[data-theme="dark"] .card, body[data-theme="dark"] .sidebar {
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(0, 229, 255, 0.1) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Glowing Text Gradient for main headers */
+body[data-theme="dark"] header h1, body[data-theme="dark"] .sidebar .logo h2 {
+    background: linear-gradient(90deg, #ffffff 30%, #00e5ff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 20px rgba(0, 229, 255, 0.2);
+    font-weight: 800;
+}
+
+/* Glowing Buttons */
+body[data-theme="dark"] .theme-btn {
+    box-shadow: 0 0 10px rgba(0, 229, 255, 0.1);
+    border-color: rgba(0, 229, 255, 0.3);
+}
+body[data-theme="dark"] .theme-btn:hover {
+    box-shadow: 0 0 20px rgba(0, 229, 255, 0.4);
+    background: rgba(0, 229, 255, 0.1);
+}
+
 
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Tajawal', sans-serif; }
 
@@ -544,43 +599,44 @@ header h1:hover {
     /* Hide Desktop Header in Dashboard */
     #dashboard > header { display: none; }
 
-    /* The Bottom Sheet Sidebar (Mobile) */
+    /* The Right Side Menu (Mobile) */
     .sidebar {
         position: fixed !important;
-        top: auto !important; 
-        bottom: -120% !important;
-        left: 0 !important; right: 0 !important;
-        width: 100% !important;
-        height: auto !important;
-        max-height: 85vh !important;
+        top: 0 !important; 
+        bottom: 0 !important;
+        right: -120% !important;
+        left: auto !important;
+        width: 80% !important;
+        max-width: 320px !important;
+        height: 100vh !important;
+        max-height: 100vh !important;
         flex-direction: column !important;
-        background: linear-gradient(180deg, rgba(20,15,40,0.95) 0%, rgba(10,8,25,0.98) 100%) !important;
+        background: linear-gradient(180deg, rgba(20,15,40,0.98) 0%, rgba(10,8,25,1) 100%) !important;
         backdrop-filter: blur(20px);
         -webkit-backdrop-filter: blur(20px);
         border: none !important;
-        border-top: 1px solid rgba(255,255,255,0.1) !important;
-        border-radius: 30px 30px 0 0 !important;
+        border-left: 1px solid rgba(255,255,255,0.1) !important;
+        border-radius: 30px 0 0 30px !important;
         z-index: 10001 !important;
-        transition: bottom 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+        transition: right 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
         overflow-y: auto;
         -webkit-overflow-scrolling: touch;
         padding-bottom: 30px !important;
         padding-top: 30px !important;
-        box-shadow: 0 -10px 40px rgba(0,0,0,0.6) !important;
+        box-shadow: -10px 0 40px rgba(0,0,0,0.6) !important;
     }
-    .sidebar.open { bottom: 0 !important; }
+    .sidebar.open { right: 0 !important; }
     
     [data-theme="light"] .sidebar {
-        background: rgba(255, 255, 255, 0.95) !important;
-        border-top: 1px solid rgba(0,0,0,0.05) !important;
+        background: rgba(255, 255, 255, 0.98) !important;
+        border-left: 1px solid rgba(0,0,0,0.05) !important;
     }
 
-    /* Drag Handle */
+    /* Hide Drag Handle */
     .sidebar::before {
-        content: ''; position: absolute; top: 12px; left: 50%; transform: translateX(-50%);
-        width: 50px; height: 5px; background: rgba(255, 255, 255, 0.2); border-radius: 10px;
+        display: none !important;
     }
-    [data-theme="light"] .sidebar::before { background: rgba(0, 0, 0, 0.1); }
+    [data-theme="light"] .sidebar::before { display: none !important; }
     
     .sidebar .logo { display: flex !important; justify-content: space-between; padding: 0 20px; }
     .sidebar-footer { display: flex !important; flex-direction: column !important; padding: 20px; background: transparent !important; }
@@ -797,4 +853,66 @@ header h1:hover {
     33% { transform: translate(60px, -90px) scale(0.9); }
     66% { transform: translate(-70px, 30px) scale(1.2); }
     100% { transform: translate(0, 0) scale(1); }
+}
+
+
+/* ========================================================= */
+/* --- UNIVERSAL HOVER EFFECTS (JUMP & GLOW) --- */
+/* ========================================================= */
+
+/* Add smooth transition to interactive elements */
+.card, .theme-btn, .nav-links li, .stat-card, .subject-card, .flashcard, .challenge-card {
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease, border-color 0.3s ease !important;
+}
+
+/* Hover effects for Light Mode (Subtle Shadow & Jump) */
+.card:hover, .theme-btn:hover, .stat-card:hover, .subject-card:hover, .flashcard:hover {
+    transform: translateY(-5px) !important;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Hover effects for Sidebar Navigation Links */
+.nav-links li {
+    border: 1px solid transparent;
+}
+.nav-links li:hover {
+    transform: translateX(-5px) translateY(-2px) !important; /* Move slightly left (RTL) and up */
+    background: var(--bg-color) !important;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05) !important;
+    border: 1px solid var(--border-color);
+}
+
+/* --- DARK MODE CYBERPUNK GLOW HOVER --- */
+body[data-theme="dark"] .card:hover, 
+body[data-theme="dark"] .theme-btn:hover, 
+body[data-theme="dark"] .stat-card:hover, 
+body[data-theme="dark"] .subject-card:hover,
+body[data-theme="dark"] .flashcard:hover {
+    transform: translateY(-5px) !important;
+    box-shadow: 0 15px 35px rgba(0, 229, 255, 0.2), 0 0 15px rgba(0, 229, 255, 0.1) inset !important;
+    border-color: rgba(0, 229, 255, 0.5) !important;
+}
+
+/* Dark Mode Sidebar Nav Items Glow */
+body[data-theme="dark"] .nav-links li:hover {
+    transform: translateX(-5px) translateY(-3px) !important;
+    background: rgba(0, 229, 255, 0.05) !important;
+    box-shadow: 0 8px 25px rgba(0, 229, 255, 0.2) !important;
+    border: 1px solid rgba(0, 229, 255, 0.4) !important;
+    color: #00e5ff !important;
+}
+body[data-theme="dark"] .nav-links li:hover i {
+    color: #00e5ff !important;
+    text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+}
+
+/* Sidebar Profile Box Glow */
+body[data-theme="dark"] #sidebar-user-profile {
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0, 229, 255, 0.2) !important;
+}
+body[data-theme="dark"] #sidebar-user-profile:hover {
+    transform: translateY(-3px) !important;
+    box-shadow: 0 10px 25px rgba(0, 229, 255, 0.2) !important;
+    border-color: rgba(0, 229, 255, 0.5) !important;
 }
