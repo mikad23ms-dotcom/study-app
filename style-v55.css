@@ -887,16 +887,38 @@ header h1:hover {
     border: 1px solid var(--border-color);
 }
 
-/* --- DARK MODE CYBERPUNK GLOW HOVER --- */
+
+/* --- DARK MODE FLAME GLOW HOVER --- */
 body[data-theme="dark"] .card:hover, 
 body[data-theme="dark"] .theme-btn:hover, 
 body[data-theme="dark"] .stat-card:hover, 
 body[data-theme="dark"] .subject-card:hover,
 body[data-theme="dark"] .flashcard:hover {
     transform: translateY(-5px) !important;
-    box-shadow: 0 15px 35px rgba(0, 229, 255, 0.2), 0 0 15px rgba(0, 229, 255, 0.1) inset !important;
-    border-color: rgba(0, 229, 255, 0.5) !important;
+    box-shadow: 0 10px 40px rgba(67, 97, 238, 0.4), 0 0 20px rgba(67, 97, 238, 0.2) inset !important;
+    border-color: rgba(67, 97, 238, 0.6) !important;
 }
+
+/* Dark Mode Sidebar Nav Items Glow */
+body[data-theme="dark"] .nav-links li:hover {
+    transform: translateX(-5px) translateY(-3px) !important;
+    background: rgba(67, 97, 238, 0.1) !important;
+    box-shadow: 0 8px 30px rgba(67, 97, 238, 0.3) !important;
+    border: 1px solid rgba(67, 97, 238, 0.5) !important;
+    color: #fff !important;
+}
+body[data-theme="dark"] .nav-links li:hover i {
+    color: #fff !important;
+    text-shadow: 0 0 15px rgba(67, 97, 238, 0.8);
+}
+
+/* Sidebar Profile Box Glow */
+body[data-theme="dark"] #sidebar-user-profile:hover {
+    transform: translateY(-3px) !important;
+    box-shadow: 0 10px 30px rgba(67, 97, 238, 0.3) !important;
+    border-color: rgba(67, 97, 238, 0.5) !important;
+}
+
 
 /* Dark Mode Sidebar Nav Items Glow */
 body[data-theme="dark"] .nav-links li:hover {
@@ -923,86 +945,23 @@ body[data-theme="dark"] #sidebar-user-profile:hover {
 }
 
 
-/* ========================================================= */
-/* --- 3D MOBILE APP PUSH SIDEBAR (IOS STYLE) --- */
-/* ========================================================= */
-@media (max-width: 900px) {
-    body {
-        background-color: var(--bg-color); 
-    }
-    
-    /* Main Content Wrapper */
-    .app-container {
-        overflow: hidden; 
-        position: relative;
-        width: 100vw;
-        height: 100vh;
-        background: linear-gradient(180deg, rgba(20,15,40,0.98) 0%, rgba(10,8,25,1) 100%);
-    }
 
-    .main-content {
-        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-radius 0.4s ease !important;
-        background: var(--bg-color);
-        z-index: 20;
-        position: absolute;
-        top: 0; left: 0; right: 0; bottom: 0;
-        min-height: 100vh;
-        overflow-y: auto;
-        transform-origin: center left;
-    }
-    
-    /* Sidebar sits behind or on the side */
-    .sidebar {
-        position: absolute !important;
-        top: 0 !important;
-        right: 0 !important;
-        width: 75% !important;
-        height: 100vh !important;
-        z-index: 10 !important;
-        transform: translateX(100%);
-        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.4s ease !important;
-        opacity: 0;
-        box-shadow: none !important;
-        border-radius: 0 !important;
-        background: transparent !important;
-        border: none !important;
-    }
-    
-    .sidebar.open {
-        transform: translateX(0);
-        opacity: 1;
-    }
-
-    /* Trigger 3D Push on Main Content */
-    body.sidebar-is-open .main-content {
-        transform: translateX(-65%) scale(0.85) !important;
-        border-radius: 40px !important;
-        box-shadow: 0 0 50px rgba(0,0,0,0.5) !important;
-        pointer-events: none;
-        overflow: hidden !important;
-    }
-
-    /* Optional Overlay styling adjustment */
-    #sidebar-overlay {
-        z-index: 15 !important;
-        background: rgba(0,0,0,0.2) !important;
-    }
-    
-    /* Dark mode sidebar background fix */
-    body[data-theme="dark"] .app-container {
-        background: linear-gradient(180deg, #111 0%, #000 100%);
-    }
-}
 
 
 /* ========================================================= */
-/* --- INTERACTIVE GLOWING DOT GRID --- */
+
+
+
+/* ========================================================= */
+/* --- INTERACTIVE PURPLE FLAME DOT GRID --- */
 /* ========================================================= */
 body[data-theme="dark"]::after {
     content: "";
     position: fixed;
     top: 0; left: 0; width: 100vw; height: 100vh;
-    background: radial-gradient(400px circle at var(--mouse-x, -500px) var(--mouse-y, -500px), rgba(0, 229, 255, 0.9), transparent 40%);
+    background: 
+        radial-gradient(150px circle at var(--mouse-x, -500px) var(--mouse-y, -500px), rgba(255, 255, 255, 0.4), transparent 50%),
+        radial-gradient(400px circle at var(--mouse-x, -500px) var(--mouse-y, -500px), rgba(67, 97, 238, 0.9), transparent 60%);
     -webkit-mask-image: url('data:image/svg+xml;utf8,<svg width="24" height="24" xmlns="http://www.w3.org/2000/svg"><circle cx="2" cy="2" r="1.5" fill="black"/></svg>');
     -webkit-mask-size: 24px 24px;
     mask-image: url('data:image/svg+xml;utf8,<svg width="24" height="24" xmlns="http://www.w3.org/2000/svg"><circle cx="2" cy="2" r="1.5" fill="black"/></svg>');
