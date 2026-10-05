@@ -10,7 +10,7 @@
     
     <!-- PWA Setup -->
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#4361ee">
+    <meta name="theme-color" content="#00e5ff">
     <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/3429/3429930.png">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -60,7 +60,7 @@
     </div>
     <!-- Welcome Quote Overlay -->
     <div id="welcome-quote-overlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:var(--bg-color); z-index:9999; justify-content:center; align-items:center; flex-direction:column; padding:20px; text-align:center;">
-        <div style="max-width: 600px; padding: 40px; border-radius: 15px; background: rgba(67, 97, 238, 0.05); border: 1px solid var(--primary-color); box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+        <div style="max-width: 600px; padding: 40px; border-radius: 15px; background: rgba(0, 229, 255, 0.05); border: 1px solid var(--primary-color); box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
             <i class="fa-solid fa-quote-right" style="font-size: 3rem; color: var(--primary-color); margin-top: 20px; bottom: auto; opacity: 0.5;"></i>
             <h2 id="quote-text" style="font-size: 1.8rem; line-height: 1.6; margin-bottom: 30px; font-weight: 500; color: var(--text-main);">...</h2>
             <button class="btn btn-primary btn-large" style="width: 100%; font-size: 1.2rem; padding: 15px;" onclick="document.getElementById('welcome-quote-overlay').style.display='none'">يلا نبدأ المذاكرة 💪</button>
@@ -208,7 +208,7 @@
                 <h2>دليلك للمذاكرة</h2>
             </div>
             <!-- User Profile in Sidebar -->
-            <div id="sidebar-user-profile" style="padding: 15px 20px; margin: 0 10px 10px; background: linear-gradient(135deg, rgba(67,97,238,0.15), rgba(114,9,183,0.1)); border-radius: 12px; border: 1px solid rgba(67,97,238,0.2);">
+            <div id="sidebar-user-profile" style="padding: 15px 20px; margin: 0 10px 10px; background: linear-gradient(135deg, rgba(0, 229, 255,0.15), rgba(0, 229, 255,0.1)); border-radius: 12px; border: 1px solid rgba(0, 229, 255,0.2);">
                 <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
                     <div style="width: 45px; height: 45px; border-radius: 50%; background: var(--primary-color); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
                         <i class="fa-solid fa-user-graduate" style="color: white; font-size: 1.2rem;"></i>
@@ -241,7 +241,7 @@
             </ul>
             <div class="sidebar-footer">
                 
-                <button onclick="logoutAccount()" class="theme-btn" style="margin-top:10px; border: 1px solid rgba(247, 37, 133, 0.3); color: var(--danger); background: rgba(247, 37, 133, 0.05);">
+                <button onclick="logoutAccount()" class="theme-btn" style="margin-top:10px; border: 1px solid rgba(0, 229, 255, 0.3); color: var(--danger); background: rgba(0, 229, 255, 0.05);">
                     <i class="fa-solid fa-right-from-bracket"></i> تبديل الحساب
                 </button>
                 <div class="developer-credit" style="margin-top: 15px; text-align: center; font-size: 0.85rem; color: var(--text-muted); padding: 10px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color); user-select: none;">
@@ -331,7 +331,7 @@
 
                 
                 <!-- My Dream Banner -->
-                <div class="card hover-glow-box" style="background: linear-gradient(135deg, rgba(255, 159, 243, 0.1), rgba(243, 104, 224, 0.05)); border: 2px dashed #ff9ff3; text-align: center; margin-bottom: 2rem;">
+                <div class="card hover-glow-box" style="background: linear-gradient(135deg, rgba(0, 229, 255, 0.1), rgba(0, 229, 255, 0.05)); border: 2px dashed #00e5ff; text-align: center; margin-bottom: 2rem;">
                     <h3 style="color: var(--primary-color); margin-top: 0;"><i class="fa-solid fa-star" style="color: #feca57;"></i> حلمي اللي بسعى عشانه</h3>
                     <div id="dream-display-container">
                         <p id="dream-text" style="font-size: 1.3rem; font-weight: bold; color: var(--text-main); margin: 1rem 0; min-height: 30px;">لم تكتب حلمك بعد..</p>
@@ -830,7 +830,7 @@
                     <div class="card hover-glow-box" style="margin-top: 2rem; text-align: center; border: 1px dashed #feca57; background: rgba(254, 202, 87, 0.05); padding: 1.5rem;">
                         <h4 style="color: #feca57; margin-top: 0; font-size: 1.2rem;"><i class="fa-solid fa-moon"></i> وضع النوم (مهم جداً لضمان الرنين)</h4>
                         <p style="color: var(--text-main); font-size: 1rem; line-height: 1.6;">عشان المنبه يرن الصبح بصوت عالي بدون ما نظام الموبايل يقفله، لازم المتصفح يفضل شغال. بعد ما تظبط المنبه فوق، اضغط على الزرار اللي تحت وسيب الموبايل على الشاحن، الشاشة هتسود بالكامل عشان تحافظ على البطارية والتطبيق هيفضل صاحي عشان يصحيك!</p>
-                        <button onclick="startNightstand()" class="theme-btn btn-hover-glow" style="background: #2d3436; color: var(--primary-color); padding: 0.8rem 2rem; border-radius: 10px; font-size: 1.1rem; border: 1px solid #ff9ff3; margin-top: 1rem;"><i class="fa-solid fa-bed"></i> تفعيل وضع النوم الآن</button>
+                        <button onclick="startNightstand()" class="theme-btn btn-hover-glow" style="background: #2d3436; color: var(--primary-color); padding: 0.8rem 2rem; border-radius: 10px; font-size: 1.1rem; border: 1px solid #00e5ff; margin-top: 1rem;"><i class="fa-solid fa-bed"></i> تفعيل وضع النوم الآن</button>
                     </div>
 
                     <div id="stop-alarm-container" style="display: none; margin-top: 30px;">
@@ -902,7 +902,7 @@
                     }
                     .text-hover-glow:hover {
                         transform: translateY(-3px) scale(1.05);
-                        text-shadow: 0 0 15px rgba(255, 159, 243, 0.6);
+                        text-shadow: 0 0 15px rgba(0, 229, 255, 0.6);
                         color: var(--primary-color) !important;
                     }
                     .btn-hover-glow {
@@ -910,7 +910,7 @@
                     }
                     .btn-hover-glow:hover {
                         transform: translateY(-5px) scale(1.02);
-                        box-shadow: 0 10px 25px rgba(255, 159, 243, 0.6), 0 0 15px rgba(255, 159, 243, 0.4) !important;
+                        box-shadow: 0 10px 25px rgba(0, 229, 255, 0.6), 0 0 15px rgba(0, 229, 255, 0.4) !important;
                     }
 
                     .comment-card {
@@ -918,7 +918,7 @@
                         padding: 1.5rem;
                         border-radius: 15px;
                         box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-                        border-right: 4px solid #ff9ff3;
+                        border-right: 4px solid #00e5ff;
                         margin-bottom: 1rem;
                         transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
                         opacity: 0;
@@ -927,8 +927,8 @@
                     }
                     .comment-card:hover {
                         transform: translateY(-8px) scale(1.02);
-                        box-shadow: 0 15px 30px rgba(255, 159, 243, 0.4), 0 0 20px rgba(0, 229, 255, 0.2);
-                        border-right: 6px solid #f368e0;
+                        box-shadow: 0 15px 30px rgba(0, 229, 255, 0.4), 0 0 20px rgba(0, 229, 255, 0.2);
+                        border-right: 6px solid #00e5ff;
                     }
                     .comment-card p {
                         transition: color 0.3s ease;
@@ -946,21 +946,21 @@
                 <div id="comments-list" style="display: flex; flex-direction: column; gap: 1.5rem; padding: 1rem 0;">
 
                     
-                    <div style="background: var(--card-bg); padding: 1.5rem; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.03); border-right: 4px solid #ff9ff3; margin-bottom: 1rem;">
+                    <div style="background: var(--card-bg); padding: 1.5rem; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.03); border-right: 4px solid #00e5ff; margin-bottom: 1rem;">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem;">
                             <strong style="color: var(--primary-color); font-size: 1.1rem;"><i class="fa-solid fa-user-graduate"></i> ندى محمد</strong>
                             <span style="color: #888; font-size: 0.85rem;">أمس</span>
                         </div>
                         <p style="margin: 0; color: var(--text-main); line-height: 1.6;">بجد التطبيق ده أنقذني في تنظيم وقتي! شكراً جداً للمبرمجة العبقرية، ربنا يوفقك ويسعدك زي ما بتسعدينا وبتسهلي علينا المذاكرة. دعواتي ليكي بالتوفيق ديماً يا رب. 🌸</p>
                     </div>
-                    <div style="background: var(--card-bg); padding: 1.5rem; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.03); border-right: 4px solid #ff9ff3; margin-bottom: 1rem;">
+                    <div style="background: var(--card-bg); padding: 1.5rem; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.03); border-right: 4px solid #00e5ff; margin-bottom: 1rem;">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem;">
                             <strong style="color: var(--primary-color); font-size: 1.1rem;"><i class="fa-solid fa-user-graduate"></i> عمر خالد</strong>
                             <span style="color: #888; font-size: 0.85rem;">منذ يومين</span>
                         </div>
                         <p style="margin: 0; color: var(--text-main); line-height: 1.6;">مجهود عظيم وأكتر ميزة بحبها هي الذكاء الاصطناعي وجدول المذاكرة.. استمري بجد!</p>
                     </div>
-                    <div style="background: var(--card-bg); padding: 1.5rem; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.03); border-right: 4px solid #ff9ff3; margin-bottom: 1rem;">
+                    <div style="background: var(--card-bg); padding: 1.5rem; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.03); border-right: 4px solid #00e5ff; margin-bottom: 1rem;">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem;">
                             <strong style="color: var(--primary-color); font-size: 1.1rem;"><i class="fa-solid fa-user-graduate"></i> سارة أحمد</strong>
                             <span style="color: #888; font-size: 0.85rem;">11 أكتوبر</span>
@@ -1025,7 +1025,7 @@
 
                 <style>
                     .switch input:checked + span {
-                        background: linear-gradient(135deg, #4361ee, #7209b7) !important;
+                        background: linear-gradient(135deg, #00e5ff, #00e5ff) !important;
                     }
                     .switch input:checked + span::before {
                         transform: translateX(30px);
@@ -1058,17 +1058,17 @@
                 </div>
 
                 <!-- Ice Cube Challenge -->
-                <div class="card hover-glow-box" style="margin-bottom: 1.5rem; border-left: 4px solid #74b9ff;">
+                <div class="card hover-glow-box" style="margin-bottom: 1.5rem; border-left: 4px solid #00e5ff;">
                     <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
-                        <i class="fa-solid fa-icicles" style="font-size: 2.5rem; color: #74b9ff;"></i>
+                        <i class="fa-solid fa-icicles" style="font-size: 2.5rem; color: #00e5ff;"></i>
                         <div>
-                            <h3 style="margin: 0; color: #74b9ff;">تحدي كوباية التلج 🧊</h3>
+                            <h3 style="margin: 0; color: #00e5ff;">تحدي كوباية التلج 🧊</h3>
                             <p style="margin: 5px 0 0 0; color: var(--text-muted); font-size: 0.9rem;">املى كوباية تلج وحطها قدامك.. هدفك تذاكر بتركيز لحد ما التلج كله يدوب!</p>
                         </div>
                     </div>
                     <div style="text-align: center; margin-top: 1rem;">
                         <p style="color: var(--text-main); margin-bottom: 1rem;">(بتاخد تقريباً من 15 لـ 20 دقيقة)</p>
-                        <button onclick="startIceChallenge()" id="ice-btn" class="theme-btn btn-hover-glow" style="background: linear-gradient(135deg, #74b9ff, #0984e3); color: white; border: none; padding: 0.8rem 2rem; border-radius: 10px; font-size: 1.1rem;"><i class="fa-solid fa-play"></i> ابدأ التحدي دلوقتي</button>
+                        <button onclick="startIceChallenge()" id="ice-btn" class="theme-btn btn-hover-glow" style="background: linear-gradient(135deg, #00e5ff, #00e5ff); color: white; border: none; padding: 0.8rem 2rem; border-radius: 10px; font-size: 1.1rem;"><i class="fa-solid fa-play"></i> ابدأ التحدي دلوقتي</button>
                     </div>
                 </div>
 
@@ -1187,16 +1187,16 @@
                 </div>
 
                 <!-- Challenge 7: Caveman -->
-                <div class="card hover-glow-box" style="margin-bottom: 1.5rem; border-left: 4px solid #8e44ad;">
+                <div class="card hover-glow-box" style="margin-bottom: 1.5rem; border-left: 4px solid #00e5ff;">
                     <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
-                        <i class="fa-solid fa-campground" style="font-size: 2.5rem; color: #8e44ad;"></i>
+                        <i class="fa-solid fa-campground" style="font-size: 2.5rem; color: #00e5ff;"></i>
                         <div>
-                            <h3 style="margin: 0; color: #8e44ad;">تحدي رجل الكهف 🪨</h3>
+                            <h3 style="margin: 0; color: #00e5ff;">تحدي رجل الكهف 🪨</h3>
                             <p style="margin: 5px 0 0 0; color: var(--text-muted); font-size: 0.9rem;">مفيش أجهزة، مفيش نت، مفيش أي حاجة إلكترونية. ورقة وقلم وكتاب وبس!</p>
                         </div>
                     </div>
                     <div style="text-align: center; margin-top: 1rem;">
-                        <button onclick="startCavemanChallenge()" id="caveman-btn" class="theme-btn btn-hover-glow" style="background: linear-gradient(135deg, #8e44ad, #9b59b6); color: white; border: none; padding: 0.8rem 2rem; border-radius: 10px; font-size: 1.1rem;"><i class="fa-solid fa-leaf"></i> اقفل كل حاجة وابدأ</button>
+                        <button onclick="startCavemanChallenge()" id="caveman-btn" class="theme-btn btn-hover-glow" style="background: linear-gradient(135deg, #00e5ff, #00e5ff); color: white; border: none; padding: 0.8rem 2rem; border-radius: 10px; font-size: 1.1rem;"><i class="fa-solid fa-leaf"></i> اقفل كل حاجة وابدأ</button>
                     </div>
                 </div>
 
@@ -1419,7 +1419,7 @@
             <h2>إضافة مادة جديدة</h2>
             <form id="subject-form">
                 <div class="form-group"><label>اسم المادة</label><input type="text" id="subject-name" required></div>
-                <div class="form-group"><label>اللون المميز</label><input type="color" id="subject-color" value="#4361ee" required></div>
+                <div class="form-group"><label>اللون المميز</label><input type="color" id="subject-color" value="#00e5ff" required></div>
                 <button type="submit" class="btn btn-primary">حفظ</button>
             </form>
         </div>
@@ -1486,10 +1486,10 @@
             <span class="close" onclick="closeModal('api-instructions-modal')">&times;</span>
             <h2 style="color: var(--primary-color); margin-bottom: 15px;">طريقة الحصول على المفاتيح المجانية 🔑</h2>
 
-            <div style="background: rgba(67, 97, 238, 0.1); padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+            <div style="background: rgba(0, 229, 255, 0.1); padding: 15px; border-radius: 8px; margin-bottom: 15px;">
                 <h3 style="color: var(--primary-color); margin-top: 0;">1. مفتاح Google Gemini</h3>
                 <ol style="padding-right: 20px; font-size: 0.9rem; color: var(--text-main); margin-bottom: 0; line-height: 1.6;">
-                    <li>ادخل على موقع: <a href="https://aistudio.google.com/app/apikey" target="_blank" style="color:#4361ee; font-weight:bold;">Google AI Studio</a></li>
+                    <li>ادخل على موقع: <a href="https://aistudio.google.com/app/apikey" target="_blank" style="color:#00e5ff; font-weight:bold;">Google AI Studio</a></li>
                     <li>سجل دخول بحساب جوجل بتاعك (هتلاقي زرار Create API Key).</li>
                     <li>لو ظهرتلك رسالة اضغط Get API key وبعدين Create API key in new project.</li>
                     <li>انسخ الكود الطويل اللي هيظهر، والصقه في التطبيق.</li>
@@ -1660,7 +1660,7 @@
 
     <!-- Nightstand Screensaver -->
     <div id="nightstand-mode" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: black; z-index: 999999; flex-direction: column; justify-content: center; align-items: center; cursor: pointer;">
-        <h1 id="nightstand-time" style="color: var(--primary-color); font-size: 5rem; font-family: monospace; text-shadow: 0 0 20px rgba(255,159,243,0.5); margin:0;">00:00</h1>
+        <h1 id="nightstand-time" style="color: var(--primary-color); font-size: 5rem; font-family: monospace; text-shadow: 0 0 20px rgba(0, 229, 255,0.5); margin:0;">00:00</h1>
         <p style="color: #888; font-size: 1.5rem; margin-top: 10px;">المنبه يعمل في الخلفية ⏰</p>
         <p style="color: #555; margin-top: 2rem; font-size: 1.2rem;">(اضغط في أي مكان للإلغاء والعودة)</p>
         <p style="color: #444; font-size: 0.9rem; position: absolute; bottom: 30px; text-align: center; padding: 0 20px;">الرجاء ترك الهاتف موصلاً بالشاحن وعدم قفل الشاشة يدوياً.<br>هذه الشاشة السوداء موفرة جداً للبطارية وتضمن رنين المنبه بقوة.</p>
@@ -1669,7 +1669,7 @@
 
     <!-- What's New Modal -->
     <div id="whats-new-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.8); z-index: 10000; justify-content: center; align-items: center; backdrop-filter: blur(5px);">
-        <div style="background: var(--card-bg); padding: 2rem; border-radius: 20px; max-width: 90%; width: 500px; border: 2px solid #ff9ff3; box-shadow: 0 10px 30px rgba(255,159,243,0.3); animation: slideUpGlow 0.5s ease;">
+        <div style="background: var(--card-bg); padding: 2rem; border-radius: 20px; max-width: 90%; width: 500px; border: 2px solid #00e5ff; box-shadow: 0 10px 30px rgba(0, 229, 255,0.3); animation: slideUpGlow 0.5s ease;">
             <h2 style="color: var(--primary-color); margin-top: 0; text-align: center;"><i class="fa-solid fa-bullhorn" style="color: #feca57; font-size: 2rem; margin-bottom:10px; display:block;"></i>تحديث جديد وصل!</h2>
             <p style="color: var(--text-muted); text-align: center; font-size: 1rem; margin-bottom: 2rem;">ضفنا مميزات خرافية عشان نساعدك تذاكر أحسن وتكسر الملل!</p>
             <div style="display: flex; flex-direction: column; gap: 1.2rem;">
@@ -1699,7 +1699,7 @@
                 </div>
 
                 <div style="display: flex; gap: 1rem; align-items: flex-start;">
-                    <div style="background: rgba(116, 185, 255, 0.2); padding: 10px; border-radius: 12px; width: 45px; text-align: center;"><i class="fa-solid fa-moon" style="color: #74b9ff; font-size: 1.3rem;"></i></div>
+                    <div style="background: rgba(0, 229, 255, 0.2); padding: 10px; border-radius: 12px; width: 45px; text-align: center;"><i class="fa-solid fa-moon" style="color: #00e5ff; font-size: 1.3rem;"></i></div>
                     <div>
                         <strong style="color: var(--text-main); font-size: 1.1rem;">وضع النوم للمنبه 🌙</strong>
                         <p style="color: var(--text-muted); margin: 5px 0 0 0; font-size: 0.95rem; line-height: 1.5;">عشان تضمن إن المنبه يرن الصبح.. فعل "وضع النوم" وسيب الموبايل على الشاحن.</p>
