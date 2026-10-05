@@ -919,7 +919,7 @@ body[data-theme="dark"]::after {
         right: -300px !important;
         left: auto !important;
         width: 280px !important;
-        height: 100vh !important;
+        height: 100% !important; max-height: 100dvh !important; overscroll-behavior-y: contain !important; -webkit-overflow-scrolling: touch !important;
         z-index: 100000 !important;
         flex-direction: column !important;
         justify-content: flex-start !important;
