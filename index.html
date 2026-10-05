@@ -235,8 +235,8 @@
                 <li data-page="gpa-calc"><i class="fa-solid fa-calculator"></i> حاسبة الـ GPA 🎓</li>
                 <li data-page="alarm"><i class="fa-solid fa-bell"></i> منبه النوم الثقيل ⏰</li>
                 <li data-page="notifications-settings"><i class="fa-solid fa-bell" style="color: #feca57;"></i> الإشعارات الذكية 🔔</li>
-                <li data-page="challenges"><i class="fa-solid fa-gamepad" style="color: #ff9ff3;"></i> تحديات المذاكرة 🎮</li>
-                <li data-page="comments-wall"><i class="fa-solid fa-comments" style="color: #ff9ff3;"></i> كلمة تشجعني ✨</li>
+                <li data-page="challenges"><i class="fa-solid fa-gamepad" style="color: var(--primary-color);"></i> تحديات المذاكرة 🎮</li>
+                <li data-page="comments-wall"><i class="fa-solid fa-comments" style="color: var(--primary-color);"></i> كلمة تشجعني ✨</li>
                 <li data-page="admin" id="nav-admin" style="display:none;"></li>
             </ul>
             <div class="sidebar-footer">
@@ -335,11 +335,11 @@
                     <h3 style="color: var(--primary-color); margin-top: 0;"><i class="fa-solid fa-star" style="color: #feca57;"></i> حلمي اللي بسعى عشانه</h3>
                     <div id="dream-display-container">
                         <p id="dream-text" style="font-size: 1.3rem; font-weight: bold; color: var(--text-main); margin: 1rem 0; min-height: 30px;">لم تكتب حلمك بعد..</p>
-                        <button onclick="editDream()" class="theme-btn" style="background: rgba(255, 159, 243, 0.2); color: #ff9ff3; padding: 0.5rem 1rem;"><i class="fa-solid fa-pen"></i> تعديل</button>
+                        <button onclick="editDream()" class="theme-btn" style="background: rgba(0, 229, 255, 0.2); color: var(--primary-color); padding: 0.5rem 1rem;"><i class="fa-solid fa-pen"></i> تعديل</button>
                     </div>
                     <div id="dream-edit-container" style="display: none; flex-direction: column; gap: 1rem; align-items: center;">
                         <input type="text" id="dream-input" placeholder="نفسك تطلع إيه؟ إيه الكلية اللي بتحلم بيها؟" style="width: 80%; padding: 0.8rem; border: 2px solid var(--border-color); border-radius: 10px; font-family: 'Tajawal'; background: var(--bg-color); color: var(--text-main); text-align: center; font-size: 1.1rem;">
-                        <button onclick="saveDream()" class="theme-btn" style="background: linear-gradient(135deg, #ff9ff3, #f368e0); color: white; padding: 0.6rem 2rem;"><i class="fa-solid fa-check"></i> حفظ</button>
+                        <button onclick="saveDream()" class="theme-btn" style="background: linear-gradient(135deg, #00e5ff, #00b8cc); color: white; padding: 0.6rem 2rem;"><i class="fa-solid fa-check"></i> حفظ</button>
                     </div>
                 </div>
 
@@ -830,7 +830,7 @@
                     <div class="card hover-glow-box" style="margin-top: 2rem; text-align: center; border: 1px dashed #feca57; background: rgba(254, 202, 87, 0.05); padding: 1.5rem;">
                         <h4 style="color: #feca57; margin-top: 0; font-size: 1.2rem;"><i class="fa-solid fa-moon"></i> وضع النوم (مهم جداً لضمان الرنين)</h4>
                         <p style="color: var(--text-main); font-size: 1rem; line-height: 1.6;">عشان المنبه يرن الصبح بصوت عالي بدون ما نظام الموبايل يقفله، لازم المتصفح يفضل شغال. بعد ما تظبط المنبه فوق، اضغط على الزرار اللي تحت وسيب الموبايل على الشاحن، الشاشة هتسود بالكامل عشان تحافظ على البطارية والتطبيق هيفضل صاحي عشان يصحيك!</p>
-                        <button onclick="startNightstand()" class="theme-btn btn-hover-glow" style="background: #2d3436; color: #ff9ff3; padding: 0.8rem 2rem; border-radius: 10px; font-size: 1.1rem; border: 1px solid #ff9ff3; margin-top: 1rem;"><i class="fa-solid fa-bed"></i> تفعيل وضع النوم الآن</button>
+                        <button onclick="startNightstand()" class="theme-btn btn-hover-glow" style="background: #2d3436; color: var(--primary-color); padding: 0.8rem 2rem; border-radius: 10px; font-size: 1.1rem; border: 1px solid #ff9ff3; margin-top: 1rem;"><i class="fa-solid fa-bed"></i> تفعيل وضع النوم الآن</button>
                     </div>
 
                     <div id="stop-alarm-container" style="display: none; margin-top: 30px;">
@@ -864,7 +864,7 @@
         <section id="comments-wall" class="page">
             <div class="comments-container" style="max-width: 800px; margin: 2rem auto; padding: 0 1rem;">
                 <div style="text-align: center; margin-bottom: 2rem;" class="hover-glow-box">
-                    <i class="fa-solid fa-heart-pulse" style="font-size: 3rem; color: #ff9ff3; margin-bottom: 1rem;"></i>
+                    <i class="fa-solid fa-heart-pulse" style="font-size: 3rem; color: var(--primary-color); margin-bottom: 1rem;"></i>
                     <h2 style="color: var(--primary-color); font-family: 'Tajawal', sans-serif;">كلمة تشجعني ✨</h2>
                     <p style="color: var(--text-main); font-size: 1.1rem; line-height: 1.6;">
                         المساحة دي مخصصة ليكم! سيبوا رأيكم، رسالة تشجيع، أو دعوة حلوة.<br>
@@ -877,7 +877,7 @@
                     <form id="comment-form" style="display: flex; flex-direction: column; gap: 1rem;">
                         <input type="text" id="comment-name" placeholder="اسمك (اختياري) أو اللقب" style="width: 100%; padding: 0.8rem; border: 2px solid var(--border-color); border-radius: 10px; font-family: 'Tajawal'; background: var(--bg-color); color: var(--text-main);">
                         <textarea id="comment-text" required placeholder="رسالتك أو دعوتك..." style="width: 100%; padding: 0.8rem; border: 2px solid var(--border-color); border-radius: 10px; font-family: 'Tajawal'; min-height: 100px; resize: vertical; background: var(--bg-color); color: var(--text-main);"></textarea>
-                        <button type="submit" class="btn-hover-glow" style="background: linear-gradient(135deg, #ff9ff3, #f368e0); color: white; border: none; padding: 0.8rem; border-radius: 10px; font-size: 1.1rem; font-weight: bold; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 0.5rem;">
+                        <button type="submit" class="btn-hover-glow" style="background: linear-gradient(135deg, #00e5ff, #00b8cc); color: white; border: none; padding: 0.8rem; border-radius: 10px; font-size: 1.1rem; font-weight: bold; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 0.5rem;">
                             <i class="fa-solid fa-paper-plane"></i> نشر الرسالة
                         </button>
                     </form>
@@ -893,8 +893,8 @@
                     }
                     .hover-glow-box:hover {
                         transform: translateY(-8px);
-                        box-shadow: 0 15px 30px rgba(255, 159, 243, 0.3) !important;
-                        border-color: #ff9ff3 !important;
+                        box-shadow: 0 15px 30px rgba(0, 229, 255, 0.3) !important;
+                        border-color: var(--primary-color) !important;
                     }
                     .text-hover-glow {
                         transition: all 0.3s ease;
@@ -903,7 +903,7 @@
                     .text-hover-glow:hover {
                         transform: translateY(-3px) scale(1.05);
                         text-shadow: 0 0 15px rgba(255, 159, 243, 0.6);
-                        color: #ff9ff3 !important;
+                        color: var(--primary-color) !important;
                     }
                     .btn-hover-glow {
                         transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
@@ -927,7 +927,7 @@
                     }
                     .comment-card:hover {
                         transform: translateY(-8px) scale(1.02);
-                        box-shadow: 0 15px 30px rgba(255, 159, 243, 0.4), 0 0 20px rgba(255, 159, 243, 0.2);
+                        box-shadow: 0 15px 30px rgba(255, 159, 243, 0.4), 0 0 20px rgba(0, 229, 255, 0.2);
                         border-right: 6px solid #f368e0;
                     }
                     .comment-card p {
@@ -1050,7 +1050,7 @@
         <section id="challenges" class="page">
             <div style="max-width: 800px; margin: 2rem auto; padding: 0 1rem;">
                 <div style="text-align: center; margin-bottom: 2rem;" class="hover-glow-box">
-                    <i class="fa-solid fa-gamepad" style="font-size: 3rem; color: #ff9ff3; margin-bottom: 1rem;"></i>
+                    <i class="fa-solid fa-gamepad" style="font-size: 3rem; color: var(--primary-color); margin-bottom: 1rem;"></i>
                     <h2 style="color: var(--primary-color); font-family: 'Tajawal', sans-serif;">تحديات المذاكرة المجنونة 🎮</h2>
                     <p style="color: var(--text-main); font-size: 1.1rem; line-height: 1.6;">
                         زهقت من المذاكرة التقليدية؟ جرب الطرق دي عشان تكسر الملل وتتحدى نفسك!
@@ -1653,14 +1653,14 @@
 
     <!-- Developer Watermark -->
     <div class="dev-watermark" style="position: fixed; bottom: 85px; left: 20px; background: rgba(0, 0, 0, 0.7); color: #fff; padding: 8px 16px; border-radius: 50px; font-family: 'Tajawal', sans-serif; font-size: 0.9rem; z-index: 9999; backdrop-filter: blur(5px); border: 1px solid rgba(255, 255, 255, 0.1); display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); pointer-events: none; transition: opacity 0.3s;">
-        <i class="fa-solid fa-code" style="color: #ff9ff3;"></i>
+        <i class="fa-solid fa-code" style="color: var(--primary-color);"></i>
         <span>Developed by <strong>Eng. Malak Adel Abdelhamid</strong></span>
     </div>
 
 
     <!-- Nightstand Screensaver -->
     <div id="nightstand-mode" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: black; z-index: 999999; flex-direction: column; justify-content: center; align-items: center; cursor: pointer;">
-        <h1 id="nightstand-time" style="color: #ff9ff3; font-size: 5rem; font-family: monospace; text-shadow: 0 0 20px rgba(255,159,243,0.5); margin:0;">00:00</h1>
+        <h1 id="nightstand-time" style="color: var(--primary-color); font-size: 5rem; font-family: monospace; text-shadow: 0 0 20px rgba(255,159,243,0.5); margin:0;">00:00</h1>
         <p style="color: #888; font-size: 1.5rem; margin-top: 10px;">المنبه يعمل في الخلفية ⏰</p>
         <p style="color: #555; margin-top: 2rem; font-size: 1.2rem;">(اضغط في أي مكان للإلغاء والعودة)</p>
         <p style="color: #444; font-size: 0.9rem; position: absolute; bottom: 30px; text-align: center; padding: 0 20px;">الرجاء ترك الهاتف موصلاً بالشاحن وعدم قفل الشاشة يدوياً.<br>هذه الشاشة السوداء موفرة جداً للبطارية وتضمن رنين المنبه بقوة.</p>
@@ -1683,7 +1683,7 @@
                 </div>
 
                 <div style="display: flex; gap: 1rem; align-items: flex-start;">
-                    <div style="background: rgba(255, 159, 243, 0.2); padding: 10px; border-radius: 12px; width: 45px; text-align: center;"><i class="fa-solid fa-bell" style="color: #ff9ff3; font-size: 1.3rem;"></i></div>
+                    <div style="background: rgba(0, 229, 255, 0.2); padding: 10px; border-radius: 12px; width: 45px; text-align: center;"><i class="fa-solid fa-bell" style="color: var(--primary-color); font-size: 1.3rem;"></i></div>
                     <div>
                         <strong style="color: var(--text-main); font-size: 1.1rem;">إشعارات الصلاة والتحفيز 🔔</strong>
                         <p style="color: var(--text-muted); margin: 5px 0 0 0; font-size: 0.95rem; line-height: 1.5;">فعلها من القائمة الجانبية (الإشعارات الذكية)، وهيبعتلك رسايل تشجيع ومواعيد صلاة!</p>
@@ -1706,7 +1706,7 @@
                     </div>
                 </div>
             </div>
-            <button onclick="closeWhatsNew()" class="theme-btn btn-hover-glow" style="width: 100%; background: linear-gradient(135deg, #ff9ff3, #f368e0); color: white; padding: 1rem; border-radius: 10px; font-size: 1.2rem; font-weight: bold; border: none; cursor: pointer; margin-top: 2rem;">يلا نجرب! 🚀</button>
+            <button onclick="closeWhatsNew()" class="theme-btn btn-hover-glow" style="width: 100%; background: linear-gradient(135deg, #00e5ff, #00b8cc); color: white; padding: 1rem; border-radius: 10px; font-size: 1.2rem; font-weight: bold; border: none; cursor: pointer; margin-top: 2rem;">يلا نجرب! 🚀</button>
         </div>
     </div>
 
