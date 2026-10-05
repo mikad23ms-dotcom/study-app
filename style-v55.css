@@ -987,3 +987,30 @@ body[data-theme="dark"]::after {
         -webkit-backdrop-filter: blur(3px);
     }
 }
+
+
+/* Global Hide Scrollbar for Sidebar */
+.sidebar, .sidebar * {
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+}
+.sidebar::-webkit-scrollbar, .sidebar *::-webkit-scrollbar {
+    width: 0 !important;
+    height: 0 !important;
+    display: none !important;
+    background: transparent !important;
+    -webkit-appearance: none !important;
+}
+
+
+@media (max-width: 768px) {
+    .sidebar .logo {
+        display: flex !important;
+    }
+    .sidebar .sidebar-footer {
+        display: flex !important;
+        flex-direction: column !important;
+        padding: 20px !important;
+        margin-top: auto !important;
+    }
+}
