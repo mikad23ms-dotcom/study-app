@@ -99,7 +99,7 @@ body {
 .btn-danger { background-color: var(--danger); color: white; }
 .btn-large { padding: 15px 30px; font-size: 1.2rem; }
 
-.app-container { display: flex; width: 100%; }
+body { height: 100vh; overflow: hidden; display: flex; flex-direction: column; } .app-container { display: flex; width: 100%; flex: 1; overflow: hidden; } .sidebar { height: 100vh; overflow-y: auto; } .main-content { height: 100vh; overflow-y: auto; }
 
 .sidebar {
     width: 250px;
@@ -212,6 +212,9 @@ textarea { width: 100%; height: 200px; padding: 15px; border-radius: 8px; border
 .filter-btn.active, .filter-btn:hover { background: var(--primary-color); color: white; }
 
 @media (max-width: 768px) {
+    body { height: auto !important; overflow: auto !important; display: block !important; overscroll-behavior-y: none !important; }
+    .app-container { overflow: visible !important; }
+
     .app-container { flex-direction: column; height: auto; min-height: 100vh; overflow: visible; }
     .sidebar { width: 100%; border-left: none; border-bottom: 1px solid var(--border-color); padding: 10px; flex-direction: row; justify-content: space-between; align-items: center; flex-wrap: wrap; height: auto; position: relative; }
     .sidebar .logo { padding: 0; margin-bottom: 0; width: 100%; text-align: center; }
@@ -603,70 +606,6 @@ header h1:hover {
 
     /* Hide Desktop Header in Dashboard */
     #dashboard > header { display: none; }
-
-    /* The Right Side Menu (Mobile) */
-    .sidebar {
-        position: fixed !important;
-        top: 0 !important; 
-        bottom: 0 !important;
-        right: -120% !important;
-        left: auto !important;
-        width: 80% !important;
-        max-width: 320px !important;
-        height: 100vh !important;
-        max-height: 100vh !important;
-        flex-direction: column !important;
-        background: linear-gradient(180deg, rgba(20,15,40,0.98) 0%, rgba(10,8,25,1) 100%) !important;
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        border: none !important;
-        border-left: 1px solid rgba(255,255,255,0.1) !important;
-        border-radius: 30px 0 0 30px !important;
-        z-index: 10001 !important;
-        transition: right 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
-        overflow-y: auto;
-        -webkit-overflow-scrolling: touch;
-        padding-bottom: 30px !important;
-        padding-top: 30px !important;
-        box-shadow: -10px 0 40px rgba(0,0,0,0.6) !important;
-    }
-    .sidebar.open { right: 0 !important; }
-    
-    [data-theme="light"] .sidebar {
-        background: rgba(255, 255, 255, 0.98) !important;
-        border-left: 1px solid rgba(0,0,0,0.05) !important;
-    }
-
-    /* Hide Drag Handle */
-    .sidebar::before {
-        display: none !important;
-    }
-    [data-theme="light"] .sidebar::before { display: none !important; }
-    
-    .sidebar .logo { display: flex !important; justify-content: space-between; padding: 0 20px; }
-    .sidebar-footer { display: flex !important; flex-direction: column !important; padding: 20px; background: transparent !important; }
-
-    .close-sidebar-btn {
-        background: transparent; border: none; color: white; font-size: 1.5rem; cursor: pointer;
-    }
-
-    /* Nav Links inside Drawer */
-    .nav-links {
-        flex-direction: column !important;
-        overflow: visible !important;
-        padding: 20px 10px !important;
-    }
-    .nav-links li {
-        width: 100% !important;
-        flex-direction: row !important;
-        justify-content: flex-start !important;
-        text-align: right !important;
-        padding: 12px 20px !important;
-        margin: 5px 0 !important;
-        font-size: 1rem !important;
-        border-radius: 12px !important;
-    }
-    .nav-links li i { margin-left: 15px; font-size: 1.2rem; }
 
     #sidebar-overlay {
         display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
