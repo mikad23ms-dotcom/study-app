@@ -1,11 +1,11 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Eng. Malak Adel Abdelhamid">
-    <meta name="copyright" content="Developer: Eng. Malak Adel Abdelhamid Â© 2026">
-    <title>ØªØ·Ø¨ÙŠÙ‚ Ø§Ù„Ù…Ø°Ø§ÙƒØ±Ø© Ø§Ù„Ù…ØªÙƒØ§Ù…Ù„ | Developer: Eng. Malak Adel Abdelhamid</title>
+    <meta name="copyright" content="Developer: Eng. Malak Adel Abdelhamid © 2026">
+    <title>تطبيق المذاكرة المتكامل | Developer: Eng. Malak Adel Abdelhamid</title>
     <link rel="stylesheet" href="style-v55.css">
     
     <!-- PWA Setup -->
@@ -59,20 +59,20 @@
         <div class="glow-cloud cloud-2"></div>
         <div class="glow-cloud cloud-3"></div>
     </div>
-    <!-- ØªØ«Ø¨ÙŠØª Ø§Ù„Ø¢Ù†Ù„ÙŠØ³ Ø§Ù„Ø¢Ù†??? -->
+    <!-- تثبيت الآنليس الآن??? -->
     <div id="install-banner" style="display: none; position: fixed; top: 20px; bottom: auto; left: 50%; transform: translateX(-50%); width: 90%; max-width: 400px; background: var(--primary-color); color: white; padding: 20px; text-align: center; z-index: 9999; box-shadow: 0 10px 25px rgba(0,0,0,0.5); border-radius: 15px; border: 2px solid white;">
         <i class="fa-solid fa-download" style="font-size: 2rem; margin-bottom: 10px;"></i>
-        <h3 style="margin: 0 0 10px 0;">Ø­Ù…Ù„ Ø§Ù„ØªØ·Ø¨ÙŠÙ‚ Ø¹Ù„Ù‰ Ø¬Ù‡Ø§Ø²Ùƒ!</h3>
-        <p style="margin: 0 0 15px 0; font-size: 0.9rem;">Ø§Ø³ØªÙ…ØªØ¹ Ø¨ØªØ¬Ø±Ø¨Ø© Ø£Ø³Ø±Ø¹ ÙˆØ£ÙØ¶Ù„ Ù…Ù† Ø®Ù„Ø§Ù„ ØªØ«Ø¨ÙŠØª Ø§Ù„ØªØ·Ø¨ÙŠÙ‚ Ø¹Ù„Ù‰ Ø§Ù„Ø´Ø§Ø´Ø© Ø§Ù„Ø±Ø¦ÙŠØ³ÙŠØ©.</p>
-        <button id="install-btn" style="background: white; color: var(--primary-color); border: none; padding: 10px 20px; font-weight: bold; border-radius: 8px; cursor: pointer; margin-left: 10px; width: 45%;">ØªØ«Ø¨ÙŠØª Ø§Ù„Ø¢Ù†</button>
-        <button id="close-install-btn" style="background: transparent; color: white; border: 1px solid white; padding: 10px 20px; border-radius: 8px; cursor: pointer; width: 45%;">Ù„ÙŠØ³ Ø§Ù„Ø¢Ù†</button>
+        <h3 style="margin: 0 0 10px 0;">حمل التطبيق على جهازك!</h3>
+        <p style="margin: 0 0 15px 0; font-size: 0.9rem;">استمتع بتجربة أسرع وأفضل من خلال تثبيت التطبيق على الشاشة الرئيسية.</p>
+        <button id="install-btn" style="background: white; color: var(--primary-color); border: none; padding: 10px 20px; font-weight: bold; border-radius: 8px; cursor: pointer; margin-left: 10px; width: 45%;">تثبيت الآن</button>
+        <button id="close-install-btn" style="background: transparent; color: white; border: 1px solid white; padding: 10px 20px; border-radius: 8px; cursor: pointer; width: 45%;">ليس الآن</button>
     </div>
     <!-- Welcome Quote Overlay -->
     <div id="welcome-quote-overlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:var(--bg-color); z-index:9999; justify-content:center; align-items:center; flex-direction:column; padding:20px; text-align:center;">
         <div style="max-width: 600px; padding: 40px; border-radius: 15px; background: rgba(0, 229, 255, 0.05); border: 1px solid var(--primary-color); box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
             <i class="fa-solid fa-quote-right" style="font-size: 3rem; color: var(--primary-color); margin-top: 20px; bottom: auto; opacity: 0.5;"></i>
             <h2 id="quote-text" style="font-size: 1.8rem; line-height: 1.6; margin-bottom: 30px; font-weight: 500; color: var(--text-main);">...</h2>
-            <button class="btn btn-primary btn-large" style="width: 100%; font-size: 1.2rem; padding: 15px;" onclick="document.getElementById('welcome-quote-overlay').style.display='none'">ÙŠÙ„Ø§ Ù†Ø¨Ø¯Ø£ Ø§Ù„Ù…Ø°Ø§ÙƒØ±Ø© ðŸ’ª</button>
+            <button class="btn btn-primary btn-large" style="width: 100%; font-size: 1.2rem; padding: 15px;" onclick="document.getElementById('welcome-quote-overlay').style.display='none'">يلا نبدأ المذاكرة 💪</button>
         </div>
     </div>
 
@@ -80,11 +80,11 @@
         <nav class="mobile-bottom-nav d-mobile">
             <div class="nav-item active" data-page="dashboard">
                 <i class="fa-solid fa-house"></i>
-                <span>Ø§Ù„Ø±Ø¦ÙŠØ³ÙŠØ©</span>
+                <span>الرئيسية</span>
             </div>
             <div class="nav-item" data-page="subjects">
                 <i class="fa-solid fa-book-open"></i>
-                <span>Ø§Ù„Ù…ÙƒØªØ¨Ø©</span>
+                <span>المكتبة</span>
             </div>
             <div class="nav-item ai-fab" data-page="ai-assistant">
                 <div class="fab-inner">
@@ -93,11 +93,11 @@
             </div>
             <div class="nav-item" data-page="schedule">
                 <i class="fa-solid fa-calendar-days"></i>
-                <span>Ø§Ù„Ø¬Ø¯ÙˆÙ„</span>
+                <span>الجدول</span>
             </div>
             <div class="nav-item" onclick="toggleSidebar()">
                 <i class="fa-solid fa-bars-staggered"></i>
-                <span>Ø§Ù„Ù…Ø²ÙŠØ¯</span>
+                <span>المزيد</span>
             </div>
         </nav>
         
@@ -107,73 +107,73 @@
     <div id="onboarding-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 10000; justify-content: center; align-items: center; backdrop-filter: blur(5px);">
         <div style="background: var(--card-bg); padding: 30px; border-radius: 15px; width: 90%; max-width: 400px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
             <i class="fa-solid fa-graduation-cap" style="font-size: 3rem; color: var(--primary-color); margin-bottom: 15px;"></i>
-            <h2 style="margin-top: 20px; bottom: auto;">Ù…Ø±Ø­Ø¨Ø§Ù‹ Ø¨Ùƒ ÙŠØ§ Ø¨Ø·Ù„! ðŸŽ¯</h2>
+            <h2 style="margin-top: 20px; bottom: auto;">مرحباً بك يا بطل! 🎯</h2>
                         <div style="text-align: right; margin-bottom: 15px;">
-                                <label style="display: block; margin-bottom: 5px; color: var(--text-muted);">Ø§Ù„Ø§Ø³Ù… Ø¨Ø§Ù„ÙƒØ§Ù…Ù„:</label>
-                <input type="text" id="onboard-name" class="search-input" placeholder="Ø§ÙƒØªØ¨ Ø§Ø³Ù…Ùƒ Ù‡Ù†Ø§..." style="width: 100%; margin-bottom: 15px;">
+                                <label style="display: block; margin-bottom: 5px; color: var(--text-muted);">الاسم بالكامل:</label>
+                <input type="text" id="onboard-name" class="search-input" placeholder="اكتب اسمك هنا..." style="width: 100%; margin-bottom: 15px;">
                 
                 <!-- Role Selection -->
-                <label style="display: block; margin-bottom: 10px; color: var(--text-muted); font-weight: bold;">Ø£Ù†Øª Ø¨ØªØ³Ø¬Ù„ ÙƒÙ€ØŸ</label>
+                <label style="display: block; margin-bottom: 10px; color: var(--text-muted); font-weight: bold;">أنت بتسجل كـ؟</label>
                 <div style="display: flex; gap: 10px; margin-top: 20px; bottom: auto;">
-                    <button id="role-student-btn" class="btn btn-primary" style="flex: 1; padding: 10px;" onclick="selectRole('student')"><i class="fa-solid fa-user-graduate"></i> Ø·Ø§Ù„Ø¨</button>
-                    <button id="role-teacher-btn" class="btn" style="flex: 1; padding: 10px; background: var(--bg-color); color: var(--text-main); border: 1px solid var(--border-color);" onclick="selectRole('teacher')"><i class="fa-solid fa-chalkboard-user"></i> Ù…Ø¯Ø±Ø³</button>
+                    <button id="role-student-btn" class="btn btn-primary" style="flex: 1; padding: 10px;" onclick="selectRole('student')"><i class="fa-solid fa-user-graduate"></i> طالب</button>
+                    <button id="role-teacher-btn" class="btn" style="flex: 1; padding: 10px; background: var(--bg-color); color: var(--text-main); border: 1px solid var(--border-color);" onclick="selectRole('teacher')"><i class="fa-solid fa-chalkboard-user"></i> مدرس</button>
                 </div>
                 <input type="hidden" id="onboard-role" value="student">
                 
                 <div id="teacher-fields" style="display: none;">
                     <div style="background: rgba(56, 176, 0, 0.1); border-left: 4px solid var(--success); padding: 15px; margin-bottom: 15px; border-radius: 8px; font-size: 0.9rem; color: var(--text-main);">
                         <i class="fa-solid fa-circle-info" style="color: var(--success);"></i> 
-                        Ø¨ØµÙØªÙƒ Ù…Ø¯Ø±Ø³ØŒ Ø³ÙŠØªÙ… Ø¥Ù†Ø´Ø§Ø¡ <strong>ÙƒÙˆØ¯ Ø®Ø§Øµ Ø¨Ùƒ</strong>.
+                        بصفتك مدرس، سيتم إنشاء <strong>كود خاص بك</strong>.
                     </div>
                     
-                    <label style="display: block; margin-bottom: 5px; color: var(--text-muted);">Ø§Ù„Ù…ÙˆØ§Ø¯ Ø§Ù„ØªÙŠ ØªØ¯Ø±Ø³Ù‡Ø§ (ÙŠÙ…ÙƒÙ† Ø¥Ø¶Ø§ÙØ© Ø£ÙƒØ«Ø± Ù…Ù† Ù…Ø§Ø¯Ø©):</label>
-                    <input type="text" id="onboard-teacher-subject" class="search-input" placeholder="Ù…Ø«Ø§Ù„: Ù„ØºØ© Ø¹Ø±Ø¨ÙŠØ© ÙˆØ¯ÙŠÙ†..." style="width: 100%; margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px; color: var(--text-muted);">المواد التي تدرسها (يمكن إضافة أكثر من مادة):</label>
+                    <input type="text" id="onboard-teacher-subject" class="search-input" placeholder="مثال: لغة عربية ودين..." style="width: 100%; margin-bottom: 15px;">
                     
-                    <label style="display: block; margin-bottom: 10px; color: var(--text-muted);">Ø§Ù„Ù…Ø±Ø§Ø­Ù„ ÙˆØ§Ù„ØµÙÙˆÙ Ø§Ù„ØªÙŠ ØªØ¯Ø±Ø³ Ù„Ù‡Ø§:</label>
+                    <label style="display: block; margin-bottom: 10px; color: var(--text-muted);">المراحل والصفوف التي تدرس لها:</label>
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; text-align: right; background: var(--bg-color); padding: 15px; border-radius: 8px; border: 1px solid var(--border-color);">
-                        <label style="cursor:pointer; display:flex; align-items:center; gap:8px;"><input type="checkbox" class="t-stage-cb" value="Ø§Ø¨ØªØ¯Ø§Ø¦ÙŠ"> Ù…Ø±Ø­Ù„Ø© Ø§Ø¨ØªØ¯Ø§Ø¦ÙŠØ©</label>
-                        <label style="cursor:pointer; display:flex; align-items:center; gap:8px;"><input type="checkbox" class="t-stage-cb" value="Ø¥Ø¹Ø¯Ø§Ø¯ÙŠ"> Ù…Ø±Ø­Ù„Ø© Ø¥Ø¹Ø¯Ø§Ø¯ÙŠØ©</label>
-                        <label style="cursor:pointer; display:flex; align-items:center; gap:8px;"><input type="checkbox" class="t-stage-cb" value="Ø«Ø§Ù†ÙˆÙŠ"> Ù…Ø±Ø­Ù„Ø© Ø«Ø§Ù†ÙˆÙŠØ©</label>
-                        <label style="cursor:pointer; display:flex; align-items:center; gap:8px;"><input type="checkbox" class="t-stage-cb" value="Ù„ØºØ§Øª ÙˆØªØ¬Ø±ÙŠØ¨ÙŠ"> Ù„ØºØ§Øª ÙˆØªØ¬Ø±ÙŠØ¨ÙŠ</label>
-                        <label style="cursor:pointer; display:flex; align-items:center; gap:8px; grid-column: 1/-1;"><input type="checkbox" class="t-stage-cb" value="ØªØ£Ø³ÙŠØ³ Ø£Ø·ÙØ§Ù„"> ØªØ£Ø³ÙŠØ³ Ø£Ø·ÙØ§Ù„</label>
+                        <label style="cursor:pointer; display:flex; align-items:center; gap:8px;"><input type="checkbox" class="t-stage-cb" value="ابتدائي"> مرحلة ابتدائية</label>
+                        <label style="cursor:pointer; display:flex; align-items:center; gap:8px;"><input type="checkbox" class="t-stage-cb" value="إعدادي"> مرحلة إعدادية</label>
+                        <label style="cursor:pointer; display:flex; align-items:center; gap:8px;"><input type="checkbox" class="t-stage-cb" value="ثانوي"> مرحلة ثانوية</label>
+                        <label style="cursor:pointer; display:flex; align-items:center; gap:8px;"><input type="checkbox" class="t-stage-cb" value="لغات وتجريبي"> لغات وتجريبي</label>
+                        <label style="cursor:pointer; display:flex; align-items:center; gap:8px; grid-column: 1/-1;"><input type="checkbox" class="t-stage-cb" value="تأسيس أطفال"> تأسيس أطفال</label>
                     </div>
                 </div>
                 
                 <div id="student-fields">
                 
-                <label style="display: block; margin-bottom: 5px; color: var(--text-muted);">Ø§Ù„Ù…Ø±Ø­Ù„Ø© Ø§Ù„Ø¯Ø±Ø§Ø³ÙŠØ©:</label>
+                <label style="display: block; margin-bottom: 5px; color: var(--text-muted);">المرحلة الدراسية:</label>
                 <select id="onboard-stage" class="search-input" style="width: 100%; margin-bottom: 10px;" onchange="toggleStageFields()">
-                    <option value="" disabled selected>Ø§Ø®ØªØ± Ù…Ø±Ø­Ù„ØªÙƒ...</option>
-                    <option value="Ø¥Ø¹Ø¯Ø§Ø¯ÙŠ">Ø¥Ø¹Ø¯Ø§Ø¯ÙŠ</option>
-                    <option value="Ø«Ø§Ù†ÙˆÙŠ">Ø«Ø§Ù†ÙˆÙŠ</option>
-                    <option value="Ø¬Ø§Ù…Ø¹Ø©">Ø¬Ø§Ù…Ø¹Ø©</option>
+                    <option value="" disabled selected>اختر مرحلتك...</option>
+                    <option value="إعدادي">إعدادي</option>
+                    <option value="ثانوي">ثانوي</option>
+                    <option value="جامعة">جامعة</option>
                 </select>
 
                 <div id="stage-school" style="display: none;">
-                    <label style="display: block; margin-bottom: 5px; color: var(--text-muted);">Ø§Ù„Ø³Ù†Ø© Ø§Ù„Ø¯Ø±Ø§Ø³ÙŠØ©:</label>
+                    <label style="display: block; margin-bottom: 5px; color: var(--text-muted);">السنة الدراسية:</label>
                     <select id="onboard-year" class="search-input" style="width: 100%; margin-bottom: 10px;">
-                        <option value="Ø§Ù„ØµÙ Ø§Ù„Ø£ÙˆÙ„">Ø§Ù„ØµÙ Ø§Ù„Ø£ÙˆÙ„</option>
-                        <option value="Ø§Ù„ØµÙ Ø§Ù„Ø«Ø§Ù†ÙŠ">Ø§Ù„ØµÙ Ø§Ù„Ø«Ø§Ù†ÙŠ</option>
-                        <option value="Ø§Ù„ØµÙ Ø§Ù„Ø«Ø§Ù„Ø«">Ø§Ù„ØµÙ Ø§Ù„Ø«Ø§Ù„Ø«</option>
+                        <option value="الصف الأول">الصف الأول</option>
+                        <option value="الصف الثاني">الصف الثاني</option>
+                        <option value="الصف الثالث">الصف الثالث</option>
                     </select>
                 </div>
 
                 <div id="stage-uni" style="display: none;">
-                    <label style="display: block; margin-bottom: 5px; color: var(--text-muted);">Ø§Ù„ÙƒÙ„ÙŠØ© / Ø§Ù„ØªØ®ØµØµ:</label>
-                    <input type="text" id="onboard-uni" class="search-input" placeholder="Ù…Ø«Ø§Ù„: Ø·Ø¨ØŒ Ù‡Ù†Ø¯Ø³Ø©ØŒ ØªØ¬Ø§Ø±Ø©..." style="width: 100%; margin-bottom: 10px;">
+                    <label style="display: block; margin-bottom: 5px; color: var(--text-muted);">الكلية / التخصص:</label>
+                    <input type="text" id="onboard-uni" class="search-input" placeholder="مثال: طب، هندسة، تجارة..." style="width: 100%; margin-bottom: 10px;">
                 </div>
                             </div> <!-- End student fields div -->
-                <label id="teacher-code-label" style="display: block; margin-bottom: 5px; color: var(--text-muted);">ÙƒÙˆØ¯ Ø§Ù„Ù…Ø¯Ø±Ø³ (Ø§Ø®ØªÙŠØ§Ø±ÙŠ):</label>
-                <input type="text" id="onboard-teacher-code" class="search-input" placeholder="Ù„Ùˆ Ù…Ø¹Ø§Ùƒ ÙƒÙˆØ¯ Ù…Ù† Ù…Ø¯Ø±Ø³Ùƒ Ø§ÙƒØªØ¨Ù‡ Ù‡Ù†Ø§..." style="width: 100%; margin-bottom: 10px;">
+                <label id="teacher-code-label" style="display: block; margin-bottom: 5px; color: var(--text-muted);">كود المدرس (اختياري):</label>
+                <input type="text" id="onboard-teacher-code" class="search-input" placeholder="لو معاك كود من مدرسك اكتبه هنا..." style="width: 100%; margin-bottom: 10px;">
             </div> <!-- End outer right aligned div -->
-            <button class="btn btn-primary btn-large" style="width: 100%; margin-top: 10px;" onclick="saveOnboarding()">Ø§Ø¨Ø¯Ø£ Ø§Ù„Ù…Ø°Ø§ÙƒØ±Ø© ðŸš€</button>
+            <button class="btn btn-primary btn-large" style="width: 100%; margin-top: 10px;" onclick="saveOnboarding()">ابدأ المذاكرة 🚀</button>
         </div>
     </div>
     <script>
         function toggleStageFields() {
             const stage = document.getElementById('onboard-stage').value;
-            document.getElementById('stage-school').style.display = (stage === 'Ø¥Ø¹Ø¯Ø§Ø¯ÙŠ' || stage === 'Ø«Ø§Ù†ÙˆÙŠ') ? 'block' : 'none';
-            document.getElementById('stage-uni').style.display = (stage === 'Ø¬Ø§Ù…Ø¹Ø©') ? 'block' : 'none';
+            document.getElementById('stage-school').style.display = (stage === 'إعدادي' || stage === 'ثانوي') ? 'block' : 'none';
+            document.getElementById('stage-uni').style.display = (stage === 'جامعة') ? 'block' : 'none';
         }
     </script>
 
@@ -214,7 +214,7 @@
             <div class="logo">
                 <button class="close-sidebar-btn d-mobile" onclick="toggleSidebar()"><i class="fa-solid fa-xmark"></i></button>
                 <i class="fa-solid fa-graduation-cap"></i>
-                <h2>Ø¯Ù„ÙŠÙ„Ùƒ Ù„Ù„Ù…Ø°Ø§ÙƒØ±Ø©</h2>
+                <h2>دليلك للمذاكرة</h2>
             </div>
             <!-- User Profile in Sidebar -->
             <div id="sidebar-user-profile" style="padding: 15px 20px; margin: 0 10px 10px; background: linear-gradient(135deg, rgba(0, 229, 255,0.15), rgba(0, 229, 255,0.1)); border-radius: 12px; border: 1px solid rgba(0, 229, 255,0.2);">
@@ -223,35 +223,35 @@
                         <i class="fa-solid fa-user-graduate" style="color: white; font-size: 1.2rem;"></i>
                     </div>
                     <div>
-                        <div id="sidebar-user-name" style="font-weight: 700; color: var(--text-main); font-size: 1.05rem;">ÙŠØ§ Ø¨Ø·Ù„</div>
+                        <div id="sidebar-user-name" style="font-weight: 700; color: var(--text-main); font-size: 1.05rem;">يا بطل</div>
                         <div id="sidebar-user-stage" style="color: var(--text-muted); font-size: 0.8rem;"></div>
                     </div>
                 </div>
             </div>
             <ul class="nav-links">
-                <li class="active" data-page="dashboard"><i class="fa-solid fa-chart-pie"></i> Ù„ÙˆØ­Ø© Ø§Ù„ØªØ­ÙƒÙ…</li>
-                <li data-page="schedule"><i class="fa-solid fa-calendar-week"></i> Ø¬Ø¯ÙˆÙ„ Ø§Ù„Ø¯Ø±ÙˆØ³</li>
-                <li data-page="teacher-dashboard" id="nav-teacher" style="display:none;"><i class="fa-solid fa-chalkboard-user"></i> Ù„ÙˆØ­Ø© Ø§Ù„Ù…Ø¯Ø±Ø³ÙŠÙ†</li>
-                <li data-page="tasks"><i class="fa-solid fa-list-check"></i> Ù…Ù‡Ø§Ù… Ø§Ù„Ù…Ø°Ø§ÙƒØ±Ø©</li>
-                <li data-page="subjects"><i class="fa-solid fa-book"></i> Ø§Ù„Ù…ÙˆØ§Ø¯ Ø§Ù„Ø¯Ø±Ø§Ø³ÙŠØ©</li>
-                <li data-page="pomodoro"><i class="fa-solid fa-stopwatch"></i> Ù…Ø¤Ù‚Øª Ø¨ÙˆÙ…ÙˆØ¯ÙˆØ±Ùˆ</li>
-                <li data-page="exams"><i class="fa-solid fa-file-signature"></i> Ø§Ù„Ø§Ù…ØªØ­Ø§Ù†Ø§Øª</li>
-                <li data-page="flashcards"><i class="fa-solid fa-layer-group"></i> Ø§Ù„Ø¨Ø·Ø§Ù‚Ø§Øª (Flashcards)</li>
-                <li data-page="ai-assistant"><i class="fa-solid fa-robot"></i> Ø§Ù„Ù…Ø³Ø§Ø¹Ø¯ Ø§Ù„Ø°ÙƒÙŠ ðŸŒŸ</li>
-                <li data-page="backlog"><i class="fa-solid fa-boxes-stacked"></i> Ù„Ù…Ù‘ Ø§Ù„Ù…ØªØ±Ø§ÙƒÙ… ðŸ“¦</li>
-                <li data-page="quiz"><i class="fa-solid fa-clipboard-question"></i> Ø§Ø®ØªØ¨Ø± Ù†ÙØ³Ùƒ ðŸ§ª</li>
-                <li data-page="statistics"><i class="fa-solid fa-chart-simple"></i> Ø¥Ø­ØµØ§Ø¦ÙŠØ§Øª Ø§Ù„Ù…Ø°Ø§ÙƒØ±Ø© ðŸ“Š</li>
-                <li data-page="gpa-calc"><i class="fa-solid fa-calculator"></i> Ø­Ø§Ø³Ø¨Ø© Ø§Ù„Ù€ GPA ðŸŽ“</li>
-                <li data-page="alarm"><i class="fa-solid fa-bell"></i> Ù…Ù†Ø¨Ù‡ Ø§Ù„Ù†ÙˆÙ… Ø§Ù„Ø«Ù‚ÙŠÙ„ â°</li>
-                <li data-page="notifications-settings"><i class="fa-solid fa-bell" style="color: #feca57;"></i> Ø§Ù„Ø¥Ø´Ø¹Ø§Ø±Ø§Øª Ø§Ù„Ø°ÙƒÙŠØ© ðŸ””</li>
-                <li data-page="challenges"><i class="fa-solid fa-gamepad" style="color: var(--primary-color);"></i> ØªØ­Ø¯ÙŠØ§Øª Ø§Ù„Ù…Ø°Ø§ÙƒØ±Ø© ðŸŽ®</li>
-                <li data-page="comments-wall"><i class="fa-solid fa-comments" style="color: var(--primary-color);"></i> ÙƒÙ„Ù…Ø© ØªØ´Ø¬Ø¹Ù†ÙŠ âœ¨</li>
+                <li class="active" data-page="dashboard"><i class="fa-solid fa-chart-pie"></i> لوحة التحكم</li>
+                <li data-page="schedule"><i class="fa-solid fa-calendar-week"></i> جدول الدروس</li>
+                <li data-page="teacher-dashboard" id="nav-teacher" style="display:none;"><i class="fa-solid fa-chalkboard-user"></i> لوحة المدرسين</li>
+                <li data-page="tasks"><i class="fa-solid fa-list-check"></i> مهام المذاكرة</li>
+                <li data-page="subjects"><i class="fa-solid fa-book"></i> المواد الدراسية</li>
+                <li data-page="pomodoro"><i class="fa-solid fa-stopwatch"></i> مؤقت بومودورو</li>
+                <li data-page="exams"><i class="fa-solid fa-file-signature"></i> الامتحانات</li>
+                <li data-page="flashcards"><i class="fa-solid fa-layer-group"></i> البطاقات (Flashcards)</li>
+                <li data-page="ai-assistant"><i class="fa-solid fa-robot"></i> المساعد الذكي 🌟</li>
+                <li data-page="backlog"><i class="fa-solid fa-boxes-stacked"></i> لمّ المتراكم 📦</li>
+                <li data-page="quiz"><i class="fa-solid fa-clipboard-question"></i> اختبر نفسك 🧪</li>
+                <li data-page="statistics"><i class="fa-solid fa-chart-simple"></i> إحصائيات المذاكرة 📊</li>
+                <li data-page="gpa-calc"><i class="fa-solid fa-calculator"></i> حاسبة الـ GPA 🎓</li>
+                <li data-page="alarm"><i class="fa-solid fa-bell"></i> منبه النوم الثقيل ⏰</li>
+                <li data-page="notifications-settings"><i class="fa-solid fa-bell" style="color: #feca57;"></i> الإشعارات الذكية 🔔</li>
+                <li data-page="challenges"><i class="fa-solid fa-gamepad" style="color: var(--primary-color);"></i> تحديات المذاكرة 🎮</li>
+                <li data-page="comments-wall"><i class="fa-solid fa-comments" style="color: var(--primary-color);"></i> كلمة تشجعني ✨</li>
                 <li data-page="admin" id="nav-admin" style="display:none;"></li>
             </ul>
             <div class="sidebar-footer">
                 
                 <button onclick="logoutAccount()" class="theme-btn" style="margin-top:10px; border: 1px solid rgba(0, 229, 255, 0.3); color: var(--danger); background: rgba(0, 229, 255, 0.05);">
-                    <i class="fa-solid fa-right-from-bracket"></i> ØªØ¨Ø¯ÙŠÙ„ Ø§Ù„Ø­Ø³Ø§Ø¨
+                    <i class="fa-solid fa-right-from-bracket"></i> تبديل الحساب
                 </button>
                 <div class="developer-credit" style="margin-top: 15px; text-align: center; font-size: 0.85rem; color: var(--text-muted); padding: 10px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color); user-select: none;">
                     <i class="fa-solid fa-code"></i> Developer: <strong style="color: var(--primary-color); font-size: 1rem; cursor: pointer;" id="secret-admin-btn">Eng. Malak Adel Abdelhamid</strong>
@@ -267,8 +267,8 @@
             <div class="user-profile-header">
                 <div class="avatar-circle"><i class="fa-solid fa-user-graduate"></i></div>
                 <div class="user-info-header">
-                    <span class="greeting">Ù…Ø±Ø­Ø¨Ø§Ù‹ Ø¨Ùƒ</span>
-                    <span id="mobile-welcome-name" class="name">ÙŠØ§ Ø¨Ø·Ù„</span>
+                    <span class="greeting">مرحباً بك</span>
+                    <span id="mobile-welcome-name" class="name">يا بطل</span>
                 </div>
             </div>
             <div class="header-actions">
@@ -279,48 +279,48 @@
             <section id="teacher-dashboard" class="page">
                 <header>
                     <div>
-                        <h1>Ù„ÙˆØ­Ø© Ø§Ù„Ù…Ø¯Ø±Ø³ÙŠÙ† <i class="fa-solid fa-chalkboard-user text-primary"></i></h1>
-                        <p>Ø¥Ø¯Ø§Ø±Ø© Ø·Ù„Ø§Ø¨ÙƒØŒ ÙˆØªØµÙØ­ Ø¨Ù†Ùƒ Ø§Ù„Ù…Ù„Ø§Ø²Ù… ÙˆØ§Ù„Ø§Ù…ØªØ­Ø§Ù†Ø§Øª Ø§Ù„Ø¬Ø§Ù‡Ø²Ø©.</p>
+                        <h1>لوحة المدرسين <i class="fa-solid fa-chalkboard-user text-primary"></i></h1>
+                        <p>إدارة طلابك، وتصفح بنك الملازم والامتحانات الجاهزة.</p>
                     </div>
                 </header>
                 
                 <div class="dashboard-grid" style="margin-bottom: 30px;">
                     <div class="card" style="text-align: center; border-bottom: 4px solid var(--primary-color);">
-                        <h3 style="color: var(--text-muted); font-size: 1rem; border:none; justify-content:center;">ÙƒÙˆØ¯ Ø§Ù„Ø±Ø¨Ø· Ø§Ù„Ø®Ø§Øµ Ø¨Ùƒ</h3>
+                        <h3 style="color: var(--text-muted); font-size: 1rem; border:none; justify-content:center;">كود الربط الخاص بك</h3>
                         <h2 id="display-teacher-code" style="color: var(--primary-color); font-size: 2.2rem; margin: 15px 0;">---</h2>
-                        <p style="font-size: 0.85rem; color:var(--text-muted);">Ø£Ø¹Ø·Ù‡ Ù„Ø·Ù„Ø§Ø¨Ùƒ Ù„ÙŠØ±ØªØ¨Ø·ÙˆØ§ Ø¨Ø­Ø³Ø§Ø¨Ùƒ</p>
+                        <p style="font-size: 0.85rem; color:var(--text-muted);">أعطه لطلابك ليرتبطوا بحسابك</p>
                     </div>
                     <div class="card" style="text-align: center; border-bottom: 4px solid var(--success);">
-                        <h3 style="color: var(--text-muted); font-size: 1rem; border:none; justify-content:center;">Ø§Ù„Ø·Ù„Ø§Ø¨ Ø§Ù„Ù…Ø³Ø¬Ù„ÙŠÙ† Ø¨ÙƒÙˆØ¯Ùƒ</h3>
+                        <h3 style="color: var(--text-muted); font-size: 1rem; border:none; justify-content:center;">الطلاب المسجلين بكودك</h3>
                         <h2 id="teacher-students-count" style="color: var(--success); font-size: 2.2rem; margin: 15px 0;">0</h2>
-                        <button onclick="loadTeacherStudents()" class="btn btn-primary" style="font-size:0.8rem; padding: 5px 10px;">ØªØ­Ø¯ÙŠØ« Ø§Ù„Ù‚Ø§Ø¦Ù…Ø©</button>
+                        <button onclick="loadTeacherStudents()" class="btn btn-primary" style="font-size:0.8rem; padding: 5px 10px;">تحديث القائمة</button>
                     </div>
                 </div>
                 
                 <div class="card" style="margin-bottom: 30px;">
-                    <h3 style="margin-top: 20px; bottom: auto; border-bottom:2px solid var(--bg-color); padding-bottom:10px;"><i class="fa-solid fa-users text-success"></i> Ù‚Ø§Ø¦Ù…Ø© Ø·Ù„Ø§Ø¨Ùƒ</h3>
+                    <h3 style="margin-top: 20px; bottom: auto; border-bottom:2px solid var(--bg-color); padding-bottom:10px;"><i class="fa-solid fa-users text-success"></i> قائمة طلابك</h3>
                     <ul class="item-list" id="teacher-students-list">
-                          <li class="list-item" style="justify-content:center; color:var(--text-muted);">Ù„Ø§ ÙŠÙˆØ¬Ø¯ Ø·Ù„Ø§Ø¨ Ù…Ø³Ø¬Ù„ÙŠÙ† Ø­ØªÙ‰ Ø§Ù„Ø¢Ù†.</li>
+                          <li class="list-item" style="justify-content:center; color:var(--text-muted);">لا يوجد طلاب مسجلين حتى الآن.</li>
                       </ul>
                   </div>
 
                 <div class="card" style="margin-bottom: 30px;">
-                    <h3 style="margin-top: 20px; bottom: auto; border-bottom:2px solid var(--bg-color); padding-bottom:10px;"><i class="fa-solid fa-book-bookmark text-primary"></i> Ø¨Ù†Ùƒ Ø§Ù„Ù…ØµØ§Ø¯Ø± ÙˆØ§Ù„Ù…Ù„Ø§Ø²Ù…</h3>
+                    <h3 style="margin-top: 20px; bottom: auto; border-bottom:2px solid var(--bg-color); padding-bottom:10px;"><i class="fa-solid fa-book-bookmark text-primary"></i> بنك المصادر والملازم</h3>
                     <div class="filters" style="display: flex; gap: 15px; flex-wrap: wrap; margin-bottom: 25px;">
                         <select id="teacher-stage-filter" class="search-input" style="flex: 1; min-width: 200px;">
-                            <option value="all">ÙƒÙ„ Ø§Ù„Ù…Ø±Ø§Ø­Ù„ Ø§Ù„Ø¯Ø±Ø§Ø³ÙŠØ©</option>
-                            <option value="Ø§Ø¨ØªØ¯Ø§Ø¦ÙŠ">Ø§Ù„Ù…Ø±Ø­Ù„Ø© Ø§Ù„Ø§Ø¨ØªØ¯Ø§Ø¦ÙŠØ©</option>
-                            <option value="Ø¥Ø¹Ø¯Ø§Ø¯ÙŠ">Ø§Ù„Ù…Ø±Ø­Ù„Ø© Ø§Ù„Ø¥Ø¹Ø¯Ø§Ø¯ÙŠØ©</option>
-                            <option value="Ø«Ø§Ù†ÙˆÙŠ">Ø§Ù„Ù…Ø±Ø­Ù„Ø© Ø§Ù„Ø«Ø§Ù†ÙˆÙŠØ©</option>
+                            <option value="all">كل المراحل الدراسية</option>
+                            <option value="ابتدائي">المرحلة الابتدائية</option>
+                            <option value="إعدادي">المرحلة الإعدادية</option>
+                            <option value="ثانوي">المرحلة الثانوية</option>
                         </select>
                         <select id="teacher-subject-filter" class="search-input" style="flex: 1; min-width: 200px;">
-                            <option value="all">ÙƒÙ„ Ø§Ù„Ù…ÙˆØ§Ø¯</option>
-                            <option value="Ø¹Ø±Ø¨ÙŠ">Ù„ØºØ© Ø¹Ø±Ø¨ÙŠØ©</option>
-                            <option value="Ø±ÙŠØ§Ø¶ÙŠØ§Øª">Ø±ÙŠØ§Ø¶ÙŠØ§Øª</option>
-                            <option value="Ø¹Ù„ÙˆÙ…">Ø¹Ù„ÙˆÙ… / ÙÙŠØ²ÙŠØ§Ø¡</option>
-                            <option value="Ù„ØºØ§Øª">Ù„ØºØ§Øª Ø£Ø¬Ù†Ø¨ÙŠØ©</option>
+                            <option value="all">كل المواد</option>
+                            <option value="عربي">لغة عربية</option>
+                            <option value="رياضيات">رياضيات</option>
+                            <option value="علوم">علوم / فيزياء</option>
+                            <option value="لغات">لغات أجنبية</option>
                         </select>
-                        <button class="btn btn-primary" onclick="filterTeacherLibrary()"><i class="fa-solid fa-magnifying-glass"></i> Ø¨Ø­Ø«</button>
+                        <button class="btn btn-primary" onclick="filterTeacherLibrary()"><i class="fa-solid fa-magnifying-glass"></i> بحث</button>
                     </div>
 
                     <div id="teacher-library-grid" class="dashboard-grid">
@@ -333,27 +333,27 @@
             <section id="dashboard" class="page active-page">
                 <header>
                     <div>
-                        <h1>Ù…Ø±Ø­Ø¨Ø§Ù‹ Ø¨Ùƒ ÙŠØ§ Ø¨Ø·Ù„! ðŸŽ¯</h1>
-                        <p id="current-date">Ø§Ù„ÙŠÙˆÙ… Ù‡Ùˆ...</p>
+                        <h1>مرحباً بك يا بطل! 🎯</h1>
+                        <p id="current-date">اليوم هو...</p>
                     </div>
                 </header>
 
                 
                 <!-- My Dream Banner -->
                 <div class="card hover-glow-box" style="background: linear-gradient(135deg, rgba(0, 229, 255, 0.1), rgba(0, 229, 255, 0.05)); border: 2px dashed #00e5ff; text-align: center; margin-bottom: 2rem;">
-                    <h3 style="color: var(--primary-color); margin-top: 0;"><i class="fa-solid fa-star" style="color: #feca57;"></i> Ø­Ù„Ù…ÙŠ Ø§Ù„Ù„ÙŠ Ø¨Ø³Ø¹Ù‰ Ø¹Ø´Ø§Ù†Ù‡</h3>
+                    <h3 style="color: var(--primary-color); margin-top: 0;"><i class="fa-solid fa-star" style="color: #feca57;"></i> حلمي اللي بسعى عشانه</h3>
                     <div id="dream-display-container">
-                        <p id="dream-text" style="font-size: 1.3rem; font-weight: bold; color: var(--text-main); margin: 1rem 0; min-height: 30px;">Ù„Ù… ØªÙƒØªØ¨ Ø­Ù„Ù…Ùƒ Ø¨Ø¹Ø¯..</p>
-                        <button onclick="editDream()" class="theme-btn" style="background: rgba(0, 229, 255, 0.2); color: var(--primary-color); padding: 0.5rem 1rem;"><i class="fa-solid fa-pen"></i> ØªØ¹Ø¯ÙŠÙ„</button>
+                        <p id="dream-text" style="font-size: 1.3rem; font-weight: bold; color: var(--text-main); margin: 1rem 0; min-height: 30px;">لم تكتب حلمك بعد..</p>
+                        <button onclick="editDream()" class="theme-btn" style="background: rgba(0, 229, 255, 0.2); color: var(--primary-color); padding: 0.5rem 1rem;"><i class="fa-solid fa-pen"></i> تعديل</button>
                     </div>
                     <div id="dream-edit-container" style="display: none; flex-direction: column; gap: 1rem; align-items: center;">
-                        <input type="text" id="dream-input" placeholder="Ù†ÙØ³Ùƒ ØªØ·Ù„Ø¹ Ø¥ÙŠÙ‡ØŸ Ø¥ÙŠÙ‡ Ø§Ù„ÙƒÙ„ÙŠØ© Ø§Ù„Ù„ÙŠ Ø¨ØªØ­Ù„Ù… Ø¨ÙŠÙ‡Ø§ØŸ" style="width: 80%; padding: 0.8rem; border: 2px solid var(--border-color); border-radius: 10px; font-family: 'Tajawal'; background: var(--bg-color); color: var(--text-main); text-align: center; font-size: 1.1rem;">
-                        <button onclick="saveDream()" class="theme-btn" style="background: linear-gradient(135deg, #00e5ff, #00b8cc); color: white; padding: 0.6rem 2rem;"><i class="fa-solid fa-check"></i> Ø­ÙØ¸</button>
+                        <input type="text" id="dream-input" placeholder="نفسك تطلع إيه؟ إيه الكلية اللي بتحلم بيها؟" style="width: 80%; padding: 0.8rem; border: 2px solid var(--border-color); border-radius: 10px; font-family: 'Tajawal'; background: var(--bg-color); color: var(--text-main); text-align: center; font-size: 1.1rem;">
+                        <button onclick="saveDream()" class="theme-btn" style="background: linear-gradient(135deg, #00e5ff, #00b8cc); color: white; padding: 0.6rem 2rem;"><i class="fa-solid fa-check"></i> حفظ</button>
                     </div>
                 </div>
 
                 <div class="progress-section">
-                    <h3>Ù…Ø¹Ø¯Ù„ Ø¥Ù†Ø¬Ø§Ø² Ù…Ù‡Ø§Ù… Ø§Ù„ÙŠÙˆÙ…</h3>
+                    <h3>معدل إنجاز مهام اليوم</h3>
                     <div class="progress-bar-bg">
                         <div class="progress-bar-fill" id="daily-progress" style="width: 0%;"></div>
                     </div>
@@ -362,42 +362,42 @@
 
                 <div class="dashboard-grid">
                     <div class="card">
-                        <h3>Ø¯Ø±ÙˆØ³ Ø§Ù„ÙŠÙˆÙ… <i class="fa-solid fa-bell text-blue"></i></h3>
+                        <h3>دروس اليوم <i class="fa-solid fa-bell text-blue"></i></h3>
                         <ul id="today-classes-list" class="item-list"></ul>
                     </div>
                     <div class="card">
-                        <h3>Ù…Ø§ ÙŠØ¬Ø¨ Ù…Ø°Ø§ÙƒØ±ØªÙ‡ Ø§Ù„ÙŠÙˆÙ… <i class="fa-solid fa-fire text-orange"></i></h3>
+                        <h3>ما يجب مذاكرته اليوم <i class="fa-solid fa-fire text-orange"></i></h3>
                         <ul id="today-tasks-list" class="item-list"></ul>
                     </div>
                     
                     <!-- Islamic Widget -->
                     <div class="card" id="islamic-widget" style="grid-column: 1 / -1;">
                         <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <h3>Ù…ÙˆØ§Ù‚ÙŠØª Ø§Ù„ØµÙ„Ø§Ø© ÙˆØ§Ù„Ø°ÙƒØ± ðŸ•Œ <small style="font-size:0.8rem; font-weight:normal; cursor:pointer; color:var(--primary-color); background:var(--bg-color); padding:3px 8px; border-radius:12px;" onclick="changeCity()">[ØªØºÙŠÙŠØ± Ø§Ù„Ù…Ø¯ÙŠÙ†Ø©]</small></h3>
-                            <span id="current-city-label" style="font-size:0.9rem; font-weight:bold; color:var(--text-muted)">Ø§Ù„Ù‚Ø§Ù‡Ø±Ø©</span>
+                            <h3>مواقيت الصلاة والذكر 🕌 <small style="font-size:0.8rem; font-weight:normal; cursor:pointer; color:var(--primary-color); background:var(--bg-color); padding:3px 8px; border-radius:12px;" onclick="changeCity()">[تغيير المدينة]</small></h3>
+                            <span id="current-city-label" style="font-size:0.9rem; font-weight:bold; color:var(--text-muted)">القاهرة</span>
                         </div>
                         <div class="prayer-times" id="prayer-times-container">
-                            <p style="text-align:center; color:var(--text-muted); font-size:0.9rem; padding: 10px;">Ø¬Ø§Ø±ÙŠ Ø§Ù„ØªØ­Ù…ÙŠÙ„...</p>
+                            <p style="text-align:center; color:var(--text-muted); font-size:0.9rem; padding: 10px;">جاري التحميل...</p>
                         </div>
                         <div class="study-dua" style="margin-top: 15px; padding: 15px; background: var(--bg-color); border-radius: 8px; border-right: 4px solid var(--primary-color);">
-                            <h4 style="margin-bottom: 5px; color: var(--primary-color);"><i class="fa-solid fa-hands-praying"></i> Ø¯Ø¹Ø§Ø¡ Ù‚Ø¨Ù„ Ø§Ù„Ù…Ø°Ø§ÙƒØ±Ø©</h4>
-                            <p style="font-size: 0.95rem; line-height: 1.6; font-weight: 500;">"Ø§Ù„Ù„Ù‡Ù… Ø¥Ù†ÙŠ Ø£Ø³Ø£Ù„Ùƒ ÙÙ‡Ù… Ø§Ù„Ù†Ø¨ÙŠÙŠÙ†ØŒ ÙˆØ­ÙØ¸ Ø§Ù„Ù…Ø±Ø³Ù„ÙŠÙ†ØŒ ÙˆØ§Ù„Ù…Ù„Ø§Ø¦ÙƒØ© Ø§Ù„Ù…Ù‚Ø±Ø¨ÙŠÙ†. Ø§Ù„Ù„Ù‡Ù… Ø§Ø¬Ø¹Ù„ Ø£Ù„Ø³Ù†ØªÙ†Ø§ Ø¹Ø§Ù…Ø±Ø© Ø¨Ø°ÙƒØ±ÙƒØŒ ÙˆÙ‚Ù„ÙˆØ¨Ù†Ø§ Ø¨Ø®Ø´ÙŠØªÙƒØŒ ÙˆØ£Ø³Ø±Ø§Ø±Ù†Ø§ Ø¨Ø·Ø§Ø¹ØªÙƒØŒ Ø¥Ù†Ùƒ Ø¹Ù„Ù‰ ÙƒÙ„ Ø´ÙŠØ¡ Ù‚Ø¯ÙŠØ±."</p>
+                            <h4 style="margin-bottom: 5px; color: var(--primary-color);"><i class="fa-solid fa-hands-praying"></i> دعاء قبل المذاكرة</h4>
+                            <p style="font-size: 0.95rem; line-height: 1.6; font-weight: 500;">"اللهم إني أسألك فهم النبيين، وحفظ المرسلين، والملائكة المقربين. اللهم اجعل ألسنتنا عامرة بذكرك، وقلوبنا بخشيتك، وأسرارنا بطاعتك، إنك على كل شيء قدير."</p>
                         </div>
                     </div>
 
                     <!-- Quran Wird Widget -->
                     <div class="card" id="quran-widget" style="grid-column: 1 / -1; border-right: 4px solid var(--success);">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                            <h3 style="margin: 0;"><i class="fa-solid fa-book-quran" style="color: var(--success);"></i> ÙˆØ±Ø¯ÙŠ Ø§Ù„Ù‚Ø±Ø¢Ù†ÙŠ Ø§Ù„ÙŠÙˆÙ…ÙŠ</h3>
-                            <button class="btn btn-outline" onclick="openModal('quran-modal')" style="font-size: 0.8rem; padding: 5px 10px;">ØªØ­Ø¯ÙŠØ¯ Ø§Ù„ÙˆØ±Ø¯</button>
+                            <h3 style="margin: 0;"><i class="fa-solid fa-book-quran" style="color: var(--success);"></i> وردي القرآني اليومي</h3>
+                            <button class="btn btn-outline" onclick="openModal('quran-modal')" style="font-size: 0.8rem; padding: 5px 10px;">تحديد الورد</button>
                         </div>
                         <div style="display: flex; justify-content: space-between; align-items: center; background: var(--bg-color); padding: 15px; border-radius: 8px;">
                             <div>
-                                <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 5px;">Ù…Ù‚Ø¯Ø§Ø± Ø§Ù„ÙˆØ±Ø¯:</p>
-                                <strong id="quran-goal-display" style="font-size: 1.1rem;">Ù„Ù… ÙŠØªÙ… Ø§Ù„ØªØ­Ø¯ÙŠØ¯</strong>
+                                <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 5px;">مقدار الورد:</p>
+                                <strong id="quran-goal-display" style="font-size: 1.1rem;">لم يتم التحديد</strong>
                             </div>
                             <div style="text-align: center;">
-                                <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 5px;">Ø§Ù„Ù…Ù†Ø¬Ø² Ø§Ù„ÙŠÙˆÙ…:</p>
+                                <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 5px;">المنجز اليوم:</p>
                                 <div style="display: flex; align-items: center; gap: 10px;">
                                     <button class="btn" style="background: var(--danger); color: white; padding: 2px 8px; border-radius: 4px;" onclick="updateQuranWird(-1)">-</button>
                                     <strong id="quran-done-display" style="font-size: 1.5rem; color: var(--success);">0</strong>
@@ -405,13 +405,13 @@
                                 </div>
                             </div>
                             <div style="text-align: center;">
-                                <button class="btn btn-primary" id="btn-complete-quran" onclick="completeQuranWird()" style="background-color: var(--success);"><i class="fa-solid fa-check"></i> Ø£ØªÙ…Ù…Øª Ø§Ù„ÙˆØ±Ø¯</button>
+                                <button class="btn btn-primary" id="btn-complete-quran" onclick="completeQuranWird()" style="background-color: var(--success);"><i class="fa-solid fa-check"></i> أتممت الورد</button>
                             </div>
                         </div>
                     </div>
 
                     <div class="card" style="grid-column: 1 / -1;">
-                        <h3>Ø£Ù‚Ø±Ø¨ Ø§Ù„Ø§Ù…ØªØ­Ø§Ù†Ø§Øª <i class="fa-solid fa-hourglass-half text-danger"></i></h3>
+                        <h3>أقرب الامتحانات <i class="fa-solid fa-hourglass-half text-danger"></i></h3>
                         <div class="exams-grid" id="dashboard-exams-grid"></div>
                     </div>
                 </div>
@@ -421,19 +421,19 @@
             <section id="schedule" class="page">
                 <header style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
                     <div>
-                        <h1 style="margin: 0;">Ø¬Ø¯ÙˆÙ„ Ø§Ù„Ø¯Ø±ÙˆØ³ ðŸ“…</h1>
-                        <p style="color: var(--text-muted); margin-top: 5px;">Ù†Ø¸Ù… ÙˆÙ‚ØªÙƒ ÙˆÙ…ÙˆØ§Ø¹ÙŠØ¯Ùƒ Ø¨Ø°ÙƒØ§Ø¡.</p>
+                        <h1 style="margin: 0;">جدول الدروس 📅</h1>
+                        <p style="color: var(--text-muted); margin-top: 5px;">نظم وقتك ومواعيدك بذكاء.</p>
                     </div>
                     <div style="display: flex; gap: 10px;">
-                        <button class="btn btn-primary" onclick="openModal('class-modal')">Ø¥Ø¶Ø§ÙØ© Ø¯Ø±Ø³</button>
-                        <button class="btn" style="background: var(--orange); color: white;" onclick="openModal('ai-schedule-modal')"><i class="fa-solid fa-wand-magic-sparkles"></i> Ø¬Ø¯ÙˆÙ„ Ø§Ù„Ø°ÙƒØ§Ø¡ Ø§Ù„Ø§ØµØ·Ù†Ø§Ø¹ÙŠ</button>
+                        <button class="btn btn-primary" onclick="openModal('class-modal')">إضافة درس</button>
+                        <button class="btn" style="background: var(--orange); color: white;" onclick="openModal('ai-schedule-modal')"><i class="fa-solid fa-wand-magic-sparkles"></i> جدول الذكاء الاصطناعي</button>
                     </div>
                 </header>
                 <!-- AI Result Container for Schedule -->
                 <div id="schedule-ai-result" style="display:none; margin-bottom:20px; background:var(--bg-color); padding:20px; border-radius:12px; border:1px solid var(--border-color); box-shadow:0 4px 15px rgba(0,0,0,0.1);">
                     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px; border-bottom:1px solid var(--border-color); padding-bottom:10px;">
-                        <h3 style="color:var(--orange); margin:0;"><i class="fa-solid fa-wand-magic-sparkles"></i> Ø¬Ø¯ÙˆÙ„ Ø§Ù„Ù…Ø°Ø§ÙƒØ±Ø© Ø§Ù„Ø°ÙƒÙŠ</h3>
-                        <button onclick="document.getElementById('schedule-ai-result').style.display='none'" class="btn" style="background:var(--danger); color:white; padding:5px 10px;"><i class="fa-solid fa-xmark"></i> Ø¥ØºÙ„Ø§Ù‚</button>
+                        <h3 style="color:var(--orange); margin:0;"><i class="fa-solid fa-wand-magic-sparkles"></i> جدول المذاكرة الذكي</h3>
+                        <button onclick="document.getElementById('schedule-ai-result').style.display='none'" class="btn" style="background:var(--danger); color:white; padding:5px 10px;"><i class="fa-solid fa-xmark"></i> إغلاق</button>
                     </div>
                     <div id="schedule-ai-content" style="line-height:1.8; color:var(--text-main);"></div>
                 </div>
@@ -443,13 +443,13 @@
             <!-- Tasks Page -->
             <section id="tasks" class="page">
                 <header>
-                    <h1>Ù…Ù‡Ø§Ù… Ø§Ù„Ù…Ø°Ø§ÙƒØ±Ø© ðŸ“</h1>
-                    <button class="btn btn-primary" onclick="openModal('task-modal')">Ø¥Ø¶Ø§ÙØ© Ù…Ù‡Ù…Ø© Ø¬Ø¯ÙŠØ¯Ø©</button>
+                    <h1>مهام المذاكرة 📝</h1>
+                    <button class="btn btn-primary" onclick="openModal('task-modal')">إضافة مهمة جديدة</button>
                 </header>
                 <div class="filters">
-                    <button class="filter-btn active" data-filter="all">Ø§Ù„ÙƒÙ„</button>
-                    <button class="filter-btn" data-filter="pending">Ù‚ÙŠØ¯ Ø§Ù„Ø§Ù†ØªØ¸Ø§Ø±</button>
-                    <button class="filter-btn" data-filter="completed">Ù…ÙƒØªÙ…Ù„Ø©</button>
+                    <button class="filter-btn active" data-filter="all">الكل</button>
+                    <button class="filter-btn" data-filter="pending">قيد الانتظار</button>
+                    <button class="filter-btn" data-filter="completed">مكتملة</button>
                 </div>
                 <ul id="all-tasks-list" class="item-list"></ul>
             </section>
@@ -457,8 +457,8 @@
             <!-- Subjects Page -->
             <section id="subjects" class="page">
                 <header>
-                    <h1>Ø§Ù„Ù…ÙˆØ§Ø¯ Ø§Ù„Ø¯Ø±Ø§Ø³ÙŠØ© ðŸ“š</h1>
-                    <button class="btn btn-primary" onclick="openModal('subject-modal')">Ø¥Ø¶Ø§ÙØ© Ù…Ø§Ø¯Ø©</button>
+                    <h1>المواد الدراسية 📚</h1>
+                    <button class="btn btn-primary" onclick="openModal('subject-modal')">إضافة مادة</button>
                 </header>
                 <div class="subjects-grid" id="subjects-grid"></div>
             </section>
@@ -467,32 +467,32 @@
             <section id="pomodoro" class="page">
                 <header>
                     <div>
-                        <h1>Ù…Ø¤Ù‚Øª Ø¨ÙˆÙ…ÙˆØ¯ÙˆØ±Ùˆ â±ï¸</h1>
-                        <p>Ø±ÙƒØ² Ù„Ù…Ø¯Ø© 25 Ø¯Ù‚ÙŠÙ‚Ø©ØŒ Ø«Ù… Ø§Ø³ØªØ±Ø­ Ù„Ù…Ø¯Ø© 5 Ø¯Ù‚Ø§Ø¦Ù‚.</p>
+                        <h1>مؤقت بومودورو ⏱️</h1>
+                        <p>ركز لمدة 25 دقيقة، ثم استرح لمدة 5 دقائق.</p>
                     </div>
                     <button class="btn" style="background:var(--bg-color); border:1px solid var(--border-color); color:var(--text-main);" onclick="toggleFullScreen()">
-                        <i class="fa-solid fa-expand"></i> ÙˆØ¶Ø¹ Ø§Ù„Ø¹Ø²Ù„
+                        <i class="fa-solid fa-expand"></i> وضع العزل
                     </button>
                 </header>
                 <div class="pomodoro-container">
                     <div class="pomodoro-modes">
-                        <button class="pomo-mode-btn active" onclick="setPomodoroMode('work', 25)">Ø¬Ù„Ø³Ø© Ù…Ø°Ø§ÙƒØ±Ø©</button>
-                        <button class="pomo-mode-btn" onclick="setPomodoroMode('shortBreak', 5)">Ø§Ø³ØªØ±Ø§Ø­Ø© Ù‚ØµÙŠØ±Ø©</button>
-                        <button class="pomo-mode-btn" onclick="setPomodoroMode('longBreak', 15)">Ø§Ø³ØªØ±Ø§Ø­Ø© Ø·ÙˆÙŠÙ„Ø©</button>
+                        <button class="pomo-mode-btn active" onclick="setPomodoroMode('work', 25)">جلسة مذاكرة</button>
+                        <button class="pomo-mode-btn" onclick="setPomodoroMode('shortBreak', 5)">استراحة قصيرة</button>
+                        <button class="pomo-mode-btn" onclick="setPomodoroMode('longBreak', 15)">استراحة طويلة</button>
                     </div>
                     <div class="timer-display" id="timer-display">25:00</div>
                     <div class="timer-controls">
-                        <button class="btn btn-primary btn-large" id="start-timer-btn" onclick="toggleTimer()">Ø§Ø¨Ø¯Ø£ Ø§Ù„Ù…Ø°Ø§ÙƒØ±Ø©</button>
-                        <button class="btn btn-danger btn-large" onclick="resetTimer()">Ø¥Ø¹Ø§Ø¯Ø© Ø¶Ø¨Ø·</button>
+                        <button class="btn btn-primary btn-large" id="start-timer-btn" onclick="toggleTimer()">ابدأ المذاكرة</button>
+                        <button class="btn btn-danger btn-large" onclick="resetTimer()">إعادة ضبط</button>
                     </div>
                     
                     <div class="focus-sounds" style="margin-top:30px; border-top: 1px solid var(--border-color); padding-top: 20px;">
-                        <h4 style="margin-bottom: 15px;"><i class="fa-solid fa-headphones"></i> Ø£ØµÙˆØ§Øª Ù„Ù„ØªØ±ÙƒÙŠØ² (Focus Sounds):</h4>
+                        <h4 style="margin-bottom: 15px;"><i class="fa-solid fa-headphones"></i> أصوات للتركيز (Focus Sounds):</h4>
                         <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
-                            <button class="btn" id="btn-sound-rain" style="background:var(--bg-color); border:1px solid var(--border-color); color:var(--text-main);" onclick="toggleSound('rain')">ðŸŒ§ï¸ Ù…Ø·Ø±</button>
-                            <button class="btn" id="btn-sound-cafe" style="background:var(--bg-color); border:1px solid var(--border-color); color:var(--text-main);" onclick="toggleSound('cafe')">â˜• Ù…Ù‚Ù‡Ù‰</button>
-                            <button class="btn" id="btn-sound-lofi" style="background:var(--bg-color); border:1px solid var(--border-color); color:var(--text-main);" onclick="toggleSound('lofi')">ðŸŽµ Ù…ÙˆØ³ÙŠÙ‚Ù‰ Ù‡Ø§Ø¯Ø¦Ø©</button>
-                            <button class="btn btn-danger" onclick="stopAllSounds()">ðŸ”‡ Ø¥ÙŠÙ‚Ø§Ù</button>
+                            <button class="btn" id="btn-sound-rain" style="background:var(--bg-color); border:1px solid var(--border-color); color:var(--text-main);" onclick="toggleSound('rain')">🌧️ مطر</button>
+                            <button class="btn" id="btn-sound-cafe" style="background:var(--bg-color); border:1px solid var(--border-color); color:var(--text-main);" onclick="toggleSound('cafe')">☕ مقهى</button>
+                            <button class="btn" id="btn-sound-lofi" style="background:var(--bg-color); border:1px solid var(--border-color); color:var(--text-main);" onclick="toggleSound('lofi')">🎵 موسيقى هادئة</button>
+                            <button class="btn btn-danger" onclick="stopAllSounds()">🔇 إيقاف</button>
                         </div>
                         
                         <!-- Audio Sources -->
@@ -506,8 +506,8 @@
             <!-- Exams Page -->
             <section id="exams" class="page">
                 <header>
-                    <h1>Ø§Ù„Ø§Ù…ØªØ­Ø§Ù†Ø§Øª ðŸ†</h1>
-                    <button class="btn btn-primary" onclick="openModal('exam-modal')">Ø¥Ø¶Ø§ÙØ© Ø§Ù…ØªØ­Ø§Ù†</button>
+                    <h1>الامتحانات 🏆</h1>
+                    <button class="btn btn-primary" onclick="openModal('exam-modal')">إضافة امتحان</button>
                 </header>
                 <div class="exams-list" id="exams-list"></div>
             </section>
@@ -515,121 +515,121 @@
             <!-- Flashcards Page -->
             <section id="flashcards" class="page">
                 <header>
-                    <h1>Ø§Ù„Ø¨Ø·Ø§Ù‚Ø§Øª Ø§Ù„ØªØ¹Ù„ÙŠÙ…ÙŠØ© (Flashcards) ðŸ—‚ï¸</h1>
-                    <button class="btn btn-primary" onclick="openModal('flashcard-modal')">Ø¥Ø¶Ø§ÙØ© Ø¨Ø·Ø§Ù‚Ø© Ø¬Ø¯ÙŠØ¯Ø©</button>
+                    <h1>البطاقات التعليمية (Flashcards) 🗂️</h1>
+                    <button class="btn btn-primary" onclick="openModal('flashcard-modal')">إضافة بطاقة جديدة</button>
                 </header>
-                <p style="color:var(--text-muted); margin-top: 20px; bottom: auto;">Ø§Ø³ØªØ®Ø¯Ù… Ø§Ù„Ø¨Ø·Ø§Ù‚Ø§Øª Ù„Ù„Ù…Ø±Ø§Ø¬Ø¹Ø© Ø§Ù„Ø³Ø±ÙŠØ¹Ø© ÙˆØªØ«Ø¨ÙŠØª Ø§Ù„Ø­ÙØ¸. Ø§Ù†Ù‚Ø± Ø¹Ù„Ù‰ Ø§Ù„Ø¨Ø·Ø§Ù‚Ø© Ù„Ù‚Ù„Ø¨Ù‡Ø§ ÙˆØ±Ø¤ÙŠØ© Ø§Ù„Ø¥Ø¬Ø§Ø¨Ø©.</p>
+                <p style="color:var(--text-muted); margin-top: 20px; bottom: auto;">استخدم البطاقات للمراجعة السريعة وتثبيت الحفظ. انقر على البطاقة لقلبها ورؤية الإجابة.</p>
                 <div class="flashcards-grid" id="flashcards-grid"></div>
             </section>
 
             <!-- AI Assistant Page -->
             <section id="ai-assistant" class="page">
                 <header>
-                    <h1>Ø§Ù„Ù…Ø³Ø§Ø¹Ø¯ Ø§Ù„Ø°ÙƒÙŠ ðŸŒŸ</h1>
-                    <p>Ø°ÙƒØ§Ø¡ Ø§ØµØ·Ù†Ø§Ø¹ÙŠ Ù…Ø¯Ù…Ø¬ Ù„Ù…Ø³Ø§Ø¹Ø¯ØªÙƒ ÙÙŠ ØªÙ„Ø®ÙŠØµ Ø£ÙŠ Ø´ÙŠØ¡ Ù„ØªØ³Ù‡ÙŠÙ„ Ø§Ù„Ù…Ø°Ø§ÙƒØ±Ø©.</p>
+                    <h1>المساعد الذكي 🌟</h1>
+                    <p>ذكاء اصطناعي مدمج لمساعدتك في تلخيص أي شيء لتسهيل المذاكرة.</p>
                 </header>
                 
                 <div class="ai-container">
                     <!-- API Key Alert -->
                                         <div id="api-key-alert" style="background: var(--card-bg); padding: 20px; border-radius: 12px; margin-bottom: 20px; border: 1px solid var(--border-color);">
-                        <h3 style="margin-top:0; color:var(--primary-color);">Ø¥Ø¹Ø¯Ø§Ø¯Ø§Øª Ø§Ù„Ø°ÙƒØ§Ø¡ Ø§Ù„Ø§ØµØ·Ù†Ø§Ø¹ÙŠ ðŸ¤–</h3>
+                        <h3 style="margin-top:0; color:var(--primary-color);">إعدادات الذكاء الاصطناعي 🤖</h3>
                         <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 15px;">
-                            Ø§Ø®ØªØ± Ù…Ø­Ø±Ùƒ Ø§Ù„Ø°ÙƒØ§Ø¡ Ø§Ù„Ø§ØµØ·Ù†Ø§Ø¹ÙŠ Ø§Ù„Ù…ÙØ¶Ù„ Ù„Ø¯ÙŠÙƒ ÙˆØ£Ø¯Ø®Ù„ Ø§Ù„Ù…ÙØªØ§Ø­ Ø§Ù„Ø®Ø§Øµ Ø¨Ù‡. (Ø§Ù„Ø¨ÙŠØ§Ù†Ø§Øª ØªÙØ­ÙØ¸ ÙÙŠ Ø¬Ù‡Ø§Ø²Ùƒ ÙÙ‚Ø· Ù„Ø¶Ù…Ø§Ù† Ø§Ù„Ø®ØµÙˆØµÙŠØ©).
+                            اختر محرك الذكاء الاصطناعي المفضل لديك وأدخل المفتاح الخاص به. (البيانات تُحفظ في جهازك فقط لضمان الخصوصية).
                         </p>
                 
-                        <label style="display:block; margin-bottom:5px; color:var(--text-main);">Ø§Ù„Ù…Ø­Ø±Ùƒ Ø§Ù„Ù…ÙØ¶Ù„:</label>
+                        <label style="display:block; margin-bottom:5px; color:var(--text-main);">المحرك المفضل:</label>
                         <select id="ai-provider-select" class="search-input" style="width:100%; margin-bottom:15px;" onchange="toggleApiInputs()">
-                            <option value="gemini">Google Gemini (ÙŠØ¯Ø¹Ù… Ø§Ù„ØµÙˆØ± ÙˆØ§Ù„Ù…Ù„ÙØ§Øª - Ù…ÙˆØµÙ‰ Ø¨Ù‡)</option>
-                            <option value="groq">Groq Llama 3 (Ø³Ø±ÙŠØ¹ Ø¬Ø¯Ø§Ù‹ - Ù†ØµÙˆØµ ÙÙ‚Ø·)</option>
+                            <option value="gemini">Google Gemini (يدعم الصور والملفات - موصى به)</option>
+                            <option value="groq">Groq Llama 3 (سريع جداً - نصوص فقط)</option>
                         </select>
                 
                         <div id="gemini-input-group">
-                            <input type="password" id="gemini-api-key-input" class="search-input" placeholder="Ù…ÙØªØ§Ø­ Google Gemini API..." style="width: 100%; margin-bottom: 10px;">
+                            <input type="password" id="gemini-api-key-input" class="search-input" placeholder="مفتاح Google Gemini API..." style="width: 100%; margin-bottom: 10px;">
                         </div>
                 
                         <div id="groq-input-group" style="display:none;">
-                            <input type="password" id="groq-api-key-input" class="search-input" placeholder="Ù…ÙØªØ§Ø­ Groq API..." style="width: 100%; margin-bottom: 10px;">
+                            <input type="password" id="groq-api-key-input" class="search-input" placeholder="مفتاح Groq API..." style="width: 100%; margin-bottom: 10px;">
                         </div>
                 
                         <div style="display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap;">
-                            <button onclick="saveApiKeys()" class="btn btn-primary" style="flex: 1; min-width: 150px;">Ø­ÙØ¸ Ø§Ù„Ø¥Ø¹Ø¯Ø§Ø¯Ø§Øª</button>
-                            <button onclick="openApiInstructions()" class="btn" style="flex: 1; min-width: 150px; background: var(--bg-color); border: 1px solid var(--primary-color); color: var(--primary-color);">ÙƒÙŠÙ Ø£Ø­ØµÙ„ Ø¹Ù„Ù‰ Ù…ÙØªØ§Ø­ Ù…Ø¬Ø§Ù†ÙŠØŸ</button>
+                            <button onclick="saveApiKeys()" class="btn btn-primary" style="flex: 1; min-width: 150px;">حفظ الإعدادات</button>
+                            <button onclick="openApiInstructions()" class="btn" style="flex: 1; min-width: 150px; background: var(--bg-color); border: 1px solid var(--primary-color); color: var(--primary-color);">كيف أحصل على مفتاح مجاني؟</button>
                         </div>
                     </div>
 
                     <div class="ai-tabs">
-                        <button class="ai-tab-btn active" onclick="switchAITab('mindmap-tab')">Ø§Ù„Ù†ØµÙˆØµ ÙˆØ§Ù„Ø®Ø±Ø§Ø¦Ø·</button>
-                        <button class="ai-tab-btn" onclick="switchAITab('pdf-tab')">ØªÙ„Ø®ÙŠØµ PDF ðŸ“„</button>
-                        <button class="ai-tab-btn" onclick="switchAITab('platform-tab')">Ù…Ù†ØµØ§Øª Ø§Ù„Ù…Ø¯Ø±Ø³ÙŠÙ† (ØµÙˆØ± ÙˆØµÙˆØª)</button>
-                        <button class="ai-tab-btn" onclick="switchAITab('youtube-tab')">ÙŠÙˆØªÙŠÙˆØ¨</button>
+                        <button class="ai-tab-btn active" onclick="switchAITab('mindmap-tab')">النصوص والخرائط</button>
+                        <button class="ai-tab-btn" onclick="switchAITab('pdf-tab')">تلخيص PDF 📄</button>
+                        <button class="ai-tab-btn" onclick="switchAITab('platform-tab')">منصات المدرسين (صور وصوت)</button>
+                        <button class="ai-tab-btn" onclick="switchAITab('youtube-tab')">يوتيوب</button>
                     </div>
 
                     <!-- Mindmap Tab -->
                     <div id="mindmap-tab" class="ai-tab-content active">
                         <div style="position: relative;">
-                            <textarea id="ai-lesson-text" placeholder="Ø£Ù„ØµÙ‚ Ù‡Ù†Ø§ Ù†Øµ Ø§Ù„Ø¯Ø±Ø³ Ø£Ùˆ Ø³Ø¬Ù„ Ø¨ØµÙˆØªÙƒ Ø£ÙŠ Ø´ÙŠØ¡ ØªØ±ÙŠØ¯ ØªÙ„Ø®ÙŠØµÙ‡ ÙˆØªØ­ÙˆÙŠÙ„Ù‡ Ù„Ø®Ø±Ø§Ø¦Ø· Ø°Ù‡Ù†ÙŠØ© ÙˆØ´ÙØ±Ø§Øª..."></textarea>
-                            <button id="mic-btn" title="ØªØ­Ø¯Ø« ÙˆØ³ÙŠÙ‚ÙˆÙ… Ø§Ù„Ø°ÙƒØ§Ø¡ Ø§Ù„Ø§ØµØ·Ù†Ø§Ø¹ÙŠ Ø¨ÙƒØªØ§Ø¨Ø© Ù…Ø§ ØªÙ‚ÙˆÙ„Ù‡" style="position: absolute; left: 15px; bottom: 15px; background: var(--primary-color); color: white; border: none; border-radius: 50%; width: 45px; height: 45px; font-size: 1.2rem; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.2); transition: 0.3s; z-index: 10;">
+                            <textarea id="ai-lesson-text" placeholder="ألصق هنا نص الدرس أو سجل بصوتك أي شيء تريد تلخيصه وتحويله لخرائط ذهنية وشفرات..."></textarea>
+                            <button id="mic-btn" title="تحدث وسيقوم الذكاء الاصطناعي بكتابة ما تقوله" style="position: absolute; left: 15px; bottom: 15px; background: var(--primary-color); color: white; border: none; border-radius: 50%; width: 45px; height: 45px; font-size: 1.2rem; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.2); transition: 0.3s; z-index: 10;">
                                 <i class="fa-solid fa-microphone"></i>
                             </button>
                         </div>
                         <button class="btn btn-primary" id="btn-generate-mindmap" onclick="generateMindmap()" style="width: 100%; margin-top: 10px; font-size: 1.1rem;">
-                            <i class="fa-solid fa-wand-magic-sparkles"></i> Ø³Ø­Ø± Ø§Ù„Ù…Ø°Ø§ÙƒØ±Ø© (Ù„Ø®Ù‘Øµ ÙˆØ§ØµÙ†Ø¹ Ø®Ø±ÙŠØ·Ø©)
+                            <i class="fa-solid fa-wand-magic-sparkles"></i> سحر المذاكرة (لخّص واصنع خريطة)
                         </button>
                     </div>
 
                     <!-- PDF Tab -->
                     <div id="pdf-tab" class="ai-tab-content">
                         <div class="alert" style="background: var(--bg-color); border-right: 4px solid var(--primary-color);">
-                            <i class="fa-solid fa-file-pdf"></i> <strong>Ø§Ø±ÙØ¹ Ø£ÙŠ Ù…Ù„Ù PDF</strong><br>
-                            Ø§Ù„ØªØ·Ø¨ÙŠÙ‚ Ø³ÙŠÙ‚Ø±Ø£ Ø§Ù„Ù…Ø­ØªÙˆÙ‰ ÙˆÙŠÙ„Ø®ØµÙ‡ Ù„Ùƒ ÙÙŠ Ù†Ù‚Ø§Ø· Ù…Ù†Ø¸Ù…Ø© Ù…Ø¹ Ø®Ø±Ø§Ø¦Ø· Ø°Ù‡Ù†ÙŠØ© ÙˆØ´ÙØ±Ø§Øª Ù„Ù„ØªØ°ÙƒØ±!
+                            <i class="fa-solid fa-file-pdf"></i> <strong>ارفع أي ملف PDF</strong><br>
+                            التطبيق سيقرأ المحتوى ويلخصه لك في نقاط منظمة مع خرائط ذهنية وشفرات للتذكر!
                         </div>
                         <div style="border: 2px dashed var(--border-color); border-radius: 12px; padding: 30px; text-align: center; margin: 15px 0;">
                             <i class="fa-solid fa-cloud-arrow-up" style="font-size: 2.5rem; color: var(--primary-color); margin-bottom: 10px;"></i>
-                            <p style="color: var(--text-muted); margin-bottom: 15px;">Ø§Ø®ØªØ± Ù…Ù„Ù PDF Ø£Ùˆ Ø§Ø³Ø­Ø¨Ù‡ Ù‡Ù†Ø§</p>
+                            <p style="color: var(--text-muted); margin-bottom: 15px;">اختر ملف PDF أو اسحبه هنا</p>
                             <input type="file" id="ai-pdf-upload" accept=".pdf" style="width: 100%; padding: 5px;">
                         </div>
                         <div id="pdf-page-info" style="display:none; margin-bottom:10px; padding:10px; background:var(--bg-color); border-radius:8px;">
                             <span id="pdf-page-count" style="color:var(--text-muted);"></span>
                         </div>
                         <button class="btn btn-primary" onclick="summarizePDF()" style="width: 100%; font-size: 1.1rem; margin-top: 10px;">
-                            <i class="fa-solid fa-wand-magic-sparkles"></i> ØªÙ„Ø®ÙŠØµ Ø§Ù„Ù…Ù„Ù + Ø®Ø±ÙŠØ·Ø© Ø°Ù‡Ù†ÙŠØ© + Ø´ÙØ±Ø§Øª
+                            <i class="fa-solid fa-wand-magic-sparkles"></i> تلخيص الملف + خريطة ذهنية + شفرات
                         </button>
                     </div>
 
                     <!-- Teacher Platforms Tab -->
                     <div id="platform-tab" class="ai-tab-content">
                         <div class="alert" style="background: var(--bg-color); border-right: 4px solid var(--success);">
-                            <i class="fa-solid fa-chalkboard-user"></i> <strong>Ù‡Ù„ Ø§Ù„Ø¯Ø±Ø³ Ø¹Ù„Ù‰ Ù…Ù†ØµØ© ØªÙ…Ù†Ø¹ Ø§Ù„Ù†Ø³Ø®ØŸ</strong><br>
-                            ÙŠÙ…ÙƒÙ†ÙƒÙ Ø¥Ù…Ø§ <strong>ØªØµÙˆÙŠØ± Ø§Ù„Ø´Ø§Ø´Ø©</strong> (Ø³ÙƒØ±ÙŠÙ† Ø´ÙˆØª) Ù„Ù„Ø´Ø±Ø­ ÙˆØ±ÙØ¹Ù‡Ø§ Ù‡Ù†Ø§ØŒ Ø£Ùˆ Ø§Ø³ØªØ®Ø¯Ø§Ù… <strong>Ø§Ù„Ù…Ø³ØªÙ…Ø¹ Ø§Ù„Ø°ÙƒÙŠ</strong> Ù„ÙŠÙ‚ÙˆÙ… Ø¨ØªØ­ÙˆÙŠÙ„ ÙƒÙ„Ø§Ù… Ø§Ù„Ù…Ø¯Ø±Ø³ ÙÙŠ Ø§Ù„ÙÙŠØ¯ÙŠÙˆ Ø¥Ù„Ù‰ Ù†Øµ ØªÙ„Ù‚Ø§Ø¦ÙŠØ§Ù‹ Ø«Ù… ØªÙ„Ø®ÙŠØµÙ‡.
+                            <i class="fa-solid fa-chalkboard-user"></i> <strong>هل الدرس على منصة تمنع النسخ؟</strong><br>
+                            يمكنكِ إما <strong>تصوير الشاشة</strong> (سكرين شوت) للشرح ورفعها هنا، أو استخدام <strong>المستمع الذكي</strong> ليقوم بتحويل كلام المدرس في الفيديو إلى نص تلقائياً ثم تلخيصه.
                         </div>
 
                         <div class="platform-features" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
                             <!-- Image Upload Section -->
                             <div class="feature-box" style="padding: 20px; border: 1px dashed var(--border-color); border-radius: 8px; text-align: center;">
-                                <h3><i class="fa-regular fa-image"></i> ØªÙ„Ø®ÙŠØµ Ù…Ù† Ø³ÙƒØ±ÙŠÙ† Ø´ÙˆØª</h3>
-                                <p style="font-size: 0.9rem; color: var(--text-muted); margin: 10px 0;">Ù‚ÙˆÙ…ÙŠ Ø¨ØªØµÙˆÙŠØ± Ø§Ù„Ø³Ø¨ÙˆØ±Ø© Ø£Ùˆ Ø§Ù„Ù€ PDF Ù…Ù† Ø§Ù„Ù…Ù†ØµØ©ØŒ ÙˆØ§Ø±ÙØ¹ÙŠ Ø§Ù„ØµÙˆØ±Ø© Ù‡Ù†Ø§.</p>
+                                <h3><i class="fa-regular fa-image"></i> تلخيص من سكرين شوت</h3>
+                                <p style="font-size: 0.9rem; color: var(--text-muted); margin: 10px 0;">قومي بتصوير السبورة أو الـ PDF من المنصة، وارفعي الصورة هنا.</p>
                                 <input type="file" id="ai-image-upload" accept="image/*" style="width: 100%; margin-bottom: 10px; padding: 5px;">
                                 <button class="btn btn-primary" onclick="summarizeImage()" style="width: 100%;">
-                                    <i class="fa-solid fa-magnifying-glass"></i> Ø§Ø³ØªØ®Ø±Ø§Ø¬ Ø§Ù„Ù†Øµ ÙˆØ§Ù„ØªÙ„Ø®ÙŠØµ
+                                    <i class="fa-solid fa-magnifying-glass"></i> استخراج النص والتلخيص
                                 </button>
                             </div>
 
                                                         <!-- Audio File & Dictation Section -->
                             <div class="feature-box" style="padding: 20px; border: 1px dashed var(--border-color); border-radius: 8px; text-align: center;">
-                                <h3><i class="fa-solid fa-microphone-lines"></i> ØªÙ„Ø®ÙŠØµ Ø§Ù„Ø±ÙŠÙƒÙˆØ±Ø¯Ø§Øª ÙˆØ§Ù„Ù…Ø­Ø§Ø¶Ø±Ø§Øª</h3>
-                                <p style="font-size: 0.9rem; color: var(--text-muted); margin: 10px 0;">Ø§Ø±ÙØ¹ÙŠ Ø±ÙŠÙƒÙˆØ±Ø¯ (ØªØ³Ø¬ÙŠÙ„ ØµÙˆØªÙŠ) Ù„Ù„Ù…Ø¯Ø±Ø³ØŒ ÙˆØ§Ù„Ø°ÙƒØ§Ø¡ Ø§Ù„Ø§ØµØ·Ù†Ø§Ø¹ÙŠ Ù‡ÙŠØ³Ù…Ø¹Ù‡ ÙˆÙŠÙ„Ø®ØµÙ‡ÙˆÙ„Ùƒ!</p>
+                                <h3><i class="fa-solid fa-microphone-lines"></i> تلخيص الريكوردات والمحاضرات</h3>
+                                <p style="font-size: 0.9rem; color: var(--text-muted); margin: 10px 0;">ارفعي ريكورد (تسجيل صوتي) للمدرس، والذكاء الاصطناعي هيسمعه ويلخصهولك!</p>
                                 <input type="file" id="ai-audio-upload" accept="audio/*" style="width: 100%; margin-bottom: 10px; padding: 5px;">
                                 <button class="btn btn-primary" onclick="summarizeAudio()" style="width: 100%; margin-bottom: 15px; background-color: var(--danger);">
-                                    <i class="fa-solid fa-headphones"></i> Ø§Ø³Ù…Ø¹ Ø§Ù„Ø±ÙŠÙƒÙˆØ±Ø¯ ÙˆÙ„Ø®Ù‘ØµÙ‡
+                                    <i class="fa-solid fa-headphones"></i> اسمع الريكورد ولخّصه
                                 </button>
                                 <hr style="border:0; border-top:1px solid var(--border-color); margin:15px 0;">
-                                <p style="font-size: 0.8rem; color: var(--text-muted); margin: 10px 0;">Ø£Ùˆ Ø§ÙØªØ­ÙŠ Ø§Ù„Ù…Ø§ÙŠÙƒ ÙˆØ§ÙƒØªØ¨ÙŠ ÙˆØ±Ø§ Ø§Ù„Ù…Ø¯Ø±Ø³ Ù…Ø¨Ø§Ø´Ø±Ø©:</p>
+                                <p style="font-size: 0.8rem; color: var(--text-muted); margin: 10px 0;">أو افتحي المايك واكتبي ورا المدرس مباشرة:</p>
                                 <button class="btn" id="btn-dictation" onclick="toggleDictation()" style="width: 100%; background-color: var(--bg-color); color: var(--primary-color); border: 1px solid var(--primary-color); margin-bottom: 10px;">
-                                    <i class="fa-solid fa-microphone"></i> Ø§Ù„Ù…Ø§ÙŠÙƒ Ø§Ù„Ù…Ø¨Ø§Ø´Ø±
+                                    <i class="fa-solid fa-microphone"></i> المايك المباشر
                                 </button>
-                                <textarea id="dictation-text" placeholder="Ø³ÙŠØ¸Ù‡Ø± ÙƒÙ„Ø§Ù… Ø§Ù„Ù…Ø¯Ø±Ø³ Ù‡Ù†Ø§ ØªÙ„Ù‚Ø§Ø¦ÙŠØ§Ù‹..." style="height: 60px; font-size: 0.9rem; margin-bottom: 10px;"></textarea>
+                                <textarea id="dictation-text" placeholder="سيظهر كلام المدرس هنا تلقائياً..." style="height: 60px; font-size: 0.9rem; margin-bottom: 10px;"></textarea>
                                 <button class="btn btn-primary" onclick="summarizeDictation()" style="width: 100%;">
-                                    <i class="fa-solid fa-wand-magic-sparkles"></i> Ù„Ø®Øµ Ø§Ù„ÙƒÙ„Ø§Ù…
+                                    <i class="fa-solid fa-wand-magic-sparkles"></i> لخص الكلام
                                 </button>
                             </div>
                         </div>
@@ -638,35 +638,35 @@
                     <!-- YouTube Tab -->
                     <div id="youtube-tab" class="ai-tab-content">
                         <div class="alert" style="background: var(--bg-color); border-right: 4px solid var(--danger);">
-                            <i class="fa-brands fa-youtube" style="color: var(--danger);"></i> <strong>ØªÙ„Ø®ÙŠØµ ÙÙŠØ¯ÙŠÙˆÙ‡Ø§Øª ÙŠÙˆØªÙŠÙˆØ¨</strong><br>
-                            Ø£Ù„ØµÙ‚ Ø±Ø§Ø¨Ø· Ø§Ù„ÙÙŠØ¯ÙŠÙˆ ÙˆÙ‡Ù†Ù„Ø®ØµÙ‡ÙˆÙ„Ùƒ ÙÙŠ Ø«ÙˆØ§Ù†ÙŠ! Ø£Ùˆ Ø£Ù„ØµÙ‚ Ø§Ù„Ù†Øµ ÙŠØ¯ÙˆÙŠØ§Ù‹ Ù„Ùˆ Ø­Ø¨ÙŠØª.
+                            <i class="fa-brands fa-youtube" style="color: var(--danger);"></i> <strong>تلخيص فيديوهات يوتيوب</strong><br>
+                            ألصق رابط الفيديو وهنلخصهولك في ثواني! أو ألصق النص يدوياً لو حبيت.
                         </div>
                         <div style="margin-bottom: 15px;">
-                            <label style="display:block; margin-bottom:5px; color:var(--text-muted);">Ø±Ø§Ø¨Ø· ÙÙŠØ¯ÙŠÙˆ Ø§Ù„ÙŠÙˆØªÙŠÙˆØ¨:</label>
+                            <label style="display:block; margin-bottom:5px; color:var(--text-muted);">رابط فيديو اليوتيوب:</label>
                             <div style="display:flex; gap:10px;">
-                                <input type="text" id="ai-youtube-url" class="search-input" placeholder="Ø£Ù„ØµÙ‚ Ø±Ø§Ø¨Ø· Ø§Ù„ÙÙŠØ¯ÙŠÙˆ Ù‡Ù†Ø§... Ù…Ø«Ø§Ù„: https://youtube.com/watch?v=..." style="flex:1;">
+                                <input type="text" id="ai-youtube-url" class="search-input" placeholder="ألصق رابط الفيديو هنا... مثال: https://youtube.com/watch?v=..." style="flex:1;">
                                 <button class="btn btn-primary" onclick="fetchYouTubeTranscript()" style="white-space:nowrap;">
-                                    <i class="fa-solid fa-download"></i> Ø¬Ù„Ø¨ Ø§Ù„Ù†Øµ
+                                    <i class="fa-solid fa-download"></i> جلب النص
                                 </button>
                             </div>
-                            <small style="color:var(--text-muted);">Ø³ÙŠØªÙ… Ø¬Ù„Ø¨ Ù†Øµ Ø§Ù„ÙÙŠØ¯ÙŠÙˆ ØªÙ„Ù‚Ø§Ø¦ÙŠØ§Ù‹ (ÙŠØ¯Ø¹Ù… Ø§Ù„ÙÙŠØ¯ÙŠÙˆÙ‡Ø§Øª Ø§Ù„ØªÙŠ Ø¨Ù‡Ø§ ØªØ±Ø¬Ù…Ø©/Subtitles)</small>
+                            <small style="color:var(--text-muted);">سيتم جلب نص الفيديو تلقائياً (يدعم الفيديوهات التي بها ترجمة/Subtitles)</small>
                         </div>
                         <div id="yt-fetch-status" style="display:none; padding:10px; border-radius:8px; margin-bottom:10px; text-align:center;"></div>
-                        <textarea id="ai-youtube-text" placeholder="Ø³ÙŠØ¸Ù‡Ø± Ù†Øµ Ø§Ù„ÙÙŠØ¯ÙŠÙˆ Ù‡Ù†Ø§ ØªÙ„Ù‚Ø§Ø¦ÙŠØ§Ù‹... Ø£Ùˆ ÙŠÙ…ÙƒÙ†Ùƒ Ù„ØµÙ‚ Ø§Ù„Ù†Øµ ÙŠØ¯ÙˆÙŠØ§Ù‹."></textarea>
+                        <textarea id="ai-youtube-text" placeholder="سيظهر نص الفيديو هنا تلقائياً... أو يمكنك لصق النص يدوياً."></textarea>
                         <button class="btn btn-primary" id="btn-generate-youtube" onclick="summarizeYouTube()" style="width: 100%; margin-top: 10px; font-size: 1.1rem; background-color: var(--danger);">
-                            <i class="fa-brands fa-youtube"></i> Ø§Ø³ØªØ®Ø±Ø§Ø¬ Ø§Ù„Ø²Ø¨Ø¯Ø© ÙˆØ§Ù„Ù…Ù„Ø®Øµ
+                            <i class="fa-brands fa-youtube"></i> استخراج الزبدة والملخص
                         </button>
                     </div>
 
                     <!-- Output Area -->
                     <div id="ai-loading" style="display:none; text-align: center; padding: 40px;">
                         <i class="fa-solid fa-spinner fa-spin fa-3x" style="color: var(--primary-color);"></i>
-                        <p style="margin-top: 15px; font-size: 1.2rem;">Ø¬Ø§Ø±ÙŠ Ø§Ù„ØªÙÙƒÙŠØ± ÙˆØ§Ù„ØªØ¬Ù‡ÙŠØ²...</p>
+                        <p style="margin-top: 15px; font-size: 1.2rem;">جاري التفكير والتجهيز...</p>
                     </div>
                     
                     <div id="ai-output-container" class="ai-output" style="display:none;">
                         <div class="ai-actions" style="text-align: left; margin-bottom: 10px;">
-                            <button class="btn" style="background:var(--bg-color); border:1px solid var(--border-color); color:var(--text-main)" onclick="document.getElementById('ai-output-container').style.display='none'">Ø¥Ø®ÙØ§Ø¡ Ø§Ù„Ù†ØªÙŠØ¬Ø©</button>
+                            <button class="btn" style="background:var(--bg-color); border:1px solid var(--border-color); color:var(--text-main)" onclick="document.getElementById('ai-output-container').style.display='none'">إخفاء النتيجة</button>
                         </div>
                         <div id="ai-result-content"></div>
                         <div id="mermaid-container" style="margin-top: 20px; background: white; padding: 10px; border-radius: 8px; overflow-x: auto; text-align: center; color: black !important;"></div>
@@ -677,24 +677,24 @@
             <!-- Backlog Tracker Page -->
             <section id="backlog" class="page">
                 <header>
-                    <h1>ØªØ¹Ø§Ù„Ù‰ Ù„Ù…Ù‘ Ø§Ù„Ù…ØªØ±Ø§ÙƒÙ… ðŸ“¦</h1>
-                    <button class="btn btn-primary" onclick="openModal('backlog-modal')">Ø¥Ø¶Ø§ÙØ© Ù…Ø§Ø¯Ø© Ù…ØªØ±Ø§ÙƒÙ…Ø©</button>
+                    <h1>تعالى لمّ المتراكم 📦</h1>
+                    <button class="btn btn-primary" onclick="openModal('backlog-modal')">إضافة مادة متراكمة</button>
                 </header>
-                <p style="color:var(--text-muted); margin-bottom:20px;">Ù…Ø±Ø§ÙƒÙ… Ù…Ø­Ø§Ø¶Ø±Ø§ØªØŸ Ø¶ÙŠÙ Ø§Ù„Ù…Ø§Ø¯Ø© ÙˆØ¹Ø¯Ø¯ Ø§Ù„Ù…Ø­Ø§Ø¶Ø±Ø§Øª ÙˆÙ‡Ù†Ø¹Ù…Ù„Ùƒ Ø®Ø·Ø© ØªÙ„Ù… Ø¨ÙŠÙ‡Ø§ ÙƒÙ„ Ø­Ø§Ø¬Ø©!</p>
+                <p style="color:var(--text-muted); margin-bottom:20px;">مراكم محاضرات؟ ضيف المادة وعدد المحاضرات وهنعملك خطة تلم بيها كل حاجة!</p>
                 
                 <div id="backlog-list" style="display:grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap:20px;"></div>
                 
                 <div id="backlog-empty" style="text-align:center; padding:40px; color:var(--text-muted);">
                     <i class="fa-solid fa-face-smile-beam" style="font-size:3rem; margin-bottom:15px; color:var(--success);"></i>
-                    <h3>Ù…ÙÙŠØ´ Ø­Ø§Ø¬Ø© Ù…ØªØ±Ø§ÙƒÙ…Ø©! ðŸŽ‰</h3>
-                    <p>Ù„Ùˆ Ø¹Ù†Ø¯Ùƒ Ù…ÙˆØ§Ø¯ Ù…ØªØ±Ø§ÙƒÙ…Ø©ØŒ Ø¶ÙŠÙÙ‡Ø§ ÙˆÙ‡Ù†Ø³Ø§Ø¹Ø¯Ùƒ ØªÙ„Ù…Ù‡Ø§!</p>
+                    <h3>مفيش حاجة متراكمة! 🎉</h3>
+                    <p>لو عندك مواد متراكمة، ضيفها وهنساعدك تلمها!</p>
                 </div>
             
                 <!-- AI Result Container for Backlog -->
                 <div id="backlog-ai-result" style="display:none; margin-top:20px; background:var(--bg-color); padding:20px; border-radius:12px; border:1px solid var(--border-color); box-shadow:0 4px 15px rgba(0,0,0,0.1);">
                     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px; border-bottom:1px solid var(--border-color); padding-bottom:10px;">
-                        <h3 style="color:var(--primary-color); margin:0;"><i class="fa-solid fa-wand-magic-sparkles"></i> Ø§Ù„Ø®Ø·Ø© Ø§Ù„Ø°ÙƒÙŠØ© Ø§Ù„Ù…Ù‚ØªØ±Ø­Ø©</h3>
-                        <button onclick="document.getElementById('backlog-ai-result').style.display='none'" class="btn" style="background:var(--danger); color:white; padding:5px 10px;"><i class="fa-solid fa-xmark"></i> Ø¥ØºÙ„Ø§Ù‚</button>
+                        <h3 style="color:var(--primary-color); margin:0;"><i class="fa-solid fa-wand-magic-sparkles"></i> الخطة الذكية المقترحة</h3>
+                        <button onclick="document.getElementById('backlog-ai-result').style.display='none'" class="btn" style="background:var(--danger); color:white; padding:5px 10px;"><i class="fa-solid fa-xmark"></i> إغلاق</button>
                     </div>
                     <div id="backlog-ai-content" style="line-height:1.8; color:var(--text-main);"></div>
                 </div>
@@ -703,46 +703,46 @@
             <!-- Interactive Quiz Page -->
             <section id="quiz" class="page">
                 <header>
-                    <h1>Ø§Ø®ØªØ¨Ø± Ù†ÙØ³Ùƒ ðŸ§ª</h1>
-                    <p>Ø§Ø±ÙØ¹ Ø¯Ø±Ø³ Ø£Ùˆ Ø£Ù„ØµÙ‚ Ù†Øµ ÙˆÙ‡Ù†Ø¹Ù…Ù„Ùƒ Ø£Ø³Ø¦Ù„Ø© ØªÙØ§Ø¹Ù„ÙŠØ© Ø¹Ù„ÙŠÙ‡!</p>
+                    <h1>اختبر نفسك 🧪</h1>
+                    <p>ارفع درس أو ألصق نص وهنعملك أسئلة تفاعلية عليه!</p>
                 </header>
                 
                 <div class="ai-container">
                     <div style="display:grid; grid-template-columns: 1fr 1fr; gap:15px; margin-bottom:20px;">
                         <div style="border:2px dashed var(--border-color); border-radius:12px; padding:20px; text-align:center;">
                             <i class="fa-solid fa-file-pdf" style="font-size:2rem; color:var(--primary-color); margin-bottom:10px;"></i>
-                            <h3 style="margin-bottom:10px;">Ù…Ù† Ù…Ù„Ù PDF</h3>
+                            <h3 style="margin-bottom:10px;">من ملف PDF</h3>
                             <input type="file" id="quiz-pdf-upload" accept=".pdf" style="width:100%; padding:5px;">
                         </div>
                         <div style="border:2px dashed var(--border-color); border-radius:12px; padding:20px; text-align:center;">
                             <i class="fa-solid fa-keyboard" style="font-size:2rem; color:var(--primary-color); margin-bottom:10px;"></i>
-                            <h3 style="margin-bottom:10px;">Ù…Ù† Ù†Øµ Ù…ÙƒØªÙˆØ¨</h3>
-                            <textarea id="quiz-text-input" placeholder="Ø£Ù„ØµÙ‚ Ù†Øµ Ø§Ù„Ø¯Ø±Ø³ Ù‡Ù†Ø§..." style="height:80px; font-size:0.9rem;"></textarea>
+                            <h3 style="margin-bottom:10px;">من نص مكتوب</h3>
+                            <textarea id="quiz-text-input" placeholder="ألصق نص الدرس هنا..." style="height:80px; font-size:0.9rem;"></textarea>
                         </div>
                     </div>
                     
                     <div style="display:flex; gap:10px; margin-bottom:20px;">
                         <select id="quiz-type" class="search-input" style="flex:1;">
-                            <option value="mcq">Ø§Ø®ØªÙŠØ§Ø± Ù…Ù† Ù…ØªØ¹Ø¯Ø¯ (MCQ)</option>
-                            <option value="truefalse">ØµØ­ ÙˆØºÙ„Ø·</option>
-                            <option value="fill">Ø£ÙƒÙ…Ù„ Ø§Ù„ÙØ±Ø§ØºØ§Øª</option>
-                            <option value="mixed">Ø®Ù„ÙŠØ· Ù…Ù† ÙƒÙ„ Ø§Ù„Ø£Ù†ÙˆØ§Ø¹</option>
+                            <option value="mcq">اختيار من متعدد (MCQ)</option>
+                            <option value="truefalse">صح وغلط</option>
+                            <option value="fill">أكمل الفراغات</option>
+                            <option value="mixed">خليط من كل الأنواع</option>
                         </select>
                         <select id="quiz-count" class="search-input" style="flex:1;">
-                            <option value="5">5 Ø£Ø³Ø¦Ù„Ø©</option>
-                            <option value="10" selected>10 Ø£Ø³Ø¦Ù„Ø©</option>
-                            <option value="15">15 Ø³Ø¤Ø§Ù„</option>
-                            <option value="20">20 Ø³Ø¤Ø§Ù„</option>
+                            <option value="5">5 أسئلة</option>
+                            <option value="10" selected>10 أسئلة</option>
+                            <option value="15">15 سؤال</option>
+                            <option value="20">20 سؤال</option>
                         </select>
                     </div>
                     
                     <button class="btn btn-primary" onclick="generateQuiz()" style="width:100%; font-size:1.1rem;">
-                        <i class="fa-solid fa-wand-magic-sparkles"></i> ÙˆÙ„Ù‘Ø¯ Ø§Ù„Ø£Ø³Ø¦Ù„Ø© Ø§Ù„Ø¢Ù†!
+                        <i class="fa-solid fa-wand-magic-sparkles"></i> ولّد الأسئلة الآن!
                     </button>
                     
                     <div id="quiz-loading" style="display:none; text-align:center; padding:30px;">
                         <i class="fa-solid fa-spinner fa-spin fa-3x" style="color:var(--primary-color);"></i>
-                        <p style="margin-top:15px;">Ø¬Ø§Ø±ÙŠ ØªØ¬Ù‡ÙŠØ² Ø§Ù„Ø£Ø³Ø¦Ù„Ø©...</p>
+                        <p style="margin-top:15px;">جاري تجهيز الأسئلة...</p>
                     </div>
                     
                     <div id="quiz-container" style="display:none; margin-top:20px;"></div>
@@ -750,7 +750,7 @@
                     <div id="quiz-result" style="display:none; margin-top:20px; text-align:center; padding:30px; background:var(--bg-color); border-radius:12px;">
                         <h2 id="quiz-score" style="font-size:2rem; margin-bottom:10px;"></h2>
                         <p id="quiz-feedback" style="color:var(--text-muted); font-size:1.1rem;"></p>
-                        <button class="btn btn-primary" onclick="document.getElementById('quiz-result').style.display='none'; document.getElementById('quiz-container').style.display='none';" style="margin-top:15px;">Ø­Ø§ÙˆÙ„ Ù…Ø±Ø© Ø£Ø®Ø±Ù‰</button>
+                        <button class="btn btn-primary" onclick="document.getElementById('quiz-result').style.display='none'; document.getElementById('quiz-container').style.display='none';" style="margin-top:15px;">حاول مرة أخرى</button>
                     </div>
                 </div>
             </section>
@@ -758,52 +758,52 @@
             <!-- Statistics Page -->
             <section id="statistics" class="page">
                 <header>
-                    <h1>Ø¥Ø­ØµØ§Ø¦ÙŠØ§Øª Ø§Ù„Ù…Ø°Ø§ÙƒØ±Ø© ðŸ“Š</h1>
-                    <p>Ù…ØªØ§Ø¨Ø¹Ø© Ø£Ø¯Ø§Ø¡Ùƒ Ø§Ù„ÙŠÙˆÙ…ÙŠ ÙŠØ¬Ø¹Ù„Ùƒ Ø£Ù‚Ø±Ø¨ Ù„Ø­Ù„Ù…Ùƒ! Ø§Ø³ØªÙ…Ø± ÙˆÙ„Ø§ ØªØªÙˆÙ‚Ù.</p>
+                    <h1>إحصائيات المذاكرة 📊</h1>
+                    <p>متابعة أداءك اليومي يجعلك أقرب لحلمك! استمر ولا تتوقف.</p>
                 </header>
                 <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:20px; margin-top: 20px; bottom: auto;">
                     <div class="card" style="text-align:center; padding:30px; border-bottom: 4px solid var(--orange);">
                         <i class="fa-solid fa-fire text-orange" style="font-size:3rem; margin-bottom:15px; color: var(--orange);"></i>
                         <h2 id="stat-streak" style="font-size: 2.5rem; margin-bottom: 5px;">0</h2>
-                        <p style="color: var(--text-muted);">Ø£ÙŠØ§Ù… Ù…ØªØªØ§Ù„ÙŠØ© (Streak)</p>
+                        <p style="color: var(--text-muted);">أيام متتالية (Streak)</p>
                     </div>
                     <div class="card" style="text-align:center; padding:30px; border-bottom: 4px solid var(--primary-color);">
                         <i class="fa-solid fa-clock" style="font-size:3rem; margin-bottom:15px; color: var(--primary-color);"></i>
                         <h2 id="stat-hours" style="font-size: 2.5rem; margin-bottom: 5px;">0.0</h2>
-                        <p style="color: var(--text-muted);">Ø³Ø§Ø¹Ø§Øª Ø§Ù„ØªØ±ÙƒÙŠØ² (Ø¨ÙˆÙ…ÙˆØ¯ÙˆØ±Ùˆ)</p>
+                        <p style="color: var(--text-muted);">ساعات التركيز (بومودورو)</p>
                     </div>
                     <div class="card" style="text-align:center; padding:30px; border-bottom: 4px solid var(--success);">
                         <i class="fa-solid fa-check-double" style="font-size:3rem; margin-bottom:15px; color: var(--success);"></i>
                         <h2 id="stat-tasks" style="font-size: 2.5rem; margin-bottom: 5px;">0</h2>
-                        <p style="color: var(--text-muted);">Ù…Ù‡Ø§Ù… ØªÙ… Ø¥Ù†Ø¬Ø§Ø²Ù‡Ø§</p>
+                        <p style="color: var(--text-muted);">مهام تم إنجازها</p>
                     </div>
                 </div>
                 <div class="card" style="text-align: center;">
-                    <h3><i class="fa-solid fa-ranking-star" style="color: #ffd700;"></i> Ù…Ø³ØªÙˆØ§Ùƒ Ø§Ù„Ø­Ø§Ù„ÙŠ</h3>
-                    <p id="stat-level" style="font-size: 1.2rem; font-weight: bold; margin-top: 10px; color: var(--primary-color);">Ù…Ø¨ØªØ¯Ø¦ Ø·Ù…ÙˆØ­ ðŸŒ±</p>
-                    <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 5px;">ÙƒÙ„Ù…Ø§ Ø°Ø§ÙƒØ±Øª Ø£ÙƒØ«Ø± Ø¨Ø§Ø³ØªØ®Ø¯Ø§Ù… Ù…Ø¤Ù‚Øª Ø¨ÙˆÙ…ÙˆØ¯ÙˆØ±Ùˆ ÙˆØ£Ù†Ø¬Ø²Øª Ù…Ù‡Ø§Ù…ØŒ Ø²Ø§Ø¯ Ù…Ø³ØªÙˆØ§Ùƒ!</p>
+                    <h3><i class="fa-solid fa-ranking-star" style="color: #ffd700;"></i> مستواك الحالي</h3>
+                    <p id="stat-level" style="font-size: 1.2rem; font-weight: bold; margin-top: 10px; color: var(--primary-color);">مبتدئ طموح 🌱</p>
+                    <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 5px;">كلما ذاكرت أكثر باستخدام مؤقت بومودورو وأنجزت مهام، زاد مستواك!</p>
                 </div>
             </section>
 
             <!-- GPA Calculator Page -->
             <section id="gpa-calc" class="page">
                 <header>
-                    <h1>Ø­Ø§Ø³Ø¨Ø© Ø§Ù„Ù€ GPA ðŸŽ“</h1>
-                    <p>Ø§Ø­Ø³Ø¨ Ù…Ø¹Ø¯Ù„Ùƒ Ø§Ù„ÙØµÙ„ÙŠ Ø¨Ø³Ù‡ÙˆÙ„Ø© Ù„Ù„Ø¬Ø§Ù…Ø¹Ø©.</p>
+                    <h1>حاسبة الـ GPA 🎓</h1>
+                    <p>احسب معدلك الفصلي بسهولة للجامعة.</p>
                 </header>
                 <div class="card" style="margin-bottom:20px;">
                     <div style="display:flex; gap:10px; margin-bottom:20px;">
                         <select id="gpa-scale" class="search-input" style="flex:1;" onchange="calculateGPA()">
-                            <option value="4">Ù†Ø¸Ø§Ù… 4.0 (Ø§Ù„Ø£ÙƒØ«Ø± Ø´ÙŠÙˆØ¹Ø§Ù‹)</option>
-                            <option value="5">Ù†Ø¸Ø§Ù… 5.0</option>
+                            <option value="4">نظام 4.0 (الأكثر شيوعاً)</option>
+                            <option value="5">نظام 5.0</option>
                         </select>
-                        <button class="btn btn-primary" onclick="addGPACourse()">+ Ø¥Ø¶Ø§ÙØ© Ù…Ø§Ø¯Ø©</button>
+                        <button class="btn btn-primary" onclick="addGPACourse()">+ إضافة مادة</button>
                     </div>
                     
                     <div style="display: grid; grid-template-columns: 2fr 1fr 1fr auto; gap: 10px; margin-bottom: 10px; font-weight: bold; color: var(--text-muted); padding: 0 10px;">
-                        <div>Ø§Ù„Ù…Ø§Ø¯Ø©</div>
-                        <div>Ø§Ù„Ø³Ø§Ø¹Ø§Øª</div>
-                        <div>Ø§Ù„ØªÙ‚Ø¯ÙŠØ±</div>
+                        <div>المادة</div>
+                        <div>الساعات</div>
+                        <div>التقدير</div>
                         <div></div>
                     </div>
                     
@@ -812,7 +812,7 @@
                     </div>
                     
                     <div style="margin-top:20px; padding:20px; background:var(--bg-color); border-radius:8px; text-align:center; border:2px solid var(--primary-color);">
-                        <h3>Ø§Ù„Ù…Ø¹Ø¯Ù„ Ø§Ù„ÙØµÙ„ÙŠ (GPA): <br><span id="gpa-result" style="color:var(--primary-color); font-size:2.5rem; display:inline-block; margin-top:10px;">0.00</span></h3>
+                        <h3>المعدل الفصلي (GPA): <br><span id="gpa-result" style="color:var(--primary-color); font-size:2.5rem; display:inline-block; margin-top:10px;">0.00</span></h3>
                     </div>
                 </div>
             </section>
@@ -820,16 +820,16 @@
             <!-- Alarm Page -->
             <section id="alarm" class="page">
                 <header>
-                    <h1>Ù…Ù†Ø¨Ù‡ Ø§Ù„Ø§Ø³ØªÙŠÙ‚Ø§Ø¸ Ø§Ù„Ø«Ù‚ÙŠÙ„ â°</h1>
-                    <p>Ù†ØºÙ…Ø© Ù…Ø²Ø¹Ø¬Ø© ÙˆÙ‚ÙˆÙŠØ© ØµÙÙ…Ù…Øª Ø®ØµÙŠØµØ§Ù‹ Ù„Ø¥ÙŠÙ‚Ø§Ø¸Ùƒ Ù…Ù‡Ù…Ø§ ÙƒØ§Ù† Ù†ÙˆÙ…Ùƒ Ø«Ù‚ÙŠÙ„Ø§Ù‹!</p>
+                    <h1>منبه الاستيقاظ الثقيل ⏰</h1>
+                    <p>نغمة مزعجة وقوية صُممت خصيصاً لإيقاظك مهما كان نومك ثقيلاً!</p>
                 </header>
                 <div class="card" style="max-width: 500px; margin: 40px auto; text-align: center; padding: 40px;">
                     <i class="fa-solid fa-bed" style="font-size: 4rem; color: var(--primary-color); margin-top: 20px; bottom: auto;"></i>
-                    <h3>Ù…ØªÙ‰ ØªØ±ÙŠØ¯ÙŠÙ† Ø§Ù„Ø§Ø³ØªÙŠÙ‚Ø§Ø¸ØŸ</h3>
+                    <h3>متى تريدين الاستيقاظ؟</h3>
                     <input type="time" id="alarm-time-input" style="font-size: 3rem; padding: 15px; margin: 20px 0; border-radius: 12px; border: 2px solid var(--primary-color); width: 100%; text-align: center; background: var(--bg-color); color: var(--text-main);">
                     
                     <button class="btn btn-primary btn-large" id="set-alarm-btn" onclick="toggleAlarm()" style="width: 100%; font-size: 1.3rem;">
-                        <i class="fa-solid fa-clock"></i> Ø¶Ø¨Ø· Ø§Ù„Ù…Ù†Ø¨Ù‡
+                        <i class="fa-solid fa-clock"></i> ضبط المنبه
                     </button>
                     
                     <p id="alarm-status" style="margin-top: 20px; font-size: 1.2rem; font-weight: bold; color: var(--success); display: none;"></p>
@@ -837,15 +837,15 @@
                     
                     <!-- Nightstand Note -->
                     <div class="card hover-glow-box" style="margin-top: 2rem; text-align: center; border: 1px dashed #feca57; background: rgba(254, 202, 87, 0.05); padding: 1.5rem;">
-                        <h4 style="color: #feca57; margin-top: 0; font-size: 1.2rem;"><i class="fa-solid fa-moon"></i> ÙˆØ¶Ø¹ Ø§Ù„Ù†ÙˆÙ… (Ù…Ù‡Ù… Ø¬Ø¯Ø§Ù‹ Ù„Ø¶Ù…Ø§Ù† Ø§Ù„Ø±Ù†ÙŠÙ†)</h4>
-                        <p style="color: var(--text-main); font-size: 1rem; line-height: 1.6;">Ø¹Ø´Ø§Ù† Ø§Ù„Ù…Ù†Ø¨Ù‡ ÙŠØ±Ù† Ø§Ù„ØµØ¨Ø­ Ø¨ØµÙˆØª Ø¹Ø§Ù„ÙŠ Ø¨Ø¯ÙˆÙ† Ù…Ø§ Ù†Ø¸Ø§Ù… Ø§Ù„Ù…ÙˆØ¨Ø§ÙŠÙ„ ÙŠÙ‚ÙÙ„Ù‡ØŒ Ù„Ø§Ø²Ù… Ø§Ù„Ù…ØªØµÙØ­ ÙŠÙØ¶Ù„ Ø´ØºØ§Ù„. Ø¨Ø¹Ø¯ Ù…Ø§ ØªØ¸Ø¨Ø· Ø§Ù„Ù…Ù†Ø¨Ù‡ ÙÙˆÙ‚ØŒ Ø§Ø¶ØºØ· Ø¹Ù„Ù‰ Ø§Ù„Ø²Ø±Ø§Ø± Ø§Ù„Ù„ÙŠ ØªØ­Øª ÙˆØ³ÙŠØ¨ Ø§Ù„Ù…ÙˆØ¨Ø§ÙŠÙ„ Ø¹Ù„Ù‰ Ø§Ù„Ø´Ø§Ø­Ù†ØŒ Ø§Ù„Ø´Ø§Ø´Ø© Ù‡ØªØ³ÙˆØ¯ Ø¨Ø§Ù„ÙƒØ§Ù…Ù„ Ø¹Ø´Ø§Ù† ØªØ­Ø§ÙØ¸ Ø¹Ù„Ù‰ Ø§Ù„Ø¨Ø·Ø§Ø±ÙŠØ© ÙˆØ§Ù„ØªØ·Ø¨ÙŠÙ‚ Ù‡ÙŠÙØ¶Ù„ ØµØ§Ø­ÙŠ Ø¹Ø´Ø§Ù† ÙŠØµØ­ÙŠÙƒ!</p>
-                        <button onclick="startNightstand()" class="theme-btn btn-hover-glow" style="background: #2d3436; color: var(--primary-color); padding: 0.8rem 2rem; border-radius: 10px; font-size: 1.1rem; border: 1px solid #00e5ff; margin-top: 1rem;"><i class="fa-solid fa-bed"></i> ØªÙØ¹ÙŠÙ„ ÙˆØ¶Ø¹ Ø§Ù„Ù†ÙˆÙ… Ø§Ù„Ø¢Ù†</button>
+                        <h4 style="color: #feca57; margin-top: 0; font-size: 1.2rem;"><i class="fa-solid fa-moon"></i> وضع النوم (مهم جداً لضمان الرنين)</h4>
+                        <p style="color: var(--text-main); font-size: 1rem; line-height: 1.6;">عشان المنبه يرن الصبح بصوت عالي بدون ما نظام الموبايل يقفله، لازم المتصفح يفضل شغال. بعد ما تظبط المنبه فوق، اضغط على الزرار اللي تحت وسيب الموبايل على الشاحن، الشاشة هتسود بالكامل عشان تحافظ على البطارية والتطبيق هيفضل صاحي عشان يصحيك!</p>
+                        <button onclick="startNightstand()" class="theme-btn btn-hover-glow" style="background: #2d3436; color: var(--primary-color); padding: 0.8rem 2rem; border-radius: 10px; font-size: 1.1rem; border: 1px solid #00e5ff; margin-top: 1rem;"><i class="fa-solid fa-bed"></i> تفعيل وضع النوم الآن</button>
                     </div>
 
                     <div id="stop-alarm-container" style="display: none; margin-top: 30px;">
-                        <p style="color: var(--danger); font-size: 2rem; font-weight: bold; margin-bottom: 15px; animation: pulse 1s infinite;">Ø§Ø³ØªÙŠÙ‚Ø¸ÙŠ Ø§Ù„Ø¢Ù†!!! ðŸš¨</p>
+                        <p style="color: var(--danger); font-size: 2rem; font-weight: bold; margin-bottom: 15px; animation: pulse 1s infinite;">استيقظي الآن!!! 🚨</p>
                         <button class="btn btn-danger btn-large" onclick="stopAlarmSound()" style="width: 100%; font-size: 1.5rem; padding: 20px;">
-                            <i class="fa-solid fa-power-off"></i> Ø¥ÙŠÙ‚Ø§Ù Ø§Ù„Ù…Ù†Ø¨Ù‡
+                            <i class="fa-solid fa-power-off"></i> إيقاف المنبه
                         </button>
                     </div>
                 </div>
@@ -854,11 +854,11 @@
             <!-- Admin Page -->
             <section id="admin" class="page">
                 <header>
-                    <h1>ØºØ±ÙØ© Ø§Ù„Ø¥Ø¯Ø§Ø±Ø© ÙˆØ§Ù„Ù…Ø±Ø§Ù‚Ø¨Ø© ðŸ•µï¸â€â™€ï¸</h1>
-                    <button class="btn btn-primary" onclick="loadAdminData()"><i class="fa-solid fa-rotate"></i> ØªØ­Ø¯ÙŠØ« Ø§Ù„Ø¨ÙŠØ§Ù†Ø§Øª</button>
+                    <h1>غرفة الإدارة والمراقبة 🕵️‍♀️</h1>
+                    <button class="btn btn-primary" onclick="loadAdminData()"><i class="fa-solid fa-rotate"></i> تحديث البيانات</button>
                 </header>
                 <div class="alert alert-warning">
-                    Ù‡Ù†Ø§ ØªØ¸Ù‡Ø± Ø®Ø·Ø· ÙˆÙ…Ù‡Ø§Ù… Ø§Ù„Ø£ØµØ¯Ù‚Ø§Ø¡ Ø§Ù„Ø°ÙŠÙ† ÙŠØ³ØªØ®Ø¯Ù…ÙˆÙ† Ø§Ù„ØªØ·Ø¨ÙŠÙ‚.
+                    هنا تظهر خطط ومهام الأصدقاء الذين يستخدمون التطبيق.
                 </div>
                 <div id="admin-content" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px;">
                     <!-- User cards will load here -->
@@ -874,25 +874,25 @@
             <div class="comments-container" style="max-width: 800px; margin: 2rem auto; padding: 0 1rem;">
                 <div style="text-align: center; margin-bottom: 2rem;" class="hover-glow-box">
                     <i class="fa-solid fa-heart-pulse" style="font-size: 3rem; color: var(--primary-color); margin-bottom: 1rem;"></i>
-                    <h2 style="color: var(--primary-color); font-family: 'Tajawal', sans-serif;">ÙƒÙ„Ù…Ø© ØªØ´Ø¬Ø¹Ù†ÙŠ âœ¨</h2>
+                    <h2 style="color: var(--primary-color); font-family: 'Tajawal', sans-serif;">كلمة تشجعني ✨</h2>
                     <p style="color: var(--text-main); font-size: 1.1rem; line-height: 1.6;">
-                        Ø§Ù„Ù…Ø³Ø§Ø­Ø© Ø¯ÙŠ Ù…Ø®ØµØµØ© Ù„ÙŠÙƒÙ…! Ø³ÙŠØ¨ÙˆØ§ Ø±Ø£ÙŠÙƒÙ…ØŒ Ø±Ø³Ø§Ù„Ø© ØªØ´Ø¬ÙŠØ¹ØŒ Ø£Ùˆ Ø¯Ø¹ÙˆØ© Ø­Ù„ÙˆØ©.<br>
-                        ÙƒÙ„Ø§Ù…ÙƒÙ… Ù‡Ùˆ Ø§Ù„Ù„ÙŠ Ø¨ÙŠØ¯ÙŠ Ø·Ø§Ù‚Ø© Ø¥ÙŠØ¬Ø§Ø¨ÙŠØ© ÙˆØ¨ÙŠØ´Ø¬Ø¹ Ø¹Ù„Ù‰ Ø§Ù„Ø§Ø³ØªÙ…Ø±Ø§Ø±. ðŸ’–
+                        المساحة دي مخصصة ليكم! سيبوا رأيكم، رسالة تشجيع، أو دعوة حلوة.<br>
+                        كلامكم هو اللي بيدي طاقة إيجابية وبيشجع على الاستمرار. 💖
                     </p>
                 </div>
                 
                 <div class="hover-glow-box" style="background: var(--card-bg); padding: 1.5rem; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin-bottom: 2rem; border: 1px solid var(--border-color);">
-                    <h3 class="text-hover-glow" style="margin-top: 0; color: var(--primary-color); margin-bottom: 1rem;"><i class="fa-solid fa-pen-nib"></i> Ø§ÙƒØªØ¨ Ø±Ø³Ø§Ù„ØªÙƒ</h3>
+                    <h3 class="text-hover-glow" style="margin-top: 0; color: var(--primary-color); margin-bottom: 1rem;"><i class="fa-solid fa-pen-nib"></i> اكتب رسالتك</h3>
                     <form id="comment-form" style="display: flex; flex-direction: column; gap: 1rem;">
-                        <input type="text" id="comment-name" placeholder="Ø§Ø³Ù…Ùƒ (Ø§Ø®ØªÙŠØ§Ø±ÙŠ) Ø£Ùˆ Ø§Ù„Ù„Ù‚Ø¨" style="width: 100%; padding: 0.8rem; border: 2px solid var(--border-color); border-radius: 10px; font-family: 'Tajawal'; background: var(--bg-color); color: var(--text-main);">
-                        <textarea id="comment-text" required placeholder="Ø±Ø³Ø§Ù„ØªÙƒ Ø£Ùˆ Ø¯Ø¹ÙˆØªÙƒ..." style="width: 100%; padding: 0.8rem; border: 2px solid var(--border-color); border-radius: 10px; font-family: 'Tajawal'; min-height: 100px; resize: vertical; background: var(--bg-color); color: var(--text-main);"></textarea>
+                        <input type="text" id="comment-name" placeholder="اسمك (اختياري) أو اللقب" style="width: 100%; padding: 0.8rem; border: 2px solid var(--border-color); border-radius: 10px; font-family: 'Tajawal'; background: var(--bg-color); color: var(--text-main);">
+                        <textarea id="comment-text" required placeholder="رسالتك أو دعوتك..." style="width: 100%; padding: 0.8rem; border: 2px solid var(--border-color); border-radius: 10px; font-family: 'Tajawal'; min-height: 100px; resize: vertical; background: var(--bg-color); color: var(--text-main);"></textarea>
                         <button type="submit" class="btn-hover-glow" style="background: linear-gradient(135deg, #00e5ff, #00b8cc); color: white; border: none; padding: 0.8rem; border-radius: 10px; font-size: 1.1rem; font-weight: bold; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 0.5rem;">
-                            <i class="fa-solid fa-paper-plane"></i> Ù†Ø´Ø± Ø§Ù„Ø±Ø³Ø§Ù„Ø©
+                            <i class="fa-solid fa-paper-plane"></i> نشر الرسالة
                         </button>
                     </form>
                 </div>
 
-                <h3 class="text-hover-glow" style="color: var(--primary-color); margin-bottom: 1rem; border-bottom: 2px solid var(--border-color); padding-bottom: 0.5rem; display: block;">Ø§Ù„Ø±Ø³Ø§Ø¦Ù„ Ø§Ù„Ø³Ø§Ø¨Ù‚Ø© (<span id="comments-count">3</span>)</h3>
+                <h3 class="text-hover-glow" style="color: var(--primary-color); margin-bottom: 1rem; border-bottom: 2px solid var(--border-color); padding-bottom: 0.5rem; display: block;">الرسائل السابقة (<span id="comments-count">3</span>)</h3>
                 
                 <style>
                     
@@ -957,24 +957,24 @@
                     
                     <div style="background: var(--card-bg); padding: 1.5rem; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.03); border-right: 4px solid #00e5ff; margin-bottom: 1rem;">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem;">
-                            <strong style="color: var(--primary-color); font-size: 1.1rem;"><i class="fa-solid fa-user-graduate"></i> Ù†Ø¯Ù‰ Ù…Ø­Ù…Ø¯</strong>
-                            <span style="color: #888; font-size: 0.85rem;">Ø£Ù…Ø³</span>
+                            <strong style="color: var(--primary-color); font-size: 1.1rem;"><i class="fa-solid fa-user-graduate"></i> ندى محمد</strong>
+                            <span style="color: #888; font-size: 0.85rem;">أمس</span>
                         </div>
-                        <p style="margin: 0; color: var(--text-main); line-height: 1.6;">Ø¨Ø¬Ø¯ Ø§Ù„ØªØ·Ø¨ÙŠÙ‚ Ø¯Ù‡ Ø£Ù†Ù‚Ø°Ù†ÙŠ ÙÙŠ ØªÙ†Ø¸ÙŠÙ… ÙˆÙ‚ØªÙŠ! Ø´ÙƒØ±Ø§Ù‹ Ø¬Ø¯Ø§Ù‹ Ù„Ù„Ù…Ø¨Ø±Ù…Ø¬Ø© Ø§Ù„Ø¹Ø¨Ù‚Ø±ÙŠØ©ØŒ Ø±Ø¨Ù†Ø§ ÙŠÙˆÙÙ‚Ùƒ ÙˆÙŠØ³Ø¹Ø¯Ùƒ Ø²ÙŠ Ù…Ø§ Ø¨ØªØ³Ø¹Ø¯ÙŠÙ†Ø§ ÙˆØ¨ØªØ³Ù‡Ù„ÙŠ Ø¹Ù„ÙŠÙ†Ø§ Ø§Ù„Ù…Ø°Ø§ÙƒØ±Ø©. Ø¯Ø¹ÙˆØ§ØªÙŠ Ù„ÙŠÙƒÙŠ Ø¨Ø§Ù„ØªÙˆÙÙŠÙ‚ Ø¯ÙŠÙ…Ø§Ù‹ ÙŠØ§ Ø±Ø¨. ðŸŒ¸</p>
+                        <p style="margin: 0; color: var(--text-main); line-height: 1.6;">بجد التطبيق ده أنقذني في تنظيم وقتي! شكراً جداً للمبرمجة العبقرية، ربنا يوفقك ويسعدك زي ما بتسعدينا وبتسهلي علينا المذاكرة. دعواتي ليكي بالتوفيق ديماً يا رب. 🌸</p>
                     </div>
                     <div style="background: var(--card-bg); padding: 1.5rem; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.03); border-right: 4px solid #00e5ff; margin-bottom: 1rem;">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem;">
-                            <strong style="color: var(--primary-color); font-size: 1.1rem;"><i class="fa-solid fa-user-graduate"></i> Ø¹Ù…Ø± Ø®Ø§Ù„Ø¯</strong>
-                            <span style="color: #888; font-size: 0.85rem;">Ù…Ù†Ø° ÙŠÙˆÙ…ÙŠÙ†</span>
+                            <strong style="color: var(--primary-color); font-size: 1.1rem;"><i class="fa-solid fa-user-graduate"></i> عمر خالد</strong>
+                            <span style="color: #888; font-size: 0.85rem;">منذ يومين</span>
                         </div>
-                        <p style="margin: 0; color: var(--text-main); line-height: 1.6;">Ù…Ø¬Ù‡ÙˆØ¯ Ø¹Ø¸ÙŠÙ… ÙˆØ£ÙƒØªØ± Ù…ÙŠØ²Ø© Ø¨Ø­Ø¨Ù‡Ø§ Ù‡ÙŠ Ø§Ù„Ø°ÙƒØ§Ø¡ Ø§Ù„Ø§ØµØ·Ù†Ø§Ø¹ÙŠ ÙˆØ¬Ø¯ÙˆÙ„ Ø§Ù„Ù…Ø°Ø§ÙƒØ±Ø©.. Ø§Ø³ØªÙ…Ø±ÙŠ Ø¨Ø¬Ø¯!</p>
+                        <p style="margin: 0; color: var(--text-main); line-height: 1.6;">مجهود عظيم وأكتر ميزة بحبها هي الذكاء الاصطناعي وجدول المذاكرة.. استمري بجد!</p>
                     </div>
                     <div style="background: var(--card-bg); padding: 1.5rem; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.03); border-right: 4px solid #00e5ff; margin-bottom: 1rem;">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem;">
-                            <strong style="color: var(--primary-color); font-size: 1.1rem;"><i class="fa-solid fa-user-graduate"></i> Ø³Ø§Ø±Ø© Ø£Ø­Ù…Ø¯</strong>
-                            <span style="color: #888; font-size: 0.85rem;">11 Ø£ÙƒØªÙˆØ¨Ø±</span>
+                            <strong style="color: var(--primary-color); font-size: 1.1rem;"><i class="fa-solid fa-user-graduate"></i> سارة أحمد</strong>
+                            <span style="color: #888; font-size: 0.85rem;">11 أكتوبر</span>
                         </div>
-                        <p style="margin: 0; color: var(--text-main); line-height: 1.6;">Ø¬Ø²Ø§ÙƒÙ… Ø§Ù„Ù„Ù‡ Ø®ÙŠØ±Ø§Ù‹ Ø¹Ù„Ù‰ Ø§Ù„Ø¹Ù…Ù„ Ø¯Ù‡ØŒ ÙÙŠ Ù…ÙŠØ²Ø§Ù† Ø­Ø³Ù†Ø§ØªÙƒ Ø¥Ù† Ø´Ø§Ø¡ Ø§Ù„Ù„Ù‡. ðŸ¤²ðŸ»</p>
+                        <p style="margin: 0; color: var(--text-main); line-height: 1.6;">جزاكم الله خيراً على العمل ده، في ميزان حسناتك إن شاء الله. 🤲🏻</p>
                     </div>
 
                 </div>
@@ -987,9 +987,9 @@
             <div style="max-width: 600px; margin: 2rem auto; padding: 0 1rem;">
                 <div style="text-align: center; margin-bottom: 2rem;">
                     <i class="fa-solid fa-bell" style="font-size: 3rem; color: #feca57; margin-bottom: 1rem;"></i>
-                    <h2 style="color: var(--primary-color); font-family: 'Tajawal', sans-serif;">Ø§Ù„Ø¥Ø´Ø¹Ø§Ø±Ø§Øª Ø§Ù„Ø°ÙƒÙŠØ© ðŸ””</h2>
+                    <h2 style="color: var(--primary-color); font-family: 'Tajawal', sans-serif;">الإشعارات الذكية 🔔</h2>
                     <p style="color: var(--text-main); font-size: 1.05rem; line-height: 1.6;">
-                        Ø®Ù„Ù‘ÙŠ Ø§Ù„ØªØ·Ø¨ÙŠÙ‚ ÙŠÙÙƒÙ‘Ø±Ùƒ Ø¨Ù…ÙˆØ§Ø¹ÙŠØ¯ Ø§Ù„ØµÙ„Ø§Ø© ÙˆÙŠØ´Ø¬Ø¹Ùƒ Ø¹Ù„Ù‰ Ø§Ù„Ù…Ø°Ø§ÙƒØ±Ø© Ø­ØªÙ‰ Ù„Ùˆ Ù…Ø´ ÙØ§ØªØ­ Ø§Ù„ØªØ·Ø¨ÙŠÙ‚!
+                        خلّي التطبيق يفكّرك بمواعيد الصلاة ويشجعك على المذاكرة حتى لو مش فاتح التطبيق!
                     </p>
                 </div>
 
@@ -998,10 +998,10 @@
                     <div style="background: var(--card-bg); padding: 1.5rem; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center;">
                         <div style="flex: 1;">
                             <h3 style="color: var(--primary-color); margin: 0 0 0.5rem 0; font-size: 1.1rem;">
-                                <i class="fa-solid fa-fire" style="color: #ff6b6b;"></i> Ø¥Ø´Ø¹Ø§Ø±Ø§Øª Ø§Ù„ØªØ´Ø¬ÙŠØ¹ ÙˆØ§Ù„ØªØ­ÙÙŠØ²
+                                <i class="fa-solid fa-fire" style="color: #ff6b6b;"></i> إشعارات التشجيع والتحفيز
                             </h3>
                             <p style="color: var(--text-main); margin: 0; font-size: 0.9rem; opacity: 0.8;">
-                                Ø±Ø³Ø§Ø¦Ù„ ØªØ­ÙÙŠØ²ÙŠØ© ÙƒÙ„ Ø³Ø§Ø¹Ø© ÙˆÙ†Øµ ØªØ´Ø¬Ø¹Ùƒ ØªØ°Ø§ÙƒØ± ÙˆØªØ¹Ù…Ù„ Ø§Ù„Ù„ÙŠ Ø¹Ù„ÙŠÙƒ ðŸ’ª
+                                رسائل تحفيزية كل ساعة ونص تشجعك تذاكر وتعمل اللي عليك 💪
                             </p>
                         </div>
                         <label class="switch" style="position: relative; width: 60px; height: 30px; flex-shrink: 0; margin-right: 1rem;">
@@ -1014,10 +1014,10 @@
                     <div style="background: var(--card-bg); padding: 1.5rem; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center;">
                         <div style="flex: 1;">
                             <h3 style="color: var(--primary-color); margin: 0 0 0.5rem 0; font-size: 1.1rem;">
-                                <i class="fa-solid fa-mosque" style="color: #1dd1a1;"></i> Ø¥Ø´Ø¹Ø§Ø±Ø§Øª Ù…ÙˆØ§Ø¹ÙŠØ¯ Ø§Ù„ØµÙ„Ø§Ø©
+                                <i class="fa-solid fa-mosque" style="color: #1dd1a1;"></i> إشعارات مواعيد الصلاة
                             </h3>
                             <p style="color: var(--text-main); margin: 0; font-size: 0.9rem; opacity: 0.8;">
-                                ØªÙ†Ø¨ÙŠÙ‡ Ù‚Ø¨Ù„ ÙƒÙ„ ØµÙ„Ø§Ø© Ø¨Ø¯Ù‚ÙŠÙ‚ØªÙŠÙ† Ø¹Ø´Ø§Ù† Ù…ØªÙ†Ø³Ø§Ø´ ðŸ¤²
+                                تنبيه قبل كل صلاة بدقيقتين عشان متنساش 🤲
                             </p>
                         </div>
                         <label class="switch" style="position: relative; width: 60px; height: 30px; flex-shrink: 0; margin-right: 1rem;">
@@ -1028,7 +1028,7 @@
 
                     <!-- Test Button -->
                     <button onclick="testNotification()" style="background: linear-gradient(135deg, #feca57, #ff9f43); color: #333; border: none; padding: 1rem; border-radius: 12px; font-size: 1.1rem; font-weight: bold; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 0.5rem; width: 100%; transition: transform 0.3s;">
-                        <i class="fa-solid fa-bell"></i> Ø¬Ø±Ø¨ Ø§Ù„Ø¥Ø´Ø¹Ø§Ø±Ø§Øª
+                        <i class="fa-solid fa-bell"></i> جرب الإشعارات
                     </button>
                 </div>
 
@@ -1060,9 +1060,9 @@
             <div style="max-width: 800px; margin: 2rem auto; padding: 0 1rem;">
                 <div style="text-align: center; margin-bottom: 2rem;" class="hover-glow-box">
                     <i class="fa-solid fa-gamepad" style="font-size: 3rem; color: var(--primary-color); margin-bottom: 1rem;"></i>
-                    <h2 style="color: var(--primary-color); font-family: 'Tajawal', sans-serif;">ØªØ­Ø¯ÙŠØ§Øª Ø§Ù„Ù…Ø°Ø§ÙƒØ±Ø© Ø§Ù„Ù…Ø¬Ù†ÙˆÙ†Ø© ðŸŽ®</h2>
+                    <h2 style="color: var(--primary-color); font-family: 'Tajawal', sans-serif;">تحديات المذاكرة المجنونة 🎮</h2>
                     <p style="color: var(--text-main); font-size: 1.1rem; line-height: 1.6;">
-                        Ø²Ù‡Ù‚Øª Ù…Ù† Ø§Ù„Ù…Ø°Ø§ÙƒØ±Ø© Ø§Ù„ØªÙ‚Ù„ÙŠØ¯ÙŠØ©ØŸ Ø¬Ø±Ø¨ Ø§Ù„Ø·Ø±Ù‚ Ø¯ÙŠ Ø¹Ø´Ø§Ù† ØªÙƒØ³Ø± Ø§Ù„Ù…Ù„Ù„ ÙˆØªØªØ­Ø¯Ù‰ Ù†ÙØ³Ùƒ!
+                        زهقت من المذاكرة التقليدية؟ جرب الطرق دي عشان تكسر الملل وتتحدى نفسك!
                     </p>
                 </div>
 
@@ -1071,13 +1071,13 @@
                     <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
                         <i class="fa-solid fa-icicles" style="font-size: 2.5rem; color: #00e5ff;"></i>
                         <div>
-                            <h3 style="margin: 0; color: #00e5ff;">ØªØ­Ø¯ÙŠ ÙƒÙˆØ¨Ø§ÙŠØ© Ø§Ù„ØªÙ„Ø¬ ðŸ§Š</h3>
-                            <p style="margin: 5px 0 0 0; color: var(--text-muted); font-size: 0.9rem;">Ø§Ù…Ù„Ù‰ ÙƒÙˆØ¨Ø§ÙŠØ© ØªÙ„Ø¬ ÙˆØ­Ø·Ù‡Ø§ Ù‚Ø¯Ø§Ù…Ùƒ.. Ù‡Ø¯ÙÙƒ ØªØ°Ø§ÙƒØ± Ø¨ØªØ±ÙƒÙŠØ² Ù„Ø­Ø¯ Ù…Ø§ Ø§Ù„ØªÙ„Ø¬ ÙƒÙ„Ù‡ ÙŠØ¯ÙˆØ¨!</p>
+                            <h3 style="margin: 0; color: #00e5ff;">تحدي كوباية التلج 🧊</h3>
+                            <p style="margin: 5px 0 0 0; color: var(--text-muted); font-size: 0.9rem;">املى كوباية تلج وحطها قدامك.. هدفك تذاكر بتركيز لحد ما التلج كله يدوب!</p>
                         </div>
                     </div>
                     <div style="text-align: center; margin-top: 1rem;">
-                        <p style="color: var(--text-main); margin-bottom: 1rem;">(Ø¨ØªØ§Ø®Ø¯ ØªÙ‚Ø±ÙŠØ¨Ø§Ù‹ Ù…Ù† 15 Ù„Ù€ 20 Ø¯Ù‚ÙŠÙ‚Ø©)</p>
-                        <button onclick="startIceChallenge()" id="ice-btn" class="theme-btn btn-hover-glow" style="background: linear-gradient(135deg, #00e5ff, #00e5ff); color: white; border: none; padding: 0.8rem 2rem; border-radius: 10px; font-size: 1.1rem;"><i class="fa-solid fa-play"></i> Ø§Ø¨Ø¯Ø£ Ø§Ù„ØªØ­Ø¯ÙŠ Ø¯Ù„ÙˆÙ‚ØªÙŠ</button>
+                        <p style="color: var(--text-main); margin-bottom: 1rem;">(بتاخد تقريباً من 15 لـ 20 دقيقة)</p>
+                        <button onclick="startIceChallenge()" id="ice-btn" class="theme-btn btn-hover-glow" style="background: linear-gradient(135deg, #00e5ff, #00e5ff); color: white; border: none; padding: 0.8rem 2rem; border-radius: 10px; font-size: 1.1rem;"><i class="fa-solid fa-play"></i> ابدأ التحدي دلوقتي</button>
                     </div>
                 </div>
 
@@ -1086,29 +1086,29 @@
                     <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
                         <i class="fa-solid fa-plane-departure" style="font-size: 2.5rem; color: #00b894;"></i>
                         <div>
-                            <h3 style="margin: 0; color: #00b894;">ØªØ­Ø¯ÙŠ Ø±Ø­Ù„Ø© Ø§Ù„Ø·ÙŠØ±Ø§Ù† âœˆï¸</h3>
-                            <p style="margin: 5px 0 0 0; color: var(--text-muted); font-size: 0.9rem;">Ø§Ø®ØªØ§Ø± Ø¨Ù„Ø¯ ÙˆØ³Ø§ÙØ± Ù„ÙŠÙ‡Ø§! Ù‡ØªØ°Ø§ÙƒØ± Ø·ÙˆÙ„ Ù…Ø¯Ø© Ø§Ù„Ø±Ø­Ù„Ø© Ø¨Ø¯ÙˆÙ† Ù…Ù‚Ø§Ø·Ø¹Ø© Ù„Ø­Ø¯ Ù…Ø§ Ø§Ù„Ø·ÙŠØ§Ø±Ø© ØªÙˆØµÙ„.</p>
+                            <h3 style="margin: 0; color: #00b894;">تحدي رحلة الطيران ✈️</h3>
+                            <p style="margin: 5px 0 0 0; color: var(--text-muted); font-size: 0.9rem;">اختار بلد وسافر ليها! هتذاكر طول مدة الرحلة بدون مقاطعة لحد ما الطيارة توصل.</p>
                         </div>
                     </div>
                     <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
                         <select id="flight-destination" style="flex: 1; padding: 0.8rem; border: 2px solid var(--border-color); border-radius: 10px; font-family: 'Tajawal'; background: var(--bg-color); color: var(--text-main);">
-                            <option value="120">Ù…ØµØ± Ø¥Ù„Ù‰ Ø§Ù„Ø³Ø¹ÙˆØ¯ÙŠØ© (Ø³Ø§Ø¹ØªÙŠÙ†)</option>
-                            <option value="210">Ù…ØµØ± Ø¥Ù„Ù‰ Ø§Ù„Ø¥Ù…Ø§Ø±Ø§Øª (3.5 Ø³Ø§Ø¹Ø§Øª)</option>
-                            <option value="240">Ù…ØµØ± Ø¥Ù„Ù‰ ÙØ±Ù†Ø³Ø§ (4 Ø³Ø§Ø¹Ø§Øª)</option>
-                            <option value="60">Ù…ØµØ± Ø¥Ù„Ù‰ Ø§Ù„Ø£Ø±Ø¯Ù† (Ø³Ø§Ø¹Ø© ÙˆØ§Ø­Ø¯Ø©)</option>
-                            <option value="900">Ù…ØµØ± Ø¥Ù„Ù‰ Ø£Ù…Ø±ÙŠÙƒØ§ (15 Ø³Ø§Ø¹Ø© - Ù„ÙŠÙÙŠÙ„ Ø§Ù„ÙˆØ­Ø´!)</option>
+                            <option value="120">مصر إلى السعودية (ساعتين)</option>
+                            <option value="210">مصر إلى الإمارات (3.5 ساعات)</option>
+                            <option value="240">مصر إلى فرنسا (4 ساعات)</option>
+                            <option value="60">مصر إلى الأردن (ساعة واحدة)</option>
+                            <option value="900">مصر إلى أمريكا (15 ساعة - ليفيل الوحش!)</option>
                         </select>
                     </div>
                     <div style="text-align: center;">
-                        <button onclick="startFlightChallenge()" id="flight-btn" class="theme-btn btn-hover-glow" style="background: linear-gradient(135deg, #00b894, #00cec9); color: white; border: none; padding: 0.8rem 2rem; border-radius: 10px; font-size: 1.1rem;"><i class="fa-solid fa-plane"></i> Ø¥Ù‚Ù„Ø§Ø¹!</button>
+                        <button onclick="startFlightChallenge()" id="flight-btn" class="theme-btn btn-hover-glow" style="background: linear-gradient(135deg, #00b894, #00cec9); color: white; border: none; padding: 0.8rem 2rem; border-radius: 10px; font-size: 1.1rem;"><i class="fa-solid fa-plane"></i> إقلاع!</button>
                     </div>
                     
                     <!-- Flight Progress -->
                     <div id="flight-progress-container" style="display: none; margin-top: 1.5rem;">
                         <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem; color: var(--text-main);">
-                            <span>ðŸ›« Ø§Ù„Ø¥Ù‚Ù„Ø§Ø¹</span>
+                            <span>🛫 الإقلاع</span>
                             <span id="flight-time-left" style="font-weight: bold; color: #00b894;">00:00</span>
-                            <span>Ø§Ù„ÙˆØµÙˆÙ„ ðŸ›¬</span>
+                            <span>الوصول 🛬</span>
                         </div>
                         <div class="progress-bar-bg" style="height: 20px; background: rgba(0,0,0,0.1); border-radius: 10px; overflow: hidden; position: relative;">
                             <div id="flight-progress-fill" style="height: 100%; width: 0%; background: linear-gradient(90deg, #00b894, #55efc4); transition: width 1s linear;"></div>
@@ -1121,12 +1121,12 @@
                     <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
                         <i class="fa-solid fa-fire-flame-curved" style="font-size: 2.5rem; color: #e17055;"></i>
                         <div>
-                            <h3 style="margin: 0; color: #e17055;">ØªØ­Ø¯ÙŠ Ø§Ù„Ø´Ù…Ø¹Ø© ðŸ•¯ï¸</h3>
-                            <p style="margin: 5px 0 0 0; color: var(--text-muted); font-size: 0.9rem;">ÙˆÙ„Ø¹ Ø´Ù…Ø¹Ø© ØµØºÙŠØ±Ø© Ù‚Ø¯Ø§Ù…Ùƒ.. Ù‡Ø¯ÙÙƒ ØªØ°Ø§ÙƒØ± Ø¨ØªØ±ÙƒÙŠØ² ØªØ§Ù… ÙˆÙ…Ø§ØªÙ‚ÙˆÙ…Ø´ ØºÙŠØ± Ù„Ù…Ø§ Ø§Ù„Ø´Ù…Ø¹Ø© ØªØ·ÙÙŠ Ù„ÙˆØ­Ø¯Ù‡Ø§!</p>
+                            <h3 style="margin: 0; color: #e17055;">تحدي الشمعة 🕯️</h3>
+                            <p style="margin: 5px 0 0 0; color: var(--text-muted); font-size: 0.9rem;">ولع شمعة صغيرة قدامك.. هدفك تذاكر بتركيز تام وماتقومش غير لما الشمعة تطفي لوحدها!</p>
                         </div>
                     </div>
                     <div style="text-align: center; margin-top: 1rem;">
-                        <button onclick="startCandleChallenge()" id="candle-btn" class="theme-btn btn-hover-glow" style="background: linear-gradient(135deg, #e17055, #d63031); color: white; border: none; padding: 0.8rem 2rem; border-radius: 10px; font-size: 1.1rem;"><i class="fa-solid fa-play"></i> Ø§Ø¨Ø¯Ø£ Ø§Ù„ØªØ­Ø¯ÙŠ Ø¯Ù„ÙˆÙ‚ØªÙŠ</button>
+                        <button onclick="startCandleChallenge()" id="candle-btn" class="theme-btn btn-hover-glow" style="background: linear-gradient(135deg, #e17055, #d63031); color: white; border: none; padding: 0.8rem 2rem; border-radius: 10px; font-size: 1.1rem;"><i class="fa-solid fa-play"></i> ابدأ التحدي دلوقتي</button>
                     </div>
                 </div>
 
@@ -1135,24 +1135,24 @@
                     <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
                         <i class="fa-solid fa-person-running" style="font-size: 2.5rem; color: #d63031;"></i>
                         <div>
-                            <h3 style="margin: 0; color: #d63031;">ØªØ­Ø¯ÙŠ Ø§Ù„Ù…Ø§Ø±Ø§Ø«ÙˆÙ† ðŸƒâ€â™‚ï¸</h3>
-                            <p style="margin: 5px 0 0 0; color: var(--text-muted); font-size: 0.9rem;">Ù…Ø°Ø§ÙƒØ±Ø© Ù…Ø³ØªÙ…Ø±Ø© Ø¨Ø¯ÙˆÙ† ØªÙˆÙ‚Ù ØªÙ…Ø§Ù…Ø§.. Ù…ÙŠÙ† Ù‡ÙŠÙˆØµÙ„ Ù„Ø®Ø· Ø§Ù„Ù†Ù‡Ø§ÙŠØ© Ø¨Ø¯ÙˆÙ† Ù…Ø§ ÙŠØ³ØªØ³Ù„Ù…ØŸ</p>
+                            <h3 style="margin: 0; color: #d63031;">تحدي الماراثون 🏃‍♂️</h3>
+                            <p style="margin: 5px 0 0 0; color: var(--text-muted); font-size: 0.9rem;">مذاكرة مستمرة بدون توقف تماما.. مين هيوصل لخط النهاية بدون ما يستسلم؟</p>
                         </div>
                     </div>
                     <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
                         <select id="marathon-duration" style="flex: 1; padding: 0.8rem; border: 2px solid var(--border-color); border-radius: 10px; font-family: 'Tajawal'; background: var(--bg-color); color: var(--text-main);">
-                            <option value="180">3 Ø³Ø§Ø¹Ø§Øª Ù…ØªÙˆØ§ØµÙ„Ø©</option>
-                            <option value="240">4 Ø³Ø§Ø¹Ø§Øª Ù…ØªÙˆØ§ØµÙ„Ø©</option>
-                            <option value="300">5 Ø³Ø§Ø¹Ø§Øª Ù…ØªÙˆØ§ØµÙ„Ø©</option>
-                            <option value="360">6 Ø³Ø§Ø¹Ø§Øª Ù…ØªÙˆØ§ØµÙ„Ø©</option>
+                            <option value="180">3 ساعات متواصلة</option>
+                            <option value="240">4 ساعات متواصلة</option>
+                            <option value="300">5 ساعات متواصلة</option>
+                            <option value="360">6 ساعات متواصلة</option>
                         </select>
                     </div>
                     <div style="text-align: center;">
-                        <button onclick="startMarathonChallenge()" id="marathon-btn" class="theme-btn btn-hover-glow" style="background: linear-gradient(135deg, #d63031, #c0392b); color: white; border: none; padding: 0.8rem 2rem; border-radius: 10px; font-size: 1.1rem;"><i class="fa-solid fa-play"></i> Ø§Ù†Ø·Ù„Ø§Ù‚ Ø§Ù„Ù…Ø§Ø±Ø§Ø«ÙˆÙ†!</button>
+                        <button onclick="startMarathonChallenge()" id="marathon-btn" class="theme-btn btn-hover-glow" style="background: linear-gradient(135deg, #d63031, #c0392b); color: white; border: none; padding: 0.8rem 2rem; border-radius: 10px; font-size: 1.1rem;"><i class="fa-solid fa-play"></i> انطلاق الماراثون!</button>
                     </div>
                     <div id="marathon-progress-container" style="display: none; margin-top: 1.5rem; text-align: center;">
                         <h2 id="marathon-time-left" style="color: #d63031; margin: 0; font-size: 2.5rem;">00:00:00</h2>
-                        <p style="color: var(--text-muted);">Ø¨Ø§Ù‚ÙŠ Ø¹Ù„Ù‰ Ø®Ø· Ø§Ù„Ù†Ù‡Ø§ÙŠØ©</p>
+                        <p style="color: var(--text-muted);">باقي على خط النهاية</p>
                     </div>
                 </div>
 
@@ -1161,20 +1161,20 @@
                     <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
                         <i class="fa-solid fa-mobile-screen-button" style="font-size: 2.5rem; color: #2d3436;"></i>
                         <div>
-                            <h3 style="margin: 0; color: #2d3436;">ØªØ­Ø¯ÙŠ Ø§Ù„Ø¹Ø²Ù„ Ø§Ù„ØªØ§Ù… ðŸ“µ</h3>
-                            <p style="margin: 5px 0 0 0; color: var(--text-muted); font-size: 0.9rem;">Ø§Ù‚ÙÙ„ Ø§Ù„Ù†ØªØŒ ÙØ¹Ù„ ÙˆØ¶Ø¹ Ø§Ù„Ø·ÙŠØ±Ø§Ù†ØŒ ÙˆØ§Ù‚ÙÙ„ Ø§Ù„Ø¨Ø§Ø¨. Ù…ÙÙŠØ´ Ø£ÙŠ ØªÙˆØ§ØµÙ„ Ù…Ø¹ Ø§Ù„Ø¹Ø§Ù„Ù… Ø§Ù„Ø®Ø§Ø±Ø¬ÙŠ Ù„Ø­Ø¯ Ù…Ø§ ØªØ®Ù„Øµ Ø§Ù„ÙˆÙ‚Øª!</p>
+                            <h3 style="margin: 0; color: #2d3436;">تحدي العزل التام 📵</h3>
+                            <p style="margin: 5px 0 0 0; color: var(--text-muted); font-size: 0.9rem;">اقفل النت، فعل وضع الطيران، واقفل الباب. مفيش أي تواصل مع العالم الخارجي لحد ما تخلص الوقت!</p>
                         </div>
                     </div>
                     <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
                         <select id="isolation-duration" style="flex: 1; padding: 0.8rem; border: 2px solid var(--border-color); border-radius: 10px; font-family: 'Tajawal'; background: var(--bg-color); color: var(--text-main);">
-                            <option value="120">Ø³Ø§Ø¹ØªÙŠÙ† Ø¹Ø²Ù„</option>
-                            <option value="240">4 Ø³Ø§Ø¹Ø§Øª Ø¹Ø²Ù„</option>
-                            <option value="360">6 Ø³Ø§Ø¹Ø§Øª Ø¹Ø²Ù„</option>
-                            <option value="480">8 Ø³Ø§Ø¹Ø§Øª Ø¹Ø²Ù„</option>
+                            <option value="120">ساعتين عزل</option>
+                            <option value="240">4 ساعات عزل</option>
+                            <option value="360">6 ساعات عزل</option>
+                            <option value="480">8 ساعات عزل</option>
                         </select>
                     </div>
                     <div style="text-align: center;">
-                        <button onclick="startIsolationChallenge()" id="isolation-btn" class="theme-btn btn-hover-glow" style="background: linear-gradient(135deg, #2d3436, #636e72); color: white; border: none; padding: 0.8rem 2rem; border-radius: 10px; font-size: 1.1rem;"><i class="fa-solid fa-power-off"></i> Ø§Ø¨Ø¯Ø£ Ø§Ù„Ø¹Ø²Ù„!</button>
+                        <button onclick="startIsolationChallenge()" id="isolation-btn" class="theme-btn btn-hover-glow" style="background: linear-gradient(135deg, #2d3436, #636e72); color: white; border: none; padding: 0.8rem 2rem; border-radius: 10px; font-size: 1.1rem;"><i class="fa-solid fa-power-off"></i> ابدأ العزل!</button>
                     </div>
                     <div id="isolation-progress-container" style="display: none; margin-top: 1.5rem; text-align: center;">
                         <h2 id="isolation-time-left" style="color: #2d3436; margin: 0; font-size: 2.5rem;">00:00:00</h2>
@@ -1186,12 +1186,12 @@
                     <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
                         <i class="fa-solid fa-battery-half" style="font-size: 2.5rem; color: #27ae60;"></i>
                         <div>
-                            <h3 style="margin: 0; color: #27ae60;">ØªØ­Ø¯ÙŠ Ø´Ø­Ù† Ø§Ù„Ø¨Ø·Ø§Ø±ÙŠØ© ðŸ”‹</h3>
-                            <p style="margin: 5px 0 0 0; color: var(--text-muted); font-size: 0.9rem;">Ø§ÙØµÙ„ Ø´Ø§Ø­Ù† Ø§Ù„Ù„Ø§Ø¨ ØªÙˆØ¨ Ø£Ùˆ Ø§Ù„Ù…ÙˆØ¨Ø§ÙŠÙ„.. Ø§Ù„ØªØ­Ø¯ÙŠ Ø¥Ù†Ùƒ ØªØ®Ù„Øµ Ø§Ù„ØªØ§Ø±Ø¬Øª Ø¨ØªØ§Ø¹Ùƒ Ù‚Ø¨Ù„ Ù…Ø§ Ø§Ù„Ø¨Ø·Ø§Ø±ÙŠØ© ØªÙØµÙ„!</p>
+                            <h3 style="margin: 0; color: #27ae60;">تحدي شحن البطارية 🔋</h3>
+                            <p style="margin: 5px 0 0 0; color: var(--text-muted); font-size: 0.9rem;">افصل شاحن اللاب توب أو الموبايل.. التحدي إنك تخلص التارجت بتاعك قبل ما البطارية تفصل!</p>
                         </div>
                     </div>
                     <div style="text-align: center; margin-top: 1rem;">
-                        <button onclick="startBatteryChallenge()" id="battery-btn" class="theme-btn btn-hover-glow" style="background: linear-gradient(135deg, #27ae60, #2ecc71); color: white; border: none; padding: 0.8rem 2rem; border-radius: 10px; font-size: 1.1rem;"><i class="fa-solid fa-bolt"></i> Ø§Ø¨Ø¯Ø£ Ø§Ù„ØªØ­Ø¯ÙŠ</button>
+                        <button onclick="startBatteryChallenge()" id="battery-btn" class="theme-btn btn-hover-glow" style="background: linear-gradient(135deg, #27ae60, #2ecc71); color: white; border: none; padding: 0.8rem 2rem; border-radius: 10px; font-size: 1.1rem;"><i class="fa-solid fa-bolt"></i> ابدأ التحدي</button>
                     </div>
                 </div>
 
@@ -1200,12 +1200,12 @@
                     <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
                         <i class="fa-solid fa-campground" style="font-size: 2.5rem; color: #00e5ff;"></i>
                         <div>
-                            <h3 style="margin: 0; color: #00e5ff;">ØªØ­Ø¯ÙŠ Ø±Ø¬Ù„ Ø§Ù„ÙƒÙ‡Ù ðŸª¨</h3>
-                            <p style="margin: 5px 0 0 0; color: var(--text-muted); font-size: 0.9rem;">Ù…ÙÙŠØ´ Ø£Ø¬Ù‡Ø²Ø©ØŒ Ù…ÙÙŠØ´ Ù†ØªØŒ Ù…ÙÙŠØ´ Ø£ÙŠ Ø­Ø§Ø¬Ø© Ø¥Ù„ÙƒØªØ±ÙˆÙ†ÙŠØ©. ÙˆØ±Ù‚Ø© ÙˆÙ‚Ù„Ù… ÙˆÙƒØªØ§Ø¨ ÙˆØ¨Ø³!</p>
+                            <h3 style="margin: 0; color: #00e5ff;">تحدي رجل الكهف 🪨</h3>
+                            <p style="margin: 5px 0 0 0; color: var(--text-muted); font-size: 0.9rem;">مفيش أجهزة، مفيش نت، مفيش أي حاجة إلكترونية. ورقة وقلم وكتاب وبس!</p>
                         </div>
                     </div>
                     <div style="text-align: center; margin-top: 1rem;">
-                        <button onclick="startCavemanChallenge()" id="caveman-btn" class="theme-btn btn-hover-glow" style="background: linear-gradient(135deg, #00e5ff, #00e5ff); color: white; border: none; padding: 0.8rem 2rem; border-radius: 10px; font-size: 1.1rem;"><i class="fa-solid fa-leaf"></i> Ø§Ù‚ÙÙ„ ÙƒÙ„ Ø­Ø§Ø¬Ø© ÙˆØ§Ø¨Ø¯Ø£</button>
+                        <button onclick="startCavemanChallenge()" id="caveman-btn" class="theme-btn btn-hover-glow" style="background: linear-gradient(135deg, #00e5ff, #00e5ff); color: white; border: none; padding: 0.8rem 2rem; border-radius: 10px; font-size: 1.1rem;"><i class="fa-solid fa-leaf"></i> اقفل كل حاجة وابدأ</button>
                     </div>
                 </div>
 
@@ -1214,24 +1214,24 @@
                     <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
                         <i class="fa-solid fa-rocket" style="font-size: 2.5rem; color: #d35400;"></i>
                         <div>
-                            <h3 style="margin: 0; color: #d35400;">ØªØ­Ø¯ÙŠ Ø§Ù„Ù…Ø±ÙŠØ® ðŸš€</h3>
-                            <p style="margin: 5px 0 0 0; color: var(--text-muted); font-size: 0.9rem;">Ø£Ø·ÙˆÙ„ Ø±Ø­Ù„Ø© ØªØ±ÙƒÙŠØ²! Ø£Ù†Øª ÙÙŠ Ø·Ø±ÙŠÙ‚Ùƒ Ù„Ù„Ù…Ø±ÙŠØ® ÙˆÙ…ÙÙŠØ´ Ø£ÙŠ Ù…Ø¬Ø§Ù„ Ù„Ù„Ø®Ø·Ø£ (Ø£Ù‚ØµÙ‰ Ù…Ø¯Ø© 15 Ø³Ø§Ø¹Ø©).</p>
+                            <h3 style="margin: 0; color: #d35400;">تحدي المريخ 🚀</h3>
+                            <p style="margin: 5px 0 0 0; color: var(--text-muted); font-size: 0.9rem;">أطول رحلة تركيز! أنت في طريقك للمريخ ومفيش أي مجال للخطأ (أقصى مدة 15 ساعة).</p>
                         </div>
                     </div>
                     <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
                         <select id="mars-duration" style="flex: 1; padding: 0.8rem; border: 2px solid var(--border-color); border-radius: 10px; font-family: 'Tajawal'; background: var(--bg-color); color: var(--text-main);">
-                            <option value="420">7 Ø³Ø§Ø¹Ø§Øª (Ø§Ù„Ù…Ø±Ø­Ù„Ø© Ø§Ù„Ø£ÙˆÙ„Ù‰)</option>
-                            <option value="480">8 Ø³Ø§Ø¹Ø§Øª (Ø§Ù„ØºÙ„Ø§Ù Ø§Ù„Ø¬ÙˆÙŠ)</option>
-                            <option value="540">9 Ø³Ø§Ø¹Ø§Øª (Ø§Ù„Ù‡Ø¨ÙˆØ· Ø¹Ù„Ù‰ Ø§Ù„Ù…Ø±ÙŠØ®)</option>
-                            <option value="900">15 Ø³Ø§Ø¹Ø© (Ù„ÙŠÙÙŠÙ„ Ø§Ù„ÙˆØ­Ø´ Ø§Ù„ÙØ¶Ø§Ø¦ÙŠ!)</option>
+                            <option value="420">7 ساعات (المرحلة الأولى)</option>
+                            <option value="480">8 ساعات (الغلاف الجوي)</option>
+                            <option value="540">9 ساعات (الهبوط على المريخ)</option>
+                            <option value="900">15 ساعة (ليفيل الوحش الفضائي!)</option>
                         </select>
                     </div>
                     <div style="text-align: center;">
-                        <button onclick="startMarsChallenge()" id="mars-btn" class="theme-btn btn-hover-glow" style="background: linear-gradient(135deg, #d35400, #e67e22); color: white; border: none; padding: 0.8rem 2rem; border-radius: 10px; font-size: 1.1rem;"><i class="fa-solid fa-rocket"></i> Ø¥Ø·Ù„Ø§Ù‚ Ø§Ù„ØµØ§Ø±ÙˆØ®!</button>
+                        <button onclick="startMarsChallenge()" id="mars-btn" class="theme-btn btn-hover-glow" style="background: linear-gradient(135deg, #d35400, #e67e22); color: white; border: none; padding: 0.8rem 2rem; border-radius: 10px; font-size: 1.1rem;"><i class="fa-solid fa-rocket"></i> إطلاق الصاروخ!</button>
                     </div>
                     <div id="mars-progress-container" style="display: none; margin-top: 1.5rem; text-align: center;">
                         <h2 id="mars-time-left" style="color: #d35400; margin: 0; font-size: 2.5rem;">00:00:00</h2>
-                        <p style="color: var(--text-muted);">Ø¨Ø§Ù‚ÙŠ Ø¹Ù„Ù‰ Ø§Ù„ÙˆØµÙˆÙ„ Ù„Ù„Ù…Ø±ÙŠØ®</p>
+                        <p style="color: var(--text-muted);">باقي على الوصول للمريخ</p>
                     </div>
                 </div>
 
@@ -1240,12 +1240,12 @@
                     <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
                         <i class="fa-solid fa-book-open" style="font-size: 2.5rem; color: #f39c12;"></i>
                         <div>
-                            <h3 style="margin: 0; color: #f39c12;">ØªØ­Ø¯ÙŠ Ø§Ù„Ù€ 100 ØµÙØ­Ø© ðŸ“š</h3>
-                            <p style="margin: 5px 0 0 0; color: var(--text-muted); font-size: 0.9rem;">Ø§Ù„ØªØ­Ø¯ÙŠ Ù…Ø´ Ø¨Ø§Ù„ÙˆÙ‚Øª.. Ø§Ù„ØªØ­Ø¯ÙŠ Ø¨Ø§Ù„ÙƒÙ…ÙŠØ©! Ù…Ø´ Ù‡ØªÙ‚ÙˆÙ… ØºÙŠØ± Ù„Ù…Ø§ ØªØ®Ù„Øµ 100 ØµÙØ­Ø© Ù‚Ø±Ø§Ø¡Ø© Ø£Ùˆ Ù…Ø°Ø§ÙƒØ±Ø©.</p>
+                            <h3 style="margin: 0; color: #f39c12;">تحدي الـ 100 صفحة 📚</h3>
+                            <p style="margin: 5px 0 0 0; color: var(--text-muted); font-size: 0.9rem;">التحدي مش بالوقت.. التحدي بالكمية! مش هتقوم غير لما تخلص 100 صفحة قراءة أو مذاكرة.</p>
                         </div>
                     </div>
                     <div style="text-align: center; margin-top: 1rem;">
-                        <button onclick="startPagesChallenge()" id="pages-btn" class="theme-btn btn-hover-glow" style="background: linear-gradient(135deg, #f39c12, #f1c40f); color: white; border: none; padding: 0.8rem 2rem; border-radius: 10px; font-size: 1.1rem;"><i class="fa-solid fa-check-double"></i> Ù‚Ø¨Ù„Øª Ø§Ù„ØªØ­Ø¯ÙŠ</button>
+                        <button onclick="startPagesChallenge()" id="pages-btn" class="theme-btn btn-hover-glow" style="background: linear-gradient(135deg, #f39c12, #f1c40f); color: white; border: none; padding: 0.8rem 2rem; border-radius: 10px; font-size: 1.1rem;"><i class="fa-solid fa-check-double"></i> قبلت التحدي</button>
                     </div>
                 </div>
 
@@ -1254,12 +1254,12 @@
                     <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
                         <i class="fa-solid fa-mug-hot" style="font-size: 2.5rem; color: #7f8c8d;"></i>
                         <div>
-                            <h3 style="margin: 0; color: #7f8c8d;">ØªØ­Ø¯ÙŠ Ù‚Ù‡ÙˆØ© Ø§Ù„ØµØ¨Ø§Ø­ â˜•</h3>
-                            <p style="margin: 5px 0 0 0; color: var(--text-muted); font-size: 0.9rem;">Ø§Ø¹Ù…Ù„ Ù‚Ù‡ÙˆØªÙƒØŒ ÙˆØ§Ø¨Ø¯Ø£ Ù…Ø°Ø§ÙƒØ±Ø©. Ù…Ø§ØªØ´Ø±Ø¨Ø´ Ø§Ù„Ù‚Ù‡ÙˆØ© ØºÙŠØ± Ù„Ù…Ø§ ØªØ®Ù„Øµ Ø§Ù„Ø¬Ø²Ø¡ Ø§Ù„Ù„ÙŠ Ø­Ø¯Ø¯ØªÙ‡!</p>
+                            <h3 style="margin: 0; color: #7f8c8d;">تحدي قهوة الصباح ☕</h3>
+                            <p style="margin: 5px 0 0 0; color: var(--text-muted); font-size: 0.9rem;">اعمل قهوتك، وابدأ مذاكرة. ماتشربش القهوة غير لما تخلص الجزء اللي حددته!</p>
                         </div>
                     </div>
                     <div style="text-align: center; margin-top: 1rem;">
-                        <button onclick="startCoffeeChallenge()" id="coffee-btn" class="theme-btn btn-hover-glow" style="background: linear-gradient(135deg, #7f8c8d, #95a5a6); color: white; border: none; padding: 0.8rem 2rem; border-radius: 10px; font-size: 1.1rem;"><i class="fa-solid fa-mug-hot"></i> Ø§Ù„Ù‚Ù‡ÙˆØ© Ø¬Ø§Ù‡Ø²Ø©</button>
+                        <button onclick="startCoffeeChallenge()" id="coffee-btn" class="theme-btn btn-hover-glow" style="background: linear-gradient(135deg, #7f8c8d, #95a5a6); color: white; border: none; padding: 0.8rem 2rem; border-radius: 10px; font-size: 1.1rem;"><i class="fa-solid fa-mug-hot"></i> القهوة جاهزة</button>
                     </div>
                 </div>
 
@@ -1268,23 +1268,23 @@
                     <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
                         <i class="fa-solid fa-train-subway" style="font-size: 2.5rem; color: #34495e;"></i>
                         <div>
-                            <h3 style="margin: 0; color: #34495e;">ØªØ­Ø¯ÙŠ Ù‚Ø·Ø§Ø± Ù…Ù†ØªØµÙ Ø§Ù„Ù„ÙŠÙ„ ðŸš†</h3>
-                            <p style="margin: 5px 0 0 0; color: var(--text-muted); font-size: 0.9rem;">Ø±Ø­Ù„Ø© Ù‡Ø¯ÙˆØ¡ Ù…Ø³Ø§Ø¦ÙŠØ© Ø¨Ø¯ÙˆÙ† ØªÙˆÙ‚Ù Ù„Ø­Ø¯ Ù…Ø§ Ø§Ù„Ù‚Ø·Ø± ÙŠÙˆØµÙ„ Ø§Ù„Ù…Ø­Ø·Ø© Ø§Ù„Ø£Ø®ÙŠØ±Ø©.</p>
+                            <h3 style="margin: 0; color: #34495e;">تحدي قطار منتصف الليل 🚆</h3>
+                            <p style="margin: 5px 0 0 0; color: var(--text-muted); font-size: 0.9rem;">رحلة هدوء مسائية بدون توقف لحد ما القطر يوصل المحطة الأخيرة.</p>
                         </div>
                     </div>
                     <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
                         <select id="train-duration" style="flex: 1; padding: 0.8rem; border: 2px solid var(--border-color); border-radius: 10px; font-family: 'Tajawal'; background: var(--bg-color); color: var(--text-main);">
-                            <option value="180">3 Ø³Ø§Ø¹Ø§Øª (Ù…Ù†ØªØµÙ Ø§Ù„Ù„ÙŠÙ„)</option>
-                            <option value="240">4 Ø³Ø§Ø¹Ø§Øª (Ø±Ø­Ù„Ø© Ø§Ù„ÙØ¬Ø±)</option>
-                            <option value="360">6 Ø³Ø§Ø¹Ø§Øª (Ø­ØªÙ‰ Ø§Ù„ØµØ¨Ø§Ø­)</option>
+                            <option value="180">3 ساعات (منتصف الليل)</option>
+                            <option value="240">4 ساعات (رحلة الفجر)</option>
+                            <option value="360">6 ساعات (حتى الصباح)</option>
                         </select>
                     </div>
                     <div style="text-align: center;">
-                        <button onclick="startTrainChallenge()" id="train-btn" class="theme-btn btn-hover-glow" style="background: linear-gradient(135deg, #34495e, #2c3e50); color: white; border: none; padding: 0.8rem 2rem; border-radius: 10px; font-size: 1.1rem;"><i class="fa-solid fa-ticket"></i> Ù‚Ø·Ø¹ Ø§Ù„ØªØ°ÙƒØ±Ø©!</button>
+                        <button onclick="startTrainChallenge()" id="train-btn" class="theme-btn btn-hover-glow" style="background: linear-gradient(135deg, #34495e, #2c3e50); color: white; border: none; padding: 0.8rem 2rem; border-radius: 10px; font-size: 1.1rem;"><i class="fa-solid fa-ticket"></i> قطع التذكرة!</button>
                     </div>
                     <div id="train-progress-container" style="display: none; margin-top: 1.5rem; text-align: center;">
                         <h2 id="train-time-left" style="color: #34495e; margin: 0; font-size: 2.5rem;">00:00:00</h2>
-                        <p style="color: var(--text-muted);">Ø¨Ø§Ù‚ÙŠ Ø¹Ù„Ù‰ Ø§Ù„Ù…Ø­Ø·Ø© Ø§Ù„Ø£Ø®ÙŠØ±Ø©</p>
+                        <p style="color: var(--text-muted);">باقي على المحطة الأخيرة</p>
                     </div>
                 </div>
 
@@ -1293,12 +1293,12 @@
                     <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
                         <i class="fa-solid fa-bug" style="font-size: 2.5rem; color: #e74c3c;"></i>
                         <div>
-                            <h3 style="margin: 0; color: #e74c3c;">ØªØ­Ø¯ÙŠ Ø§Ù„Ù†Ù…Ù„Ø© Ø§Ù„Ù†Ø´ÙŠØ·Ø© ðŸœ</h3>
-                            <p style="margin: 5px 0 0 0; color: var(--text-muted); font-size: 0.9rem;">Ù…Ø°Ø§ÙƒØ±Ø© Ø¨ØªØ±ÙƒÙŠØ² ÙˆÙ„Ù…Ø§ ØªØ®Ù„Øµ Ù…Ù‡Ù…Ø© ØªÙ‚ÙˆÙ… ØªØ¹Ù…Ù„ Ø­Ø§Ø¬Ø© Ø­Ø±ÙƒÙŠØ© (ØªØ±ØªÙŠØ¨ Ø§Ù„Ø£ÙˆØ¶Ø©ØŒ ØªÙ…Ø±ÙŠÙ† Ø¶ØºØ·) ÙˆØªØ±Ø¬Ø¹ ØªØ§Ù†ÙŠ!</p>
+                            <h3 style="margin: 0; color: #e74c3c;">تحدي النملة النشيطة 🐜</h3>
+                            <p style="margin: 5px 0 0 0; color: var(--text-muted); font-size: 0.9rem;">مذاكرة بتركيز ولما تخلص مهمة تقوم تعمل حاجة حركية (ترتيب الأوضة، تمرين ضغط) وترجع تاني!</p>
                         </div>
                     </div>
                     <div style="text-align: center; margin-top: 1rem;">
-                        <button onclick="startAntChallenge()" id="ant-btn" class="theme-btn btn-hover-glow" style="background: linear-gradient(135deg, #e74c3c, #c0392b); color: white; border: none; padding: 0.8rem 2rem; border-radius: 10px; font-size: 1.1rem;"><i class="fa-solid fa-play"></i> Ø§Ø¨Ø¯Ø£ Ø§Ù„ØªØ­Ø¯ÙŠ</button>
+                        <button onclick="startAntChallenge()" id="ant-btn" class="theme-btn btn-hover-glow" style="background: linear-gradient(135deg, #e74c3c, #c0392b); color: white; border: none; padding: 0.8rem 2rem; border-radius: 10px; font-size: 1.1rem;"><i class="fa-solid fa-play"></i> ابدأ التحدي</button>
                     </div>
                 </div>
 
@@ -1317,16 +1317,16 @@
             <div style="display: flex; align-items: center; gap: 15px; border-bottom: 2px solid var(--border-color); padding-bottom: 15px; margin-bottom: 15px;">
                 <i class="fa-solid fa-user-graduate" style="font-size: 3rem; color: var(--primary-color);"></i>
                 <div>
-                    <h2 id="admin-modal-name" style="margin: 0; color: var(--primary-color);">Ø§Ø³Ù… Ø§Ù„Ø·Ø§Ù„Ø¨</h2>
-                    <span id="admin-modal-stage" style="color: var(--text-muted); font-size: 0.9rem;">Ø§Ù„Ù…Ø±Ø­Ù„Ø©</span>
+                    <h2 id="admin-modal-name" style="margin: 0; color: var(--primary-color);">اسم الطالب</h2>
+                    <span id="admin-modal-stage" style="color: var(--text-muted); font-size: 0.9rem;">المرحلة</span>
                     <br><small id="admin-modal-lastseen" style="color: var(--orange);"></small>
                 </div>
             </div>
             
-            <h3 style="margin-bottom:10px;"><i class="fa-solid fa-list-check text-success"></i> Ù…Ù‡Ø§Ù… Ø§Ù„Ù…Ø°Ø§ÙƒØ±Ø© (To-Do)</h3>
+            <h3 style="margin-bottom:10px;"><i class="fa-solid fa-list-check text-success"></i> مهام المذاكرة (To-Do)</h3>
             <div id="admin-modal-tasks" style="background: var(--bg-color); padding: 15px; border-radius: 8px; margin-top: 20px; bottom: auto; border: 1px solid var(--border-color);"></div>
             
-            <h3 style="margin-bottom:10px;"><i class="fa-solid fa-calendar-week text-blue"></i> Ø¬Ø¯ÙˆÙ„ Ø§Ù„Ø¯Ø±ÙˆØ³</h3>
+            <h3 style="margin-bottom:10px;"><i class="fa-solid fa-calendar-week text-blue"></i> جدول الدروس</h3>
             <div id="admin-modal-classes" style="background: var(--bg-color); padding: 15px; border-radius: 8px; border: 1px solid var(--border-color);"></div>
         </div>
     </div>
@@ -1336,9 +1336,9 @@
         <div class="modal-content" style="text-align: center; border-top: 6px solid var(--primary-color);">
             <span class="close" onclick="closeModal('prayer-alert-modal')">&times;</span>
             <i class="fa-solid fa-mosque" style="font-size: 4rem; color: var(--primary-color); margin-bottom: 15px;"></i>
-            <h2 id="prayer-alert-title" style="margin-bottom: 10px;">Ø­Ø§Ù† Ø§Ù„Ø¢Ù† Ù…ÙˆØ¹Ø¯ Ø§Ù„Ø£Ø°Ø§Ù†! ðŸ•Œ</h2>
-            <p id="prayer-alert-msg" style="font-size: 1.1rem; line-height: 1.6; color: var(--text-muted); margin-top: 20px; bottom: auto;">Ø§Ù„Ù†Ø¬Ø§Ø­ ÙˆØ§Ù„ØªÙˆÙÙŠÙ‚ Ø¨ÙÙŠÙŽØ¯Ù Ø§Ù„Ù„Ù‡.. Ø§ØªØ±ÙƒÙŠ Ø§Ù„Ù…Ø°Ø§ÙƒØ±Ø© Ø§Ù„Ø¢Ù† Ù„Ø¯Ù‚Ø§Ø¦Ù‚ØŒ ÙˆÙ‚ÙˆÙ…ÙŠ Ù„Ù„ØµÙ„Ø§Ø© Ù„ØªÙ†Ø§Ù„ÙŠ Ø§Ù„Ø¨Ø±ÙƒØ© ÙˆØ§Ù„ÙÙ‡Ù….</p>
-            <button class="btn btn-primary btn-large" onclick="closeModal('prayer-alert-modal')" style="width: 100%;">Ø³Ø£Ù‚ÙˆÙ… Ù„Ù„ØµÙ„Ø§Ø© ÙÙˆØ±Ø§Ù‹ ðŸ¤</button>
+            <h2 id="prayer-alert-title" style="margin-bottom: 10px;">حان الآن موعد الأذان! 🕌</h2>
+            <p id="prayer-alert-msg" style="font-size: 1.1rem; line-height: 1.6; color: var(--text-muted); margin-top: 20px; bottom: auto;">النجاح والتوفيق بِيَدِ الله.. اتركي المذاكرة الآن لدقائق، وقومي للصلاة لتنالي البركة والفهم.</p>
+            <button class="btn btn-primary btn-large" onclick="closeModal('prayer-alert-modal')" style="width: 100%;">سأقوم للصلاة فوراً 🤍</button>
         </div>
     </div>
 
@@ -1347,21 +1347,21 @@
     <div id="quran-modal" class="modal">
         <div class="modal-content" style="max-width: 400px;">
             <span class="close" onclick="closeModal('quran-modal')">&times;</span>
-            <h2 style="color: var(--success);"><i class="fa-solid fa-book-quran"></i> ØªØ­Ø¯ÙŠØ¯ Ø§Ù„ÙˆØ±Ø¯ Ø§Ù„Ù‚Ø±Ø¢Ù†ÙŠ</h2>
+            <h2 style="color: var(--success);"><i class="fa-solid fa-book-quran"></i> تحديد الورد القرآني</h2>
             <form id="quran-form">
                 <div class="form-group">
-                    <label>Ù…Ø§ Ù‡Ùˆ Ù‡Ø¯ÙÙƒ Ø§Ù„ÙŠÙˆÙ…ÙŠØŸ</label>
+                    <label>ما هو هدفك اليومي؟</label>
                     <select id="quran-goal-select" class="search-input" onchange="if(this.value==='custom') { document.getElementById('custom-quran-goal').style.display='block'; } else { document.getElementById('custom-quran-goal').style.display='none'; }">
-                        <option value="ØµÙØ­Ø© ÙˆØ§Ø­Ø¯Ø©">ØµÙØ­Ø© ÙˆØ§Ø­Ø¯Ø©</option>
-                        <option value="ØµÙØ­ØªØ§Ù†">ØµÙØ­ØªØ§Ù†</option>
-                        <option value="Ø±Ø¨Ø¹ Ø­Ø²Ø¨">Ø±Ø¨Ø¹ Ø­Ø²Ø¨</option>
-                        <option value="Ù†ØµÙ Ø¬Ø²Ø¡">Ù†ØµÙ Ø¬Ø²Ø¡</option>
-                        <option value="Ø¬Ø²Ø¡ ÙƒØ§Ù…Ù„">Ø¬Ø²Ø¡ ÙƒØ§Ù…Ù„</option>
-                        <option value="custom">Ù…Ø®ØµØµ (Ø§ÙƒØªØ¨ Ø¨Ù†ÙØ³Ùƒ)</option>
+                        <option value="صفحة واحدة">صفحة واحدة</option>
+                        <option value="صفحتان">صفحتان</option>
+                        <option value="ربع حزب">ربع حزب</option>
+                        <option value="نصف جزء">نصف جزء</option>
+                        <option value="جزء كامل">جزء كامل</option>
+                        <option value="custom">مخصص (اكتب بنفسك)</option>
                     </select>
-                    <input type="text" id="custom-quran-goal" class="search-input" placeholder="Ù…Ø«Ø§Ù„: Ø³ÙˆØ±Ø© Ø§Ù„ÙƒÙ‡Ù" style="display:none; margin-top:10px;">
+                    <input type="text" id="custom-quran-goal" class="search-input" placeholder="مثال: سورة الكهف" style="display:none; margin-top:10px;">
                 </div>
-                <button type="submit" class="btn btn-primary" style="background-color: var(--success); width: 100%;">Ø­ÙØ¸ Ø§Ù„ÙˆØ±Ø¯</button>
+                <button type="submit" class="btn btn-primary" style="background-color: var(--success); width: 100%;">حفظ الورد</button>
             </form>
         </div>
     </div>
@@ -1370,30 +1370,30 @@
     <div id="ai-schedule-modal" class="modal">
         <div class="modal-content" style="max-width: 500px;">
             <span class="close" onclick="closeModal('ai-schedule-modal')">&times;</span>
-            <h2 style="color: var(--orange);"><i class="fa-solid fa-wand-magic-sparkles"></i> Ø§Ù„Ù…Ø®Ø·Ø· Ø§Ù„Ø°ÙƒÙŠ</h2>
-            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 15px;">Ø§Ù„Ø°ÙƒØ§Ø¡ Ø§Ù„Ø§ØµØ·Ù†Ø§Ø¹ÙŠ Ù‡ÙŠØµÙ…Ù…Ù„Ùƒ Ø¬Ø¯ÙˆÙ„ Ù…Ø°Ø§ÙƒØ±Ø© ÙŠÙ†Ø§Ø³Ø¨ Ø·Ø¨ÙŠØ¹Ø© ÙŠÙˆÙ…Ùƒ!</p>
+            <h2 style="color: var(--orange);"><i class="fa-solid fa-wand-magic-sparkles"></i> المخطط الذكي</h2>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 15px;">الذكاء الاصطناعي هيصمملك جدول مذاكرة يناسب طبيعة يومك!</p>
             <form id="ai-schedule-form">
                 <div class="form-group">
-                    <label>Ø£Ù†Øª ÙƒØ§Ø¦Ù†ØŸ (ÙˆÙ‚ØªÙƒ Ø§Ù„Ù…ÙØ¶Ù„)</label>
+                    <label>أنت كائن؟ (وقتك المفضل)</label>
                     <select id="ai-schedule-time" class="search-input">
-                        <option value="ØµØ¨Ø§Ø­ÙŠ (Ø¨ØµØ­Ù‰ Ø¨Ø¯Ø±ÙŠ Ø¬Ø¯Ø§Ù‹)">ØµØ¨Ø§Ø­ÙŠ (Ø¨ØµØ­Ù‰ Ø§Ù„ÙØ¬Ø±/Ø§Ù„ØµØ¨Ø­)</option>
-                        <option value="Ù…Ø³Ø§Ø¦ÙŠ (Ø¨Ø­Ø¨ Ø§Ù„Ø³Ù‡Ø±)">Ù…Ø³Ø§Ø¦ÙŠ (Ø¨Ø°Ø§ÙƒØ± Ø¨Ø§Ù„Ù„ÙŠÙ„/Ø¨Ø³Ù‡Ø±)</option>
-                        <option value="Ø¹Ø´ÙˆØ§Ø¦ÙŠ (Ø­Ø³Ø¨ Ø§Ù„Ø¸Ø±ÙˆÙ)">Ø¹Ø´ÙˆØ§Ø¦ÙŠ (Ø¨Ø°Ø§ÙƒØ± Ù„Ù…Ø§ Ø£ÙØ¶Ù‰)</option>
+                        <option value="صباحي (بصحى بدري جداً)">صباحي (بصحى الفجر/الصبح)</option>
+                        <option value="مسائي (بحب السهر)">مسائي (بذاكر بالليل/بسهر)</option>
+                        <option value="عشوائي (حسب الظروف)">عشوائي (بذاكر لما أفضى)</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>Ø¹Ø¯Ø¯ Ø³Ø§Ø¹Ø§Øª Ø§Ù„Ù…Ø°Ø§ÙƒØ±Ø© Ø§Ù„Ù…Ø·Ù„ÙˆØ¨Ø© Ø§Ù„ÙŠÙˆÙ…</label>
+                    <label>عدد ساعات المذاكرة المطلوبة اليوم</label>
                     <input type="number" id="ai-schedule-hours" class="search-input" min="1" max="16" value="4" required>
                 </div>
                 <div class="form-group">
-                    <label>Ø§Ù„Ù…ÙˆØ§Ø¯ Ø§Ù„ØªÙŠ ØªØ±ÙŠØ¯ Ù…Ø°Ø§ÙƒØ±ØªÙ‡Ø§ Ø§Ù„ÙŠÙˆÙ… (Ù…ÙØµÙˆÙ„Ø© Ø¨ÙØ§ØµÙ„Ø©)</label>
-                    <input type="text" id="ai-schedule-subjects" class="search-input" placeholder="Ù…Ø«Ø§Ù„: ÙÙŠØ²ÙŠØ§Ø¡ØŒ Ø±ÙŠØ§Ø¶Ø©ØŒ Ø¹Ø±Ø¨ÙŠ" required>
+                    <label>المواد التي تريد مذاكرتها اليوم (مفصولة بفاصلة)</label>
+                    <input type="text" id="ai-schedule-subjects" class="search-input" placeholder="مثال: فيزياء، رياضة، عربي" required>
                 </div>
-                <button type="submit" class="btn btn-primary" style="background-color: var(--orange); width: 100%;"><i class="fa-solid fa-robot"></i> Ø§ØµÙ†Ø¹ Ù„ÙŠ Ø§Ù„Ø¬Ø¯ÙˆÙ„</button>
+                <button type="submit" class="btn btn-primary" style="background-color: var(--orange); width: 100%;"><i class="fa-solid fa-robot"></i> اصنع لي الجدول</button>
             </form>
             <div id="ai-schedule-loading" style="display:none; text-align: center; margin-top: 15px;">
                 <i class="fa-solid fa-spinner fa-spin" style="color: var(--orange); font-size: 2rem;"></i>
-                <p>Ø¬Ø§Ø±ÙŠ Ø§Ù„ØªÙÙƒÙŠØ± ÙˆØªÙ†Ø³ÙŠÙ‚ Ø§Ù„Ø¬Ø¯ÙˆÙ„...</p>
+                <p>جاري التفكير وتنسيق الجدول...</p>
             </div>
         </div>
     </div>
@@ -1401,59 +1401,59 @@
     <div id="class-modal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal('class-modal')">&times;</span>
-            <h2>Ø¥Ø¶Ø§ÙØ© Ø¯Ø±Ø³ Ø¬Ø¯ÙŠØ¯</h2>
+            <h2>إضافة درس جديد</h2>
             <form id="class-form">
-                <div class="form-group"><label>Ø§Ù„Ù…Ø§Ø¯Ø©</label><select id="class-subject" required></select></div>
-                <div class="form-group"><label>Ø§Ù„ÙŠÙˆÙ…</label><select id="class-day" required><option value="0">Ø§Ù„Ø£Ø­Ø¯</option><option value="1">Ø§Ù„Ø¥Ø«Ù†ÙŠÙ†</option><option value="2">Ø§Ù„Ø«Ù„Ø§Ø«Ø§Ø¡</option><option value="3">Ø§Ù„Ø£Ø±Ø¨Ø¹Ø§Ø¡</option><option value="4">Ø§Ù„Ø®Ù…ÙŠØ³</option><option value="5">Ø§Ù„Ø¬Ù…Ø¹Ø©</option><option value="6">Ø§Ù„Ø³Ø¨Øª</option></select></div>
-                <div class="form-group"><label>Ø§Ù„ÙˆÙ‚Øª</label><input type="time" id="class-time" required></div>
-                <button type="submit" class="btn btn-primary">Ø­ÙØ¸</button>
+                <div class="form-group"><label>المادة</label><select id="class-subject" required></select></div>
+                <div class="form-group"><label>اليوم</label><select id="class-day" required><option value="0">الأحد</option><option value="1">الإثنين</option><option value="2">الثلاثاء</option><option value="3">الأربعاء</option><option value="4">الخميس</option><option value="5">الجمعة</option><option value="6">السبت</option></select></div>
+                <div class="form-group"><label>الوقت</label><input type="time" id="class-time" required></div>
+                <button type="submit" class="btn btn-primary">حفظ</button>
             </form>
         </div>
     </div>
     <div id="task-modal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal('task-modal')">&times;</span>
-            <h2>Ø¥Ø¶Ø§ÙØ© Ù…Ù‡Ù…Ø© Ù…Ø°Ø§ÙƒØ±Ø©</h2>
+            <h2>إضافة مهمة مذاكرة</h2>
             <form id="task-form">
-                <div class="form-group"><label>ÙˆØµÙ Ø§Ù„Ù…Ù‡Ù…Ø©</label><input type="text" id="task-desc" required></div>
-                <div class="form-group"><label>Ø§Ù„Ù…Ø§Ø¯Ø© (Ø§Ø®ØªÙŠØ§Ø±ÙŠ)</label><select id="task-subject"><option value="">Ø¨Ø¯ÙˆÙ† Ù…Ø§Ø¯Ø© Ù…Ø­Ø¯Ø¯Ø©</option></select></div>
-                <div class="form-group"><label>ØªØ§Ø±ÙŠØ® Ø§Ù„Ù…Ø°Ø§ÙƒØ±Ø©</label><input type="date" id="task-date" required></div>
-                <button type="submit" class="btn btn-primary">Ø­ÙØ¸</button>
+                <div class="form-group"><label>وصف المهمة</label><input type="text" id="task-desc" required></div>
+                <div class="form-group"><label>المادة (اختياري)</label><select id="task-subject"><option value="">بدون مادة محددة</option></select></div>
+                <div class="form-group"><label>تاريخ المذاكرة</label><input type="date" id="task-date" required></div>
+                <button type="submit" class="btn btn-primary">حفظ</button>
             </form>
         </div>
     </div>
     <div id="subject-modal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal('subject-modal')">&times;</span>
-            <h2>Ø¥Ø¶Ø§ÙØ© Ù…Ø§Ø¯Ø© Ø¬Ø¯ÙŠØ¯Ø©</h2>
+            <h2>إضافة مادة جديدة</h2>
             <form id="subject-form">
-                <div class="form-group"><label>Ø§Ø³Ù… Ø§Ù„Ù…Ø§Ø¯Ø©</label><input type="text" id="subject-name" required></div>
-                <div class="form-group"><label>Ø§Ù„Ù„ÙˆÙ† Ø§Ù„Ù…Ù…ÙŠØ²</label><input type="color" id="subject-color" value="#00e5ff" required></div>
-                <button type="submit" class="btn btn-primary">Ø­ÙØ¸</button>
+                <div class="form-group"><label>اسم المادة</label><input type="text" id="subject-name" required></div>
+                <div class="form-group"><label>اللون المميز</label><input type="color" id="subject-color" value="#00e5ff" required></div>
+                <button type="submit" class="btn btn-primary">حفظ</button>
             </form>
         </div>
     </div>
     <div id="exam-modal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal('exam-modal')">&times;</span>
-            <h2>Ø¥Ø¶Ø§ÙØ© Ù…ÙˆØ¹Ø¯ Ø§Ù…ØªØ­Ø§Ù†</h2>
+            <h2>إضافة موعد امتحان</h2>
             <form id="exam-form">
-                <div class="form-group"><label>Ø§Ø³Ù…/Ù†ÙˆØ¹ Ø§Ù„Ø§Ù…ØªØ­Ø§Ù†</label><input type="text" id="exam-title" required></div>
-                <div class="form-group"><label>Ø§Ù„Ù…Ø§Ø¯Ø©</label><select id="exam-subject" required></select></div>
-                <div class="form-group"><label>ØªØ§Ø±ÙŠØ® Ø§Ù„Ø§Ù…ØªØ­Ø§Ù†</label><input type="date" id="exam-date" required></div>
-                <button type="submit" class="btn btn-primary">Ø­ÙØ¸</button>
+                <div class="form-group"><label>اسم/نوع الامتحان</label><input type="text" id="exam-title" required></div>
+                <div class="form-group"><label>المادة</label><select id="exam-subject" required></select></div>
+                <div class="form-group"><label>تاريخ الامتحان</label><input type="date" id="exam-date" required></div>
+                <button type="submit" class="btn btn-primary">حفظ</button>
             </form>
         </div>
     </div>
     <div id="flashcard-modal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal('flashcard-modal')">&times;</span>
-            <h2>Ø¥Ø¶Ø§ÙØ© Ø¨Ø·Ø§Ù‚Ø© ØªØ¹Ù„ÙŠÙ…ÙŠØ© (Flashcard)</h2>
+            <h2>إضافة بطاقة تعليمية (Flashcard)</h2>
             <form id="flashcard-form">
-                <div class="form-group"><label>Ø§Ù„Ù…Ø§Ø¯Ø© (Ø§Ø®ØªÙŠØ§Ø±ÙŠ)</label><select id="flashcard-subject"><option value="">Ø¨Ø¯ÙˆÙ† Ù…Ø§Ø¯Ø© Ù…Ø­Ø¯Ø¯Ø©</option></select></div>
-                <div class="form-group"><label>Ø§Ù„Ø³Ø¤Ø§Ù„ (ÙˆØ¬Ù‡ Ø§Ù„Ø¨Ø·Ø§Ù‚Ø©)</label><textarea id="flashcard-q" rows="3" required style="width:100%; padding:10px; background:var(--bg-color); color:var(--text-main); border:1px solid var(--border-color); border-radius:6px; font-family:inherit;"></textarea></div>
-                <div class="form-group"><label>Ø§Ù„Ø¥Ø¬Ø§Ø¨Ø© (Ø¸Ù‡Ø± Ø§Ù„Ø¨Ø·Ø§Ù‚Ø©)</label><textarea id="flashcard-a" rows="4" required style="width:100%; padding:10px; background:var(--bg-color); color:var(--text-main); border:1px solid var(--border-color); border-radius:6px; font-family:inherit;"></textarea></div>
-                <button type="submit" class="btn btn-primary">Ø­ÙØ¸ Ø§Ù„Ø¨Ø·Ø§Ù‚Ø©</button>
+                <div class="form-group"><label>المادة (اختياري)</label><select id="flashcard-subject"><option value="">بدون مادة محددة</option></select></div>
+                <div class="form-group"><label>السؤال (وجه البطاقة)</label><textarea id="flashcard-q" rows="3" required style="width:100%; padding:10px; background:var(--bg-color); color:var(--text-main); border:1px solid var(--border-color); border-radius:6px; font-family:inherit;"></textarea></div>
+                <div class="form-group"><label>الإجابة (ظهر البطاقة)</label><textarea id="flashcard-a" rows="4" required style="width:100%; padding:10px; background:var(--bg-color); color:var(--text-main); border:1px solid var(--border-color); border-radius:6px; font-family:inherit;"></textarea></div>
+                <button type="submit" class="btn btn-primary">حفظ البطاقة</button>
             </form>
         </div>
     </div>
@@ -1462,20 +1462,20 @@
     <div id="backlog-modal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal('backlog-modal')">&times;</span>
-            <h2>ðŸ“¦ Ø¥Ø¶Ø§ÙØ© Ù…Ø§Ø¯Ø© Ù…ØªØ±Ø§ÙƒÙ…Ø©</h2>
+            <h2>📦 إضافة مادة متراكمة</h2>
             <form id="backlog-form">
-                <div class="form-group"><label>Ø§Ø³Ù… Ø§Ù„Ù…Ø§Ø¯Ø©</label><input type="text" id="backlog-subject" placeholder="Ù…Ø«Ø§Ù„: ÙÙŠØ²ÙŠØ§Ø¡ØŒ Ø£Ø­ÙŠØ§Ø¡..." required></div>
-                <div class="form-group"><label>Ø¹Ø¯Ø¯ Ø§Ù„Ù…Ø­Ø§Ø¶Ø±Ø§Øª Ø§Ù„Ù…ØªØ±Ø§ÙƒÙ…Ø©</label><input type="number" id="backlog-lectures" min="1" max="50" placeholder="Ù…Ø«Ù„Ø§Ù‹: 3" required></div>
-                <div class="form-group"><label>Ù…Ø¯Ø© ÙƒÙ„ Ù…Ø­Ø§Ø¶Ø±Ø© (Ø¨Ø§Ù„Ø¯Ù‚Ø§Ø¦Ù‚ ØªÙ‚Ø±ÙŠØ¨Ø§Ù‹)</label><input type="number" id="backlog-duration" min="15" max="180" value="60" required></div>
-                <div class="form-group"><label>Ø§Ù„Ù…ÙˆØ¹Ø¯ Ø§Ù„Ù†Ù‡Ø§Ø¦ÙŠ Ù„Ù„Ù…Ù‘ Ø§Ù„Ù…ØªØ±Ø§ÙƒÙ… (Ø§Ø®ØªÙŠØ§Ø±ÙŠ)</label><input type="date" id="backlog-deadline"></div>
-                <button type="submit" class="btn btn-primary">Ø¥Ù†Ø´Ø§Ø¡ Ø®Ø·Ø© Ø§Ù„Ù„Ù…Ù‘ ðŸš€</button>
+                <div class="form-group"><label>اسم المادة</label><input type="text" id="backlog-subject" placeholder="مثال: فيزياء، أحياء..." required></div>
+                <div class="form-group"><label>عدد المحاضرات المتراكمة</label><input type="number" id="backlog-lectures" min="1" max="50" placeholder="مثلاً: 3" required></div>
+                <div class="form-group"><label>مدة كل محاضرة (بالدقائق تقريباً)</label><input type="number" id="backlog-duration" min="15" max="180" value="60" required></div>
+                <div class="form-group"><label>الموعد النهائي للمّ المتراكم (اختياري)</label><input type="date" id="backlog-deadline"></div>
+                <button type="submit" class="btn btn-primary">إنشاء خطة اللمّ 🚀</button>
             </form>
         </div>
     </div>
 
     <div id="dhikr-toast" class="toast">
         <i class="fa-solid fa-heart" style="color: var(--danger);"></i>
-        <span id="dhikr-text">ØµÙ„ÙŠ Ø¹Ù„Ù‰ Ø§Ù„Ù†Ø¨ÙŠ ï·º</span>
+        <span id="dhikr-text">صلي على النبي ﷺ</span>
     </div>
     
     <!-- PWA Service Worker Registration -->
@@ -1493,29 +1493,29 @@
     <div id="api-instructions-modal" class="modal">
         <div class="modal-content" style="max-width: 500px; text-align: right;">
             <span class="close" onclick="closeModal('api-instructions-modal')">&times;</span>
-            <h2 style="color: var(--primary-color); margin-bottom: 15px;">Ø·Ø±ÙŠÙ‚Ø© Ø§Ù„Ø­ØµÙˆÙ„ Ø¹Ù„Ù‰ Ø§Ù„Ù…ÙØ§ØªÙŠØ­ Ø§Ù„Ù…Ø¬Ø§Ù†ÙŠØ© ðŸ”‘</h2>
+            <h2 style="color: var(--primary-color); margin-bottom: 15px;">طريقة الحصول على المفاتيح المجانية 🔑</h2>
 
             <div style="background: rgba(0, 229, 255, 0.1); padding: 15px; border-radius: 8px; margin-bottom: 15px;">
-                <h3 style="color: var(--primary-color); margin-top: 0;">1. Ù…ÙØªØ§Ø­ Google Gemini</h3>
+                <h3 style="color: var(--primary-color); margin-top: 0;">1. مفتاح Google Gemini</h3>
                 <ol style="padding-right: 20px; font-size: 0.9rem; color: var(--text-main); margin-bottom: 0; line-height: 1.6;">
-                    <li>Ø§Ø¯Ø®Ù„ Ø¹Ù„Ù‰ Ù…ÙˆÙ‚Ø¹: <a href="https://aistudio.google.com/app/apikey" target="_blank" style="color:#00e5ff; font-weight:bold;">Google AI Studio</a></li>
-                    <li>Ø³Ø¬Ù„ Ø¯Ø®ÙˆÙ„ Ø¨Ø­Ø³Ø§Ø¨ Ø¬ÙˆØ¬Ù„ Ø¨ØªØ§Ø¹Ùƒ (Ù‡ØªÙ„Ø§Ù‚ÙŠ Ø²Ø±Ø§Ø± Create API Key).</li>
-                    <li>Ù„Ùˆ Ø¸Ù‡Ø±ØªÙ„Ùƒ Ø±Ø³Ø§Ù„Ø© Ø§Ø¶ØºØ· Get API key ÙˆØ¨Ø¹Ø¯ÙŠÙ† Create API key in new project.</li>
-                    <li>Ø§Ù†Ø³Ø® Ø§Ù„ÙƒÙˆØ¯ Ø§Ù„Ø·ÙˆÙŠÙ„ Ø§Ù„Ù„ÙŠ Ù‡ÙŠØ¸Ù‡Ø±ØŒ ÙˆØ§Ù„ØµÙ‚Ù‡ ÙÙŠ Ø§Ù„ØªØ·Ø¨ÙŠÙ‚.</li>
+                    <li>ادخل على موقع: <a href="https://aistudio.google.com/app/apikey" target="_blank" style="color:#00e5ff; font-weight:bold;">Google AI Studio</a></li>
+                    <li>سجل دخول بحساب جوجل بتاعك (هتلاقي زرار Create API Key).</li>
+                    <li>لو ظهرتلك رسالة اضغط Get API key وبعدين Create API key in new project.</li>
+                    <li>انسخ الكود الطويل اللي هيظهر، والصقه في التطبيق.</li>
                 </ol>
             </div>
 
             <div style="background: rgba(247, 127, 0, 0.1); padding: 15px; border-radius: 8px;">
-                <h3 style="color: #f77f00; margin-top: 0;">2. Ù…ÙØªØ§Ø­ Groq (Llama 3)</h3>
+                <h3 style="color: #f77f00; margin-top: 0;">2. مفتاح Groq (Llama 3)</h3>
                 <ol style="padding-right: 20px; font-size: 0.9rem; color: var(--text-main); margin-bottom: 0; line-height: 1.6;">
-                    <li>Ø§Ø¯Ø®Ù„ Ø¹Ù„Ù‰ Ù…ÙˆÙ‚Ø¹: <a href="https://console.groq.com/keys" target="_blank" style="color:#f77f00; font-weight:bold;">Groq Cloud</a></li>
-                    <li>Ø³Ø¬Ù„ Ø¯Ø®ÙˆÙ„ Ø¨Ø­Ø³Ø§Ø¨ Ø¬ÙˆØ¬Ù„ Ø£Ùˆ Ø¬ÙŠØª Ù‡Ø§Ø¨.</li>
-                    <li>Ø§Ø¶ØºØ· Ø¹Ù„Ù‰ <strong>Create API Key</strong>.</li>
-                    <li>Ø§ÙƒØªØ¨ Ø£ÙŠ Ø§Ø³Ù… (Ù…Ø«Ù„Ø§ StudyApp) ÙˆØ§Ù†Ø³Ø® Ø§Ù„Ù…ÙØªØ§Ø­.</li>
+                    <li>ادخل على موقع: <a href="https://console.groq.com/keys" target="_blank" style="color:#f77f00; font-weight:bold;">Groq Cloud</a></li>
+                    <li>سجل دخول بحساب جوجل أو جيت هاب.</li>
+                    <li>اضغط على <strong>Create API Key</strong>.</li>
+                    <li>اكتب أي اسم (مثلا StudyApp) وانسخ المفتاح.</li>
                 </ol>
             </div>
 
-            <button onclick="closeModal('api-instructions-modal')" class="btn btn-primary" style="width: 100%; margin-top: 20px;">ÙÙ‡Ù…ØªØŒ Ø´ÙƒØ±Ø§Ù‹!</button>
+            <button onclick="closeModal('api-instructions-modal')" class="btn btn-primary" style="width: 100%; margin-top: 20px;">فهمت، شكراً!</button>
         </div>
     </div>
 
@@ -1556,9 +1556,9 @@
                     
                     // Add encouraging dummy comments to jumpstart engagement
                     const fakeComments = [
-                        { name: "Ù†Ø¯Ù‰ Ù…Ø­Ù…Ø¯", text: "Ø¨Ø¬Ø¯ Ø§Ù„ØªØ·Ø¨ÙŠÙ‚ Ø¯Ù‡ Ø£Ù†Ù‚Ø°Ù†ÙŠ ÙÙŠ ØªÙ†Ø¸ÙŠÙ… ÙˆÙ‚ØªÙŠ! Ø´ÙƒØ±Ø§Ù‹ Ø¬Ø¯Ø§Ù‹ Ù„Ù„Ù…Ø¨Ø±Ù…Ø¬Ø© Ø§Ù„Ø¹Ø¨Ù‚Ø±ÙŠØ©ØŒ Ø±Ø¨Ù†Ø§ ÙŠÙˆÙÙ‚Ùƒ ÙˆÙŠØ³Ø¹Ø¯Ùƒ Ø²ÙŠ Ù…Ø§ Ø¨ØªØ³Ø¹Ø¯ÙŠÙ†Ø§ ÙˆØ¨ØªØ³Ù‡Ù„ÙŠ Ø¹Ù„ÙŠÙ†Ø§ Ø§Ù„Ù…Ø°Ø§ÙƒØ±Ø©. Ø¯Ø¹ÙˆØ§ØªÙŠ Ù„ÙŠÙƒÙŠ Ø¨Ø§Ù„ØªÙˆÙÙŠÙ‚ Ø¯ÙŠÙ…Ø§Ù‹ ÙŠØ§ Ø±Ø¨. ðŸŒ¸", timestamp: Date.now() - 86400000 },
-                        { name: "Ø¹Ù…Ø± Ø®Ø§Ù„Ø¯", text: "Ù…Ø¬Ù‡ÙˆØ¯ Ø¹Ø¸ÙŠÙ… ÙˆØ£ÙƒØªØ± Ù…ÙŠØ²Ø© Ø¨Ø­Ø¨Ù‡Ø§ Ù‡ÙŠ Ø§Ù„Ø°ÙƒØ§Ø¡ Ø§Ù„Ø§ØµØ·Ù†Ø§Ø¹ÙŠ ÙˆØ¬Ø¯ÙˆÙ„ Ø§Ù„Ù…Ø°Ø§ÙƒØ±Ø©.. Ø§Ø³ØªÙ…Ø±ÙŠ Ø¨Ø¬Ø¯!", timestamp: Date.now() - 172800000 },
-                        { name: "Ø³Ø§Ø±Ø© Ø£Ø­Ù…Ø¯", text: "Ø¬Ø²Ø§ÙƒÙ… Ø§Ù„Ù„Ù‡ Ø®ÙŠØ±Ø§Ù‹ Ø¹Ù„Ù‰ Ø§Ù„Ø¹Ù…Ù„ Ø¯Ù‡ØŒ ÙÙŠ Ù…ÙŠØ²Ø§Ù† Ø­Ø³Ù†Ø§ØªÙƒ Ø¥Ù† Ø´Ø§Ø¡ Ø§Ù„Ù„Ù‡. ðŸ¤²ðŸ»", timestamp: Date.now() - 259200000 }
+                        { name: "ندى محمد", text: "بجد التطبيق ده أنقذني في تنظيم وقتي! شكراً جداً للمبرمجة العبقرية، ربنا يوفقك ويسعدك زي ما بتسعدينا وبتسهلي علينا المذاكرة. دعواتي ليكي بالتوفيق ديماً يا رب. 🌸", timestamp: Date.now() - 86400000 },
+                        { name: "عمر خالد", text: "مجهود عظيم وأكتر ميزة بحبها هي الذكاء الاصطناعي وجدول المذاكرة.. استمري بجد!", timestamp: Date.now() - 172800000 },
+                        { name: "سارة أحمد", text: "جزاكم الله خيراً على العمل ده، في ميزان حسناتك إن شاء الله. 🤲🏻", timestamp: Date.now() - 259200000 }
                     ];
                     
                     commentsArr = [...commentsArr, ...fakeComments];
@@ -1579,29 +1579,29 @@
                         div.style.animationDelay = `${delay}s`;
                         
                         // Sanitize text
-                        const safeName = comment.name ? comment.name.replace(/</g, "&lt;") : "Ø·Ø§Ù„Ø¨/Ø·Ø§Ù„Ø¨Ø©";
+                        const safeName = comment.name ? comment.name.replace(/</g, "&lt;") : "طالب/طالبة";
                         const safeText = comment.text ? comment.text.replace(/</g, "&lt;") : "";
                         
-                        let dateString = "Ø§Ù„Ø¢Ù†";
+                        let dateString = "الآن";
                         if (comment.timestamp) {
                             const diffMs = Date.now() - comment.timestamp;
                             const diffMins = Math.floor(diffMs / 60000);
                             const diffHours = Math.floor(diffMs / 3600000);
                             const diffDays = Math.floor(diffMs / 86400000);
                             
-                            if (diffMins < 1) dateString = "Ø§Ù„Ø¢Ù†";
-                            else if (diffMins === 1) dateString = "Ù‚Ø¨Ù„ Ø¯Ù‚ÙŠÙ‚Ø©";
-                            else if (diffMins === 2) dateString = "Ù‚Ø¨Ù„ Ø¯Ù‚ÙŠÙ‚ØªÙŠÙ†";
-                            else if (diffMins < 11) dateString = "Ù‚Ø¨Ù„ " + diffMins + " Ø¯Ù‚Ø§Ø¦Ù‚";
-                            else if (diffMins < 60) dateString = "Ù‚Ø¨Ù„ " + diffMins + " Ø¯Ù‚ÙŠÙ‚Ø©";
-                            else if (diffHours === 1) dateString = "Ù‚Ø¨Ù„ Ø³Ø§Ø¹Ø©";
-                            else if (diffHours === 2) dateString = "Ù‚Ø¨Ù„ Ø³Ø§Ø¹ØªÙŠÙ†";
-                            else if (diffHours < 11) dateString = "Ù‚Ø¨Ù„ " + diffHours + " Ø³Ø§Ø¹Ø§Øª";
-                            else if (diffHours < 24) dateString = "Ù‚Ø¨Ù„ " + diffHours + " Ø³Ø§Ø¹Ø©";
-                            else if (diffDays === 1) dateString = "Ù‚Ø¨Ù„ ÙŠÙˆÙ…";
-                            else if (diffDays === 2) dateString = "Ù‚Ø¨Ù„ ÙŠÙˆÙ…ÙŠÙ†";
-                            else if (diffDays < 11) dateString = "Ù‚Ø¨Ù„ " + diffDays + " Ø£ÙŠØ§Ù…";
-                            else if (diffDays < 30) dateString = "Ù‚Ø¨Ù„ " + diffDays + " ÙŠÙˆÙ…";
+                            if (diffMins < 1) dateString = "الآن";
+                            else if (diffMins === 1) dateString = "قبل دقيقة";
+                            else if (diffMins === 2) dateString = "قبل دقيقتين";
+                            else if (diffMins < 11) dateString = "قبل " + diffMins + " دقائق";
+                            else if (diffMins < 60) dateString = "قبل " + diffMins + " دقيقة";
+                            else if (diffHours === 1) dateString = "قبل ساعة";
+                            else if (diffHours === 2) dateString = "قبل ساعتين";
+                            else if (diffHours < 11) dateString = "قبل " + diffHours + " ساعات";
+                            else if (diffHours < 24) dateString = "قبل " + diffHours + " ساعة";
+                            else if (diffDays === 1) dateString = "قبل يوم";
+                            else if (diffDays === 2) dateString = "قبل يومين";
+                            else if (diffDays < 11) dateString = "قبل " + diffDays + " أيام";
+                            else if (diffDays < 30) dateString = "قبل " + diffDays + " يوم";
                             else dateString = new Date(comment.timestamp).toLocaleDateString('ar-EG', { year: 'numeric', month: 'short', day: 'numeric' });
                         }
 
@@ -1623,19 +1623,19 @@
                 form.addEventListener('submit', (e) => {
                     e.preventDefault();
                     const btn = form.querySelector('button');
-                    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Ø¬Ø§Ø±ÙŠ Ø§Ù„Ù†Ø´Ø±...';
+                    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> جاري النشر...';
                     btn.disabled = true;
 
-                    const nameInput = document.getElementById('comment-name').value.trim() || 'ÙØ§Ø¹Ù„ Ø®ÙŠØ±';
+                    const nameInput = document.getElementById('comment-name').value.trim() || 'فاعل خير';
                     const textInput = document.getElementById('comment-text').value.trim();
 
                     if (!textInput) return;
 
                     // Add a timeout to catch connection issues
                     const timeout = setTimeout(() => {
-                        btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Ù†Ø´Ø± Ø§Ù„Ø±Ø³Ø§Ù„Ø©';
+                        btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> نشر الرسالة';
                         btn.disabled = false;
-                        alert("Ø¹ÙÙˆØ§Ù‹ØŒ Ø§Ù„Ø§ØªØµØ§Ù„ Ø¨Ù‚Ø§Ø¹Ø¯Ø© Ø§Ù„Ø¨ÙŠØ§Ù†Ø§Øª Ø¶Ø¹ÙŠÙ Ø£Ùˆ Ù…ÙÙ‚ÙˆØ¯. ÙŠØ±Ø¬Ù‰ Ø§Ù„Ù…Ø­Ø§ÙˆÙ„Ø© Ù„Ø§Ø­Ù‚Ø§Ù‹.");
+                        alert("عفواً، الاتصال بقاعدة البيانات ضعيف أو مفقود. يرجى المحاولة لاحقاً.");
                     }, 10000);
 
                     push(commentsRef, {
@@ -1645,12 +1645,12 @@
                     }).then(() => {
                         clearTimeout(timeout);
                         form.reset();
-                        btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Ù†Ø´Ø± Ø§Ù„Ø±Ø³Ø§Ù„Ø©';
+                        btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> نشر الرسالة';
                         btn.disabled = false;
                     }).catch((error) => {
                         console.error("Firebase Error: ", error);
-                        alert("Ø¹ÙÙˆØ§Ù‹ØŒ Ø­Ø¯Ø« Ø®Ø·Ø£. ØªØ£ÙƒØ¯ÙŠ Ø¥Ù†Ùƒ Ø¹Ù…Ù„ØªÙŠ Ù‚Ø§Ø¹Ø¯Ø© Ø§Ù„Ø¨ÙŠØ§Ù†Ø§Øª (Realtime Database) ÙÙŠ ÙˆØ¶Ø¹ Ø§Ù„Ø§Ø®ØªØ¨Ø§Ø± (Test Mode) ÙˆØ¥Ù† Ø§Ù„Ù‚ÙˆØ§Ø¹Ø¯ Ø¨ØªØ³Ù…Ø­ Ø¨Ø§Ù„ÙƒØªØ§Ø¨Ø©.");
-                        btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Ù†Ø´Ø± Ø§Ù„Ø±Ø³Ø§Ù„Ø©';
+                        alert("عفواً، حدث خطأ. تأكدي إنك عملتي قاعدة البيانات (Realtime Database) في وضع الاختبار (Test Mode) وإن القواعد بتسمح بالكتابة.");
+                        btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> نشر الرسالة';
                         btn.disabled = false;
                     });
                 });
@@ -1670,57 +1670,56 @@
     <!-- Nightstand Screensaver -->
     <div id="nightstand-mode" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: black; z-index: 999999; flex-direction: column; justify-content: center; align-items: center; cursor: pointer;">
         <h1 id="nightstand-time" style="color: var(--primary-color); font-size: 5rem; font-family: monospace; text-shadow: 0 0 20px rgba(0, 229, 255,0.5); margin:0;">00:00</h1>
-        <p style="color: #888; font-size: 1.5rem; margin-top: 10px;">Ø§Ù„Ù…Ù†Ø¨Ù‡ ÙŠØ¹Ù…Ù„ ÙÙŠ Ø§Ù„Ø®Ù„ÙÙŠØ© â°</p>
-        <p style="color: #555; margin-top: 2rem; font-size: 1.2rem;">(Ø§Ø¶ØºØ· ÙÙŠ Ø£ÙŠ Ù…ÙƒØ§Ù† Ù„Ù„Ø¥Ù„ØºØ§Ø¡ ÙˆØ§Ù„Ø¹ÙˆØ¯Ø©)</p>
-        <p style="color: #444; font-size: 0.9rem; position: absolute; bottom: 30px; text-align: center; padding: 0 20px;">Ø§Ù„Ø±Ø¬Ø§Ø¡ ØªØ±Ùƒ Ø§Ù„Ù‡Ø§ØªÙ Ù…ÙˆØµÙ„Ø§Ù‹ Ø¨Ø§Ù„Ø´Ø§Ø­Ù† ÙˆØ¹Ø¯Ù… Ù‚ÙÙ„ Ø§Ù„Ø´Ø§Ø´Ø© ÙŠØ¯ÙˆÙŠØ§Ù‹.<br>Ù‡Ø°Ù‡ Ø§Ù„Ø´Ø§Ø´Ø© Ø§Ù„Ø³ÙˆØ¯Ø§Ø¡ Ù…ÙˆÙØ±Ø© Ø¬Ø¯Ø§Ù‹ Ù„Ù„Ø¨Ø·Ø§Ø±ÙŠØ© ÙˆØªØ¶Ù…Ù† Ø±Ù†ÙŠÙ† Ø§Ù„Ù…Ù†Ø¨Ù‡ Ø¨Ù‚ÙˆØ©.</p>
+        <p style="color: #888; font-size: 1.5rem; margin-top: 10px;">المنبه يعمل في الخلفية ⏰</p>
+        <p style="color: #555; margin-top: 2rem; font-size: 1.2rem;">(اضغط في أي مكان للإلغاء والعودة)</p>
+        <p style="color: #444; font-size: 0.9rem; position: absolute; bottom: 30px; text-align: center; padding: 0 20px;">الرجاء ترك الهاتف موصلاً بالشاحن وعدم قفل الشاشة يدوياً.<br>هذه الشاشة السوداء موفرة جداً للبطارية وتضمن رنين المنبه بقوة.</p>
     </div>
 
 
     <!-- What's New Modal -->
     <div id="whats-new-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.8); z-index: 10000; justify-content: center; align-items: center; backdrop-filter: blur(5px);">
         <div style="background: var(--card-bg); padding: 2rem; border-radius: 20px; max-width: 90%; width: 500px; border: 2px solid #00e5ff; box-shadow: 0 10px 30px rgba(0, 229, 255,0.3); animation: slideUpGlow 0.5s ease;">
-            <h2 style="color: var(--primary-color); margin-top: 0; text-align: center;"><i class="fa-solid fa-bullhorn" style="color: #feca57; font-size: 2rem; margin-bottom:10px; display:block;"></i>ØªØ­Ø¯ÙŠØ« Ø¬Ø¯ÙŠØ¯ ÙˆØµÙ„!</h2>
-            <p style="color: var(--text-muted); text-align: center; font-size: 1rem; margin-bottom: 2rem;">Ø¶ÙÙ†Ø§ Ù…Ù…ÙŠØ²Ø§Øª Ø®Ø±Ø§ÙÙŠØ© Ø¹Ø´Ø§Ù† Ù†Ø³Ø§Ø¹Ø¯Ùƒ ØªØ°Ø§ÙƒØ± Ø£Ø­Ø³Ù† ÙˆØªÙƒØ³Ø± Ø§Ù„Ù…Ù„Ù„!</p>
+            <h2 style="color: var(--primary-color); margin-top: 0; text-align: center;"><i class="fa-solid fa-bullhorn" style="color: #feca57; font-size: 2rem; margin-bottom:10px; display:block;"></i>تحديث جديد وصل!</h2>
+            <p style="color: var(--text-muted); text-align: center; font-size: 1rem; margin-bottom: 2rem;">ضفنا مميزات خرافية عشان نساعدك تذاكر أحسن وتكسر الملل!</p>
             <div style="display: flex; flex-direction: column; gap: 1.2rem;">
                 
                 <div style="display: flex; gap: 1rem; align-items: flex-start;">
                     <div style="background: rgba(254, 202, 87, 0.2); padding: 10px; border-radius: 12px; width: 45px; text-align: center;"><i class="fa-solid fa-star" style="color: #feca57; font-size: 1.3rem;"></i></div>
                     <div>
-                        <strong style="color: var(--text-main); font-size: 1.1rem;">Ø­Ù„Ù…Ùƒ Ù‚Ø¯Ø§Ù… Ø¹ÙŠÙ†Ùƒ âœ¨</strong>
-                        <p style="color: var(--text-muted); margin: 5px 0 0 0; font-size: 0.95rem; line-height: 1.5;">ØµÙ†Ø¯ÙˆÙ‚ Ø¬Ø¯ÙŠØ¯ ÙÙŠ Ø§Ù„Ø±Ø¦ÙŠØ³ÙŠØ©ØŒ Ø§ÙƒØªØ¨ ÙÙŠÙ‡ Ø­Ù„Ù…Ùƒ (Ù…Ø«Ù„Ø§Ù‹: Ø¯ÙƒØªÙˆØ±Ø©) Ø¹Ø´Ø§Ù† ÙŠÙØ¶Ù„ Ø¯Ø§ÙŠÙ…Ø§Ù‹ ÙŠØ­ÙØ²Ùƒ.</p>
+                        <strong style="color: var(--text-main); font-size: 1.1rem;">حلمك قدام عينك ✨</strong>
+                        <p style="color: var(--text-muted); margin: 5px 0 0 0; font-size: 0.95rem; line-height: 1.5;">صندوق جديد في الرئيسية، اكتب فيه حلمك (مثلاً: دكتورة) عشان يفضل دايماً يحفزك.</p>
                     </div>
                 </div>
 
                 <div style="display: flex; gap: 1rem; align-items: flex-start;">
                     <div style="background: rgba(0, 229, 255, 0.2); padding: 10px; border-radius: 12px; width: 45px; text-align: center;"><i class="fa-solid fa-bell" style="color: var(--primary-color); font-size: 1.3rem;"></i></div>
                     <div>
-                        <strong style="color: var(--text-main); font-size: 1.1rem;">Ø¥Ø´Ø¹Ø§Ø±Ø§Øª Ø§Ù„ØµÙ„Ø§Ø© ÙˆØ§Ù„ØªØ­ÙÙŠØ² ðŸ””</strong>
-                        <p style="color: var(--text-muted); margin: 5px 0 0 0; font-size: 0.95rem; line-height: 1.5;">ÙØ¹Ù„Ù‡Ø§ Ù…Ù† Ø§Ù„Ù‚Ø§Ø¦Ù…Ø© Ø§Ù„Ø¬Ø§Ù†Ø¨ÙŠØ© (Ø§Ù„Ø¥Ø´Ø¹Ø§Ø±Ø§Øª Ø§Ù„Ø°ÙƒÙŠØ©)ØŒ ÙˆÙ‡ÙŠØ¨Ø¹ØªÙ„Ùƒ Ø±Ø³Ø§ÙŠÙ„ ØªØ´Ø¬ÙŠØ¹ ÙˆÙ…ÙˆØ§Ø¹ÙŠØ¯ ØµÙ„Ø§Ø©!</p>
+                        <strong style="color: var(--text-main); font-size: 1.1rem;">إشعارات الصلاة والتحفيز 🔔</strong>
+                        <p style="color: var(--text-muted); margin: 5px 0 0 0; font-size: 0.95rem; line-height: 1.5;">فعلها من القائمة الجانبية (الإشعارات الذكية)، وهيبعتلك رسايل تشجيع ومواعيد صلاة!</p>
                     </div>
                 </div>
 
                 <div style="display: flex; gap: 1rem; align-items: flex-start;">
                     <div style="background: rgba(0, 206, 201, 0.2); padding: 10px; border-radius: 12px; width: 45px; text-align: center;"><i class="fa-solid fa-gamepad" style="color: #00cec9; font-size: 1.3rem;"></i></div>
                     <div>
-                        <strong style="color: var(--text-main); font-size: 1.1rem;">ØªØ­Ø¯ÙŠØ§Øª Ø§Ù„Ù…Ø°Ø§ÙƒØ±Ø© ðŸŽ®</strong>
-                        <p style="color: var(--text-muted); margin: 5px 0 0 0; font-size: 0.95rem; line-height: 1.5;">Ø²Ù‡Ù‚ØªØŸ Ø¬Ø±Ø¨ "ØªØ­Ø¯ÙŠ ÙƒÙˆØ¨Ø§ÙŠØ© Ø§Ù„ØªÙ„Ø¬" Ø£Ùˆ "Ø±Ø­Ù„Ø© Ø§Ù„Ø·ÙŠØ±Ø§Ù†" Ù…Ù† Ø§Ù„Ù‚Ø§Ø¦Ù…Ø© Ø§Ù„Ø¬Ø§Ù†Ø¨ÙŠØ©.</p>
+                        <strong style="color: var(--text-main); font-size: 1.1rem;">تحديات المذاكرة 🎮</strong>
+                        <p style="color: var(--text-muted); margin: 5px 0 0 0; font-size: 0.95rem; line-height: 1.5;">زهقت؟ جرب "تحدي كوباية التلج" أو "رحلة الطيران" من القائمة الجانبية.</p>
                     </div>
                 </div>
 
                 <div style="display: flex; gap: 1rem; align-items: flex-start;">
                     <div style="background: rgba(0, 229, 255, 0.2); padding: 10px; border-radius: 12px; width: 45px; text-align: center;"><i class="fa-solid fa-moon" style="color: #00e5ff; font-size: 1.3rem;"></i></div>
                     <div>
-                        <strong style="color: var(--text-main); font-size: 1.1rem;">ÙˆØ¶Ø¹ Ø§Ù„Ù†ÙˆÙ… Ù„Ù„Ù…Ù†Ø¨Ù‡ ðŸŒ™</strong>
-                        <p style="color: var(--text-muted); margin: 5px 0 0 0; font-size: 0.95rem; line-height: 1.5;">Ø¹Ø´Ø§Ù† ØªØ¶Ù…Ù† Ø¥Ù† Ø§Ù„Ù…Ù†Ø¨Ù‡ ÙŠØ±Ù† Ø§Ù„ØµØ¨Ø­.. ÙØ¹Ù„ "ÙˆØ¶Ø¹ Ø§Ù„Ù†ÙˆÙ…" ÙˆØ³ÙŠØ¨ Ø§Ù„Ù…ÙˆØ¨Ø§ÙŠÙ„ Ø¹Ù„Ù‰ Ø§Ù„Ø´Ø§Ø­Ù†.</p>
+                        <strong style="color: var(--text-main); font-size: 1.1rem;">وضع النوم للمنبه 🌙</strong>
+                        <p style="color: var(--text-muted); margin: 5px 0 0 0; font-size: 0.95rem; line-height: 1.5;">عشان تضمن إن المنبه يرن الصبح.. فعل "وضع النوم" وسيب الموبايل على الشاحن.</p>
                     </div>
                 </div>
             </div>
-            <button onclick="closeWhatsNew()" class="theme-btn btn-hover-glow" style="width: 100%; background: linear-gradient(135deg, #00e5ff, #00b8cc); color: white; padding: 1rem; border-radius: 10px; font-size: 1.2rem; font-weight: bold; border: none; cursor: pointer; margin-top: 2rem;">ÙŠÙ„Ø§ Ù†Ø¬Ø±Ø¨! ðŸš€</button>
+            <button onclick="closeWhatsNew()" class="theme-btn btn-hover-glow" style="width: 100%; background: linear-gradient(135deg, #00e5ff, #00b8cc); color: white; padding: 1rem; border-radius: 10px; font-size: 1.2rem; font-weight: bold; border: none; cursor: pointer; margin-top: 2rem;">يلا نجرب! 🚀</button>
         </div>
     </div>
 
 </body>
 
 </html>
-
 
