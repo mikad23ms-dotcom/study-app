@@ -1179,3 +1179,43 @@ body[data-theme="dark"]::after {
         box-shadow: none !important;
     }
 }
+
+/* ========================================================= */
+/* --- CHALLENGES FLEXBOX SYSTEM (بوكسات التحديات بجانب بعض) --- */
+/* ========================================================= */
+.challenges-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+    align-items: stretch;
+}
+
+.challenges-grid .card {
+    flex: 1 1 calc(50% - 1.5rem);
+    min-width: 320px;
+    max-width: 580px;
+    margin-bottom: 0 !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+    border-radius: 14px;
+}
+
+.challenges-grid .card:hover {
+    transform: translateY(-6px) !important;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15) !important;
+}
+
+@media (max-width: 768px) {
+    .challenges-grid {
+        gap: 1rem;
+    }
+    .challenges-grid .card {
+        flex: 1 1 100% !important;
+        max-width: 100% !important;
+        min-width: unset !important;
+    }
+}
+

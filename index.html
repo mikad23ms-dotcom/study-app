@@ -1057,7 +1057,7 @@
     
         <!-- Unconventional Challenges Section -->
         <section id="challenges" class="page">
-            <div style="max-width: 800px; margin: 2rem auto; padding: 0 1rem;">
+            <div style="max-width: 1200px; margin: 2rem auto; padding: 0 1rem;">
                 <div style="text-align: center; margin-bottom: 2rem;" class="hover-glow-box">
                     <i class="fa-solid fa-gamepad" style="font-size: 3rem; color: var(--primary-color); margin-bottom: 1rem;"></i>
                     <h2 style="color: var(--primary-color); font-family: 'Tajawal', sans-serif;">تحديات المذاكرة المجنونة 🎮</h2>
@@ -1066,6 +1066,7 @@
                     </p>
                 </div>
 
+                <div class="challenges-grid">
                 <!-- Ice Cube Challenge -->
                 <div class="card hover-glow-box" style="margin-bottom: 1.5rem; border-left: 4px solid #00e5ff;">
                     <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
@@ -1301,6 +1302,7 @@
                         <button onclick="startAntChallenge()" id="ant-btn" class="theme-btn btn-hover-glow" style="background: linear-gradient(135deg, #e74c3c, #c0392b); color: white; border: none; padding: 0.8rem 2rem; border-radius: 10px; font-size: 1.1rem;"><i class="fa-solid fa-play"></i> ابدأ التحدي</button>
                     </div>
                 </div>
+                </div> <!-- End challenges-grid -->
 
             </div>
         </section>
@@ -1309,6 +1311,64 @@
     </div>
 
     <!-- Modals -->
+    <!-- City Selection Modal -->
+    <div id="city-modal" class="modal">
+        <div class="modal-content" style="max-width: 460px; text-align: right; border-top: 5px solid var(--primary-color);">
+            <span class="close" onclick="closeModal('city-modal')">&times;</span>
+            <h2 style="color: var(--primary-color); margin-top: 0; display: flex; align-items: center; gap: 10px; font-size: 1.3rem;">
+                <i class="fa-solid fa-mosque"></i> تحديد المدينة / المحافظة
+            </h2>
+            <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.5; margin-bottom: 15px;">
+                اختر محافظتك لحساب مواقيت الصلاة بدقة تامة ومطابقة لهيئة المساحة المصرية ودار الإفتاء 🕌
+            </p>
+            
+            <button onclick="detectGPSLocation()" class="theme-btn btn-hover-glow" style="width: 100%; margin-bottom: 15px; padding: 12px; background: linear-gradient(135deg, #00e5ff, #00b894); color: white; border: none; border-radius: 10px; font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer;">
+                <i class="fa-solid fa-location-crosshairs"></i> تحديد موقعي تلقائياً (GPS)
+            </button>
+            
+            <div style="margin-bottom: 15px;">
+                <label style="font-weight: bold; display: block; margin-bottom: 8px; color: var(--text-main);">أو اختر المحافظة في مصر:</label>
+                <select id="city-select-input" class="search-input" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--bg-color); color: var(--text-main); font-family: 'Tajawal';" onchange="selectCityFromDropdown(this.value)">
+                    <option value="Cairo">القاهرة</option>
+                    <option value="Giza">الجيزة</option>
+                    <option value="Alexandria">الإسكندرية</option>
+                    <option value="Mansoura">المنصورة (الدقهلية)</option>
+                    <option value="Tanta">طنطا (الغربية)</option>
+                    <option value="Zagazig">الزقازيق (الشرقية)</option>
+                    <option value="Banha">بنها (القليوبية)</option>
+                    <option value="Shebin">شبين الكوم (المنوفية)</option>
+                    <option value="Damanhour">دمنهور (البحيرة)</option>
+                    <option value="Damietta">دمياط</option>
+                    <option value="KafrElSheikh">كفر الشيخ</option>
+                    <option value="PortSaid">بورسعيد</option>
+                    <option value="Ismailia">الإسماعيلية</option>
+                    <option value="Suez">السويس</option>
+                    <option value="Fayoum">الفيوم</option>
+                    <option value="BeniSuef">بني سويف</option>
+                    <option value="Minya">المنيا</option>
+                    <option value="Asyut">أسيوط</option>
+                    <option value="Sohag">سوهاج</option>
+                    <option value="Qena">قنا</option>
+                    <option value="Luxor">الأقصر</option>
+                    <option value="Aswan">أسوان</option>
+                    <option value="RedSea">الغردقة (البحر الأحمر)</option>
+                    <option value="SouthSinai">شرم الشيخ (جنوب سيناء)</option>
+                    <option value="NorthSinai">العريش (شمال سيناء)</option>
+                    <option value="Matrouh">مرسى مطروح</option>
+                    <option value="NewValley">الخارجة (الوادي الجديد)</option>
+                </select>
+            </div>
+            
+            <div style="border-top: 1px solid var(--border-color); padding-top: 12px; margin-top: 15px;">
+                <label style="font-size: 0.85rem; color: var(--text-muted); display: block; margin-bottom: 6px;">خارج مصر؟ اكتب مدينتك أو دولتك:</label>
+                <div style="display: flex; gap: 8px;">
+                    <input type="text" id="custom-city-input" placeholder="مثال: Riyadh أو Dubai" class="search-input" style="flex: 1; padding: 8px 12px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--bg-color); color: var(--text-main);">
+                    <button onclick="applyCustomCity()" class="btn" style="background: var(--primary-color); color: white; padding: 8px 15px; border-radius: 8px; border: none; cursor: pointer; font-weight: bold;">تطبيق</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Admin User Details Modal -->
     <div id="admin-user-modal" class="modal">
         <div class="modal-content" style="max-width: 600px; max-height: 90vh; overflow-y: auto;">
