@@ -11,7 +11,8 @@
     <!-- PWA Setup -->
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#00e5ff">
-    <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/3429/3429930.png">
+    <link rel="icon" type="image/png" href="icons/app-icon.png">
+    <link rel="apple-touch-icon" href="icons/app-icon.png">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
@@ -238,6 +239,7 @@
                 <li data-page="exams"><i class="fa-solid fa-file-signature"></i> الامتحانات</li>
                 <li data-page="flashcards"><i class="fa-solid fa-layer-group"></i> البطاقات (Flashcards)</li>
                 <li data-page="ai-assistant"><i class="fa-solid fa-robot"></i> المساعد الذكي 🌟</li>
+                <li data-page="notebook-ai"><i class="fa-solid fa-book-open-reader" style="color: #00e5ff;"></i> استوديو الكتب (Notebook AI) 📖 <span style="background:linear-gradient(135deg,#00e5ff,#ff007f); color:#fff; font-size:0.65rem; padding:2px 6px; border-radius:10px; margin-right:4px; font-weight:bold;">جديد 🔥</span></li>
                 <li data-page="backlog"><i class="fa-solid fa-boxes-stacked"></i> لمّ المتراكم 📦</li>
                 <li data-page="quiz"><i class="fa-solid fa-clipboard-question"></i> اختبر نفسك 🧪</li>
                 <li data-page="statistics"><i class="fa-solid fa-chart-simple"></i> إحصائيات المذاكرة 📊</li>
@@ -246,6 +248,7 @@
                 <li data-page="notifications-settings"><i class="fa-solid fa-bell" style="color: #feca57;"></i> الإشعارات الذكية 🔔</li>
                 <li data-page="challenges"><i class="fa-solid fa-gamepad" style="color: var(--primary-color);"></i> تحديات المذاكرة 🎮</li>
                 <li data-page="comments-wall"><i class="fa-solid fa-comments" style="color: var(--primary-color);"></i> كلمة تشجعني ✨</li>
+                <li onclick="openWhatsNew()" style="cursor: pointer; background: rgba(0, 229, 255, 0.08); border-radius: 8px; margin-top: 5px;"><i class="fa-solid fa-bullhorn" style="color: #00e5ff;"></i> مميزات التحديث الجديد 🚀</li>
                 <li data-page="admin" id="nav-admin" style="display:none;"></li>
             </ul>
             <div class="sidebar-footer">
@@ -275,8 +278,34 @@
                 <button class="icon-btn" onclick="toggleSidebar()"><i class="fa-solid fa-bars"></i></button>
             </div>
         </div>
-                        <!-- Teacher Dashboard Page -->
-            <section id="teacher-dashboard" class="page">
+
+        <!-- APK Download Banner for Web/PWA Users -->
+        <div id="apk-promo-banner" class="apk-promo-banner" style="display: none;">
+            <div class="apk-promo-content">
+                <img src="icons/app-icon.png" alt="أيقونة تطبيق المذاكرة" class="apk-promo-icon">
+                <div class="apk-promo-text">
+                    <h4>
+                        <span>تطبيق الأندرويد متوفر الآن!</span>
+                        <span class="apk-promo-badge">جديد 🚀</span>
+                    </h4>
+                    <p>حمّل تطبيق الأندرويد لتصلك إشعارات الصلاة والتحفيز حتى لو التطبيق مقفول تماماً!</p>
+                </div>
+            </div>
+            <div class="apk-promo-actions">
+                <a href="study-app.apk" download="study-app.apk" class="apk-download-btn">
+                    <i class="fa-solid fa-download"></i>
+                    <span>تحميل (APK)</span>
+                </a>
+                <button onclick="openWhatsNew()" class="btn" style="background: rgba(0, 229, 255, 0.15); color: #00e5ff; border: 1px solid rgba(0, 229, 255, 0.5); padding: 0.65rem 1rem; border-radius: 12px; font-weight: 700; font-size: 0.88rem; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;">
+                    <i class="fa-solid fa-circle-info"></i>
+                    <span>تفاصيل التحديث</span>
+                </button>
+                <button class="apk-close-btn" onclick="dismissApkBanner()" title="إغلاق"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+        </div>
+
+        <!-- Teacher Dashboard Page -->
+        <section id="teacher-dashboard" class="page">
                 <header>
                     <div>
                         <h1>لوحة المدرسين <i class="fa-solid fa-chalkboard-user text-primary"></i></h1>
@@ -670,6 +699,252 @@
                         </div>
                         <div id="ai-result-content"></div>
                         <div id="mermaid-container" style="margin-top: 20px; background: white; padding: 10px; border-radius: 8px; overflow-x: auto; text-align: center; color: black !important;"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Notebook AI (Interactive PDF, Summary, Chat & 2-Speaker Podcast) -->
+            <section id="notebook-ai" class="page">
+                <header>
+                    <div>
+                        <div style="display:flex; align-items:center; gap:10px; margin-bottom:6px;">
+                            <span class="badge-pill" style="background:linear-gradient(135deg, #00e5ff, #0088ff); color:#031024; font-weight:800; font-size:0.75rem; padding:4px 12px; border-radius:20px;">NotebookLM AI 🧠</span>
+                            <span style="color:var(--text-muted); font-size:0.85rem;">مستوحى من Google NotebookLM</span>
+                        </div>
+                        <h1>استوديو الكتب والمذكرات الذكي 📖✨</h1>
+                        <p style="color:var(--text-muted); margin:0;">ارفع أي كتاب أو ملزمة PDF، ولخصها، اتكلم مع الكتاب في شات، واسمعها كـ بودكاست صوتي بين شخصين!</p>
+                    </div>
+                </header>
+
+                <!-- Source / File Upload Card -->
+                <div class="card nb-source-card" style="margin-bottom:25px; border:1px solid rgba(0,229,255,0.25); background:linear-gradient(135deg, rgba(6,17,36,0.7), rgba(13,38,80,0.7));">
+                    <div class="nb-upload-dropzone" id="nb-dropzone" onclick="document.getElementById('nb-file-input').click()">
+                        <input type="file" id="nb-file-input" accept=".pdf,text/plain" style="display:none;" onchange="handleNotebookFileUpload(this.files[0])">
+                        <div class="nb-dropzone-icon">
+                            <i class="fa-solid fa-file-pdf" style="font-size:3rem; color:#ff4757;"></i>
+                            <i class="fa-solid fa-wand-magic-sparkles" style="font-size:1.4rem; color:#00e5ff; position:relative; top:-15px; right:-8px;"></i>
+                        </div>
+                        <h3 style="margin:10px 0 6px 0; color:#fff;">اضغط لرفع كتاب أو ملزمة PDF (أو اسحب الملف هنا)</h3>
+                        <p style="color:var(--text-muted); font-size:0.9rem; margin:0;">يدعم ملفات PDF والملازم المكتوبة باللغة العربية أو الإنجليزية</p>
+                    </div>
+
+                    <!-- Direct paste or demo options -->
+                    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-top:15px; padding-top:15px; border-top:1px solid rgba(255,255,255,0.08);">
+                        <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+                            <span style="color:var(--text-muted); font-size:0.85rem;">أو جرب درس جاهز:</span>
+                            <button class="btn btn-sm" onclick="loadNotebookDemo('atomic_habits')" style="background:rgba(0,229,255,0.1); color:#00e5ff; border:1px solid rgba(0,229,255,0.25); border-radius:8px; font-size:0.8rem; padding:4px 10px;">
+                                📘 كتاب العادات الذرية
+                            </button>
+                            <button class="btn btn-sm" onclick="loadNotebookDemo('biology_cells')" style="background:rgba(46,213,115,0.1); color:#2ed573; border:1px solid rgba(46,213,115,0.25); border-radius:8px; font-size:0.8rem; padding:4px 10px;">
+                                🧬 ملزمة الأحياء (الخلية)
+                            </button>
+                        </div>
+                        <button class="btn btn-sm" onclick="toggleNotebookTextInput()" style="background:transparent; color:var(--text-muted); border:1px dashed var(--border-color); border-radius:8px; font-size:0.8rem; padding:4px 10px;">
+                            <i class="fa-solid fa-paste"></i> لصق نص مكتوب يدوياً
+                        </button>
+                    </div>
+
+                    <!-- Hidden text paste box -->
+                    <div id="nb-text-input-box" style="display:none; margin-top:15px;">
+                        <textarea id="nb-raw-text" class="search-input" rows="4" style="width:100%; border-radius:10px; resize:vertical;" placeholder="الصق نص المحاضرة أو الدرس هنا مباشرة..."></textarea>
+                        <div style="text-align:left; margin-top:8px;">
+                            <button class="btn btn-primary btn-sm" onclick="handleNotebookRawText()">تحليل النص المكتوب 🚀</button>
+                        </div>
+                    </div>
+
+                    <!-- Loaded Document Info Bar -->
+                    <div id="nb-doc-info" style="display:none; margin-top:15px; padding:12px 16px; background:rgba(0,229,255,0.08); border-radius:10px; border:1px solid rgba(0,229,255,0.3); align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;">
+                        <div style="display:flex; align-items:center; gap:10px;">
+                            <i class="fa-solid fa-circle-check" style="color:#2ed573; font-size:1.3rem;"></i>
+                            <div>
+                                <strong id="nb-doc-title" style="color:#fff; font-size:0.95rem;">اسم الملف</strong>
+                                <div id="nb-doc-meta" style="color:var(--text-muted); font-size:0.8rem;">0 صفحة | 0 كلمة</div>
+                            </div>
+                        </div>
+                        <button class="btn btn-sm" onclick="clearNotebookDocument()" style="background:rgba(255,71,87,0.15); color:#ff4757; border:none; border-radius:8px; padding:5px 10px;">
+                            <i class="fa-solid fa-trash"></i> إزالة الملف
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Notebook Main Tabs (Summary, Chat, Podcast) -->
+                <div class="nb-tabs-container">
+                    <div class="nb-nav-tabs">
+                        <button class="nb-tab-btn active" onclick="switchNotebookTab('nb-summary-tab')">
+                            <i class="fa-solid fa-list-check"></i>
+                            <span>الملخص والأفكار الرئيسية</span>
+                        </button>
+                        <button class="nb-tab-btn" onclick="switchNotebookTab('nb-chat-tab')">
+                            <i class="fa-solid fa-comments"></i>
+                            <span>شات تفاعلي مع الكتاب</span>
+                        </button>
+                        <button class="nb-tab-btn" onclick="switchNotebookTab('nb-podcast-tab')">
+                            <i class="fa-solid fa-podcast"></i>
+                            <span>بودكاست صوتي (شخصين) 🎙️</span>
+                            <span class="nb-tab-glow-badge">مميز</span>
+                        </button>
+                    </div>
+
+                    <!-- TAB 1: SUMMARY & INSIGHTS -->
+                    <div id="nb-summary-tab" class="nb-tab-pane active">
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px; flex-wrap:wrap; gap:10px;">
+                            <h3 style="margin:0; color:#fff; display:flex; align-items:center; gap:8px;">
+                                <i class="fa-solid fa-sparkles text-primary"></i> الملخص الذكي واستخراج الأفكار
+                            </h3>
+                            <button id="nb-generate-summary-btn" class="btn btn-primary" onclick="generateNotebookSummary()">
+                                <i class="fa-solid fa-wand-magic-sparkles"></i> توليد الملخص الآن
+                            </button>
+                        </div>
+
+                        <!-- Summary Loading Skeleton -->
+                        <div id="nb-summary-loading" style="display:none; text-align:center; padding:40px 20px;">
+                            <div class="ai-spinner" style="margin:0 auto 15px;"></div>
+                            <h4 style="color:#00e5ff; margin:0 0 5px 0;">جارِ قراءة الملزمة واستخراج ملخص ذكي...</h4>
+                            <p style="color:var(--text-muted); font-size:0.85rem; margin:0;">يقوم الذكاء الاصطناعي بتحليل الأفكار ووضع الأسئلة المتوقعة</p>
+                        </div>
+
+                        <!-- Summary Content Output -->
+                        <div id="nb-summary-content" class="card" style="min-height:200px; padding:25px; line-height:1.7;">
+                            <div style="text-align:center; color:var(--text-muted); padding:30px 10px;">
+                                <i class="fa-solid fa-file-lines" style="font-size:3rem; opacity:0.3; margin-bottom:12px;"></i>
+                                <p>ارفع ملف PDF أو اختر درساً جاهزاً، ثم اضغط <strong>"توليد الملخص الآن"</strong> لتظهر لك خلاصة الكتاب هنا.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TAB 2: CHAT WITH DOCUMENT -->
+                    <div id="nb-chat-tab" class="nb-tab-pane">
+                        <div class="nb-chat-wrapper">
+                            <!-- Quick Suggested Prompts -->
+                            <div class="nb-quick-prompts">
+                                <span style="font-size:0.85rem; color:var(--text-muted); align-self:center;"><i class="fa-solid fa-bolt" style="color:#feca57;"></i> أسئلة مقترحة:</span>
+                                <button class="nb-prompt-chip" onclick="askNotebookQuick('لخص لي أهم 5 نقاط لازم أحفظها من الكتاب ده؟')">📌 أهم 5 نقاط للحفظ</button>
+                                <button class="nb-prompt-chip" onclick="askNotebookQuick('اشرح لي أصعب جزء في الملف بأسلوب مبسط كأني في ابتدائي؟')">👶 بسّط الشرح للأطفال</button>
+                                <button class="nb-prompt-chip" onclick="askNotebookQuick('اعمل لي 5 أسئلة اختيار من متعدد (MCQ) مع الإجابات لاختبار فهمي؟')">🧪 كويز سريع من 5 أسئلة</button>
+                                <button class="nb-prompt-chip" onclick="askNotebookQuick('ما هي التعريفات والمصطلحات الأساسية المذكورة في هذا الملف؟')">📖 المفاهيم والمصطلحات</button>
+                            </div>
+
+                            <!-- Chat Messages Area -->
+                            <div id="nb-chat-messages" class="nb-chat-box">
+                                <div class="nb-msg nb-msg-ai">
+                                    <div class="nb-msg-avatar"><i class="fa-solid fa-robot"></i></div>
+                                    <div class="nb-msg-bubble">
+                                        مرحباً بك! أنا مساعدك الذكي الخاص بهذا الكتاب. 📚<br>
+                                        تقدر تسألني أي سؤال عن أي صفحة أو معلومة في الملف وهجاوبك عليها بدقة واستشهد بالنص الأصلي!
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Chat Input Bar -->
+                            <form id="nb-chat-form" class="nb-chat-input-bar" onsubmit="handleNotebookChatSubmit(event)">
+                                <input type="text" id="nb-chat-input" class="search-input" placeholder="اسأل أي سؤال عن محتوى هذا الكتاب..." style="flex:1; border-radius:12px;">
+                                <button type="submit" class="btn btn-primary" style="border-radius:12px; padding:0 22px; font-weight:700;">
+                                    <i class="fa-solid fa-paper-plane"></i>
+                                </button>
+                                <button type="button" class="btn" style="background:rgba(255,255,255,0.06); color:var(--text-muted); border-radius:12px;" onclick="clearNotebookChat()" title="مسح المحادثة">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- TAB 3: TWO-SPEAKER AUDIO PODCAST -->
+                    <div id="nb-podcast-tab" class="nb-tab-pane">
+                        <div class="card nb-podcast-card">
+                            <div class="nb-podcast-header">
+                                <div style="display:flex; align-items:center; gap:15px;">
+                                    <div class="nb-podcast-badge-icon">
+                                        <i class="fa-solid fa-headphones-simple"></i>
+                                    </div>
+                                    <div>
+                                        <h3 style="margin:0 0 4px 0; color:#fff;">البودكاست الصوتي التفاعلي 🎙️</h3>
+                                        <p style="margin:0; color:var(--text-muted); font-size:0.9rem;">حوار شيق باللغة العربية بين <strong>أحمد</strong> و <strong>سارة</strong> بيشرحوا الكتاب بالتفصيل كأنهم في استوديو إذاعي!</p>
+                                    </div>
+                                </div>
+                                <button id="nb-generate-podcast-btn" class="btn btn-primary" onclick="generateNotebookPodcast()">
+                                    <i class="fa-solid fa-microphone-lines"></i> توليد حلقة البودكاست 🎧
+                                </button>
+                            </div>
+
+                            <!-- Podcast Loading -->
+                            <div id="nb-podcast-loading" style="display:none; text-align:center; padding:35px 20px;">
+                                <div class="ai-spinner" style="margin:0 auto 15px;"></div>
+                                <h4 style="color:#00e5ff; margin:0 0 5px 0;">جارِ تأليف حوار البودكاست الصوتي بين أحمد وسارة...</h4>
+                                <p style="color:var(--text-muted); font-size:0.85rem; margin:0;">يقوم الذكاء الاصطناعي بكتابة سيناريو الشرح الإذاعي وتحضير الأصوات</p>
+                            </div>
+
+                            <!-- Interactive Audio Player Section -->
+                            <div id="nb-podcast-player-section" style="display:none; margin-top:25px;">
+                                <!-- Speakers Live Display -->
+                                <div class="nb-speakers-display">
+                                    <div class="nb-speaker-card" id="speaker-ahmed">
+                                        <div class="nb-speaker-avatar" style="border-color:#00e5ff; background:rgba(0,229,255,0.15);">
+                                            <i class="fa-solid fa-user-tie" style="color:#00e5ff; font-size:1.8rem;"></i>
+                                        </div>
+                                        <div class="nb-speaker-info">
+                                            <strong>أحمد (المتسائل)</strong>
+                                            <span>يستفسر ويطرح الأسئلة الذكية</span>
+                                        </div>
+                                        <div class="nb-speaking-indicator">يتكلم الآن 🎙️</div>
+                                    </div>
+
+                                    <div class="nb-speaker-card" id="speaker-sara">
+                                        <div class="nb-speaker-avatar" style="border-color:#ff007f; background:rgba(255,0,127,0.15);">
+                                            <i class="fa-solid fa-user-graduate" style="color:#ff007f; font-size:1.8rem;"></i>
+                                        </div>
+                                        <div class="nb-speaker-info">
+                                            <strong>سارة (المعلمة)</strong>
+                                            <span>تشرح وتبسط المفاهيم بعمق</span>
+                                        </div>
+                                        <div class="nb-speaking-indicator">تتكلم الآن 🎙️</div>
+                                    </div>
+                                </div>
+
+                                <!-- Audio Visualizer Waves -->
+                                <div class="nb-audio-wave-box" id="nb-wave-box">
+                                    <div class="wave-bar"></div>
+                                    <div class="wave-bar"></div>
+                                    <div class="wave-bar"></div>
+                                    <div class="wave-bar"></div>
+                                    <div class="wave-bar"></div>
+                                    <div class="wave-bar"></div>
+                                    <div class="wave-bar"></div>
+                                    <div class="wave-bar"></div>
+                                    <div class="wave-bar"></div>
+                                    <div class="wave-bar"></div>
+                                    <div class="wave-bar"></div>
+                                    <div class="wave-bar"></div>
+                                </div>
+
+                                <!-- Player Controls -->
+                                <div class="nb-player-controls">
+                                    <button class="nb-ctrl-btn" onclick="skipPodcastSentence(-1)" title="الجملة السابقة"><i class="fa-solid fa-backward-step"></i></button>
+                                    <button class="nb-ctrl-btn nb-play-btn" id="nb-play-pause-btn" onclick="togglePodcastPlayback()">
+                                        <i class="fa-solid fa-play" id="nb-play-icon"></i>
+                                    </button>
+                                    <button class="nb-ctrl-btn" onclick="skipPodcastSentence(1)" title="الجملة التالية"><i class="fa-solid fa-forward-step"></i></button>
+                                    <button class="nb-ctrl-btn" onclick="stopPodcastPlayback()" title="إيقاف"><i class="fa-solid fa-stop"></i></button>
+
+                                    <!-- Speed Control -->
+                                    <div style="margin-right:auto; display:flex; align-items:center; gap:8px;">
+                                        <span style="font-size:0.85rem; color:var(--text-muted);"><i class="fa-solid fa-gauge-high"></i> السرعة:</span>
+                                        <select id="nb-podcast-speed" class="search-input" style="padding:4px 8px; font-size:0.85rem; border-radius:8px;" onchange="changePodcastSpeed(this.value)">
+                                            <option value="1" selected>1.0x (طبيعي)</option>
+                                            <option value="1.25">1.25x (أسرع)</option>
+                                            <option value="1.5">1.5x (سريع)</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- Synchronized Transcript (Live Highlighting) -->
+                                <div class="nb-transcript-container" id="nb-transcript-container">
+                                    <h4 style="margin:0 0 12px 0; color:var(--text-muted); font-size:0.9rem;">
+                                        <i class="fa-solid fa-align-right"></i> النص المكتوب للحلقة:
+                                    </h4>
+                                    <div id="nb-transcript-lines" class="nb-transcript-scroll"></div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -1749,46 +2024,87 @@
     </div>
 
 
-    <!-- What's New Modal -->
-    <div id="whats-new-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.8); z-index: 10000; justify-content: center; align-items: center; backdrop-filter: blur(5px);">
-        <div style="background: var(--card-bg); padding: 2rem; border-radius: 20px; max-width: 90%; width: 500px; border: 2px solid #00e5ff; box-shadow: 0 10px 30px rgba(0, 229, 255,0.3); animation: slideUpGlow 0.5s ease;">
-            <h2 style="color: var(--primary-color); margin-top: 0; text-align: center;"><i class="fa-solid fa-bullhorn" style="color: #feca57; font-size: 2rem; margin-bottom:10px; display:block;"></i>تحديث جديد وصل!</h2>
-            <p style="color: var(--text-muted); text-align: center; font-size: 1rem; margin-bottom: 2rem;">ضفنا مميزات خرافية عشان نساعدك تذاكر أحسن وتكسر الملل!</p>
-            <div style="display: flex; flex-direction: column; gap: 1.2rem;">
-                
-                <div style="display: flex; gap: 1rem; align-items: flex-start;">
-                    <div style="background: rgba(254, 202, 87, 0.2); padding: 10px; border-radius: 12px; width: 45px; text-align: center;"><i class="fa-solid fa-star" style="color: #feca57; font-size: 1.3rem;"></i></div>
-                    <div>
-                        <strong style="color: var(--text-main); font-size: 1.1rem;">حلمك قدام عينك ✨</strong>
-                        <p style="color: var(--text-muted); margin: 5px 0 0 0; font-size: 0.95rem; line-height: 1.5;">صندوق جديد في الرئيسية، اكتب فيه حلمك (مثلاً: دكتورة) عشان يفضل دايماً يحفزك.</p>
-                    </div>
-                </div>
+    <!-- What's New & Official APK Release Modal -->
+    <div id="whats-new-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.85); z-index: 10000; justify-content: center; align-items: center; backdrop-filter: blur(8px); padding: 15px;">
+        <div style="background: var(--card-bg); padding: 1.8rem; border-radius: 22px; max-width: 95%; width: 560px; max-height: 90vh; overflow-y: auto; border: 2px solid #00e5ff; box-shadow: 0 15px 40px rgba(0, 229, 255, 0.35); animation: slideUpGlow 0.4s ease; text-align: right;">
+            
+            <div style="text-align: center; margin-bottom: 1.2rem;">
+                <img src="icons/app-icon.png" alt="أيقونة تطبيق المذاكرة" style="width: 72px; height: 72px; border-radius: 18px; box-shadow: 0 0 25px rgba(0, 229, 255, 0.45); border: 2px solid #00e5ff; margin-bottom: 10px; display: inline-block;">
+                <span style="background: linear-gradient(135deg, #00e5ff, #0088ff); color: #031024; font-weight: 800; font-size: 0.78rem; padding: 4px 14px; border-radius: 20px; display: inline-block; margin-bottom: 8px;">تحديث تاريخي جديد 🚀</span>
+                <h2 style="color: #fff; margin: 0 0 6px 0; font-size: 1.4rem;">إطلاق تطبيق الأندرويد الرسمي & استوديو الكتب الذكي! 📖✨</h2>
+                <p style="color: var(--text-muted); font-size: 0.9rem; margin: 0;">اقرأ التفاصيل التالية لمعرفة أهمية هذا التحديث لدروسك ومذاكرتك:</p>
+            </div>
 
-                <div style="display: flex; gap: 1rem; align-items: flex-start;">
-                    <div style="background: rgba(0, 229, 255, 0.2); padding: 10px; border-radius: 12px; width: 45px; text-align: center;"><i class="fa-solid fa-bell" style="color: var(--primary-color); font-size: 1.3rem;"></i></div>
-                    <div>
-                        <strong style="color: var(--text-main); font-size: 1.1rem;">إشعارات الصلاة والتحفيز 🔔</strong>
-                        <p style="color: var(--text-muted); margin: 5px 0 0 0; font-size: 0.95rem; line-height: 1.5;">فعلها من القائمة الجانبية (الإشعارات الذكية)، وهيبعتلك رسايل تشجيع ومواعيد صلاة!</p>
-                    </div>
-                </div>
+            <!-- Native APK Success Badge (shown only if already running in native app) -->
+            <div id="whats-new-native-badge" style="display: none; background: rgba(46, 213, 115, 0.15); border: 1.5px solid #2ed573; border-radius: 14px; padding: 14px; margin-bottom: 1.5rem; text-align: center;">
+                <strong style="color: #2ed573; font-size: 1.05rem;"><i class="fa-solid fa-circle-check"></i> أنت الآن تستخدم تطبيق الأندرويد الرسمي الأحدث! 🎉</strong>
+                <p style="color: #f1f2f6; font-size: 0.88rem; margin: 4px 0 0 0; line-height: 1.5;">كافة المنبهات ومواقيت الصلاة واستوديو الذكاء الاصطناعي مفعلة وتعمل لديك في الخلفية بأقصى كفاءة.</p>
+            </div>
 
-                <div style="display: flex; gap: 1rem; align-items: flex-start;">
-                    <div style="background: rgba(0, 206, 201, 0.2); padding: 10px; border-radius: 12px; width: 45px; text-align: center;"><i class="fa-solid fa-gamepad" style="color: #00cec9; font-size: 1.3rem;"></i></div>
+            <!-- Crucial Explanation Box: Why install APK vs existing PWA -->
+            <div id="whats-new-pwa-warning" style="background: linear-gradient(135deg, rgba(255, 71, 87, 0.12), rgba(255, 165, 2, 0.12)); border: 1.5px solid rgba(255, 71, 87, 0.4); border-radius: 14px; padding: 14px; margin-bottom: 1.5rem;">
+                <div style="display: flex; gap: 10px; align-items: flex-start;">
+                    <i class="fa-solid fa-triangle-exclamation" style="color: #ff4757; font-size: 1.4rem; margin-top: 2px;"></i>
                     <div>
-                        <strong style="color: var(--text-main); font-size: 1.1rem;">تحديات المذاكرة 🎮</strong>
-                        <p style="color: var(--text-muted); margin: 5px 0 0 0; font-size: 0.95rem; line-height: 1.5;">زهقت؟ جرب "تحدي كوباية التلج" أو "رحلة الطيران" من القائمة الجانبية.</p>
-                    </div>
-                </div>
-
-                <div style="display: flex; gap: 1rem; align-items: flex-start;">
-                    <div style="background: rgba(0, 229, 255, 0.2); padding: 10px; border-radius: 12px; width: 45px; text-align: center;"><i class="fa-solid fa-moon" style="color: #00e5ff; font-size: 1.3rem;"></i></div>
-                    <div>
-                        <strong style="color: var(--text-main); font-size: 1.1rem;">وضع النوم للمنبه 🌙</strong>
-                        <p style="color: var(--text-muted); margin: 5px 0 0 0; font-size: 0.95rem; line-height: 1.5;">عشان تضمن إن المنبه يرن الصبح.. فعل "وضع النوم" وسيب الموبايل على الشاحن.</p>
+                        <strong style="color: #ff6b81; font-size: 1rem; display: block; margin-bottom: 4px;">تنبيه مهم للطلاب اللي مثبتين التطبيق القديم:</strong>
+                        <p style="color: #f1f2f6; font-size: 0.88rem; margin: 0; line-height: 1.5;">
+                            النسخة المثبتة من المتصفح <strong>يتوقف نظام إشعاراتها تماماً عند إغلاق التطبيق</strong> بسبب قيود توفير الطاقة في أندرويد ❌.<br>
+                            في <strong>نسخة الأندرويد الرسمية الجديدة (APK)</strong>: تم دمج منبه نظام داخلي يضمن <strong>رنين مواقيت الصلاة والتحفيز كل 90 دقيقة حتى والموبايل مقفول تماماً والشاشة مطفية!</strong> ✅
+                        </p>
                     </div>
                 </div>
             </div>
-            <button onclick="closeWhatsNew()" class="theme-btn btn-hover-glow" style="width: 100%; background: linear-gradient(135deg, #00e5ff, #00b8cc); color: white; padding: 1rem; border-radius: 10px; font-size: 1.2rem; font-weight: bold; border: none; cursor: pointer; margin-top: 2rem;">يلا نجرب! 🚀</button>
+
+            <!-- New Features Highlights -->
+            <div style="display: flex; flex-direction: column; gap: 1rem; margin-bottom: 1.5rem;">
+                
+                <div style="display: flex; gap: 12px; align-items: flex-start; background: rgba(0, 229, 255, 0.05); padding: 10px 12px; border-radius: 12px; border: 1px solid rgba(0, 229, 255, 0.15);">
+                    <div style="background: rgba(0, 229, 255, 0.2); padding: 8px; border-radius: 10px; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                        <i class="fa-solid fa-book-open-reader" style="color: #00e5ff; font-size: 1.2rem;"></i>
+                    </div>
+                    <div>
+                        <strong style="color: #fff; font-size: 0.98rem;">استوديو الكتب والمذكرات الذكي (Notebook AI) 🧠</strong>
+                        <p style="color: var(--text-muted); margin: 3px 0 0 0; font-size: 0.85rem; line-height: 1.4;">ارفع أي كتاب أو ملزمة PDF، وهيطلعلك ملخص شامل، وأهم 5 أسئلة متوقعة في الامتحان مع إجاباتها النموذجية!</p>
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 12px; align-items: flex-start; background: rgba(255, 0, 127, 0.05); padding: 10px 12px; border-radius: 12px; border: 1px solid rgba(255, 0, 127, 0.15);">
+                    <div style="background: rgba(255, 0, 127, 0.2); padding: 8px; border-radius: 10px; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                        <i class="fa-solid fa-podcast" style="color: #ff007f; font-size: 1.2rem;"></i>
+                    </div>
+                    <div>
+                        <strong style="color: #fff; font-size: 0.98rem;">بودكاست صوتي لشرح الدرس (شخصين) 🎙️</strong>
+                        <p style="color: var(--text-muted); margin: 3px 0 0 0; font-size: 0.85rem; line-height: 1.4;">حوّل كتابك بضغطة زر لحوار إذاعي ممتع بين (أحمد وسارة) بيشرحوا الدرس مع موجات صوتية متحركة!</p>
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 12px; align-items: flex-start; background: rgba(46, 213, 115, 0.05); padding: 10px 12px; border-radius: 12px; border: 1px solid rgba(46, 213, 115, 0.15);">
+                    <div style="background: rgba(46, 213, 115, 0.2); padding: 8px; border-radius: 10px; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                        <i class="fa-solid fa-comments" style="color: #2ed573; font-size: 1.2rem;"></i>
+                    </div>
+                    <div>
+                        <strong style="color: #fff; font-size: 0.98rem;">شات تفاعلي يسألك وتسأله عن المنهج 💬</strong>
+                        <p style="color: var(--text-muted); margin: 3px 0 0 0; font-size: 0.85rem; line-height: 1.4;">اتكلم مع الملزمة كأنها مدرس خصوصي، واسأله عن أي جزئية مش فاهمها وهيجاوبك فوراً.</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Action Buttons -->
+            <div style="display: flex; flex-direction: column; gap: 10px;">
+                <a id="whats-new-download-btn" href="study-app.apk" download="study-app.apk" class="btn" style="background: linear-gradient(135deg, #00e5ff, #0088ff); color: #031024 !important; font-weight: 800; font-size: 1.05rem; padding: 13px; border-radius: 12px; text-decoration: none; text-align: center; box-shadow: 0 4px 18px rgba(0, 229, 255, 0.4); display: flex; align-items: center; justify-content: center; gap: 8px;">
+                    <i class="fa-solid fa-download"></i>
+                    <span>تحميل تطبيق الأندرويد الرسمي (APK) الآن</span>
+                </a>
+                <button onclick="shareUpdateOnWhatsApp()" class="btn" style="background: rgba(37, 211, 102, 0.15); color: #25d366; border: 1.5px solid #25d366; padding: 11px; border-radius: 12px; font-weight: 700; font-size: 0.95rem; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                    <i class="fa-brands fa-whatsapp" style="font-size: 1.2rem;"></i>
+                    <span>شارك التحديث ورابط التطبيق مع زملائك على واتساب</span>
+                </button>
+                <button onclick="closeWhatsNew()" class="btn" style="background: transparent; color: var(--text-muted); border: 1px solid var(--border-color); padding: 10px; border-radius: 12px; font-size: 0.9rem; cursor: pointer;">
+                    تخطي والمتابعة داخل المتصفح
+                </button>
+            </div>
+
         </div>
     </div>
 
