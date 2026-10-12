@@ -292,7 +292,7 @@
                 </div>
             </div>
             <div class="apk-promo-actions">
-                <a href="study-app.apk" download="study-app.apk" class="apk-download-btn">
+                <a href="study-app.apk" download="study-app.apk" onclick="openWhatsNew(); setTimeout(showInstallGuide, 200);" class="apk-download-btn">
                     <i class="fa-solid fa-download"></i>
                     <span>تحميل (APK)</span>
                 </a>
@@ -2093,10 +2093,23 @@
 
             <!-- Action Buttons -->
             <div style="display: flex; flex-direction: column; gap: 10px;">
-                <a id="whats-new-download-btn" href="study-app.apk" download="study-app.apk" class="btn" style="background: linear-gradient(135deg, #00e5ff, #0088ff); color: #031024 !important; font-weight: 800; font-size: 1.05rem; padding: 13px; border-radius: 12px; text-decoration: none; text-align: center; box-shadow: 0 4px 18px rgba(0, 229, 255, 0.4); display: flex; align-items: center; justify-content: center; gap: 8px;">
+                <a id="whats-new-download-btn" href="study-app.apk" download="study-app.apk" onclick="showInstallGuide()" class="btn" style="background: linear-gradient(135deg, #00e5ff, #0088ff); color: #031024 !important; font-weight: 800; font-size: 1.05rem; padding: 13px; border-radius: 12px; text-decoration: none; text-align: center; box-shadow: 0 4px 18px rgba(0, 229, 255, 0.4); display: flex; align-items: center; justify-content: center; gap: 8px;">
                     <i class="fa-solid fa-download"></i>
                     <span>تحميل تطبيق الأندرويد الرسمي (APK) الآن</span>
                 </a>
+
+                <!-- Step-by-step installation instructions revealed on download -->
+                <div id="install-guide-steps" style="display: none; background: rgba(0, 229, 255, 0.08); border: 1.5px solid #00e5ff; border-radius: 14px; padding: 14px; margin-top: 2px; animation: slideUpGlow 0.3s ease;">
+                    <h4 style="color: #00e5ff; margin: 0 0 8px 0; font-size: 0.95rem; display: flex; align-items: center; gap: 6px;">
+                        <i class="fa-solid fa-circle-check"></i>
+                        <span>تم بدء التحميل! خطوات التثبيت في 3 ثواني:</span>
+                    </h4>
+                    <ol style="margin: 0; padding-right: 18px; color: #f1f2f6; font-size: 0.85rem; line-height: 1.6;">
+                        <li>افتح تطبيق <strong>"ملفاتي" (My Files)</strong> ⬅️ مجلد <strong>"التنزيلات" (Downloads)</strong> واضغط على الملف.</li>
+                        <li>لو ظهرت رسالة حماية جوجل (Play Protect): اضغط <strong>"مزيد من التفاصيل"</strong> ⬅️ ثم <strong>"التثبيت على أي حال"</strong>.</li>
+                        <li>اضغط <strong>"تثبيت"</strong> وهيشتغل التطبيق بكامل مميزاته والمنبه الداخلي! ✅</li>
+                    </ol>
+                </div>
                 <button onclick="shareUpdateOnWhatsApp()" class="btn" style="background: rgba(37, 211, 102, 0.15); color: #25d366; border: 1.5px solid #25d366; padding: 11px; border-radius: 12px; font-weight: 700; font-size: 0.95rem; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px;">
                     <i class="fa-brands fa-whatsapp" style="font-size: 1.2rem;"></i>
                     <span>شارك التحديث ورابط التطبيق مع زملائك على واتساب</span>
