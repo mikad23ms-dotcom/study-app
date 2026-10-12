@@ -11,8 +11,8 @@
     <!-- PWA Setup -->
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#00e5ff">
-    <link rel="icon" type="image/png" href="icons/app-icon.png">
-    <link rel="apple-touch-icon" href="icons/app-icon.png">
+    <link rel="icon" type="image/png" href="app-icon.png">
+    <link rel="apple-touch-icon" href="app-icon.png">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
@@ -282,7 +282,7 @@
         <!-- APK Download Banner for Web/PWA Users -->
         <div id="apk-promo-banner" class="apk-promo-banner" style="display: none;">
             <div class="apk-promo-content">
-                <img src="icons/app-icon.png" alt="أيقونة تطبيق المذاكرة" class="apk-promo-icon">
+                <img src="app-icon.png" alt="أيقونة تطبيق المذاكرة" class="apk-promo-icon" onerror="this.onerror=null; this.src='icons/app-icon.png';">
                 <div class="apk-promo-text">
                     <h4>
                         <span>تطبيق الأندرويد متوفر الآن!</span>
@@ -2029,7 +2029,8 @@
         <div style="background: var(--card-bg); padding: 1.8rem; border-radius: 22px; max-width: 95%; width: 560px; max-height: 90vh; overflow-y: auto; border: 2px solid #00e5ff; box-shadow: 0 15px 40px rgba(0, 229, 255, 0.35); animation: slideUpGlow 0.4s ease; text-align: right;">
             
             <div style="text-align: center; margin-bottom: 1.2rem;">
-                <img src="icons/app-icon.png" alt="أيقونة تطبيق المذاكرة" style="width: 72px; height: 72px; border-radius: 18px; box-shadow: 0 0 25px rgba(0, 229, 255, 0.45); border: 2px solid #00e5ff; margin-bottom: 10px; display: inline-block;">
+                <img src="app-icon.png" alt="أيقونة تطبيق المذاكرة" style="width: 72px; height: 72px; border-radius: 18px; box-shadow: 0 0 25px rgba(0, 229, 255, 0.45); border: 2px solid #00e5ff; margin-bottom: 10px; display: inline-block; object-fit: cover;" onerror="if(this.src.indexOf('icons/')===-1){this.src='icons/app-icon.png';}else{this.style.display='none';document.getElementById('whats-new-fallback-icon').style.display='inline-flex';}">
+                <div id="whats-new-fallback-icon" style="display: none; width: 72px; height: 72px; border-radius: 18px; background: linear-gradient(135deg, #00e5ff, #0088ff); align-items: center; justify-content: center; box-shadow: 0 0 25px rgba(0, 229, 255, 0.45); border: 2px solid #00e5ff; margin-bottom: 10px;"><i class="fa-solid fa-graduation-cap" style="font-size: 34px; color: #031024;"></i></div>
                 <span style="background: linear-gradient(135deg, #00e5ff, #0088ff); color: #031024; font-weight: 800; font-size: 0.78rem; padding: 4px 14px; border-radius: 20px; display: inline-block; margin-bottom: 8px;">تحديث تاريخي جديد 🚀</span>
                 <h2 style="color: #fff; margin: 0 0 6px 0; font-size: 1.4rem;">إطلاق تطبيق الأندرويد الرسمي & استوديو الكتب الذكي! 📖✨</h2>
                 <p style="color: var(--text-muted); font-size: 0.9rem; margin: 0;">اقرأ التفاصيل التالية لمعرفة أهمية هذا التحديث لدروسك ومذاكرتك:</p>
