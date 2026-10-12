@@ -1,23 +1,28 @@
 {
-  "name": "دليلك للمذاكرة",
-  "short_name": "المذاكرة",
-  "description": "تطبيق المذاكرة المتكامل للطلاب بخصائص الذكاء الاصطناعي",
-  "start_url": "./",
+  "name": "دليلك للمذاكرة - تطبيق المذاكرة المتكامل",
+  "short_name": "دليلك للمذاكرة",
+  "description": "تطبيق المذاكرة المتكامل للطلاب بخصائص الذكاء الاصطناعي ومواقيت الصلاة والتحديات",
+  "start_url": "./index.html",
+  "scope": "./",
   "display": "standalone",
-  "background_color": "#0f172a",
-  "theme_color": "#4361ee",
+  "background_color": "#060913",
+  "theme_color": "#00e5ff",
   "orientation": "portrait",
+  "lang": "ar",
+  "dir": "rtl",
+  "categories": ["education", "productivity"],
   "icons": [
     {
       "src": "https://cdn-icons-png.flaticon.com/512/3429/3429930.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
       "src": "https://cdn-icons-png.flaticon.com/512/3429/3429930.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ]
 }
-
