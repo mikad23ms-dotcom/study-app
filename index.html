@@ -1543,8 +1543,21 @@
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('sw.js')
-                    .then(reg => console.log('PWA ServiceWorker registered', reg.scope))
+                    .then(reg => {
+                        console.log('PWA ServiceWorker registered', reg.scope);
+                        // Check for updates on every app launch
+                        reg.update();
+                    })
                     .catch(err => console.log('PWA ServiceWorker failed', err));
+            });
+
+            // Auto-reload seamlessly when a new version is installed
+            let refreshing = false;
+            navigator.serviceWorker.addEventListener('controllerchange', () => {
+                if (!refreshing) {
+                    refreshing = true;
+                    window.location.reload();
+                }
             });
         }
     </script>
