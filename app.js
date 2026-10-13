@@ -139,6 +139,7 @@ let groqApiKey = localStorage.getItem('study_groq_api') || '';
 let aiProvider = localStorage.getItem('study_ai_provider') || 'gemini';
 // Set User Name in Dashboard
 document.addEventListener('DOMContentLoaded', () => {
+    initChallengeDashboard();
 
     // Interactive Background Glow
     document.addEventListener('mousemove', (e) => {
@@ -3010,13 +3011,64 @@ let flightInterval;
 
 function startIceChallenge() {
     const btn = document.getElementById('ice-btn');
-    if (btn.innerText.includes('ابدأ')) {
-        btn.innerHTML = '<i class="fa-solid fa-snowflake"></i> التلج بيدوب... ركز!';
-        btn.style.background = '#00e5ff';
-        alert('كوباية التلج قدامك؟ يلا ابدأ المذاكرة وماتقومش غير لما تدوب خالص! 🧊🔥');
-    } else {
+    const timerDisplay = document.getElementById('ice-timer-display');
+    const meltFill = document.getElementById('ice-melt-fill');
+    const statusText = document.getElementById('ice-status-text');
+    const iconStage = document.getElementById('ice-icon-stage');
+
+    if (btn && btn.innerText.includes('ابدأ')) {
+        const ICE_TOTAL_SECONDS = 20 * 60;
+        let iceEndTime = Date.now() + ICE_TOTAL_SECONDS * 1000;
+        btn.innerHTML = '<i class="fa-solid fa-stop"></i> رمي التلج (إلغاء التحدي)';
+        btn.style.background = '#7f8c8d';
+        if (iconStage) iconStage.innerText = '🧊';
+
+        clearInterval(window.iceInterval);
+        window.iceInterval = setInterval(() => {
+            let remaining = Math.round((iceEndTime - Date.now()) / 1000);
+            if (remaining < 0) remaining = 0;
+
+            const m = Math.floor(remaining / 60);
+            const s = remaining % 60;
+            if (timerDisplay) timerDisplay.innerText = `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+
+            const remainingPct = (remaining / ICE_TOTAL_SECONDS) * 100;
+            if (meltFill) meltFill.style.width = `${remainingPct}%`;
+
+            if (statusText && iconStage) {
+                if (remainingPct > 65) {
+                    iconStage.innerText = '🧊';
+                    statusText.innerText = 'مكعب التلج صلب ومتماسك.. واصل التركيز!';
+                } else if (remainingPct > 30) {
+                    iconStage.innerText = '💧';
+                    statusText.innerText = 'التلج بدأ يدوب ويتحول لمياه.. رائع!';
+                } else {
+                    iconStage.innerText = '🌊';
+                    statusText.innerText = 'التلج بيخلص خلاص.. قربت تنهي التحدي!';
+                }
+            }
+
+            if (remaining <= 0) {
+                clearInterval(window.iceInterval);
+                window.iceInterval = null;
+                btn.innerHTML = '<i class="fa-solid fa-play"></i> ابدأ التحدي دلوقتي';
+                btn.style.background = 'linear-gradient(135deg, #00cec9, #0984e3)';
+                if (meltFill) meltFill.style.width = '0%';
+                if (timerDisplay) timerDisplay.innerText = '20:00';
+                if (iconStage) iconStage.innerText = '🌊✨';
+                if (statusText) statusText.innerText = 'داب التلج بالكامل وأنت منتصر بتركيزك! 🏆';
+                launchChallengeVictory('تحدي كوباية التلج 🧊', 60);
+            }
+        }, 1000);
+    } else if (btn) {
+        clearInterval(window.iceInterval);
+        window.iceInterval = null;
         btn.innerHTML = '<i class="fa-solid fa-play"></i> ابدأ التحدي دلوقتي';
-        btn.style.background = 'linear-gradient(135deg, #00e5ff, #00e5ff)';
+        btn.style.background = 'linear-gradient(135deg, #00cec9, #0984e3)';
+        if (timerDisplay) timerDisplay.innerText = '20:00';
+        if (meltFill) meltFill.style.width = '100%';
+        if (iconStage) iconStage.innerText = '🧊';
+        if (statusText) statusText.innerText = 'مكعب التلج صلب ومتماسك.. ابدأ عشان يدوب!';
     }
 }
 
@@ -3052,7 +3104,7 @@ function startFlightChallenge() {
                 timeLeftDisplay.innerText = "وصلنا بالسلامة! 🎉";
                 fill.style.width = '100%';
                 icon.style.left = '100%';
-                alert('عاش يا بطل! الطيارة وصلت وأنت خلصت مذاكرة التحدي ده بنجاح! 🛬🏆');
+                launchChallengeVictory('تحدي رحلة الطيران ✈️', 80);
                 return;
             }
 
@@ -3187,7 +3239,7 @@ function closeWhatsNew() {
     const modal = document.getElementById('whats-new-modal');
     if (modal) {
         modal.style.display = 'none';
-        localStorage.setItem('study_seen_new_apk_v105', 'true');
+        localStorage.setItem('study_seen_update_v107', 'true');
     }
 }
 
@@ -3212,7 +3264,7 @@ document.addEventListener('DOMContentLoaded', () => {
             banner.style.display = 'flex';
         }
     }
-    if (!localStorage.getItem('study_seen_new_apk_v105')) {
+    if (!localStorage.getItem('study_seen_update_v107')) {
         setTimeout(() => {
             const modal = document.getElementById('whats-new-modal');
             openWhatsNew();
@@ -3233,13 +3285,69 @@ function formatTimeHHMMSS(totalSeconds) {
 
 function startCandleChallenge() {
     const btn = document.getElementById('candle-btn');
-    if (btn.innerText.includes('ابدأ')) {
-        btn.innerHTML = '<i class="fa-solid fa-fire"></i> الشمعة مولعة... ركز!';
-        btn.style.background = '#c0392b';
-        alert('ولع الشمعة دلوقتي! ماتقومش غير لما تطفي لوحدها 🔥');
-    } else {
+    const select = document.getElementById('candle-duration-select');
+    const timerDisplay = document.getElementById('candle-timer-display');
+    const burnFill = document.getElementById('candle-burn-fill');
+    const statusText = document.getElementById('candle-status-text');
+    const iconStage = document.getElementById('candle-icon-stage');
+
+    if (btn && btn.innerText.includes('ابدأ')) {
+        const mins = select ? (parseInt(select.value, 10) || 30) : 30;
+        let candleTotalSeconds = mins * 60;
+        let candleEndTime = Date.now() + candleTotalSeconds * 1000;
+        if (select) select.disabled = true;
+        btn.innerHTML = '<i class="fa-solid fa-fire-extinguisher"></i> إطفاء الشمعة (استسلام)';
+        btn.style.background = '#7f8c8d';
+        if (iconStage) iconStage.innerText = '🔥';
+
+        clearInterval(window.candleInterval);
+        window.candleInterval = setInterval(() => {
+            let remaining = Math.round((candleEndTime - Date.now()) / 1000);
+            if (remaining < 0) remaining = 0;
+
+            const m = Math.floor(remaining / 60);
+            const s = remaining % 60;
+            if (timerDisplay) timerDisplay.innerText = `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+
+            const remainingPct = (remaining / candleTotalSeconds) * 100;
+            if (burnFill) burnFill.style.width = `${remainingPct}%`;
+
+            if (statusText && iconStage) {
+                if (remainingPct > 65) {
+                    iconStage.innerText = '🕯️';
+                    statusText.innerText = 'الشمعة مولعة.. هدوء تام وتركيز مطلق!';
+                } else if (remainingPct > 25) {
+                    iconStage.innerText = '🔥';
+                    statusText.innerText = 'نصف الشمعة احترق.. استيعابك في أعلى مستوى!';
+                } else {
+                    iconStage.innerText = '✨';
+                    statusText.innerText = 'الشمعة على وشك الانطفاء.. ثبات أسطوري!';
+                }
+            }
+
+            if (remaining <= 0) {
+                clearInterval(window.candleInterval);
+                window.candleInterval = null;
+                if (select) select.disabled = false;
+                btn.innerHTML = '<i class="fa-solid fa-play"></i> ابدأ التحدي دلوقتي';
+                btn.style.background = 'linear-gradient(135deg, #e17055, #d63031)';
+                if (burnFill) burnFill.style.width = '0%';
+                if (timerDisplay) timerDisplay.innerText = select ? `${select.value}:00` : '30:00';
+                if (iconStage) iconStage.innerText = '💨';
+                if (statusText) statusText.innerText = 'انطفأت الشمعة بنجاح وأنت ثابت في مكانك! 🎉';
+                launchChallengeVictory('تحدي الشمعة 🕯️', 70);
+            }
+        }, 1000);
+    } else if (btn) {
+        clearInterval(window.candleInterval);
+        window.candleInterval = null;
+        if (select) select.disabled = false;
         btn.innerHTML = '<i class="fa-solid fa-play"></i> ابدأ التحدي دلوقتي';
         btn.style.background = 'linear-gradient(135deg, #e17055, #d63031)';
+        if (timerDisplay && select) timerDisplay.innerText = `${select.value}:00`;
+        if (burnFill) burnFill.style.width = '100%';
+        if (iconStage) iconStage.innerText = '🕯️';
+        if (statusText) statusText.innerText = 'الشمعة جاهزة للإشعال 🔥';
     }
 }
 
@@ -3270,7 +3378,7 @@ function startMarathonChallenge() {
                 btn.innerHTML = '<i class="fa-solid fa-play"></i> انطلاق الماراثون!';
                 btn.style.background = 'linear-gradient(135deg, #d63031, #c0392b)';
                 timeLeftDisplay.innerText = "وصلت لخط النهاية! 🏆";
-                alert('عاش يا وحش! خلصت الماراثون بنجاح!');
+                launchChallengeVictory('تحدي الماراثون 🏃‍♂️', 120);
                 return;
             }
             timeLeftDisplay.innerText = formatTimeHHMMSS(remainingSeconds);
@@ -3309,7 +3417,7 @@ function startIsolationChallenge() {
                 btn.innerHTML = '<i class="fa-solid fa-power-off"></i> ابدأ العزل!';
                 btn.style.background = 'linear-gradient(135deg, #2d3436, #636e72)';
                 timeLeftDisplay.innerText = "تمت المهمة بنجاح! 🌍";
-                alert('أهلاً بيك في العالم الخارجي تاني! عملت إنجاز عظيم!');
+                launchChallengeVictory('تحدي العزل التام 📵', 90);
                 return;
             }
             timeLeftDisplay.innerText = formatTimeHHMMSS(remainingSeconds);
@@ -3371,7 +3479,7 @@ function startMarsChallenge() {
                 btn.innerHTML = '<i class="fa-solid fa-rocket"></i> إطلاق الصاروخ!';
                 btn.style.background = 'linear-gradient(135deg, #d35400, #e67e22)';
                 timeLeftDisplay.innerText = "هبطنا على المريخ! 🔴";
-                alert('إنجاز تاريخي! هبطت على المريخ وخلصت أصعب تحدي! 🚀');
+                launchChallengeVictory('تحدي المريخ 🚀', 200);
                 return;
             }
             timeLeftDisplay.innerText = formatTimeHHMMSS(remainingSeconds);
@@ -3433,7 +3541,7 @@ function startTrainChallenge() {
                 btn.innerHTML = '<i class="fa-solid fa-ticket"></i> قطع التذكرة!';
                 btn.style.background = 'linear-gradient(135deg, #34495e, #2c3e50)';
                 timeLeftDisplay.innerText = "وصلنا بالسلامة! 🚉";
-                alert('وصلنا المحطة الأخيرة! رحلة ممتازة! 🚂');
+                launchChallengeVictory('تحدي قطار منتصف الليل 🚆', 100);
                 return;
             }
             timeLeftDisplay.innerText = formatTimeHHMMSS(remainingSeconds);
@@ -3877,9 +3985,127 @@ window.notebookPodcast = {
     currentUtterance: null
 };
 
-// 1. File Upload (PDF or Text)
+// 1. File Upload (PDF, Images, or Text)
+function compressImageForOCR(file, maxDimension = 1600, quality = 0.85) {
+    return new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            const img = new Image();
+            img.onload = () => {
+                let width = img.width;
+                let height = img.height;
+                if (width > maxDimension || height > maxDimension) {
+                    if (width > height) {
+                        height = Math.round((height * maxDimension) / width);
+                        width = maxDimension;
+                    } else {
+                        width = Math.round((width * maxDimension) / height);
+                        height = maxDimension;
+                    }
+                }
+                const canvas = document.createElement('canvas');
+                canvas.width = width;
+                canvas.height = height;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0, width, height);
+                const dataUrl = canvas.toDataURL('image/jpeg', quality);
+                const base64 = dataUrl.split(',')[1];
+                resolve({ base64, mimeType: 'image/jpeg' });
+            };
+            img.onerror = () => {
+                const raw = e.target.result;
+                resolve({ base64: raw.split(',')[1], mimeType: file.type || 'image/jpeg' });
+            };
+            img.src = e.target.result;
+        };
+        reader.onerror = () => resolve(null);
+        reader.readAsDataURL(file);
+    });
+}
+
+window.handleNotebookImageUpload = async function(files) {
+    if (!files || files.length === 0) return;
+    const fileList = Array.from(files).filter(f => f.type.startsWith('image/') || /\.(jpe?g|png|webp|heic|bmp)$/i.test(f.name));
+    if (fileList.length === 0) {
+        return alert("يرجى اختيار صور صالحة لصفحات الكتاب (JPG, PNG, WebP).");
+    }
+
+    const loader = document.getElementById('nb-ocr-loading');
+    const loadingText = document.getElementById('nb-ocr-loading-text');
+    const dropzone = document.getElementById('nb-dropzone');
+
+    if (loader) loader.style.display = 'block';
+    if (dropzone) dropzone.style.display = 'none';
+
+    try {
+        let fullExtractedText = "";
+        let pageCount = 0;
+
+        for (let i = 0; i < fileList.length; i++) {
+            const file = fileList[i];
+            pageCount++;
+
+            if (loadingText) {
+                loadingText.innerText = `الذكاء الاصطناعي يقرأ صفحة الكتاب (${pageCount} من ${fileList.length}) بدقة... 📖✨`;
+            }
+
+            const imgData = await compressImageForOCR(file);
+            if (!imgData || !imgData.base64) continue;
+
+            const promptText = `أنت نظام ماسح ضوئي ذكي فائق الدقة (OCR) متخصص في قراءة واستخراج نصوص الكتب والمذكرات الدراسية.
+اقرأ واستخرج النص الكامل المكتوب في هذه الصفحة من الكتاب بدقة 100% باللغة العربية أو الإنجليزية كما هي مكتوبة تماماً.
+- حافظ على العناوين والفقرات والقوانين والمعادلات والنقاط بالترتيب السليم.
+- اكتب النص فقط بدون أي تعليق أو مقدمة أو خاتمة.`;
+
+            const parts = [
+                { text: promptText },
+                { inlineData: { mimeType: imgData.mimeType, data: imgData.base64 } }
+            ];
+
+            const pageText = await callGeminiAPI(parts, { silent: true });
+            if (pageText && pageText.trim()) {
+                fullExtractedText += (fullExtractedText ? `\n\n--- [صفحة ${pageCount}] ---\n\n` : `--- [صفحة 1] ---\n\n`) + pageText.trim();
+            }
+        }
+
+        fullExtractedText = fullExtractedText.trim();
+        if (!fullExtractedText) {
+            alert("لم نتمكن من قراءة النص في الصورة. يرجى التأكد من وضوح إضاءة الصفحة وإعادة المحاولة.");
+            return;
+        }
+
+        const wordCount = fullExtractedText.split(/\s+/).length;
+        window.notebookDoc = {
+            title: pageCount === 1 ? `كتاب ورقي: صفحة مصورة` : `كتاب ورقي (${pageCount} صفحات مصورة)`,
+            text: fullExtractedText,
+            pages: pageCount,
+            words: wordCount,
+            isPaperBook: true
+        };
+
+        renderNotebookDocInfo();
+        switchNotebookTab('nb-summary-tab');
+        generateNotebookSummary();
+    } catch(err) {
+        console.error("Camera OCR error:", err);
+        alert("حدث خطأ أثناء قراءة صورة الكتاب: " + (err.message || err));
+    } finally {
+        if (loader) loader.style.display = 'none';
+        if (dropzone) dropzone.style.display = 'block';
+        const camInput = document.getElementById('nb-camera-input');
+        const galInput = document.getElementById('nb-gallery-input');
+        if (camInput) camInput.value = '';
+        if (galInput) galInput.value = '';
+    }
+};
+
 window.handleNotebookFileUpload = async function(file) {
     if (!file) return;
+
+    if (file.type && file.type.startsWith('image/')) {
+        return window.handleNotebookImageUpload([file]);
+    }
+
     const dropzone = document.getElementById('nb-dropzone');
     if (dropzone) dropzone.style.opacity = '0.5';
 
@@ -3949,6 +4175,10 @@ window.clearNotebookDocument = function() {
     if (infoBox) infoBox.style.display = 'none';
     const fileInput = document.getElementById('nb-file-input');
     if (fileInput) fileInput.value = '';
+    const camInput = document.getElementById('nb-camera-input');
+    if (camInput) camInput.value = '';
+    const galInput = document.getElementById('nb-gallery-input');
+    if (galInput) galInput.value = '';
     const summaryBox = document.getElementById('nb-summary-content');
     if (summaryBox) {
         summaryBox.innerHTML = `
@@ -4284,7 +4514,7 @@ function cleanTextForSpeech(text) {
     return clean;
 }
 
-function splitTextIntoTTSChunks(text, maxLength = 130) {
+function splitTextIntoTTSChunks(text, maxLength = 120) {
     if (!text) return [];
     if (text.length <= maxLength) return [text];
 
@@ -4364,16 +4594,12 @@ function stopPodcastCurrentAudio() {
 
 function playViaSpeechSynthesis(text, speaker, speed, onDone) {
     if (!('speechSynthesis' in window)) {
-        if (onDone) onDone();
+        if (onDone) setTimeout(onDone, 500);
         return;
     }
 
     const isSara = (speaker === 'سارة');
     const bestVoice = getBestArabicVoice(isSara);
-
-    if (!bestVoice && (!cachedArabicVoices || cachedArabicVoices.length === 0)) {
-        console.warn("SpeechSynthesis has no Arabic voice installed on this device.");
-    }
 
     const utterance = new SpeechSynthesisUtterance(text);
     if (bestVoice) {
@@ -4393,30 +4619,60 @@ function playViaSpeechSynthesis(text, speaker, speed, onDone) {
     }
 
     utterance.onend = () => {
-        if (onDone) onDone();
+        // Natural studio conversation pause between speakers (450ms)
+        setTimeout(() => {
+            if (window.notebookPodcast.isPlaying && onDone) onDone();
+        }, 450);
     };
 
     utterance.onerror = (e) => {
-        console.log("SpeechSynthesis error:", e);
-        if (onDone) onDone();
+        if (e.error === 'interrupted' || e.error === 'canceled') {
+            return; // Normal cancel/stop, DO NOT auto-advance
+        }
+        console.warn("SpeechSynthesis error:", e.error);
+        if (window.notebookPodcast.isPlaying) {
+            setTimeout(() => {
+                if (window.notebookPodcast.isPlaying && onDone) onDone();
+            }, 600);
+        }
     };
 
     currentPodcastUtterance = utterance;
-    window.speechSynthesis.speak(utterance);
+
+    // In Chromium, small delay after cancel ensures utterance is not immediately killed
+    setTimeout(() => {
+        if (!window.notebookPodcast.isPlaying) return;
+        try {
+            window.speechSynthesis.speak(utterance);
+        } catch(err) {
+            console.error("Speak error:", err);
+        }
+    }, 50);
 }
 
 function playGoogleTTS(text, speaker, speed, onDone, onError) {
-    const chunks = splitTextIntoTTSChunks(text, 130);
+    const chunks = splitTextIntoTTSChunks(text, 120);
     if (chunks.length === 0) {
-        if (onDone) onDone();
+        if (onDone) setTimeout(onDone, 500);
         return;
     }
 
     let chunkIdx = 0;
+    let fallbackTriggered = false;
+
+    function triggerFallback() {
+        if (fallbackTriggered) return;
+        fallbackTriggered = true;
+        if (onError) onError();
+    }
+
     function playNextChunk() {
         if (!window.notebookPodcast.isPlaying) return;
         if (chunkIdx >= chunks.length) {
-            if (onDone) onDone();
+            // Natural pause between sentences (500ms)
+            setTimeout(() => {
+                if (window.notebookPodcast.isPlaying && onDone) onDone();
+            }, 500);
             return;
         }
 
@@ -4424,30 +4680,33 @@ function playGoogleTTS(text, speaker, speed, onDone, onError) {
         chunkIdx++;
 
         const url = `https://translate.google.com/translate_tts?ie=UTF-8&tl=ar&client=tw-ob&q=${encodeURIComponent(chunk)}`;
-        const audio = new Audio(url);
+        const audio = new Audio();
+        audio.referrerPolicy = 'no-referrer';
+        audio.src = url;
         currentPodcastAudio = audio;
 
         const isSara = (speaker === 'سارة');
         const baseRate = speed || 1.0;
-        audio.playbackRate = isSara ? (baseRate * 1.05) : (baseRate * 0.92);
+        audio.playbackRate = isSara ? (baseRate * 1.04) : (baseRate * 0.94);
         try {
             audio.preservesPitch = false;
         } catch(e) {}
 
         audio.onended = () => {
-            playNextChunk();
+            // Short pause between chunks of the same sentence
+            setTimeout(playNextChunk, 200);
         };
 
         audio.onerror = (err) => {
-            console.warn("Google TTS audio error, falling back:", err);
-            if (onError) onError();
+            console.warn("Google TTS audio error, switching to SpeechSynthesis fallback:", err);
+            triggerFallback();
         };
 
         const playPromise = audio.play();
         if (playPromise !== undefined) {
             playPromise.catch(e => {
                 console.warn("Audio play() blocked or failed:", e);
-                if (onError) onError();
+                triggerFallback();
             });
         }
     }
@@ -4517,21 +4776,24 @@ function generateFallbackPodcastDialogue() {
     const cleanSentences = raw.replace(/[\[\]{}#*]/g, '').split(/[.!?؟\n]+/).map(s => s.trim()).filter(s => s.length > 15 && s.length < 140);
     const s1 = cleanSentences[0] || "موضوع اليوم مهم جداً لكل الطلاب في الامتحانات.";
     const s2 = cleanSentences[1] || "الفكرة الجوهرية تعتمد على الفهم والتطبيق السليم.";
+    const s3 = cleanSentences[2] || "أهم ما يميز هذا الدرس هو الربط بين المفاهيم وحل التدريبات العملية.";
 
     return [
-        { speaker: "أحمد", text: `أهلاً بكم يا أصدقائي في بودكاست المذاكرة الذكية! اليوم معنا مراجعة مركزة لدرس ${title}.` },
-        { speaker: "سارة", text: `أهلاً يا أحمد وأهلاً بكل الطلاب! هذا الدرس شيق ومهم جداً، والسر فيه فهم الفكرة العامة أولاً.` },
-        { speaker: "أحمد", text: `رائع جداً يا سارة، ما هي أهم نقطة جوهرية يجب أن يركز عليها الطالب هنا؟` },
-        { speaker: "سارة", text: `أهم نقطة هي استيعاب الأساسيات وتطبيقها خطوة بخطوة، خصوصاً أن ${s1}` },
-        { speaker: "أحمد", text: `وهل هناك مفاهيم أو قوانين ترتبط بهذه النقطة في الاختبارات؟` },
-        { speaker: "سارة", text: `بالتأكيد، النقطة التالية توضح ذلك بذكاء: ${s2}` },
-        { speaker: "أحمد", text: `كلام مبسط ومريح للفهم! شكراً لك يا سارة ولكل من استمع معنا.` }
+        { speaker: "أحمد", text: `أهلاً بكم يا أصدقائي في حلقة جديدة من بودكاست المذاكرة الذكية! اليوم معنا مراجعة مركزة لدرس ${title}.` },
+        { speaker: "سارة", text: `أهلاً يا أحمد وأهلاً بكل الطلاب المتميزين! هذا الدرس من الدروس الممتعة جداً، والسر فيه فهم الصورة الكلية أولاً.` },
+        { speaker: "أحمد", text: `رائع جداً يا سارة، ما هي أول نقطة جوهرية يجب أن نركز عليها لضمان الدرجة الكاملة؟` },
+        { speaker: "سارة", text: `النقطة الأساسية هي استيعاب الأساسيات وتطبيقها خطوة بخطوة، خصوصاً أن ${s1}` },
+        { speaker: "أحمد", text: `كلام سليم تماماً! وهل هناك أي فخ أو خطأ شائع يقع فيه الطلاب أثناء المذاكرة هنا؟` },
+        { speaker: "سارة", text: `سؤال ذكي يا أحمد! الخطأ الشائع هو حفظ القواعد دون فهم التطبيق، ولذلك نؤكد دائماً أن ${s2}` },
+        { speaker: "أحمد", text: `وهل توجد أي نصيحة ذهبية أخيرة تلخص طريقة مراجعة هذا الجزء قبل الاختبار؟` },
+        { speaker: "سارة", text: `نعم بالتأكيد! تذكروا دائماً أن ${s3} وبالتوفيق والنجاح لجميع الطلاب!` },
+        { speaker: "أحمد", text: `شكراً جزيلاً لك يا سارة على هذا التبسيط الرائع، ونلقاكم في حلقة جديدة من بودكاست المذاكرة الذكية!` }
     ];
 }
 
 window.generateNotebookPodcast = async function() {
     if (!window.notebookDoc || !window.notebookDoc.text) {
-        return alert("يرجى رفع ملف PDF أو اختيار درس تجريبي أولاً!");
+        return alert("يرجى تصوير كتابك الورقي أو رفع ملف PDF أو اختيار درس تجريبي أولاً!");
     }
 
     const loader = document.getElementById('nb-podcast-loading');
@@ -4546,9 +4808,9 @@ window.generateNotebookPodcast = async function() {
 
     const sampleText = window.notebookDoc.text.slice(0, 10000);
     const prompt = `أنت مخرج ومؤلف حلقات بودكاست إذاعية حوارية ذكية جداً للطلاب مستوحاة من خاصية Audio Overview في Google NotebookLM.
-حوّل محتوى هذا الملف الدراسي إلى حلقة بودكاست تفاعلية حية ممتعة بين شخصين:
-- [أحمد]: طالب ذكي يسأل بفضول وحماس ويبحث عن الشرح المبسط والأمثلة الواقعية.
-- [سارة]: معلمة وباحثة خبيرة تشرح المفاهيم وتبسط المعقد بأسلوب واقعي مشوق وسلس.
+حوّل محتوى هذا الملف الدراسي إلى حلقة بودكاست إذاعية تفاعلية ممتعة وشيقة جداً بين شخصين، بترتيب حواري إذاعي متقن ومحكم:
+- [أحمد]: طالب ذكي متسائل، يبدأ الحلقة بترحيب حماسي بالمستمعين، يسأل بفضول، ويبحث عن التبسيط والأمثلة العملية وأهم ما يأتي في الامتحانات.
+- [سارة]: معلمة وباحثة خبيرة ذكية، تشرح بأسلوب واقعي مشوق، تعطي أمثلة حية، وتبين الفخاخ والأخطاء الشائعة في الدرس.
 
 الملف: "${window.notebookDoc.title}"
 المحتوى:
@@ -4556,19 +4818,28 @@ window.generateNotebookPodcast = async function() {
 ${sampleText}
 """
 
-قواعد صارمة جداً للنطق الصوتي الاحترافي (مهمة للغاية لمنع أي أخطاء أو أصوات غريبة):
+ترتيب وتوزيع الحوار الإذاعي (صارم جداً):
+1. يبدأ الحوار دائماً بـ [أحمد] يرحب بالطلاب ويعلن اسم الدرس بحماس.
+2. ترد [سارة] بتلخيص الفكرة العامة للدرس في جملة مشوقة.
+3. التبادل بالتناوب الصارم: أحمد -> سارة -> أحمد -> سارة (ممنوع أن يتحدث نفس الشخص مرتين متتاليتين).
+4. يناقش الحوار أهم 3 نقاط في الدرس مع التركيز على المفاهيم المتوقعة في الامتحانات.
+5. تنتهي الحلقة بختام تحفيزي قصير ومشجع من الطرفين.
+
+قواعد صارمة للنطق وجودة الصوت:
 1. اكتب الحوار باللغة العربية الفصحى الواضحة والسهلة فقط.
-2. ممنوع منعاً باتاً كتابة أي حروف أو كلمات أو اختصارات باللغة الإنجليزية أو اللاتينية داخل الحوار (مثل: NGC أو مصطلحات أجنبية أو أسماء بالإنجليزية بين قوسين). أي مصطلح اكتبه معرباً بالكامل بحروف عربية فقط (مثلاً اكتب: تجمعات النجوم الضخمة، أو تلسكوب الفضاء، أو الحمض النووي، بدون كتابة أي كلمة إنجليزية).
-3. اجعل الجمل قصيرة وسلسة (من 10 إلى 22 كلمة في الجملة)، حتى يكون الإلقاء الصوتي طبيعياً وحيوياً ومريحاً للأذن.
+2. ممنوع تماماً كتابة أي حروف أو كلمات أو اختصارات باللغة الإنجليزية أو اللاتينية داخل الحوار (مثل: NGC أو DNA أو أسماء بين قوسين). أي مصطلح اكتبه معرباً بالكامل بحروف عربية فقط.
+3. اجعل الجمل مركزة وقصيرة (من 12 إلى 22 كلمة في الجملة)، حتى يكون الإلقاء الإذاعي طبيعياً ومريحاً للأذن.
 4. لا تضع أي رموز تعبيرية (إيموجي) أو رموز مثل النجوم والشرطات أو وصف للحركات مثل (يضحك) أو (مبتسمة) داخل نص الجملة.
 
 المطلوب الإرجاع كـ JSON ARRAY حصراً بالصيغة التالية (بدون أي نصوص خارج الـ JSON):
 [
-  {"speaker": "أحمد", "text": "مرحباً يا سارة، قرأت في الملف عن موضوع رائع اليوم وشعرت بالفضول، ما هي الفكرة الأساسية؟"},
-  {"speaker": "سارة", "text": "أهلاً بك يا أحمد، الفكرة الأساسية بسيطة وشيقة جداً، وهي تدور حول..."}
+  {"speaker": "أحمد", "text": "أهلاً بكم يا أصدقائي في حلقة جديدة من بودكاست المذاكرة الذكية، اليوم معنا درس رائع ومهم جداً..."},
+  {"speaker": "سارة", "text": "أهلاً يا أحمد وأهلاً بكل الطلاب، والسر في هذا الدرس هو فهم الفكرة الأساسية أولاً..."},
+  {"speaker": "أحمد", "text": "جميل جداً يا سارة، ما هي أهم نقطة يحتاج الطالب التركيز عليها هنا؟"},
+  {"speaker": "سارة", "text": "النقطة الأولى والجوهرية هي..."}
 ]
 
-اكتب حواراً من 8 إلى 14 جملة ممتعة ومفيدة جداً بالعربية فقط. أرجع الـ JSON حصراً.`;
+اكتب حواراً من 8 إلى 10 جمل ممتعة ومفيدة جداً بالعربية فقط. أرجع الـ JSON حصراً.`;
 
     try {
         let raw = await callGeminiAPI([{ text: prompt }], { silent: true });
@@ -4585,7 +4856,8 @@ ${sampleText}
         renderPodcastTranscript();
         if (playerSec) playerSec.style.display = 'block';
 
-        startPodcastPlayback();
+        // Provide a clear ready banner and let the user click to start (preserves browser audio gesture)
+        updatePodcastUIPlaying(false);
     } catch(err) {
         console.error("Podcast generation error:", err);
         const fallback = generateFallbackPodcastDialogue();
@@ -4593,7 +4865,7 @@ ${sampleText}
         window.notebookPodcast.currentIndex = 0;
         renderPodcastTranscript();
         if (playerSec) playerSec.style.display = 'block';
-        startPodcastPlayback();
+        updatePodcastUIPlaying(false);
     } finally {
         if (loader) loader.style.display = 'none';
         if (btn) btn.disabled = false;
@@ -4611,7 +4883,7 @@ window.renderPodcastTranscript = function() {
         div.id = `nb-line-${index}`;
         const icon = item.speaker === 'أحمد' ? '👨‍🎓' : '👩‍🏫';
         const color = item.speaker === 'أحمد' ? '#00e5ff' : '#ff007f';
-        div.innerHTML = `<strong style="color:${color};">${icon} ${item.speaker}:</strong> ${item.text}`;
+        div.innerHTML = `<strong style="color:${color}; font-size:0.95rem;">${icon} ${item.speaker}:</strong> <span style="line-height:1.6;">${item.text}</span>`;
         div.onclick = () => {
             window.notebookPodcast.isPlaying = true;
             playPodcastSentence(index);
@@ -4698,7 +4970,8 @@ window.playPodcastSentence = function(index) {
         }
     };
 
-    // Try Google Natural Arabic Audio first, fallback to SpeechSynthesis
+    // Primary: Google Natural Arabic Audio (with no-referrer)
+    // Fallback: Safe SpeechSynthesis
     playGoogleTTS(
         cleanText,
         item.speaker,
@@ -4716,15 +4989,29 @@ window.highlightSpeaker = function(speaker) {
     if (ahmed) ahmed.classList.remove('speaking');
     if (sara) sara.classList.remove('speaking');
 
-    if (speaker === 'أحمد' && ahmed) ahmed.classList.add('speaking');
-    if (speaker === 'سارة' && sara) sara.classList.add('speaking');
+    if (speaker === 'أحمد' && ahmed) {
+        ahmed.classList.add('speaking');
+        ahmed.style.opacity = '1';
+        if (sara) sara.style.opacity = '0.55';
+    }
+    if (speaker === 'سارة' && sara) {
+        sara.classList.add('speaking');
+        sara.style.opacity = '1';
+        if (ahmed) ahmed.style.opacity = '0.55';
+    }
 };
 
 window.clearSpeakerHighlight = function() {
     const ahmed = document.getElementById('speaker-ahmed');
     const sara = document.getElementById('speaker-sara');
-    if (ahmed) ahmed.classList.remove('speaking');
-    if (sara) sara.classList.remove('speaking');
+    if (ahmed) {
+        ahmed.classList.remove('speaking');
+        ahmed.style.opacity = '1';
+    }
+    if (sara) {
+        sara.classList.remove('speaking');
+        sara.style.opacity = '1';
+    }
 };
 
 window.updatePodcastUIPlaying = function(isPlaying) {
@@ -4966,3 +5253,596 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+// =====================================================================
+// === CHALLENGER GAMER DASHBOARD & INTERACTIVE CHALLENGES SYSTEM ===
+// =====================================================================
+const CHALLENGE_RANKS = [
+    { minXP: 0, maxXP: 149, name: "مقاتل تركيز مبتدئ 🥉", nextRank: "صائد الدقائق والمذاكرة 🥈", targetXP: 150 },
+    { minXP: 150, maxXP: 349, name: "صائد الدقائق والمذاكرة 🥈", nextRank: "فارس التركيز الخارق 🥇", targetXP: 350 },
+    { minXP: 350, maxXP: 649, name: "فارس التركيز الخارق 🥇", nextRank: "قاهر زعيم المماطلة ⚔️", targetXP: 650 },
+    { minXP: 650, maxXP: 999, name: "قاهر زعيم المماطلة ⚔️", nextRank: "أسطورة المذاكرة التي لا تُقهر 👑✨", targetXP: 1000 },
+    { minXP: 1000, maxXP: Infinity, name: "أسطورة المذاكرة التي لا تُقهر 👑✨", nextRank: "القمة المطلقة 🌟", targetXP: 1000 }
+];
+
+function getChallengeXP() {
+    return parseInt(localStorage.getItem('study_challenges_xp') || '0', 10);
+}
+
+function getCompletedChallengesCount() {
+    return parseInt(localStorage.getItem('study_challenges_completed') || '0', 10);
+}
+
+function getCurrentRankInfo(xp) {
+    for (let i = 0; i < CHALLENGE_RANKS.length; i++) {
+        if (xp >= CHALLENGE_RANKS[i].minXP && xp <= CHALLENGE_RANKS[i].maxXP) {
+            return CHALLENGE_RANKS[i];
+        }
+    }
+    return CHALLENGE_RANKS[CHALLENGE_RANKS.length - 1];
+}
+
+function initChallengeDashboard() {
+    const xp = getChallengeXP();
+    const completed = getCompletedChallengesCount();
+    const rankInfo = getCurrentRankInfo(xp);
+
+    const xpDisplay = document.getElementById('challenger-xp-display');
+    const compDisplay = document.getElementById('challenger-completed-count');
+    const rankNameDisplay = document.getElementById('challenger-current-rank-name');
+    const nextRankBadge = document.getElementById('challenger-next-rank-badge-text');
+    const progressDesc = document.getElementById('challenger-progress-desc');
+    const progressPct = document.getElementById('challenger-progress-pct');
+    const progressFill = document.getElementById('challenger-progress-fill');
+
+    if (xpDisplay) xpDisplay.innerText = `${xp} XP`;
+    if (compDisplay) compDisplay.innerText = completed;
+    if (rankNameDisplay) rankNameDisplay.innerText = rankInfo.name;
+    if (nextRankBadge) nextRankBadge.innerText = rankInfo.nextRank;
+
+    if (progressDesc && progressPct && progressFill) {
+        if (xp >= 1000) {
+            progressDesc.innerText = "وصلت لأعلى رتبة! أسطورة المذاكرة 👑";
+            progressPct.innerText = "100%";
+            progressFill.style.width = "100%";
+        } else {
+            const rangeSpan = rankInfo.targetXP - rankInfo.minXP;
+            const currentInSpan = xp - rankInfo.minXP;
+            const pct = Math.min(100, Math.max(0, Math.round((currentInSpan / rangeSpan) * 100)));
+            progressDesc.innerText = `التقدم نحو (${rankInfo.nextRank}) - باقي ${rankInfo.targetXP - xp} XP`;
+            progressPct.innerText = `${pct}%`;
+            progressFill.style.width = `${pct}%`;
+        }
+    }
+
+    const isMuted = localStorage.getItem('study_challenges_sound_muted') === 'true';
+    const soundIcon = document.getElementById('challenger-sound-icon');
+    const soundLabel = document.getElementById('challenger-sound-label');
+    if (soundIcon && soundLabel) {
+        if (isMuted) {
+            soundIcon.className = 'fa-solid fa-volume-xmark';
+            soundIcon.style.color = '#ff4757';
+            soundLabel.innerText = 'المؤثرات: مكتومة';
+        } else {
+            soundIcon.className = 'fa-solid fa-volume-high';
+            soundIcon.style.color = '#00e5ff';
+            soundLabel.innerText = 'المؤثرات: مفعلة';
+        }
+    }
+}
+
+function toggleChallengeSound() {
+    const isMuted = localStorage.getItem('study_challenges_sound_muted') === 'true';
+    localStorage.setItem('study_challenges_sound_muted', isMuted ? 'false' : 'true');
+    initChallengeDashboard();
+    if (isMuted) {
+        playWebAudioChime('levelup');
+    }
+}
+
+function playWebAudioChime(type = 'victory') {
+    if (localStorage.getItem('study_challenges_sound_muted') === 'true') return;
+    try {
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        if (!AudioCtx) return;
+        const ctx = new AudioCtx();
+        if (ctx.state === 'suspended') {
+            ctx.resume();
+        }
+
+        if (type === 'victory') {
+            const notes = [523.25, 659.25, 783.99, 1046.50];
+            notes.forEach((freq, index) => {
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.type = index === 3 ? 'sine' : 'triangle';
+                osc.frequency.setValueAtTime(freq, ctx.currentTime + index * 0.15);
+                gain.gain.setValueAtTime(0.001, ctx.currentTime + index * 0.15);
+                gain.gain.exponentialRampToValueAtTime(0.3, ctx.currentTime + index * 0.15 + 0.05);
+                gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + index * 0.15 + (index === 3 ? 0.9 : 0.4));
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.start(ctx.currentTime + index * 0.15);
+                osc.stop(ctx.currentTime + index * 0.15 + (index === 3 ? 0.95 : 0.45));
+            });
+        } else if (type === 'strike') {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.type = 'sawtooth';
+            osc.frequency.setValueAtTime(220, ctx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(40, ctx.currentTime + 0.35);
+            gain.gain.setValueAtTime(0.4, ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.35);
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start(ctx.currentTime);
+            osc.stop(ctx.currentTime + 0.36);
+        } else if (type === 'levelup') {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(440, ctx.currentTime);
+            osc.frequency.linearRampToValueAtTime(880, ctx.currentTime + 0.4);
+            gain.gain.setValueAtTime(0.2, ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.45);
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start(ctx.currentTime);
+            osc.stop(ctx.currentTime + 0.46);
+        }
+    } catch (e) {
+        console.warn('Audio chime error:', e);
+    }
+}
+
+let confettiAnimId = null;
+function launchChallengeConfetti(durationMs = 3800) {
+    const canvas = document.getElementById('challenge-confetti-canvas');
+    if (!canvas) return;
+    canvas.style.display = 'block';
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const colors = ['#00e5ff', '#ff4757', '#fbbf24', '#2ed573', '#a55eea', '#ff6b81', '#ffffff'];
+    const particles = [];
+    for (let i = 0; i < 110; i++) {
+        particles.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * -canvas.height * 0.5,
+            w: Math.random() * 10 + 6,
+            h: Math.random() * 6 + 4,
+            color: colors[Math.floor(Math.random() * colors.length)],
+            speedY: Math.random() * 4 + 3,
+            speedX: Math.random() * 4 - 2,
+            angle: Math.random() * 360,
+            spin: Math.random() * 10 - 5,
+            opacity: 1
+        });
+    }
+
+    const startTime = Date.now();
+    if (confettiAnimId) cancelAnimationFrame(confettiAnimId);
+
+    function frame() {
+        const elapsed = Date.now() - startTime;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        particles.forEach(p => {
+            p.y += p.speedY;
+            p.x += p.speedX;
+            p.angle += p.spin;
+            if (elapsed > durationMs - 1000) {
+                p.opacity = Math.max(0, (durationMs - elapsed) / 1000);
+            }
+
+            ctx.save();
+            ctx.globalAlpha = p.opacity;
+            ctx.translate(p.x, p.y);
+            ctx.rotate((p.angle * Math.PI) / 180);
+            ctx.fillStyle = p.color;
+            ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+            ctx.restore();
+        });
+
+        if (elapsed < durationMs) {
+            confettiAnimId = requestAnimationFrame(frame);
+        } else {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            canvas.style.display = 'none';
+            confettiAnimId = null;
+        }
+    }
+    frame();
+}
+
+let lastWonChallengeName = '';
+let lastWonXp = 0;
+function launchChallengeVictory(challengeName, xpReward) {
+    lastWonChallengeName = challengeName;
+    lastWonXp = xpReward;
+
+    const oldXP = getChallengeXP();
+    const newXP = oldXP + xpReward;
+    localStorage.setItem('study_challenges_xp', newXP);
+    const completedCount = getCompletedChallengesCount() + 1;
+    localStorage.setItem('study_challenges_completed', completedCount);
+
+    initChallengeDashboard();
+    playWebAudioChime('victory');
+    launchChallengeConfetti(4000);
+
+    const modal = document.getElementById('challenge-victory-modal');
+    const nameEl = document.getElementById('victory-challenge-name');
+    const xpEl = document.getElementById('victory-xp-gained');
+    const rankEl = document.getElementById('victory-rank-status');
+    const currentRank = getCurrentRankInfo(newXP);
+
+    if (nameEl) nameEl.innerText = challengeName;
+    if (xpEl) xpEl.innerText = `+${xpReward} XP 🎖️`;
+    if (rankEl) rankEl.innerText = `رتبتك الحالية: ${currentRank.name} (${newXP} XP)`;
+    if (modal) modal.style.display = 'flex';
+}
+
+function closeVictoryModal() {
+    const modal = document.getElementById('challenge-victory-modal');
+    if (modal) modal.style.display = 'none';
+}
+
+function shareVictoryWhatsApp() {
+    const text = encodeURIComponent(
+        `🏆 انتصار جديد في تحديات المذاكرة!\n` +
+        `أنهيت بنجاح: ${lastWonChallengeName}\n` +
+        `وحصلت على +${lastWonXp} XP في تطبيق المذاكرة المتكامل! ⚡\n` +
+        `يلا جرب تكسر الملل وتتحدى نفسك معايا!`
+    );
+    window.open(`https://api.whatsapp.com/send?text=${text}`, '_blank');
+}
+
+// 💣 Focus Bomb Challenge
+let bombInterval = null;
+let bombEndTime = 0;
+let bombTotalSeconds = 25 * 60;
+
+function toggleBombChallenge() {
+    const btn = document.getElementById('bomb-action-btn');
+    const timerDisplay = document.getElementById('bomb-timer-display');
+    const fuseFill = document.getElementById('bomb-fuse-fill');
+    const quoteDisplay = document.getElementById('bomb-quote-display');
+    const sparkle = document.getElementById('bomb-sparkle-icon');
+    const card = document.getElementById('card-challenge-bomb');
+
+    if (btn && (btn.innerText.includes('إشعال') || btn.innerText.includes('ابدأ'))) {
+        bombTotalSeconds = 25 * 60;
+        bombEndTime = Date.now() + bombTotalSeconds * 1000;
+        btn.innerHTML = '<i class="fa-solid fa-hand"></i> إبطال القنبلة (استسلام)';
+        btn.style.background = '#7f8c8d';
+        if (sparkle) sparkle.style.display = 'inline-block';
+        if (card) card.classList.add('boss-glow');
+
+        clearInterval(bombInterval);
+        bombInterval = setInterval(() => {
+            let remaining = Math.round((bombEndTime - Date.now()) / 1000);
+            if (remaining < 0) remaining = 0;
+
+            const m = Math.floor(remaining / 60);
+            const s = remaining % 60;
+            if (timerDisplay) timerDisplay.innerText = `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+
+            const pct = (remaining / bombTotalSeconds) * 100;
+            if (fuseFill) fuseFill.style.width = `${pct}%`;
+
+            if (quoteDisplay) {
+                if (remaining > 15 * 60) {
+                    quoteDisplay.innerText = "🔥 الفتيل مشتعل.. احذر تشتيت انتباهك أو لمس الهاتف!";
+                } else if (remaining > 8 * 60) {
+                    quoteDisplay.innerText = "⚡ عديت نص الوقت بتركيز عالي! كمل للاخر!";
+                } else if (remaining > 2 * 60) {
+                    quoteDisplay.innerText = "⏳ باقي دقائق معدودة على الانفجار المعرفي العظيم!";
+                } else {
+                    quoteDisplay.innerText = "💥 اللحظات الأخيرة! مبروك مقدماً يا وحش!";
+                }
+            }
+
+            if (remaining <= 0) {
+                clearInterval(bombInterval);
+                bombInterval = null;
+                btn.innerHTML = '<i class="fa-solid fa-fire"></i> إشعال فتيل القنبلة (25 دقيقة)';
+                btn.style.background = 'linear-gradient(135deg, #ff4757, #ee5253)';
+                if (sparkle) sparkle.style.display = 'none';
+                if (card) card.classList.remove('boss-glow');
+                if (fuseFill) fuseFill.style.width = '100%';
+                if (timerDisplay) timerDisplay.innerText = '25:00';
+                if (quoteDisplay) quoteDisplay.innerText = 'جاهز للتحدي؟ اضغط ابدأ واوعى تسيب مكانك!';
+                launchChallengeVictory('تحدي قنبلة التركيز 💣', 100);
+            }
+        }, 1000);
+    } else if (btn) {
+        clearInterval(bombInterval);
+        bombInterval = null;
+        btn.innerHTML = '<i class="fa-solid fa-fire"></i> إشعال فتيل القنبلة (25 دقيقة)';
+        btn.style.background = 'linear-gradient(135deg, #ff4757, #ee5253)';
+        if (sparkle) sparkle.style.display = 'none';
+        if (card) card.classList.remove('boss-glow');
+        if (fuseFill) fuseFill.style.width = '100%';
+        if (timerDisplay) timerDisplay.innerText = '25:00';
+        if (quoteDisplay) quoteDisplay.innerText = 'أبطلت مفعول القنبلة.. خسرنا الجولة بس هتعوضها في الجولة الجاية! 🛡️';
+    }
+}
+
+// 🐉⚔️ Boss Fight Battle
+let bossHP = 100;
+let bossRound = 1;
+let bossRoundInterval = null;
+let bossRoundEndTime = 0;
+const BOSS_ROUND_SECONDS = 15 * 60;
+
+function toggleBossRound() {
+    const roundBtn = document.getElementById('boss-round-btn');
+    const timerDisplay = document.getElementById('boss-round-timer');
+    const dialogue = document.getElementById('boss-battle-dialogue');
+    const statusText = document.getElementById('boss-round-status');
+    const strikeBtn = document.getElementById('boss-strike-btn');
+
+    if (roundBtn && roundBtn.innerText.includes('ابدأ')) {
+        bossRoundEndTime = Date.now() + BOSS_ROUND_SECONDS * 1000;
+        roundBtn.innerHTML = '<i class="fa-solid fa-flag"></i> إنهاء الجولة مبكراً (انسحاب)';
+        roundBtn.style.background = '#7f8c8d';
+        if (strikeBtn) strikeBtn.style.display = 'none';
+
+        clearInterval(bossRoundInterval);
+        bossRoundInterval = setInterval(() => {
+            let remaining = Math.round((bossRoundEndTime - Date.now()) / 1000);
+            if (remaining < 0) remaining = 0;
+
+            const m = Math.floor(remaining / 60);
+            const s = remaining % 60;
+            if (timerDisplay) timerDisplay.innerText = `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+
+            if (dialogue) {
+                if (remaining > 10 * 60) {
+                    dialogue.innerText = `🗡️ الجولة ${bossRound}: الزعيم يهاجمك بالنعاس والمشتتات.. ارفع درع تركيزك!`;
+                } else if (remaining > 5 * 60) {
+                    dialogue.innerText = `🔥 ضرباتك المتتالية بالتركيز تضعف دفاعات الزعيم!`;
+                } else {
+                    dialogue.innerText = `⚡ سيف التركيز يشحن طاقته القصوى.. استعد للضربة القاضية!`;
+                }
+            }
+
+            if (remaining <= 0) {
+                clearInterval(bossRoundInterval);
+                bossRoundInterval = null;
+                roundBtn.style.display = 'none';
+                if (strikeBtn) strikeBtn.style.display = 'block';
+                if (dialogue) dialogue.innerText = `✨ جهز سيفك الآن! الزعيم منهك وساقط على الأرض.. اضغط زر الضربة القاضية!`;
+                playWebAudioChime('levelup');
+            }
+        }, 1000);
+    } else if (roundBtn) {
+        clearInterval(bossRoundInterval);
+        bossRoundInterval = null;
+        roundBtn.innerHTML = '<i class="fa-solid fa-khanda"></i> ابدأ جولة القتال (15 دقيقة)';
+        roundBtn.style.background = 'linear-gradient(135deg, #8e44ad, #9b59b6)';
+        if (timerDisplay) timerDisplay.innerText = '15:00';
+        if (dialogue) dialogue.innerText = 'تراجعت عن القتال.. الزعيم يسخر منك! ارجع وحاربه لما تكون جاهز! 🐉';
+    }
+}
+
+function strikeBoss() {
+    const card = document.getElementById('card-challenge-boss');
+    const avatar = document.getElementById('boss-avatar-box');
+    const hpText = document.getElementById('boss-hp-text');
+    const hpFill = document.getElementById('boss-hp-fill');
+    const strikeBtn = document.getElementById('boss-strike-btn');
+    const roundBtn = document.getElementById('boss-round-btn');
+    const statusText = document.getElementById('boss-round-status');
+    const dialogue = document.getElementById('boss-battle-dialogue');
+    const timerDisplay = document.getElementById('boss-round-timer');
+
+    playWebAudioChime('strike');
+    if (card) {
+        card.classList.remove('shake-anim');
+        void card.offsetWidth;
+        card.classList.add('shake-anim');
+    }
+
+    bossHP = Math.max(0, bossHP - 25);
+    if (hpText) hpText.innerText = `${bossHP}%`;
+    if (hpFill) hpFill.style.width = `${bossHP}%`;
+
+    if (bossHP <= 0) {
+        if (avatar) avatar.innerText = '💀';
+        if (dialogue) dialogue.innerText = '🏆 سقط زعيم الكسل والمماطلة صريعاً! أنت بطل حقيقي!';
+        if (strikeBtn) strikeBtn.style.display = 'none';
+        if (roundBtn) {
+            roundBtn.style.display = 'block';
+            roundBtn.innerHTML = '<i class="fa-solid fa-rotate-right"></i> إعادة خوض المعركة من جديد!';
+            roundBtn.style.background = 'linear-gradient(135deg, #27ae60, #2ecc71)';
+            roundBtn.onclick = () => {
+                bossHP = 100;
+                bossRound = 1;
+                if (hpText) hpText.innerText = '100%';
+                if (hpFill) hpFill.style.width = '100%';
+                if (avatar) avatar.innerText = '🐉';
+                if (statusText) statusText.innerText = 'الجولة 1 من 4 (15 دقيقة)';
+                if (timerDisplay) timerDisplay.innerText = '15:00';
+                if (dialogue) dialogue.innerText = 'الزعيم يتحدى: "مش هتقدر تركز ربع ساعة على بعضها!"';
+                roundBtn.innerHTML = '<i class="fa-solid fa-khanda"></i> ابدأ جولة القتال (15 دقيقة)';
+                roundBtn.style.background = 'linear-gradient(135deg, #8e44ad, #9b59b6)';
+                roundBtn.onclick = toggleBossRound;
+            };
+        }
+        launchChallengeVictory('معركة زعيم الكسل والمماطلة 🐉⚔️', 150);
+    } else {
+        bossRound++;
+        const avatars = { 75: '🐲', 50: '💥', 25: '🤕' };
+        if (avatar && avatars[bossHP]) avatar.innerText = avatars[bossHP];
+        if (strikeBtn) strikeBtn.style.display = 'none';
+        if (roundBtn) {
+            roundBtn.style.display = 'block';
+            roundBtn.innerHTML = `<i class="fa-solid fa-khanda"></i> ابدأ الجولة ${bossRound} من 4 (15 دقيقة)`;
+            roundBtn.style.background = 'linear-gradient(135deg, #8e44ad, #9b59b6)';
+        }
+        if (statusText) statusText.innerText = `الجولة ${bossRound} من 4 (15 دقيقة)`;
+        if (timerDisplay) timerDisplay.innerText = '15:00';
+        if (dialogue) dialogue.innerText = `⚔️ ضربة قاضية ناجحة (-25% HP)! الزعيم يتألم.. استعد للجولة التالية!`;
+    }
+}
+
+// 🌱🌳 Virtual Tree Grow Challenge
+let treeInterval = null;
+let treeEndTime = 0;
+let treeTotalSeconds = 25 * 60;
+
+function toggleTreeChallenge() {
+    const btn = document.getElementById('tree-action-btn');
+    const select = document.getElementById('tree-duration-select');
+    const timerDisplay = document.getElementById('tree-timer-display');
+    const growthFill = document.getElementById('tree-growth-fill');
+    const statusText = document.getElementById('tree-status-text');
+    const iconStage = document.getElementById('tree-icon-stage');
+
+    if (btn && (btn.innerText.includes('ازرع') || btn.innerText.includes('ابدأ'))) {
+        const mins = select ? (parseInt(select.value, 10) || 25) : 25;
+        treeTotalSeconds = mins * 60;
+        treeEndTime = Date.now() + treeTotalSeconds * 1000;
+        if (select) select.disabled = true;
+        btn.innerHTML = '<i class="fa-solid fa-ban"></i> استسلام (ستذبل الشجرة 🥀)';
+        btn.style.background = '#7f8c8d';
+        if (iconStage) iconStage.innerText = '🌱';
+
+        clearInterval(treeInterval);
+        treeInterval = setInterval(() => {
+            let remaining = Math.round((treeEndTime - Date.now()) / 1000);
+            if (remaining < 0) remaining = 0;
+
+            const m = Math.floor(remaining / 60);
+            const s = remaining % 60;
+            if (timerDisplay) timerDisplay.innerText = `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+
+            const progress = 1 - (remaining / treeTotalSeconds);
+            const pct = Math.round(progress * 100);
+            if (growthFill) growthFill.style.width = `${pct}%`;
+
+            if (iconStage && statusText) {
+                if (progress < 0.3) {
+                    iconStage.innerText = '🌱';
+                    statusText.innerText = 'بذرة في التربة.. حافظ على تركيزك لتنمو!';
+                } else if (progress < 0.6) {
+                    iconStage.innerText = '🌿';
+                    statusText.innerText = 'بدأت الأوراق الخضراء بالظهور.. ممتاز كمل!';
+                } else if (progress < 0.9) {
+                    iconStage.innerText = '🪴';
+                    statusText.innerText = 'شجيرة وارفة تقترب من الإثمار الكامل!';
+                } else {
+                    iconStage.innerText = '🌳';
+                    statusText.innerText = 'الشجرة تكاد تكتمل.. روعة!';
+                }
+            }
+
+            if (remaining <= 0) {
+                clearInterval(treeInterval);
+                treeInterval = null;
+                if (select) select.disabled = false;
+                btn.innerHTML = '<i class="fa-solid fa-seedling"></i> ازرع الشجرة الآن';
+                btn.style.background = 'linear-gradient(135deg, #2ecc71, #27ae60)';
+                if (iconStage) {
+                    iconStage.innerText = '🌳✨';
+                    iconStage.classList.add('tree-grow-anim');
+                }
+                if (statusText) statusText.innerText = 'أزهرت شجرة عملاقة في بستان إنجازاتك! 🌳✨';
+                launchChallengeVictory('شجرة التركيز والنمو الحية 🌱🌳', 75);
+            }
+        }, 1000);
+    } else if (btn) {
+        clearInterval(treeInterval);
+        treeInterval = null;
+        if (select) select.disabled = false;
+        btn.innerHTML = '<i class="fa-solid fa-seedling"></i> ازرع الشجرة الآن';
+        btn.style.background = 'linear-gradient(135deg, #2ecc71, #27ae60)';
+        if (iconStage) iconStage.innerText = '🥀';
+        if (growthFill) growthFill.style.width = '0%';
+        if (timerDisplay && select) timerDisplay.innerText = `${select.value}:00`;
+        if (statusText) statusText.innerText = 'ذبلت الشجرة بسبب المقاطعة.. متقلقش ازرع بذرة جديدة دلوقتي! 🥀';
+    }
+}
+
+// 🥷⚡ Ninja Sprint Challenge
+let ninjaInterval = null;
+let ninjaEndTime = 0;
+const NINJA_TOTAL_SECONDS = 15 * 60;
+
+function toggleNinjaChallenge() {
+    const btn = document.getElementById('ninja-action-btn');
+    const timerDisplay = document.getElementById('ninja-timer-display');
+    const progressFill = document.getElementById('ninja-progress-fill');
+    const statusText = document.getElementById('ninja-status-text');
+    const card = document.getElementById('card-challenge-ninja');
+
+    if (btn && (btn.innerText.includes('انطلاق') || btn.innerText.includes('ابدأ'))) {
+        ninjaEndTime = Date.now() + NINJA_TOTAL_SECONDS * 1000;
+        btn.innerHTML = '<i class="fa-solid fa-stop"></i> كسر وتيرة النينجا (إلغاء)';
+        btn.style.background = '#7f8c8d';
+        if (card) card.classList.add('ninja-card-active');
+
+        clearInterval(ninjaInterval);
+        ninjaInterval = setInterval(() => {
+            let remaining = Math.round((ninjaEndTime - Date.now()) / 1000);
+            if (remaining < 0) remaining = 0;
+
+            const m = Math.floor(remaining / 60);
+            const s = remaining % 60;
+            if (timerDisplay) timerDisplay.innerText = `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+
+            const progress = 1 - (remaining / NINJA_TOTAL_SECONDS);
+            const pct = Math.round(progress * 100);
+            if (progressFill) progressFill.style.width = `${pct}%`;
+
+            if (statusText) {
+                if (remaining > 10 * 60) {
+                    statusText.innerText = '⚡ سرعة قصوى! لا ترفع عينك عن مهمتك!';
+                } else if (remaining > 5 * 60) {
+                    statusText.innerText = '🥷 حركة سريعة وإنجاز لا يصدق.. واصل الركض!';
+                } else {
+                    statusText.innerText = '🔥 اللحظات الأخيرة للسباق.. أنهِ المهمة فوراً!';
+                }
+            }
+
+            if (remaining <= 0) {
+                clearInterval(ninjaInterval);
+                ninjaInterval = null;
+                btn.innerHTML = '<i class="fa-solid fa-bolt"></i> انطلاق بسرعة النينجا (15 دقيقة)';
+                btn.style.background = 'linear-gradient(135deg, #00e5ff, #0984e3)';
+                if (card) card.classList.remove('ninja-card-active');
+                if (timerDisplay) timerDisplay.innerText = '15:00';
+                if (progressFill) progressFill.style.width = '100%';
+                if (statusText) statusText.innerText = 'أنهيت جولة النينجا الخاطفة بنجاح ساحق! ⚡';
+                launchChallengeVictory('سباق النينجا الخاطف 🥷⚡', 50);
+            }
+        }, 1000);
+    } else if (btn) {
+        clearInterval(ninjaInterval);
+        ninjaInterval = null;
+        btn.innerHTML = '<i class="fa-solid fa-bolt"></i> انطلاق بسرعة النينجا (15 دقيقة)';
+        btn.style.background = 'linear-gradient(135deg, #00e5ff, #0984e3)';
+        if (card) card.classList.remove('ninja-card-active');
+        if (timerDisplay) timerDisplay.innerText = '15:00';
+        if (progressFill) progressFill.style.width = '0%';
+        if (statusText) statusText.innerText = 'توقف سباق النينجا.. استعد وانطلق مجدداً!';
+    }
+}
+
+// Window global bindings
+window.initChallengeDashboard = initChallengeDashboard;
+window.toggleChallengeSound = toggleChallengeSound;
+window.playWebAudioChime = playWebAudioChime;
+window.launchChallengeConfetti = launchChallengeConfetti;
+window.launchChallengeVictory = launchChallengeVictory;
+window.closeVictoryModal = closeVictoryModal;
+window.shareVictoryWhatsApp = shareVictoryWhatsApp;
+window.toggleBombChallenge = toggleBombChallenge;
+window.toggleBossRound = toggleBossRound;
+window.strikeBoss = strikeBoss;
+window.toggleTreeChallenge = toggleTreeChallenge;
+window.toggleNinjaChallenge = toggleNinjaChallenge;
+window.startIceChallenge = startIceChallenge;
+window.startCandleChallenge = startCandleChallenge;

@@ -1257,6 +1257,140 @@ body[data-theme="dark"]::after {
 }
 
 /* ========================================================= */
+/* --- CHALLENGER GAMER DASHBOARD & GAMIFICATION STYLES --- */
+/* ========================================================= */
+.challenger-dashboard {
+    background: linear-gradient(135deg, rgba(17, 24, 39, 0.95), rgba(30, 27, 75, 0.95));
+    border: 2px solid rgba(0, 229, 255, 0.4);
+    border-radius: 20px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3), 0 0 25px rgba(0, 229, 255, 0.15);
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+}
+.challenger-dashboard::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(0, 229, 255, 0.08) 0%, transparent 60%);
+    pointer-events: none;
+}
+.challenger-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1.2rem;
+    position: relative;
+    z-index: 1;
+}
+.challenger-rank-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.25), rgba(217, 119, 6, 0.35));
+    border: 1px solid #f59e0b;
+    border-radius: 30px;
+    padding: 0.5rem 1.25rem;
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: #fbbf24;
+    box-shadow: 0 4px 15px rgba(245, 158, 11, 0.2);
+}
+.challenger-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.2rem;
+    position: relative;
+    z-index: 1;
+}
+.challenger-stat-item {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 14px;
+    padding: 0.9rem;
+    text-align: center;
+    transition: transform 0.2s ease;
+}
+.challenger-stat-item:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.1);
+}
+.challenger-stat-val {
+    font-size: 1.7rem;
+    font-weight: 800;
+    color: #00e5ff;
+    font-family: 'Tajawal', sans-serif;
+    line-height: 1.2;
+}
+.challenger-stat-label {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.75);
+    margin-top: 0.3rem;
+}
+.challenger-progress-bar-bg {
+    background: rgba(255, 255, 255, 0.12);
+    height: 16px;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
+}
+.challenger-progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #00e5ff, #8b5cf6, #ec4899);
+    border-radius: 12px;
+    transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 0 12px rgba(0, 229, 255, 0.6);
+}
+@keyframes bossShake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-8px) rotate(-1deg); }
+    40%, 80% { transform: translateX(8px) rotate(1deg); }
+}
+.shake-anim {
+    animation: bossShake 0.45s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+@keyframes pulseGlow {
+    0%, 100% { box-shadow: 0 0 15px rgba(239, 68, 68, 0.4); border-color: rgba(239, 68, 68, 0.8); }
+    50% { box-shadow: 0 0 35px rgba(239, 68, 68, 0.9); border-color: #ff4757; }
+}
+.boss-glow {
+    animation: pulseGlow 2.2s infinite;
+}
+@keyframes fuseSparkle {
+    0% { filter: drop-shadow(0 0 3px #ff9800); }
+    50% { filter: drop-shadow(0 0 12px #ffeb3b); }
+    100% { filter: drop-shadow(0 0 3px #ff9800); }
+}
+.fuse-burning {
+    animation: fuseSparkle 0.8s infinite;
+}
+@keyframes treeBounce {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+}
+.tree-grow-anim {
+    animation: treeBounce 0.7s ease-out;
+}
+@keyframes ninjaPulse {
+    0%, 100% { border-color: rgba(0, 229, 255, 0.4); box-shadow: 0 0 15px rgba(0, 229, 255, 0.2); }
+    50% { border-color: #00e5ff; box-shadow: 0 0 30px rgba(0, 229, 255, 0.6); }
+}
+.ninja-card-active {
+    animation: ninjaPulse 1.8s infinite;
+}
+
+
+/* ========================================================= */
 /* --- APK DOWNLOAD PROMO BANNER --- */
 /* ========================================================= */
 .apk-promo-banner {

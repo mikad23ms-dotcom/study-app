@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer">
     <meta name="author" content="Eng. Malak Adel Abdelhamid">
     <meta name="copyright" content="Developer: Eng. Malak Adel Abdelhamid © 2026">
     <title>تطبيق المذاكرة المتكامل | Developer: Eng. Malak Adel Abdelhamid</title>
@@ -751,14 +752,51 @@
 
                 <!-- Source / File Upload Card -->
                 <div class="card nb-source-card" style="margin-bottom:25px; border:1px solid rgba(0,229,255,0.25); background:linear-gradient(135deg, rgba(6,17,36,0.7), rgba(13,38,80,0.7));">
-                    <div class="nb-upload-dropzone" id="nb-dropzone" onclick="document.getElementById('nb-file-input').click()">
-                        <input type="file" id="nb-file-input" accept=".pdf,text/plain" style="display:none;" onchange="handleNotebookFileUpload(this.files[0])">
-                        <div class="nb-dropzone-icon">
-                            <i class="fa-solid fa-file-pdf" style="font-size:3rem; color:#ff4757;"></i>
-                            <i class="fa-solid fa-wand-magic-sparkles" style="font-size:1.4rem; color:#00e5ff; position:relative; top:-15px; right:-8px;"></i>
+                    <!-- Paper Book Scanner Banner -->
+                    <div style="background:rgba(0,229,255,0.08); border:1px solid rgba(0,229,255,0.25); border-radius:12px; padding:12px 15px; margin-bottom:15px; display:flex; align-items:center; gap:12px;">
+                        <div style="width:38px; height:38px; border-radius:50%; background:rgba(0,229,255,0.2); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                            <i class="fa-solid fa-camera-retro" style="color:#00e5ff; font-size:1.15rem;"></i>
                         </div>
-                        <h3 style="margin:10px 0 6px 0; color:#fff;">اضغط لرفع كتاب أو ملزمة PDF (أو اسحب الملف هنا)</h3>
-                        <p style="color:var(--text-muted); font-size:0.9rem; margin:0;">يدعم ملفات PDF والملازم المكتوبة باللغة العربية أو الإنجليزية</p>
+                        <div style="flex:1;">
+                            <strong style="color:#00e5ff; font-size:0.92rem; display:block;">معاك كتاب ورقي أو ملزمة ومش معاك نسخة PDF؟ 📚</strong>
+                            <span style="color:var(--text-muted); font-size:0.82rem;">صوّر أي صفحة بكاميرا الموبايل الآن، والذكاء الاصطناعي هيقرأها ويستخرج كلامها فوراً ويلخصها ويحولها لبودكاست!</span>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons: Camera, Gallery, PDF -->
+                    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(160px, 1fr)); gap:10px; margin-bottom:15px;">
+                        <button type="button" class="btn" onclick="document.getElementById('nb-camera-input').click()" style="background:linear-gradient(135deg, rgba(0,229,255,0.2), rgba(0,136,255,0.2)); border:1px solid #00e5ff; color:#fff; padding:12px 14px; border-radius:12px; font-weight:700; font-size:0.9rem; display:flex; align-items:center; justify-content:center; gap:8px; cursor:pointer;">
+                            <i class="fa-solid fa-camera" style="color:#00e5ff; font-size:1.2rem;"></i>
+                            <span>تصوير بالكاميرا 📸</span>
+                        </button>
+                        <button type="button" class="btn" onclick="document.getElementById('nb-gallery-input').click()" style="background:linear-gradient(135deg, rgba(168,85,247,0.2), rgba(236,72,153,0.2)); border:1px solid #c084fc; color:#fff; padding:12px 14px; border-radius:12px; font-weight:700; font-size:0.9rem; display:flex; align-items:center; justify-content:center; gap:8px; cursor:pointer;">
+                            <i class="fa-solid fa-images" style="color:#c084fc; font-size:1.2rem;"></i>
+                            <span>صور من المعرض 🖼️</span>
+                        </button>
+                        <button type="button" class="btn" onclick="document.getElementById('nb-file-input').click()" style="background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.18); color:#fff; padding:12px 14px; border-radius:12px; font-weight:600; font-size:0.9rem; display:flex; align-items:center; justify-content:center; gap:8px; cursor:pointer;">
+                            <i class="fa-solid fa-file-pdf" style="color:#ff4757; font-size:1.2rem;"></i>
+                            <span>رفع ملف PDF 📄</span>
+                        </button>
+                    </div>
+
+                    <!-- Hidden Inputs for Files, Camera, and Gallery -->
+                    <input type="file" id="nb-file-input" accept=".pdf,text/plain,image/*" style="display:none;" onchange="handleNotebookFileUpload(this.files[0])">
+                    <input type="file" id="nb-camera-input" accept="image/*" capture="environment" style="display:none;" onchange="handleNotebookImageUpload(this.files)">
+                    <input type="file" id="nb-gallery-input" accept="image/*" multiple style="display:none;" onchange="handleNotebookImageUpload(this.files)">
+
+                    <!-- OCR Progress / Loading State -->
+                    <div id="nb-ocr-loading" style="display:none; text-align:center; padding:30px 15px; background:rgba(0,229,255,0.06); border:1px dashed #00e5ff; border-radius:14px; margin-bottom:15px;">
+                        <i class="fa-solid fa-wand-magic-sparkles fa-spin" style="font-size:2.5rem; color:#00e5ff; margin-bottom:12px;"></i>
+                        <h3 style="color:#00e5ff; margin:0 0 6px 0; font-size:1.1rem;" id="nb-ocr-loading-title">جاري مسح وقراءة صفحة الكتاب بالذكاء الاصطناعي... 🔍</h3>
+                        <p style="color:var(--text-muted); font-size:0.85rem; margin:0;" id="nb-ocr-loading-text">يتم الآن استخراج النصوص والعناوين لتحويلها لملخص وبودكاست صوتي...</p>
+                    </div>
+
+                    <div class="nb-upload-dropzone" id="nb-dropzone" onclick="document.getElementById('nb-file-input').click()" style="padding:22px 15px;">
+                        <div class="nb-dropzone-icon">
+                            <i class="fa-solid fa-cloud-arrow-up" style="font-size:2.5rem; color:#00e5ff;"></i>
+                        </div>
+                        <h3 style="margin:8px 0 4px 0; color:#fff; font-size:1rem;">أو اسحب وأفلت الملف / صورة الصفحة هنا</h3>
+                        <p style="color:var(--text-muted); font-size:0.85rem; margin:0;">يدعم ملفات PDF، الصور الممسوحة، والمستندات النصية</p>
                     </div>
 
                     <!-- Direct paste or demo options -->
@@ -1374,19 +1412,236 @@
                     </p>
                 </div>
 
-                <div class="challenges-grid">
-                <!-- Ice Cube Challenge -->
-                <div class="card hover-glow-box" style="margin-bottom: 1.5rem; border-left: 4px solid #00e5ff;">
-                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
-                        <i class="fa-solid fa-icicles" style="font-size: 2.5rem; color: #00e5ff;"></i>
-                        <div>
-                            <h3 style="margin: 0; color: #00e5ff;">تحدي كوباية التلج 🧊</h3>
-                            <p style="margin: 5px 0 0 0; color: var(--text-muted); font-size: 0.9rem;">املى كوباية تلج وحطها قدامك.. هدفك تذاكر بتركيز لحد ما التلج كله يدوب!</p>
+                <!-- Challenger Gamer Dashboard -->
+                <div class="challenger-dashboard" id="challenger-dashboard">
+                    <div class="challenger-header">
+                        <div style="display: flex; align-items: center; gap: 0.8rem;">
+                            <i class="fa-solid fa-trophy" style="font-size: 2.2rem; color: #fbbf24;"></i>
+                            <div>
+                                <h3 style="margin: 0; font-size: 1.35rem; font-family: 'Tajawal', sans-serif; color: #fff;">لوحة بطل التحديات والتركيز 🏆</h3>
+                                <p style="margin: 3px 0 0 0; color: rgba(255, 255, 255, 0.7); font-size: 0.88rem;">أكمل التحديات، واكسب نقاط XP، وارتقِ برتبتك لتصبح أسطورة المذاكرة!</p>
+                            </div>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 0.8rem; flex-wrap: wrap;">
+                            <span id="challenger-rank-badge" class="challenger-rank-badge">
+                                <i class="fa-solid fa-medal"></i>
+                                <span id="challenger-current-rank-name">مقاتل تركيز مبتدئ 🥉</span>
+                            </span>
+                            <button id="challenger-sound-btn" onclick="toggleChallengeSound()" title="تشغيل / كتم المؤثرات الصوتية" style="background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); color: #fff; padding: 0.45rem 0.9rem; border-radius: 20px; cursor: pointer; font-family: 'Tajawal'; font-size: 0.85rem; display: flex; align-items: center; gap: 6px;">
+                                <i id="challenger-sound-icon" class="fa-solid fa-volume-high" style="color: #00e5ff;"></i>
+                                <span id="challenger-sound-label">المؤثرات: مفعلة</span>
+                            </button>
                         </div>
                     </div>
-                    <div style="text-align: center; margin-top: 1rem;">
-                        <p style="color: var(--text-main); margin-bottom: 1rem;">(بتاخد تقريباً من 15 لـ 20 دقيقة)</p>
-                        <button onclick="startIceChallenge()" id="ice-btn" class="theme-btn btn-hover-glow" style="background: linear-gradient(135deg, #00e5ff, #00e5ff); color: white; border: none; padding: 0.8rem 2rem; border-radius: 10px; font-size: 1.1rem;"><i class="fa-solid fa-play"></i> ابدأ التحدي دلوقتي</button>
+
+                    <div class="challenger-stats-grid">
+                        <div class="challenger-stat-item">
+                            <div id="challenger-xp-display" class="challenger-stat-val">0 XP</div>
+                            <div class="challenger-stat-label">نقاط الخبرة (XP)</div>
+                        </div>
+                        <div class="challenger-stat-item">
+                            <div id="challenger-completed-count" class="challenger-stat-val" style="color: #2ed573;">0</div>
+                            <div class="challenger-stat-label">تحديات منجزة بنجاح</div>
+                        </div>
+                        <div class="challenger-stat-item">
+                            <div id="challenger-next-rank-badge-text" class="challenger-stat-val" style="color: #fbbf24; font-size: 1.15rem;">صائد الدقائق 🥈</div>
+                            <div class="challenger-stat-label">الرتبة القادمة</div>
+                        </div>
+                        <div class="challenger-stat-item">
+                            <div class="challenger-stat-val" style="color: #ff4757;">🔥 x1.2</div>
+                            <div class="challenger-stat-label">مضاعف الحماس</div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; font-size: 0.88rem;">
+                            <span id="challenger-progress-desc" style="color: rgba(255, 255, 255, 0.85);">التقدم نحو الرتبة التالية (0 / 150 XP)</span>
+                            <span id="challenger-progress-pct" style="font-weight: 800; color: #00e5ff;">0%</span>
+                        </div>
+                        <div class="challenger-progress-bar-bg">
+                            <div id="challenger-progress-fill" class="challenger-progress-bar-fill" style="width: 0%;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="challenges-grid">
+                <!-- New Challenge 1: Focus Bomb (قنبلة التركيز) -->
+                <div id="card-challenge-bomb" class="card hover-glow-box" style="margin-bottom: 1.5rem; border-left: 4px solid #ff4757; background: linear-gradient(180deg, rgba(255, 71, 87, 0.05), transparent);">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 0.8rem;">
+                            <div style="position: relative; font-size: 2.6rem;">
+                                <i class="fa-solid fa-bomb" style="color: #ff4757;"></i>
+                                <span id="bomb-sparkle-icon" style="position: absolute; top: -5px; right: -5px; font-size: 1.2rem; display: none;" class="fuse-burning">💥</span>
+                            </div>
+                            <div>
+                                <div style="display: flex; align-items: center; gap: 8px;">
+                                    <h3 style="margin: 0; color: #ff4757;">تحدي قنبلة التركيز 💣</h3>
+                                    <span style="background: rgba(255, 71, 87, 0.18); color: #ff6b81; font-size: 0.75rem; font-weight: 700; padding: 2px 8px; border-radius: 12px; border: 1px solid rgba(255, 71, 87, 0.3);">+100 XP</span>
+                                </div>
+                                <p style="margin: 4px 0 0 0; color: var(--text-muted); font-size: 0.88rem;">القنبلة موقوتة لمدة 25 دقيقة! الفتيل بيولع ولازم تخلص هدفك قبل ما تنفجر وتخسر التحدي!</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="text-align: center; margin: 0.8rem 0;">
+                        <div id="bomb-timer-display" style="font-size: 2.6rem; font-weight: 800; color: #ff4757; font-family: monospace; letter-spacing: 2px;">25:00</div>
+                        <p id="bomb-quote-display" style="color: var(--text-muted); font-size: 0.88rem; margin: 4px 0 10px 0;">جاهز للتحدي؟ اضغط ابدأ واوعى تسيب مكانك!</p>
+                        
+                        <div style="background: rgba(0,0,0,0.18); height: 16px; border-radius: 10px; overflow: hidden; position: relative; margin-bottom: 1rem; box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);">
+                            <div id="bomb-fuse-fill" style="height: 100%; width: 100%; background: linear-gradient(90deg, #ff4757, #ffa502, #ffda79); transition: width 1s linear; border-radius: 10px;"></div>
+                        </div>
+
+                        <button id="bomb-action-btn" onclick="toggleBombChallenge()" class="theme-btn btn-hover-glow" style="background: linear-gradient(135deg, #ff4757, #ee5253); color: white; border: none; padding: 0.8rem 2.2rem; border-radius: 12px; font-size: 1.05rem; font-weight: 700; width: 100%;">
+                            <i class="fa-solid fa-fire"></i> إشعال فتيل القنبلة (25 دقيقة)
+                        </button>
+                    </div>
+                </div>
+
+                <!-- New Challenge 2: Boss Fight Battle (معركة زعيم الكسل والمماطلة) -->
+                <div id="card-challenge-boss" class="card hover-glow-box" style="margin-bottom: 1.5rem; border-left: 4px solid #8e44ad; background: linear-gradient(180deg, rgba(142, 68, 173, 0.06), transparent);">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 0.8rem;">
+                            <div id="boss-avatar-box" style="font-size: 2.8rem; line-height: 1; transition: transform 0.3s ease;">
+                                🐉
+                            </div>
+                            <div>
+                                <div style="display: flex; align-items: center; gap: 8px;">
+                                    <h3 style="margin: 0; color: #a55eea;">معركة زعيم الكسل والمماطلة ⚔️</h3>
+                                    <span style="background: rgba(165, 94, 234, 0.2); color: #d1d8e0; font-size: 0.75rem; font-weight: 700; padding: 2px 8px; border-radius: 12px; border: 1px solid rgba(165, 94, 234, 0.4);">+150 XP 👑</span>
+                                </div>
+                                <p style="margin: 4px 0 0 0; color: var(--text-muted); font-size: 0.88rem;">الوحش عنده 100% طاقة. قسّم مذاكرتك لـ 4 جولات (15 دقيقة كل جولة)، وكل جولة تسدد ضربة سيف قاضية (-25% HP)!</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="margin: 0.8rem 0;">
+                        <!-- Boss HP Bar -->
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem; font-size: 0.9rem; font-weight: 700;">
+                            <span style="color: #ff4757;"><i class="fa-solid fa-heart-pulse"></i> طاقة الزعيم (HP)</span>
+                            <span id="boss-hp-text" style="color: #ff4757;">100%</span>
+                        </div>
+                        <div style="background: rgba(0,0,0,0.25); height: 18px; border-radius: 10px; overflow: hidden; position: relative; margin-bottom: 0.8rem; box-shadow: inset 0 2px 5px rgba(0,0,0,0.3);">
+                            <div id="boss-hp-fill" style="height: 100%; width: 100%; background: linear-gradient(90deg, #ff4757, #ff6b81); transition: width 0.6s ease; border-radius: 10px;"></div>
+                        </div>
+
+                        <!-- Battle Round Tracker -->
+                        <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 0.7rem; text-align: center; margin-bottom: 1rem;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.9rem;">
+                                <span id="boss-round-status" style="font-weight: 700; color: var(--text-main);">الجولة 1 من 4 (15 دقيقة)</span>
+                                <span id="boss-round-timer" style="font-size: 1.3rem; font-weight: 800; color: #a55eea; font-family: monospace;">15:00</span>
+                            </div>
+                            <p id="boss-battle-dialogue" style="margin: 6px 0 0 0; color: var(--text-muted); font-size: 0.84rem;">الزعيم يتحدى: "مش هتقدر تركز ربع ساعة على بعضها!"</p>
+                        </div>
+
+                        <div style="display: flex; flex-direction: column; gap: 8px;">
+                            <button id="boss-round-btn" onclick="toggleBossRound()" class="theme-btn btn-hover-glow" style="background: linear-gradient(135deg, #8e44ad, #9b59b6); color: white; border: none; padding: 0.8rem; border-radius: 12px; font-size: 1rem; font-weight: 700; width: 100%;">
+                                <i class="fa-solid fa-khanda"></i> ابدأ جولة القتال (15 دقيقة)
+                            </button>
+                            <button id="boss-strike-btn" onclick="strikeBoss()" style="display: none; background: linear-gradient(135deg, #f1c40f, #e67e22); color: #031024; border: none; padding: 0.85rem; border-radius: 12px; font-size: 1.05rem; font-weight: 800; width: 100%; box-shadow: 0 0 20px rgba(241, 196, 15, 0.6); cursor: pointer; animation: pulseGlow 1.5s infinite;">
+                                <i class="fa-solid fa-burst"></i> سدد ضربة السيف القاضية للزعيم (-25% HP)! ⚡
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- New Challenge 3: Virtual Tree Grow (شجرة التركيز والنمو الحية) -->
+                <div id="card-challenge-tree" class="card hover-glow-box" style="margin-bottom: 1.5rem; border-left: 4px solid #2ecc71; background: linear-gradient(180deg, rgba(46, 204, 113, 0.05), transparent);">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 0.8rem;">
+                            <div style="font-size: 2.8rem; line-height: 1;">
+                                <span id="tree-icon-stage" style="display: inline-block; transition: transform 0.4s ease;">🌱</span>
+                            </div>
+                            <div>
+                                <div style="display: flex; align-items: center; gap: 8px;">
+                                    <h3 style="margin: 0; color: #2ecc71;">شجرة التركيز والنمو الحية 🌳</h3>
+                                    <span style="background: rgba(46, 204, 113, 0.2); color: #2ed573; font-size: 0.75rem; font-weight: 700; padding: 2px 8px; border-radius: 12px; border: 1px solid rgba(46, 204, 113, 0.4);">+75 XP</span>
+                                </div>
+                                <p style="margin: 4px 0 0 0; color: var(--text-muted); font-size: 0.88rem;">ازرع بذرة في بستان مذاكرتك.. ومع مرور دقائق التركيز بتنمو وتكبر لشجرة عملاقة! لو استسلمت الشجرة هتدبل 🥀</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="margin: 0.8rem 0;">
+                        <div style="display: flex; gap: 0.8rem; margin-bottom: 0.8rem;">
+                            <select id="tree-duration-select" style="flex: 1; padding: 0.75rem; border: 2px solid var(--border-color); border-radius: 10px; font-family: 'Tajawal'; background: var(--bg-color); color: var(--text-main);">
+                                <option value="25">شجيرة سريعة (25 دقيقة)</option>
+                                <option value="45">شجرة برتقال مثمرة (45 دقيقة)</option>
+                                <option value="60">شجرة البلوط الخالدة (60 دقيقة)</option>
+                            </select>
+                        </div>
+
+                        <div style="text-align: center; margin-bottom: 0.8rem;">
+                            <div id="tree-timer-display" style="font-size: 2.4rem; font-weight: 800; color: #2ecc71; font-family: monospace;">25:00</div>
+                            <p id="tree-status-text" style="color: var(--text-muted); font-size: 0.88rem; margin: 4px 0 8px 0;">بذرة جاهزة للغرس في التربة 🌱</p>
+                            
+                            <div style="background: rgba(0,0,0,0.18); height: 16px; border-radius: 10px; overflow: hidden; position: relative; box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);">
+                                <div id="tree-growth-fill" style="height: 100%; width: 0%; background: linear-gradient(90deg, #2ecc71, #1abc9c, #27ae60); transition: width 1s linear; border-radius: 10px;"></div>
+                            </div>
+                        </div>
+
+                        <button id="tree-action-btn" onclick="toggleTreeChallenge()" class="theme-btn btn-hover-glow" style="background: linear-gradient(135deg, #2ecc71, #27ae60); color: white; border: none; padding: 0.8rem 2.2rem; border-radius: 12px; font-size: 1.05rem; font-weight: 700; width: 100%;">
+                            <i class="fa-solid fa-seedling"></i> ازرع الشجرة الآن
+                        </button>
+                    </div>
+                </div>
+
+                <!-- New Challenge 4: Ninja Sprint (سباق النينجا الخاطف) -->
+                <div id="card-challenge-ninja" class="card hover-glow-box" style="margin-bottom: 1.5rem; border-left: 4px solid #00e5ff; background: linear-gradient(180deg, rgba(0, 229, 255, 0.05), transparent);">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 0.8rem;">
+                            <div style="font-size: 2.8rem; line-height: 1;">
+                                <i class="fa-solid fa-user-ninja" style="color: #00e5ff;"></i>
+                            </div>
+                            <div>
+                                <div style="display: flex; align-items: center; gap: 8px;">
+                                    <h3 style="margin: 0; color: #00e5ff;">سباق النينجا الخاطف 🥷⚡</h3>
+                                    <span style="background: rgba(0, 229, 255, 0.18); color: #00e5ff; font-size: 0.75rem; font-weight: 700; padding: 2px 8px; border-radius: 12px; border: 1px solid rgba(0, 229, 255, 0.4);">+50 XP</span>
+                                </div>
+                                <p style="margin: 4px 0 0 0; color: var(--text-muted); font-size: 0.88rem;">15 دقيقة فقط من السرعة الخارقة! للمهام الصعبة، حفظ القوانين، أو حل نموذج سريع بدون رفع عينك عن الورقة!</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="text-align: center; margin: 0.8rem 0;">
+                        <div id="ninja-timer-display" style="font-size: 2.6rem; font-weight: 800; color: #00e5ff; font-family: monospace; letter-spacing: 2px;">15:00</div>
+                        <p id="ninja-status-text" style="color: var(--text-muted); font-size: 0.88rem; margin: 4px 0 10px 0;">جاهز للانطلاق بسرعة البرق؟</p>
+                        
+                        <div style="background: rgba(0,0,0,0.18); height: 16px; border-radius: 10px; overflow: hidden; position: relative; margin-bottom: 1rem; box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);">
+                            <div id="ninja-progress-fill" style="height: 100%; width: 0%; background: linear-gradient(90deg, #00e5ff, #0984e3, #6c5ce7); transition: width 1s linear; border-radius: 10px;"></div>
+                        </div>
+
+                        <button id="ninja-action-btn" onclick="toggleNinjaChallenge()" class="theme-btn btn-hover-glow" style="background: linear-gradient(135deg, #00e5ff, #0984e3); color: white; border: none; padding: 0.8rem 2.2rem; border-radius: 12px; font-size: 1.05rem; font-weight: 700; width: 100%;">
+                            <i class="fa-solid fa-bolt"></i> انطلاق بسرعة النينجا (15 دقيقة)
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Upgraded Ice Cube Challenge -->
+                <div id="card-challenge-ice" class="card hover-glow-box" style="margin-bottom: 1.5rem; border-left: 4px solid #00cec9; background: linear-gradient(180deg, rgba(0, 206, 201, 0.05), transparent);">
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 0.8rem;">
+                        <div style="font-size: 2.6rem; line-height: 1;">
+                            <span id="ice-icon-stage">🧊</span>
+                        </div>
+                        <div>
+                            <div style="display: flex; align-items: center; gap: 8px;">
+                                <h3 style="margin: 0; color: #00cec9;">تحدي كوباية التلج 🧊</h3>
+                                <span style="background: rgba(0, 206, 201, 0.18); color: #00cec9; font-size: 0.75rem; font-weight: 700; padding: 2px 8px; border-radius: 12px; border: 1px solid rgba(0, 206, 201, 0.4);">+60 XP</span>
+                            </div>
+                            <p style="margin: 4px 0 0 0; color: var(--text-muted); font-size: 0.88rem;">املى كوباية تلج حقيقية وحطها قدامك.. التحدي التفاعلي مدته 20 دقيقة، هدفك تذاكر لحد ما التلج يدوب كله!</p>
+                        </div>
+                    </div>
+                    
+                    <div style="text-align: center; margin: 0.8rem 0;">
+                        <div id="ice-timer-display" style="font-size: 2.4rem; font-weight: 800; color: #00cec9; font-family: monospace;">20:00</div>
+                        <p id="ice-status-text" style="color: var(--text-muted); font-size: 0.88rem; margin: 4px 0 8px 0;">مكعب التلج صلب ومتماسك.. ابدأ عشان يدوب!</p>
+                        
+                        <div style="background: rgba(0,0,0,0.18); height: 16px; border-radius: 10px; overflow: hidden; position: relative; margin-bottom: 1rem; box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);">
+                            <div id="ice-melt-fill" style="height: 100%; width: 100%; background: linear-gradient(90deg, #00cec9, #81ecec); transition: width 1s linear; border-radius: 10px;"></div>
+                        </div>
+
+                        <button onclick="startIceChallenge()" id="ice-btn" class="theme-btn btn-hover-glow" style="background: linear-gradient(135deg, #00cec9, #0984e3); color: white; border: none; padding: 0.8rem 2rem; border-radius: 12px; font-size: 1.05rem; font-weight: 700; width: 100%;">
+                            <i class="fa-solid fa-play"></i> ابدأ التحدي دلوقتي
+                        </button>
                     </div>
                 </div>
 
@@ -1425,17 +1680,41 @@
                         </div>
                     </div>
                 </div>
-                <!-- Challenge 3: Candle -->
-                <div class="card hover-glow-box" style="margin-bottom: 1.5rem; border-left: 4px solid #e17055;">
-                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
-                        <i class="fa-solid fa-fire-flame-curved" style="font-size: 2.5rem; color: #e17055;"></i>
+                <!-- Upgraded Candle Challenge -->
+                <div id="card-challenge-candle" class="card hover-glow-box" style="margin-bottom: 1.5rem; border-left: 4px solid #e17055; background: linear-gradient(180deg, rgba(225, 112, 85, 0.05), transparent);">
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 0.8rem;">
+                        <div style="font-size: 2.6rem; line-height: 1;">
+                            <span id="candle-icon-stage">🕯️</span>
+                        </div>
                         <div>
-                            <h3 style="margin: 0; color: #e17055;">تحدي الشمعة 🕯️</h3>
-                            <p style="margin: 5px 0 0 0; color: var(--text-muted); font-size: 0.9rem;">ولع شمعة صغيرة قدامك.. هدفك تذاكر بتركيز تام وماتقومش غير لما الشمعة تطفي لوحدها!</p>
+                            <div style="display: flex; align-items: center; gap: 8px;">
+                                <h3 style="margin: 0; color: #e17055;">تحدي الشمعة 🕯️</h3>
+                                <span style="background: rgba(225, 112, 85, 0.18); color: #e17055; font-size: 0.75rem; font-weight: 700; padding: 2px 8px; border-radius: 12px; border: 1px solid rgba(225, 112, 85, 0.4);">+70 XP</span>
+                            </div>
+                            <p style="margin: 4px 0 0 0; color: var(--text-muted); font-size: 0.88rem;">ولع شمعة قدامك.. هدفك تذاكر بتركيز تام وماتقومش غير لما الشمعة تطفي لوحدها!</p>
                         </div>
                     </div>
-                    <div style="text-align: center; margin-top: 1rem;">
-                        <button onclick="startCandleChallenge()" id="candle-btn" class="theme-btn btn-hover-glow" style="background: linear-gradient(135deg, #e17055, #d63031); color: white; border: none; padding: 0.8rem 2rem; border-radius: 10px; font-size: 1.1rem;"><i class="fa-solid fa-play"></i> ابدأ التحدي دلوقتي</button>
+                    
+                    <div style="margin: 0.8rem 0;">
+                        <div style="display: flex; gap: 0.8rem; margin-bottom: 0.8rem;">
+                            <select id="candle-duration-select" style="flex: 1; padding: 0.75rem; border: 2px solid var(--border-color); border-radius: 10px; font-family: 'Tajawal'; background: var(--bg-color); color: var(--text-main);">
+                                <option value="30">شمعة صغيرة (30 دقيقة)</option>
+                                <option value="45">شمعة متوسطة (45 دقيقة)</option>
+                            </select>
+                        </div>
+
+                        <div style="text-align: center; margin-bottom: 0.8rem;">
+                            <div id="candle-timer-display" style="font-size: 2.4rem; font-weight: 800; color: #e17055; font-family: monospace;">30:00</div>
+                            <p id="candle-status-text" style="color: var(--text-muted); font-size: 0.88rem; margin: 4px 0 8px 0;">الشمعة جاهزة للإشعال 🔥</p>
+                            
+                            <div style="background: rgba(0,0,0,0.18); height: 16px; border-radius: 10px; overflow: hidden; position: relative; margin-bottom: 1rem; box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);">
+                                <div id="candle-burn-fill" style="height: 100%; width: 100%; background: linear-gradient(90deg, #e17055, #fab1a0); transition: width 1s linear; border-radius: 10px;"></div>
+                            </div>
+
+                            <button onclick="startCandleChallenge()" id="candle-btn" class="theme-btn btn-hover-glow" style="background: linear-gradient(135deg, #e17055, #d63031); color: white; border: none; padding: 0.8rem 2rem; border-radius: 12px; font-size: 1.05rem; font-weight: 700; width: 100%;">
+                                <i class="fa-solid fa-play"></i> ابدأ التحدي دلوقتي
+                            </button>
+                        </div>
                     </div>
                 </div>
 
@@ -2187,39 +2466,56 @@
                 </button>
             </div>
 
-            <!-- New Features Highlights -->
-            <div style="display: flex; flex-direction: column; gap: 1rem; margin-bottom: 1.5rem;">
-                
-                <div style="display: flex; gap: 12px; align-items: flex-start; background: rgba(0, 229, 255, 0.05); padding: 10px 12px; border-radius: 12px; border: 1px solid rgba(0, 229, 255, 0.15);">
-                    <div style="background: rgba(0, 229, 255, 0.2); padding: 8px; border-radius: 10px; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-                        <i class="fa-solid fa-book-open-reader" style="color: #00e5ff; font-size: 1.2rem;"></i>
+                <!-- Feature 1: Camera Book Scanner -->
+                <div style="display: flex; gap: 12px; align-items: flex-start; background: rgba(0, 229, 255, 0.08); padding: 12px 14px; border-radius: 14px; border: 1.5px solid rgba(0, 229, 255, 0.35);">
+                    <div style="background: rgba(0, 229, 255, 0.25); padding: 8px; border-radius: 10px; width: 42px; height: 42px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                        <i class="fa-solid fa-camera-retro" style="color: #00e5ff; font-size: 1.3rem;"></i>
                     </div>
                     <div>
-                        <strong style="color: #fff; font-size: 0.98rem;">استوديو الكتب والمذكرات الذكي (Notebook AI) 🧠</strong>
-                        <p style="color: var(--text-muted); margin: 3px 0 0 0; font-size: 0.85rem; line-height: 1.4;">ارفع أي كتاب أو ملزمة PDF، وهيطلعلك ملخص شامل، وأهم 5 أسئلة متوقعة في الامتحان مع إجاباتها النموذجية!</p>
+                        <strong style="color: #00e5ff; font-size: 1rem; display: block;">معندكش نسخة PDF؟ صوّر كتابك الورقي بالكاميرا فوراً! 📸</strong>
+                        <p style="color: #e2e8f0; margin: 4px 0 0 0; font-size: 0.86rem; line-height: 1.5;">
+                            افتح <strong>استوديو الكتب (Notebook AI)</strong> واضغط <strong>"تصوير بالكاميرا 📸"</strong> أو اختر صوراً من المعرض.. الذكاء الاصطناعي هيقرأ صفحة كتابك الورقي ويستخرج كل كلماتها بدقة 100% ويحولها لملخص وبودكاست في ثوانٍ!
+                        </p>
                     </div>
                 </div>
 
-                <div style="display: flex; gap: 12px; align-items: flex-start; background: rgba(255, 0, 127, 0.05); padding: 10px 12px; border-radius: 12px; border: 1px solid rgba(255, 0, 127, 0.15);">
-                    <div style="background: rgba(255, 0, 127, 0.2); padding: 8px; border-radius: 10px; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-                        <i class="fa-solid fa-podcast" style="color: #ff007f; font-size: 1.2rem;"></i>
+                <!-- Feature 2: High Quality Podcast Audio Overview -->
+                <div style="display: flex; gap: 12px; align-items: flex-start; background: rgba(255, 0, 127, 0.08); padding: 12px 14px; border-radius: 14px; border: 1.5px solid rgba(255, 0, 127, 0.35);">
+                    <div style="background: rgba(255, 0, 127, 0.25); padding: 8px; border-radius: 10px; width: 42px; height: 42px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                        <i class="fa-solid fa-podcast" style="color: #ff007f; font-size: 1.3rem;"></i>
                     </div>
                     <div>
-                        <strong style="color: #fff; font-size: 0.98rem;">بودكاست صوتي لشرح الدرس (شخصين) 🎙️</strong>
-                        <p style="color: var(--text-muted); margin: 3px 0 0 0; font-size: 0.85rem; line-height: 1.4;">حوّل كتابك بضغطة زر لحوار إذاعي ممتع بين (أحمد وسارة) بيشرحوا الدرس مع موجات صوتية متحركة!</p>
+                        <strong style="color: #ff007f; font-size: 1rem; display: block;">بودكاست صوتي إذاعي فائق النقاء والترتيب (أحمد وسارة) 🎙️</strong>
+                        <p style="color: #e2e8f0; margin: 4px 0 0 0; font-size: 0.86rem; line-height: 1.5;">
+                            تم تطوير محرك الصوت بالكامل! الحوار الآن مرتب بنظام إذاعي متناوب (أحمد يسأل بذكاء وسارة تشرح المفاهيم وفخاخ الامتحانات)، بنطق عربي فصيح بدون انقطاع، مع إمكانية التحكم في السرعة والضغط على أي جملة لسماعها منفصلة!
+                        </p>
                     </div>
                 </div>
 
-                <div style="display: flex; gap: 12px; align-items: flex-start; background: rgba(46, 213, 115, 0.05); padding: 10px 12px; border-radius: 12px; border: 1px solid rgba(46, 213, 115, 0.15);">
-                    <div style="background: rgba(46, 213, 115, 0.2); padding: 8px; border-radius: 10px; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-                        <i class="fa-solid fa-comments" style="color: #2ed573; font-size: 1.2rem;"></i>
+                <!-- Feature 3: Interactive Study Chat -->
+                <div style="display: flex; gap: 12px; align-items: flex-start; background: rgba(46, 213, 115, 0.06); padding: 12px 14px; border-radius: 14px; border: 1px solid rgba(46, 213, 115, 0.25);">
+                    <div style="background: rgba(46, 213, 115, 0.2); padding: 8px; border-radius: 10px; width: 42px; height: 42px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                        <i class="fa-solid fa-comments" style="color: #2ed573; font-size: 1.3rem;"></i>
                     </div>
                     <div>
-                        <strong style="color: #fff; font-size: 0.98rem;">شات تفاعلي يسألك وتسأله عن المنهج 💬</strong>
-                        <p style="color: var(--text-muted); margin: 3px 0 0 0; font-size: 0.85rem; line-height: 1.4;">اتكلم مع الملزمة كأنها مدرس خصوصي، واسأله عن أي جزئية مش فاهمها وهيجاوبك فوراً.</p>
+                        <strong style="color: #2ed573; font-size: 0.98rem; display: block;">شات تفاعلي وأسئلة امتحانات متوقعة 💬</strong>
+                        <p style="color: var(--text-muted); margin: 3px 0 0 0; font-size: 0.85rem; line-height: 1.4;">
+                            اسأل في أي نقطة في كتابك المصور أو ملزمتك، وسيجاوبك الذكاء الاصطناعي مع شرح المسائل والقوانين النموذجية.
+                        </p>
                     </div>
                 </div>
-
+                <!-- Feature 4: Gamified Challenges System -->
+                <div style="display: flex; gap: 12px; align-items: flex-start; background: rgba(251, 191, 36, 0.08); padding: 12px 14px; border-radius: 14px; border: 1.5px solid rgba(251, 191, 36, 0.35);">
+                    <div style="background: rgba(251, 191, 36, 0.2); padding: 8px; border-radius: 10px; width: 42px; height: 42px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                        <i class="fa-solid fa-gamepad" style="color: #fbbf24; font-size: 1.3rem;"></i>
+                    </div>
+                    <div>
+                        <strong style="color: #fbbf24; font-size: 0.98rem; display: block;">تحديات المذاكرة التفاعلية ونظام نقاط الخبرة (Gamer XP) 🎮⚡</strong>
+                        <p style="color: #e2e8f0; margin: 4px 0 0 0; font-size: 0.86rem; line-height: 1.5;">
+                            واجه <strong>معركة زعيم الكسل والمماطلة 🐉</strong> وسدد له ضربات السيف، أو جرب <strong>قنبلة التركيز 💣</strong>، وازرع <strong>شجرتك الحية 🌱</strong>، وسابق الزمن في <strong>سباق النينجا 🥷</strong>! كل تحدي تخلصه هتكسب نقاط XP وترتقي في الرتب مع احتفالات وأصوات نصر حماسية!
+                        </p>
+                    </div>
+                </div>
             </div>
 
             <!-- Action Buttons -->
@@ -2250,6 +2546,31 @@
                 </button>
             </div>
 
+        </div>
+    </div>
+
+    <!-- Challenge Victory Celebration Modal & Confetti Canvas -->
+    <canvas id="challenge-confetti-canvas" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 999999; display: none;"></canvas>
+    <div id="challenge-victory-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.85); z-index: 100000; justify-content: center; align-items: center; backdrop-filter: blur(8px); padding: 15px;">
+        <div style="background: linear-gradient(135deg, #111827, #1e1b4b); padding: 2rem; border-radius: 24px; max-width: 95%; width: 480px; text-align: center; border: 2px solid #fbbf24; box-shadow: 0 0 40px rgba(251, 191, 36, 0.4); animation: slideUpGlow 0.4s ease; color: #fff;">
+            <div style="font-size: 4rem; margin-bottom: 0.5rem; animation: treeBounce 0.8s ease;">🏆</div>
+            <h2 style="color: #fbbf24; margin: 0 0 8px 0; font-size: 1.6rem; font-family: 'Tajawal', sans-serif;">عاش يا بطل! أنهيت التحدي بنجاح! 🎉</h2>
+            <p id="victory-challenge-name" style="color: #00e5ff; font-size: 1.15rem; font-weight: 700; margin: 0 0 1rem 0;">تحدي قنبلة التركيز 💣</p>
+            
+            <div style="background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(251, 191, 36, 0.3); border-radius: 16px; padding: 1.2rem; margin-bottom: 1.5rem;">
+                <div style="font-size: 0.9rem; color: rgba(255, 255, 255, 0.75);">المكافأة المكتسبة:</div>
+                <div id="victory-xp-gained" style="font-size: 2.2rem; font-weight: 800; color: #fbbf24; font-family: 'Tajawal'; margin: 4px 0;">+100 XP 🎖️</div>
+                <div id="victory-rank-status" style="font-size: 0.95rem; color: #2ed573; font-weight: 600;">رتبتك الحالية: مقاتل تركيز مبتدئ 🥉</div>
+            </div>
+
+            <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+                <button onclick="shareVictoryWhatsApp()" class="theme-btn" style="background: #25d366; color: #fff; border: none; padding: 0.75rem 1.4rem; border-radius: 12px; font-weight: 700; font-family: 'Tajawal'; display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                    <i class="fa-brands fa-whatsapp" style="font-size: 1.2rem;"></i> شارك فوزك مع أصحابك
+                </button>
+                <button onclick="closeVictoryModal()" class="theme-btn" style="background: rgba(255, 255, 255, 0.15); color: #fff; border: 1px solid rgba(255, 255, 255, 0.3); padding: 0.75rem 1.6rem; border-radius: 12px; font-weight: 700; font-family: 'Tajawal'; cursor: pointer;">
+                    إغلاق ومتابعة
+                </button>
+            </div>
         </div>
     </div>
 
