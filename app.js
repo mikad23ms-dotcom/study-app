@@ -4612,14 +4612,16 @@ function playViaSpeechSynthesis(text, speaker, speed, onDone) {
 
     const isSara = (speaker === 'سارة');
     const bestVoice = getBestArabicVoice(isSara);
+    if (!bestVoice) {
+        // STRICT: Never use English system voice to read Arabic text!
+        console.warn("No native Arabic TTS voice on device; avoiding English accent gibberish.");
+        if (onDone) setTimeout(onDone, 1200);
+        return;
+    }
 
     const utterance = new SpeechSynthesisUtterance(text);
-    if (bestVoice) {
-        utterance.voice = bestVoice;
-        utterance.lang = bestVoice.lang;
-    } else {
-        utterance.lang = 'ar-SA';
-    }
+    utterance.voice = bestVoice;
+    utterance.lang = bestVoice.lang;
 
     const baseSpeed = speed || 1.0;
     if (isSara) {
@@ -5907,22 +5909,77 @@ window.startCandleChallenge = startCandleChallenge;
 // === ADVANCED INTERACTIVE GAMIFICATION: CHEER, AMBIENT, WHEEL, BADGES ===
 // =====================================================================
 
-// --- 🗣️ Arabic Motivational Speech Cheerleader ---
+// --- 🗣️ Arabic Motivational Speech Cheerleader (Google Native Arabic TTS + Strict Arabic Fallback) ---
+let currentCheerAudio = null;
+
+function cleanArabicSpeechText(text) {
+    if (!text) return '';
+    let clean = text.replace(/[\u{1F000}-\u{1F9FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}\u{1F1E6}-\u{1F1FF}\u{1F600}-\u{1F64F}\u{1F680}-\u{1F6FF}]/gu, ' ');
+    clean = clean.replace(/\bXP\b/gi, ' نقطة ');
+    clean = clean.replace(/\bHP\b/gi, ' طاقة ');
+    clean = clean.replace(/[a-zA-Z]+/g, ' ');
+    clean = clean.replace(/[:_~*#@^&|<>{}\[\]()\\/+\-=]/g, ' ');
+    clean = clean.replace(/\s+/g, ' ').trim();
+    return clean;
+}
+
 function speakCheer(phrase) {
     if (localStorage.getItem('study_challenges_sound_muted') === 'true') return;
+    const cleanText = cleanArabicSpeechText(phrase);
+    if (!cleanText) return;
+
+    // 1. Primary: Google High-Quality Native Arabic Audio (Sounds 100% fluent Arabic)
+    try {
+        if (currentCheerAudio) {
+            try { currentCheerAudio.pause(); } catch(e) {}
+            currentCheerAudio = null;
+        }
+        const encoded = encodeURIComponent(cleanText.slice(0, 180));
+        const url = `https://translate.google.com/translate_tts?ie=UTF-8&tl=ar&client=tw-ob&q=${encoded}`;
+        const audio = new Audio();
+        audio.referrerPolicy = 'no-referrer';
+        audio.src = url;
+        currentCheerAudio = audio;
+
+        audio.onerror = () => {
+            currentCheerAudio = null;
+            speakCheerFallback(cleanText);
+        };
+
+        const playPromise = audio.play();
+        if (playPromise !== undefined) {
+            playPromise.catch(e => {
+                currentCheerAudio = null;
+                speakCheerFallback(cleanText);
+            });
+        }
+    } catch (e) {
+        speakCheerFallback(cleanText);
+    }
+}
+
+function speakCheerFallback(cleanText) {
     if (!('speechSynthesis' in window)) return;
     try {
         window.speechSynthesis.cancel();
-        const utter = new SpeechSynthesisUtterance(phrase);
-        utter.lang = 'ar-EG';
-        utter.rate = 1.05;
-        utter.pitch = 1.15;
-        const voices = window.speechSynthesis.getVoices();
-        const arVoice = voices.find(v => v.lang.startsWith('ar'));
-        if (arVoice) utter.voice = arVoice;
+        const voices = window.speechSynthesis.getVoices() || [];
+        // STRICT: ONLY use speech synthesis if an actual Arabic voice is installed!
+        const arVoice = voices.find(v => v && v.lang && (v.lang.toLowerCase().startsWith('ar') || v.lang.toLowerCase().includes('ar')));
+        
+        if (!arVoice) {
+            // NEVER allow English default voice (like Microsoft David) to butcher Arabic words!
+            console.log("No native Arabic voice found on device; avoided English TTS gibberish.");
+            return;
+        }
+
+        const utter = new SpeechSynthesisUtterance(cleanText);
+        utter.voice = arVoice;
+        utter.lang = arVoice.lang || 'ar-EG';
+        utter.rate = 1.0;
+        utter.pitch = 1.05;
         window.speechSynthesis.speak(utter);
-    } catch (e) {
-        console.warn('Speech cheer error:', e);
+    } catch (err) {
+        console.warn("Speech cheer fallback error:", err);
     }
 }
 
