@@ -3070,6 +3070,7 @@ function startIceChallenge() {
         if (meltFill) meltFill.style.width = '100%';
         if (iconStage) iconStage.innerText = '🧊';
         if (statusText) statusText.innerText = 'مكعب التلج صلب ومتماسك.. ابدأ عشان يدوب!';
+        if (typeof triggerChallengeForfeit === 'function') triggerChallengeForfeit('تحدي كوباية التلج 🧊');
     }
 }
 
@@ -3125,7 +3126,7 @@ function startFlightChallenge() {
         btn.innerHTML = '<i class="fa-solid fa-plane"></i> إقلاع!';
         btn.style.background = 'linear-gradient(135deg, #00b894, #00cec9)';
         container.style.display = 'none';
-        alert('تم إلغاء الرحلة.. الطيارة رجعت المطار 😅');
+        if (typeof triggerChallengeForfeit === 'function') triggerChallengeForfeit('تحدي رحلة الطيران ✈️');
     }
 }
 
@@ -3227,12 +3228,14 @@ function dismissApkBanner() {
 function shareUpdateOnWhatsApp() {
     const appUrl = window.location.origin + window.location.pathname.replace(/\/$/, '') + '/study-app.apk';
     const text = encodeURIComponent(
-        "🚀 تحديث جديد وتاريخي لتطبيق المذاكرة!\n\n" +
-        "تم إطلاق تطبيق الأندرويد الرسمي (APK) بمميزات خرافية:\n" +
-        "1️⃣ استوديو ذكي للكتب والمذكرات (Notebook AI) بيلخص الـ PDF ويطلع أهم أسئلة الامتحانات المتوقعة!\n" +
-        "2️⃣ بودكاست صوتي لشرح الدروس كحوار إذاعي بين شخصين (أحمد وسارة)!\n" +
-        "3️⃣ منبهات الصلاة وتنبيهات المذاكرة كل 90 دقيقة بترن والموبايل مقفول تماماً!\n\n" +
-        "حمل التطبيق الرسمي الآن من هنا:\n" + appUrl
+        "🚀 تحديث تاريخي جديد لتطبيق المذاكرة المتكامل (الإصدار الذهبي)!\n\n" +
+        "🔥 أبرز المميزات الخرافية المضافة:\n" +
+        "1️⃣ استوديو الكتب الذكي (Notebook AI) وتصوير المذكرات بالكاميرا وتلخيص الـ PDF فوراً! 📸\n" +
+        "2️⃣ بودكاست صوتي إذاعي متناوب فائق النقاء لشرح الدروس (أحمد وسارة)! 🎙️\n" +
+        "3️⃣ عجلة حظ التحديات الشاملة لـ 16 تحدياً ومضاعفات XP نارية بدون تكرار! 🎡\n" +
+        "4️⃣ ميزان الالتزام: دولاب مكافآت الإنجاز (كافئ نفسك بضمير مرتاح) & أحكام الكفارة المضحكة! 🎁🎭\n" +
+        "5️⃣ منبهات الصلاة وتذكيرات المذاكرة تعمل والموبايل مقفول تماماً مع نقل وحفظ البيانات! 🕌📋\n\n" +
+        "حمل التطبيق الرسمي أو جربه الآن من هنا:\n" + appUrl
     );
     window.open(`https://api.whatsapp.com/send?text=${text}`, '_blank');
 }
@@ -3240,7 +3243,7 @@ function closeWhatsNew() {
     const modal = document.getElementById('whats-new-modal');
     if (modal) {
         modal.style.display = 'none';
-        localStorage.setItem('study_seen_update_v107', 'true');
+        localStorage.setItem('study_seen_update_v110_gold', 'true');
     }
 }
 
@@ -3265,11 +3268,10 @@ document.addEventListener('DOMContentLoaded', () => {
             banner.style.display = 'flex';
         }
     }
-    if (!localStorage.getItem('study_seen_update_v107')) {
+    if (!localStorage.getItem('study_seen_update_v110_gold')) {
         setTimeout(() => {
-            const modal = document.getElementById('whats-new-modal');
             openWhatsNew();
-        }, 1500);
+        }, 1200);
     }
 });
 
@@ -3349,6 +3351,7 @@ function startCandleChallenge() {
         if (burnFill) burnFill.style.width = '100%';
         if (iconStage) iconStage.innerText = '🕯️';
         if (statusText) statusText.innerText = 'الشمعة جاهزة للإشعال 🔥';
+        if (typeof triggerChallengeForfeit === 'function') triggerChallengeForfeit('تحدي الشمعة 🕯️');
     }
 }
 
@@ -3390,7 +3393,7 @@ function startMarathonChallenge() {
         btn.innerHTML = '<i class="fa-solid fa-play"></i> انطلاق الماراثون!';
         btn.style.background = 'linear-gradient(135deg, #d63031, #c0392b)';
         container.style.display = 'none';
-        alert('انسحبت من الماراثون.. حاول تاني بعدين! 🏃‍♂️💨');
+        if (typeof triggerChallengeForfeit === 'function') triggerChallengeForfeit('تحدي الماراثون 🏃‍♂️');
     }
 }
 
@@ -3429,6 +3432,7 @@ function startIsolationChallenge() {
         btn.innerHTML = '<i class="fa-solid fa-power-off"></i> ابدأ العزل!';
         btn.style.background = 'linear-gradient(135deg, #2d3436, #636e72)';
         container.style.display = 'none';
+        if (typeof triggerChallengeForfeit === 'function') triggerChallengeForfeit('تحدي العزل التام 📵');
     }
 }
 
@@ -3441,6 +3445,7 @@ function startBatteryChallenge() {
     } else {
         btn.innerHTML = '<i class="fa-solid fa-bolt"></i> ابدأ التحدي';
         btn.style.background = 'linear-gradient(135deg, #27ae60, #2ecc71)';
+        if (typeof triggerChallengeForfeit === 'function') triggerChallengeForfeit('تحدي شحن البطارية 🔋');
     }
 }
 
@@ -3453,6 +3458,7 @@ function startCavemanChallenge() {
     } else {
         btn.innerHTML = '<i class="fa-solid fa-leaf"></i> اقفل كل حاجة وابدأ';
         btn.style.background = 'linear-gradient(135deg, #00e5ff, #00e5ff)';
+        if (typeof triggerChallengeForfeit === 'function') triggerChallengeForfeit('تحدي رجل الكهف 🪨');
     }
 }
 
@@ -3491,6 +3497,7 @@ function startMarsChallenge() {
         btn.innerHTML = '<i class="fa-solid fa-rocket"></i> إطلاق الصاروخ!';
         btn.style.background = 'linear-gradient(135deg, #d35400, #e67e22)';
         container.style.display = 'none';
+        if (typeof triggerChallengeForfeit === 'function') triggerChallengeForfeit('تحدي مهمة المريخ 🚀');
     }
 }
 
@@ -3503,6 +3510,7 @@ function startPagesChallenge() {
     } else {
         btn.innerHTML = '<i class="fa-solid fa-check-double"></i> قبلت التحدي';
         btn.style.background = 'linear-gradient(135deg, #f39c12, #f1c40f)';
+        if (typeof triggerChallengeForfeit === 'function') triggerChallengeForfeit('تحدي الـ 100 صفحة 📚');
     }
 }
 
@@ -3515,6 +3523,7 @@ function startCoffeeChallenge() {
     } else {
         btn.innerHTML = '<i class="fa-solid fa-mug-hot"></i> القهوة جاهزة';
         btn.style.background = 'linear-gradient(135deg, #7f8c8d, #95a5a6)';
+        if (typeof triggerChallengeForfeit === 'function') triggerChallengeForfeit('تحدي قهوة الصباح ☕');
     }
 }
 
@@ -3553,6 +3562,7 @@ function startTrainChallenge() {
         btn.innerHTML = '<i class="fa-solid fa-ticket"></i> قطع التذكرة!';
         btn.style.background = 'linear-gradient(135deg, #34495e, #2c3e50)';
         container.style.display = 'none';
+        if (typeof triggerChallengeForfeit === 'function') triggerChallengeForfeit('تحدي قطار منتصف الليل 🚆');
     }
 }
 
@@ -3565,6 +3575,7 @@ function startAntChallenge() {
     } else {
         btn.innerHTML = '<i class="fa-solid fa-play"></i> ابدأ التحدي';
         btn.style.background = 'linear-gradient(135deg, #e74c3c, #c0392b)';
+        if (typeof triggerChallengeForfeit === 'function') triggerChallengeForfeit('تحدي النملة النشيطة 🐜');
     }
 }
 
@@ -5283,6 +5294,7 @@ function getCurrentRankInfo(xp) {
 }
 
 function initChallengeDashboard() {
+    if (typeof initCommitmentBalanceUI === 'function') initCommitmentBalanceUI();
     const xp = getChallengeXP();
     const completed = getCompletedChallengesCount();
     const rankInfo = getCurrentRankInfo(xp);
@@ -5372,6 +5384,18 @@ function playWebAudioChime(type = 'victory') {
             osc.frequency.setValueAtTime(220, ctx.currentTime);
             osc.frequency.exponentialRampToValueAtTime(40, ctx.currentTime + 0.35);
             gain.gain.setValueAtTime(0.4, ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.35);
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start(ctx.currentTime);
+            osc.stop(ctx.currentTime + 0.36);
+        } else if (type === 'funny') {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.type = 'sawtooth';
+            osc.frequency.setValueAtTime(340, ctx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(110, ctx.currentTime + 0.35);
+            gain.gain.setValueAtTime(0.25, ctx.currentTime);
             gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.35);
             osc.connect(gain);
             gain.connect(ctx.destination);
@@ -5580,6 +5604,7 @@ function toggleBombChallenge() {
         if (fuseFill) fuseFill.style.width = '100%';
         if (timerDisplay) timerDisplay.innerText = '25:00';
         if (quoteDisplay) quoteDisplay.innerText = 'أبطلت مفعول القنبلة.. خسرنا الجولة بس هتعوضها في الجولة الجاية! 🛡️';
+        if (typeof triggerChallengeForfeit === 'function') triggerChallengeForfeit('تحدي قنبلة التركيز 💣');
     }
 }
 
@@ -5638,6 +5663,7 @@ function toggleBossRound() {
         roundBtn.style.background = 'linear-gradient(135deg, #8e44ad, #9b59b6)';
         if (timerDisplay) timerDisplay.innerText = '15:00';
         if (dialogue) dialogue.innerText = 'تراجعت عن القتال.. الزعيم يسخر منك! ارجع وحاربه لما تكون جاهز! 🐉';
+        if (typeof triggerChallengeForfeit === 'function') triggerChallengeForfeit('قتال زعيم الكسل 🐉');
     }
 }
 
@@ -5791,6 +5817,7 @@ function toggleTreeChallenge() {
         if (growthFill) growthFill.style.width = '0%';
         if (timerDisplay && select) timerDisplay.innerText = `${select.value}:00`;
         if (statusText) statusText.innerText = 'ذبلت الشجرة بسبب المقاطعة.. متقلقش ازرع بذرة جديدة دلوقتي! 🥀';
+        if (typeof triggerChallengeForfeit === 'function') triggerChallengeForfeit('شجرة التركيز والنمو 🌳');
     }
 }
 
@@ -5856,6 +5883,7 @@ function toggleNinjaChallenge() {
         if (timerDisplay) timerDisplay.innerText = '15:00';
         if (progressFill) progressFill.style.width = '0%';
         if (statusText) statusText.innerText = 'توقف سباق النينجا.. استعد وانطلق مجدداً!';
+        if (typeof triggerChallengeForfeit === 'function') triggerChallengeForfeit('سباق النينجا 🥷');
     }
 }
 
@@ -6028,47 +6056,365 @@ function updateAmbientUI() {
     });
 }
 
-// --- 🎡 Lucky Challenge Wheel Spinner ---
-const LUCKY_CHALLENGES = [
-    { id: 'card-challenge-bomb', name: 'تحدي قنبلة التركيز 💣', xpMultiplier: '2x', bonusXP: 100 },
-    { id: 'card-challenge-boss', name: 'معركة زعيم الكسل 🐉⚔️', xpMultiplier: '1.5x', bonusXP: 75 },
-    { id: 'card-challenge-tree', name: 'شجرة التركيز والنمو 🌱🌳', xpMultiplier: '2x', bonusXP: 75 },
-    { id: 'card-challenge-ninja', name: 'سباق النينجا الخاطف 🥷⚡', xpMultiplier: '2.5x', bonusXP: 100 },
-    { id: 'card-challenge-ice', name: 'تحدي كوباية التلج 🧊', xpMultiplier: '2x', bonusXP: 60 },
-    { id: 'card-challenge-candle', name: 'تحدي الشمعة 🕯️', xpMultiplier: '2x', bonusXP: 70 }
+// =====================================================================
+// --- 🎡 COMPREHENSIVE LUCKY CHALLENGE WHEEL (ALL 16+ CHALLENGES & NON-REPEATING) ---
+// =====================================================================
+const ALL_WHEEL_CHALLENGES = [
+    // ⚡ Short (15 - 30 mins)
+    {
+        id: 'card-challenge-bomb',
+        name: 'تحدي قنبلة التركيز 💣',
+        durationText: '25 دقيقة تركيز حديدي',
+        multiplierText: '2x XP',
+        bonusXP: 100,
+        tier: 'short',
+        selectId: null,
+        selectVal: null,
+        desc: 'احذر أن ينفجر الفتيل قبل أن تنهي مهمتك كاملة!'
+    },
+    {
+        id: 'card-challenge-ninja',
+        name: 'سباق النينجا الخاطف 🥷⚡',
+        durationText: '15 دقيقة سرعة قصوى',
+        multiplierText: '2x XP',
+        bonusXP: 50,
+        tier: 'short',
+        selectId: null,
+        selectVal: null,
+        desc: '15 دقيقة لحفظ المصطلحات والقوانين بسرعة البرق وبدون تردد!'
+    },
+    {
+        id: 'card-challenge-ice',
+        name: 'تحدي كوباية التلج 🧊',
+        durationText: '20 دقيقة حتى ذوبان الثلج',
+        multiplierText: '2x XP',
+        bonusXP: 60,
+        tier: 'short',
+        selectId: null,
+        selectVal: null,
+        desc: 'املى كوباية ثلج وركز حتى تذوب بالكامل أمام عينك!'
+    },
+    {
+        id: 'card-challenge-candle',
+        name: 'تحدي الشمعة الصغيرة 🕯️',
+        durationText: '30 دقيقة هدوء تام',
+        multiplierText: '2x XP',
+        bonusXP: 60,
+        tier: 'short',
+        selectId: 'candle-duration-select',
+        selectVal: '30',
+        desc: 'شمعة مضيئة وجلسة هادئة حتى تنطفئ لوحدها!'
+    },
+    {
+        id: 'ant-btn',
+        name: 'تحدي النملة النشيطة 🐜',
+        durationText: '30 دقيقة مذاكرة ونشاط حركي',
+        multiplierText: '2x XP',
+        bonusXP: 60,
+        tier: 'short',
+        selectId: null,
+        selectVal: null,
+        desc: 'ذاكر بتركيز ولما تخلص تحرك واعمل تمرين خفيف وارجع فوراً!'
+    },
+
+    // 💪 Medium Sessions (40 - 60 mins)
+    {
+        id: 'card-challenge-boss',
+        name: 'معركة زعيم الكسل والمماطلة 🐉⚔️',
+        durationText: 'ساعة كاملة (4 جولات × 15 دقيقة)',
+        multiplierText: '2.5x XP',
+        bonusXP: 150,
+        tier: 'medium',
+        selectId: null,
+        selectVal: null,
+        desc: 'قسّم مذاكرتك لـ 4 جولات وسدد ضربة سيف قاضية كل ربع ساعة!'
+    },
+    {
+        id: 'card-challenge-tree',
+        name: 'شجرة التركيز المثمرة 🌳',
+        durationText: '45 دقيقة رعاية وازدهار',
+        multiplierText: '2x XP',
+        bonusXP: 75,
+        tier: 'medium',
+        selectId: 'tree-duration-select',
+        selectVal: '45',
+        desc: 'ازرع شجرة برتقال مثمرة ولا تستسلم حتى تزهر بالكامل!'
+    },
+    {
+        id: 'card-challenge-tree',
+        name: 'شجرة البلوط الخالدة 🌳✨',
+        durationText: 'ساعة كاملة (60 دقيقة) ثبات',
+        multiplierText: '2.5x XP',
+        bonusXP: 100,
+        tier: 'medium',
+        selectId: 'tree-duration-select',
+        selectVal: '60',
+        desc: 'أطول شجرة تركيز في التطبيق.. إثبات لصبرك الأسطوري!'
+    },
+    {
+        id: 'card-challenge-candle',
+        name: 'تحدي الشمعة المتوسطة 🕯️',
+        durationText: '45 دقيقة استيعاب عميق',
+        multiplierText: '2x XP',
+        bonusXP: 70,
+        tier: 'medium',
+        selectId: 'candle-duration-select',
+        selectVal: '45',
+        desc: 'استيعاب هادئ ومستمر طوال 45 دقيقة بدون أي مقاطعة!'
+    },
+    {
+        id: 'flight-destination',
+        name: 'رحلة الطيران: مصر إلى الأردن ✈️',
+        durationText: 'ساعة واحدة (60 دقيقة)',
+        multiplierText: '2x XP',
+        bonusXP: 70,
+        tier: 'medium',
+        selectId: 'flight-destination',
+        selectVal: '60',
+        desc: 'رحلة سريعة بدون توقف حتى هبوط الطائرة بأمان!'
+    },
+    {
+        id: 'caveman-btn',
+        name: 'تحدي رجل الكهف 🪨',
+        durationText: '45 دقيقة: ورقة وقلم وكتاب فقط',
+        multiplierText: '2x XP',
+        bonusXP: 75,
+        tier: 'medium',
+        selectId: null,
+        selectVal: null,
+        desc: 'اقفل كل جهاز إلكتروني وارجع للمذاكرة الورقية الصافية!'
+    },
+    {
+        id: 'battery-btn',
+        name: 'تحدي شحن البطارية 🔋⚡',
+        durationText: 'سباق ضد نفاذ شحن جهازك',
+        multiplierText: '2x XP',
+        bonusXP: 80,
+        tier: 'medium',
+        selectId: null,
+        selectVal: null,
+        desc: 'افصل الشاحن وسابق الزمن لإنهاء هدفك قبل أن يفصل الجهاز!'
+    },
+    {
+        id: 'coffee-btn',
+        name: 'تحدي قهوة الصباح ☕',
+        durationText: '40 دقيقة تركيز ذهبي',
+        multiplierText: '2x XP',
+        bonusXP: 70,
+        tier: 'medium',
+        selectId: null,
+        selectVal: null,
+        desc: 'ممنوع شرب القهوة حتى تنتهي من كامل الجزء المحدد!'
+    },
+    {
+        id: 'pages-btn',
+        name: 'تحدي الـ 100 صفحة 📚',
+        durationText: 'كمية إنجاز: 100 صفحة قراءة ومذاكرة',
+        multiplierText: '2.5x XP',
+        bonusXP: 120,
+        tier: 'medium',
+        selectId: null,
+        selectVal: null,
+        desc: 'التحدي ليس بالوقت فقط.. لا تقم حتى تنهي 100 صفحة كاملة!'
+    },
+
+    // 🏆 Long & Epic Sessions (ساعتين - 7 ساعات)
+    {
+        id: 'flight-destination',
+        name: 'رحلة الطيران: مصر إلى السعودية ✈️🇸🇦',
+        durationText: 'ساعتان كاملتان (120 دقيقة)',
+        multiplierText: '2.5x XP',
+        bonusXP: 120,
+        tier: 'long',
+        selectId: 'flight-destination',
+        selectVal: '120',
+        desc: 'جلسة تركيز دسمة لمدة ساعتين تعادل إنجاز أسبوع كامل!'
+    },
+    {
+        id: 'isolation-duration',
+        name: 'تحدي العزل التام 📵',
+        durationText: 'ساعتان (120 دقيقة) بدون نت نهائياً',
+        multiplierText: '2.5x XP',
+        bonusXP: 120,
+        tier: 'long',
+        selectId: 'isolation-duration',
+        selectVal: '120',
+        desc: 'وضع الطيران والباب مغلق.. لا وجود لأي إشعارات أو تواصل!'
+    },
+    {
+        id: 'marathon-duration',
+        name: 'تحدي الماراثون الصامد 🏃‍♂️',
+        durationText: '3 ساعات مستمرة (180 دقيقة)',
+        multiplierText: '3x XP',
+        bonusXP: 160,
+        tier: 'long',
+        selectId: 'marathon-duration',
+        selectVal: '180',
+        desc: 'ماراثون حقيقي لإنهاء فصول كاملة.. من سيصمد للنهاية؟'
+    },
+    {
+        id: 'train-duration',
+        name: 'قطار منتصف الليل 🚆🌙',
+        durationText: '3 ساعات هدوء ليلي (180 دقيقة)',
+        multiplierText: '3x XP',
+        bonusXP: 160,
+        tier: 'long',
+        selectId: 'train-duration',
+        selectVal: '180',
+        desc: 'رحلة ليلية ساكنة.. المذاكرة في أهدأ أوقات الليل حتى المحطة الأخيرة!'
+    },
+    {
+        id: 'flight-destination',
+        name: 'رحلة الطيران: مصر إلى فرنسا ✈️🗼',
+        durationText: '4 ساعات متواصلة (240 دقيقة)',
+        multiplierText: '3.5x XP',
+        bonusXP: 220,
+        tier: 'epic',
+        selectId: 'flight-destination',
+        selectVal: '240',
+        desc: 'رحلة دولية طويلة لعشاق التحديات الكبرى والإنجاز الضخم!'
+    },
+    {
+        id: 'marathon-duration',
+        name: 'ماراثون الأبطال الخارق 🏃‍♂️🔥',
+        durationText: '4 ساعات متواصلة (240 دقيقة)',
+        multiplierText: '3.5x XP',
+        bonusXP: 220,
+        tier: 'epic',
+        selectId: 'marathon-duration',
+        selectVal: '240',
+        desc: 'تحدي النخبة! 4 ساعات من المذاكرة الصامتة والتركيز الفولاذي!'
+    },
+    {
+        id: 'isolation-duration',
+        name: 'العزل العظيم للأبطال 📵🔒',
+        durationText: '4 ساعات (240 دقيقة) عزلة تامة',
+        multiplierText: '3.5x XP',
+        bonusXP: 220,
+        tier: 'epic',
+        selectId: 'isolation-duration',
+        selectVal: '240',
+        desc: 'أطول فترة عزل رقمي.. تفرغ كامل للمواد الصعبة والتفوق!'
+    },
+    {
+        id: 'train-duration',
+        name: 'قطار رحلة الفجر 🚆🌅',
+        durationText: '4 ساعات بركة الصباح (240 دقيقة)',
+        multiplierText: '3.5x XP',
+        bonusXP: 220,
+        tier: 'epic',
+        selectId: 'train-duration',
+        selectVal: '240',
+        desc: 'استغل بركة الصباح الباكر حتى مطلع النهار بدون أي تشتيت!'
+    },
+    {
+        id: 'mars-duration',
+        name: 'مهمة الهبوط على المريخ 🚀🔴',
+        durationText: '7 ساعات (ليفيل الوحش الفضائي!)',
+        multiplierText: '4x XP الأسطوري!',
+        bonusXP: 350,
+        tier: 'epic',
+        selectId: 'mars-duration',
+        selectVal: '420',
+        desc: 'أصعب وأطول تحدٍ في التطبيق! إنجاز تاريخي لمن يحققه!'
+    }
 ];
 
 let isWheelSpinning = false;
+let currentWheelCategory = 'all';
 let luckyChallengeBooster = null;
+
+function setWheelCategory(category) {
+    currentWheelCategory = category;
+    const tabs = ['all', 'short', 'medium', 'long'];
+    tabs.forEach(t => {
+        const btn = document.getElementById('wheel-tab-' + t);
+        if (btn) {
+            if (t === category) btn.classList.add('active');
+            else btn.classList.remove('active');
+        }
+    });
+}
+
+function getNonRepeatingWheelPool(category) {
+    let pool = ALL_WHEEL_CHALLENGES;
+    if (category === 'short') {
+        pool = ALL_WHEEL_CHALLENGES.filter(c => c.tier === 'short');
+    } else if (category === 'medium') {
+        pool = ALL_WHEEL_CHALLENGES.filter(c => c.tier === 'medium');
+    } else if (category === 'long') {
+        pool = ALL_WHEEL_CHALLENGES.filter(c => c.tier === 'long' || c.tier === 'epic');
+    }
+
+    let history = [];
+    try {
+        history = JSON.parse(localStorage.getItem('study_wheel_recent_picks') || '[]');
+    } catch(e){ history = []; }
+
+    let available = pool.filter(c => !history.includes(c.name));
+    if (available.length < 2) {
+        history = [];
+        available = pool;
+    }
+
+    if (category === 'all' && history.length > 0) {
+        const lastPickName = history[history.length - 1];
+        const lastPickObj = ALL_WHEEL_CHALLENGES.find(c => c.name === lastPickName);
+        if (lastPickObj && lastPickObj.tier === 'short') {
+            const longerPool = available.filter(c => c.tier !== 'short');
+            if (longerPool.length > 0 && Math.random() < 0.75) {
+                return longerPool;
+            }
+        }
+    }
+
+    return available;
+}
+
+function recordWheelPick(challengeName) {
+    try {
+        let history = JSON.parse(localStorage.getItem('study_wheel_recent_picks') || '[]');
+        history.push(challengeName);
+        if (history.length > 8) history.shift();
+        localStorage.setItem('study_wheel_recent_picks', JSON.stringify(history));
+    } catch(e){}
+}
 
 function spinLuckyChallengeWheel() {
     if (isWheelSpinning) return;
     isWheelSpinning = true;
 
     const btn = document.getElementById('spin-wheel-btn');
-    const resultBanner = document.getElementById('lucky-wheel-result-banner');
-    const resultText = document.getElementById('lucky-wheel-result-text');
+    const container = document.getElementById('lucky-mission-card-container');
 
     if (btn) {
         btn.disabled = true;
-        btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> جاري دوران العجلة... 🎲';
+        btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> جاري دوران العجلة وفحص التحديات... 🎲';
     }
 
+    const pool = getNonRepeatingWheelPool(currentWheelCategory);
+
     let ticks = 0;
-    const maxTicks = 22;
+    const maxTicks = 24;
     const tickInterval = setInterval(() => {
         ticks++;
         playWebAudioChime('strike');
-        const randomItem = LUCKY_CHALLENGES[Math.floor(Math.random() * LUCKY_CHALLENGES.length)];
-        if (resultBanner && resultText) {
-            resultBanner.style.display = 'block';
-            resultText.innerText = '🎲 ' + randomItem.name + ' (' + randomItem.xpMultiplier + ' XP Booster!)';
+        const previewItem = pool[Math.floor(Math.random() * pool.length)];
+        if (container) {
+            container.style.display = 'block';
+            container.innerHTML = `
+                <div style="background: rgba(0,0,0,0.4); border: 1.5px dashed #fbbf24; border-radius: 16px; padding: 1rem; text-align: center;">
+                    <div style="font-size: 1.2rem; font-weight: 800; color: #fbbf24;">🎲 ${previewItem.name}</div>
+                    <div style="color: #00e5ff; font-size: 0.9rem; margin-top: 4px;">⏱️ ${previewItem.durationText} | 🔥 ${previewItem.multiplierText} Booster</div>
+                </div>
+            `;
         }
 
         if (ticks >= maxTicks) {
             clearInterval(tickInterval);
-            const winner = LUCKY_CHALLENGES[Math.floor(Math.random() * LUCKY_CHALLENGES.length)];
+            const winner = pool[Math.floor(Math.random() * pool.length)];
             luckyChallengeBooster = winner;
+            recordWheelPick(winner.name);
             isWheelSpinning = false;
 
             if (btn) {
@@ -6076,26 +6422,74 @@ function spinLuckyChallengeWheel() {
                 btn.innerHTML = '<i class="fa-solid fa-dice"></i> دور عجلة التحديات مرة تانية! 🎲';
             }
 
-            if (resultText) {
-                resultText.innerHTML = '🎉 حظك اليومي: <strong>' + winner.name + '</strong> مع مضاعف <strong>' + winner.xpMultiplier + ' XP</strong>! يلا اضغط عليه وابدأ!';
-            }
-
+            renderMissionCard(winner);
             playWebAudioChime('victory');
-            launchChallengeConfetti(2500);
-            speakCheer('مبروك يا بطل! كسبت ' + winner.name + '! يلا وريني تركيزك!');
-
-            const cardEl = document.getElementById(winner.id);
-            if (cardEl) {
-                cardEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                cardEl.style.boxShadow = '0 0 35px rgba(245, 158, 11, 0.9)';
-                cardEl.style.borderColor = '#fbbf24';
-                setTimeout(() => {
-                    cardEl.style.boxShadow = '';
-                    cardEl.style.borderColor = '';
-                }, 5000);
-            }
+            launchChallengeConfetti(3000);
+            speakCheer(`مبروك يا بطل! وقع عليك ${winner.name}! المدة المطلوبة: ${winner.durationText}! وريني همتك!`);
         }
-    }, 110);
+    }, 100);
+}
+
+function renderMissionCard(winner) {
+    const container = document.getElementById('lucky-mission-card-container');
+    if (!container) return;
+
+    container.style.display = 'block';
+    container.innerHTML = `
+        <div class="lucky-mission-card">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 0.6rem;">
+                <h4 style="margin: 0; color: #fbbf24; font-size: 1.3rem; font-family: 'Tajawal', sans-serif;">🎯 المهمة المحددة: ${winner.name}</h4>
+                <span class="mission-tag" style="background: rgba(251, 191, 36, 0.2); color: #fbbf24; border: 1px solid #fbbf24;">
+                    🔥 مضاعف: ${winner.multiplierText}
+                </span>
+            </div>
+            <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 0.8rem;">
+                <span class="mission-tag" style="background: rgba(0, 229, 255, 0.15); color: #00e5ff; border: 1px solid #00e5ff;">
+                    ⏱️ المدة المستهدفة: ${winner.durationText}
+                </span>
+                <span class="mission-tag" style="background: rgba(46, 213, 115, 0.15); color: #2ed573; border: 1px solid #2ed573;">
+                    🎖️ مكافأة إضافية: +${winner.bonusXP} XP
+                </span>
+            </div>
+            <p style="color: #cbd5e1; font-size: 0.95rem; margin: 0 0 1.2rem 0; line-height: 1.6;">${winner.desc}</p>
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <button onclick="launchTargetLuckyChallenge('${winner.id}', '${winner.selectId || ''}', '${winner.selectVal || ''}', '${winner.name}')" class="theme-btn btn-hover-glow" style="background: linear-gradient(135deg, #00e5ff, #0984e3); color: #031024; font-weight: 800; font-size: 1.05rem; padding: 0.8rem 1.8rem; border-radius: 12px; border: none; cursor: pointer; display: inline-flex; align-items: center; gap: 8px;">
+                    <i class="fa-solid fa-play"></i>
+                    <span>انطلق للتحدي واضبط الوقت فوراً! 🚀</span>
+                </button>
+            </div>
+        </div>
+    `;
+}
+
+function launchTargetLuckyChallenge(targetId, selectId, selectVal, challengeName) {
+    if (selectId && selectVal) {
+        const selectEl = document.getElementById(selectId);
+        if (selectEl) {
+            selectEl.value = selectVal;
+            selectEl.dispatchEvent(new Event('change'));
+        }
+    }
+
+    const targetEl = document.getElementById(targetId);
+    if (targetEl) {
+        let cardEl = targetEl;
+        if (!cardEl.classList.contains('card')) {
+            cardEl = targetEl.closest('.card') || targetEl;
+        }
+
+        cardEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        cardEl.style.boxShadow = '0 0 45px rgba(0, 229, 255, 0.95)';
+        cardEl.style.borderColor = '#00e5ff';
+        cardEl.style.transition = 'box-shadow 0.4s ease, border-color 0.4s ease';
+
+        setTimeout(() => {
+            cardEl.style.boxShadow = '';
+            cardEl.style.borderColor = '';
+        }, 6000);
+
+        speakCheer(`انطلق لتحدي ${challengeName}! ركز بتمام قوتك وأنا واثق فيك!`);
+    }
 }
 
 // --- 🛡️ Badges & Trophy Engine ---
@@ -6247,8 +6641,474 @@ window.playHeartbeatThump = playHeartbeatThump;
 window.toggleAmbientSound = toggleAmbientSound;
 window.stopAmbientSound = stopAmbientSound;
 window.spinLuckyChallengeWheel = spinLuckyChallengeWheel;
+window.setWheelCategory = setWheelCategory;
+window.launchTargetLuckyChallenge = launchTargetLuckyChallenge;
 window.initBadges = initBadges;
 window.unlockBadge = unlockBadge;
 window.showBadgeDetails = showBadgeDetails;
 window.closeBadgeModal = closeBadgeModal;
 window.shareBadgeWhatsApp = shareBadgeWhatsApp;
+
+
+// =========================================================================
+// === COMMITMENT & FUN BALANCE: SELF-REWARDS & LIGHTHEARTED PENALTIES ===
+// =========================================================================
+
+const DEFAULT_PENALTIES = [
+    {
+        id: 'cold_water',
+        icon: '🥶',
+        title: 'صدمة المياه المتلجة',
+        desc: 'اغسل وشك بماية متلجة جداً، وبص لنفسك في المراية وقول: "أنا بطل ومش هستسلم تاني!"',
+        funTip: 'بتفوق المخ فوراً وبتطرد هرمون الكسل! 🧠⚡'
+    },
+    {
+        id: 'pushups',
+        icon: '💪',
+        title: '15 ضغطة المحارب',
+        desc: 'انزل على الأرض واعمل 15 عدة ضغط (أو 20 سكوات) حالاً وفوق جسمك وعضلاتك!',
+        funTip: 'هتضخ دم في دماغك وهترجع تركز غصب عنك!'
+    },
+    {
+        id: 'dishes',
+        icon: '🍽️',
+        title: 'بطل غسيل المواعين',
+        desc: 'قوم على المطبخ فوراً واغسل كل المواعين اللي في الحوض وفرح مامتك بيك!',
+        funTip: 'دعوة حلوة من والدتك هتفتحلك أبواب الفهم والتركيز ✨'
+    },
+    {
+        id: 'desk_clean',
+        icon: '🧹',
+        title: 'سباق ترتيب المكتب السريع',
+        desc: 'معاك 3 دقائق فقط ترتب مكتبك وسريرك وتخلي المكان حواليك يلمع بدون أي كسل!',
+        funTip: 'المكان المنظم بيريح الأعصاب ويفتح النفس للمذاكرة 📚'
+    },
+    {
+        id: 'evil_laugh',
+        icon: '🪞',
+        title: 'ضحكة الشر في المراية',
+        desc: 'بص لنفسك في المراية واضحك ضحكة شريرة لمدة 15 ثانية وقول: "الكسل خسران وأنا اللي هكسب!"',
+        funTip: 'الضحك بيطرد التوتر وبيفرفشك 😂'
+    },
+    {
+        id: 'phone_jail',
+        icon: '📵',
+        title: 'حبس الموبايل ساعة في أوضة تانية',
+        desc: 'شيل الموبايل حطه في أبعد درج في أوضة تانية واقفل الباب عليه لمدة ساعة كاملة!',
+        funTip: 'عشان تعرف مين المتحكم في التاني! 🔒'
+    },
+    {
+        id: 'water_jumping',
+        icon: '🥛',
+        title: 'شرب المياه وقفزات النشاط',
+        desc: 'اشرب كوبايتين كبار مياه واعمل 15 قفزة (Jumping Jacks) فوراً في مكانك!',
+        funTip: 'ترطيب + حركة = طاقة خارقة فورية ⚡'
+    },
+    {
+        id: 'confess_friend',
+        icon: '📞',
+        title: 'اعتراف الكسل لصاحبك',
+        desc: 'ابعت لصاحبك فويس نوت 5 ثواني قوله: "أنا استسلمت بس راجع أعوض وهكتسحك!" واقفل النت 😂',
+        funTip: 'الإحراج الصحي بيولد إصرار حديدي! 🔥'
+    },
+    {
+        id: 'no_sugar',
+        icon: '🚫🍫',
+        title: 'صيام السكر والمسليات',
+        desc: 'امنع نفسك من أي شيبسي أو سكريات أو شيكولاتة لبقية اليوم كفارة عن الهروب!',
+        funTip: 'انضباط ذاتي قوي يرجعلك السيطرة 🧠'
+    },
+    {
+        id: 'dramatic_poem',
+        icon: '🎭',
+        title: 'القصيدة الحماسية المسرحية',
+        desc: 'اقف في نص الأوضة وقول بصوت مسرحي مرتفع: "سأذاكر وأنتصر ولن أستسلم للكروان المنكسر!" 😂',
+        funTip: 'الفرفشة بتكسر الملل والجمود!'
+    },
+    {
+        id: 'silent_apology',
+        icon: '🧘‍♂️',
+        title: 'اعتذار دقيقتين للضمير',
+        desc: 'اقعد على الأرض، غمض عينك وخد 10 أنفاس عميقة واعتذر لكتابك بابتسامة وارجع افتحه!',
+        funTip: 'التصالح مع الذات أحسن من جلد الذات 🕊️'
+    }
+];
+
+const DEFAULT_REWARDS = [
+    {
+        id: 'youtube_anime',
+        icon: '🍿',
+        title: 'ربع ساعة يوتيوب أو حلقة أنمي',
+        desc: 'اتفرج على اللي بتحبه لمدة 15 دقيقة كاملة بدون ذرة تأنيب ضمير.. إنت تعبت وتستاهل!'
+    },
+    {
+        id: 'iced_coffee',
+        icon: '☕🧊',
+        title: 'مشروب فاخر أو آيس كوفي',
+        desc: 'اعمل لنفسك كوباية قهوة مثلجة بمزاج رايق أو عصير فريش واشربه بروقان واستمتع!'
+    },
+    {
+        id: 'sweet_treat',
+        icon: '🍫✨',
+        title: 'شوكولاتة أو حلى مفضل',
+        desc: 'خد قطعتين من الشوكولاتة المفضلة ليك أو تحلية بتحبها كمكافأة طاقة لمخك الشغال!'
+    },
+    {
+        id: 'gaming_session',
+        icon: '🎮🏆',
+        title: '20 دقيقة جيمينج ولعبتك المفضلة',
+        desc: 'العب ماتش فيفا أو جيم فري فاير أو لعبتك المفضلة لمدة 20 دقيقة وإنت رافع راسك!'
+    },
+    {
+        id: 'power_nap',
+        icon: '😴⚡',
+        title: 'قيلولة ذهبية (Power Nap) 25 دقيقة',
+        desc: 'افرد ضهرك وريح عينك 20-25 دقيقة في هدوء.. تصحى مفرمت كأنك لسه بادي اليوم!'
+    },
+    {
+        id: 'friend_call',
+        icon: '📞😂',
+        title: 'مكالمة فرفوشة مع صاحبك المقرب',
+        desc: 'كلم صاحبك الفرفوش واضحكوا وهزروا 10 دقايق عن أي حاجة غير المذاكرة والامتحانات!'
+    },
+    {
+        id: 'guilt_free_scroll',
+        icon: '📱✨',
+        title: '15 دقيقة سوشيال ميديا بدون ذنب',
+        desc: 'افتح ريلز أو إنستجرام وتصفح براحتك بروقان.. ضميرك راضي لأنك خلصت تحديك!'
+    },
+    {
+        id: 'favorite_meal',
+        icon: '🍕🎉',
+        title: 'اطلب أو حضر وجبتك المفضلة',
+        desc: 'كافئ نفسك بأكلتك المفضلة (بيتزا، برجر، شاورما..) احتفالاً بصمودك وإنجازك!'
+    },
+    {
+        id: 'relax_shower',
+        icon: '🚿🧼',
+        title: 'دش دافئ منعش مع موسيقى هادية',
+        desc: 'خد حمام مياه دافئة منعش يفك عضلات ضهرك ورقبتك ويروق جسمك بالكامل!'
+    },
+    {
+        id: 'outdoor_walk',
+        icon: '🚶‍♂️🌳',
+        title: 'تمشية ربع ساعة في الهواء الطلق',
+        desc: 'انزل اتمشى في الشارع أو البلكونة، اتنفس هواء نقي واسمع حاجة بتحبها في ودانك!'
+    },
+    {
+        id: 'wishlist_gift',
+        icon: '🎁🛍️',
+        title: 'شراء حاجة كنت مأجلها',
+        desc: 'اشتري لنفسك قلم جديد، نوت بوك شيك، أو حاجة بسيطة كنت حاططها في بالك!'
+    }
+];
+
+let activeSelectedReward = DEFAULT_REWARDS[0];
+let activeSelectedPenalty = DEFAULT_PENALTIES[0];
+let customModalMode = 'reward';
+
+function getCombinedRewards() {
+    try {
+        const stored = localStorage.getItem('study_custom_rewards');
+        const custom = stored ? JSON.parse(stored) : [];
+        return [...custom, ...DEFAULT_REWARDS];
+    } catch (e) {
+        return DEFAULT_REWARDS;
+    }
+}
+
+function getCombinedPenalties() {
+    try {
+        const stored = localStorage.getItem('study_custom_penalties');
+        const custom = stored ? JSON.parse(stored) : [];
+        return [...custom, ...DEFAULT_PENALTIES];
+    } catch (e) {
+        return DEFAULT_PENALTIES;
+    }
+}
+
+function getRewardsClaimedCount() {
+    return parseInt(localStorage.getItem('study_rewards_claimed_count') || '0', 10);
+}
+
+function getPenaltiesClearedCount() {
+    return parseInt(localStorage.getItem('study_penalties_cleared_count') || '0', 10);
+}
+
+function updateCommitmentStatsUI() {
+    const rEl = document.getElementById('rewards-claimed-counter');
+    const pEl = document.getElementById('penalties-cleared-counter');
+    if (rEl) rEl.innerText = getRewardsClaimedCount();
+    if (pEl) pEl.innerText = getPenaltiesClearedCount();
+}
+
+function renderRewardDisplay(reward) {
+    if (!reward) return;
+    activeSelectedReward = reward;
+    const iconEl = document.getElementById('reward-display-icon');
+    const titleEl = document.getElementById('reward-display-title');
+    const descEl = document.getElementById('reward-display-desc');
+    if (iconEl) iconEl.innerText = reward.icon || '🎁';
+    if (titleEl) titleEl.innerText = reward.title;
+    if (descEl) descEl.innerText = reward.desc;
+}
+
+function renderPenaltyDisplay(penalty) {
+    if (!penalty) return;
+    activeSelectedPenalty = penalty;
+    const iconEl = document.getElementById('penalty-display-icon');
+    const titleEl = document.getElementById('penalty-display-title');
+    const descEl = document.getElementById('penalty-display-desc');
+    const tipEl = document.getElementById('penalty-display-tip');
+    if (iconEl) iconEl.innerText = penalty.icon || '🎭';
+    if (titleEl) titleEl.innerText = penalty.title;
+    if (descEl) descEl.innerText = penalty.desc;
+    if (tipEl) tipEl.innerText = penalty.funTip || '💡 نفذ الحكم عشان ترجع للفورمة وتصالح ضميرك!';
+}
+
+function initCommitmentBalanceUI() {
+    updateCommitmentStatsUI();
+    const rewards = getCombinedRewards();
+    const penalties = getCombinedPenalties();
+    if (rewards.length > 0) renderRewardDisplay(rewards[0]);
+    if (penalties.length > 0) renderPenaltyDisplay(penalties[0]);
+}
+
+function drawRandomReward() {
+    const list = getCombinedRewards();
+    if (!list.length) return;
+    let chosen = list[Math.floor(Math.random() * list.length)];
+    if (list.length > 1 && chosen.id === activeSelectedReward?.id) {
+        chosen = list[(list.indexOf(chosen) + 1) % list.length];
+    }
+    playWebAudioChime('strike');
+    renderRewardDisplay(chosen);
+}
+
+function claimCurrentReward() {
+    const current = getRewardsClaimedCount() + 1;
+    localStorage.setItem('study_rewards_claimed_count', current);
+    updateCommitmentStatsUI();
+    playWebAudioChime('victory');
+    launchChallengeConfetti(2500);
+    speakCheer('ألف مبروك يا بطل! كافأت نفسك وتستاهل كل خير!');
+}
+
+function drawRandomPenalty() {
+    const list = getCombinedPenalties();
+    if (!list.length) return;
+    let chosen = list[Math.floor(Math.random() * list.length)];
+    if (list.length > 1 && chosen.id === activeSelectedPenalty?.id) {
+        chosen = list[(list.indexOf(chosen) + 1) % list.length];
+    }
+    playWebAudioChime('funny');
+    renderPenaltyDisplay(chosen);
+}
+
+function serveCurrentPenalty() {
+    const current = getPenaltiesClearedCount() + 1;
+    localStorage.setItem('study_penalties_cleared_count', current);
+    updateCommitmentStatsUI();
+    playWebAudioChime('levelup');
+    speakCheer('عاش يا وحش! كفارة مقبولة ورجعت للفورمة وأقوى من الأول!');
+}
+
+// --- Victory Modal Integration ---
+function openRewardRevealModalFromVictory() {
+    closeVictoryModal();
+    const list = getCombinedRewards();
+    const chosen = list[Math.floor(Math.random() * list.length)];
+    activeSelectedReward = chosen;
+    renderRewardDisplay(chosen);
+
+    const modal = document.getElementById('challenge-reward-reveal-modal');
+    const iconEl = document.getElementById('modal-reward-icon');
+    const titleEl = document.getElementById('modal-reward-title');
+    const descEl = document.getElementById('modal-reward-desc');
+
+    if (iconEl) iconEl.innerText = chosen.icon || '🎁';
+    if (titleEl) titleEl.innerText = chosen.title;
+    if (descEl) descEl.innerText = chosen.desc;
+
+    if (modal) modal.style.display = 'flex';
+    playWebAudioChime('victory');
+    launchChallengeConfetti(3000);
+    speakCheer('تستاهل تكافئ نفسك يا بطل! اختار لك التطبيق هذه المكافأة بضمير مرتاح!');
+}
+
+function confirmClaimRewardModal() {
+    claimCurrentReward();
+    closeRewardModal();
+}
+
+function rollAnotherRewardModal() {
+    const list = getCombinedRewards();
+    let chosen = list[Math.floor(Math.random() * list.length)];
+    if (list.length > 1 && chosen.id === activeSelectedReward?.id) {
+        chosen = list[(list.indexOf(chosen) + 1) % list.length];
+    }
+    activeSelectedReward = chosen;
+    renderRewardDisplay(chosen);
+
+    const titleEl = document.getElementById('modal-reward-title');
+    const descEl = document.getElementById('modal-reward-desc');
+    const iconEl = document.getElementById('modal-reward-icon');
+    if (iconEl) iconEl.innerText = chosen.icon || '🎁';
+    if (titleEl) titleEl.innerText = chosen.title;
+    if (descEl) descEl.innerText = chosen.desc;
+    playWebAudioChime('strike');
+}
+
+function closeRewardModal() {
+    const modal = document.getElementById('challenge-reward-reveal-modal');
+    if (modal) modal.style.display = 'none';
+}
+
+// --- Forfeit / Penalty Trigger (Called on Cancel/Give Up) ---
+function triggerChallengeForfeit(challengeTitle = 'التحدي') {
+    const list = getCombinedPenalties();
+    const chosen = list[Math.floor(Math.random() * list.length)];
+    activeSelectedPenalty = chosen;
+    renderPenaltyDisplay(chosen);
+
+    const modal = document.getElementById('challenge-penalty-modal');
+    const headline = document.getElementById('modal-penalty-headline');
+    const subtitle = document.getElementById('modal-penalty-subtitle');
+    const miniIcon = document.getElementById('modal-penalty-mini-icon');
+    const titleEl = document.getElementById('modal-penalty-title');
+    const descEl = document.getElementById('modal-penalty-desc');
+    const tipEl = document.getElementById('modal-penalty-tip');
+
+    if (headline) headline.innerText = `أوبااا! استسلمت في ${challengeTitle}؟ 😂`;
+    if (subtitle) subtitle.innerText = 'مش هنسيبك تهرب كدة ببساطة! نفذ الحكم الطريف ده حالاً عشان تكفر عن ذنب الهروب وترجع للفورمة:';
+    if (miniIcon) miniIcon.innerText = chosen.icon || '🥶';
+    if (titleEl) titleEl.innerText = chosen.title;
+    if (descEl) descEl.innerText = chosen.desc;
+    if (tipEl) tipEl.innerText = chosen.funTip || '💡 نفذ الحكم عشان تصالح ضميرك!';
+
+    if (modal) modal.style.display = 'flex';
+    playWebAudioChime('funny');
+    speakCheer('أوبااا! استسلمت وكسلت؟ مش هنسيبك تهرب كدة! لازم تنفذ الحكم ده الأول!');
+}
+
+function confirmServePenaltyModal() {
+    serveCurrentPenalty();
+    closePenaltyModal();
+}
+
+function rollAnotherPenaltyModal() {
+    const list = getCombinedPenalties();
+    let chosen = list[Math.floor(Math.random() * list.length)];
+    if (list.length > 1 && chosen.id === activeSelectedPenalty?.id) {
+        chosen = list[(list.indexOf(chosen) + 1) % list.length];
+    }
+    activeSelectedPenalty = chosen;
+    renderPenaltyDisplay(chosen);
+
+    const miniIcon = document.getElementById('modal-penalty-mini-icon');
+    const titleEl = document.getElementById('modal-penalty-title');
+    const descEl = document.getElementById('modal-penalty-desc');
+    const tipEl = document.getElementById('modal-penalty-tip');
+
+    if (miniIcon) miniIcon.innerText = chosen.icon || '🥶';
+    if (titleEl) titleEl.innerText = chosen.title;
+    if (descEl) descEl.innerText = chosen.desc;
+    if (tipEl) tipEl.innerText = chosen.funTip || '💡 نفذ الحكم عشان تصالح ضميرك!';
+    playWebAudioChime('funny');
+}
+
+function closePenaltyModal() {
+    const modal = document.getElementById('challenge-penalty-modal');
+    if (modal) modal.style.display = 'none';
+}
+
+// --- Custom Additions Modal ---
+function openAddCustomModal(type = 'reward') {
+    customModalMode = type;
+    const modal = document.getElementById('add-custom-modal');
+    const titleEl = document.getElementById('custom-modal-title');
+    const subtitleEl = document.getElementById('custom-modal-subtitle');
+    const titleInput = document.getElementById('custom-item-title');
+    const descInput = document.getElementById('custom-item-desc');
+
+    if (titleInput) titleInput.value = '';
+    if (descInput) descInput.value = '';
+
+    if (type === 'reward') {
+        if (titleEl) titleEl.innerText = 'إضافة مكافأة ذاتية مخصصة ✨';
+        if (subtitleEl) subtitleEl.innerText = 'اكتب شيئاً تحبه تكافئ به نفسك عند إنجاز التحدي والمذاكرة بضمير:';
+        if (titleInput) titleInput.placeholder = 'مثال: وجبة شاورما، حلقة مسلسل، ماتش بلايستيشن...';
+    } else {
+        if (titleEl) titleEl.innerText = 'إضافة حكم مضحك مخصص 😂';
+        if (subtitleEl) subtitleEl.innerText = 'اكتب حكماً طريفاً أو تحدياً بدنياً تنفذه لو كسلت أو استسلمت:';
+        if (titleInput) titleInput.placeholder = 'مثال: غسيل الحوض، 20 ضغط، الجري في المكان...';
+    }
+
+    if (modal) modal.style.display = 'flex';
+}
+
+function closeAddCustomModal() {
+    const modal = document.getElementById('add-custom-modal');
+    if (modal) modal.style.display = 'none';
+}
+
+function saveCustomItem() {
+    const titleInput = document.getElementById('custom-item-title');
+    const descInput = document.getElementById('custom-item-desc');
+    const title = titleInput?.value.trim();
+    const desc = descInput?.value.trim() || title;
+
+    if (!title) {
+        alert('من فضلك اكتب عنوان المكافأة أو الحكم أولاً!');
+        return;
+    }
+
+    if (customModalMode === 'reward') {
+        const newItem = {
+            id: 'custom_reward_' + Date.now(),
+            icon: '🎁✨',
+            title: title,
+            desc: desc
+        };
+        const list = JSON.parse(localStorage.getItem('study_custom_rewards') || '[]');
+        list.unshift(newItem);
+        localStorage.setItem('study_custom_rewards', JSON.stringify(list));
+        renderRewardDisplay(newItem);
+        playWebAudioChime('levelup');
+        alert('تمت إضافة مكافأتك الخاصة بنجاح! كافيء نفسك بها لما تنجز! 🥳');
+    } else {
+        const newItem = {
+            id: 'custom_penalty_' + Date.now(),
+            icon: '🎭⚡',
+            title: title,
+            desc: desc,
+            funTip: '💡 حكمك الخاص عشان ترجع أقوى وتكسر الكسل! 💪'
+        };
+        const list = JSON.parse(localStorage.getItem('study_custom_penalties') || '[]');
+        list.unshift(newItem);
+        localStorage.setItem('study_custom_penalties', JSON.stringify(list));
+        renderPenaltyDisplay(newItem);
+        playWebAudioChime('funny');
+        alert('تمت إضافة حكمك الطريف بنجاح! 😂');
+    }
+
+    closeAddCustomModal();
+}
+
+// Commitment binds
+window.initCommitmentBalanceUI = initCommitmentBalanceUI;
+window.drawRandomReward = drawRandomReward;
+window.claimCurrentReward = claimCurrentReward;
+window.drawRandomPenalty = drawRandomPenalty;
+window.serveCurrentPenalty = serveCurrentPenalty;
+window.openRewardRevealModalFromVictory = openRewardRevealModalFromVictory;
+window.confirmClaimRewardModal = confirmClaimRewardModal;
+window.rollAnotherRewardModal = rollAnotherRewardModal;
+window.closeRewardModal = closeRewardModal;
+window.triggerChallengeForfeit = triggerChallengeForfeit;
+window.confirmServePenaltyModal = confirmServePenaltyModal;
+window.rollAnotherPenaltyModal = rollAnotherPenaltyModal;
+window.closePenaltyModal = closePenaltyModal;
+window.openAddCustomModal = openAddCustomModal;
+window.closeAddCustomModal = closeAddCustomModal;
+window.saveCustomItem = saveCustomItem;

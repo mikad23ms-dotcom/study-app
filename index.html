@@ -1483,22 +1483,39 @@
                     </div>
                 </div>
 
-                <!-- Lucky Challenge Wheel Banner -->
+                <!-- Comprehensive Lucky Challenge Wheel Banner -->
                 <div class="wheel-banner-box">
                     <div style="display: flex; align-items: center; justify-content: center; gap: 0.8rem; margin-bottom: 0.6rem;">
                         <span style="font-size: 2.2rem;">🎡</span>
-                        <h3 style="margin: 0; color: #fbbf24; font-size: 1.35rem; font-family: 'Tajawal', sans-serif;">عجلة حظ التحديات ومضاعف الـ XP اليومي 🚀</h3>
+                        <h3 style="margin: 0; color: #fbbf24; font-size: 1.35rem; font-family: 'Tajawal', sans-serif;">عجلة حظ التحديات الشاملة ومضاعف الـ XP اليومي 🚀</h3>
                     </div>
                     <p style="color: #e2e8f0; font-size: 0.95rem; margin: 0 0 1.1rem 0; line-height: 1.6;">
-                        محتار تبدأ بإيه ومتردد؟ اضغط على زر الحظ، والذكاء الاصطناعي هيختارلك التحدي الأنسب لمودك مع <strong>مضاعف نقاط (2x XP Booster)</strong>! 🔥
+                        اختر نوع جلستك، أو اترك الذكاء الاصطناعي يختار لك عشوائياً من بين <strong>كل تحديات التطبيق الـ 16</strong> بمدد متنوعة من 15 دقيقة وحتى 7 ساعات مع مضاعفات XP نارية! 🔥
                     </p>
+
+                    <!-- Category Filter Tabs -->
+                    <div class="wheel-filter-tabs">
+                        <button class="wheel-tab-btn active" id="wheel-tab-all" onclick="setWheelCategory('all')">
+                            🎲 كل التحديات والأوقات (شامل)
+                        </button>
+                        <button class="wheel-tab-btn" id="wheel-tab-short" onclick="setWheelCategory('short')">
+                            ⚡ تحديات سريعة (15 - 30 دقيقة)
+                        </button>
+                        <button class="wheel-tab-btn" id="wheel-tab-medium" onclick="setWheelCategory('medium')">
+                            💪 جلسات عميقة (45 - 60 دقيقة)
+                        </button>
+                        <button class="wheel-tab-btn" id="wheel-tab-long" onclick="setWheelCategory('long')">
+                            🏆 ماراثون وعزل (ساعتين - 7 ساعات)
+                        </button>
+                    </div>
+
                     <button id="spin-wheel-btn" onclick="spinLuckyChallengeWheel()" class="wheel-btn">
                         <i class="fa-solid fa-dice"></i>
                         <span>دور عجلة التحديات دلوقتي! 🎲</span>
                     </button>
-                    <div id="lucky-wheel-result-banner" style="display: none; margin-top: 1rem; background: rgba(0,0,0,0.35); border: 1.5px solid #00e5ff; border-radius: 14px; padding: 0.9rem 1.4rem; animation: slideUpGlow 0.3s ease;">
-                        <span id="lucky-wheel-result-text" style="color: #00e5ff; font-weight: 800; font-size: 1.1rem;"></span>
-                    </div>
+
+                    <!-- Grand Mission Card Result -->
+                    <div id="lucky-mission-card-container" style="display: none;"></div>
                 </div>
 
                 <div class="challenges-grid">
@@ -1927,6 +1944,113 @@
                     </div>
                 </div>
                 </div> <!-- End challenges-grid -->
+
+                <!-- ========================================================================= -->
+                <!-- COMMITMENT & FUN BALANCE: SELF-REWARDS & LIGHTHEARTED PENALTIES           -->
+                <!-- ========================================================================= -->
+                <div class="commitment-balance-box" id="commitment-balance-section">
+                    <div class="commitment-header">
+                        <div style="display: flex; align-items: center; gap: 0.8rem; justify-content: center; flex-wrap: wrap;">
+                            <span style="font-size: 2.2rem;">⚖️</span>
+                            <div>
+                                <h3 style="margin: 0; color: #fbbf24; font-size: 1.4rem; font-family: 'Tajawal', sans-serif;">ميزان الالتزام: دولاب المكافآت الذاتية & صندوق الأحكام المضحكة 🎁🎭</h3>
+                                <p style="margin: 4px 0 0 0; color: #cbd5e1; font-size: 0.92rem;">ذاكرت وأنجزت؟ كافئ نفسك بضمير مرتاح! كسلّت أو استسلمت؟ نفذ حكماً طريفاً يرجعك للفورمة! 💪😂</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Live Counters -->
+                        <div class="commitment-stats-bar">
+                            <div class="commitment-stat-pill reward-stat">
+                                <i class="fa-solid fa-gift"></i>
+                                <span>مكافآت مستحقة تم جنيها:</span>
+                                <strong id="rewards-claimed-counter">0</strong>
+                            </div>
+                            <div class="commitment-stat-pill penalty-stat">
+                                <i class="fa-solid fa-masks-theater"></i>
+                                <span>أحكام كفارة تم تنفيذها:</span>
+                                <strong id="penalties-cleared-counter">0</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Dual Action Grid -->
+                    <div class="commitment-grid">
+                        <!-- 🎁 Card 1: Self-Rewards (كافئ نفسك) -->
+                        <div class="commitment-subcard reward-card-theme">
+                            <div class="subcard-header">
+                                <div style="display: flex; align-items: center; gap: 8px;">
+                                    <span style="font-size: 1.6rem;">🎁</span>
+                                    <h4 style="margin: 0; color: #fbbf24; font-size: 1.15rem; font-family: 'Tajawal', sans-serif;">دولاب مكافآت الإنجاز</h4>
+                                </div>
+                                <span class="subcard-badge badge-reward">للأبطال الملتزمين 🏆</span>
+                            </div>
+                            <p style="font-size: 0.88rem; color: #e2e8f0; margin: 0 0 1rem 0; line-height: 1.5;">
+                                إذا أنجزت جلسة مذاكرة أو أنهيت تحدياً، اسحب مكافأة مستحقة وكافئ نفسك بدون أدنى تأنيب ضمير!
+                            </p>
+
+                            <!-- Active Reward Display Box -->
+                            <div id="active-reward-display" class="action-reveal-box reward-box-glow">
+                                <div id="reward-display-icon" style="font-size: 3rem; margin-bottom: 0.4rem;">🍿</div>
+                                <h5 id="reward-display-title" style="margin: 0 0 6px 0; color: #fbbf24; font-size: 1.2rem; font-family: 'Tajawal', sans-serif;">ربع ساعة يوتيوب أو حلقة أنمي</h5>
+                                <p id="reward-display-desc" style="margin: 0; color: #f8fafc; font-size: 0.92rem; line-height: 1.6;">
+                                    اتفرج على اللي بتحبه لمدة 15 دقيقة كاملة بدون ذرة تأنيب ضمير.. إنت تعبت وتستاهل!
+                                </p>
+                            </div>
+
+                            <!-- Reward Action Buttons -->
+                            <div class="commitment-actions">
+                                <button onclick="drawRandomReward()" class="theme-btn btn-draw-reward">
+                                    <i class="fa-solid fa-dice"></i> اسحب مكافأة جديدة 🎲
+                                </button>
+                                <button onclick="claimCurrentReward()" class="theme-btn btn-claim-reward">
+                                    <i class="fa-solid fa-check-circle"></i> كافأت نفسي واستمتعت! 🥳
+                                </button>
+                                <button onclick="openAddCustomModal('reward')" class="theme-btn btn-add-custom">
+                                    <i class="fa-solid fa-plus"></i> أضف مكافأتك الخاصة ✨
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- 🎭 Card 2: Lighthearted Penalties (أحكام الكفارة المضحكة) -->
+                        <div class="commitment-subcard penalty-card-theme">
+                            <div class="subcard-header">
+                                <div style="display: flex; align-items: center; gap: 8px;">
+                                    <span style="font-size: 1.6rem;">🎭</span>
+                                    <h4 style="margin: 0; color: #ff6b81; font-size: 1.15rem; font-family: 'Tajawal', sans-serif;">صندوق الأحكام المضحكة</h4>
+                                </div>
+                                <span class="subcard-badge badge-penalty">كفارة الكسل والاستسلام 😂</span>
+                            </div>
+                            <p style="font-size: 0.88rem; color: #e2e8f0; margin: 0 0 1rem 0; line-height: 1.5;">
+                                استسلمت في تحدي أو كسلّت عن هدفك؟ نفذ حكماً طريفاً يفوقك ويضخ دم في عضلاتك وضميرك!
+                            </p>
+
+                            <!-- Active Penalty Display Box -->
+                            <div id="active-penalty-display" class="action-reveal-box penalty-box-glow">
+                                <div id="penalty-display-icon" style="font-size: 3rem; margin-bottom: 0.4rem;">🥶</div>
+                                <h5 id="penalty-display-title" style="margin: 0 0 6px 0; color: #ff6b81; font-size: 1.2rem; font-family: 'Tajawal', sans-serif;">صدمة المياه المتلجة</h5>
+                                <p id="penalty-display-desc" style="margin: 0; color: #f8fafc; font-size: 0.92rem; line-height: 1.6;">
+                                    اغسل وشك بماية متلجة جداً، وبص لنفسك في المراية وقول: "أنا بطل ومش هستسلم تاني!"
+                                </p>
+                                <div id="penalty-display-tip" style="margin-top: 8px; font-size: 0.82rem; color: #a5b4fc; background: rgba(0,0,0,0.25); padding: 5px 10px; border-radius: 8px;">
+                                    💡 بتفوق المخ فوراً وبتطرد هرمون الكسل! 🧠⚡
+                                </div>
+                            </div>
+
+                            <!-- Penalty Action Buttons -->
+                            <div class="commitment-actions">
+                                <button onclick="drawRandomPenalty()" class="theme-btn btn-draw-penalty">
+                                    <i class="fa-solid fa-dice"></i> اسحب حكماً طريفاً 🎲
+                                </button>
+                                <button onclick="serveCurrentPenalty()" class="theme-btn btn-serve-penalty">
+                                    <i class="fa-solid fa-handshake"></i> نفذت الحكم ورجعت للفورمة! 💪
+                                </button>
+                                <button onclick="openAddCustomModal('penalty')" class="theme-btn btn-add-custom">
+                                    <i class="fa-solid fa-plus"></i> أضف حكماً مضحكاً من عندك 😂
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                 <!-- Badges & Trophy Showcase (خزنة الأوسمة والدروع) -->
                 <div class="badges-container" id="badges-container">
@@ -2526,99 +2650,136 @@
     </div>
 
     <!-- What's New & Official APK Release Modal -->
-    <div id="whats-new-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.85); z-index: 10000; justify-content: center; align-items: center; backdrop-filter: blur(8px); padding: 15px;">
-        <div style="background: var(--card-bg); padding: 1.8rem; border-radius: 22px; max-width: 95%; width: 560px; max-height: 90vh; overflow-y: auto; border: 2px solid #00e5ff; box-shadow: 0 15px 40px rgba(0, 229, 255, 0.35); animation: slideUpGlow 0.4s ease; text-align: right;">
+    <div id="whats-new-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.88); z-index: 10000; justify-content: center; align-items: center; backdrop-filter: blur(10px); padding: 15px;">
+        <div style="background: var(--card-bg); padding: 1.8rem; border-radius: 24px; max-width: 95%; width: 580px; max-height: 90vh; overflow-y: auto; border: 2px solid #00e5ff; box-shadow: 0 15px 45px rgba(0, 229, 255, 0.4); animation: slideUpGlow 0.4s ease; text-align: right; position: relative;">
             
+            <!-- Quick Close X Button -->
+            <button onclick="closeWhatsNew()" style="position: absolute; top: 15px; left: 15px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #fff; width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1.1rem;">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
             <div style="text-align: center; margin-bottom: 1.2rem;">
                 <img src="app-icon.png" alt="أيقونة تطبيق المذاكرة" style="width: 72px; height: 72px; border-radius: 18px; box-shadow: 0 0 25px rgba(0, 229, 255, 0.45); border: 2px solid #00e5ff; margin-bottom: 10px; display: inline-block; object-fit: cover;" onerror="if(this.src.indexOf('icons/')===-1){this.src='icons/app-icon.png';}else{this.style.display='none';document.getElementById('whats-new-fallback-icon').style.display='inline-flex';}">
                 <div id="whats-new-fallback-icon" style="display: none; width: 72px; height: 72px; border-radius: 18px; background: linear-gradient(135deg, #00e5ff, #0088ff); align-items: center; justify-content: center; box-shadow: 0 0 25px rgba(0, 229, 255, 0.45); border: 2px solid #00e5ff; margin-bottom: 10px;"><i class="fa-solid fa-graduation-cap" style="font-size: 34px; color: #031024;"></i></div>
-                <span style="background: linear-gradient(135deg, #00e5ff, #0088ff); color: #031024; font-weight: 800; font-size: 0.78rem; padding: 4px 14px; border-radius: 20px; display: inline-block; margin-bottom: 8px;">تحديث تاريخي جديد 🚀</span>
-                <h2 style="color: #fff; margin: 0 0 6px 0; font-size: 1.4rem;">إطلاق تطبيق الأندرويد الرسمي & استوديو الكتب الذكي! 📖✨</h2>
-                <p style="color: var(--text-muted); font-size: 0.9rem; margin: 0;">اقرأ التفاصيل التالية لمعرفة أهمية هذا التحديث لدروسك ومذاكرتك:</p>
+                <span style="background: linear-gradient(135deg, #00e5ff, #0088ff); color: #031024; font-weight: 800; font-size: 0.8rem; padding: 4px 16px; border-radius: 20px; display: inline-block; margin-bottom: 8px;">🚀 التحديث الأكبر الشامل (الإصدار الذهبي)</span>
+                <h2 style="color: #fff; margin: 0 0 6px 0; font-size: 1.45rem; font-family: 'Tajawal', sans-serif;">كل ما هو جديد في تطبيق المذاكرة المتكامل! 🌟</h2>
+                <p style="color: var(--text-muted); font-size: 0.9rem; margin: 0;">إليك ملخص كافة الميزات والترقيات الجبارة التي تمت إضافتها لتجربة مذاكرة لا مثيل لها:</p>
             </div>
 
             <!-- Native APK Success Badge (shown only if already running in native app) -->
-            <div id="whats-new-native-badge" style="display: none; background: rgba(46, 213, 115, 0.15); border: 1.5px solid #2ed573; border-radius: 14px; padding: 14px; margin-bottom: 1.5rem; text-align: center;">
+            <div id="whats-new-native-badge" style="display: none; background: rgba(46, 213, 115, 0.15); border: 1.5px solid #2ed573; border-radius: 14px; padding: 14px; margin-bottom: 1.2rem; text-align: center;">
                 <strong style="color: #2ed573; font-size: 1.05rem;"><i class="fa-solid fa-circle-check"></i> أنت الآن تستخدم تطبيق الأندرويد الرسمي الأحدث! 🎉</strong>
-                <p style="color: #f1f2f6; font-size: 0.88rem; margin: 4px 0 0 0; line-height: 1.5;">كافة المنبهات ومواقيت الصلاة واستوديو الذكاء الاصطناعي مفعلة وتعمل لديك في الخلفية بأقصى كفاءة.</p>
+                <p style="color: #f1f2f6; font-size: 0.88rem; margin: 4px 0 0 0; line-height: 1.5;">كافة المنبهات ومواقيت الصلاة وميزات التحديات ومكافآت الإنجاز تعمل لديك بأقصى سرعة وكفاءة.</p>
             </div>
 
             <!-- Crucial Explanation Box: Why install APK vs existing PWA -->
-            <div id="whats-new-pwa-warning" style="background: linear-gradient(135deg, rgba(255, 71, 87, 0.12), rgba(255, 165, 2, 0.12)); border: 1.5px solid rgba(255, 71, 87, 0.4); border-radius: 14px; padding: 14px; margin-bottom: 1.5rem;">
+            <div id="whats-new-pwa-warning" style="background: linear-gradient(135deg, rgba(255, 71, 87, 0.12), rgba(255, 165, 2, 0.12)); border: 1.5px solid rgba(255, 71, 87, 0.4); border-radius: 14px; padding: 14px; margin-bottom: 1.2rem;">
                 <div style="display: flex; gap: 10px; align-items: flex-start;">
                     <i class="fa-solid fa-triangle-exclamation" style="color: #ff4757; font-size: 1.4rem; margin-top: 2px;"></i>
                     <div>
-                        <strong style="color: #ff6b81; font-size: 1rem; display: block; margin-bottom: 4px;">تنبيه مهم للطلاب اللي مثبتين التطبيق القديم:</strong>
+                        <strong style="color: #ff6b81; font-size: 1rem; display: block; margin-bottom: 4px;">تنبيه مهم للطلاب (تثبيت التطبيق الرسمي APK):</strong>
                         <p style="color: #f1f2f6; font-size: 0.88rem; margin: 0; line-height: 1.5;">
-                            النسخة المثبتة من المتصفح <strong>يتوقف نظام إشعاراتها تماماً عند إغلاق التطبيق</strong> بسبب قيود توفير الطاقة في أندرويد ❌.<br>
-                            في <strong>نسخة الأندرويد الرسمية الجديدة (APK)</strong>: تم دمج منبه نظام داخلي يضمن <strong>رنين مواقيت الصلاة والتحفيز كل 90 دقيقة حتى والموبايل مقفول تماماً والشاشة مطفية!</strong> ✅
+                            تطبيق الأندرويد الرسمي (APK) يحتوي على <strong>منبه نظام داخلي يعمل والشاشة مغلقة تماماً</strong> لمواقيت الصلاة وتذكيرات المذاكرة كل 90 دقيقة! حمله الآن لتجربة متكاملة.
                         </p>
                     </div>
                 </div>
+            </div>
+
             <!-- Data Transfer Tip Box -->
             <div style="background: rgba(46, 213, 115, 0.08); border: 1.5px solid rgba(46, 213, 115, 0.35); border-radius: 14px; padding: 12px 14px; margin-bottom: 1.2rem; display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap;">
                 <div style="display: flex; align-items: center; gap: 10px;">
-                    <i class="fa-solid fa-cloud-arrow-down" style="color: #2ed573; font-size: 1.3rem;"></i>
+                    <i class="fa-solid fa-arrows-rotate" style="color: #2ed573; font-size: 1.3rem;"></i>
                     <div>
-                        <strong style="color: #2ed573; font-size: 0.92rem; display: block;">حفظ ونقل بياناتك القديمة:</strong>
-                        <span style="color: #ced6e0; font-size: 0.82rem;">تقدر تنقل كل موادك وجداولك لتطبيق الأندرويد في ثانية واحدة!</span>
+                        <strong style="color: #2ed573; font-size: 0.95rem; display: block;">نقل واستعادة بياناتك القديمة:</strong>
+                        <span style="color: #ced6e0; font-size: 0.82rem;">عندك حساب قديم؟ انسخ كود بياناتك وانقله لتطبيقك الجديد في ثانية واحدة بدون إعادة إدخال!</span>
                     </div>
                 </div>
                 <button onclick="openDataTransferModal('export')" class="btn" style="background: #2ed573; color: #031024; font-weight: 700; font-size: 0.82rem; padding: 6px 14px; border-radius: 8px; cursor: pointer; border: none;">
-                    نسخ بياناتي الآن 📋
+                    نقل بياناتي الآن 📋
                 </button>
             </div>
 
-                <!-- Feature 1: Camera Book Scanner -->
+            <!-- Features Grid List -->
+            <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 1.5rem;">
+                
+                <!-- Feature 1: Self-Rewards Vault -->
+                <div style="display: flex; gap: 12px; align-items: flex-start; background: rgba(251, 191, 36, 0.08); padding: 12px 14px; border-radius: 14px; border: 1.5px solid rgba(251, 191, 36, 0.35);">
+                    <div style="background: rgba(251, 191, 36, 0.2); padding: 8px; border-radius: 10px; width: 42px; height: 42px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                        <span style="font-size: 1.4rem;">🎁</span>
+                    </div>
+                    <div>
+                        <strong style="color: #fbbf24; font-size: 1rem; display: block;">دولاب مكافآت الإنجاز (كافئ نفسك بضمير مرتاح) 🥳✨</strong>
+                        <p style="color: #e2e8f0; margin: 4px 0 0 0; font-size: 0.86rem; line-height: 1.5;">
+                            أنجزت تحدياً وذاكرت كويس؟ التطبيق هيكافئك بمكافأة مستحقة بدون أدنى تأنيب ضمير: ربع ساعة يوتيوب أو أنمي، كوباية آيس كوفي رايقة، 20 دقيقة جيمينج، قيلولة سريعة، أو أكلتك المفضلة، مع إمكانية إضافة مكافآتك الخاصة!
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Feature 2: Lighthearted Penalties -->
+                <div style="display: flex; gap: 12px; align-items: flex-start; background: rgba(255, 71, 87, 0.08); padding: 12px 14px; border-radius: 14px; border: 1.5px solid rgba(255, 71, 87, 0.35);">
+                    <div style="background: rgba(255, 71, 87, 0.2); padding: 8px; border-radius: 10px; width: 42px; height: 42px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                        <span style="font-size: 1.4rem;">🎭</span>
+                    </div>
+                    <div>
+                        <strong style="color: #ff6b81; font-size: 1rem; display: block;">صندوق الأحكام والعقوبات المضحكة (كفارة الكسل) 😂💪</strong>
+                        <p style="color: #e2e8f0; margin: 4px 0 0 0; font-size: 0.86rem; line-height: 1.5;">
+                            استسلمت أو لغيت التحدي؟ مش هنسيبك تهرب كدة بالساهل! هيطلعلك حكم طريف يفوقك ويصالح ضميرك: غسيل مواعين الحوض وفرح مامتك، أو 15 ضغطة تفوق عضلاتك، مياه متلجة، أو حبس الموبايل ساعة.. نفذ الحكم وارجع للفورمة!
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Feature 3: Smart Lucky Wheel -->
+                <div style="display: flex; gap: 12px; align-items: flex-start; background: rgba(168, 85, 247, 0.08); padding: 12px 14px; border-radius: 14px; border: 1.5px solid rgba(168, 85, 247, 0.35);">
+                    <div style="background: rgba(168, 85, 247, 0.2); padding: 8px; border-radius: 10px; width: 42px; height: 42px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                        <span style="font-size: 1.4rem;">🎡</span>
+                    </div>
+                    <div>
+                        <strong style="color: #c084fc; font-size: 1rem; display: block;">عجلة حظ التحديات الشاملة ومضاعفات الـ XP اليومية 🚀</strong>
+                        <p style="color: #e2e8f0; margin: 4px 0 0 0; font-size: 0.86rem; line-height: 1.5;">
+                            العجلة أصبحت تشمل <strong>جميع تحديات التطبيق الـ 16 بالكامل</strong> بـ 23 مدة متنوعة (من سباق النينجا 15 دقيقة وحتى مهمة المريخ 7 ساعات!) مع نظام ذكي يمنع تكرار نفس التحدي، وموازنة تمنع تكرار الأوقات القصيرة، وأقسام فلترة زمنية!
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Feature 4: Notebook AI & Camera Scanner -->
                 <div style="display: flex; gap: 12px; align-items: flex-start; background: rgba(0, 229, 255, 0.08); padding: 12px 14px; border-radius: 14px; border: 1.5px solid rgba(0, 229, 255, 0.35);">
                     <div style="background: rgba(0, 229, 255, 0.25); padding: 8px; border-radius: 10px; width: 42px; height: 42px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
                         <i class="fa-solid fa-camera-retro" style="color: #00e5ff; font-size: 1.3rem;"></i>
                     </div>
                     <div>
-                        <strong style="color: #00e5ff; font-size: 1rem; display: block;">معندكش نسخة PDF؟ صوّر كتابك الورقي بالكاميرا فوراً! 📸</strong>
+                        <strong style="color: #00e5ff; font-size: 1rem; display: block;">استوديو الكتب الذكي & تصوير المذكرات بالكاميرا 📸📖</strong>
                         <p style="color: #e2e8f0; margin: 4px 0 0 0; font-size: 0.86rem; line-height: 1.5;">
-                            افتح <strong>استوديو الكتب (Notebook AI)</strong> واضغط <strong>"تصوير بالكاميرا 📸"</strong> أو اختر صوراً من المعرض.. الذكاء الاصطناعي هيقرأ صفحة كتابك الورقي ويستخرج كل كلماتها بدقة 100% ويحولها لملخص وبودكاست في ثوانٍ!
+                            صوّر صفحات كتابك الورقي أو ملزمتك بكاميرا الموبايل فوراً أو ارفع ملف PDF كبير.. الذكاء الاصطناعي هيستخرج الكلمات بدقة 100% ويحولها لملخص شامل مع جداول مقارنة وشات تفاعلي وأسئلة امتحانات متوقعة!
                         </p>
                     </div>
                 </div>
 
-                <!-- Feature 2: High Quality Podcast Audio Overview -->
+                <!-- Feature 5: Radio Podcast Studio -->
                 <div style="display: flex; gap: 12px; align-items: flex-start; background: rgba(255, 0, 127, 0.08); padding: 12px 14px; border-radius: 14px; border: 1.5px solid rgba(255, 0, 127, 0.35);">
                     <div style="background: rgba(255, 0, 127, 0.25); padding: 8px; border-radius: 10px; width: 42px; height: 42px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
                         <i class="fa-solid fa-podcast" style="color: #ff007f; font-size: 1.3rem;"></i>
                     </div>
                     <div>
-                        <strong style="color: #ff007f; font-size: 1rem; display: block;">بودكاست صوتي إذاعي فائق النقاء والترتيب (أحمد وسارة) 🎙️</strong>
+                        <strong style="color: #ff007f; font-size: 1rem; display: block;">بودكاست إذاعي متناوب فائق النقاء (أحمد وسارة) 🎙️</strong>
                         <p style="color: #e2e8f0; margin: 4px 0 0 0; font-size: 0.86rem; line-height: 1.5;">
-                            تم تطوير محرك الصوت بالكامل! الحوار الآن مرتب بنظام إذاعي متناوب (أحمد يسأل بذكاء وسارة تشرح المفاهيم وفخاخ الامتحانات)، بنطق عربي فصيح بدون انقطاع، مع إمكانية التحكم في السرعة والضغط على أي جملة لسماعها منفصلة!
+                            حوار صوتي إذاعي فصيح لشرح دروسك بطريقة مشوقة وسلسة بدون تقطيع، مع إمكانية التحكم في سرعة الصوت أو الضغط على أي جملة لسماع نطقها منفرداً!
                         </p>
                     </div>
                 </div>
 
-                <!-- Feature 3: Interactive Study Chat -->
-                <div style="display: flex; gap: 12px; align-items: flex-start; background: rgba(46, 213, 115, 0.06); padding: 12px 14px; border-radius: 14px; border: 1px solid rgba(46, 213, 115, 0.25);">
+                <!-- Feature 6: Ambient Sounds & Badges -->
+                <div style="display: flex; gap: 12px; align-items: flex-start; background: rgba(46, 213, 115, 0.08); padding: 12px 14px; border-radius: 14px; border: 1.5px solid rgba(46, 213, 115, 0.35);">
                     <div style="background: rgba(46, 213, 115, 0.2); padding: 8px; border-radius: 10px; width: 42px; height: 42px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-                        <i class="fa-solid fa-comments" style="color: #2ed573; font-size: 1.3rem;"></i>
+                        <i class="fa-solid fa-headphones" style="color: #2ed573; font-size: 1.3rem;"></i>
                     </div>
                     <div>
-                        <strong style="color: #2ed573; font-size: 0.98rem; display: block;">شات تفاعلي وأسئلة امتحانات متوقعة 💬</strong>
-                        <p style="color: var(--text-muted); margin: 3px 0 0 0; font-size: 0.85rem; line-height: 1.4;">
-                            اسأل في أي نقطة في كتابك المصور أو ملزمتك، وسيجاوبك الذكاء الاصطناعي مع شرح المسائل والقوانين النموذجية.
-                        </p>
-                    </div>
-                </div>
-                <!-- Feature 4: Gamified Challenges System -->
-                <div style="display: flex; gap: 12px; align-items: flex-start; background: rgba(251, 191, 36, 0.08); padding: 12px 14px; border-radius: 14px; border: 1.5px solid rgba(251, 191, 36, 0.35);">
-                    <div style="background: rgba(251, 191, 36, 0.2); padding: 8px; border-radius: 10px; width: 42px; height: 42px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-                        <i class="fa-solid fa-gamepad" style="color: #fbbf24; font-size: 1.3rem;"></i>
-                    </div>
-                    <div>
-                        <strong style="color: #fbbf24; font-size: 0.98rem; display: block;">تحديات المذاكرة التفاعلية ونظام نقاط الخبرة (Gamer XP) 🎮⚡</strong>
+                        <strong style="color: #2ed573; font-size: 1rem; display: block;">أجواء صوتية محفزة وخزنة الأوسمة والدروع 🛡️🎧</strong>
                         <p style="color: #e2e8f0; margin: 4px 0 0 0; font-size: 0.86rem; line-height: 1.5;">
-                            واجه <strong>معركة زعيم الكسل والمماطلة 🐉</strong> وسدد له ضربات السيف، أو جرب <strong>قنبلة التركيز 💣</strong>، وازرع <strong>شجرتك الحية 🌱</strong>، وسابق الزمن في <strong>سباق النينجا 🥷</strong>! كل تحدي تخلصه هتكسب نقاط XP وترتقي في الرتب مع احتفالات وأصوات نصر حماسية!
+                            أصوات طبيعية لعزل المشتتات (مطر هادئ، مقهى، نار دافئة، غابة)، مع خزنة أوسمة حصرية تفتح لك ألقاباً ودروعاً تثبت تفوقك وصمودك في المذاكرة!
                         </p>
                     </div>
                 </div>
+
             </div>
 
             <!-- Action Buttons -->
@@ -2640,12 +2801,14 @@
                         <li>اضغط <strong>"تثبيت"</strong> وهيشتغل التطبيق بكامل مميزاته والمنبه الداخلي! ✅</li>
                     </ol>
                 </div>
+                
                 <button onclick="shareUpdateOnWhatsApp()" class="btn" style="background: rgba(37, 211, 102, 0.15); color: #25d366; border: 1.5px solid #25d366; padding: 11px; border-radius: 12px; font-weight: 700; font-size: 0.95rem; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px;">
                     <i class="fa-brands fa-whatsapp" style="font-size: 1.2rem;"></i>
                     <span>شارك التحديث ورابط التطبيق مع زملائك على واتساب</span>
                 </button>
-                <button onclick="closeWhatsNew()" class="btn" style="background: transparent; color: var(--text-muted); border: 1px solid var(--border-color); padding: 10px; border-radius: 12px; font-size: 0.9rem; cursor: pointer;">
-                    تخطي والمتابعة داخل المتصفح
+                
+                <button onclick="closeWhatsNew()" class="btn" style="background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05)); color: #fff; border: 1px solid rgba(255,255,255,0.3); padding: 12px; border-radius: 12px; font-weight: 700; font-size: 0.95rem; cursor: pointer;">
+                    <i class="fa-solid fa-check"></i> فهمت كل شيء.. ابدأ المذاكرة الآن 🚀
                 </button>
             </div>
 
@@ -2667,6 +2830,9 @@
             </div>
 
             <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+                <button onclick="openRewardRevealModalFromVictory()" class="theme-btn" style="background: linear-gradient(135deg, #fbbf24, #f59e0b); color: #0f172a; border: none; padding: 0.75rem 1.4rem; border-radius: 12px; font-weight: 800; font-family: 'Tajawal'; display: flex; align-items: center; gap: 8px; cursor: pointer; box-shadow: 0 0 20px rgba(251, 191, 36, 0.4);">
+                    <i class="fa-solid fa-gift" style="font-size: 1.2rem;"></i> 🎁 اكشف مكافأة إنجازك الآن!
+                </button>
                 <button onclick="shareVictoryWhatsApp()" class="theme-btn" style="background: #25d366; color: #fff; border: none; padding: 0.75rem 1.4rem; border-radius: 12px; font-weight: 700; font-family: 'Tajawal'; display: flex; align-items: center; gap: 8px; cursor: pointer;">
                     <i class="fa-brands fa-whatsapp" style="font-size: 1.2rem;"></i> شارك فوزك مع أصحابك
                 </button>
@@ -2691,6 +2857,94 @@
                 </button>
                 <button onclick="closeBadgeModal()" class="theme-btn" style="background: rgba(255, 255, 255, 0.15); color: #fff; border: 1px solid rgba(255, 255, 255, 0.3); padding: 0.75rem 1.6rem; border-radius: 12px; font-weight: 700; font-family: 'Tajawal'; cursor: pointer;">
                     إغلاق
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 🎁 Challenge Self-Reward Reveal Modal -->
+    <div id="challenge-reward-reveal-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.88); z-index: 100001; justify-content: center; align-items: center; backdrop-filter: blur(10px); padding: 15px;">
+        <div style="background: linear-gradient(135deg, #111827, #1e1b4b); padding: 2rem; border-radius: 24px; max-width: 95%; width: 480px; text-align: center; border: 2px solid #fbbf24; box-shadow: 0 0 45px rgba(251, 191, 36, 0.45); animation: slideUpGlow 0.4s ease; color: #fff;">
+            <div id="modal-reward-icon" style="font-size: 4rem; margin-bottom: 0.5rem; animation: treeBounce 0.8s ease;">🎁</div>
+            <h2 style="color: #fbbf24; margin: 0 0 8px 0; font-size: 1.55rem; font-family: 'Tajawal', sans-serif;">كافئ نفسك.. أنت تستحق بامتياز! 🥳✨</h2>
+            <p id="modal-reward-subtitle" style="color: #00e5ff; font-size: 0.95rem; margin: 0 0 1.2rem 0; line-height: 1.5;">أنجزت التحدي وكسرت عين الكسل، اختار لك التطبيق هذه المكافأة لتستمتع بها بضمير مرتاح:</p>
+            
+            <div style="background: rgba(255, 255, 255, 0.08); border: 1.5px dashed #fbbf24; border-radius: 18px; padding: 1.3rem; margin-bottom: 1.5rem; text-align: center;">
+                <h3 id="modal-reward-title" style="color: #fbbf24; margin: 0 0 8px 0; font-size: 1.3rem;">ربع ساعة يوتيوب أو حلقة أنمي</h3>
+                <p id="modal-reward-desc" style="color: #f1f5f9; font-size: 0.95rem; line-height: 1.6; margin: 0;">اتفرج على اللي بتحبه لمدة 15 دقيقة كاملة بدون ذرة تأنيب ضمير.. إنت تعبت وتستاهل!</p>
+            </div>
+
+            <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+                <button onclick="confirmClaimRewardModal()" class="theme-btn" style="background: linear-gradient(135deg, #2ed573, #10b981); color: #fff; border: none; padding: 0.75rem 1.4rem; border-radius: 12px; font-weight: 800; font-family: 'Tajawal'; display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                    <i class="fa-solid fa-check"></i> هستمتع بمكافأتي دلوقتي! 🥳
+                </button>
+                <button onclick="rollAnotherRewardModal()" class="theme-btn" style="background: rgba(251, 191, 36, 0.2); border: 1px solid #fbbf24; color: #fbbf24; padding: 0.75rem 1.2rem; border-radius: 12px; font-weight: 700; font-family: 'Tajawal'; cursor: pointer;">
+                    <i class="fa-solid fa-dice"></i> اختار مكافأة تانية 🎲
+                </button>
+                <button onclick="closeRewardModal()" class="theme-btn" style="background: rgba(255, 255, 255, 0.15); color: #fff; border: 1px solid rgba(255, 255, 255, 0.3); padding: 0.75rem 1.2rem; border-radius: 12px; font-family: 'Tajawal'; cursor: pointer;">
+                    إغلاق
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 🎭 Challenge Lighthearted Penalty Modal (أحكام الكفارة المضحكة) -->
+    <div id="challenge-penalty-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.88); z-index: 100001; justify-content: center; align-items: center; backdrop-filter: blur(10px); padding: 15px;">
+        <div style="background: linear-gradient(135deg, #18181b, #27272a); padding: 2rem; border-radius: 24px; max-width: 95%; width: 480px; text-align: center; border: 2px solid #ff4757; box-shadow: 0 0 45px rgba(255, 71, 87, 0.45); animation: slideUpGlow 0.4s ease; color: #fff;">
+            <div id="modal-penalty-icon" style="font-size: 4rem; margin-bottom: 0.5rem; animation: heartPulse 1.2s infinite ease-in-out;">😂</div>
+            <h2 id="modal-penalty-headline" style="color: #ff4757; margin: 0 0 8px 0; font-size: 1.5rem; font-family: 'Tajawal', sans-serif;">أوبااا! استسلمت وكسلت؟ 😂</h2>
+            <p id="modal-penalty-subtitle" style="color: #fca5a5; font-size: 0.95rem; margin: 0 0 1.2rem 0; line-height: 1.5;">مش هنسيبك تهرب كدة ببساطة! نفذ الحكم الطريف ده حالاً عشان تكفر عن ذنب الهروب وترجع للفورمة:</p>
+            
+            <div style="background: rgba(255, 255, 255, 0.08); border: 1.5px dashed #ff4757; border-radius: 18px; padding: 1.3rem; margin-bottom: 1.5rem; text-align: right;">
+                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+                    <span id="modal-penalty-mini-icon" style="font-size: 1.8rem;">🥶</span>
+                    <h3 id="modal-penalty-title" style="color: #ff6b81; margin: 0; font-size: 1.25rem;">صدمة المياه المتلجة</h3>
+                </div>
+                <p id="modal-penalty-desc" style="color: #f1f5f9; font-size: 0.95rem; line-height: 1.6; margin: 0 0 8px 0;">اغسل وشك بماية متلجة جداً، وبص لنفسك في المراية وقول: "أنا بطل ومش هستسلم تاني!"</p>
+                <div id="modal-penalty-tip" style="font-size: 0.85rem; color: #a5b4fc; background: rgba(0,0,0,0.3); padding: 6px 12px; border-radius: 8px;">
+                    💡 بتفوق المخ فوراً وبتطرد هرمون الكسل! 🧠⚡
+                </div>
+            </div>
+
+            <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+                <button onclick="confirmServePenaltyModal()" class="theme-btn" style="background: linear-gradient(135deg, #10b981, #059669); color: #fff; border: none; padding: 0.75rem 1.4rem; border-radius: 12px; font-weight: 800; font-family: 'Tajawal'; display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                    <i class="fa-solid fa-handshake"></i> نفذت الحكم ورجعت أقوى! 💪
+                </button>
+                <button onclick="rollAnotherPenaltyModal()" class="theme-btn" style="background: rgba(255, 71, 87, 0.2); border: 1px solid #ff4757; color: #ff6b81; padding: 0.75rem 1.2rem; border-radius: 12px; font-weight: 700; font-family: 'Tajawal'; cursor: pointer;">
+                    <i class="fa-solid fa-dice"></i> الحكم ده قاسي.. لف تاني 😂
+                </button>
+                <button onclick="closePenaltyModal()" class="theme-btn" style="background: rgba(255, 255, 255, 0.12); color: #cbd5e1; border: 1px solid rgba(255, 255, 255, 0.2); padding: 0.75rem 1.2rem; border-radius: 12px; font-family: 'Tajawal'; cursor: pointer;">
+                    تخطي (بس ضميرك هيأنبك 😉)
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ➕ Add Custom Reward/Penalty Modal -->
+    <div id="add-custom-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.85); z-index: 100002; justify-content: center; align-items: center; backdrop-filter: blur(8px); padding: 15px;">
+        <div style="background: linear-gradient(135deg, #111827, #1e1b4b); padding: 2rem; border-radius: 24px; max-width: 95%; width: 440px; text-align: right; border: 2px solid #00e5ff; box-shadow: 0 0 35px rgba(0, 229, 255, 0.35); animation: slideUpGlow 0.4s ease; color: #fff;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                <h3 id="custom-modal-title" style="margin: 0; color: #00e5ff; font-size: 1.3rem; font-family: 'Tajawal', sans-serif;">إضافة مكافأة مخصصة ✨</h3>
+                <span onclick="closeAddCustomModal()" style="cursor: pointer; font-size: 1.5rem; color: #94a3b8;">&times;</span>
+            </div>
+            <p id="custom-modal-subtitle" style="color: #cbd5e1; font-size: 0.88rem; margin: 0 0 1.2rem 0;">اكتب شيئاً تحبه تكافئ به نفسك عند الالتزام والمذاكرة:</p>
+            
+            <div style="margin-bottom: 1rem;">
+                <label style="display: block; font-size: 0.85rem; color: #fbbf24; margin-bottom: 6px; font-weight: 700;">العنوان (مثال: طلب وجبة شاورما):</label>
+                <input type="text" id="custom-item-title" class="search-input" style="width: 100%; padding: 10px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.08); color: #fff; font-family: 'Tajawal';" placeholder="اكتب العنوان هنا...">
+            </div>
+
+            <div style="margin-bottom: 1.2rem;">
+                <label style="display: block; font-size: 0.85rem; color: #fbbf24; margin-bottom: 6px; font-weight: 700;">التفاصيل / الوصف:</label>
+                <textarea id="custom-item-desc" class="search-input" style="width: 100%; height: 80px; padding: 10px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.08); color: #fff; font-family: 'Tajawal';" placeholder="اكتب تفاصيل المكافأة أو الحكم..."></textarea>
+            </div>
+
+            <div style="display: flex; gap: 10px; justify-content: flex-end;">
+                <button onclick="saveCustomItem()" class="theme-btn" style="background: linear-gradient(135deg, #00e5ff, #00b894); color: #0f172a; border: none; padding: 0.75rem 1.6rem; border-radius: 12px; font-weight: 800; font-family: 'Tajawal'; cursor: pointer;">
+                    حفظ وإضافة الآن 💾
+                </button>
+                <button onclick="closeAddCustomModal()" class="theme-btn" style="background: rgba(255, 255, 255, 0.15); color: #fff; border: 1px solid rgba(255, 255, 255, 0.3); padding: 0.75rem 1.2rem; border-radius: 12px; font-family: 'Tajawal'; cursor: pointer;">
+                    إلغاء
                 </button>
             </div>
         </div>

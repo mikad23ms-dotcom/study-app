@@ -1459,6 +1459,58 @@ body[data-theme="dark"]::after {
     transform: scale(1.05);
     box-shadow: 0 6px 25px rgba(245, 158, 11, 0.6);
 }
+.wheel-filter-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 1.1rem;
+}
+.wheel-tab-btn {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    color: #fff;
+    border-radius: 20px;
+    padding: 0.45rem 1.1rem;
+    font-size: 0.88rem;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    font-family: 'Tajawal', sans-serif;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+.wheel-tab-btn:hover {
+    border-color: #fbbf24;
+    background: rgba(251, 191, 36, 0.15);
+}
+.wheel-tab-btn.active {
+    background: linear-gradient(135deg, #fbbf24, #f59e0b) !important;
+    color: #031024 !important;
+    font-weight: 800;
+    box-shadow: 0 0 16px rgba(251, 191, 36, 0.55);
+    border-color: #fbbf24 !important;
+}
+.lucky-mission-card {
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 27, 75, 0.95));
+    border: 2px solid #00e5ff;
+    border-radius: 20px;
+    padding: 1.4rem;
+    margin-top: 1.2rem;
+    text-align: right;
+    box-shadow: 0 10px 30px rgba(0, 229, 255, 0.25);
+    animation: slideUpGlow 0.4s ease;
+    color: #fff;
+}
+.mission-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 700;
+}
 
 /* --- FLOATING COMBAT DAMAGE TEXT --- */
 @keyframes damageFloat {
@@ -2268,6 +2320,233 @@ body[data-theme="dark"]::after {
     border: none !important;
     border-top: 1px dashed rgba(0, 229, 255, 0.25) !important;
     margin: 1.8rem 0 !important;
+}
+
+/* ========================================================================= */
+/* --- COMMITMENT & FUN BALANCE: SELF-REWARDS & LIGHTHEARTED PENALTIES ---  */
+/* ========================================================================= */
+.commitment-balance-box {
+    background: linear-gradient(135deg, rgba(17, 24, 39, 0.95), rgba(30, 27, 75, 0.9));
+    border: 2px solid rgba(251, 191, 36, 0.35);
+    border-radius: 22px;
+    padding: 1.6rem;
+    margin: 2rem 0;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.35);
+    position: relative;
+    overflow: hidden;
+}
+.commitment-header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+.commitment-stats-bar {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+}
+.commitment-stat-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 16px;
+    border-radius: 30px;
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+.commitment-stat-pill.reward-stat {
+    background: rgba(251, 191, 36, 0.12);
+    border: 1px solid rgba(251, 191, 36, 0.4);
+    color: #fbbf24;
+}
+.commitment-stat-pill.penalty-stat {
+    background: rgba(255, 71, 87, 0.12);
+    border: 1px solid rgba(255, 71, 87, 0.4);
+    color: #ff6b81;
+}
+.commitment-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+}
+.commitment-subcard {
+    border-radius: 18px;
+    padding: 1.3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.commitment-subcard:hover {
+    transform: translateY(-3px);
+}
+.reward-card-theme {
+    background: linear-gradient(180deg, rgba(245, 158, 11, 0.08), rgba(15, 23, 42, 0.6));
+    border: 1.5px solid rgba(245, 158, 11, 0.35);
+    box-shadow: 0 4px 20px rgba(245, 158, 11, 0.12);
+}
+.reward-card-theme:hover {
+    box-shadow: 0 6px 25px rgba(245, 158, 11, 0.25);
+}
+.penalty-card-theme {
+    background: linear-gradient(180deg, rgba(239, 68, 68, 0.08), rgba(15, 23, 42, 0.6));
+    border: 1.5px solid rgba(239, 68, 68, 0.35);
+    box-shadow: 0 4px 20px rgba(239, 68, 68, 0.12);
+}
+.penalty-card-theme:hover {
+    box-shadow: 0 6px 25px rgba(239, 68, 68, 0.25);
+}
+.subcard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.6rem;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+.subcard-badge {
+    padding: 3px 12px;
+    border-radius: 20px;
+    font-size: 0.78rem;
+    font-weight: 700;
+}
+.badge-reward {
+    background: rgba(251, 191, 36, 0.18);
+    color: #fbbf24;
+    border: 1px solid #fbbf24;
+}
+.badge-penalty {
+    background: rgba(255, 71, 87, 0.18);
+    color: #ff6b81;
+    border: 1px solid #ff4757;
+}
+.action-reveal-box {
+    border-radius: 14px;
+    padding: 1.2rem;
+    text-align: center;
+    margin-bottom: 1.2rem;
+    transition: all 0.3s ease;
+    min-height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.reward-box-glow {
+    background: rgba(251, 191, 36, 0.06);
+    border: 1px dashed rgba(251, 191, 36, 0.4);
+}
+.reward-box-glow:hover {
+    background: rgba(251, 191, 36, 0.1);
+    border-color: #fbbf24;
+}
+.penalty-box-glow {
+    background: rgba(255, 71, 87, 0.06);
+    border: 1px dashed rgba(255, 71, 87, 0.4);
+}
+.penalty-box-glow:hover {
+    background: rgba(255, 71, 87, 0.1);
+    border-color: #ff4757;
+}
+.commitment-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.btn-draw-reward {
+    background: linear-gradient(135deg, #fbbf24, #f59e0b) !important;
+    color: #0f172a !important;
+    font-weight: 800;
+    border: none;
+    border-radius: 12px;
+    padding: 0.7rem 1.2rem;
+    cursor: pointer;
+    font-family: 'Tajawal';
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: transform 0.2s ease;
+}
+.btn-draw-reward:hover {
+    transform: scale(1.02);
+}
+.btn-claim-reward {
+    background: rgba(46, 213, 115, 0.15) !important;
+    border: 1px solid #2ed573 !important;
+    color: #2ed573 !important;
+    font-weight: 700;
+    border-radius: 12px;
+    padding: 0.65rem 1.2rem;
+    cursor: pointer;
+    font-family: 'Tajawal';
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+}
+.btn-claim-reward:hover {
+    background: #2ed573 !important;
+    color: #fff !important;
+}
+.btn-draw-penalty {
+    background: linear-gradient(135deg, #ff4757, #ee5253) !important;
+    color: #fff !important;
+    font-weight: 800;
+    border: none;
+    border-radius: 12px;
+    padding: 0.7rem 1.2rem;
+    cursor: pointer;
+    font-family: 'Tajawal';
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: transform 0.2s ease;
+}
+.btn-draw-penalty:hover {
+    transform: scale(1.02);
+}
+.btn-serve-penalty {
+    background: rgba(16, 185, 129, 0.15) !important;
+    border: 1px solid #10b981 !important;
+    color: #10b981 !important;
+    font-weight: 700;
+    border-radius: 12px;
+    padding: 0.65rem 1.2rem;
+    cursor: pointer;
+    font-family: 'Tajawal';
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+}
+.btn-serve-penalty:hover {
+    background: #10b981 !important;
+    color: #fff !important;
+}
+.btn-add-custom {
+    background: rgba(255, 255, 255, 0.08) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    color: #cbd5e1 !important;
+    font-weight: 600;
+    border-radius: 12px;
+    padding: 0.55rem 1rem;
+    cursor: pointer;
+    font-family: 'Tajawal';
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+}
+.btn-add-custom:hover {
+    border-color: #00e5ff !important;
+    color: #00e5ff !important;
 }
 
 
