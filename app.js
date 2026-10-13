@@ -140,6 +140,7 @@ let aiProvider = localStorage.getItem('study_ai_provider') || 'gemini';
 // Set User Name in Dashboard
 document.addEventListener('DOMContentLoaded', () => {
     initChallengeDashboard();
+    initBadges();
 
     // Interactive Background Glow
     document.addEventListener('mousemove', (e) => {
@@ -5458,6 +5459,18 @@ function launchChallengeConfetti(durationMs = 3800) {
 let lastWonChallengeName = '';
 let lastWonXp = 0;
 function launchChallengeVictory(challengeName, xpReward) {
+    if (typeof luckyChallengeBooster !== 'undefined' && luckyChallengeBooster && challengeName.includes(luckyChallengeBooster.name.split(' ')[1])) {
+        xpReward += luckyChallengeBooster.bonusXP;
+        luckyChallengeBooster = null;
+    }
+
+    if (challengeName.includes('قنبلة')) unlockBadge('bomb');
+    else if (challengeName.includes('زعيم')) unlockBadge('boss');
+    else if (challengeName.includes('شجرة')) unlockBadge('tree');
+    else if (challengeName.includes('النينجا')) unlockBadge('ninja');
+    else if (challengeName.includes('التلج')) unlockBadge('ice');
+    else if (challengeName.includes('الشمعة')) unlockBadge('candle');
+
     lastWonChallengeName = challengeName;
     lastWonXp = xpReward;
 
@@ -5515,6 +5528,7 @@ function toggleBombChallenge() {
         bombTotalSeconds = 25 * 60;
         bombEndTime = Date.now() + bombTotalSeconds * 1000;
         btn.innerHTML = '<i class="fa-solid fa-hand"></i> إبطال القنبلة (استسلام)';
+        speakCheer('اشتعل فتيل القنبلة! ركز بتمام قوتك ومتقومش من مكانك!');
         btn.style.background = '#7f8c8d';
         if (sparkle) sparkle.style.display = 'inline-block';
         if (card) card.classList.add('boss-glow');
@@ -5646,6 +5660,20 @@ function strikeBoss() {
     }
 
     bossHP = Math.max(0, bossHP - 25);
+    if (card) {
+        const popup = document.createElement('div');
+        popup.className = 'damage-text-popup';
+        popup.innerText = '💥 -25% HP! ضربة قاضية! ⚡';
+        card.appendChild(popup);
+        setTimeout(() => popup.remove(), 1200);
+    }
+    const cheerQuotes = [
+        'الله عليك يا فنان! ضربة في مقتل!',
+        'عاش يا وحش! دفاعات الزعيم بتنهار!',
+        'تركيز أسطوري! قربت تقضي على الكسل تماماً!',
+        'ضربة سيف حاسمة! مكملين للنصر!'
+    ];
+    speakCheer(cheerQuotes[Math.floor(Math.random() * cheerQuotes.length)]);
     if (hpText) hpText.innerText = `${bossHP}%`;
     if (hpFill) hpFill.style.width = `${bossHP}%`;
 
@@ -5846,3 +5874,381 @@ window.toggleTreeChallenge = toggleTreeChallenge;
 window.toggleNinjaChallenge = toggleNinjaChallenge;
 window.startIceChallenge = startIceChallenge;
 window.startCandleChallenge = startCandleChallenge;
+
+// =====================================================================
+// === ADVANCED INTERACTIVE GAMIFICATION: CHEER, AMBIENT, WHEEL, BADGES ===
+// =====================================================================
+
+// --- 🗣️ Arabic Motivational Speech Cheerleader ---
+function speakCheer(phrase) {
+    if (localStorage.getItem('study_challenges_sound_muted') === 'true') return;
+    if (!('speechSynthesis' in window)) return;
+    try {
+        window.speechSynthesis.cancel();
+        const utter = new SpeechSynthesisUtterance(phrase);
+        utter.lang = 'ar-EG';
+        utter.rate = 1.05;
+        utter.pitch = 1.15;
+        const voices = window.speechSynthesis.getVoices();
+        const arVoice = voices.find(v => v.lang.startsWith('ar'));
+        if (arVoice) utter.voice = arVoice;
+        window.speechSynthesis.speak(utter);
+    } catch (e) {
+        console.warn('Speech cheer error:', e);
+    }
+}
+
+// --- 💓 Synthesized Heartbeat for Last-Minute Adrenaline ---
+let heartbeatAudioCtx = null;
+function playHeartbeatThump() {
+    if (localStorage.getItem('study_challenges_sound_muted') === 'true') return;
+    try {
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        if (!AudioCtx) return;
+        if (!heartbeatAudioCtx) heartbeatAudioCtx = new AudioCtx();
+        if (heartbeatAudioCtx.state === 'suspended') heartbeatAudioCtx.resume();
+
+        // Lub-dub: two quick low-frequency thumps
+        [0, 0.14].forEach(delay => {
+            const osc = heartbeatAudioCtx.createOscillator();
+            const gain = heartbeatAudioCtx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(65, heartbeatAudioCtx.currentTime + delay);
+            osc.frequency.exponentialRampToValueAtTime(35, heartbeatAudioCtx.currentTime + delay + 0.1);
+            gain.gain.setValueAtTime(0.35, heartbeatAudioCtx.currentTime + delay);
+            gain.gain.exponentialRampToValueAtTime(0.001, heartbeatAudioCtx.currentTime + delay + 0.1);
+            osc.connect(gain);
+            gain.connect(heartbeatAudioCtx.destination);
+            osc.start(heartbeatAudioCtx.currentTime + delay);
+            osc.stop(heartbeatAudioCtx.currentTime + delay + 0.11);
+        });
+    } catch(e){}
+}
+
+// --- 🌧️ Native Web Audio API Focus Ambient Sound Synthesizer ---
+let ambientAudioCtx = null;
+let ambientNoiseNode = null;
+let ambientGainNode = null;
+let currentAmbientType = null;
+
+function toggleAmbientSound(type) {
+    if (currentAmbientType === type) {
+        stopAmbientSound();
+        return;
+    }
+    stopAmbientSound();
+    playAmbientSound(type);
+}
+
+function stopAmbientSound() {
+    if (ambientNoiseNode) {
+        try { ambientNoiseNode.stop(); } catch(e){}
+        ambientNoiseNode = null;
+    }
+    if (ambientGainNode) {
+        try { ambientGainNode.disconnect(); } catch(e){}
+        ambientGainNode = null;
+    }
+    currentAmbientType = null;
+    updateAmbientUI();
+}
+
+function playAmbientSound(type) {
+    try {
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        if (!AudioCtx) return;
+        if (!ambientAudioCtx) ambientAudioCtx = new AudioCtx();
+        if (ambientAudioCtx.state === 'suspended') ambientAudioCtx.resume();
+
+        const bufferSize = ambientAudioCtx.sampleRate * 2;
+        const noiseBuffer = ambientAudioCtx.createBuffer(1, bufferSize, ambientAudioCtx.sampleRate);
+        const output = noiseBuffer.getChannelData(0);
+
+        if (type === 'rain') {
+            // Natural brown noise rain simulation
+            let lastOut = 0.0;
+            for (let i = 0; i < bufferSize; i++) {
+                const white = Math.random() * 2 - 1;
+                output[i] = (lastOut + (0.02 * white)) / 1.02;
+                lastOut = output[i];
+                output[i] *= 3.5;
+            }
+        } else if (type === 'waves') {
+            for (let i = 0; i < bufferSize; i++) {
+                output[i] = (Math.random() * 2 - 1) * 0.4;
+            }
+        } else {
+            for (let i = 0; i < bufferSize; i++) {
+                output[i] = (Math.random() * 2 - 1) * 0.15;
+            }
+        }
+
+        const whiteNoise = ambientAudioCtx.createBufferSource();
+        whiteNoise.buffer = noiseBuffer;
+        whiteNoise.loop = true;
+
+        const filter = ambientAudioCtx.createBiquadFilter();
+        if (type === 'rain') {
+            filter.type = 'lowpass';
+            filter.frequency.value = 750;
+        } else if (type === 'waves') {
+            filter.type = 'bandpass';
+            filter.frequency.value = 350;
+        } else {
+            filter.type = 'lowpass';
+            filter.frequency.value = 1100;
+        }
+
+        ambientGainNode = ambientAudioCtx.createGain();
+        ambientGainNode.gain.setValueAtTime(0.25, ambientAudioCtx.currentTime);
+
+        whiteNoise.connect(filter);
+        filter.connect(ambientGainNode);
+        ambientGainNode.connect(ambientAudioCtx.destination);
+        whiteNoise.start();
+        ambientNoiseNode = whiteNoise;
+        currentAmbientType = type;
+        updateAmbientUI();
+    } catch(e) {
+        console.warn('Ambient play error:', e);
+    }
+}
+
+function updateAmbientUI() {
+    const types = ['rain', 'waves', 'white'];
+    types.forEach(t => {
+        const btn = document.getElementById('ambient-btn-' + t);
+        if (btn) {
+            if (currentAmbientType === t) {
+                btn.classList.add('active');
+            } else {
+                btn.classList.remove('active');
+            }
+        }
+    });
+}
+
+// --- 🎡 Lucky Challenge Wheel Spinner ---
+const LUCKY_CHALLENGES = [
+    { id: 'card-challenge-bomb', name: 'تحدي قنبلة التركيز 💣', xpMultiplier: '2x', bonusXP: 100 },
+    { id: 'card-challenge-boss', name: 'معركة زعيم الكسل 🐉⚔️', xpMultiplier: '1.5x', bonusXP: 75 },
+    { id: 'card-challenge-tree', name: 'شجرة التركيز والنمو 🌱🌳', xpMultiplier: '2x', bonusXP: 75 },
+    { id: 'card-challenge-ninja', name: 'سباق النينجا الخاطف 🥷⚡', xpMultiplier: '2.5x', bonusXP: 100 },
+    { id: 'card-challenge-ice', name: 'تحدي كوباية التلج 🧊', xpMultiplier: '2x', bonusXP: 60 },
+    { id: 'card-challenge-candle', name: 'تحدي الشمعة 🕯️', xpMultiplier: '2x', bonusXP: 70 }
+];
+
+let isWheelSpinning = false;
+let luckyChallengeBooster = null;
+
+function spinLuckyChallengeWheel() {
+    if (isWheelSpinning) return;
+    isWheelSpinning = true;
+
+    const btn = document.getElementById('spin-wheel-btn');
+    const resultBanner = document.getElementById('lucky-wheel-result-banner');
+    const resultText = document.getElementById('lucky-wheel-result-text');
+
+    if (btn) {
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> جاري دوران العجلة... 🎲';
+    }
+
+    let ticks = 0;
+    const maxTicks = 22;
+    const tickInterval = setInterval(() => {
+        ticks++;
+        playWebAudioChime('strike');
+        const randomItem = LUCKY_CHALLENGES[Math.floor(Math.random() * LUCKY_CHALLENGES.length)];
+        if (resultBanner && resultText) {
+            resultBanner.style.display = 'block';
+            resultText.innerText = '🎲 ' + randomItem.name + ' (' + randomItem.xpMultiplier + ' XP Booster!)';
+        }
+
+        if (ticks >= maxTicks) {
+            clearInterval(tickInterval);
+            const winner = LUCKY_CHALLENGES[Math.floor(Math.random() * LUCKY_CHALLENGES.length)];
+            luckyChallengeBooster = winner;
+            isWheelSpinning = false;
+
+            if (btn) {
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fa-solid fa-dice"></i> دور عجلة التحديات مرة تانية! 🎲';
+            }
+
+            if (resultText) {
+                resultText.innerHTML = '🎉 حظك اليومي: <strong>' + winner.name + '</strong> مع مضاعف <strong>' + winner.xpMultiplier + ' XP</strong>! يلا اضغط عليه وابدأ!';
+            }
+
+            playWebAudioChime('victory');
+            launchChallengeConfetti(2500);
+            speakCheer('مبروك يا بطل! كسبت ' + winner.name + '! يلا وريني تركيزك!');
+
+            const cardEl = document.getElementById(winner.id);
+            if (cardEl) {
+                cardEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                cardEl.style.boxShadow = '0 0 35px rgba(245, 158, 11, 0.9)';
+                cardEl.style.borderColor = '#fbbf24';
+                setTimeout(() => {
+                    cardEl.style.boxShadow = '';
+                    cardEl.style.borderColor = '';
+                }, 5000);
+            }
+        }
+    }, 110);
+}
+
+// --- 🛡️ Badges & Trophy Engine ---
+const BADGE_DEFINITIONS = {
+    bomb: {
+        title: 'خبير المتفجرات 💣',
+        icon: '💣',
+        desc: 'أنهى تحدي قنبلة التركيز 25 دقيقة كاملة بتركيز حديدي دون إبطال الفتيل!',
+        challengeKey: 'bomb'
+    },
+    boss: {
+        title: 'قاهر زعيم الكسل 🐉⚔️',
+        icon: '⚔️',
+        desc: 'أسقط زعيم الكسل والمماطلة صريعاً في معركة بطولية من 4 جولات!',
+        challengeKey: 'boss'
+    },
+    tree: {
+        title: 'البستاني الأسطوري 🌳',
+        icon: '🌳',
+        desc: 'زرع شجرة تركيز وارفة الظلال حتى أزهرت بنجاح في بستان إنجازاته!',
+        challengeKey: 'tree'
+    },
+    ninja: {
+        title: 'شبح النينجا الخاطف 🥷',
+        icon: '🥷',
+        desc: 'أنهى سباق النينجا الخاطف 15 دقيقة بسرعة فائقة ودون تردد!',
+        challengeKey: 'ninja'
+    },
+    ice: {
+        title: 'القلب الجليدي المقاوم 🧊',
+        icon: '🧊',
+        desc: 'صمد في وجه التشتت طوال 20 دقيقة حتى ذاب قالب الثلج بالكامل!',
+        challengeKey: 'ice'
+    },
+    legend: {
+        title: 'أسطورة المذاكرة الخارقة 👑',
+        icon: '👑',
+        desc: 'جمع أكثر من 500 نقطة خبرة XP وأثبت جدارته في قمة المتحدين!',
+        challengeKey: 'legend'
+    }
+};
+
+function getUnlockedBadges() {
+    try {
+        return JSON.parse(localStorage.getItem('study_unlocked_badges') || '[]');
+    } catch(e) {
+        return [];
+    }
+}
+
+function unlockBadge(badgeKey) {
+    const list = getUnlockedBadges();
+    if (!list.includes(badgeKey)) {
+        list.push(badgeKey);
+        localStorage.setItem('study_unlocked_badges', JSON.stringify(list));
+        initBadges();
+        playWebAudioChime('levelup');
+        const def = BADGE_DEFINITIONS[badgeKey];
+        if (def) {
+            speakCheer('عاش يا بطل! فتحت وسام جديد: ' + def.title);
+        }
+    }
+}
+
+function initBadges() {
+    const unlocked = getUnlockedBadges();
+    const xp = getChallengeXP();
+
+    if (xp >= 500 && !unlocked.includes('legend')) {
+        unlocked.push('legend');
+        localStorage.setItem('study_unlocked_badges', JSON.stringify(unlocked));
+    }
+
+    const counter = document.getElementById('badges-unlocked-counter');
+    if (counter) counter.innerText = unlocked.length + ' من 6 أوسمة مفتوحة';
+
+    Object.keys(BADGE_DEFINITIONS).forEach(key => {
+        const el = document.getElementById('badge-' + key);
+        const tag = document.getElementById('badge-tag-' + key);
+        if (el) {
+            if (unlocked.includes(key)) {
+                el.classList.remove('locked');
+                el.classList.add('unlocked');
+                if (tag) tag.innerHTML = '✨ مفتوح';
+            } else {
+                el.classList.remove('unlocked');
+                el.classList.add('locked');
+                if (tag) tag.innerHTML = '🔒 مغلق';
+            }
+        }
+    });
+}
+
+let activeModalBadgeKey = null;
+function showBadgeDetails(badgeKey) {
+    activeModalBadgeKey = badgeKey;
+    const def = BADGE_DEFINITIONS[badgeKey];
+    if (!def) return;
+
+    const unlocked = getUnlockedBadges().includes(badgeKey);
+    const modal = document.getElementById('badge-details-modal');
+    const iconEl = document.getElementById('badge-modal-icon');
+    const titleEl = document.getElementById('badge-modal-title');
+    const statusEl = document.getElementById('badge-modal-status-badge');
+    const descEl = document.getElementById('badge-modal-desc');
+    const shareBtn = document.getElementById('badge-modal-share-btn');
+
+    if (iconEl) iconEl.innerText = def.icon;
+    if (titleEl) titleEl.innerText = def.title;
+    if (descEl) descEl.innerText = def.desc;
+
+    if (statusEl) {
+        if (unlocked) {
+            statusEl.innerText = '✨ وسام مفتوح ومكتسب!';
+            statusEl.style.background = '#fbbf24';
+            statusEl.style.color = '#031024';
+            if (shareBtn) shareBtn.style.display = 'inline-flex';
+        } else {
+            statusEl.innerText = '🔒 وسام مقفل - أكمل التحدي لفتحه!';
+            statusEl.style.background = 'rgba(255,255,255,0.15)';
+            statusEl.style.color = '#fff';
+            if (shareBtn) shareBtn.style.display = 'none';
+        }
+    }
+
+    if (modal) modal.style.display = 'flex';
+}
+
+function closeBadgeModal() {
+    const modal = document.getElementById('badge-details-modal');
+    if (modal) modal.style.display = 'none';
+}
+
+function shareBadgeWhatsApp() {
+    const def = BADGE_DEFINITIONS[activeModalBadgeKey];
+    if (!def) return;
+    const text = encodeURIComponent(
+        '🛡️ إنجاز أسطوري جديد في تطبيق المذاكرة المتكامل!\n' +
+        'فتحت وسام: ' + def.title + ' ' + def.icon + '\n' +
+        def.desc + '\n' +
+        'يلا اتحدى نفسك وافتح أوسمتك معايا! 🚀'
+    );
+    window.open('https://api.whatsapp.com/send?text=' + text, '_blank');
+}
+
+// Global binds
+window.speakCheer = speakCheer;
+window.playHeartbeatThump = playHeartbeatThump;
+window.toggleAmbientSound = toggleAmbientSound;
+window.stopAmbientSound = stopAmbientSound;
+window.spinLuckyChallengeWheel = spinLuckyChallengeWheel;
+window.initBadges = initBadges;
+window.unlockBadge = unlockBadge;
+window.showBadgeDetails = showBadgeDetails;
+window.closeBadgeModal = closeBadgeModal;
+window.shareBadgeWhatsApp = shareBadgeWhatsApp;

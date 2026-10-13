@@ -1462,6 +1462,43 @@
                             <div id="challenger-progress-fill" class="challenger-progress-bar-fill" style="width: 0%;"></div>
                         </div>
                     </div>
+
+                    <!-- Ambient Sound Focus Generator -->
+                    <div class="ambient-sound-bar">
+                        <span style="font-size: 0.85rem; color: rgba(255,255,255,0.7); display: flex; align-items: center; gap: 5px;">
+                            <i class="fa-solid fa-headphones-simple" style="color: #00e5ff;"></i> خلفية صوتية للتركيز (100% Offline):
+                        </span>
+                        <button class="ambient-btn" id="ambient-btn-rain" onclick="toggleAmbientSound('rain')">
+                            🌧️ صوت المطر
+                        </button>
+                        <button class="ambient-btn" id="ambient-btn-waves" onclick="toggleAmbientSound('waves')">
+                            🌊 أمواج البحر
+                        </button>
+                        <button class="ambient-btn" id="ambient-btn-white" onclick="toggleAmbientSound('white')">
+                            ☕ هدوء الكافيه
+                        </button>
+                        <button class="ambient-btn" id="ambient-btn-stop" onclick="stopAmbientSound()" style="color: #ff4757; border-color: rgba(255,71,87,0.3);">
+                            <i class="fa-solid fa-power-off"></i> إيقاف
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Lucky Challenge Wheel Banner -->
+                <div class="wheel-banner-box">
+                    <div style="display: flex; align-items: center; justify-content: center; gap: 0.8rem; margin-bottom: 0.6rem;">
+                        <span style="font-size: 2.2rem;">🎡</span>
+                        <h3 style="margin: 0; color: #fbbf24; font-size: 1.35rem; font-family: 'Tajawal', sans-serif;">عجلة حظ التحديات ومضاعف الـ XP اليومي 🚀</h3>
+                    </div>
+                    <p style="color: #e2e8f0; font-size: 0.95rem; margin: 0 0 1.1rem 0; line-height: 1.6;">
+                        محتار تبدأ بإيه ومتردد؟ اضغط على زر الحظ، والذكاء الاصطناعي هيختارلك التحدي الأنسب لمودك مع <strong>مضاعف نقاط (2x XP Booster)</strong>! 🔥
+                    </p>
+                    <button id="spin-wheel-btn" onclick="spinLuckyChallengeWheel()" class="wheel-btn">
+                        <i class="fa-solid fa-dice"></i>
+                        <span>دور عجلة التحديات دلوقتي! 🎲</span>
+                    </button>
+                    <div id="lucky-wheel-result-banner" style="display: none; margin-top: 1rem; background: rgba(0,0,0,0.35); border: 1.5px solid #00e5ff; border-radius: 14px; padding: 0.9rem 1.4rem; animation: slideUpGlow 0.3s ease;">
+                        <span id="lucky-wheel-result-text" style="color: #00e5ff; font-weight: 800; font-size: 1.1rem;"></span>
+                    </div>
                 </div>
 
                 <div class="challenges-grid">
@@ -1890,6 +1927,72 @@
                     </div>
                 </div>
                 </div> <!-- End challenges-grid -->
+
+                <!-- Badges & Trophy Showcase (خزنة الأوسمة والدروع) -->
+                <div class="badges-container" id="badges-container">
+                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 0.8rem;">
+                        <div style="display: flex; align-items: center; gap: 0.8rem;">
+                            <i class="fa-solid fa-shield-halved" style="font-size: 1.8rem; color: #fbbf24;"></i>
+                            <div>
+                                <h3 style="margin: 0; color: #fff; font-size: 1.25rem; font-family: 'Tajawal', sans-serif;">خزنة الأوسمة والدروع الأسطورية 🛡️</h3>
+                                <p style="margin: 2px 0 0 0; color: var(--text-muted); font-size: 0.85rem;">كل تحدٍ تكمله يفتح لك وساماً حقيقياً يثبت تفوقك وإصرارك في المذاكرة!</p>
+                            </div>
+                        </div>
+                        <span id="badges-unlocked-counter" style="background: rgba(251, 191, 36, 0.15); border: 1px solid #fbbf24; color: #fbbf24; padding: 4px 14px; border-radius: 20px; font-weight: 700; font-size: 0.88rem;">
+                            0 من 6 أوسمة مفتوحة
+                        </span>
+                    </div>
+
+                    <div class="badges-grid" id="badges-grid">
+                        <!-- Badge 1: Focus Bomb -->
+                        <div class="badge-item locked" id="badge-bomb" onclick="showBadgeDetails('bomb')">
+                            <span class="badge-status-tag" id="badge-tag-bomb">🔒 مغلق</span>
+                            <div class="badge-icon">💣</div>
+                            <div class="badge-title">خبير المتفجرات</div>
+                            <div class="badge-desc">أنهِ تحدي قنبلة التركيز 25 دقيقة</div>
+                        </div>
+
+                        <!-- Badge 2: Boss Slayer -->
+                        <div class="badge-item locked" id="badge-boss" onclick="showBadgeDetails('boss')">
+                            <span class="badge-status-tag" id="badge-tag-boss">🔒 مغلق</span>
+                            <div class="badge-icon">⚔️</div>
+                            <div class="badge-title">قاهر زعيم الكسل</div>
+                            <div class="badge-desc">اهزم الزعيم في 4 جولات قتالية</div>
+                        </div>
+
+                        <!-- Badge 3: Tree Grower -->
+                        <div class="badge-item locked" id="badge-tree" onclick="showBadgeDetails('tree')">
+                            <span class="badge-status-tag" id="badge-tag-tree">🔒 مغلق</span>
+                            <div class="badge-icon">🌳</div>
+                            <div class="badge-title">البستاني الأسطوري</div>
+                            <div class="badge-desc">ازرع شجرة تركيز كاملة دون أن تذبل</div>
+                        </div>
+
+                        <!-- Badge 4: Ninja Ghost -->
+                        <div class="badge-item locked" id="badge-ninja" onclick="showBadgeDetails('ninja')">
+                            <span class="badge-status-tag" id="badge-tag-ninja">🔒 مغلق</span>
+                            <div class="badge-icon">🥷</div>
+                            <div class="badge-title">شبح النينجا الخاطف</div>
+                            <div class="badge-desc">أنهِ سباق النينجا السريع بنجاح</div>
+                        </div>
+
+                        <!-- Badge 5: Ice Master -->
+                        <div class="badge-item locked" id="badge-ice" onclick="showBadgeDetails('ice')">
+                            <span class="badge-status-tag" id="badge-tag-ice">🔒 مغلق</span>
+                            <div class="badge-icon">🧊</div>
+                            <div class="badge-title">القلب الجليدي</div>
+                            <div class="badge-desc">أنهِ تحدي كوباية التلج 20 دقيقة</div>
+                        </div>
+
+                        <!-- Badge 6: XP Legend -->
+                        <div class="badge-item locked" id="badge-legend" onclick="showBadgeDetails('legend')">
+                            <span class="badge-status-tag" id="badge-tag-legend">🔒 مغلق</span>
+                            <div class="badge-icon">👑</div>
+                            <div class="badge-title">أسطورة المذاكرة</div>
+                            <div class="badge-desc">اجمع 500 نقطة خبرة XP</div>
+                        </div>
+                    </div>
+                </div>
 
             </div>
         </section>
@@ -2569,6 +2672,25 @@
                 </button>
                 <button onclick="closeVictoryModal()" class="theme-btn" style="background: rgba(255, 255, 255, 0.15); color: #fff; border: 1px solid rgba(255, 255, 255, 0.3); padding: 0.75rem 1.6rem; border-radius: 12px; font-weight: 700; font-family: 'Tajawal'; cursor: pointer;">
                     إغلاق ومتابعة
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Badge Details Modal -->
+    <div id="badge-details-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.85); z-index: 100000; justify-content: center; align-items: center; backdrop-filter: blur(8px); padding: 15px;">
+        <div style="background: linear-gradient(135deg, #111827, #1e1b4b); padding: 2rem; border-radius: 24px; max-width: 95%; width: 440px; text-align: center; border: 2px solid #fbbf24; box-shadow: 0 0 35px rgba(251, 191, 36, 0.35); animation: slideUpGlow 0.4s ease; color: #fff;">
+            <div id="badge-modal-icon" style="font-size: 4rem; margin-bottom: 0.5rem; animation: treeBounce 0.6s ease;">🛡️</div>
+            <h2 id="badge-modal-title" style="color: #fbbf24; margin: 0 0 8px 0; font-size: 1.5rem; font-family: 'Tajawal', sans-serif;">اسم الوسام</h2>
+            <div id="badge-modal-status-badge" style="display: inline-block; padding: 4px 14px; border-radius: 20px; font-weight: 700; font-size: 0.85rem; margin-bottom: 1rem;">مغلق</div>
+            <p id="badge-modal-desc" style="color: #e2e8f0; font-size: 0.95rem; line-height: 1.6; margin: 0 0 1.5rem 0;">وصف الوسام وطريقة الحصول عليه</p>
+            
+            <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+                <button id="badge-modal-share-btn" onclick="shareBadgeWhatsApp()" class="theme-btn" style="background: #25d366; color: #fff; border: none; padding: 0.75rem 1.4rem; border-radius: 12px; font-weight: 700; font-family: 'Tajawal'; display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                    <i class="fa-brands fa-whatsapp" style="font-size: 1.2rem;"></i> شارك وسامك على واتساب
+                </button>
+                <button onclick="closeBadgeModal()" class="theme-btn" style="background: rgba(255, 255, 255, 0.15); color: #fff; border: 1px solid rgba(255, 255, 255, 0.3); padding: 0.75rem 1.6rem; border-radius: 12px; font-weight: 700; font-family: 'Tajawal'; cursor: pointer;">
+                    إغلاق
                 </button>
             </div>
         </div>
