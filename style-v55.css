@@ -188,8 +188,9 @@ header p { color: var(--text-muted); font-size: 1.1rem; margin-top: 5px; }
 .alert { padding: 15px; border-radius: 8px; margin-bottom: 20px; }
 .alert-warning { background-color: #fff3cd; color: #856404; border: 1px solid #ffeeba; }
 [data-theme="dark"] .alert-warning { background-color: #332b00; color: #ffeb99; border-color: #4d4000; }
-.ai-tabs { display: flex; gap: 10px; margin-bottom: 20px; border-bottom: 2px solid var(--border-color); padding-bottom: 10px; }
-.ai-tab-btn { background: transparent; border: none; padding: 10px 20px; font-size: 1.1rem; color: var(--text-muted); cursor: pointer; font-weight: 600; border-bottom: 3px solid transparent; margin-bottom: -13px; }
+.ai-tabs { display: flex; gap: 8px; margin-bottom: 20px; border-bottom: 2px solid var(--border-color); padding-bottom: 10px; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+.ai-tabs::-webkit-scrollbar { display: none; }
+.ai-tab-btn { background: transparent; border: none; padding: 10px 18px; font-size: 1rem; color: var(--text-muted); cursor: pointer; font-weight: 600; border-bottom: 3px solid transparent; margin-bottom: -12px; white-space: nowrap; flex-shrink: 0; transition: all 0.25s ease; display: inline-flex; align-items: center; gap: 8px; }
 .ai-tab-btn.active { color: var(--primary-color); border-bottom-color: var(--primary-color); }
 .ai-tab-content { display: none; }
 .ai-tab-content.active { display: block; animation: fadeIn 0.4s ease; }
@@ -197,6 +198,43 @@ textarea { width: 100%; height: 200px; padding: 15px; border-radius: 8px; border
 .ai-output { background: var(--bg-color); padding: 25px; border-radius: 8px; border: 1px solid var(--border-color); margin-top: 20px; line-height: 1.8; font-size: 1.1rem; }
 .ai-output h1, .ai-output h2, .ai-output h3 { color: var(--primary-color); margin-top: 20px; margin-bottom: 10px; }
 .ai-output ul { margin-right: 20px; margin-bottom: 15px; }
+
+/* AI Quick Action Booster Chips */
+.ai-quick-chips {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+}
+.ai-quick-chips .chip-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-color);
+    color: var(--text-muted);
+    padding: 7px 14px;
+    border-radius: 20px;
+    font-size: 0.84rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.22s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+}
+.ai-quick-chips .chip-btn:hover {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+    background: rgba(0, 229, 255, 0.08);
+    transform: translateY(-1px);
+}
+.ai-quick-chips .chip-btn.active {
+    background: linear-gradient(135deg, rgba(0, 229, 255, 0.2), rgba(0, 136, 255, 0.2));
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+    font-weight: 700;
+    box-shadow: 0 2px 10px rgba(0, 229, 255, 0.22);
+}
+
 
 /* Modals */
 .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); backdrop-filter: blur(4px); justify-content: center; align-items: center; }
@@ -226,7 +264,7 @@ textarea { width: 100%; height: 200px; padding: 15px; border-radius: 8px; border
     .theme-btn { padding: 8px; width: auto; }
     
     .timer-display { font-size: 4rem; }
-    .ai-tabs { flex-direction: column; }
+    .ai-tabs { overflow-x: auto; flex-wrap: nowrap; padding-bottom: 8px; }
 }
 
 /* Prayer Times */
@@ -389,13 +427,16 @@ textarea { width: 100%; height: 200px; padding: 15px; border-radius: 8px; border
         grid-template-columns: 1fr; /* ?? ?????? ???? ??? ????? */
     }
     
-    /* ????? ?????? ????????? */
+    /* تحسين التبويبات بالأجهزة المحمولة */
     .ai-tabs {
-        flex-direction: column;
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        padding-bottom: 8px;
     }
     .ai-tab-btn {
-        width: 100%;
-        margin-bottom: 5px;
+        width: auto;
+        flex-shrink: 0;
+        margin-bottom: 0;
     }
 }
 
@@ -2548,6 +2589,371 @@ body[data-theme="dark"]::after {
     border-color: #00e5ff !important;
     color: #00e5ff !important;
 }
+
+/* ============================================================
+   🔥 LIVE & INTERACTIVE CHALLENGES ARENA STYLES (v56)
+   ============================================================ */
+
+/* 🟢 Live Community Pulse Bar */
+.live-pulse-container {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(6, 182, 212, 0.08));
+    border: 1px solid rgba(16, 185, 129, 0.35);
+    border-radius: 16px;
+    padding: 0.85rem 1.2rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    box-shadow: 0 4px 20px rgba(16, 185, 129, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+.live-pulse-status {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #e2e8f0;
+}
+.live-beacon-dot {
+    width: 12px;
+    height: 12px;
+    background: #10b981;
+    border-radius: 50%;
+    display: inline-block;
+    box-shadow: 0 0 10px #10b981;
+    animation: beaconPulse 1.8s infinite ease-in-out;
+}
+@keyframes beaconPulse {
+    0% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+    70% { transform: scale(1.15); box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
+    100% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+.live-ticker-box {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 0.4rem 0.9rem;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #cbd5e1;
+    font-size: 0.88rem;
+    max-width: 100%;
+}
+.live-ticker-text {
+    color: #f1f5f9;
+    font-weight: 600;
+    transition: opacity 0.4s ease;
+}
+
+/* 💡 Smart Student Guide Card */
+.challenge-guide-card {
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.85), rgba(15, 23, 42, 0.95));
+    border: 1.5px solid rgba(245, 158, 11, 0.4);
+    border-radius: 18px;
+    padding: 1.2rem 1.4rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+}
+.challenge-guide-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 1rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+.guide-steps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 12px;
+    margin-bottom: 1rem;
+}
+.guide-step-item {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    padding: 0.9rem 1rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+.guide-step-item:hover {
+    transform: translateY(-2px);
+    border-color: rgba(245, 158, 11, 0.5);
+}
+.guide-step-icon {
+    font-size: 1.8rem;
+    line-height: 1;
+    flex-shrink: 0;
+}
+.guide-step-title {
+    font-weight: 700;
+    color: #fbbf24;
+    font-size: 0.98rem;
+    margin-bottom: 4px;
+}
+.guide-step-desc {
+    color: #cbd5e1;
+    font-size: 0.84rem;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* 🔥 Daily Streak & Mystery Box Row */
+.streak-mystery-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 14px;
+    margin-bottom: 1.5rem;
+}
+.streak-box-card {
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.12), rgba(249, 115, 22, 0.08));
+    border: 1.5px solid rgba(239, 68, 68, 0.35);
+    border-radius: 18px;
+    padding: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    box-shadow: 0 4px 20px rgba(239, 68, 68, 0.1);
+}
+.streak-flame-icon {
+    font-size: 2.8rem;
+    filter: drop-shadow(0 0 12px rgba(249, 115, 22, 0.6));
+    animation: flameFlicker 2s infinite ease-in-out alternate;
+}
+@keyframes flameFlicker {
+    0% { transform: scale(1) rotate(-2deg); }
+    100% { transform: scale(1.1) rotate(3deg); }
+}
+.mystery-chest-card {
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(217, 119, 6, 0.08));
+    border: 1.5px solid rgba(245, 158, 11, 0.45);
+    border-radius: 18px;
+    padding: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 4px 20px rgba(245, 158, 11, 0.15);
+}
+.mystery-chest-card:hover {
+    transform: translateY(-4px) scale(1.02);
+    border-color: #fbbf24;
+    box-shadow: 0 8px 25px rgba(245, 158, 11, 0.3);
+}
+.chest-animated-icon {
+    font-size: 2.8rem;
+    display: inline-block;
+    filter: drop-shadow(0 0 10px rgba(251, 191, 36, 0.5));
+}
+.chest-shaking {
+    animation: chestShake 2.5s infinite ease-in-out;
+}
+@keyframes chestShake {
+    0%, 75%, 100% { transform: rotate(0deg) scale(1); }
+    80% { transform: rotate(-10deg) scale(1.1); }
+    85% { transform: rotate(10deg) scale(1.1); }
+    90% { transform: rotate(-6deg) scale(1.08); }
+    95% { transform: rotate(6deg) scale(1.08); }
+}
+
+/* 🎯 Daily Live Quest Card */
+.daily-quest-banner {
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.18), rgba(168, 85, 247, 0.12));
+    border: 1.5px solid rgba(168, 85, 247, 0.4);
+    border-radius: 20px;
+    padding: 1.4rem;
+    margin-bottom: 1.8rem;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(99, 102, 241, 0.15);
+}
+.quest-top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 0.8rem;
+}
+.quest-badge {
+    background: linear-gradient(135deg, #ec4899, #8b5cf6);
+    color: #fff;
+    font-weight: 800;
+    font-size: 0.82rem;
+    padding: 4px 12px;
+    border-radius: 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0 2px 10px rgba(236, 72, 153, 0.4);
+}
+.quest-countdown {
+    color: #c084fc;
+    font-size: 0.88rem;
+    font-weight: 700;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 3px 10px;
+    border-radius: 12px;
+    border: 1px solid rgba(192, 132, 252, 0.3);
+}
+
+/* 🕵️‍♂️ SCIENTIFIC CSI DETECTIVE ARENA */
+.csi-arena-container {
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(2, 6, 23, 0.98));
+    border: 2px solid #00e5ff;
+    border-radius: 22px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    position: relative;
+    box-shadow: 0 0 30px rgba(0, 229, 255, 0.15);
+    overflow: hidden;
+}
+.csi-header-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(0, 229, 255, 0.15);
+    color: #00e5ff;
+    border: 1px solid rgba(0, 229, 255, 0.4);
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: 0.88rem;
+    font-weight: 800;
+    margin-bottom: 0.6rem;
+}
+.csi-input-box {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1.5px solid rgba(0, 229, 255, 0.3);
+    border-radius: 16px;
+    padding: 0.8rem;
+    margin: 1rem 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+}
+.csi-input-field {
+    flex: 1;
+    min-width: 200px;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #fff;
+    font-family: 'Tajawal', sans-serif;
+    font-size: 1rem;
+    padding: 0.4rem;
+}
+.csi-input-field::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+.csi-preset-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 1rem;
+}
+.csi-pill-btn {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #cbd5e1;
+    border-radius: 14px;
+    padding: 4px 11px;
+    font-size: 0.82rem;
+    font-family: 'Tajawal';
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.csi-pill-btn:hover {
+    background: rgba(0, 229, 255, 0.18);
+    border-color: #00e5ff;
+    color: #00e5ff;
+}
+.csi-case-file {
+    background: rgba(2, 6, 23, 0.7);
+    border: 1.5px dashed rgba(0, 229, 255, 0.4);
+    border-radius: 18px;
+    padding: 1.2rem;
+    margin-top: 1rem;
+    animation: fadeIn 0.4s ease;
+}
+.csi-clues-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 10px;
+    margin: 1rem 0;
+}
+.csi-clue-card {
+    background: rgba(0, 229, 255, 0.05);
+    border: 1px solid rgba(0, 229, 255, 0.2);
+    border-radius: 12px;
+    padding: 0.8rem;
+    font-size: 0.86rem;
+    color: #e2e8f0;
+    line-height: 1.5;
+}
+.csi-choice-btn {
+    width: 100%;
+    text-align: right;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1.5px solid rgba(255, 255, 255, 0.15);
+    color: #f1f5f9;
+    padding: 0.85rem 1rem;
+    border-radius: 14px;
+    font-family: 'Tajawal';
+    font-size: 0.95rem;
+    cursor: pointer;
+    margin-bottom: 8px;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.csi-choice-btn:hover {
+    background: rgba(0, 229, 255, 0.15);
+    border-color: #00e5ff;
+    transform: translateX(-4px);
+}
+.csi-choice-btn.correct {
+    background: rgba(16, 185, 129, 0.25) !important;
+    border-color: #10b981 !important;
+    color: #34d399 !important;
+}
+.csi-choice-btn.wrong {
+    background: rgba(239, 68, 68, 0.2) !important;
+    border-color: #ef4444 !important;
+    color: #f87171 !important;
+}
+
+/* 👑 XP Vault Modal & Rewards */
+.vault-item-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 14px;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 10px;
+    transition: border-color 0.2s ease;
+}
+.vault-item-card:hover {
+    border-color: #fbbf24;
+}
+
 
 
 

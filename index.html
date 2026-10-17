@@ -401,6 +401,26 @@
                     </div>
                 </header>
 
+                <!-- 🌟 Quick Daily Streak & Live Quest Banner on Main Dashboard -->
+                <div id="dashboard-streak-banner" class="card hover-glow-box" style="background: linear-gradient(135deg, rgba(239, 68, 68, 0.12), rgba(245, 158, 11, 0.1)); border: 1.5px solid rgba(245, 158, 11, 0.45); border-radius: 18px; padding: 1.1rem 1.3rem; margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; box-shadow: 0 4px 20px rgba(245, 158, 11, 0.15);">
+                    <div style="display: flex; align-items: center; gap: 14px;">
+                        <span style="font-size: 2.4rem; animation: flameFlicker 2s infinite ease-in-out alternate; display: inline-block;">🔥</span>
+                        <div>
+                            <div style="display: flex; align-items: center; gap: 8px;">
+                                <strong id="dash-streak-title" style="color: #fbbf24; font-size: 1.15rem; font-family: 'Tajawal', sans-serif;">شعلة التزامك: 0 أيام متتالية! 🔥</strong>
+                                <span id="dash-mystery-badge" style="background: rgba(245, 158, 11, 0.25); color: #fbbf24; font-size: 0.78rem; font-weight: 700; padding: 3px 10px; border-radius: 12px; border: 1px solid rgba(245, 158, 11, 0.5);">
+                                    🎁 هدية اليوم جاهزة!
+                                </span>
+                            </div>
+                            <p id="dash-streak-sub" style="margin: 4px 0 0 0; color: #cbd5e1; font-size: 0.88rem; line-height: 1.5;">
+                                ادخل غرفة التحديات الآن، افتح صندوق حظك وحل لغز المحقق العلمي واكسب XP مضاعف!
+                            </p>
+                        </div>
+                    </div>
+                    <button onclick="window.switchPage('challenges')" class="theme-btn btn-hover-glow" style="background: linear-gradient(135deg, #fbbf24, #f59e0b); color: #0f172a; border: none; padding: 0.7rem 1.4rem; border-radius: 12px; font-weight: 800; font-family: 'Tajawal'; font-size: 0.92rem; cursor: pointer; white-space: nowrap; display: flex; align-items: center; gap: 6px;">
+                        <i class="fa-solid fa-gamepad"></i> دخول غرفة التحديات 🚀
+                    </button>
+                </div>
                 
                 <!-- My Dream Banner -->
                 <div class="card hover-glow-box" style="background: linear-gradient(135deg, rgba(0, 229, 255, 0.1), rgba(0, 229, 255, 0.05)); border: 2px dashed #00e5ff; text-align: center; margin-bottom: 2rem;">
@@ -593,11 +613,38 @@
                 </header>
                 
                 <div class="ai-container">
-                    <!-- API Key Alert -->
-                                        <div id="api-key-alert" style="background: var(--card-bg); padding: 20px; border-radius: 12px; margin-bottom: 20px; border: 1px solid var(--border-color);">
-                        <h3 style="margin-top:0; color:var(--primary-color);">إعدادات الذكاء الاصطناعي 🤖</h3>
+                    <!-- Notebook AI Studio Feature Showcase Banner -->
+                    <div style="background: linear-gradient(135deg, rgba(0, 229, 255, 0.12), rgba(0, 136, 255, 0.15)); border: 1.5px solid rgba(0, 229, 255, 0.35); border-radius: 14px; padding: 14px 18px; margin-bottom: 18px; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;">
+                        <div style="display: flex; align-items: center; gap: 12px;">
+                            <div style="width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(135deg, #00e5ff, #0088ff); color: #020c1b; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; flex-shrink: 0; box-shadow: 0 4px 12px rgba(0,229,255,0.3);">
+                                <i class="fa-solid fa-podcast"></i>
+                            </div>
+                            <div>
+                                <strong style="color: #00e5ff; font-size: 0.98rem; display: block;">استوديو الكتب والمذكرات الذكي (NotebookLM) 🎙️📖</strong>
+                                <span style="color: var(--text-muted); font-size: 0.83rem;">صوّر صفحة كتابك بالكاميرا، اتكلم مع الكتاب في شات، واسمعه كبودكاست إذاعي لشخصين!</span>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-sm" onclick="switchPage('notebook-ai')" style="background: linear-gradient(135deg, #00e5ff, #0088ff); color: #020c1b; font-weight: 800; border: none; padding: 8px 16px; border-radius: 10px; cursor: pointer; white-space: nowrap;">
+                            فتح الاستوديو الآن 🚀
+                        </button>
+                    </div>
+
+                    <!-- AI Status & Advanced Settings Toggle -->
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px; flex-wrap: wrap; gap: 10px; background: rgba(46, 213, 115, 0.08); border: 1px solid rgba(46, 213, 115, 0.25); border-radius: 10px; padding: 10px 14px;">
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <span style="display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: #2ed573; box-shadow: 0 0 8px #2ed573;"></span>
+                            <span style="font-size: 0.86rem; color: #2ed573; font-weight: 700;">الذكاء الاصطناعي نشط ويعمل مجاناً 100% بدون أي إعدادات!</span>
+                        </div>
+                        <button type="button" class="btn btn-sm" onclick="toggleApiSettingsBox()" style="background: transparent; border: 1px dashed var(--border-color); color: var(--text-muted); font-size: 0.8rem; padding: 4px 10px; border-radius: 8px; cursor: pointer;">
+                            <i class="fa-solid fa-sliders"></i> إعدادات متقدمة (API اختياري)
+                        </button>
+                    </div>
+
+                    <!-- Collapsible API Key Box (Hidden by default for frictionless student experience) -->
+                    <div id="api-key-alert" style="display: none; background: var(--card-bg); padding: 20px; border-radius: 12px; margin-bottom: 20px; border: 1px solid var(--border-color);">
+                        <h3 style="margin-top:0; color:var(--primary-color);">إعدادات الذكاء الاصطناعي المتقدمة 🤖</h3>
                         <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 15px;">
-                            اختر محرك الذكاء الاصطناعي المفضل لديك وأدخل المفتاح الخاص به. (البيانات تُحفظ في جهازك فقط لضمان الخصوصية).
+                            النظام يعمل تلقائياً وبشكل مجاني تماماً. إذا كنت ترغب في ربط مفتاحك الخاص من Google أو Groq للحصول على مزيد من الميزات المتقدمة، يمكنك إدخاله هنا:
                         </p>
                 
                         <label style="display:block; margin-bottom:5px; color:var(--text-main);">المحرك المفضل:</label>
@@ -621,21 +668,46 @@
                     </div>
 
                     <div class="ai-tabs">
-                        <button class="ai-tab-btn active" onclick="switchAITab('mindmap-tab')">النصوص والخرائط</button>
-                        <button class="ai-tab-btn" onclick="switchAITab('pdf-tab')">تلخيص PDF 📄</button>
-                        <button class="ai-tab-btn" onclick="switchAITab('platform-tab')">منصات المدرسين (صور وصوت)</button>
-                        <button class="ai-tab-btn" onclick="switchAITab('youtube-tab')">يوتيوب</button>
+                        <button class="ai-tab-btn active" onclick="switchAITab('mindmap-tab')"><i class="fa-solid fa-wand-magic-sparkles"></i> نصوص وخرائط</button>
+                        <button class="ai-tab-btn" onclick="switchAITab('pdf-tab')"><i class="fa-solid fa-file-pdf"></i> تلخيص PDF 📄</button>
+                        <button class="ai-tab-btn" onclick="switchAITab('platform-tab')"><i class="fa-solid fa-camera"></i> تصوير سبورة وصوت 🎙️</button>
+                        <button class="ai-tab-btn" onclick="switchAITab('youtube-tab')"><i class="fa-brands fa-youtube"></i> فيديو يوتيوب 🎬</button>
                     </div>
 
                     <!-- Mindmap Tab -->
                     <div id="mindmap-tab" class="ai-tab-content active">
+                        <!-- Quick Action Booster Chips -->
+                        <div style="margin-bottom: 12px;">
+                            <label style="display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 6px; font-weight: 600;">
+                                ⚡ اختر طريقة التلخيص بضغطة زر واحدة:
+                            </label>
+                            <div class="ai-quick-chips">
+                                <button type="button" class="chip-btn active" onclick="setQuickAiMode('summary', this)"><i class="fa-solid fa-wand-magic-sparkles"></i> ملخص شامل + خريطة</button>
+                                <button type="button" class="chip-btn" onclick="setQuickAiMode('brief', this)"><i class="fa-solid fa-bolt"></i> لخص في 3 أسطر فقط</button>
+                                <button type="button" class="chip-btn" onclick="setQuickAiMode('exam', this)"><i class="fa-solid fa-circle-question"></i> 5 أسئلة امتحان مع الإجابة</button>
+                                <button type="button" class="chip-btn" onclick="setQuickAiMode('simple', this)"><i class="fa-solid fa-face-smile"></i> اشرحه لطفل (تبسيط فائق)</button>
+                                <button type="button" class="chip-btn" onclick="setQuickAiMode('mnemonic', this)"><i class="fa-solid fa-key"></i> شفرات سحرية للتذكر</button>
+                            </div>
+                        </div>
+
                         <div style="position: relative;">
                             <textarea id="ai-lesson-text" placeholder="ألصق هنا نص الدرس أو سجل بصوتك أي شيء تريد تلخيصه وتحويله لخرائط ذهنية وشفرات..."></textarea>
                             <button id="mic-btn" title="تحدث وسيقوم الذكاء الاصطناعي بكتابة ما تقوله" style="position: absolute; left: 15px; bottom: 15px; background: var(--primary-color); color: white; border: none; border-radius: 50%; width: 45px; height: 45px; font-size: 1.2rem; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.2); transition: 0.3s; z-index: 10;">
                                 <i class="fa-solid fa-microphone"></i>
                             </button>
                         </div>
-                        <button class="btn btn-primary" id="btn-generate-mindmap" onclick="generateMindmap()" style="width: 100%; margin-top: 10px; font-size: 1.1rem;">
+
+                        <!-- 1-Tap Sample Lessons -->
+                        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-top: 10px; font-size: 0.85rem;">
+                            <span style="color: var(--text-muted); font-size: 0.82rem;">أو جرب درساً جاهزاً فوراً:</span>
+                            <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+                                <button type="button" class="btn btn-sm" onclick="loadSampleLesson('history')" style="background: rgba(255,177,66,0.12); color: #ffb142; border: 1px solid rgba(255,177,66,0.3); border-radius: 8px; font-size: 0.78rem; padding: 4px 10px; font-weight: 600; cursor: pointer;">⚔️ معركة حطين (تاريخ)</button>
+                                <button type="button" class="btn btn-sm" onclick="loadSampleLesson('chemistry')" style="background: rgba(0,229,255,0.12); color: #00e5ff; border: 1px solid rgba(0,229,255,0.3); border-radius: 8px; font-size: 0.78rem; padding: 4px 10px; font-weight: 600; cursor: pointer;">🧪 الروابط الكيميائية (علوم)</button>
+                                <button type="button" class="btn btn-sm" onclick="loadSampleLesson('arabic')" style="background: rgba(46,213,115,0.12); color: #2ed573; border: 1px solid rgba(46,213,115,0.3); border-radius: 8px; font-size: 0.78rem; padding: 4px 10px; font-weight: 600; cursor: pointer;">📚 كان وأخواتها (عربي)</button>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-primary" id="btn-generate-mindmap" onclick="generateMindmap()" style="width: 100%; margin-top: 12px; font-size: 1.1rem; padding: 12px;">
                             <i class="fa-solid fa-wand-magic-sparkles"></i> سحر المذاكرة (لخّص واصنع خريطة)
                         </button>
                     </div>
@@ -662,37 +734,54 @@
                     <!-- Teacher Platforms Tab -->
                     <div id="platform-tab" class="ai-tab-content">
                         <div class="alert" style="background: var(--bg-color); border-right: 4px solid var(--success);">
-                            <i class="fa-solid fa-chalkboard-user"></i> <strong>هل الدرس على منصة تمنع النسخ؟</strong><br>
-                            يمكنكِ إما <strong>تصوير الشاشة</strong> (سكرين شوت) للشرح ورفعها هنا، أو استخدام <strong>المستمع الذكي</strong> ليقوم بتحويل كلام المدرس في الفيديو إلى نص تلقائياً ثم تلخيصه.
+                            <i class="fa-solid fa-chalkboard-user"></i> <strong>هل الدرس على سبورة أو في مذكرة ورقية أو ريكورد صوتي؟</strong><br>
+                            صوّر السبورة أو ورقة الدرس بكاميرا الموبايل مباشرة، أو ارفع تسجيلاً صوتياً (ريكورد) للمدرس، وسيقوم الذكاء الاصطناعي بقراءة واستماع وتلخيص كل شيء فوراً!
                         </div>
 
-                        <div class="platform-features" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-                            <!-- Image Upload Section -->
-                            <div class="feature-box" style="padding: 20px; border: 1px dashed var(--border-color); border-radius: 8px; text-align: center;">
-                                <h3><i class="fa-regular fa-image"></i> تلخيص من سكرين شوت</h3>
-                                <p style="font-size: 0.9rem; color: var(--text-muted); margin: 10px 0;">قومي بتصوير السبورة أو الـ PDF من المنصة، وارفعي الصورة هنا.</p>
-                                <input type="file" id="ai-image-upload" accept="image/*" style="width: 100%; margin-bottom: 10px; padding: 5px;">
-                                <button class="btn btn-primary" onclick="summarizeImage()" style="width: 100%;">
-                                    <i class="fa-solid fa-magnifying-glass"></i> استخراج النص والتلخيص
+                        <div class="platform-features" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px;">
+                            <!-- Image Upload & Camera Section -->
+                            <div class="feature-box" style="padding: 20px; border: 1px dashed var(--border-color); border-radius: 12px; text-align: center; background: rgba(255,255,255,0.02);">
+                                <h3 style="color: var(--primary-color); margin-bottom: 8px;"><i class="fa-solid fa-camera-retro"></i> تصوير سبورة أو مذكرة</h3>
+                                <p style="font-size: 0.88rem; color: var(--text-muted); margin: 8px 0 14px;">صوّر السبورة أو المذكرة أو ورقة الدرس، والذكاء الاصطناعي هيستخرج النص ويلخصه في ثواني.</p>
+                                
+                                <div style="display: flex; gap: 8px; justify-content: center; margin-bottom: 12px; flex-wrap: wrap;">
+                                    <button type="button" class="btn btn-sm" onclick="document.getElementById('ai-camera-upload').click()" style="background: linear-gradient(135deg, rgba(0,229,255,0.2), rgba(0,136,255,0.2)); border: 1px solid #00e5ff; color: #fff; padding: 8px 14px; border-radius: 8px; font-weight: 600; font-size: 0.85rem; cursor: pointer;">
+                                        <i class="fa-solid fa-camera"></i> تصوير بالكاميرا 📸
+                                    </button>
+                                    <button type="button" class="btn btn-sm" onclick="document.getElementById('ai-image-upload').click()" style="background: rgba(255,255,255,0.06); border: 1px solid var(--border-color); color: var(--text-main); padding: 8px 14px; border-radius: 8px; font-weight: 600; font-size: 0.85rem; cursor: pointer;">
+                                        <i class="fa-regular fa-image"></i> صور المعرض 🖼️
+                                    </button>
+                                </div>
+
+                                <input type="file" id="ai-camera-upload" accept="image/*" capture="environment" style="display: none;" onchange="handleAiImageSelect(this.files[0])">
+                                <input type="file" id="ai-image-upload" accept="image/*" style="display: none;" onchange="handleAiImageSelect(this.files[0])">
+
+                                <div id="ai-image-preview-container" style="display: none; margin: 12px 0; padding: 10px; background: var(--bg-color); border: 1px solid var(--border-color); border-radius: 10px; text-align: center;">
+                                    <img id="ai-image-preview-thumb" src="" alt="معاينة الصورة" style="max-height: 140px; border-radius: 8px; object-fit: contain; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
+                                    <div id="ai-image-preview-name" style="font-size: 0.82rem; color: var(--text-muted); margin-top: 6px;"></div>
+                                </div>
+
+                                <button class="btn btn-primary" id="btn-summarize-image" onclick="summarizeImage()" style="width: 100%; font-size: 0.95rem; padding: 10px;">
+                                    <i class="fa-solid fa-wand-magic-sparkles"></i> قراءة الصورة وتلخيصها فوراً
                                 </button>
                             </div>
 
-                                                        <!-- Audio File & Dictation Section -->
-                            <div class="feature-box" style="padding: 20px; border: 1px dashed var(--border-color); border-radius: 8px; text-align: center;">
-                                <h3><i class="fa-solid fa-microphone-lines"></i> تلخيص الريكوردات والمحاضرات</h3>
-                                <p style="font-size: 0.9rem; color: var(--text-muted); margin: 10px 0;">ارفعي ريكورد (تسجيل صوتي) للمدرس، والذكاء الاصطناعي هيسمعه ويلخصهولك!</p>
+                            <!-- Audio File & Dictation Section -->
+                            <div class="feature-box" style="padding: 20px; border: 1px dashed var(--border-color); border-radius: 12px; text-align: center; background: rgba(255,255,255,0.02);">
+                                <h3 style="color: var(--primary-color); margin-bottom: 8px;"><i class="fa-solid fa-microphone-lines"></i> تلخيص الريكوردات والمحاضرات</h3>
+                                <p style="font-size: 0.88rem; color: var(--text-muted); margin: 8px 0 14px;">ارفع ريكورد للمدرس، والذكاء الاصطناعي هيسمعه ويلخصهولك في نقاط محددة!</p>
                                 <input type="file" id="ai-audio-upload" accept="audio/*" style="width: 100%; margin-bottom: 10px; padding: 5px;">
                                 <button class="btn btn-primary" onclick="summarizeAudio()" style="width: 100%; margin-bottom: 15px; background-color: var(--danger);">
                                     <i class="fa-solid fa-headphones"></i> اسمع الريكورد ولخّصه
                                 </button>
                                 <hr style="border:0; border-top:1px solid var(--border-color); margin:15px 0;">
-                                <p style="font-size: 0.8rem; color: var(--text-muted); margin: 10px 0;">أو افتحي المايك واكتبي ورا المدرس مباشرة:</p>
+                                <p style="font-size: 0.82rem; color: var(--text-muted); margin: 8px 0 10px;">أو افتح المايك واكتب ورا المدرس مباشرة:</p>
                                 <button class="btn" id="btn-dictation" onclick="toggleDictation()" style="width: 100%; background-color: var(--bg-color); color: var(--primary-color); border: 1px solid var(--primary-color); margin-bottom: 10px;">
                                     <i class="fa-solid fa-microphone"></i> المايك المباشر
                                 </button>
                                 <textarea id="dictation-text" placeholder="سيظهر كلام المدرس هنا تلقائياً..." style="height: 60px; font-size: 0.9rem; margin-bottom: 10px;"></textarea>
                                 <button class="btn btn-primary" onclick="summarizeDictation()" style="width: 100%;">
-                                    <i class="fa-solid fa-wand-magic-sparkles"></i> لخص الكلام
+                                    <i class="fa-solid fa-wand-magic-sparkles"></i> لخص الكلام المكتوب
                                 </button>
                             </div>
                         </div>
@@ -704,6 +793,17 @@
                             <i class="fa-brands fa-youtube" style="color: var(--danger);"></i> <strong>تلخيص فيديوهات يوتيوب</strong><br>
                             ألصق رابط الفيديو وهنلخصهولك في ثواني! أو ألصق النص يدوياً لو حبيت.
                         </div>
+
+                        <!-- 1-Tap Sample Educational Videos -->
+                        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; font-size: 0.85rem;">
+                            <span style="color: var(--text-muted); font-size: 0.82rem;">أو جرب فيديو تعليمي بضغطة واحدة:</span>
+                            <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+                                <button type="button" class="btn btn-sm" onclick="loadSampleYouTube('chem')" style="background: rgba(0,229,255,0.12); color: #00e5ff; border: 1px solid rgba(0,229,255,0.3); border-radius: 8px; font-size: 0.78rem; padding: 4px 10px; font-weight: 600; cursor: pointer;">🧪 كيمياء (الأكسدة)</button>
+                                <button type="button" class="btn btn-sm" onclick="loadSampleYouTube('physics')" style="background: rgba(255,177,66,0.12); color: #ffb142; border: 1px solid rgba(255,177,66,0.3); border-radius: 8px; font-size: 0.78rem; padding: 4px 10px; font-weight: 600; cursor: pointer;">⚡ فيزياء (قوانين نيوتن)</button>
+                                <button type="button" class="btn btn-sm" onclick="loadSampleYouTube('history')" style="background: rgba(46,213,115,0.12); color: #2ed573; border: 1px solid rgba(46,213,115,0.3); border-radius: 8px; font-size: 0.78rem; padding: 4px 10px; font-weight: 600; cursor: pointer;">🏛️ تاريخ (حضارة مصر)</button>
+                            </div>
+                        </div>
+
                         <div style="margin-bottom: 15px;">
                             <label style="display:block; margin-bottom:5px; color:var(--text-muted);">رابط فيديو اليوتيوب:</label>
                             <div style="display:flex; gap:10px;">
@@ -728,8 +828,21 @@
                     </div>
                     
                     <div id="ai-output-container" class="ai-output" style="display:none;">
-                        <div class="ai-actions" style="text-align: left; margin-bottom: 10px;">
-                            <button class="btn" style="background:var(--bg-color); border:1px solid var(--border-color); color:var(--text-main)" onclick="document.getElementById('ai-output-container').style.display='none'">إخفاء النتيجة</button>
+                        <div class="ai-actions-bar" style="display: flex; flex-wrap: wrap; gap: 8px; justify-content: space-between; align-items: center; margin-bottom: 15px; padding: 10px 14px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); border-radius: 10px;">
+                            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                                <button type="button" class="btn btn-sm btn-primary" onclick="copyAIResult()" id="btn-copy-ai" style="padding: 6px 14px; font-size: 0.85rem; border-radius: 8px;">
+                                    <i class="fa-regular fa-copy"></i> نسخ التلخيص
+                                </button>
+                                <button type="button" class="btn btn-sm" onclick="toggleSpeakAIResult()" id="btn-speak-ai" style="background: rgba(0,229,255,0.15); border: 1px solid #00e5ff; color: #00e5ff; padding: 6px 14px; font-size: 0.85rem; border-radius: 8px;">
+                                    <i class="fa-solid fa-volume-high"></i> استماع صوتي 🔊
+                                </button>
+                                <button type="button" class="btn btn-sm" onclick="convertAIToFlashcards()" id="btn-convert-flashcards" style="background: rgba(46,213,115,0.15); border: 1px solid #2ed573; color: #2ed573; padding: 6px 14px; font-size: 0.85rem; border-radius: 8px;">
+                                    <i class="fa-solid fa-layer-group"></i> تحويل لبطاقات استذكار 🗂️
+                                </button>
+                            </div>
+                            <button type="button" class="btn btn-sm" onclick="document.getElementById('ai-output-container').style.display='none'" style="background: transparent; border: 1px solid var(--border-color); color: var(--text-muted); font-size: 0.82rem; padding: 6px 12px; border-radius: 8px;">
+                                <i class="fa-solid fa-xmark"></i> إخفاء النتيجة
+                            </button>
                         </div>
                         <div id="ai-result-content"></div>
                         <div id="mermaid-container" style="margin-top: 20px; background: white; padding: 10px; border-radius: 8px; overflow-x: auto; text-align: center; color: black !important;"></div>
@@ -1412,6 +1525,129 @@
                     </p>
                 </div>
 
+                <!-- 🟢 1. Live Community Pulse Bar -->
+                <div class="live-pulse-container" id="live-pulse-container">
+                    <div class="live-pulse-status">
+                        <span class="live-beacon-dot"></span>
+                        <span id="live-online-students-text">1,485 طالب يتحدون ويذاكرون الآن معاً 🔥</span>
+                    </div>
+                    <div class="live-ticker-box">
+                        <i class="fa-solid fa-bell" style="color: #fbbf24; font-size: 0.85rem;"></i>
+                        <span id="live-community-ticker" class="live-ticker-text">عمر (المنصورة) حل قضية المحقق العلمي وكسب 120 XP! 🕵️‍♂️</span>
+                    </div>
+                </div>
+
+                <!-- 💡 2. Smart Student Quick Guide Card (ليه؟ إمتى؟ إزاي؟) -->
+                <div class="challenge-guide-card">
+                    <div class="challenge-guide-header">
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <span style="font-size: 1.4rem;">💡</span>
+                            <h4 style="margin: 0; color: #fbbf24; font-size: 1.15rem; font-family: 'Tajawal', sans-serif;">
+                                دليلك السريع: إزاي تستغل التحديات وتكسر الملل والروتين؟ 🚀
+                            </h4>
+                        </div>
+                        <button onclick="openChallengeGuideModal()" style="background: rgba(245, 158, 11, 0.2); border: 1px solid #fbbf24; color: #fbbf24; padding: 5px 14px; border-radius: 20px; font-size: 0.82rem; font-weight: 700; cursor: pointer; font-family: 'Tajawal'; display: flex; align-items: center; gap: 6px; transition: all 0.2s ease;">
+                            <i class="fa-solid fa-circle-question"></i> كيف ألعب وأفوز؟ (دليل تفاعلي)
+                        </button>
+                    </div>
+                    <div class="guide-steps-grid">
+                        <div class="guide-step-item">
+                            <span class="guide-step-icon">🎯</span>
+                            <div>
+                                <div class="guide-step-title">1. ليه أستخدم التحديات؟</div>
+                                <p class="guide-step-desc">عشان تحول مذاكرتك لمغامرة وألغاز فيها XP وألقاب، وتكسر الملل والسرحان وتثبت المعلومة زي اللعبة!</p>
+                            </div>
+                        </div>
+                        <div class="guide-step-item">
+                            <span class="guide-step-icon">⏰</span>
+                            <div>
+                                <div class="guide-step-title">2. أستخدمها إمتى؟</div>
+                                <p class="guide-step-desc">بعد ما تخلص قراءة درسك في 5 دقائق لتثبيت الفهم، أو وقت البريك، أو لما تحس بكسل ومش طايق تفتح الكتاب!</p>
+                            </div>
+                        </div>
+                        <div class="guide-step-item">
+                            <span class="guide-step-icon">🚀</span>
+                            <div>
+                                <div class="guide-step-title">3. إزاي أبدأ خطوة بخطوة؟</div>
+                                <p class="guide-step-desc">حافظ على شعلتك اليومية 🔥، افتح صندوق حظك 🎁، وحل لغز المحقق العلمي 🕵️‍♂️ بدون أي مجهود أو تصوير كتب!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 🔥 3. Daily Streak & Mystery Box Row -->
+                <div class="streak-mystery-row">
+                    <!-- Daily Streak Flame -->
+                    <div class="streak-box-card">
+                        <div style="display: flex; align-items: center; gap: 14px;">
+                            <span class="streak-flame-icon">🔥</span>
+                            <div>
+                                <div style="display: flex; align-items: center; gap: 8px;">
+                                    <h4 style="margin: 0; color: #ef4444; font-size: 1.15rem; font-family: 'Tajawal', sans-serif;">شعلة الالتزام اليومي</h4>
+                                    <span id="streak-shields-count-badge" style="background: rgba(59, 130, 246, 0.2); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.4); padding: 2px 8px; border-radius: 12px; font-size: 0.75rem; font-weight: 700;">
+                                        🛡️ 0 دروع
+                                    </span>
+                                </div>
+                                <div id="streak-days-display" style="color: #fbbf24; font-size: 1.35rem; font-weight: 800; margin: 4px 0;">
+                                    0 أيام متتالية 🔥
+                                </div>
+                                <p id="streak-sub-message" style="margin: 0; color: #cbd5e1; font-size: 0.82rem;">افتح التطبيق يومياً وأنجز تحدياً لتحافظ على شعلتك وتضاعف الـ XP!</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Daily Mystery Box -->
+                    <div class="mystery-chest-card" id="mystery-chest-trigger-card" onclick="triggerDailyMysteryChest()">
+                        <div style="display: flex; align-items: center; gap: 14px;">
+                            <span class="chest-animated-icon chest-shaking" id="mystery-chest-icon">🎁</span>
+                            <div>
+                                <div style="display: flex; align-items: center; gap: 8px;">
+                                    <h4 style="margin: 0; color: #fbbf24; font-size: 1.15rem; font-family: 'Tajawal', sans-serif;">صندوق المفاجأة اليومية</h4>
+                                    <span id="mystery-chest-status-pill" style="background: rgba(245, 158, 11, 0.25); color: #fbbf24; border: 1px solid #fbbf24; padding: 2px 8px; border-radius: 12px; font-size: 0.75rem; font-weight: 700;">
+                                        جاهز للفتح ✨
+                                    </span>
+                                </div>
+                                <p id="mystery-chest-desc" style="margin: 5px 0 0 0; color: #f1f5f9; font-size: 0.88rem; font-weight: 600;">
+                                    اضغط هنا لاستلام هديتك المجانية اليومية ومضاعف الـ XP! 🎲
+                                </p>
+                                <div id="mystery-chest-countdown" style="display: none; color: #94a3b8; font-size: 0.8rem; margin-top: 4px;">
+                                    الصندوق القادم يفتح بعد: <span id="chest-next-timer" style="color: #38bdf8; font-weight: 700;">--:--:--</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 🎯 4. Daily Live Quest Banner -->
+                <div class="daily-quest-banner" id="daily-quest-banner">
+                    <div class="quest-top-bar">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <span class="quest-badge">
+                                <i class="fa-solid fa-star"></i> مهمة اليوم الحصرية المتجددة
+                            </span>
+                            <span class="quest-countdown" id="quest-countdown-timer">
+                                ⏳ ينتهي بعد: --:--:--
+                            </span>
+                        </div>
+                        <span id="quest-completion-badge" style="background: rgba(255, 255, 255, 0.1); color: #cbd5e1; padding: 3px 10px; border-radius: 12px; font-size: 0.8rem; font-weight: 700;">
+                            غير مكتمل ⏳
+                        </span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;">
+                        <div style="flex: 1; min-width: 260px;">
+                            <h3 id="daily-quest-title" style="margin: 0 0 6px 0; color: #fff; font-size: 1.25rem; font-family: 'Tajawal', sans-serif;">
+                                🕵️‍♂️ مهمة اليوم: كشف الخدعة العلمية في 3 دقائق
+                            </h3>
+                            <p id="daily-quest-desc" style="margin: 0; color: #e2e8f0; font-size: 0.9rem; line-height: 1.5;">
+                                حل لغز اليوم في المحقق العلمي واكشف الخطأ العلمي في مسألة الدرس واحصل على مكافأة +200 XP مضاعفة!
+                            </p>
+                        </div>
+                        <button id="daily-quest-action-btn" onclick="launchDailyQuestAction()" class="theme-btn btn-hover-glow" style="background: linear-gradient(135deg, #ec4899, #8b5cf6); color: white; border: none; padding: 0.75rem 1.6rem; border-radius: 14px; font-size: 0.95rem; font-weight: 800; cursor: pointer; white-space: nowrap;">
+                            <i class="fa-solid fa-play"></i> ابدأ مهمة اليوم الآن (+200 XP)
+                        </button>
+                    </div>
+                </div>
+
                 <!-- Challenger Gamer Dashboard -->
                 <div class="challenger-dashboard" id="challenger-dashboard">
                     <div class="challenger-header">
@@ -1427,6 +1663,10 @@
                                 <i class="fa-solid fa-medal"></i>
                                 <span id="challenger-current-rank-name">مقاتل تركيز مبتدئ 🥉</span>
                             </span>
+                            <button id="challenger-vault-btn" onclick="openXpVaultModal()" title="خزينة الألقاب ودروع حماية الشعلة" style="background: rgba(251, 191, 36, 0.18); border: 1px solid #fbbf24; color: #fbbf24; padding: 0.45rem 0.9rem; border-radius: 20px; cursor: pointer; font-family: 'Tajawal'; font-size: 0.85rem; display: flex; align-items: center; gap: 6px; font-weight: 700;">
+                                <i class="fa-solid fa-crown" style="color: #fbbf24;"></i>
+                                <span>خزينة المكافآت والألقاب 👑</span>
+                            </button>
                             <button id="challenger-sound-btn" onclick="toggleChallengeSound()" title="تشغيل / كتم المؤثرات الصوتية" style="background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); color: #fff; padding: 0.45rem 0.9rem; border-radius: 20px; cursor: pointer; font-family: 'Tajawal'; font-size: 0.85rem; display: flex; align-items: center; gap: 6px;">
                                 <i id="challenger-sound-icon" class="fa-solid fa-volume-high" style="color: #00e5ff;"></i>
                                 <span id="challenger-sound-label">المؤثرات: مفعلة</span>
@@ -1481,6 +1721,62 @@
                             <i class="fa-solid fa-power-off"></i> إيقاف
                         </button>
                     </div>
+                </div>
+
+                <!-- 🕵️‍♂️ 5. SCIENTIFIC CSI DETECTIVE ARENA -->
+                <div class="csi-arena-container" id="csi-arena-section">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 10px; margin-bottom: 0.8rem;">
+                        <div>
+                            <div class="csi-header-badge">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                                <span>ميزة حصرية جديدة: محقق القضايا والجرائم العلمية (CSI) 🧬</span>
+                            </div>
+                            <h3 style="margin: 4px 0; color: #fff; font-size: 1.4rem; font-family: 'Tajawal', sans-serif;">
+                                حل ألغاز المناهج واكشف الغلطة العلمية بدون تصوير ولا رفع كتب! 🔍
+                            </h3>
+                            <p style="margin: 0; color: #94a3b8; font-size: 0.92rem; line-height: 1.5;">
+                                مش محتاج تصور 20 صفحة من كتابك! اكتب اسم درسك بس أو انطقه بالصوت، والذكاء الاصطناعي هيصنع لك قضية شيقة تفككها في 3 دقائق!
+                            </p>
+                        </div>
+                        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                            <button onclick="openCSIHowToModal()" style="background: rgba(0, 229, 255, 0.15); border: 1px solid #00e5ff; color: #00e5ff; padding: 6px 14px; border-radius: 12px; font-size: 0.85rem; font-weight: 700; cursor: pointer; font-family: 'Tajawal'; display: flex; align-items: center; gap: 5px;">
+                                <i class="fa-solid fa-circle-info"></i> إزاي بتشتغل؟
+                            </button>
+                            <button onclick="startCsiDemoCase()" class="theme-btn btn-hover-glow" style="background: linear-gradient(135deg, #00e5ff, #0284c7); color: #031024; border: none; padding: 6px 14px; border-radius: 12px; font-size: 0.85rem; font-weight: 800; cursor: pointer;">
+                                ⚡ جرب قضية تجريبية فوراً
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Micro Topic Input Bar (Zero Friction) -->
+                    <div class="csi-input-box">
+                        <i class="fa-solid fa-file-signature" style="color: #00e5ff; font-size: 1.2rem; margin-right: 4px;"></i>
+                        <input type="text" id="csi-topic-input" class="csi-input-field" placeholder="اكتب اسم الدرس (مثال: كيرشوف، الروابط التساهمية، كان وأخواتها، ثورة 1919، انقسام ميوزي)...">
+                        
+                        <button id="csi-voice-btn" onclick="startCsiVoiceInput()" title="انطق اسم الدرس بصوتك" style="background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); color: #fff; width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s ease;">
+                            <i class="fa-solid fa-microphone" id="csi-voice-icon" style="color: #00e5ff;"></i>
+                        </button>
+
+                        <button onclick="generateCsiCase()" class="theme-btn btn-hover-glow" style="background: linear-gradient(135deg, #00e5ff, #00b4d8); color: #031024; border: none; padding: 0.65rem 1.4rem; border-radius: 12px; font-size: 0.95rem; font-weight: 800; cursor: pointer;">
+                            <i class="fa-solid fa-fingerprint"></i> فتح ملف القضية الآن!
+                        </button>
+                    </div>
+
+                    <!-- Quick Preset Topics Pills -->
+                    <div style="margin-bottom: 0.6rem; font-size: 0.84rem; color: #94a3b8; display: flex; align-items: center; gap: 6px;">
+                        <span>أو اختر درساً شائعاً بلمسة واحدة:</span>
+                    </div>
+                    <div class="csi-preset-pills">
+                        <button class="csi-pill-btn" onclick="selectCsiPreset('قانون كيرشوف الأول والثاني (فيزياء 3 ثانوي)')">⚡ كيرشوف فيزياء</button>
+                        <button class="csi-pill-btn" onclick="selectCsiPreset('الروابط الأيونية والتساهمية (كيمياء)')">🧪 الروابط الكيميائية</button>
+                        <button class="csi-pill-btn" onclick="selectCsiPreset('الانقسام الميوزي وتكوين الأمشاج (أحياء)')">🧬 الانقسام الميوزي</button>
+                        <button class="csi-pill-btn" onclick="selectCsiPreset('كان وأخواتها والأفعال الناسخة (لغة عربية)')">📜 كان وأخواتها (نحو)</button>
+                        <button class="csi-pill-btn" onclick="selectCsiPreset('معركة حطين وتحرير القدس (تاريخ)')">⚔️ معركة حطين (تاريخ)</button>
+                        <button class="csi-pill-btn" onclick="selectCsiPreset('الاحتمالات والإحصاء المشروط (رياضيات)')">📐 الاحتمالات (رياضيات)</button>
+                    </div>
+
+                    <!-- Active CSI Case Container (Rendered dynamically) -->
+                    <div id="csi-active-case-container" style="display: none;"></div>
                 </div>
 
                 <!-- Comprehensive Lucky Challenge Wheel Banner -->
@@ -2702,6 +2998,22 @@
             <!-- Features Grid List -->
             <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 1.5rem;">
                 
+                <!-- Grand Feature: CSI Detective & Live Arena -->
+                <div style="display: flex; gap: 12px; align-items: flex-start; background: linear-gradient(135deg, rgba(0, 229, 255, 0.12), rgba(168, 85, 247, 0.1)); padding: 14px; border-radius: 16px; border: 2px solid #00e5ff; box-shadow: 0 0 20px rgba(0, 229, 255, 0.2);">
+                    <div style="background: rgba(0, 229, 255, 0.25); padding: 8px; border-radius: 12px; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                        <span style="font-size: 1.5rem;">🕵️‍♂️🔥</span>
+                    </div>
+                    <div>
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <strong style="color: #00e5ff; font-size: 1.05rem;">غرفة التحديات الحية ومحقق الجرائم العلمية (CSI) 🧬✨</strong>
+                            <span style="background: #ec4899; color: #fff; font-size: 0.72rem; font-weight: 800; padding: 2px 8px; border-radius: 10px;">جديد وحصري</span>
+                        </div>
+                        <p style="color: #f1f5f9; margin: 5px 0 0 0; font-size: 0.88rem; line-height: 1.5;">
+                            غرفة التحديات أصبحت حية وتفاعلية 100%! مش محتاج تصور كتبك: اكتب اسم درسك أو انطقه بالصوت وحل قضيته العلمية كأنك محقق جنائي في 3 دقائق! مع <strong>شعلة الالتزام اليومية 🔥</strong>، <strong>صندوق المفاجأة اليومي 🎁</strong>، و<strong>مهمة اليوم الحصرية المتجددة كل 24 ساعة (+200 XP) 🎯</strong>!
+                        </p>
+                    </div>
+                </div>
+
                 <!-- Feature 1: Self-Rewards Vault -->
                 <div style="display: flex; gap: 12px; align-items: flex-start; background: rgba(251, 191, 36, 0.08); padding: 12px 14px; border-radius: 14px; border: 1.5px solid rgba(251, 191, 36, 0.35);">
                     <div style="background: rgba(251, 191, 36, 0.2); padding: 8px; border-radius: 10px; width: 42px; height: 42px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
@@ -2947,6 +3259,162 @@
                     إلغاء
                 </button>
             </div>
+        </div>
+    </div>
+
+    <!-- 💡 Interactive Guide Modal: How Challenges Work (دليل الطالب الذكي) -->
+    <div id="challenge-how-it-works-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.85); z-index: 100005; justify-content: center; align-items: center; backdrop-filter: blur(10px); padding: 15px;">
+        <div style="background: linear-gradient(135deg, #0f172a, #1e1b4b); padding: 2rem; border-radius: 24px; max-width: 95%; width: 520px; max-height: 90vh; overflow-y: auto; text-align: right; border: 2px solid #fbbf24; box-shadow: 0 0 45px rgba(251, 191, 36, 0.4); animation: slideUpGlow 0.35s ease; color: #fff;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 0.8rem;">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <span style="font-size: 1.8rem;">🎮💡</span>
+                    <h3 style="margin: 0; color: #fbbf24; font-size: 1.35rem; font-family: 'Tajawal', sans-serif;">دليل الطالب الذكي للتحديات</h3>
+                </div>
+                <button onclick="closeChallengeGuideModal()" style="background: none; border: none; color: #94a3b8; font-size: 1.5rem; cursor: pointer;">&times;</button>
+            </div>
+
+            <div style="line-height: 1.6; font-size: 0.95rem; color: #e2e8f0;">
+                <div style="background: rgba(245, 158, 11, 0.1); border-right: 4px solid #fbbf24; padding: 0.8rem; border-radius: 8px; margin-bottom: 1rem;">
+                    <strong style="color: #fbbf24;">🎯 الهدف من التحديات:</strong>
+                    تحويل المذاكرة من "روتين ملل وتلقين" إلى "مغامرة حية وألغاز تفكير"، تكسب منها نقاط XP وتفتح ألقاب نادرة!
+                </div>
+
+                <h4 style="color: #00e5ff; margin: 1rem 0 0.5rem 0;">⏰ إمتى أستخدم غرفة التحديات في يومي؟</h4>
+                <ul style="padding-right: 1.2rem; margin: 0 0 1rem 0;">
+                    <li><strong>بعد ما تخلص قراءة درسك (5 إلى 10 دقائق):</strong> عشان تثبت المعلومات في مخك زي اللعبة قبل ما تنساها.</li>
+                    <li><strong>في أوقات الاستراحة (البريك):</strong> بدل ما تضيع وقتك على السوشيال ميديا، حل لغز أو خوض جولة سريعة.</li>
+                    <li><strong>أيام المراجعة وليالي الامتحانات:</strong> لتنشيط عقلك على حل الأفكار والخدع الخبيثة بدون خوف!</li>
+                </ul>
+
+                <h4 style="color: #10b981; margin: 1rem 0 0.5rem 0;">🔥 سر النجاح اليومي:</h4>
+                <ul style="padding-right: 1.2rem; margin: 0 0 1rem 0;">
+                    <li><strong>شعلة الالتزام (Daily Streak):</strong> افتح التطبيق يومياً لتحافظ على شعلتك، كل يوم بيزيد مضاعف الـ XP!</li>
+                    <li><strong>صندوق الحظ اليومي (Mystery Box):</strong> يفتح مجاناً مرة كل 24 ساعة، بيطلعلك هدايا ودروع ونقاط XP!</li>
+                    <li><strong>تحدي اليوم المتجدد:</strong> مهمة خاصة تتغير كل 24 ساعة بمكافأة مضاعفة (+200 XP).</li>
+                    <li><strong>المحقق العلمي (CSI):</strong> مش محتاج تصور كتابك! اكتب اسم الدرس في ثانيتين وابدأ حل الجريمة العلمية فوراً!</li>
+                </ul>
+            </div>
+
+            <button onclick="closeChallengeGuideModal()" class="theme-btn" style="background: linear-gradient(135deg, #fbbf24, #f59e0b); color: #0f172a; border: none; padding: 0.8rem; border-radius: 14px; font-weight: 800; width: 100%; font-family: 'Tajawal'; cursor: pointer; margin-top: 1rem;">
+                فهمت الفكرة.. جاهز للتحدي! 🚀
+            </button>
+        </div>
+    </div>
+
+    <!-- 🎁 Daily Mystery Chest Reward Reveal Modal -->
+    <div id="mystery-chest-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.88); z-index: 100005; justify-content: center; align-items: center; backdrop-filter: blur(10px); padding: 15px;">
+        <div style="background: linear-gradient(135deg, #111827, #1e1b4b); padding: 2rem; border-radius: 24px; max-width: 95%; width: 460px; text-align: center; border: 2px solid #fbbf24; box-shadow: 0 0 45px rgba(251, 191, 36, 0.45); animation: slideUpGlow 0.4s ease; color: #fff;">
+            <div id="chest-reveal-icon" style="font-size: 4.5rem; margin-bottom: 0.5rem; animation: treeBounce 0.8s ease;">🎁</div>
+            <h2 id="chest-reveal-title" style="color: #fbbf24; margin: 0 0 8px 0; font-size: 1.6rem; font-family: 'Tajawal', sans-serif;">مبروك! هديتك اليومية وصلت 🎉</h2>
+            <p id="chest-reveal-subtitle" style="color: #00e5ff; font-size: 0.95rem; margin: 0 0 1.2rem 0; line-height: 1.5;">فتحت صندوق الحظ اليومي وحصلت على هذه المكافأة الحصرية:</p>
+
+            <div style="background: rgba(255, 255, 255, 0.08); border: 1.5px dashed #fbbf24; border-radius: 18px; padding: 1.3rem; margin-bottom: 1.5rem; text-align: center;">
+                <div id="chest-prize-value" style="font-size: 1.9rem; font-weight: 800; color: #fbbf24; margin-bottom: 6px;">+50 XP 🚀</div>
+                <div id="chest-prize-desc" style="color: #f1f5f9; font-size: 0.95rem; line-height: 1.6;">تمت إضافة النقاط لرصيدك وتقدمت نحو رتبتك القادمة!</div>
+            </div>
+
+            <button onclick="closeMysteryChestModal()" class="theme-btn" style="background: linear-gradient(135deg, #fbbf24, #f59e0b); color: #0f172a; border: none; padding: 0.8rem 2rem; border-radius: 14px; font-weight: 800; font-family: 'Tajawal'; cursor: pointer; width: 100%;">
+                استلم المكافأة واقفل الصندوق 🥳
+            </button>
+        </div>
+    </div>
+
+    <!-- 🧬 CSI How It Works Modal -->
+    <div id="csi-how-to-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.85); z-index: 100005; justify-content: center; align-items: center; backdrop-filter: blur(10px); padding: 15px;">
+        <div style="background: linear-gradient(135deg, #090d16, #0e1e38); padding: 2rem; border-radius: 24px; max-width: 95%; width: 500px; text-align: right; border: 2px solid #00e5ff; box-shadow: 0 0 40px rgba(0, 229, 255, 0.35); animation: slideUpGlow 0.35s ease; color: #fff;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 0.8rem;">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <span style="font-size: 1.8rem;">🕵️‍♂️🧬</span>
+                    <h3 style="margin: 0; color: #00e5ff; font-size: 1.35rem; font-family: 'Tajawal', sans-serif;">إزاي يشتغل المحقق العلمي (CSI)؟</h3>
+                </div>
+                <button onclick="closeCSIHowToModal()" style="background: none; border: none; color: #94a3b8; font-size: 1.5rem; cursor: pointer;">&times;</button>
+            </div>
+
+            <div style="line-height: 1.6; font-size: 0.95rem; color: #e2e8f0;">
+                <p><strong>ببساطة شديدة وبدون أي تعقيد:</strong></p>
+                <div style="display: flex; flex-direction: column; gap: 10px; margin: 1rem 0;">
+                    <div style="background: rgba(0, 229, 255, 0.08); padding: 0.7rem; border-radius: 10px; border-right: 3px solid #00e5ff;">
+                        1️⃣ <strong>اكتب أو انطق اسم الدرس بس:</strong> مش محتاج تصور كتابك ولا ترفع ملفات PDF، الذكاء الاصطناعي حافظ كل المناهج!
+                    </div>
+                    <div style="background: rgba(0, 229, 255, 0.08); padding: 0.7rem; border-radius: 10px; border-right: 3px solid #00e5ff;">
+                        2️⃣ <strong>افحص مسرح الجريمة والأدلة:</strong> بتظهرلك قصة قضية غامضة حصل فيها خطأ علمي، ومعاها 3 أدلة معملية وقوانين.
+                    </div>
+                    <div style="background: rgba(0, 229, 255, 0.08); padding: 0.7rem; border-radius: 10px; border-right: 3px solid #00e5ff;">
+                        3️⃣ <strong>قدم حُكمك واكشف الخدعة:</strong> اختار السبب العلمي الحقيقي واحصل على +120 XP ولقب المحقق العلمي!
+                    </div>
+                </div>
+            </div>
+
+            <button onclick="closeCSIHowToModal()" class="theme-btn" style="background: linear-gradient(135deg, #00e5ff, #0284c7); color: #031024; border: none; padding: 0.8rem; border-radius: 14px; font-weight: 800; width: 100%; font-family: 'Tajawal'; cursor: pointer;">
+                يلا نجرب قضية دلوقتي! 🔎
+            </button>
+        </div>
+    </div>
+
+    <!-- 👑 XP Rewards Vault & Shields Modal -->
+    <div id="xp-vault-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.85); z-index: 100005; justify-content: center; align-items: center; backdrop-filter: blur(10px); padding: 15px;">
+        <div style="background: linear-gradient(135deg, #0f172a, #1e1b4b); padding: 2rem; border-radius: 24px; max-width: 95%; width: 500px; text-align: right; border: 2px solid #fbbf24; box-shadow: 0 0 40px rgba(251, 191, 36, 0.35); animation: slideUpGlow 0.35s ease; color: #fff;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 0.8rem;">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <span style="font-size: 1.8rem;">👑🪙</span>
+                    <div>
+                        <h3 style="margin: 0; color: #fbbf24; font-size: 1.35rem; font-family: 'Tajawal', sans-serif;">خزينة الألقاب ودروع الشعلة</h3>
+                        <p style="margin: 2px 0 0 0; color: #94a3b8; font-size: 0.85rem;">استبدل نقاط خبرتك المكتسبة بأدوات قوة وألقاب فخمة!</p>
+                    </div>
+                </div>
+                <button onclick="closeXpVaultModal()" style="background: none; border: none; color: #94a3b8; font-size: 1.5rem; cursor: pointer;">&times;</button>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(251, 191, 36, 0.12); padding: 0.8rem 1.2rem; border-radius: 14px; margin-bottom: 1.2rem; border: 1px solid rgba(251, 191, 36, 0.3);">
+                <span style="color: #cbd5e1; font-size: 0.95rem;">رصيدك الحالي من نقاط الـ XP:</span>
+                <span id="vault-user-xp" style="color: #fbbf24; font-size: 1.3rem; font-weight: 800;">0 XP</span>
+            </div>
+
+            <!-- Vault Items List -->
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 1.2rem; max-height: 50vh; overflow-y: auto;">
+                <div class="vault-item-card">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <span style="font-size: 2.2rem;">🛡️</span>
+                        <div>
+                            <div style="font-weight: 700; color: #60a5fa; font-size: 0.98rem;">درع حماية الشعلة (Streak Freeze)</div>
+                            <div style="color: #cbd5e1; font-size: 0.82rem;">يحميك من انطفاء الشعلة لو نسيت تفتح التطبيق يوماً كاملاً!</div>
+                        </div>
+                    </div>
+                    <button onclick="buyVaultItem('shield', 150)" class="theme-btn" style="background: linear-gradient(135deg, #3b82f6, #1d4ed8); color: #fff; border: none; padding: 6px 12px; border-radius: 10px; font-weight: 700; font-size: 0.85rem; cursor: pointer; white-space: nowrap;">
+                        150 XP
+                    </button>
+                </div>
+
+                <div class="vault-item-card">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <span style="font-size: 2.2rem;">👑</span>
+                        <div>
+                            <div style="font-weight: 700; color: #fbbf24; font-size: 0.98rem;">لقب: محقق العباقرة الخارق 🕵️‍♂️</div>
+                            <div style="color: #cbd5e1; font-size: 0.82rem;">لقب فخم يزين لوحة إنجازاتك ورتبتك بين الطلاب!</div>
+                        </div>
+                    </div>
+                    <button onclick="buyVaultItem('title_csi', 250)" class="theme-btn" style="background: linear-gradient(135deg, #fbbf24, #d97706); color: #031024; border: none; padding: 6px 12px; border-radius: 10px; font-weight: 700; font-size: 0.85rem; cursor: pointer; white-space: nowrap;">
+                        250 XP
+                    </button>
+                </div>
+
+                <div class="vault-item-card">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <span style="font-size: 2.2rem;">⚡</span>
+                        <div>
+                            <div style="font-weight: 700; color: #a855f7; font-size: 0.98rem;">لقب: سفاح المناهج وقاهر المماطلة ⚔️</div>
+                            <div style="color: #cbd5e1; font-size: 0.82rem;">لقب أسطوري للأبطال الذين هزموا زعيم الكسل!</div>
+                        </div>
+                    </div>
+                    <button onclick="buyVaultItem('title_boss', 350)" class="theme-btn" style="background: linear-gradient(135deg, #a855f7, #7e22ce); color: #fff; border: none; padding: 6px 12px; border-radius: 10px; font-weight: 700; font-size: 0.85rem; cursor: pointer; white-space: nowrap;">
+                        350 XP
+                    </button>
+                </div>
+            </div>
+
+            <button onclick="closeXpVaultModal()" class="theme-btn" style="background: rgba(255, 255, 255, 0.15); color: #fff; border: 1px solid rgba(255, 255, 255, 0.3); padding: 0.75rem 1.6rem; border-radius: 12px; font-weight: 700; font-family: 'Tajawal'; cursor: pointer; width: 100%;">
+                إغلاق الخزينة
+            </button>
         </div>
     </div>
 
