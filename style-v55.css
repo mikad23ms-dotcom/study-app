@@ -3228,3 +3228,107 @@ body[data-theme="dark"]::after {
         gap: 16px;
     }
 }
+
+
+/* --- High-End Teacher Workspace Styles --- */
+.teacher-tabs-bar {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 8px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.teacher-tab-btn {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: var(--text-main);
+    padding: 10px 18px;
+    border-radius: 12px;
+    font-size: 0.92rem;
+    font-weight: 700;
+    cursor: pointer;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.25s ease;
+}
+
+.teacher-tab-btn:hover {
+    background: rgba(255, 165, 2, 0.15);
+    border-color: #ffa502;
+    color: #ffa502;
+    transform: translateY(-2px);
+}
+
+.teacher-tab-btn.active {
+    background: linear-gradient(135deg, #ffa502, #e67e22) !important;
+    border-color: #ffa502 !important;
+    color: #031024 !important;
+    font-weight: 800;
+    box-shadow: 0 4px 15px rgba(255, 165, 2, 0.35);
+}
+
+.teacher-pane {
+    display: none;
+    animation: fadeIn 0.3s ease;
+}
+
+.teacher-pane.active {
+    display: block;
+}
+
+/* Printable Exam Sheet Styling */
+#printable-exam-sheet {
+    background: #ffffff;
+    color: #111827;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    border: 2px solid #000;
+    position: relative;
+    font-family: 'Tajawal', sans-serif;
+    line-height: 1.8;
+}
+
+.exam-watermark {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-30deg);
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: rgba(0, 0, 0, 0.05);
+    white-space: nowrap;
+    pointer-events: none;
+    user-select: none;
+    z-index: 1;
+}
+
+@media print {
+    body * {
+        visibility: hidden !important;
+    }
+    #printable-exam-sheet, #printable-exam-sheet * {
+        visibility: visible !important;
+    }
+    #printable-exam-sheet {
+        position: fixed !important;
+        left: 0 !important;
+        top: 0 !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        margin: 0 !important;
+        padding: 20mm !important;
+        border: none !important;
+        box-shadow: none !important;
+        background: #fff !important;
+        color: #000 !important;
+        z-index: 999999 !important;
+    }
+    .no-print {
+        display: none !important;
+    }
+}
