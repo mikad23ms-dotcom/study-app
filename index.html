@@ -419,73 +419,111 @@
             
             <!-- Dashboard Page -->
             <section id="dashboard" class="page active-page">
-                <header style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 1.5rem;">
+                <!-- Top Welcome Header -->
+                <header style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 1.2rem;">
                     <div>
                         <h1 style="margin: 0; font-size: 1.8rem; display: flex; align-items: center; gap: 8px;">
                             مرحباً بك يا <span id="welcome-user">بطل</span>! 🎯
                         </h1>
                         <p id="current-date" style="margin: 4px 0 0 0; color: var(--text-muted); font-size: 0.95rem;">اليوم هو...</p>
                     </div>
-                    <button onclick="openAppGuideModal()" class="btn btn-hover-glow" style="background: linear-gradient(135deg, rgba(0, 229, 255, 0.2), rgba(0, 184, 204, 0.1)); color: #00e5ff; border: 1.5px solid #00e5ff; padding: 9px 18px; border-radius: 12px; font-weight: 800; font-family: 'Tajawal'; font-size: 0.9rem; cursor: pointer; display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 15px rgba(0, 229, 255, 0.2);">
-                        <i class="fa-solid fa-circle-play" style="font-size: 1.1rem;"></i>
-                        <span>كيف أستخدم التطبيق؟ (دليل في دقيقة) 💡</span>
-                    </button>
+                    <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+                        <button onclick="openAppGuideModal()" class="btn btn-hover-glow" style="background: linear-gradient(135deg, rgba(0, 229, 255, 0.2), rgba(0, 184, 204, 0.1)); color: #00e5ff; border: 1.5px solid #00e5ff; padding: 8px 16px; border-radius: 12px; font-weight: 800; font-family: 'Tajawal'; font-size: 0.88rem; cursor: pointer; display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 15px rgba(0, 229, 255, 0.2);">
+                            <i class="fa-solid fa-circle-play" style="font-size: 1.1rem;"></i>
+                            <span>دليل التطبيق في دقيقة 💡</span>
+                        </button>
+                    </div>
                 </header>
 
-                <!-- 🚀 HERO QUICK-START GUIDE: Solves "مطلوب مني إيه؟ وأكتب فين؟" -->
-                <div id="quick-start-hero" class="card hover-glow-box" style="background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.85)); border: 2px solid #00e5ff; border-radius: 18px; padding: 1.3rem; margin-bottom: 1.5rem; box-shadow: 0 8px 30px rgba(0, 229, 255, 0.22); position: relative; overflow: hidden;">
-                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; border-bottom: 1px solid rgba(0, 229, 255, 0.25); padding-bottom: 12px; margin-bottom: 14px;">
-                        <div style="display: flex; align-items: center; gap: 12px;">
-                            <span style="font-size: 2.2rem; filter: drop-shadow(0 0 10px rgba(0,229,255,0.6));">🚀</span>
+                <!-- ⚡ Top Daily Status Chips (Sleek Glassmorphism KPI Bar) -->
+                <div class="dash-kpi-bar" id="dash-kpi-bar">
+                    <div class="dash-kpi-chip" onclick="switchPage('challenges')" title="شعلة الاستمرار اليومي">
+                        <div class="icon-wrap" style="background: rgba(255, 71, 87, 0.2); color: #ff4757;">🔥</div>
+                        <div>
+                            <div style="font-size: 0.72rem; color: var(--text-muted);">شعلة الالتزام</div>
+                            <div id="dash-kpi-streak" style="font-size: 0.95rem; font-weight: 800; color: #ffa502;">1 يوم</div>
+                        </div>
+                    </div>
+                    <div class="dash-kpi-chip" onclick="document.getElementById('dashboard-leaderboard-card').scrollIntoView({behavior:'smooth'})" title="مركزك ومستوى خبرتك">
+                        <div class="icon-wrap" style="background: rgba(251, 191, 36, 0.2); color: #fbbf24;">⚡</div>
+                        <div>
+                            <div style="font-size: 0.72rem; color: var(--text-muted);">المركز والخبرة</div>
+                            <div id="dash-kpi-rank" style="font-size: 0.95rem; font-weight: 800; color: #fbbf24;">#1 (0 XP)</div>
+                        </div>
+                    </div>
+                    <div class="dash-kpi-chip" onclick="document.getElementById('today-tasks-card').scrollIntoView({behavior:'smooth'})" title="مهام المذاكرة لليوم">
+                        <div class="icon-wrap" style="background: rgba(46, 213, 115, 0.2); color: #2ed573;">📝</div>
+                        <div>
+                            <div style="font-size: 0.72rem; color: var(--text-muted);">مهام اليوم</div>
+                            <div id="dash-kpi-tasks" style="font-size: 0.95rem; font-weight: 800; color: #2ed573;">0 متبقية</div>
+                        </div>
+                    </div>
+                    <div class="dash-kpi-chip" onclick="document.getElementById('islamic-widget').scrollIntoView({behavior:'smooth'})" title="مواقيت الصلاة والذكر">
+                        <div class="icon-wrap" style="background: rgba(0, 229, 255, 0.2); color: #00e5ff;">🕌</div>
+                        <div>
+                            <div style="font-size: 0.72rem; color: var(--text-muted);">الصلاة القادمة</div>
+                            <div id="dash-kpi-prayer" style="font-size: 0.95rem; font-weight: 800; color: #00e5ff;">جاري الحساب...</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 🚀 HERO QUICK-START GUIDE (With Smart Collapse Toggle!) -->
+                <div id="quick-start-hero" class="card hover-glow-box" style="background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.85)); border: 2px solid #00e5ff; border-radius: 18px; padding: 1.2rem; margin-bottom: 1.5rem; box-shadow: 0 8px 30px rgba(0, 229, 255, 0.22); position: relative; overflow: hidden;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; border-bottom: 1px solid rgba(0, 229, 255, 0.25); padding-bottom: 10px; margin-bottom: 12px;">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <span style="font-size: 1.8rem; filter: drop-shadow(0 0 10px rgba(0,229,255,0.6));">🚀</span>
                             <div>
-                                <h3 style="margin: 0; color: #00e5ff; font-size: 1.25rem; font-family: 'Tajawal', sans-serif; border: none; padding: 0;">
-                                    ابدأ من هنا يا بطل! (3 خطوات فقط لتنظيم كل مذاكرتك 👇)
+                                <h3 style="margin: 0; color: #00e5ff; font-size: 1.15rem; font-family: 'Tajawal', sans-serif; border: none; padding: 0;">
+                                    ابدأ من هنا يا بطل! (3 خطوات سريعة لتنظيم مذاكرتك 👇)
                                 </h3>
-                                <p style="margin: 3px 0 0; color: #cbd5e1; font-size: 0.86rem;">
-                                    مش محتاج تدور في التبويبات.. ضيف موادك ودرسك النهاردة في 10 ثواني!
+                                <p style="margin: 2px 0 0; color: #cbd5e1; font-size: 0.84rem;">
+                                    نزل موادك وسجل درسك في ثواني بدون حيرة
                                 </p>
                             </div>
                         </div>
+                        <button type="button" onclick="toggleQuickStartHero()" id="toggle-hero-btn" class="btn" style="background: rgba(255,255,255,0.06); color: #cbd5e1; border: 1px solid rgba(255,255,255,0.2); padding: 5px 12px; border-radius: 8px; font-size: 0.78rem; cursor: pointer; display: flex; align-items: center; gap: 6px;">
+                            <i class="fa-solid fa-chevron-up"></i> <span>إخفاء الدليل</span>
+                        </button>
                     </div>
 
                     <!-- 3 Simple Steps Grid -->
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px;">
+                    <div id="quick-start-hero-content" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px;">
                         <!-- Step 1: Subjects -->
-                        <div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(0, 229, 255, 0.25); border-radius: 14px; padding: 14px; display: flex; flex-direction: column; justify-content: space-between;">
+                        <div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(0, 229, 255, 0.25); border-radius: 14px; padding: 12px; display: flex; flex-direction: column; justify-content: space-between;">
                             <div>
-                                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
-                                    <span style="width: 28px; height: 28px; border-radius: 50%; background: #00e5ff; color: #020d1a; display: inline-flex; align-items: center; justify-content: center; font-weight: 900; font-size: 0.9rem;">1</span>
-                                    <strong style="color: #fff; font-size: 1rem;">مواد مرحلتك الدراسية 📚</strong>
+                                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                                    <span style="width: 26px; height: 26px; border-radius: 50%; background: #00e5ff; color: #020d1a; display: inline-flex; align-items: center; justify-content: center; font-weight: 900; font-size: 0.85rem;">1</span>
+                                    <strong style="color: #fff; font-size: 0.95rem;">مواد مرحلتك الدراسية 📚</strong>
                                 </div>
-                                <p style="color: var(--text-muted); font-size: 0.82rem; margin: 0 0 12px 0; line-height: 1.5;">
-                                    بدل ما تكتب كل مادة يدوي، نزل مواد مرحلتك كاملة بألوانها بضغطة زر واحدة!
+                                <p style="color: var(--text-muted); font-size: 0.8rem; margin: 0 0 10px 0; line-height: 1.4;">
+                                    نزل مواد مرحلتك كاملة بألوانها بضغطة زر واحدة:
                                 </p>
                             </div>
                             <div style="display: flex; flex-direction: column; gap: 6px;">
-                                <button id="quick-preset-btn" onclick="applySmartStagePreset()" class="btn btn-primary" style="padding: 10px 12px; font-weight: bold; font-size: 0.88rem; width: 100%; display: flex; align-items: center; justify-content: center; gap: 6px;">
+                                <button id="quick-preset-btn" onclick="applySmartStagePreset()" class="btn btn-primary" style="padding: 8px 10px; font-weight: bold; font-size: 0.84rem; width: 100%; display: flex; align-items: center; justify-content: center; gap: 6px;">
                                     <i class="fa-solid fa-bolt"></i> <span id="quick-preset-label">تنزيل مواد مرحلتي بضغطة واحدة</span>
                                 </button>
-                                <button onclick="openModal('subject-modal')" class="btn" style="background: rgba(255,255,255,0.05); color: var(--text-main); border: 1px solid rgba(255,255,255,0.15); font-size: 0.78rem; padding: 6px; border-radius: 8px; cursor: pointer;">
+                                <button onclick="openModal('subject-modal')" class="btn" style="background: rgba(255,255,255,0.05); color: var(--text-main); border: 1px solid rgba(255,255,255,0.15); font-size: 0.75rem; padding: 5px; border-radius: 6px; cursor: pointer;">
                                     + أو أضف مادة يدوياً
                                 </button>
                             </div>
                         </div>
 
                         <!-- Step 2: Today's Task -->
-                        <div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(46, 213, 115, 0.25); border-radius: 14px; padding: 14px; display: flex; flex-direction: column; justify-content: space-between;">
+                        <div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(46, 213, 115, 0.25); border-radius: 14px; padding: 12px; display: flex; flex-direction: column; justify-content: space-between;">
                             <div>
-                                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
-                                    <span style="width: 28px; height: 28px; border-radius: 50%; background: #2ed573; color: #020d1a; display: inline-flex; align-items: center; justify-content: center; font-weight: 900; font-size: 0.9rem;">2</span>
-                                    <strong style="color: #fff; font-size: 1rem;">أول درس هتذاكره النهاردة 📝</strong>
+                                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                                    <span style="width: 26px; height: 26px; border-radius: 50%; background: #2ed573; color: #020d1a; display: inline-flex; align-items: center; justify-content: center; font-weight: 900; font-size: 0.85rem;">2</span>
+                                    <strong style="color: #fff; font-size: 0.95rem;">أول درس هتذاكره النهاردة 📝</strong>
                                 </div>
-                                <p style="color: var(--text-muted); font-size: 0.82rem; margin: 0 0 10px 0; line-height: 1.5;">
-                                    اكتب اسم الدرس هنا وهيضاف فوراً لجدول مذاكرتك اليومية:
+                                <p style="color: var(--text-muted); font-size: 0.8rem; margin: 0 0 8px 0; line-height: 1.4;">
+                                    اكتب اسم الدرس هنا وهيضاف فوراً لجدولك:
                                 </p>
                             </div>
                             <div>
                                 <div style="display: flex; gap: 6px;">
-                                    <input type="text" id="hero-quick-task" placeholder="مثال: الباب الأول كيمياء..." style="flex: 1; padding: 10px 12px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.15); background: rgba(0,0,0,0.3); color: #fff; font-family: 'Tajawal'; font-size: 0.88rem;" onkeypress="if(event.key==='Enter') addHeroQuickTask()">
-                                    <button onclick="addHeroQuickTask()" class="btn" style="background: #2ed573; color: #020d1a; font-weight: 800; border: none; padding: 10px 14px; border-radius: 10px; cursor: pointer; white-space: nowrap;">
+                                    <input type="text" id="hero-quick-task" placeholder="مثال: الباب الأول كيمياء..." style="flex: 1; padding: 8px 10px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.15); background: rgba(0,0,0,0.3); color: #fff; font-family: 'Tajawal'; font-size: 0.85rem;" onkeypress="if(event.key==='Enter') addHeroQuickTask()">
+                                    <button onclick="addHeroQuickTask()" class="btn" style="background: #2ed573; color: #020d1a; font-weight: 800; border: none; padding: 8px 12px; border-radius: 8px; cursor: pointer; white-space: nowrap; font-size: 0.85rem;">
                                         ➕ ضيف
                                     </button>
                                 </div>
@@ -493,21 +531,21 @@
                         </div>
 
                         <!-- Step 3: Class Schedule & AI -->
-                        <div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255, 165, 2, 0.25); border-radius: 14px; padding: 14px; display: flex; flex-direction: column; justify-content: space-between;">
+                        <div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255, 165, 2, 0.25); border-radius: 14px; padding: 12px; display: flex; flex-direction: column; justify-content: space-between;">
                             <div>
-                                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
-                                    <span style="width: 28px; height: 28px; border-radius: 50%; background: #ffa502; color: #020d1a; display: inline-flex; align-items: center; justify-content: center; font-weight: 900; font-size: 0.9rem;">3</span>
-                                    <strong style="color: #fff; font-size: 1rem;">جدول الحصص والتلخيص الذكي 🗓️</strong>
+                                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                                    <span style="width: 26px; height: 26px; border-radius: 50%; background: #ffa502; color: #020d1a; display: inline-flex; align-items: center; justify-content: center; font-weight: 900; font-size: 0.85rem;">3</span>
+                                    <strong style="color: #fff; font-size: 0.95rem;">جدول الحصص والتلخيص الذكي 🗓️</strong>
                                 </div>
-                                <p style="color: var(--text-muted); font-size: 0.82rem; margin: 0 0 12px 0; line-height: 1.5;">
-                                    سجل مواعيد دروسك في السنتر أو شغل المايك ليلخص المستر بالـ AI:
+                                <p style="color: var(--text-muted); font-size: 0.8rem; margin: 0 0 10px 0; line-height: 1.4;">
+                                    سجل مواعيد دروسك أو لخص بالذكاء الاصطناعي:
                                 </p>
                             </div>
                             <div style="display: flex; gap: 6px;">
-                                <button onclick="openModal('class-modal')" class="btn" style="flex: 1; background: rgba(255, 165, 2, 0.15); color: #ffa502; border: 1px solid rgba(255, 165, 2, 0.4); font-size: 0.82rem; font-weight: bold; padding: 9px 6px; border-radius: 10px; cursor: pointer;">
+                                <button onclick="openModal('class-modal')" class="btn" style="flex: 1; background: rgba(255, 165, 2, 0.15); color: #ffa502; border: 1px solid rgba(255, 165, 2, 0.4); font-size: 0.78rem; font-weight: bold; padding: 8px 4px; border-radius: 8px; cursor: pointer;">
                                     🗓️ أضف درساً
                                 </button>
-                                <button onclick="switchPage('notebook-ai')" class="btn" style="flex: 1; background: rgba(0, 229, 255, 0.15); color: #00e5ff; border: 1px solid rgba(0, 229, 255, 0.4); font-size: 0.82rem; font-weight: bold; padding: 9px 6px; border-radius: 10px; cursor: pointer;">
+                                <button onclick="switchPage('notebook-ai')" class="btn" style="flex: 1; background: rgba(0, 229, 255, 0.15); color: #00e5ff; border: 1px solid rgba(0, 229, 255, 0.4); font-size: 0.78rem; font-weight: bold; padding: 8px 4px; border-radius: 8px; cursor: pointer;">
                                     🤖 المساعد الذكي
                                 </button>
                             </div>
@@ -515,240 +553,248 @@
                     </div>
                 </div>
 
-                <!-- 🌟 Quick Daily Streak & Live Quest Banner on Main Dashboard -->
-                <div id="dashboard-streak-banner" class="card hover-glow-box" style="background: linear-gradient(135deg, rgba(239, 68, 68, 0.12), rgba(245, 158, 11, 0.1)); border: 1.5px solid rgba(245, 158, 11, 0.45); border-radius: 18px; padding: 1.1rem 1.3rem; margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; box-shadow: 0 4px 20px rgba(245, 158, 11, 0.15);">
-                    <div style="display: flex; align-items: center; gap: 14px;">
-                        <span style="font-size: 2.4rem; animation: flameFlicker 2s infinite ease-in-out alternate; display: inline-block;">🔥</span>
-                        <div>
-                            <div style="display: flex; align-items: center; gap: 8px;">
-                                <strong id="dash-streak-title" style="color: #fbbf24; font-size: 1.15rem; font-family: 'Tajawal', sans-serif;">شعلة التزامك: 0 أيام متتالية! 🔥</strong>
-                                <span id="dash-mystery-badge" style="background: rgba(245, 158, 11, 0.25); color: #fbbf24; font-size: 0.78rem; font-weight: 700; padding: 3px 10px; border-radius: 12px; border: 1px solid rgba(245, 158, 11, 0.5);">
-                                    🎁 هدية اليوم جاهزة!
-                                </span>
-                            </div>
-                            <p id="dash-streak-sub" style="margin: 4px 0 0 0; color: #cbd5e1; font-size: 0.88rem; line-height: 1.5;">
-                                ادخل غرفة التحديات الآن، افتح صندوق حظك وحل لغز المحقق العلمي واكسب XP مضاعف!
-                            </p>
-                        </div>
-                    </div>
-                    <button onclick="window.switchPage('challenges')" class="theme-btn btn-hover-glow" style="background: linear-gradient(135deg, #fbbf24, #f59e0b); color: #0f172a; border: none; padding: 0.7rem 1.4rem; border-radius: 12px; font-weight: 800; font-family: 'Tajawal'; font-size: 0.92rem; cursor: pointer; white-space: nowrap; display: flex; align-items: center; gap: 6px;">
-                        <i class="fa-solid fa-gamepad"></i> دخول غرفة التحديات 🚀
-                    </button>
-                </div>
-
-                <!-- 🎯 سؤال التحدي اليومي لطلاب مصر (Daily Challenge Question) -->
-                <div id="daily-question-container" class="daily-question-card hover-glow-box">
-                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; border-bottom: 1px solid rgba(16, 185, 129, 0.25); padding-bottom: 10px;">
-                        <div style="display: flex; align-items: center; gap: 10px;">
-                            <span style="font-size: 1.8rem;">🎯</span>
-                            <div>
-                                <h3 style="margin: 0; color: #34d399; font-size: 1.15rem; border: none; padding: 0;">سؤال التحدي اليومي السريع</h3>
-                                <p style="margin: 3px 0 0; color: var(--text-muted); font-size: 0.82rem;">سؤال في دقيقة واحدة يثبت معلومتك ويكسبك نقاط خبرة فورية!</p>
-                            </div>
-                        </div>
-                        <span id="daily-q-reward-badge" style="background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); padding: 4px 12px; border-radius: 20px; font-size: 0.82rem; font-weight: 800;">
-                            +50 XP ⚡
-                        </span>
-                    </div>
-
-                    <div id="daily-q-loading" style="text-align: center; padding: 15px; color: var(--text-muted); font-size: 0.9rem;">
-                        <i class="fa-solid fa-circle-notch fa-spin"></i> جاري تحضير سؤال اليوم...
-                    </div>
-
-                    <div id="daily-q-body" style="display: none;">
-                        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">
-                            <span id="daily-q-subject-tag" style="background: rgba(0, 229, 255, 0.15); color: #00e5ff; border: 1px solid rgba(0, 229, 255, 0.3); padding: 3px 10px; border-radius: 10px; font-size: 0.78rem; font-weight: 700;">اللغة العربية</span>
-                            <span id="daily-q-difficulty-tag" style="background: rgba(251, 191, 36, 0.15); color: #fbbf24; border: 1px solid rgba(251, 191, 36, 0.3); padding: 3px 10px; border-radius: 10px; font-size: 0.78rem; font-weight: 700;">تحدي ذكاء</span>
-                        </div>
-                        <h4 id="daily-q-text" style="font-size: 1.05rem; line-height: 1.6; color: var(--text-main); margin: 0 0 16px 0; font-family: 'Tajawal', sans-serif;">---</h4>
-                        
-                        <div id="daily-q-options" style="display: flex; flex-direction: column;"></div>
-
-                        <div id="daily-q-explanation" style="display: none; margin-top: 14px; padding: 12px 16px; background: rgba(0, 229, 255, 0.08); border-right: 4px solid #00e5ff; border-radius: 10px;">
-                            <div style="font-weight: 800; color: #00e5ff; font-size: 0.9rem; margin-bottom: 4px;"><i class="fa-solid fa-lightbulb"></i> الشرح والتوضيح العلمي:</div>
-                            <p id="daily-q-explanation-text" style="margin: 0; color: #cbd5e1; font-size: 0.88rem; line-height: 1.5;"></p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 🏆 بطاقة ترتيبك وإنجازك الشخصي بين الطلاب (Personal Rank & Engagement Card) -->
-                <div id="dashboard-leaderboard-card" class="personal-rank-card hover-glow-box">
-                    <!-- Header -->
-                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; border-bottom: 1px solid rgba(251, 191, 36, 0.25); padding-bottom: 12px; margin-bottom: 16px;">
-                        <div style="display: flex; align-items: center; gap: 10px;">
-                            <span style="font-size: 2rem;">🏆</span>
-                            <div>
-                                <h3 style="margin: 0; color: #fbbf24; font-size: 1.2rem; border: none; padding: 0;">مركزك ومستوى تفاعلك بين الطلاب 🌟</h3>
-                                <p style="margin: 3px 0 0; color: var(--text-muted); font-size: 0.82rem;">تقييم مباشر لمدى التزامك وإنجازك مقارنة بجميع طلاب التطبيق!</p>
-                            </div>
-                        </div>
-                        <div style="display: flex; align-items: center; gap: 8px;">
-                            <span class="privacy-badge" style="background: rgba(46, 213, 115, 0.15); color: #2ed573; border: 1px solid rgba(46, 213, 115, 0.35); padding: 4px 10px; border-radius: 20px; font-size: 0.78rem; font-weight: 700; display: inline-flex; align-items: center; gap: 5px;">
-                                <i class="fa-solid fa-shield-halved"></i> خصوصيتك محمية 100%
-                            </span>
-                            <button onclick="renderLeaderboard(true)" class="btn" style="background: rgba(251, 191, 36, 0.15); color: #fbbf24; border: 1px solid rgba(251, 191, 36, 0.4); font-size: 0.8rem; padding: 6px 12px; border-radius: 12px; cursor: pointer; display: flex; align-items: center; gap: 6px;">
-                                <i class="fa-solid fa-arrows-rotate"></i> تحديث
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Personal Rank Hero Showcase -->
-                    <div class="user-rank-hero" style="background: linear-gradient(135deg, rgba(251, 191, 36, 0.12), rgba(0, 229, 255, 0.08)); border: 1.5px solid rgba(251, 191, 36, 0.35); border-radius: 18px; padding: 1.4rem; text-align: center; margin-bottom: 16px; position: relative;">
-                        <div id="user-rank-medal-icon" style="font-size: 3.5rem; line-height: 1; margin-bottom: 8px; filter: drop-shadow(0 0 15px rgba(251, 191, 36, 0.5));">🥇</div>
-                        <div style="display: inline-block; background: rgba(251, 191, 36, 0.2); border: 1px solid #fbbf24; color: #fbbf24; padding: 4px 16px; border-radius: 20px; font-weight: 800; font-size: 0.85rem; margin-bottom: 8px;" id="user-tier-badge">
-                            🌟 متصدر الأسبوع
-                        </div>
-                        <h2 id="user-rank-title" style="margin: 0 0 6px 0; color: #f8fafc; font-size: 1.45rem; font-family: 'Tajawal', sans-serif;">
-                            أنت في المركز <span style="color: #fbbf24; font-size: 1.8rem;" id="user-rank-number">#1</span> بين جميع الطلاب!
-                        </h2>
-                        <p id="user-rank-subtitle" style="margin: 0; color: #94a3b8; font-size: 0.9rem;">
-                            مجموع نقاطك يضعك ضمن أفضل الطلاب الأكثر التزاماً ومذاكرة هذا الأسبوع! 🚀
-                        </p>
-                    </div>
-
-                    <!-- 4 Personal Engagement Stats Grid -->
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin-bottom: 16px;">
-                        <!-- Stat 1: Total XP -->
-                        <div style="background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(251, 191, 36, 0.25); border-radius: 14px; padding: 12px; text-align: center;">
-                            <span style="font-size: 1.5rem;">⚡</span>
-                            <div style="font-size: 0.76rem; color: var(--text-muted); margin-top: 4px;">نقاط الخبرة</div>
-                            <div id="user-stat-xp" style="font-weight: 900; font-size: 1.25rem; color: #fbbf24; margin-top: 2px;">0 XP</div>
-                        </div>
-                        <!-- Stat 2: Streak -->
-                        <div style="background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 107, 129, 0.25); border-radius: 14px; padding: 12px; text-align: center;">
-                            <span style="font-size: 1.5rem;">🔥</span>
-                            <div style="font-size: 0.76rem; color: var(--text-muted); margin-top: 4px;">شعلة الالتزام</div>
-                            <div id="user-stat-streak" style="font-weight: 900; font-size: 1.25rem; color: #ff6b81; margin-top: 2px;">1 يوم</div>
-                        </div>
-                        <!-- Stat 3: Tasks Completed -->
-                        <div style="background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(46, 213, 115, 0.25); border-radius: 14px; padding: 12px; text-align: center;">
-                            <span style="font-size: 1.5rem;">✅</span>
-                            <div style="font-size: 0.76rem; color: var(--text-muted); margin-top: 4px;">المهام المنجزة</div>
-                            <div id="user-stat-tasks" style="font-weight: 900; font-size: 1.25rem; color: #2ed573; margin-top: 2px;">0 مهمة</div>
-                        </div>
-                        <!-- Stat 4: Focus Time -->
-                        <div style="background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(0, 229, 255, 0.25); border-radius: 14px; padding: 12px; text-align: center;">
-                            <span style="font-size: 1.5rem;">⏱️</span>
-                            <div style="font-size: 0.76rem; color: var(--text-muted); margin-top: 4px;">جلسات التركيز</div>
-                            <div id="user-stat-focus" style="font-weight: 900; font-size: 1.25rem; color: #00e5ff; margin-top: 2px;">0 جلسة</div>
-                        </div>
-                    </div>
-
-                    <!-- Progress to Next Target & Action -->
-                    <div style="background: rgba(0, 229, 255, 0.06); border: 1px dashed rgba(0, 229, 255, 0.35); border-radius: 14px; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
-                        <div style="display: flex; align-items: center; gap: 10px;">
-                            <span style="font-size: 1.5rem;">🎯</span>
-                            <div>
-                                <strong id="user-next-target-text" style="color: #00e5ff; font-size: 0.92rem; display: block;">أنت على قمة الترتيب!</strong>
-                                <small style="color: var(--text-muted); font-size: 0.78rem;">حافظ على شعلتك اليومية ومذاكرة جلسة بومودورو للبقاء في الصدارة</small>
-                            </div>
-                        </div>
-                        <div style="display: flex; gap: 8px;">
-                            <button onclick="switchPage('pomodoro')" class="btn" style="background: #00e5ff; color: #020d1a; font-weight: 800; font-size: 0.82rem; padding: 6px 14px; border-radius: 10px; border: none; cursor: pointer;">
-                                <i class="fa-solid fa-stopwatch"></i> ابدأ مذاكرة
-                            </button>
-                            <button onclick="switchPage('challenges')" class="btn" style="background: rgba(251, 191, 36, 0.2); color: #fbbf24; border: 1px solid #fbbf24; font-weight: 800; font-size: 0.82rem; padding: 6px 14px; border-radius: 10px; cursor: pointer;">
-                                <i class="fa-solid fa-gamepad"></i> التحديات
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Privacy Guarantee Footnote -->
-                    <div style="margin-top: 12px; text-align: center; font-size: 0.76rem; color: var(--text-muted);">
-                        <i class="fa-solid fa-lock" style="color: #2ed573;"></i> نظام التنافس آمن وسري تماماً: إحصائياتك وترتيبك تظهر لك وحدك، ولا يمكن لأي طالب أو شخص آخر معرفة اسمك أو وقت مذاكرتك.
-                    </div>
-                </div>
-                
-                <!-- My Dream Banner -->
-                <div class="card hover-glow-box" style="background: linear-gradient(135deg, rgba(0, 229, 255, 0.1), rgba(0, 229, 255, 0.05)); border: 2px dashed #00e5ff; text-align: center; margin-bottom: 2rem;">
-                    <h3 style="color: var(--primary-color); margin-top: 0;"><i class="fa-solid fa-star" style="color: #feca57;"></i> حلمي اللي بسعى عشانه</h3>
-                    <div id="dream-display-container">
-                        <p id="dream-text" style="font-size: 1.3rem; font-weight: bold; color: var(--text-main); margin: 1rem 0; min-height: 30px;">لم تكتب حلمك بعد..</p>
-                        <button onclick="editDream()" class="theme-btn" style="background: rgba(0, 229, 255, 0.2); color: var(--primary-color); padding: 0.5rem 1rem;"><i class="fa-solid fa-pen"></i> تعديل</button>
-                    </div>
-                    <div id="dream-edit-container" style="display: none; flex-direction: column; gap: 1rem; align-items: center;">
-                        <input type="text" id="dream-input" placeholder="نفسك تطلع إيه؟ إيه الكلية اللي بتحلم بيها؟" style="width: 80%; padding: 0.8rem; border: 2px solid var(--border-color); border-radius: 10px; font-family: 'Tajawal'; background: var(--bg-color); color: var(--text-main); text-align: center; font-size: 1.1rem;">
-                        <button onclick="saveDream()" class="theme-btn" style="background: linear-gradient(135deg, #00e5ff, #00b8cc); color: white; padding: 0.6rem 2rem;"><i class="fa-solid fa-check"></i> حفظ</button>
-                    </div>
-                </div>
-
-                <div class="progress-section">
-                    <h3>معدل إنجاز مهام اليوم</h3>
-                    <div class="progress-bar-bg">
-                        <div class="progress-bar-fill" id="daily-progress" style="width: 0%;"></div>
-                    </div>
-                    <p id="progress-text" style="text-align: left; font-size: 0.9rem; color: var(--text-muted); margin-top: 5px;">0%</p>
-                </div>
-
-                <div class="dashboard-grid">
-                    <div class="card hover-glow-box">
-                        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--border-color); padding-bottom: 8px; margin-bottom: 12px;">
-                            <h3 style="margin: 0; border: none; padding: 0;">دروس اليوم <i class="fa-solid fa-bell text-blue"></i></h3>
-                            <button class="btn btn-primary" onclick="openModal('class-modal')" style="font-size: 0.8rem; padding: 5px 12px; border-radius: 8px; font-weight: bold;">
-                                <i class="fa-solid fa-plus"></i> إضافة درس
-                            </button>
-                        </div>
-                        <ul id="today-classes-list" class="item-list"></ul>
-                    </div>
-                    <div class="card hover-glow-box">
-                        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--border-color); padding-bottom: 8px; margin-bottom: 12px;">
-                            <h3 style="margin: 0; border: none; padding: 0;">ما يجب مذاكرته اليوم <i class="fa-solid fa-fire text-orange"></i></h3>
+                <!-- 🎯 SECTION 1: THE CORE STUDY HUB (ما يجب مذاكرته اليوم وحصص اليوم) -->
+                <div class="dashboard-grid" id="main-today-grid" style="margin-bottom: 1.8rem;">
+                    <!-- Card 1: Today's Tasks (Right Column / Top on Mobile) -->
+                    <div class="card hover-glow-box" id="today-tasks-card">
+                        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--border-color); padding-bottom: 10px; margin-bottom: 12px;">
+                            <h3 style="margin: 0; border: none; padding: 0; font-size: 1.15rem; display: flex; align-items: center; gap: 8px;">
+                                <span>ما يجب مذاكرته اليوم</span>
+                                <i class="fa-solid fa-fire text-orange"></i>
+                            </h3>
                             <button class="btn btn-primary" onclick="openModal('task-modal')" style="font-size: 0.8rem; padding: 5px 12px; border-radius: 8px; font-weight: bold;">
-                                <i class="fa-solid fa-plus"></i> إضافة مهمة
+                                <i class="fa-solid fa-plus"></i> مهمة مفصلة
                             </button>
                         </div>
+
+                        <!-- Integrated Progress Bar inside the card -->
+                        <div style="background: rgba(0,0,0,0.2); border-radius: 12px; padding: 10px 14px; margin-bottom: 14px; border: 1px solid rgba(255,255,255,0.06);">
+                            <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.84rem; margin-bottom: 6px;">
+                                <span style="color: var(--text-muted); display: flex; align-items: center; gap: 6px;">
+                                    <i class="fa-solid fa-chart-line" style="color: #2ed573;"></i> معدل إنجاز مذاكرة اليوم:
+                                </span>
+                                <strong id="progress-text" style="color: #2ed573; font-size: 0.88rem;">0%</strong>
+                            </div>
+                            <div class="progress-bar-bg" style="height: 8px;">
+                                <div class="progress-bar-fill" id="daily-progress" style="width: 0%;"></div>
+                            </div>
+                        </div>
+
+                        <!-- Tasks List -->
                         <ul id="today-tasks-list" class="item-list"></ul>
-                        <!-- Direct Inline Quick Add Box (Answers 'أكتبهم فين دول؟') -->
+
+                        <!-- Inline Direct Input (Quick Add) -->
                         <div style="display: flex; gap: 8px; margin-top: 14px; border-top: 1px dashed rgba(255,255,255,0.12); padding-top: 12px;">
                             <input type="text" id="dash-inline-task-input" placeholder="اكتب درساً تريد مذاكرته اليوم..." style="flex: 1; padding: 10px 14px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.15); background: rgba(0,0,0,0.25); color: var(--text-main); font-family: 'Tajawal'; font-size: 0.9rem;" onkeypress="if(event.key==='Enter') addDashInlineTask()">
-                            <button onclick="addDashInlineTask()" class="btn btn-primary" style="padding: 10px 16px; border-radius: 10px; font-weight: bold; font-size: 0.9rem; display: flex; align-items: center; gap: 6px; cursor: pointer;">
+                            <button onclick="addDashInlineTask()" class="btn btn-primary" style="padding: 10px 16px; border-radius: 10px; font-weight: bold; font-size: 0.9rem; display: flex; align-items: center; gap: 6px; cursor: pointer; white-space: nowrap;">
                                 <i class="fa-solid fa-plus"></i> إضافة
                             </button>
                         </div>
                     </div>
-                    
+
+                    <!-- Card 2: Today's Classes (Left Column) -->
+                    <div class="card hover-glow-box" id="today-classes-card">
+                        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--border-color); padding-bottom: 10px; margin-bottom: 12px;">
+                            <h3 style="margin: 0; border: none; padding: 0; font-size: 1.15rem; display: flex; align-items: center; gap: 8px;">
+                                <span>دروس وحصص اليوم</span>
+                                <i class="fa-solid fa-bell text-blue"></i>
+                            </h3>
+                            <div style="display: flex; gap: 6px;">
+                                <button class="btn btn-primary" onclick="openModal('class-modal')" style="font-size: 0.8rem; padding: 5px 12px; border-radius: 8px; font-weight: bold;">
+                                    <i class="fa-solid fa-plus"></i> إضافة حصة
+                                </button>
+                                <button class="btn" onclick="switchPage('schedule')" style="background: rgba(255,255,255,0.06); color: var(--text-main); border: 1px solid rgba(255,255,255,0.15); font-size: 0.8rem; padding: 5px 10px; border-radius: 8px; cursor: pointer;" title="عرض الجدول الأسبوعي كامل">
+                                    الجدول 🗓️
+                                </button>
+                            </div>
+                        </div>
+                        <ul id="today-classes-list" class="item-list"></ul>
+                    </div>
+                </div>
+
+                <!-- 🏆 SECTION 2: GAMIFICATION & CHALLENGE HUB (سؤال اليوم السريع + مركزك بين الطلاب) -->
+                <div class="dash-interactive-grid" style="margin-bottom: 1.8rem;">
+                    <!-- Card 1: سؤال التحدي اليومي السريع 🎯 -->
+                    <div id="daily-question-container" class="daily-question-card hover-glow-box" style="margin-bottom: 0;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; border-bottom: 1px solid rgba(16, 185, 129, 0.25); padding-bottom: 10px;">
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <span style="font-size: 1.8rem;">🎯</span>
+                                <div>
+                                    <h3 style="margin: 0; color: #34d399; font-size: 1.15rem; border: none; padding: 0;">سؤال التحدي اليومي السريع</h3>
+                                    <p style="margin: 3px 0 0; color: var(--text-muted); font-size: 0.82rem;">سؤال في دقيقة واحدة يثبت معلومتك ويكسبك نقاط خبرة فورية!</p>
+                                </div>
+                            </div>
+                            <span id="daily-q-reward-badge" style="background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); padding: 4px 12px; border-radius: 20px; font-size: 0.82rem; font-weight: 800;">
+                                +50 XP ⚡
+                            </span>
+                        </div>
+
+                        <div id="daily-q-loading" style="text-align: center; padding: 15px; color: var(--text-muted); font-size: 0.9rem;">
+                            <i class="fa-solid fa-circle-notch fa-spin"></i> جاري تحضير سؤال اليوم...
+                        </div>
+
+                        <div id="daily-q-body" style="display: none;">
+                            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">
+                                <span id="daily-q-subject-tag" style="background: rgba(0, 229, 255, 0.15); color: #00e5ff; border: 1px solid rgba(0, 229, 255, 0.3); padding: 3px 10px; border-radius: 10px; font-size: 0.78rem; font-weight: 700;">اللغة العربية</span>
+                                <span id="daily-q-difficulty-tag" style="background: rgba(251, 191, 36, 0.15); color: #fbbf24; border: 1px solid rgba(251, 191, 36, 0.3); padding: 3px 10px; border-radius: 10px; font-size: 0.78rem; font-weight: 700;">تحدي ذكاء</span>
+                            </div>
+                            <h4 id="daily-q-text" style="font-size: 1.05rem; line-height: 1.6; color: var(--text-main); margin: 0 0 16px 0; font-family: 'Tajawal', sans-serif;">---</h4>
+                            
+                            <div id="daily-q-options" style="display: flex; flex-direction: column;"></div>
+
+                            <div id="daily-q-explanation" style="display: none; margin-top: 14px; padding: 12px 16px; background: rgba(0, 229, 255, 0.08); border-right: 4px solid #00e5ff; border-radius: 10px;">
+                                <div style="font-weight: 800; color: #00e5ff; font-size: 0.9rem; margin-bottom: 4px;"><i class="fa-solid fa-lightbulb"></i> الشرح والتوضيح العلمي:</div>
+                                <p id="daily-q-explanation-text" style="margin: 0; color: #cbd5e1; font-size: 0.88rem; line-height: 1.5;"></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 2: بطاقة ترتيبك وإنجازك الشخصي بين الطلاب 🏆 -->
+                    <div id="dashboard-leaderboard-card" class="personal-rank-card hover-glow-box" style="margin-bottom: 0;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; border-bottom: 1px solid rgba(251, 191, 36, 0.25); padding-bottom: 10px; margin-bottom: 14px;">
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <span style="font-size: 1.8rem;">🏆</span>
+                                <div>
+                                    <h3 style="margin: 0; color: #fbbf24; font-size: 1.15rem; border: none; padding: 0;">مركزك ومستوى تفاعلك 🌟</h3>
+                                    <p style="margin: 2px 0 0; color: var(--text-muted); font-size: 0.8rem;">تقييم التزامك مقارنة بجميع طلاب التطبيق</p>
+                                </div>
+                            </div>
+                            <button onclick="renderLeaderboard(true)" class="btn" style="background: rgba(251, 191, 36, 0.15); color: #fbbf24; border: 1px solid rgba(251, 191, 36, 0.4); font-size: 0.78rem; padding: 5px 10px; border-radius: 10px; cursor: pointer; display: flex; align-items: gap: 5px;">
+                                <i class="fa-solid fa-arrows-rotate"></i> تحديث
+                            </button>
+                        </div>
+
+                        <!-- Personal Rank Hero Showcase -->
+                        <div class="user-rank-hero" style="background: linear-gradient(135deg, rgba(251, 191, 36, 0.12), rgba(0, 229, 255, 0.08)); border: 1.5px solid rgba(251, 191, 36, 0.35); border-radius: 16px; padding: 1.1rem; text-align: center; margin-bottom: 12px; position: relative;">
+                            <div id="user-rank-medal-icon" style="font-size: 2.8rem; line-height: 1; margin-bottom: 6px; filter: drop-shadow(0 0 15px rgba(251, 191, 36, 0.5));">🥇</div>
+                            <div style="display: inline-block; background: rgba(251, 191, 36, 0.2); border: 1px solid #fbbf24; color: #fbbf24; padding: 3px 14px; border-radius: 20px; font-weight: 800; font-size: 0.82rem; margin-bottom: 6px;" id="user-tier-badge">
+                                🌟 متصدر الأسبوع
+                            </div>
+                            <h2 id="user-rank-title" style="margin: 0 0 4px 0; color: #f8fafc; font-size: 1.3rem; font-family: 'Tajawal', sans-serif;">
+                                أنت في المركز <span style="color: #fbbf24; font-size: 1.6rem;" id="user-rank-number">#1</span> بين جميع الطلاب!
+                            </h2>
+                            <p id="user-rank-subtitle" style="margin: 0; color: #94a3b8; font-size: 0.84rem;">
+                                مجموع نقاطك يضعك ضمن أفضل الطلاب الأكثر التزاماً ومذاكرة! 🚀
+                            </p>
+                        </div>
+
+                        <!-- 4 Personal Engagement Stats Grid -->
+                        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 12px;">
+                            <div style="background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(251, 191, 36, 0.25); border-radius: 12px; padding: 8px 4px; text-align: center;">
+                                <span style="font-size: 1.2rem;">⚡</span>
+                                <div style="font-size: 0.7rem; color: var(--text-muted); margin-top: 2px;">الخبرة</div>
+                                <div id="user-stat-xp" style="font-weight: 900; font-size: 1rem; color: #fbbf24; margin-top: 2px;">0 XP</div>
+                            </div>
+                            <div style="background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 107, 129, 0.25); border-radius: 12px; padding: 8px 4px; text-align: center;">
+                                <span style="font-size: 1.2rem;">🔥</span>
+                                <div style="font-size: 0.7rem; color: var(--text-muted); margin-top: 2px;">الشعلة</div>
+                                <div id="user-stat-streak" style="font-weight: 900; font-size: 1rem; color: #ff6b81; margin-top: 2px;">1 يوم</div>
+                            </div>
+                            <div style="background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(46, 213, 115, 0.25); border-radius: 12px; padding: 8px 4px; text-align: center;">
+                                <span style="font-size: 1.2rem;">✅</span>
+                                <div style="font-size: 0.7rem; color: var(--text-muted); margin-top: 2px;">المنجز</div>
+                                <div id="user-stat-tasks" style="font-weight: 900; font-size: 1rem; color: #2ed573; margin-top: 2px;">0 مهمة</div>
+                            </div>
+                            <div style="background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(0, 229, 255, 0.25); border-radius: 12px; padding: 8px 4px; text-align: center;">
+                                <span style="font-size: 1.2rem;">⏱️</span>
+                                <div style="font-size: 0.7rem; color: var(--text-muted); margin-top: 2px;">التركيز</div>
+                                <div id="user-stat-focus" style="font-weight: 900; font-size: 1rem; color: #00e5ff; margin-top: 2px;">0 جلسة</div>
+                            </div>
+                        </div>
+
+                        <div style="text-align: center; font-size: 0.72rem; color: var(--text-muted);">
+                            <i class="fa-solid fa-lock" style="color: #2ed573;"></i> خصوصيتك محمية 100%: إحصائياتك تظهر لك وحدك ولا تظهر لباقي الطلاب.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 🌟 SECTION 3: INSPIRATION & DAILY STREAK (شعلة الالتزام وحلمي الدراسي) -->
+                <div class="dash-interactive-grid" style="margin-bottom: 1.8rem;">
+                    <!-- Left: شعلة التزامك وصندوق المفاجأة اليومي -->
+                    <div id="dashboard-streak-banner" class="card hover-glow-box" style="background: linear-gradient(135deg, rgba(239, 68, 68, 0.12), rgba(245, 158, 11, 0.1)); border: 1.5px solid rgba(245, 158, 11, 0.45); border-radius: 18px; padding: 1.2rem; display: flex; flex-direction: column; justify-content: space-between; gap: 12px; box-shadow: 0 4px 20px rgba(245, 158, 11, 0.15); margin-bottom: 0;">
+                        <div style="display: flex; align-items: center; gap: 12px;">
+                            <span style="font-size: 2.2rem; animation: flameFlicker 2s infinite ease-in-out alternate; display: inline-block;">🔥</span>
+                            <div>
+                                <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                                    <strong id="dash-streak-title" style="color: #fbbf24; font-size: 1.1rem; font-family: 'Tajawal', sans-serif;">شعلة التزامك: 0 أيام متتالية! 🔥</strong>
+                                    <span id="dash-mystery-badge" style="background: rgba(245, 158, 11, 0.25); color: #fbbf24; font-size: 0.75rem; font-weight: 700; padding: 2px 8px; border-radius: 12px; border: 1px solid rgba(245, 158, 11, 0.5);">
+                                        🎁 هدية اليوم جاهزة!
+                                    </span>
+                                </div>
+                                <p id="dash-streak-sub" style="margin: 4px 0 0 0; color: #cbd5e1; font-size: 0.84rem; line-height: 1.4;">
+                                    ادخل غرفة التحديات، افتح صندوق حظك واكسب XP مضاعف!
+                                </p>
+                            </div>
+                        </div>
+                        <button onclick="window.switchPage('challenges')" class="theme-btn btn-hover-glow" style="background: linear-gradient(135deg, #fbbf24, #f59e0b); color: #0f172a; border: none; padding: 0.65rem 1.2rem; border-radius: 12px; font-weight: 800; font-family: 'Tajawal'; font-size: 0.9rem; cursor: pointer; width: 100%; display: flex; align-items: center; justify-content: center; gap: 6px;">
+                            <i class="fa-solid fa-gamepad"></i> دخول غرفة التحديات 🚀
+                        </button>
+                    </div>
+
+                    <!-- Right: حلمي اللي بسعى عشانه -->
+                    <div class="card hover-glow-box" style="background: linear-gradient(135deg, rgba(0, 229, 255, 0.1), rgba(0, 229, 255, 0.05)); border: 2px dashed #00e5ff; text-align: center; border-radius: 18px; padding: 1.2rem; display: flex; flex-direction: column; justify-content: center; margin-bottom: 0;">
+                        <h3 style="color: var(--primary-color); margin: 0 0 6px 0; font-size: 1.1rem; border: none; padding: 0;"><i class="fa-solid fa-star" style="color: #feca57;"></i> حلمي اللي بسعى عشانه 🎓</h3>
+                        <div id="dream-display-container">
+                            <p id="dream-text" style="font-size: 1.2rem; font-weight: bold; color: var(--text-main); margin: 0.6rem 0; min-height: 28px;">لم تكتب حلمك بعد..</p>
+                            <button onclick="editDream()" class="theme-btn" style="background: rgba(0, 229, 255, 0.2); color: var(--primary-color); padding: 0.4rem 1rem; border-radius: 8px; font-size: 0.82rem;"><i class="fa-solid fa-pen"></i> تعديل</button>
+                        </div>
+                        <div id="dream-edit-container" style="display: none; flex-direction: column; gap: 0.8rem; align-items: center;">
+                            <input type="text" id="dream-input" placeholder="نفسك تطلع إيه؟ إيه الكلية اللي بتحلم بيها؟" style="width: 90%; padding: 0.7rem; border: 2px solid var(--border-color); border-radius: 10px; font-family: 'Tajawal'; background: var(--bg-color); color: var(--text-main); text-align: center; font-size: 1rem;">
+                            <button onclick="saveDream()" class="theme-btn" style="background: linear-gradient(135deg, #00e5ff, #00b8cc); color: white; padding: 0.5rem 1.8rem; border-radius: 8px; font-size: 0.85rem;"><i class="fa-solid fa-check"></i> حفظ</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 🕌 SECTION 4: SPIRITUALITY & EXAMS (مواقيت الصلاة والورد القرآني وأقرب الامتحانات) -->
+                <div class="dashboard-grid">
                     <!-- Islamic Widget -->
-                    <div class="card" id="islamic-widget" style="grid-column: 1 / -1;">
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <h3>مواقيت الصلاة والذكر 🕌 <small style="font-size:0.8rem; font-weight:normal; cursor:pointer; color:var(--primary-color); background:var(--bg-color); padding:3px 8px; border-radius:12px;" onclick="changeCity()">[تغيير المدينة]</small></h3>
-                            <span id="current-city-label" style="font-size:0.9rem; font-weight:bold; color:var(--text-muted)">القاهرة</span>
+                    <div class="card hover-glow-box" id="islamic-widget">
+                        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 8px; margin-bottom: 12px;">
+                            <h3 style="margin: 0; border: none; padding: 0; font-size: 1.1rem;">مواقيت الصلاة والذكر 🕌 <small style="font-size:0.75rem; font-weight:normal; cursor:pointer; color:var(--primary-color); background:rgba(0,229,255,0.1); padding:2px 8px; border-radius:10px;" onclick="changeCity()">[تغيير المدينة]</small></h3>
+                            <span id="current-city-label" style="font-size:0.85rem; font-weight:bold; color:var(--text-muted)">القاهرة</span>
                         </div>
                         <div class="prayer-times" id="prayer-times-container">
                             <p style="text-align:center; color:var(--text-muted); font-size:0.9rem; padding: 10px;">جاري التحميل...</p>
                         </div>
-                        <div class="study-dua" style="margin-top: 15px; padding: 15px; background: var(--bg-color); border-radius: 8px; border-right: 4px solid var(--primary-color);">
-                            <h4 style="margin-bottom: 5px; color: var(--primary-color);"><i class="fa-solid fa-hands-praying"></i> دعاء قبل المذاكرة</h4>
-                            <p style="font-size: 0.95rem; line-height: 1.6; font-weight: 500;">"اللهم إني أسألك فهم النبيين، وحفظ المرسلين، والملائكة المقربين. اللهم اجعل ألسنتنا عامرة بذكرك، وقلوبنا بخشيتك، وأسرارنا بطاعتك، إنك على كل شيء قدير."</p>
+                        <div class="study-dua" style="margin-top: 12px; padding: 12px; background: var(--bg-color); border-radius: 8px; border-right: 4px solid var(--primary-color);">
+                            <h4 style="margin-bottom: 4px; color: var(--primary-color); font-size: 0.88rem;"><i class="fa-solid fa-hands-praying"></i> دعاء قبل المذاكرة</h4>
+                            <p style="font-size: 0.88rem; line-height: 1.5; font-weight: 500; margin: 0;">"اللهم إني أسألك فهم النبيين، وحفظ المرسلين، والملائكة المقربين. اللهم اجعل ألسنتنا عامرة بذكرك، وقلوبنا بخشيتك، وأسرارنا بطاعتك."</p>
                         </div>
                     </div>
 
                     <!-- Quran Wird Widget -->
-                    <div class="card" id="quran-widget" style="grid-column: 1 / -1; border-right: 4px solid var(--success);">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                            <h3 style="margin: 0;"><i class="fa-solid fa-book-quran" style="color: var(--success);"></i> وردي القرآني اليومي</h3>
-                            <button class="btn btn-outline" onclick="openModal('quran-modal')" style="font-size: 0.8rem; padding: 5px 10px;">تحديد الورد</button>
+                    <div class="card hover-glow-box" id="quran-widget" style="border-right: 4px solid var(--success);">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; border-bottom: 1px solid var(--border-color); padding-bottom: 8px;">
+                            <h3 style="margin: 0; border: none; padding: 0; font-size: 1.1rem;"><i class="fa-solid fa-book-quran" style="color: var(--success);"></i> وردي القرآني اليومي</h3>
+                            <button class="btn btn-outline" onclick="openModal('quran-modal')" style="font-size: 0.78rem; padding: 4px 8px;">تحديد الورد</button>
                         </div>
-                        <div style="display: flex; justify-content: space-between; align-items: center; background: var(--bg-color); padding: 15px; border-radius: 8px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; background: var(--bg-color); padding: 12px; border-radius: 8px;">
                             <div>
-                                <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 5px;">مقدار الورد:</p>
-                                <strong id="quran-goal-display" style="font-size: 1.1rem;">لم يتم التحديد</strong>
+                                <p style="color: var(--text-muted); font-size: 0.82rem; margin-bottom: 4px;">مقدار الورد:</p>
+                                <strong id="quran-goal-display" style="font-size: 1rem;">لم يتم التحديد</strong>
                             </div>
                             <div style="text-align: center;">
-                                <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 5px;">المنجز اليوم:</p>
-                                <div style="display: flex; align-items: center; gap: 10px;">
-                                    <button class="btn" style="background: var(--danger); color: white; padding: 2px 8px; border-radius: 4px;" onclick="updateQuranWird(-1)">-</button>
-                                    <strong id="quran-done-display" style="font-size: 1.5rem; color: var(--success);">0</strong>
-                                    <button class="btn" style="background: var(--success); color: white; padding: 2px 8px; border-radius: 4px;" onclick="updateQuranWird(1)">+</button>
+                                <p style="color: var(--text-muted); font-size: 0.82rem; margin-bottom: 4px;">المنجز اليوم:</p>
+                                <div style="display: flex; align-items: center; gap: 8px;">
+                                    <button class="btn" style="background: var(--danger); color: white; padding: 2px 7px; border-radius: 4px;" onclick="updateQuranWird(-1)">-</button>
+                                    <strong id="quran-done-display" style="font-size: 1.3rem; color: var(--success);">0</strong>
+                                    <button class="btn" style="background: var(--success); color: white; padding: 2px 7px; border-radius: 4px;" onclick="updateQuranWird(1)">+</button>
                                 </div>
                             </div>
                             <div style="text-align: center;">
-                                <button class="btn btn-primary" id="btn-complete-quran" onclick="completeQuranWird()" style="background-color: var(--success);"><i class="fa-solid fa-check"></i> أتممت الورد</button>
+                                <button class="btn btn-primary" id="btn-complete-quran" onclick="completeQuranWird()" style="background-color: var(--success); font-size: 0.82rem; padding: 6px 10px;"><i class="fa-solid fa-check"></i> أتممت الورد</button>
                             </div>
                         </div>
                     </div>
 
-                    <div class="card" style="grid-column: 1 / -1;">
-                        <h3>أقرب الامتحانات <i class="fa-solid fa-hourglass-half text-danger"></i></h3>
+                    <!-- Exams Card -->
+                    <div class="card hover-glow-box" style="grid-column: 1 / -1;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 8px; margin-bottom: 12px;">
+                            <h3 style="margin: 0; border: none; padding: 0; font-size: 1.15rem;">أقرب الامتحانات <i class="fa-solid fa-hourglass-half text-danger"></i></h3>
+                            <button class="btn btn-primary" onclick="openModal('exam-modal')" style="font-size: 0.8rem; padding: 5px 12px; border-radius: 8px; font-weight: bold;">
+                                <i class="fa-solid fa-plus"></i> إضافة موعد امتحان
+                            </button>
+                        </div>
                         <div class="exams-grid" id="dashboard-exams-grid"></div>
                     </div>
                 </div>
