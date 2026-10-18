@@ -615,7 +615,12 @@
                                 <option value="الصف الثالث الإعدادي">الصف الثالث الإعدادي (الشهادة الإعدادية)</option>
                                 <option value="الصف الثاني الإعدادي">الصف الثاني الإعدادي</option>
                                 <option value="الصف الأول الإعدادي">الصف الأول الإعدادي</option>
-                                <option value="مرحلة ابتدائية">المرحلة الابتدائية</option>
+                                <option value="الصف السادس الابتدائي">الصف السادس الابتدائي (6 ابتدائي)</option>
+                                <option value="الصف الخامس الابتدائي">الصف الخامس الابتدائي (5 ابتدائي)</option>
+                                <option value="الصف الرابع الابتدائي">الصف الرابع الابتدائي (4 ابتدائي)</option>
+                                <option value="الصف الثالث الابتدائي">الصف الثالث الابتدائي (3 ابتدائي)</option>
+                                <option value="الصف الثاني الابتدائي">الصف الثاني الابتدائي (2 ابتدائي)</option>
+                                <option value="الصف الأول الابتدائي">الصف الأول الابتدائي (1 ابتدائي)</option>
                             </select>
                         </div>
                         <div>
@@ -806,7 +811,13 @@
                                 <option value="الصف الثالث الإعدادي">3 إعدادي</option>
                                 <option value="الصف الثاني الإعدادي">2 إعدادي</option>
                                 <option value="الصف الأول الإعدادي">1 إعدادي</option>
-                                <option value="مرحلة ابتدائية">المرحلة الابتدائية</option>
+                                <option value="الصف السادس الابتدائي">6 ابتدائي</option>
+                                <option value="الصف الخامس الابتدائي">5 ابتدائي</option>
+                                <option value="الصف الرابع الابتدائي">4 ابتدائي</option>
+                                <option value="الصف الثالث الابتدائي">3 ابتدائي</option>
+                                <option value="الصف الثاني الابتدائي">2 ابتدائي</option>
+                                <option value="الصف الأول الابتدائي">1 ابتدائي</option>
+                                <option value="مرحلة ابتدائية">كل الابتدائي 🎒</option>
                             </select>
 
                             <label style="color: var(--text-muted); font-size: 0.88rem; font-weight: bold;">المجموعة:</label>
@@ -4739,7 +4750,12 @@
                     <option value="الصف الثالث الإعدادي">الصف الثالث الإعدادي</option>
                     <option value="الصف الثاني الإعدادي">الصف الثاني الإعدادي</option>
                     <option value="الصف الأول الإعدادي">الصف الأول الإعدادي</option>
-                    <option value="مرحلة ابتدائية">المرحلة الابتدائية</option>
+                    <option value="الصف السادس الابتدائي">الصف السادس الابتدائي</option>
+                    <option value="الصف الخامس الابتدائي">الصف الخامس الابتدائي</option>
+                    <option value="الصف الرابع الابتدائي">الصف الرابع الابتدائي</option>
+                    <option value="الصف الثالث الابتدائي">الصف الثالث الابتدائي</option>
+                    <option value="الصف الثاني الابتدائي">الصف الثاني الابتدائي</option>
+                    <option value="الصف الأول الابتدائي">الصف الأول الابتدائي</option>
                 </select>
                 
                 <label style="display: block; font-size: 0.84rem; color: var(--text-muted); margin-bottom: 4px;">المجموعة:</label>
@@ -4781,36 +4797,171 @@
 
     <!-- 1. Teacher Bulk Import Modal -->
     <div id="teacher-bulk-import-modal" class="modal">
-        <div class="modal-content" style="max-width: 520px; padding: 22px; border-radius: 18px; background: var(--card-bg); border: 1.5px solid #00e5ff;">
+        <div class="modal-content" style="max-width: 560px; padding: 22px; border-radius: 18px; background: var(--card-bg); border: 1.5px solid #00e5ff; max-height: 90vh; overflow-y: auto;">
             <span class="close" onclick="closeModal('teacher-bulk-import-modal')">&times;</span>
-            <h3 style="color: #00e5ff; margin: 0 0 8px 0; font-size: 1.25rem;">
-                <i class="fa-solid fa-file-import"></i> استيراد سريع لطلابك (نسخ ولصق دفعة واحدة)
-            </h3>
-            <p style="color: var(--text-muted); font-size: 0.84rem; margin: 0 0 14px 0; line-height: 1.5;">
-                الصق قائمة الطلاب من واتساب أو إكسيل مباشرةً (اسم الطالب وبجواره رقم هاتف ولي الأمر). سيقوم التطبيق بإضافتهم جميعاً في ثانية واحدة!
-            </p>
-            <div style="text-align: right; margin-bottom: 12px;">
-                <label style="display: block; font-size: 0.84rem; color: var(--text-muted); margin-bottom: 4px;">الصف الدراسي للطلاب المستوردين:</label>
-                <select id="tbulk-import-stage" class="search-input" style="width: 100%; margin-bottom: 12px;">
-                    <option value="الصف الثالث الثانوي">الصف الثالث الثانوي (ثانوية عامة)</option>
-                    <option value="الصف الثاني الثانوي">الصف الثاني الثانوي</option>
-                    <option value="الصف الأول الثانوي">الصف الأول الثانوي</option>
-                    <option value="الصف الثالث الإعدادي">الصف الثالث الإعدادي</option>
-                    <option value="الصف الثاني الإعدادي">الصف الثاني الإعدادي</option>
-                    <option value="الصف الأول الإعدادي">الصف الأول الإعدادي</option>
-                    <option value="مرحلة ابتدائية">المرحلة الابتدائية</option>
-                </select>
-
-                <label style="display: block; font-size: 0.84rem; color: var(--text-muted); margin-bottom: 4px;">إضافة الطلاب إلى مجموعة:</label>
-                <select id="tbulk-import-group" class="search-input" style="width: 100%; margin-bottom: 12px;">
-                    <!-- Injected dynamically -->
-                </select>
-
-                <label style="display: block; font-size: 0.84rem; color: var(--text-muted); margin-bottom: 4px;">قائمة الطلاب (كل طالب في سطر):</label>
-                <textarea id="tbulk-import-text" rows="7" class="search-input" placeholder="مثال:&#10;أحمد علي محمد - 01012345678&#10;مريم إبراهيم حسن 01198765432&#10;يوسف خالد عبد الله - 01234567890" style="width: 100%; font-family: monospace; font-size: 0.88rem; line-height: 1.6; padding: 10px;"></textarea>
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+                <span style="font-size: 1.5rem;">📋🚀</span>
+                <h3 style="color: #00e5ff; margin: 0; font-size: 1.25rem;">
+                    مركز إضافة واستيراد الطلاب الشامل
+                </h3>
             </div>
-            <button onclick="executeBulkImportStudents()" class="btn btn-primary" style="width: 100%; font-weight: 800; font-size: 1rem; border-radius: 10px; background: #00e5ff; color: #020d1a;">
-                <i class="fa-solid fa-bolt"></i> استيراد جميع الطلاب الآن 🚀
+            <p style="color: var(--text-muted); font-size: 0.82rem; margin: 0 0 14px 0; line-height: 1.5;">
+                حلول لجميع الحالات: لو عامل جروب واتساب، أو كاتبهم في كشف ورقي، أو معاك ملف إكسيل!
+            </p>
+
+            <!-- Mode Selector Tabs -->
+            <div style="display: flex; gap: 6px; margin-bottom: 14px; background: rgba(255,255,255,0.05); padding: 4px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1);">
+                <button type="button" id="tbulk-tab-paste" onclick="switchTeacherBulkTab('paste')" class="btn" style="flex: 1; font-size: 0.8rem; font-weight: bold; border-radius: 8px; padding: 7px 4px; background: #00e5ff; color: #020d1a;">
+                    <i class="fa-solid fa-paste"></i> لصق أو إملاء
+                </button>
+                <button type="button" id="tbulk-tab-group" onclick="switchTeacherBulkTab('group')" class="btn" style="flex: 1; font-size: 0.8rem; font-weight: bold; border-radius: 8px; padding: 7px 4px; background: transparent; color: #cbd5e1;">
+                    <i class="fa-brands fa-whatsapp" style="color: #2ed573;"></i> رابط لجروب واتساب
+                </button>
+                <button type="button" id="tbulk-tab-camera" onclick="switchTeacherBulkTab('camera')" class="btn" style="flex: 1; font-size: 0.8rem; font-weight: bold; border-radius: 8px; padding: 7px 4px; background: transparent; color: #cbd5e1;">
+                    <i class="fa-solid fa-camera" style="color: #ffa502;"></i> تصوير كشف ورقي
+                </button>
+            </div>
+
+            <!-- Group & Stage Selectors (Common to all) -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; text-align: right;">
+                <div>
+                    <label style="display: block; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 4px;">الصف الدراسي:</label>
+                    <select id="tbulk-import-stage" class="search-input" style="width: 100%; font-size: 0.84rem;">
+                        <option value="الصف الثالث الثانوي">الصف الثالث الثانوي (ثانوية عامة)</option>
+                        <option value="الصف الثاني الثانوي">الصف الثاني الثانوي</option>
+                        <option value="الصف الأول الثانوي">الصف الأول الثانوي</option>
+                        <option value="الصف الثالث الإعدادي">الصف الثالث الإعدادي</option>
+                        <option value="الصف الثاني الإعدادي">الصف الثاني الإعدادي</option>
+                        <option value="الصف الأول الإعدادي">الصف الأول الإعدادي</option>
+                        <option value="الصف السادس الابتدائي">الصف السادس الابتدائي</option>
+                        <option value="الصف الخامس الابتدائي">الصف الخامس الابتدائي</option>
+                        <option value="الصف الرابع الابتدائي">الصف الرابع الابتدائي</option>
+                        <option value="الصف الثالث الابتدائي">الصف الثالث الابتدائي</option>
+                        <option value="الصف الثاني الابتدائي">الصف الثاني الابتدائي</option>
+                        <option value="الصف الأول الابتدائي">الصف الأول الابتدائي</option>
+                    </select>
+                </div>
+                <div>
+                    <label style="display: block; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 4px;">المجموعة / السنتر:</label>
+                    <select id="tbulk-import-group" class="search-input" style="width: 100%; font-size: 0.84rem;" onchange="updateGroupInvitePreview()">
+                        <!-- Injected dynamically -->
+                    </select>
+                </div>
+            </div>
+
+            <!-- PANE 1: Paste & Quick Tools -->
+            <div id="tbulk-pane-paste">
+                <!-- Helper Tool Pills -->
+                <div style="display: flex; gap: 6px; margin-bottom: 8px; flex-wrap: wrap;">
+                    <button type="button" onclick="toggleTeacherBulkVoice()" id="tbulk-voice-btn" class="btn" style="background: rgba(239, 68, 68, 0.15); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.3); font-size: 0.78rem; padding: 5px 10px; border-radius: 8px;">
+                        <i class="fa-solid fa-microphone"></i> <span id="tbulk-voice-label">إملاء صوتي بالمايك 🎙️</span>
+                    </button>
+                    <label class="btn" style="background: rgba(46, 213, 115, 0.15); color: #2ed573; border: 1px solid rgba(46, 213, 115, 0.3); font-size: 0.78rem; padding: 5px 10px; border-radius: 8px; cursor: pointer; margin: 0; display: inline-flex; align-items: center; gap: 4px;">
+                        <i class="fa-solid fa-file-excel"></i> رفع شيت إكسيل/CSV
+                        <input type="file" id="tbulk-file-input" accept=".csv, .txt, .xlsx" style="display:none;" onchange="handleTeacherBulkFile(this)">
+                    </label>
+                    <button type="button" onclick="cleanWhatsAppGroupMembersText()" class="btn" style="background: rgba(0, 229, 255, 0.12); color: #00e5ff; border: 1px solid rgba(0, 229, 255, 0.3); font-size: 0.78rem; padding: 5px 10px; border-radius: 8px;">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i> تنظيف أعضاء واتساب
+                    </button>
+                </div>
+
+                <div style="text-align: right; margin-bottom: 12px;">
+                    <label style="display: block; font-size: 0.82rem; color: var(--text-muted); margin-bottom: 4px;">
+                        الصق القائمة أو تحدث بالمايك أو ارفع الملف:
+                    </label>
+                    <textarea id="tbulk-import-text" rows="6" class="search-input" placeholder="اكتب أو الصق الأسماء بأي شكل:&#10;أحمد علي محمد - 01012345678&#10;مريم إبراهيم 01198765432&#10;أو الصق أعضاء جروب واتساب مباشرةً" style="width: 100%; font-family: monospace; font-size: 0.86rem; line-height: 1.6; padding: 10px;"></textarea>
+                </div>
+
+                <button onclick="executeBulkImportStudents()" class="btn btn-primary" style="width: 100%; font-weight: 800; font-size: 0.96rem; border-radius: 10px; background: #00e5ff; color: #020d1a; padding: 10px;">
+                    <i class="fa-solid fa-bolt"></i> استيراد جميع الطلاب الآن 🚀
+                </button>
+            </div>
+
+            <!-- PANE 2: WhatsApp Group Invite Link -->
+            <div id="tbulk-pane-group" style="display: none; text-align: right;">
+                <div style="background: rgba(46, 213, 115, 0.08); border: 1.5px dashed rgba(46, 213, 115, 0.4); border-radius: 14px; padding: 14px; margin-bottom: 14px;">
+                    <div style="display: flex; align-items: center; gap: 8px; color: #2ed573; font-weight: bold; margin-bottom: 8px; font-size: 0.95rem;">
+                        <i class="fa-brands fa-whatsapp" style="font-size: 1.3rem;"></i>
+                        حل جروب الواتساب: الطلاب يسجلون بأنفسهم في 5 ثوانٍ!
+                    </div>
+                    <p style="color: #cbd5e1; font-size: 0.83rem; margin: 0 0 10px 0; line-height: 1.6;">
+                        لا داعي لكتابة الأسماء بنفسك! أرسل الرسالة الجاهزة التالية لجروب واتساب، وكل طالب سيفتح الرابط ويكتب اسمه وهاتف والده وينزل في كشفك فوراً.
+                    </p>
+                    <div id="tbulk-invite-preview" style="background: rgba(0,0,0,0.3); border-radius: 8px; padding: 10px; font-size: 0.82rem; color: #a7f3d0; border: 1px solid rgba(46, 213, 115, 0.2); line-height: 1.6; margin-bottom: 12px; white-space: pre-line;"></div>
+                    <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                        <button type="button" onclick="sendGroupInviteToWhatsApp()" class="btn" style="flex: 1; background: #2ed573; color: #020d1a; font-weight: bold; font-size: 0.88rem; border-radius: 8px; padding: 9px;">
+                            <i class="fa-brands fa-whatsapp"></i> إرسال إلى واتساب مباشرة 📲
+                        </button>
+                        <button type="button" onclick="copyGroupInviteMessage()" class="btn" style="background: rgba(255,255,255,0.1); color: #fff; font-size: 0.85rem; border-radius: 8px; padding: 9px 12px;">
+                            <i class="fa-solid fa-copy"></i> نسخ الرسالة 📋
+                        </button>
+                    </div>
+                </div>
+
+                <div style="background: rgba(0, 229, 255, 0.08); border-radius: 12px; padding: 12px; border: 1px solid rgba(0, 229, 255, 0.2);">
+                    <div style="color: #00e5ff; font-weight: bold; font-size: 0.88rem; margin-bottom: 4px;">
+                        💡 شاشة التسجيل الذاتي المباشر داخل القاعة:
+                    </div>
+                    <p style="color: var(--text-muted); font-size: 0.8rem; margin: 0 0 8px 0;">
+                        إذا كان الطلاب أمامك في السنتر، يمكنك فتح شاشة التسجيل السريع على هاتفك أو تابلت ويدخل كل طالب اسمه تباعاً في ثوانٍ.
+                    </p>
+                    <button type="button" onclick="openStudentSelfRegisterModal()" class="btn" style="background: rgba(0, 229, 255, 0.15); color: #00e5ff; border: 1px solid #00e5ff; font-size: 0.82rem; border-radius: 8px; padding: 7px 12px;">
+                        <i class="fa-solid fa-user-pen"></i> فتح شاشة التسجيل الذاتي المباشر 📝
+                    </button>
+                </div>
+            </div>
+
+            <!-- PANE 3: Camera & Paper Roster Scan -->
+            <div id="tbulk-pane-camera" style="display: none; text-align: right;">
+                <div style="background: rgba(255, 165, 2, 0.08); border: 1.5px dashed rgba(255, 165, 2, 0.4); border-radius: 14px; padding: 14px; margin-bottom: 14px;">
+                    <div style="display: flex; align-items: center; gap: 8px; color: #ffa502; font-weight: bold; margin-bottom: 8px; font-size: 0.95rem;">
+                        <i class="fa-solid fa-camera" style="font-size: 1.2rem;"></i>
+                        حل الكشف الورقي: تصوير الكشف بالكاميرا وقراءته بالـ AI
+                    </div>
+                    <p style="color: #cbd5e1; font-size: 0.83rem; margin: 0 0 12px 0; line-height: 1.6;">
+                        صوّر ورقة الكشف أو كشكول السنتر بالكاميرا، وسيقوم الذكاء الاصطناعي بقراءة الجدول واستخراج أسماء الطلاب وأرقام الهواتف وتفريغها تلقائياً.
+                    </p>
+                    <label class="btn btn-primary" style="display: block; text-align: center; background: #ffa502; color: #020d1a; font-weight: 800; font-size: 0.95rem; border-radius: 10px; padding: 10px; cursor: pointer; margin-bottom: 10px;">
+                        <i class="fa-solid fa-camera"></i> التقط صورة للكشف الورقي الآن 📷
+                        <input type="file" id="tbulk-camera-input" accept="image/*" capture="environment" style="display:none;" onchange="handleTeacherBulkCamera(this)">
+                    </label>
+                    <label class="btn" style="display: block; text-align: center; background: rgba(255,255,255,0.08); color: #fff; font-size: 0.85rem; border-radius: 10px; padding: 8px; cursor: pointer;">
+                        <i class="fa-solid fa-images"></i> اختيار صورة كشف من المعرض 🖼️
+                        <input type="file" accept="image/*" style="display:none;" onchange="handleTeacherBulkCamera(this)">
+                    </label>
+                    <div id="tbulk-camera-status" style="display: none; margin-top: 10px; font-size: 0.84rem; text-align: center; color: #ffa502;">
+                        <i class="fa-solid fa-spinner fa-spin"></i> جاري مسح وقراءة الكشف بالذكاء الاصطناعي...
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Student Self-Register Modal (For Classrooms or Direct Registration) -->
+    <div id="student-self-register-modal" class="modal">
+        <div class="modal-content" style="max-width: 440px; padding: 22px; border-radius: 18px; background: var(--card-bg); border: 2px solid #2ed573; text-align: right;">
+            <span class="close" onclick="closeModal('student-self-register-modal')">&times;</span>
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                <span style="font-size: 1.5rem;">🎓✨</span>
+                <h3 style="color: #2ed573; margin: 0; font-size: 1.2rem;">تسجيل طالب جديد في الكشف</h3>
+            </div>
+            <p style="color: var(--text-muted); font-size: 0.82rem; margin: 0 0 14px 0;">
+                أدخل اسمك ورقم ولي أمرك وسيتم تسجيلك فوراً في كشف الحضور:
+            </p>
+            <div style="margin-bottom: 10px;">
+                <label style="display: block; font-size: 0.82rem; color: var(--text-muted); margin-bottom: 4px;">اسم الطالب ثلاثي:</label>
+                <input type="text" id="tself-reg-name" class="search-input" placeholder="مثال: يوسف أحمد محمود" style="width: 100%;">
+            </div>
+            <div style="margin-bottom: 10px;">
+                <label style="display: block; font-size: 0.82rem; color: var(--text-muted); margin-bottom: 4px;">رقم هاتف ولي الأمر (واتساب):</label>
+                <input type="tel" id="tself-reg-phone" class="search-input" placeholder="01012345678" style="width: 100%;">
+            </div>
+            <div style="margin-bottom: 14px;">
+                <label style="display: block; font-size: 0.82rem; color: var(--text-muted); margin-bottom: 4px;">المجموعة / السنتر:</label>
+                <select id="tself-reg-group" class="search-input" style="width: 100%;"></select>
+            </div>
+            <button onclick="submitStudentSelfRegister()" class="btn btn-primary" style="width: 100%; font-weight: 800; font-size: 0.95rem; background: #2ed573; color: #020d1a; border-radius: 10px; padding: 10px;">
+                <i class="fa-solid fa-check"></i> تم، سجّل بياناتي الآن ✅
             </button>
         </div>
     </div>
@@ -5122,7 +5273,12 @@
                     <option value="الصف الثالث الإعدادي">الصف الثالث الإعدادي</option>
                     <option value="الصف الثاني الإعدادي">الصف الثاني الإعدادي</option>
                     <option value="الصف الأول الإعدادي">الصف الأول الإعدادي</option>
-                    <option value="مرحلة ابتدائية">المرحلة الابتدائية</option>
+                    <option value="الصف السادس الابتدائي">الصف السادس الابتدائي</option>
+                    <option value="الصف الخامس الابتدائي">الصف الخامس الابتدائي</option>
+                    <option value="الصف الرابع الابتدائي">الصف الرابع الابتدائي</option>
+                    <option value="الصف الثالث الابتدائي">الصف الثالث الابتدائي</option>
+                    <option value="الصف الثاني الابتدائي">الصف الثاني الابتدائي</option>
+                    <option value="الصف الأول الابتدائي">الصف الأول الابتدائي</option>
                 </select>
 
                 <label style="display: block; font-size: 0.84rem; color: var(--text-muted); margin-bottom: 4px;">اسم المجموعة والمقر (السنتر / القاعة / أونلاين):</label>
