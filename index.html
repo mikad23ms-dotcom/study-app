@@ -1479,14 +1479,97 @@
 
             <!-- Admin Page -->
             <section id="admin" class="page">
-                <header>
-                    <h1>غرفة الإدارة والمراقبة 🕵️‍♀️</h1>
-                    <button class="btn btn-primary" onclick="loadAdminData()"><i class="fa-solid fa-rotate"></i> تحديث البيانات</button>
+                <header style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 20px;">
+                    <div>
+                        <h1 style="margin: 0; font-size: 1.8rem; color: #00e5ff; display: flex; align-items: center; gap: 10px;">
+                            <i class="fa-solid fa-shield-halved"></i> غرفة المراقبة والتحكم الشاملة 🕵️‍♀️
+                        </h1>
+                        <p style="margin: 5px 0 0 0; color: var(--text-muted); font-size: 0.95rem;">
+                            رصد مباشر لكل طالب ومدرس، تسجيل الجلسات والدخول، وكل ميزة ومحتوى مضاف بدقة 100%
+                        </p>
+                    </div>
+                    <button class="btn btn-primary" onclick="loadAdminData()" style="padding: 10px 20px; font-weight: bold; border-radius: 12px; display: flex; align-items: center; gap: 8px;">
+                        <i class="fa-solid fa-rotate"></i> تحديث فوري للبيانات
+                    </button>
                 </header>
-                <div class="alert alert-warning">
-                    هنا تظهر خطط ومهام الأصدقاء الذين يستخدمون التطبيق.
+
+                <!-- Admin KPI Summary Grid -->
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 15px; margin-bottom: 25px;">
+                    <!-- Total Users -->
+                    <div class="card hover-glow-box" style="margin: 0; padding: 16px; border-radius: 16px; border: 1px solid rgba(0, 229, 255, 0.25); background: linear-gradient(145deg, rgba(15, 23, 42, 0.85), rgba(30, 41, 59, 0.7));">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                            <span style="font-size: 0.9rem; color: var(--text-muted); font-weight: bold;">إجمالي المستخدمين</span>
+                            <i class="fa-solid fa-users" style="color: #00e5ff; font-size: 1.3rem;"></i>
+                        </div>
+                        <div id="admin-kpi-total" style="font-size: 1.8rem; font-weight: 900; color: #fff;">0</div>
+                        <div id="admin-kpi-sub-total" style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">0 طالب • 0 مدرس</div>
+                    </div>
+
+                    <!-- Active Today -->
+                    <div class="card hover-glow-box" style="margin: 0; padding: 16px; border-radius: 16px; border: 1px solid rgba(46, 213, 115, 0.25); background: linear-gradient(145deg, rgba(15, 23, 42, 0.85), rgba(30, 41, 59, 0.7));">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                            <span style="font-size: 0.9rem; color: var(--text-muted); font-weight: bold;">النشطون اليوم</span>
+                            <div class="admin-online-dot"></div>
+                        </div>
+                        <div id="admin-kpi-active" style="font-size: 1.8rem; font-weight: 900; color: #2ed573;">0</div>
+                        <div id="admin-kpi-sub-active" style="font-size: 0.8rem; color: #2ed573; margin-top: 4px;">فتحوا التطبيق خلال 24 ساعة</div>
+                    </div>
+
+                    <!-- Platform Distribution -->
+                    <div class="card hover-glow-box" style="margin: 0; padding: 16px; border-radius: 16px; border: 1px solid rgba(255, 165, 2, 0.25); background: linear-gradient(145deg, rgba(15, 23, 42, 0.85), rgba(30, 41, 59, 0.7));">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                            <span style="font-size: 0.9rem; color: var(--text-muted); font-weight: bold;">المنصات والأجهزة</span>
+                            <i class="fa-solid fa-mobile-screen" style="color: #ffa502; font-size: 1.3rem;"></i>
+                        </div>
+                        <div id="admin-kpi-platforms" style="font-size: 1.25rem; font-weight: 800; color: #fff;">0 أندرويد • 0 ويب</div>
+                        <div id="admin-kpi-sub-platforms" style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">تطبيق أندرويد APK vs متصفحات</div>
+                    </div>
+
+                    <!-- Content Created -->
+                    <div class="card hover-glow-box" style="margin: 0; padding: 16px; border-radius: 16px; border: 1px solid rgba(156, 39, 176, 0.25); background: linear-gradient(145deg, rgba(15, 23, 42, 0.85), rgba(30, 41, 59, 0.7));">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                            <span style="font-size: 0.9rem; color: var(--text-muted); font-weight: bold;">إجمالي المحتوى المضاف</span>
+                            <i class="fa-solid fa-layer-group" style="color: #c084fc; font-size: 1.3rem;"></i>
+                        </div>
+                        <div id="admin-kpi-content-count" style="font-size: 1.8rem; font-weight: 900; color: #c084fc;">0</div>
+                        <div id="admin-kpi-sub-content" style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">مهام • مواد • امتحانات • بطاقات</div>
+                    </div>
                 </div>
-                <div id="admin-content" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px;">
+
+                <!-- Search and Filters Bar -->
+                <div class="card" style="margin: 0 0 20px 0; padding: 16px; border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.08); background: rgba(15, 23, 42, 0.6);">
+                    <div style="display: flex; gap: 12px; flex-wrap: wrap; align-items: center; margin-bottom: 14px;">
+                        <div style="flex: 1; min-width: 260px; position: relative;">
+                            <i class="fa-solid fa-magnifying-glass" style="position: absolute; right: 14px; top: 50%; transform: translateY(-50%); color: var(--text-muted);"></i>
+                            <input type="text" id="admin-search-input" placeholder="ابحث باسم الطالب، المرحلة، الشعبة، أو الكود..." oninput="filterAdminUsers()" style="width: 100%; padding: 11px 40px 11px 14px; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.15); background: rgba(0, 0, 0, 0.25); color: var(--text-main); font-family: 'Tajawal', sans-serif; font-size: 0.95rem;">
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <span style="font-size: 0.85rem; color: var(--text-muted); font-weight: bold;"><i class="fa-solid fa-arrow-down-wide-short"></i> ترتيب:</span>
+                            <select id="admin-sort-select" onchange="filterAdminUsers()" style="padding: 10px 14px; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.15); background: rgba(15, 23, 42, 0.9); color: var(--text-main); font-family: 'Tajawal', sans-serif; font-size: 0.88rem; cursor: pointer;">
+                                <option value="latest">الأحدث دخولاً ونشاطاً</option>
+                                <option value="xp">الأعلى نقاطاً (XP)</option>
+                                <option value="tasks">الأكثر مهام مذاكرة</option>
+                                <option value="logins">الأكثر تسجيلاً للدخول</option>
+                                <option value="name">أبجدياً (أ - ي)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Filter Chips -->
+                    <div id="admin-filter-chips" style="display: flex; flex-wrap: wrap; gap: 8px;">
+                        <button type="button" class="admin-chip active" data-filter="all" onclick="setAdminFilter('all')">الكل 🌐</button>
+                        <button type="button" class="admin-chip" data-filter="activeToday" onclick="setAdminFilter('activeToday')">🟢 نشط اليوم</button>
+                        <button type="button" class="admin-chip" data-filter="apk" onclick="setAdminFilter('apk')">📱 تطبيق أندرويد (APK)</button>
+                        <button type="button" class="admin-chip" data-filter="web" onclick="setAdminFilter('web')">🌐 متصفح ويب</button>
+                        <button type="button" class="admin-chip" data-filter="stage3" onclick="setAdminFilter('stage3')">🎓 تالتة ثانوي</button>
+                        <button type="button" class="admin-chip" data-filter="stage12" onclick="setAdminFilter('stage12')">🏫 أولى وتانية ثانوي</button>
+                        <button type="button" class="admin-chip" data-filter="prep" onclick="setAdminFilter('prep')">🎒 إعدادي</button>
+                        <button type="button" class="admin-chip" data-filter="uni" onclick="setAdminFilter('uni')">🎓 جامعة</button>
+                        <button type="button" class="admin-chip" data-filter="teachers" onclick="setAdminFilter('teachers')">👨‍🏫 مدرسين</button>
+                    </div>
+                </div>
+
+                <div id="admin-content" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px;">
                     <!-- User cards will load here -->
                 </div>
             </section>
@@ -2648,23 +2731,11 @@
 
     <!-- Admin User Details Modal -->
     <div id="admin-user-modal" class="modal">
-        <div class="modal-content" style="max-width: 600px; max-height: 90vh; overflow-y: auto;">
+        <div class="modal-content" style="max-width: 780px; max-height: 92vh; overflow-y: auto; padding: 25px; border-radius: 20px; border: 1.5px solid rgba(0, 229, 255, 0.3); background: var(--card-bg);">
             <span class="close" onclick="closeModal('admin-user-modal')">&times;</span>
-            
-            <div style="display: flex; align-items: center; gap: 15px; border-bottom: 2px solid var(--border-color); padding-bottom: 15px; margin-bottom: 15px;">
-                <i class="fa-solid fa-user-graduate" style="font-size: 3rem; color: var(--primary-color);"></i>
-                <div>
-                    <h2 id="admin-modal-name" style="margin: 0; color: var(--primary-color);">اسم الطالب</h2>
-                    <span id="admin-modal-stage" style="color: var(--text-muted); font-size: 0.9rem;">المرحلة</span>
-                    <br><small id="admin-modal-lastseen" style="color: var(--orange);"></small>
-                </div>
+            <div id="admin-modal-body">
+                <!-- Dynamic comprehensive student dossier renders here -->
             </div>
-            
-            <h3 style="margin-bottom:10px;"><i class="fa-solid fa-list-check text-success"></i> مهام المذاكرة (To-Do)</h3>
-            <div id="admin-modal-tasks" style="background: var(--bg-color); padding: 15px; border-radius: 8px; margin-top: 20px; bottom: auto; border: 1px solid var(--border-color);"></div>
-            
-            <h3 style="margin-bottom:10px;"><i class="fa-solid fa-calendar-week text-blue"></i> جدول الدروس</h3>
-            <div id="admin-modal-classes" style="background: var(--bg-color); padding: 15px; border-radius: 8px; border: 1px solid var(--border-color);"></div>
         </div>
     </div>
     
