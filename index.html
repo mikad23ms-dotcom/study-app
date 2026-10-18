@@ -319,6 +319,7 @@
                 <li data-page="notifications-settings"><i class="fa-solid fa-bell" style="color: #feca57;"></i> الإشعارات الذكية 🔔</li>
                 <li data-page="challenges"><i class="fa-solid fa-gamepad" style="color: var(--primary-color);"></i> تحديات المذاكرة 🎮</li>
                 <li data-page="comments-wall"><i class="fa-solid fa-comments" style="color: var(--primary-color);"></i> كلمة تشجعني ✨</li>
+                <li onclick="switchAppRole('teacher'); toggleSidebar();" style="cursor: pointer; background: linear-gradient(135deg, rgba(255, 165, 2, 0.15), rgba(255, 71, 87, 0.1)); border-radius: 8px; margin-top: 5px; border: 1px dashed rgba(255, 165, 2, 0.5); color: #ffa502; font-weight: bold;"><i class="fa-solid fa-chalkboard-user" style="color: #ffa502;"></i> منصة ووضع المعلم 👨‍🏫 <span style="background: #ffa502; color: #020d1a; font-size: 0.65rem; padding: 2px 6px; border-radius: 8px; font-weight: 800; margin-right: 4px;">جديد ✨</span></li>
                 <li onclick="openWhatsNew()" style="cursor: pointer; background: rgba(0, 229, 255, 0.08); border-radius: 8px; margin-top: 5px;"><i class="fa-solid fa-bullhorn" style="color: #00e5ff;"></i> مميزات التحديث الجديد 🚀</li>
                 <li onclick="openDataTransferModal()" style="cursor: pointer; background: rgba(46, 213, 115, 0.1); border-radius: 8px; margin-top: 5px;"><i class="fa-solid fa-arrows-rotate" style="color: #2ed573;"></i> نقل ونسخ البيانات 📲</li>
                 <li onclick="installPwaApp(); toggleSidebar();" style="cursor: pointer; background: rgba(0, 229, 255, 0.12); border-radius: 8px; margin-top: 5px; border: 1px solid rgba(0, 229, 255, 0.3);"><i class="fa-solid fa-mobile-screen-button" style="color: #00e5ff;"></i> تثبيت التطبيق على هاتفك (آمن 100%) 📲</li>
@@ -328,6 +329,7 @@
             <!-- Dedicated Teacher Sidebar Links (Shown ONLY when logged in as teacher) -->
             <ul class="nav-links" id="teacher-nav-links" style="display: none;">
                 <li class="active" onclick="switchPage('teacher-dashboard'); switchTeacherTab('overview'); toggleSidebar();"><i class="fa-solid fa-chart-pie" style="color: #ffa502;"></i> لوحة المعلم الرئيسية</li>
+                <li onclick="switchPage('teacher-dashboard'); switchTeacherTab('schedule'); toggleSidebar();"><i class="fa-solid fa-calendar-days" style="color: #f59e0b;"></i> جدول مواعيد الحصص 🗓️✨</li>
                 <li onclick="switchPage('teacher-dashboard'); switchTeacherTab('exams'); toggleSidebar();"><i class="fa-solid fa-file-signature" style="color: #00e5ff;"></i> صانع الامتحانات بالـ AI 📄✨</li>
                 <li onclick="switchPage('teacher-dashboard'); switchTeacherTab('attendance'); toggleSidebar();"><i class="fa-solid fa-users-rectangle" style="color: #2ed573;"></i> دفتر الحضور والدرجات 📲</li>
                 <li onclick="switchPage('teacher-dashboard'); switchTeacherTab('library'); toggleSidebar();"><i class="fa-solid fa-book-bookmark" style="color: #e056fd;"></i> بنك الملازم والوزارة 📚</li>
@@ -412,6 +414,10 @@
                     </p>
                 </div>
                 <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                    <button onclick="openTeacherGuideModal()" class="btn btn-hover-glow" style="background: linear-gradient(135deg, rgba(255, 165, 2, 0.2), rgba(255, 71, 87, 0.15)); color: #ffa502; border: 1.5px solid #ffa502; font-weight: 800; font-size: 0.84rem; padding: 8px 14px; border-radius: 12px; cursor: pointer; display: flex; align-items: center; gap: 6px; box-shadow: 0 4px 15px rgba(255, 165, 2, 0.25);">
+                        <i class="fa-solid fa-circle-play" style="font-size: 1rem;"></i>
+                        <span>دليل المعلم في دقيقة 💡</span>
+                    </button>
                     <!-- Teacher Code Badge -->
                     <div style="background: rgba(255, 165, 2, 0.15); border: 1.5px solid #ffa502; border-radius: 12px; padding: 7px 14px; display: flex; align-items: center; gap: 8px; cursor: pointer;" onclick="copyTeacherCode()" title="اضغط لنسخ الكود">
                         <span style="font-size: 0.78rem; color: #ffa502; font-weight: 700;">كودك للطلاب:</span>
@@ -434,6 +440,9 @@
                 <button class="teacher-tab-btn active" id="ttab-overview" onclick="switchTeacherTab('overview', this)">
                     <i class="fa-solid fa-chart-pie"></i> لوحة المتابعة
                 </button>
+                <button class="teacher-tab-btn" id="ttab-schedule" onclick="switchTeacherTab('schedule', this)">
+                    <i class="fa-solid fa-calendar-days" style="color: #f59e0b;"></i> جدول مواعيد الحصص 🗓️✨
+                </button>
                 <button class="teacher-tab-btn" id="ttab-exams" onclick="switchTeacherTab('exams', this)">
                     <i class="fa-solid fa-file-signature text-blue"></i> صانع الامتحانات (AI + PDF) 📄✨
                 </button>
@@ -452,6 +461,23 @@
             <!-- PANE 1: OVERVIEW & ROSTER -->
             <!-- ============================================== -->
             <div id="teacher-pane-overview" class="teacher-pane active">
+                <!-- Quick Teacher Onboarding Callout Banner -->
+                <div style="background: linear-gradient(135deg, rgba(255, 165, 2, 0.12), rgba(0, 229, 255, 0.08)); border: 1.5px solid rgba(255, 165, 2, 0.35); border-radius: 16px; padding: 14px 18px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <span style="font-size: 1.8rem;">💡</span>
+                        <div>
+                            <strong style="color: #ffa502; font-size: 1rem; display: block;">أهلاً بك يا أستاذنا! كيف يوفر هذا التطبيق ساعات من وقتك؟</strong>
+                            <p style="margin: 3px 0 0; color: #cbd5e1; font-size: 0.84rem;">
+                                1️⃣ ولّد امتحاناتك بالـ AI واطبعها بضغطة زر • 2️⃣ رصد غياب وواجب ودرجات بلمسة • 3️⃣ أرسل تقارير وشهادات تقدير فورية لأولياء الأمور
+                            </p>
+                        </div>
+                    </div>
+                    <button onclick="openTeacherGuideModal()" class="btn" style="background: #ffa502; color: #020d1a; font-weight: 800; font-size: 0.84rem; padding: 8px 16px; border-radius: 10px; border: none; cursor: pointer; display: flex; align-items: center; gap: 6px;">
+                        <i class="fa-solid fa-book-open"></i>
+                        <span>عرض الشرح السريع 📖</span>
+                    </button>
+                </div>
+
                 <!-- 4 KPI Cards -->
                 <div class="dash-kpi-bar" style="margin-bottom: 20px;">
                     <div class="dash-kpi-chip" style="cursor: default;">
@@ -484,18 +510,37 @@
                     </div>
                 </div>
 
+                <!-- Today's Schedule Banner -->
+                <div class="card hover-glow-box" style="background: linear-gradient(135deg, rgba(245, 158, 11, 0.12), rgba(217, 119, 6, 0.05)); border: 1.5px solid rgba(245, 158, 11, 0.4); border-radius: 16px; padding: 1.2rem; margin-bottom: 20px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 10px;">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <span style="font-size: 1.8rem;">🗓️📍</span>
+                            <div>
+                                <h3 id="today-teacher-schedule-title" style="margin: 0; color: #fbbf24; font-size: 1.15rem; border: none; padding: 0;">حصص اليوم (جاري التحميل...)</h3>
+                                <span id="today-teacher-schedule-sub" style="color: #cbd5e1; font-size: 0.84rem;">مواعيدك ومقرات الشرح المجدولة لهذا اليوم</span>
+                            </div>
+                        </div>
+                        <button onclick="switchTeacherTab('schedule')" class="btn" style="background: #ffa502; color: #020d1a; font-weight: 800; font-size: 0.84rem; padding: 7px 14px; border-radius: 9px; border: none; cursor: pointer;">
+                            عرض وتعديل جدول الأسبوع 🗓️
+                        </button>
+                    </div>
+                    <div id="today-teacher-sessions-list" style="display: flex; flex-direction: column; gap: 8px;">
+                        <!-- Injected by updateTodayTeacherScheduleWidget -->
+                    </div>
+                </div>
+
                 <!-- 2 Action Callout Cards -->
                 <div class="dash-interactive-grid" style="margin-bottom: 25px;">
                     <div class="card hover-glow-box" style="background: linear-gradient(135deg, rgba(0, 229, 255, 0.12), rgba(0, 184, 204, 0.05)); border: 1.5px solid #00e5ff; border-radius: 16px; padding: 1.3rem;">
                         <div style="display: flex; gap: 12px; align-items: center; margin-bottom: 10px;">
                             <span style="font-size: 2rem;">📄✨</span>
                             <div>
-                                <h3 style="margin: 0; color: #00e5ff; font-size: 1.15rem; border: none; padding: 0;">مولّد الامتحانات الفوري بالذكاء الاصطناعي</h3>
-                                <p style="margin: 2px 0 0; color: #cbd5e1; font-size: 0.84rem;">اكتب اسم درسك واطبع امتحان 15 سؤالاً بنموذج الإجابة وعلامتك المائية في 5 ثواني!</p>
+                                <h3 style="margin: 0; color: #00e5ff; font-size: 1.15rem; border: none; padding: 0;">صانع الامتحانات والمذكرات (في 3 خطوات سريعة)</h3>
+                                <p style="margin: 2px 0 0; color: #cbd5e1; font-size: 0.84rem;">1️⃣ اختر مادتك وصفك • 2️⃣ اكتب عنوان درسك • 3️⃣ اضغط توليد واطبع امتحان الوزارة A4 بعلامتك المائية في 5 ثواني!</p>
                             </div>
                         </div>
                         <button onclick="switchTeacherTab('exams')" class="btn btn-primary" style="width: 100%; font-weight: 800; font-size: 0.92rem; border-radius: 10px;">
-                            <i class="fa-solid fa-wand-magic-sparkles"></i> إنشاء امتحان جديد الآن
+                            <i class="fa-solid fa-wand-magic-sparkles"></i> إنشاء امتحان جديد الآن ⚡
                         </button>
                     </div>
 
@@ -549,6 +594,12 @@
                         </div>
                     </div>
 
+                    <!-- Quick Guidance Box -->
+                    <div style="background: rgba(0, 229, 255, 0.06); border: 1px dashed rgba(0, 229, 255, 0.3); border-radius: 12px; padding: 10px 14px; margin-bottom: 18px; font-size: 0.84rem; color: #cbd5e1; display: flex; align-items: center; gap: 10px;">
+                        <span style="font-size: 1.3rem;">💡</span>
+                        <span><strong>كيف توفر وقتك هنا؟</strong> اكتب عنوان الدرس ومرحلتك واضغط (توليد الامتحان). ستحصل على امتحان مطابق لمواصفات المركز القومي للامتحانات مع نموذج الإجابة وعلامتك المائية، جاهز للطباعة فوراً A4 أو النسخ لبرنامج Word!</span>
+                    </div>
+
                     <!-- Exam Configuration Form -->
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin-bottom: 16px;">
                         <div>
@@ -599,7 +650,7 @@
                         </div>
                         <div>
                             <label style="font-size: 0.82rem; color: #ffa502; font-weight: bold; display: block; margin-bottom: 4px;">رقم هاتفك / اسم السنتر (للتواصل):</label>
-                            <input type="text" id="texam-phone" class="search-input" placeholder="010xxxxxxxx أو سنتر الأوائل..." style="width: 100%; font-size: 0.88rem;">
+                            <input type="text" id="texam-phone" class="search-input" placeholder="010xxxxxxxx أو رقم للتواصل..." style="width: 100%; font-size: 0.88rem;">
                         </div>
                     </div>
 
@@ -644,18 +695,18 @@
                         <div style="border-bottom: 2px solid #000; padding-bottom: 12px; margin-bottom: 18px; display: flex; justify-content: space-between; align-items: center; font-family: 'Tajawal', sans-serif;">
                             <div style="text-align: right;">
                                 <div style="font-weight: 900; font-size: 1.15rem; color: #000;" id="exam-print-school">جمهورية مصر العربية - وزارة التربية والتعليم</div>
-                                <div style="font-size: 0.95rem; color: #333;" id="exam-print-stage">الصف الثالث الثانوي</div>
-                                <div style="font-size: 0.95rem; font-weight: bold; color: #000;" id="exam-print-subject">المادة: الفيزياء</div>
+                                <div style="font-size: 0.95rem; color: #333;" id="exam-print-stage">الصف الدراسي</div>
+                                <div style="font-size: 0.95rem; font-weight: bold; color: #000;" id="exam-print-subject">المادة الدراسية</div>
                             </div>
                             <div style="text-align: center;">
                                 <div style="font-size: 1.35rem; font-weight: 900; border: 2px solid #000; padding: 4px 20px; border-radius: 8px; display: inline-block;" id="exam-print-title">
                                     اختبار تقييم أسبوعي
                                 </div>
-                                <div style="font-size: 0.85rem; margin-top: 4px;" id="exam-print-date">التاريخ: 2026/10/18</div>
+                                <div style="font-size: 0.85rem; margin-top: 4px;" id="exam-print-date">التاريخ</div>
                             </div>
                             <div style="text-align: left;">
                                 <div style="font-weight: 800; font-size: 1.05rem;" id="exam-print-teacher">إعداد: أ / معلم المادة</div>
-                                <div style="font-size: 0.85rem;" id="exam-print-phone">هاتف: 010xxxxxxxx</div>
+                                <div style="font-size: 0.85rem;" id="exam-print-phone">هاتف المعلم</div>
                                 <div style="font-size: 0.85rem; font-weight: bold;">الدرجة الكلية: (20 درجة)</div>
                             </div>
                         </div>
@@ -705,27 +756,68 @@
                                 خذ غياب الحصة ورصد درجات التسميع، وأرسل تقرير فوري منسق على واتساب ولي الأمر بنقرة زر واحدة!
                             </p>
                         </div>
-                        <div style="display: flex; gap: 8px;">
-                            <button onclick="openAddStudentModal()" class="btn btn-primary" style="font-weight: bold; font-size: 0.88rem; padding: 8px 16px; border-radius: 10px;">
-                                <i class="fa-solid fa-user-plus"></i> إضافة طالب جديد
+
+                        <!-- Quick Attendance Guidance Tip -->
+                        <div style="background: rgba(46, 213, 115, 0.06); border: 1px dashed rgba(46, 213, 115, 0.3); border-radius: 12px; padding: 10px 14px; margin-bottom: 14px; font-size: 0.84rem; color: #cbd5e1; width: 100%; display: flex; align-items: center; gap: 10px;">
+                            <span style="font-size: 1.3rem;">⚡</span>
+                            <span><strong>طريقة الاستخدام السريعة:</strong> انقر زر <strong>(استيراد سريع 📋)</strong> لإضافة الطلاب دفعة واحدة. أثناء الحصة اضغط على الحضور أو الواجب أو المصروفات لتبديلها بلمسة، ثم اضغط (واتساب) لإرسال التقرير لولي الأمر فوراً! واضغط <strong>(لوحة الشرف 🏆)</strong> لتكريم الأوائل ببوست جاهز للواتساب والفيسبوك!</span>
+                        </div>
+
+                        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                            <button onclick="openAddStudentModal()" class="btn btn-primary" style="font-weight: bold; font-size: 0.88rem; padding: 8px 14px; border-radius: 10px;">
+                                <i class="fa-solid fa-user-plus"></i> إضافة طالب
+                            </button>
+                            <button onclick="openBulkImportModal()" class="btn" style="background: rgba(0, 229, 255, 0.15); color: #00e5ff; border: 1px solid rgba(0, 229, 255, 0.4); font-weight: bold; font-size: 0.84rem; padding: 8px 12px; border-radius: 10px; cursor: pointer;">
+                                <i class="fa-solid fa-file-import"></i> استيراد سريع 📋
+                            </button>
+                            <button onclick="addNewTeacherGroup()" class="btn" style="background: rgba(255, 165, 2, 0.15); color: #ffa502; border: 1px solid rgba(255, 165, 2, 0.4); font-weight: bold; font-size: 0.84rem; padding: 8px 12px; border-radius: 10px; cursor: pointer;">
+                                <i class="fa-solid fa-folder-plus"></i> إضافة مجموعة 📁
+                            </button>
+                            <button onclick="openTeacherTimerModal()" class="btn" style="background: rgba(235, 77, 75, 0.15); color: #eb4d4b; border: 1px solid rgba(235, 77, 75, 0.4); font-weight: bold; font-size: 0.84rem; padding: 8px 12px; border-radius: 10px; cursor: pointer;">
+                                <i class="fa-solid fa-stopwatch"></i> مؤقت الكويز ⏱️
+                            </button>
+                            <button onclick="printTeacherGradebook()" class="btn" style="background: rgba(255,255,255,0.08); color: #fff; border: 1px solid rgba(255,255,255,0.2); font-size: 0.84rem; padding: 8px 12px; border-radius: 10px; cursor: pointer;">
+                                <i class="fa-solid fa-print"></i> كشف A4 🖨️
+                            </button>
+                            <button onclick="exportTeacherGradebookCSV()" class="btn" style="background: rgba(46, 213, 115, 0.15); color: #2ed573; border: 1px solid rgba(46, 213, 115, 0.3); font-size: 0.84rem; padding: 8px 12px; border-radius: 10px; cursor: pointer;">
+                                <i class="fa-solid fa-file-excel"></i> إكسيل 📊
                             </button>
                             <button onclick="sendBulkAbsentWhatsApp()" class="btn" style="background: rgba(239, 68, 68, 0.15); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.4); font-size: 0.84rem; padding: 8px 12px; border-radius: 10px; cursor: pointer;">
-                                <i class="fa-solid fa-bell"></i> تنبيه كل الغائبين 📢
+                                <i class="fa-solid fa-bell"></i> تنبيه الغائبين 📢
+                            </button>
+                            <button onclick="openTeacherHallOfFame()" class="btn" style="background: linear-gradient(135deg, rgba(251, 191, 36, 0.2), rgba(245, 158, 11, 0.15)); color: #fbbf24; border: 1.5px solid #fbbf24; font-weight: bold; font-size: 0.84rem; padding: 8px 12px; border-radius: 10px; cursor: pointer; display: flex; align-items: center; gap: 6px;">
+                                <i class="fa-solid fa-crown"></i> لوحة الشرف 🏆
+                            </button>
+                            <button onclick="openSessionReminderModal()" class="btn" style="background: rgba(0, 229, 255, 0.15); color: #00e5ff; border: 1px solid rgba(0, 229, 255, 0.4); font-weight: bold; font-size: 0.84rem; padding: 8px 12px; border-radius: 10px; cursor: pointer; display: flex; align-items: center; gap: 6px;">
+                                <i class="fa-solid fa-bullhorn"></i> تذكير بالحصة 📢
                             </button>
                         </div>
                     </div>
 
                     <!-- Groups & Date Selector -->
                     <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 18px; background: rgba(255,255,255,0.03); padding: 12px 16px; border-radius: 12px;">
-                        <div style="display: flex; align-items: center; gap: 10px;">
+                        <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                            <label style="color: var(--text-muted); font-size: 0.88rem; font-weight: bold;">الصف الدراسي:</label>
+                            <select id="teacher-stage-select" class="search-input" onchange="renderTeacherGradebook()" style="min-width: 150px;">
+                                <option value="all">كل الصفوف الدراسية</option>
+                                <option value="الصف الثالث الثانوي">3 ثانوي</option>
+                                <option value="الصف الثاني الثانوي">2 ثانوي</option>
+                                <option value="الصف الأول الثانوي">1 ثانوي</option>
+                                <option value="الصف الثالث الإعدادي">3 إعدادي</option>
+                                <option value="الصف الثاني الإعدادي">2 إعدادي</option>
+                                <option value="الصف الأول الإعدادي">1 إعدادي</option>
+                                <option value="مرحلة ابتدائية">المرحلة الابتدائية</option>
+                            </select>
+
                             <label style="color: var(--text-muted); font-size: 0.88rem; font-weight: bold;">المجموعة:</label>
-                            <select id="teacher-group-select" class="search-input" onchange="renderTeacherGradebook()" style="min-width: 200px;">
-                                <option value="default">المجموعة العامة (جميع الطلاب)</option>
-                                <option value="group_sat_tue">مجموعة السبت والثلاثاء (4:00 عصراً)</option>
-                                <option value="group_sun_wed">مجموعة الأحد والأربعاء (6:00 مساءً)</option>
+                            <select id="teacher-group-select" class="search-input" onchange="renderTeacherGradebook()" style="min-width: 170px;">
+                                <option value="all">جميع المجموعات والطلاب</option>
                             </select>
                         </div>
-                        <div style="display: flex; align-items: center; gap: 10px;">
+                        <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                            <span id="teacher-fee-summary-chip" style="background: rgba(46, 213, 115, 0.15); color: #2ed573; border: 1px solid rgba(46, 213, 115, 0.3); padding: 5px 12px; border-radius: 8px; font-weight: bold; font-size: 0.82rem; display: inline-flex; align-items: center; gap: 6px;">
+                                💰 سددوا الشهر: 0/0
+                            </span>
                             <label style="color: var(--text-muted); font-size: 0.88rem; font-weight: bold;">تاريخ الحصة:</label>
                             <input type="date" id="teacher-session-date" class="search-input" style="padding: 6px 12px;">
                         </div>
@@ -739,15 +831,51 @@
                                     <th style="padding: 12px 14px;">اسم الطالب</th>
                                     <th style="padding: 12px 14px;">كود / مقعد</th>
                                     <th style="padding: 12px 14px;">الحضور</th>
+                                    <th style="padding: 12px 14px;">الواجب 📚</th>
+                                    <th style="padding: 12px 14px;">المصروفات 💰</th>
                                     <th style="padding: 12px 14px;">درجة التسميع (من 10)</th>
                                     <th style="padding: 12px 14px;">ملاحظة الحصة</th>
-                                    <th style="padding: 12px 14px; text-align: center;">إجراء ولي الأمر (واتساب)</th>
+                                    <th style="padding: 12px 14px; text-align: center;">إجراء ولي الأمر والشهادة</th>
                                 </tr>
                             </thead>
                             <tbody id="teacher-gradebook-tbody">
                                 <!-- Dynamic Gradebook Rows -->
                             </tbody>
                         </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============================================== -->
+            <!-- PANE: TEACHER WEEKLY SESSIONS SCHEDULE -->
+            <!-- ============================================== -->
+            <div id="teacher-pane-schedule" class="teacher-pane">
+                <div class="card hover-glow-box" style="border-radius: 18px; padding: 1.5rem; margin-bottom: 20px; border: 1.5px solid rgba(245, 158, 11, 0.35);">
+                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; border-bottom: 1px solid rgba(245, 158, 11, 0.2); padding-bottom: 12px; margin-bottom: 16px;">
+                        <div>
+                            <h3 style="margin: 0; color: #fbbf24; font-size: 1.3rem; border: none; padding: 0;">
+                                <i class="fa-solid fa-calendar-days"></i> جدول مواعيد الحصص والسناتر الأسبوعي 🗓️
+                            </h3>
+                            <p style="margin: 4px 0 0; color: var(--text-muted); font-size: 0.86rem;">
+                                نظّم مواعيد مجموعاتك وسناترك لكل صف دراسي، مع إمكانية مشاركة الجدول على واتساب بضغطة زر واحدة!
+                            </p>
+                        </div>
+                        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                            <button onclick="openAddScheduleModal()" class="btn" style="background: #ffa502; color: #020d1a; font-weight: 800; font-size: 0.88rem; padding: 8px 16px; border-radius: 10px; border: none; cursor: pointer; display: flex; align-items: center; gap: 6px;">
+                                <i class="fa-solid fa-plus"></i> إضافة موعد حصة جديد ➕
+                            </button>
+                            <button onclick="shareTeacherScheduleWhatsApp()" class="btn" style="background: #25d366; color: #031024; font-weight: 800; font-size: 0.88rem; padding: 8px 14px; border-radius: 10px; border: none; cursor: pointer; display: flex; align-items: center; gap: 6px;">
+                                <i class="fa-brands fa-whatsapp"></i> مشاركة الجدول على واتساب 📲
+                            </button>
+                            <button onclick="printTeacherSchedule()" class="btn" style="background: rgba(255,255,255,0.08); color: #fff; border: 1px solid rgba(255,255,255,0.2); font-size: 0.84rem; padding: 8px 12px; border-radius: 10px; cursor: pointer;">
+                                <i class="fa-solid fa-print"></i> طباعة A4 🖨️
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Days Grid Container -->
+                    <div id="teacher-schedule-days-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px;">
+                        <!-- Injected dynamically by renderTeacherSchedule -->
                     </div>
                 </div>
             </div>
@@ -794,19 +922,19 @@
                         👨‍🏫
                     </div>
                     <h2 id="tcard-name" style="margin: 0 0 6px 0; color: #fff; font-size: 1.6rem;">أ / معلم المادة</h2>
-                    <p id="tcard-specialty" style="color: #ffa502; font-weight: bold; font-size: 1rem; margin: 0 0 14px 0;">خبير مادة الفيزياء للثانوية العامة</p>
+                    <p id="tcard-specialty" style="color: #ffa502; font-weight: bold; font-size: 1rem; margin: 0 0 14px 0;">خبير المادة الدراسية</p>
                     
                     <div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 14px; padding: 16px; margin-bottom: 18px; text-align: right; line-height: 1.8;">
                         <div><strong style="color: #00e5ff;">كود الانضمام للطلاب:</strong> <span id="tcard-code" style="color: #fff; font-weight: bold;">T-....</span></div>
-                        <div><strong style="color: #2ed573;">المراحل والصفوف:</strong> <span id="tcard-stages">المرحلة الثانوية العامة (أولى، ثانية، ثالثة ثانوي)</span></div>
-                        <div><strong style="color: #ffa502;">السناتر ومقرات الشرح:</strong> <span id="tcard-centers">سنتر الأوائل - سنتر النور - متاح أونلاين عبر المنصة</span></div>
+                        <div><strong style="color: #2ed573;">المراحل والصفوف:</strong> <span id="tcard-stages">المراحل والصفوف الدراسية</span></div>
+                        <div><strong style="color: #ffa502;">السناتر ومقرات الشرح:</strong> <span id="tcard-centers">متاح أونلاين وعبر المراكز التعليمية</span></div>
                     </div>
 
                     <div style="display: flex; gap: 10px; flex-wrap: wrap;">
                         <button onclick="shareTeacherProfileWhatsApp()" class="btn btn-primary" style="flex: 1; font-weight: 800; font-size: 0.95rem; padding: 12px; border-radius: 12px; background: #25d366; color: #020d1a;">
                             <i class="fa-brands fa-whatsapp"></i> مشاركة الكارت ورابط الحجز على واتساب 📲
                         </button>
-                        <button onclick="openModal('edit-teacher-profile-modal')" class="btn" style="background: rgba(255,255,255,0.08); color: #fff; border: 1px solid rgba(255,255,255,0.2); padding: 12px 18px; border-radius: 12px; font-weight: bold;">
+                        <button onclick="openEditTeacherProfileModal()" class="btn" style="background: rgba(255,255,255,0.08); color: #fff; border: 1px solid rgba(255,255,255,0.2); padding: 12px 18px; border-radius: 12px; font-weight: bold;">
                             <i class="fa-solid fa-pen"></i> تعديل بياناتي
                         </button>
                     </div>
@@ -831,6 +959,32 @@
                         </button>
                     </div>
                 </header>
+
+                <!-- Teacher Suite Discovery Banner for Previously Registered Users -->
+                <div id="teacher-discovery-banner" style="display: none; background: linear-gradient(135deg, rgba(255, 165, 2, 0.16), rgba(255, 71, 87, 0.1)); border: 1.5px solid rgba(255, 165, 2, 0.45); border-radius: 16px; padding: 14px 18px; margin-bottom: 1.2rem; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; box-shadow: 0 4px 20px rgba(255, 165, 2, 0.15);">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <div style="background: rgba(255, 165, 2, 0.2); width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; flex-shrink: 0;">
+                            👨‍🏫
+                        </div>
+                        <div>
+                            <div style="display: flex; align-items: center; gap: 8px;">
+                                <strong style="color: #ffa502; font-size: 1.05rem;">هل أنت معلم أو تدير مجموعات وسناتر؟ 🚀</strong>
+                                <span style="background: #ffa502; color: #020d1a; font-size: 0.7rem; font-weight: 800; padding: 2px 8px; border-radius: 8px;">جديد وحصري</span>
+                            </div>
+                            <p style="margin: 4px 0 0; color: #cbd5e1; font-size: 0.86rem; line-height: 1.5;">
+                                تم تدشين <strong>منصة المعلم الذكية</strong> المستقلة! صانع امتحانات فوري بالـ AI مع نموذج الإجابة، دفتر غياب وواجب ودرجات بلمسة واحدة، ورسائل واتساب رسمية لأولياء الأمور.
+                            </p>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 8px; align-items: center;">
+                        <button onclick="switchAppRole('teacher')" class="btn" style="background: #ffa502; color: #020d1a; font-weight: 800; font-size: 0.85rem; padding: 9px 18px; border-radius: 10px; border: none; cursor: pointer; display: flex; align-items: center; gap: 6px;">
+                            <span>الانتقال لمنصة المعلم 👨‍🏫</span>
+                        </button>
+                        <button onclick="dismissTeacherDiscoveryBanner()" title="إخفاء الإشعار" style="background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); color: #94a3b8; border-radius: 10px; cursor: pointer; font-size: 0.95rem; padding: 8px 12px;">
+                            تخطي ✕
+                        </button>
+                    </div>
+                </div>
 
                 <!-- ⚡ Top Daily Status Chips (Sleek Glassmorphism KPI Bar) -->
                 <div class="dash-kpi-bar" id="dash-kpi-bar">
@@ -2035,107 +2189,282 @@
                 </div>
             </section>
 
-            <!-- Admin Page -->
+            <!-- Admin Surveillance Base Page (قاعدة المراقبة والإشراف الشاملة) -->
             <section id="admin" class="page">
-                <header style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 20px;">
+                <header style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; border-bottom: 2px solid rgba(0, 229, 255, 0.2); padding-bottom: 16px;">
                     <div>
-                        <h1 style="margin: 0; font-size: 1.8rem; color: #00e5ff; display: flex; align-items: center; gap: 10px;">
-                            <i class="fa-solid fa-shield-halved"></i> غرفة المراقبة والتحكم الشاملة 🕵️‍♀️
-                        </h1>
-                        <p style="margin: 5px 0 0 0; color: var(--text-muted); font-size: 0.95rem;">
-                            رصد مباشر لكل طالب ومدرس، تسجيل الجلسات والدخول، وكل ميزة ومحتوى مضاف بدقة 100%
-                        </p>
+                        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 4px;">
+                            <span style="font-size: 2.2rem;">🛡️👁️</span>
+                            <div>
+                                <h1 style="margin: 0; font-size: 1.7rem; color: #00e5ff; font-weight: 900; display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                                    قاعدة المراقبة والإشراف الذكية
+                                    <span style="font-size: 0.75rem; background: rgba(0, 229, 255, 0.2); color: #00e5ff; border: 1px solid #00e5ff; padding: 2px 10px; border-radius: 12px; font-weight: 800;">
+                                        تحكم المهندسة ملاك عادل 👑
+                                    </span>
+                                </h1>
+                                <p style="margin: 4px 0 0 0; color: #cbd5e1; font-size: 0.88rem;">
+                                    رصد تفصيلي ولحظي لكل ميزة ينفذها المعلمون والطلاب مع فصل كامل لبيانات كل طرف بدقة 100%
+                                </p>
+                            </div>
+                        </div>
                     </div>
-                    <button class="btn btn-primary" onclick="loadAdminData()" style="padding: 10px 20px; font-weight: bold; border-radius: 12px; display: flex; align-items: center; gap: 8px;">
-                        <i class="fa-solid fa-rotate"></i> تحديث فوري للبيانات
-                    </button>
+                    <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                        <button class="btn" onclick="exportSurveillanceLogsCSV()" style="background: rgba(46, 213, 115, 0.2); color: #2ed573; border: 1.5px solid #2ed573; font-weight: 800; font-size: 0.85rem; padding: 8px 14px; border-radius: 10px; cursor: pointer; display: flex; align-items: center; gap: 6px;">
+                            <i class="fa-solid fa-file-excel"></i> تصدير السجل Excel 📊
+                        </button>
+                        <button class="btn" onclick="printSurveillanceReport()" style="background: rgba(255, 255, 255, 0.08); color: #fff; border: 1px solid rgba(255, 255, 255, 0.2); font-size: 0.85rem; padding: 8px 12px; border-radius: 10px; cursor: pointer; display: flex; align-items: center; gap: 6px;">
+                            <i class="fa-solid fa-print"></i> طباعة A4 🖨️
+                        </button>
+                        <button class="btn" onclick="clearSurveillanceLogs()" style="background: rgba(239, 68, 68, 0.15); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.3); font-size: 0.82rem; padding: 8px 12px; border-radius: 10px; cursor: pointer; display: flex; align-items: center; gap: 5px;">
+                            <i class="fa-solid fa-trash-can"></i> تفريغ السجل
+                        </button>
+                        <button class="btn btn-primary" onclick="refreshSurveillanceBase()" style="padding: 8px 14px; font-weight: bold; border-radius: 10px; font-size: 0.85rem; display: flex; align-items: center; gap: 6px;">
+                            <i class="fa-solid fa-rotate"></i> تحديث فوري 🔄
+                        </button>
+                        <button class="btn" onclick="exitSurveillanceBase()" style="background: rgba(255, 255, 255, 0.05); color: #94a3b8; border: 1px solid rgba(255, 255, 255, 0.15); font-size: 0.82rem; padding: 8px 12px; border-radius: 10px; cursor: pointer;">
+                            <i class="fa-solid fa-lock"></i> خروج وقفل 🔒
+                        </button>
+                    </div>
                 </header>
 
-                <!-- Admin KPI Summary Grid -->
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 15px; margin-bottom: 25px;">
-                    <!-- Total Users -->
-                    <div class="card hover-glow-box" style="margin: 0; padding: 16px; border-radius: 16px; border: 1px solid rgba(0, 229, 255, 0.25); background: linear-gradient(145deg, rgba(15, 23, 42, 0.85), rgba(30, 41, 59, 0.7));">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                            <span style="font-size: 0.9rem; color: var(--text-muted); font-weight: bold;">إجمالي المستخدمين</span>
-                            <i class="fa-solid fa-users" style="color: #00e5ff; font-size: 1.3rem;"></i>
+                <!-- Navigation Tabs between Teachers and Students -->
+                <div class="teacher-tabs-bar" style="margin-bottom: 20px;">
+                    <button class="teacher-tab-btn active" id="surv-tab-teachers" onclick="switchSurveillanceTab('teachers', this)" style="border-bottom: 3px solid #ffa502;">
+                        <i class="fa-solid fa-chalkboard-user" style="color: #ffa502;"></i> 👨‍🏫 سجل رقابة المعلمين بالتفصيل (Teacher Stream)
+                    </button>
+                    <button class="teacher-tab-btn" id="surv-tab-students" onclick="switchSurveillanceTab('students', this)">
+                        <i class="fa-solid fa-user-graduate" style="color: #00e5ff;"></i> 🎓 سجل رقابة الطلاب (Student Stream)
+                    </button>
+                    <button class="teacher-tab-btn" id="surv-tab-directory" onclick="switchSurveillanceTab('directory', this)">
+                        <i class="fa-solid fa-address-book" style="color: #c084fc;"></i> 👥 دليل الحسابات وقاعدة البيانات
+                    </button>
+                    <button class="teacher-tab-btn" id="surv-tab-analytics" onclick="switchSurveillanceTab('analytics', this)">
+                        <i class="fa-solid fa-chart-line" style="color: #2ed573;"></i> 📊 مقارنات وتحليلات المنظومة
+                    </button>
+                </div>
+
+                <!-- ============================================== -->
+                <!-- PANE 1: TEACHER SURVEILLANCE STREAM -->
+                <!-- ============================================== -->
+                <div id="surv-pane-teachers" class="surv-pane" style="display: block;">
+                    <!-- Teacher KPIs -->
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-bottom: 20px;">
+                        <div class="card hover-glow-box" style="margin: 0; padding: 14px; border-radius: 14px; border: 1.5px solid rgba(255, 165, 2, 0.4); background: linear-gradient(135deg, rgba(255, 165, 2, 0.12), rgba(15, 23, 42, 0.85));">
+                            <div style="font-size: 0.78rem; color: var(--text-muted); font-weight: bold;">إجمالي عمليات المعلمين</div>
+                            <div id="surv-kpi-teacher-total" style="font-size: 1.8rem; font-weight: 900; color: #ffa502;">0</div>
+                            <div style="font-size: 0.72rem; color: #cbd5e1; margin-top: 3px;">رصد لكل ميزة تم استخدامها</div>
                         </div>
-                        <div id="admin-kpi-total" style="font-size: 1.8rem; font-weight: 900; color: #fff;">0</div>
-                        <div id="admin-kpi-sub-total" style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">0 طالب • 0 مدرس</div>
+                        <div class="card hover-glow-box" style="margin: 0; padding: 14px; border-radius: 14px; border: 1.5px solid rgba(0, 229, 255, 0.4); background: linear-gradient(135deg, rgba(0, 229, 255, 0.12), rgba(15, 23, 42, 0.85));">
+                            <div style="font-size: 0.78rem; color: var(--text-muted); font-weight: bold;">الامتحانات المولدة بالـ AI</div>
+                            <div id="surv-kpi-teacher-exams" style="font-size: 1.8rem; font-weight: 900; color: #00e5ff;">0</div>
+                            <div style="font-size: 0.72rem; color: #cbd5e1; margin-top: 3px;">امتحانات كويز وشهرية ومذكرات</div>
+                        </div>
+                        <div class="card hover-glow-box" style="margin: 0; padding: 14px; border-radius: 14px; border: 1.5px solid rgba(46, 213, 115, 0.4); background: linear-gradient(135deg, rgba(46, 213, 115, 0.12), rgba(15, 23, 42, 0.85));">
+                            <div style="font-size: 0.78rem; color: var(--text-muted); font-weight: bold;">تسجيلات الحضور والتسميع</div>
+                            <div id="surv-kpi-teacher-attendance" style="font-size: 1.8rem; font-weight: 900; color: #2ed573;">0</div>
+                            <div style="font-size: 0.72rem; color: #cbd5e1; margin-top: 3px;">حضور وغياب ورصد درجات</div>
+                        </div>
+                        <div class="card hover-glow-box" style="margin: 0; padding: 14px; border-radius: 14px; border: 1.5px solid rgba(37, 211, 102, 0.4); background: linear-gradient(135deg, rgba(37, 211, 102, 0.12), rgba(15, 23, 42, 0.85));">
+                            <div style="font-size: 0.78rem; color: var(--text-muted); font-weight: bold;">رسائل واتساب المرسلة</div>
+                            <div id="surv-kpi-teacher-wa" style="font-size: 1.8rem; font-weight: 900; color: #25d366;">0</div>
+                            <div style="font-size: 0.72rem; color: #cbd5e1; margin-top: 3px;">تقارير أولياء أمور وتذكيرات</div>
+                        </div>
+                        <div class="card hover-glow-box" style="margin: 0; padding: 14px; border-radius: 14px; border: 1.5px solid rgba(245, 158, 11, 0.4); background: linear-gradient(135deg, rgba(245, 158, 11, 0.12), rgba(15, 23, 42, 0.85));">
+                            <div style="font-size: 0.78rem; color: var(--text-muted); font-weight: bold;">حصص ومواعيد الجداول</div>
+                            <div id="surv-kpi-teacher-schedule" style="font-size: 1.8rem; font-weight: 900; color: #fbbf24;">0</div>
+                            <div style="font-size: 0.72rem; color: #cbd5e1; margin-top: 3px;">مواعيد وسناتر مسجلة</div>
+                        </div>
                     </div>
 
-                    <!-- Active Today -->
-                    <div class="card hover-glow-box" style="margin: 0; padding: 16px; border-radius: 16px; border: 1px solid rgba(46, 213, 115, 0.25); background: linear-gradient(145deg, rgba(15, 23, 42, 0.85), rgba(30, 41, 59, 0.7));">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                            <span style="font-size: 0.9rem; color: var(--text-muted); font-weight: bold;">النشطون اليوم</span>
-                            <div class="admin-online-dot"></div>
+                    <!-- Teacher Feature Filter Bar & Search -->
+                    <div class="card" style="margin-bottom: 20px; padding: 16px; border-radius: 16px; border: 1px solid rgba(255, 165, 2, 0.25); background: rgba(15, 23, 42, 0.7);">
+                        <div style="display: flex; gap: 12px; flex-wrap: wrap; align-items: center; margin-bottom: 12px;">
+                            <div style="flex: 1; min-width: 260px; position: relative;">
+                                <i class="fa-solid fa-magnifying-glass" style="position: absolute; right: 14px; top: 50%; transform: translateY(-50%); color: var(--text-muted);"></i>
+                                <input type="text" id="surv-teacher-search" placeholder="ابحث في عمليات المعلم (اسم المدرس، الطالب، الدرس، السنتر، التاريخ...)" oninput="filterSurveillanceTeacherStream()" style="width: 100%; padding: 11px 40px 11px 14px; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.15); background: rgba(0, 0, 0, 0.25); color: #fff; font-family: 'Tajawal', sans-serif; font-size: 0.95rem;">
+                            </div>
                         </div>
-                        <div id="admin-kpi-active" style="font-size: 1.8rem; font-weight: 900; color: #2ed573;">0</div>
-                        <div id="admin-kpi-sub-active" style="font-size: 0.8rem; color: #2ed573; margin-top: 4px;">فتحوا التطبيق خلال 24 ساعة</div>
+                        <!-- Filter Chips for Teacher Features -->
+                        <div id="surv-teacher-chips" style="display: flex; flex-wrap: wrap; gap: 8px;">
+                            <button type="button" class="admin-chip active" data-tfilter="all" onclick="setTeacherStreamFilter('all')">الكل 🌐</button>
+                            <button type="button" class="admin-chip" data-tfilter="exams" onclick="setTeacherStreamFilter('exams')">📝 صانع الامتحانات</button>
+                            <button type="button" class="admin-chip" data-tfilter="attendance" onclick="setTeacherStreamFilter('attendance')">🟢 الحضور والغياب</button>
+                            <button type="button" class="admin-chip" data-tfilter="homework" onclick="setTeacherStreamFilter('homework')">📚 الواجبات</button>
+                            <button type="button" class="admin-chip" data-tfilter="fees" onclick="setTeacherStreamFilter('fees')">💰 المصروفات</button>
+                            <button type="button" class="admin-chip" data-tfilter="scores" onclick="setTeacherStreamFilter('scores')">💯 درجات التسميع</button>
+                            <button type="button" class="admin-chip" data-tfilter="schedule" onclick="setTeacherStreamFilter('schedule')">🗓️ جدول الحصص</button>
+                            <button type="button" class="admin-chip" data-tfilter="whatsapp" onclick="setTeacherStreamFilter('whatsapp')">📲 رسائل واتساب</button>
+                            <button type="button" class="admin-chip" data-tfilter="hall_of_fame" onclick="setTeacherStreamFilter('hall_of_fame')">🏆 لوحة الشرف</button>
+                            <button type="button" class="admin-chip" data-tfilter="certificates" onclick="setTeacherStreamFilter('certificates')">🌟 شهادات التفوق</button>
+                            <button type="button" class="admin-chip" data-tfilter="students_mgmt" onclick="setTeacherStreamFilter('students_mgmt')">👥 استيراد وإدارة الطلاب</button>
+                        </div>
                     </div>
 
-                    <!-- Platform Distribution -->
-                    <div class="card hover-glow-box" style="margin: 0; padding: 16px; border-radius: 16px; border: 1px solid rgba(255, 165, 2, 0.25); background: linear-gradient(145deg, rgba(15, 23, 42, 0.85), rgba(30, 41, 59, 0.7));">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                            <span style="font-size: 0.9rem; color: var(--text-muted); font-weight: bold;">المنصات والأجهزة</span>
-                            <i class="fa-solid fa-mobile-screen" style="color: #ffa502; font-size: 1.3rem;"></i>
-                        </div>
-                        <div id="admin-kpi-platforms" style="font-size: 1.25rem; font-weight: 800; color: #fff;">0 أندرويد • 0 ويب</div>
-                        <div id="admin-kpi-sub-platforms" style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">تطبيق أندرويد APK vs متصفحات</div>
-                    </div>
-
-                    <!-- Content Created -->
-                    <div class="card hover-glow-box" style="margin: 0; padding: 16px; border-radius: 16px; border: 1px solid rgba(156, 39, 176, 0.25); background: linear-gradient(145deg, rgba(15, 23, 42, 0.85), rgba(30, 41, 59, 0.7));">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                            <span style="font-size: 0.9rem; color: var(--text-muted); font-weight: bold;">إجمالي المحتوى المضاف</span>
-                            <i class="fa-solid fa-layer-group" style="color: #c084fc; font-size: 1.3rem;"></i>
-                        </div>
-                        <div id="admin-kpi-content-count" style="font-size: 1.8rem; font-weight: 900; color: #c084fc;">0</div>
-                        <div id="admin-kpi-sub-content" style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">مهام • مواد • امتحانات • بطاقات</div>
+                    <!-- Teacher Live Stream Cards List -->
+                    <div id="surv-teacher-stream-list" style="display: flex; flex-direction: column; gap: 12px;">
+                        <!-- Injected by renderSurveillanceStream -->
                     </div>
                 </div>
 
-                <!-- Search and Filters Bar -->
-                <div class="card" style="margin: 0 0 20px 0; padding: 16px; border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.08); background: rgba(15, 23, 42, 0.6);">
-                    <div style="display: flex; gap: 12px; flex-wrap: wrap; align-items: center; margin-bottom: 14px;">
-                        <div style="flex: 1; min-width: 260px; position: relative;">
-                            <i class="fa-solid fa-magnifying-glass" style="position: absolute; right: 14px; top: 50%; transform: translateY(-50%); color: var(--text-muted);"></i>
-                            <input type="text" id="admin-search-input" placeholder="ابحث باسم الطالب، المرحلة، الشعبة، أو الكود..." oninput="filterAdminUsers()" style="width: 100%; padding: 11px 40px 11px 14px; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.15); background: rgba(0, 0, 0, 0.25); color: var(--text-main); font-family: 'Tajawal', sans-serif; font-size: 0.95rem;">
+                <!-- ============================================== -->
+                <!-- PANE 2: STUDENT SURVEILLANCE STREAM -->
+                <!-- ============================================== -->
+                <div id="surv-pane-students" class="surv-pane" style="display: none;">
+                    <!-- Student KPIs -->
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-bottom: 20px;">
+                        <div class="card hover-glow-box" style="margin: 0; padding: 14px; border-radius: 14px; border: 1.5px solid rgba(0, 229, 255, 0.4); background: linear-gradient(135deg, rgba(0, 229, 255, 0.12), rgba(15, 23, 42, 0.85));">
+                            <div style="font-size: 0.78rem; color: var(--text-muted); font-weight: bold;">إجمالي أنشطة الطلاب</div>
+                            <div id="surv-kpi-student-total" style="font-size: 1.8rem; font-weight: 900; color: #00e5ff;">0</div>
+                            <div style="font-size: 0.72rem; color: #cbd5e1; margin-top: 3px;">جلسات مذاكرة ومهام واختبارات</div>
                         </div>
-                        <div style="display: flex; align-items: center; gap: 8px;">
-                            <span style="font-size: 0.85rem; color: var(--text-muted); font-weight: bold;"><i class="fa-solid fa-arrow-down-wide-short"></i> ترتيب:</span>
-                            <select id="admin-sort-select" onchange="filterAdminUsers()" style="padding: 10px 14px; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.15); background: rgba(15, 23, 42, 0.9); color: var(--text-main); font-family: 'Tajawal', sans-serif; font-size: 0.88rem; cursor: pointer;">
-                                <option value="latest">الأحدث دخولاً ونشاطاً</option>
-                                <option value="xp">الأعلى نقاطاً (XP)</option>
-                                <option value="tasks">الأكثر مهام مذاكرة</option>
-                                <option value="logins">الأكثر تسجيلاً للدخول</option>
-                                <option value="name">أبجدياً (أ - ي)</option>
-                            </select>
+                        <div class="card hover-glow-box" style="margin: 0; padding: 14px; border-radius: 14px; border: 1.5px solid rgba(46, 213, 115, 0.4); background: linear-gradient(135deg, rgba(46, 213, 115, 0.12), rgba(15, 23, 42, 0.85));">
+                            <div style="font-size: 0.78rem; color: var(--text-muted); font-weight: bold;">المهام المنجزة</div>
+                            <div id="surv-kpi-student-tasks" style="font-size: 1.8rem; font-weight: 900; color: #2ed573;">0</div>
+                            <div style="font-size: 0.72rem; color: #cbd5e1; margin-top: 3px;">مهمة دراسية مكتملة</div>
+                        </div>
+                        <div class="card hover-glow-box" style="margin: 0; padding: 14px; border-radius: 14px; border: 1.5px solid rgba(255, 71, 87, 0.4); background: linear-gradient(135deg, rgba(255, 71, 87, 0.12), rgba(15, 23, 42, 0.85));">
+                            <div style="font-size: 0.78rem; color: var(--text-muted); font-weight: bold;">جلسات بومودورو</div>
+                            <div id="surv-kpi-student-pomodoro" style="font-size: 1.8rem; font-weight: 900; color: #ff4757;">0</div>
+                            <div style="font-size: 0.72rem; color: #cbd5e1; margin-top: 3px;">جلسة تركيز منجزة</div>
+                        </div>
+                        <div class="card hover-glow-box" style="margin: 0; padding: 14px; border-radius: 14px; border: 1.5px solid rgba(192, 132, 252, 0.4); background: linear-gradient(135deg, rgba(192, 132, 252, 0.12), rgba(15, 23, 42, 0.85));">
+                            <div style="font-size: 0.78rem; color: var(--text-muted); font-weight: bold;">الكويزات والاختبارات</div>
+                            <div id="surv-kpi-student-quizzes" style="font-size: 1.8rem; font-weight: 900; color: #c084fc;">0</div>
+                            <div style="font-size: 0.72rem; color: #cbd5e1; margin-top: 3px;">امتحان واختبار تم حله</div>
                         </div>
                     </div>
 
-                    <!-- Filter Chips -->
-                    <div id="admin-filter-chips" style="display: flex; flex-wrap: wrap; gap: 8px;">
-                        <button type="button" class="admin-chip active" data-filter="all" onclick="setAdminFilter('all')">الكل 🌐</button>
-                        <button type="button" class="admin-chip" data-filter="activeToday" onclick="setAdminFilter('activeToday')">🟢 نشط اليوم</button>
-                        <button type="button" class="admin-chip" data-filter="apk" onclick="setAdminFilter('apk')">📱 تطبيق أندرويد (APK)</button>
-                        <button type="button" class="admin-chip" data-filter="web" onclick="setAdminFilter('web')">🌐 متصفح ويب</button>
-                        <button type="button" class="admin-chip" data-filter="stage3" onclick="setAdminFilter('stage3')">🎓 تالتة ثانوي</button>
-                        <button type="button" class="admin-chip" data-filter="stage12" onclick="setAdminFilter('stage12')">🏫 أولى وتانية ثانوي</button>
-                        <button type="button" class="admin-chip" data-filter="prep" onclick="setAdminFilter('prep')">🎒 إعدادي</button>
-                        <button type="button" class="admin-chip" data-filter="uni" onclick="setAdminFilter('uni')">🎓 جامعة</button>
-                        <button type="button" class="admin-chip" data-filter="teachers" onclick="setAdminFilter('teachers')">👨‍🏫 مدرسين</button>
+                    <!-- Student Filter Bar & Search -->
+                    <div class="card" style="margin-bottom: 20px; padding: 16px; border-radius: 16px; border: 1px solid rgba(0, 229, 255, 0.25); background: rgba(15, 23, 42, 0.7);">
+                        <div style="display: flex; gap: 12px; flex-wrap: wrap; align-items: center; margin-bottom: 12px;">
+                            <div style="flex: 1; min-width: 260px; position: relative;">
+                                <i class="fa-solid fa-magnifying-glass" style="position: absolute; right: 14px; top: 50%; transform: translateY(-50%); color: var(--text-muted);"></i>
+                                <input type="text" id="surv-student-search" placeholder="ابحث في أنشطة الطلاب (اسم الطالب، المادة، المهمة، التاريخ...)" oninput="filterSurveillanceStudentStream()" style="width: 100%; padding: 11px 40px 11px 14px; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.15); background: rgba(0, 0, 0, 0.25); color: #fff; font-family: 'Tajawal', sans-serif; font-size: 0.95rem;">
+                            </div>
+                        </div>
+                        <!-- Filter Chips for Student Features -->
+                        <div id="surv-student-chips" style="display: flex; flex-wrap: wrap; gap: 8px;">
+                            <button type="button" class="admin-chip active" data-sfilter="all" onclick="setStudentStreamFilter('all')">الكل 🌐</button>
+                            <button type="button" class="admin-chip" data-sfilter="pomodoro" onclick="setStudentStreamFilter('pomodoro')">⏱️ بومودورو ومذاكرة</button>
+                            <button type="button" class="admin-chip" data-sfilter="tasks" onclick="setStudentStreamFilter('tasks')">✅ مهام دراسية</button>
+                            <button type="button" class="admin-chip" data-sfilter="quiz" onclick="setStudentStreamFilter('quiz')">🧪 كويزات واختبارات</button>
+                            <button type="button" class="admin-chip" data-sfilter="flashcards" onclick="setStudentStreamFilter('flashcards')">🃏 بطاقات استذكار</button>
+                            <button type="button" class="admin-chip" data-sfilter="spiritual" onclick="setStudentStreamFilter('spiritual')">🕌 صلوات وأذكار</button>
+                        </div>
+                    </div>
+
+                    <!-- Student Live Stream Cards List -->
+                    <div id="surv-student-stream-list" style="display: flex; flex-direction: column; gap: 12px;">
+                        <!-- Injected by renderSurveillanceStream -->
                     </div>
                 </div>
 
-                <div id="admin-content" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px;">
-                    <!-- User cards will load here -->
+                <!-- ============================================== -->
+                <!-- PANE 3: DIRECTORY & REGISTERED PROFILES -->
+                <!-- ============================================== -->
+                <div id="surv-pane-directory" class="surv-pane" style="display: none;">
+                    <!-- Existing Admin KPI Summary Grid -->
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 15px; margin-bottom: 25px;">
+                        <div class="card hover-glow-box" style="margin: 0; padding: 16px; border-radius: 16px; border: 1px solid rgba(0, 229, 255, 0.25); background: linear-gradient(145deg, rgba(15, 23, 42, 0.85), rgba(30, 41, 59, 0.7));">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                                <span style="font-size: 0.9rem; color: var(--text-muted); font-weight: bold;">إجمالي المسجلين</span>
+                                <i class="fa-solid fa-users" style="color: #00e5ff; font-size: 1.3rem;"></i>
+                            </div>
+                            <div id="admin-kpi-total" style="font-size: 1.8rem; font-weight: 900; color: #fff;">0</div>
+                            <div id="admin-kpi-sub-total" style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">0 طالب • 0 مدرس</div>
+                        </div>
+                        <div class="card hover-glow-box" style="margin: 0; padding: 16px; border-radius: 16px; border: 1px solid rgba(46, 213, 115, 0.25); background: linear-gradient(145deg, rgba(15, 23, 42, 0.85), rgba(30, 41, 59, 0.7));">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                                <span style="font-size: 0.9rem; color: var(--text-muted); font-weight: bold;">النشطون اليوم</span>
+                                <div class="admin-online-dot"></div>
+                            </div>
+                            <div id="admin-kpi-active" style="font-size: 1.8rem; font-weight: 900; color: #2ed573;">0</div>
+                            <div id="admin-kpi-sub-active" style="font-size: 0.8rem; color: #2ed573; margin-top: 4px;">فتحوا التطبيق خلال 24 ساعة</div>
+                        </div>
+                        <div class="card hover-glow-box" style="margin: 0; padding: 16px; border-radius: 16px; border: 1px solid rgba(255, 165, 2, 0.25); background: linear-gradient(145deg, rgba(15, 23, 42, 0.85), rgba(30, 41, 59, 0.7));">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                                <span style="font-size: 0.9rem; color: var(--text-muted); font-weight: bold;">المنصات والأجهزة</span>
+                                <i class="fa-solid fa-mobile-screen" style="color: #ffa502; font-size: 1.3rem;"></i>
+                            </div>
+                            <div id="admin-kpi-platforms" style="font-size: 1.25rem; font-weight: 800; color: #fff;">0 أندرويد • 0 ويب</div>
+                            <div id="admin-kpi-sub-platforms" style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">تطبيق أندرويد APK vs متصفحات</div>
+                        </div>
+                        <div class="card hover-glow-box" style="margin: 0; padding: 16px; border-radius: 16px; border: 1px solid rgba(156, 39, 176, 0.25); background: linear-gradient(145deg, rgba(15, 23, 42, 0.85), rgba(30, 41, 59, 0.7));">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                                <span style="font-size: 0.9rem; color: var(--text-muted); font-weight: bold;">إجمالي المحتوى المضاف</span>
+                                <i class="fa-solid fa-layer-group" style="color: #c084fc; font-size: 1.3rem;"></i>
+                            </div>
+                            <div id="admin-kpi-content-count" style="font-size: 1.8rem; font-weight: 900; color: #c084fc;">0</div>
+                            <div id="admin-kpi-sub-content" style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">مهام • مواد • امتحانات • بطاقات</div>
+                        </div>
+                    </div>
+
+                    <!-- Search and Filters Bar -->
+                    <div class="card" style="margin: 0 0 20px 0; padding: 16px; border-radius: 16px; border: 1px solid rgba(255, 255, 255, 0.08); background: rgba(15, 23, 42, 0.6);">
+                        <div style="display: flex; gap: 12px; flex-wrap: wrap; align-items: center; margin-bottom: 14px;">
+                            <div style="flex: 1; min-width: 260px; position: relative;">
+                                <i class="fa-solid fa-magnifying-glass" style="position: absolute; right: 14px; top: 50%; transform: translateY(-50%); color: var(--text-muted);"></i>
+                                <input type="text" id="admin-search-input" placeholder="ابحث باسم الطالب، المرحلة، الشعبة، أو الكود..." oninput="filterAdminUsers()" style="width: 100%; padding: 11px 40px 11px 14px; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.15); background: rgba(0, 0, 0, 0.25); color: var(--text-main); font-family: 'Tajawal', sans-serif; font-size: 0.95rem;">
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 8px;">
+                                <span style="font-size: 0.85rem; color: var(--text-muted); font-weight: bold;"><i class="fa-solid fa-arrow-down-wide-short"></i> ترتيب:</span>
+                                <select id="admin-sort-select" onchange="filterAdminUsers()" style="padding: 10px 14px; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.15); background: rgba(15, 23, 42, 0.9); color: var(--text-main); font-family: 'Tajawal', sans-serif; font-size: 0.88rem; cursor: pointer;">
+                                    <option value="latest">الأحدث دخولاً ونشاطاً</option>
+                                    <option value="xp">الأعلى نقاطاً (XP)</option>
+                                    <option value="tasks">الأكثر مهام مذاكرة</option>
+                                    <option value="logins">الأكثر تسجيلاً للدخول</option>
+                                    <option value="name">أبجدياً (أ - ي)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Filter Chips -->
+                        <div id="admin-filter-chips" style="display: flex; flex-wrap: wrap; gap: 8px;">
+                            <button type="button" class="admin-chip active" data-filter="all" onclick="setAdminFilter('all')">الكل 🌐</button>
+                            <button type="button" class="admin-chip" data-filter="activeToday" onclick="setAdminFilter('activeToday')">🟢 نشط اليوم</button>
+                            <button type="button" class="admin-chip" data-filter="apk" onclick="setAdminFilter('apk')">📱 تطبيق أندرويد (APK)</button>
+                            <button type="button" class="admin-chip" data-filter="web" onclick="setAdminFilter('web')">🌐 متصفح ويب</button>
+                            <button type="button" class="admin-chip" data-filter="stage3" onclick="setAdminFilter('stage3')">🎓 تالتة ثانوي</button>
+                            <button type="button" class="admin-chip" data-filter="stage12" onclick="setAdminFilter('stage12')">🏫 أولى وتانية ثانوي</button>
+                            <button type="button" class="admin-chip" data-filter="prep" onclick="setAdminFilter('prep')">🎒 إعدادي</button>
+                            <button type="button" class="admin-chip" data-filter="uni" onclick="setAdminFilter('uni')">🎓 جامعة</button>
+                            <button type="button" class="admin-chip" data-filter="teachers" onclick="setAdminFilter('teachers')">👨‍🏫 مدرسين</button>
+                        </div>
+                    </div>
+
+                    <div id="admin-content" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px;">
+                        <!-- User cards will load here -->
+                    </div>
+                </div>
+
+                <!-- ============================================== -->
+                <!-- PANE 4: COMPARATIVE ANALYTICS & INSIGHTS -->
+                <!-- ============================================== -->
+                <div id="surv-pane-analytics" class="surv-pane" style="display: none;">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px;">
+                        <!-- Teacher vs Student comparison -->
+                        <div class="card hover-glow-box" style="border-radius: 16px; padding: 20px; border: 1.5px solid rgba(0, 229, 255, 0.3);">
+                            <h3 style="color: #00e5ff; margin-top: 0; font-size: 1.2rem; display: flex; align-items: center; gap: 8px;">
+                                <i class="fa-solid fa-scale-balanced"></i> توزيع التفاعل (المعلمون vs الطلاب)
+                            </h3>
+                            <div id="surv-analytics-comparison" style="margin-top: 15px;">
+                                <!-- Injected dynamically -->
+                            </div>
+                        </div>
+
+                        <!-- Top Teacher Features in demand -->
+                        <div class="card hover-glow-box" style="border-radius: 16px; padding: 20px; border: 1.5px solid rgba(255, 165, 2, 0.3);">
+                            <h3 style="color: #ffa502; margin-top: 0; font-size: 1.2rem; display: flex; align-items: center; gap: 8px;">
+                                <i class="fa-solid fa-ranking-star"></i> المميزات الأكثر طلباً واستخداماً من المدرسين
+                            </h3>
+                            <div id="surv-analytics-teacher-features" style="margin-top: 15px;">
+                                <!-- Injected dynamically -->
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
-
         
-        
-
-    
         <!-- Comments Wall Section -->
         <section id="comments-wall" class="page">
             <div class="comments-container" style="max-width: 800px; margin: 2rem auto; padding: 0 1rem;">
@@ -3648,7 +3977,7 @@
     <!-- Developer Watermark -->
     <div class="dev-watermark" style="position: fixed; bottom: 85px; left: 20px; background: rgba(0, 0, 0, 0.7); color: #fff; padding: 8px 16px; border-radius: 50px; font-family: 'Tajawal', sans-serif; font-size: 0.9rem; z-index: 9999; backdrop-filter: blur(5px); border: 1px solid rgba(255, 255, 255, 0.1); display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); pointer-events: none; transition: opacity 0.3s;">
         <i class="fa-solid fa-code" style="color: var(--primary-color);"></i>
-        <span>Developed by <strong>Eng. Malak Adel Abdelhamid</strong></span>
+        <span id="secret-watermark-btn" style="pointer-events: auto; cursor: pointer; user-select: none;">Developed by <strong>Eng. Malak Adel Abdelhamid</strong></span>
     </div>
 
 
@@ -3790,6 +4119,20 @@
                 </div>
                 <button onclick="openDataTransferModal('export')" class="btn" style="background: #2ed573; color: #031024; font-weight: 700; font-size: 0.82rem; padding: 6px 14px; border-radius: 8px; cursor: pointer; border: none;">
                     نقل بياناتي الآن 📋
+                </button>
+            </div>
+
+            <!-- Teacher Suite Grand Callout -->
+            <div style="background: linear-gradient(135deg, rgba(255, 165, 2, 0.16), rgba(255, 71, 87, 0.12)); border: 1.5px solid rgba(255, 165, 2, 0.45); border-radius: 14px; padding: 14px; margin-bottom: 1.2rem; display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap;">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <span style="font-size: 1.8rem;">👨‍🏫</span>
+                    <div>
+                        <strong style="color: #ffa502; font-size: 1rem; display: block;">هل أنت معلم أو تدير مجموعات وسناتر؟</strong>
+                        <span style="color: #cbd5e1; font-size: 0.84rem;">تم إطلاق "منصة المعلم الذكية" المستقلة! صانع امتحانات بالـ AI، دفتر غياب، وواتساب لأولياء الأمور.</span>
+                    </div>
+                </div>
+                <button onclick="closeWhatsNew(); switchAppRole('teacher');" class="btn" style="background: #ffa502; color: #020d1a; font-weight: 800; font-size: 0.85rem; padding: 8px 16px; border-radius: 10px; cursor: pointer; border: none;">
+                    الانتقال لمنصة المعلم 🚀
                 </button>
             </div>
 
@@ -4387,16 +4730,417 @@
 
                 <label style="display: block; font-size: 0.84rem; color: var(--text-muted); margin-bottom: 4px;">رقم الكود / المقعد (اختياري):</label>
                 <input type="text" id="tnew-student-code" class="search-input" placeholder="مثال: #101" style="width: 100%; margin-bottom: 10px;">
+
+                <label style="display: block; font-size: 0.84rem; color: var(--text-muted); margin-bottom: 4px;">الصف الدراسي (السنة الدراسية):</label>
+                <select id="tnew-student-stage" class="search-input" style="width: 100%; margin-bottom: 10px;">
+                    <option value="الصف الثالث الثانوي">الصف الثالث الثانوي (ثانوية عامة)</option>
+                    <option value="الصف الثاني الثانوي">الصف الثاني الثانوي</option>
+                    <option value="الصف الأول الثانوي">الصف الأول الثانوي</option>
+                    <option value="الصف الثالث الإعدادي">الصف الثالث الإعدادي</option>
+                    <option value="الصف الثاني الإعدادي">الصف الثاني الإعدادي</option>
+                    <option value="الصف الأول الإعدادي">الصف الأول الإعدادي</option>
+                    <option value="مرحلة ابتدائية">المرحلة الابتدائية</option>
+                </select>
                 
                 <label style="display: block; font-size: 0.84rem; color: var(--text-muted); margin-bottom: 4px;">المجموعة:</label>
                 <select id="tnew-student-group" class="search-input" style="width: 100%; margin-bottom: 15px;">
-                    <option value="group_sat_tue">مجموعة السبت والثلاثاء</option>
-                    <option value="group_sun_wed">مجموعة الأحد والأربعاء</option>
-                    <option value="default">المجموعة العامة</option>
+                    <option value="المجموعة العامة">المجموعة العامة</option>
                 </select>
             </div>
             <button onclick="saveNewTeacherStudent()" class="btn btn-primary" style="width: 100%; font-weight: 800; font-size: 1rem; border-radius: 10px; background: #2ed573; color: #020d1a;">
                 حفظ الطالب بالدفتر 💾
+            </button>
+        </div>
+    </div>
+
+    <!-- Edit Teacher Profile Modal -->
+    <div id="edit-teacher-profile-modal" class="modal">
+        <div class="modal-content" style="max-width: 480px; padding: 22px; border-radius: 18px; background: var(--card-bg); border: 1.5px solid #ffa502;">
+            <span class="close" onclick="closeModal('edit-teacher-profile-modal')">&times;</span>
+            <h3 style="color: #ffa502; margin: 0 0 14px 0; font-size: 1.25rem;">
+                <i class="fa-solid fa-user-pen"></i> تعديل بيانات المعلم والتخصص
+            </h3>
+            <div style="text-align: right; margin-bottom: 12px;">
+                <label style="display: block; font-size: 0.84rem; color: var(--text-muted); margin-bottom: 4px;">اسم المعلم:</label>
+                <input type="text" id="tedit-name" class="search-input" placeholder="اسم المعلم..." style="width: 100%; margin-bottom: 10px;">
+
+                <label style="display: block; font-size: 0.84rem; color: var(--text-muted); margin-bottom: 4px;">المادة والتخصص:</label>
+                <input type="text" id="tedit-specialty" class="search-input" placeholder="مثال: لغة عربية / فيزياء / رياضيات / إنجليزي..." style="width: 100%; margin-bottom: 10px;">
+
+                <label style="display: block; font-size: 0.84rem; color: var(--text-muted); margin-bottom: 4px;">المراحل والصفوف الدراسية:</label>
+                <input type="text" id="tedit-stage" class="search-input" placeholder="مثال: المرحلة الثانوية / المرحلة الإعدادية..." style="width: 100%; margin-bottom: 10px;">
+
+                <label style="display: block; font-size: 0.84rem; color: var(--text-muted); margin-bottom: 4px;">السناتر ومقرات الشرح / رقم الهاتف:</label>
+                <input type="text" id="tedit-centers" class="search-input" placeholder="مثال: سنتر الأمل - سنتر الرواد - أونلاين..." style="width: 100%; margin-bottom: 15px;">
+            </div>
+            <button onclick="saveTeacherProfileEdits()" class="btn btn-primary" style="width: 100%; font-weight: 800; font-size: 1rem; border-radius: 10px; background: #ffa502; color: #020d1a;">
+                حفظ التعديلات 💾
+            </button>
+        </div>
+    </div>
+
+    <!-- 1. Teacher Bulk Import Modal -->
+    <div id="teacher-bulk-import-modal" class="modal">
+        <div class="modal-content" style="max-width: 520px; padding: 22px; border-radius: 18px; background: var(--card-bg); border: 1.5px solid #00e5ff;">
+            <span class="close" onclick="closeModal('teacher-bulk-import-modal')">&times;</span>
+            <h3 style="color: #00e5ff; margin: 0 0 8px 0; font-size: 1.25rem;">
+                <i class="fa-solid fa-file-import"></i> استيراد سريع لطلابك (نسخ ولصق دفعة واحدة)
+            </h3>
+            <p style="color: var(--text-muted); font-size: 0.84rem; margin: 0 0 14px 0; line-height: 1.5;">
+                الصق قائمة الطلاب من واتساب أو إكسيل مباشرةً (اسم الطالب وبجواره رقم هاتف ولي الأمر). سيقوم التطبيق بإضافتهم جميعاً في ثانية واحدة!
+            </p>
+            <div style="text-align: right; margin-bottom: 12px;">
+                <label style="display: block; font-size: 0.84rem; color: var(--text-muted); margin-bottom: 4px;">الصف الدراسي للطلاب المستوردين:</label>
+                <select id="tbulk-import-stage" class="search-input" style="width: 100%; margin-bottom: 12px;">
+                    <option value="الصف الثالث الثانوي">الصف الثالث الثانوي (ثانوية عامة)</option>
+                    <option value="الصف الثاني الثانوي">الصف الثاني الثانوي</option>
+                    <option value="الصف الأول الثانوي">الصف الأول الثانوي</option>
+                    <option value="الصف الثالث الإعدادي">الصف الثالث الإعدادي</option>
+                    <option value="الصف الثاني الإعدادي">الصف الثاني الإعدادي</option>
+                    <option value="الصف الأول الإعدادي">الصف الأول الإعدادي</option>
+                    <option value="مرحلة ابتدائية">المرحلة الابتدائية</option>
+                </select>
+
+                <label style="display: block; font-size: 0.84rem; color: var(--text-muted); margin-bottom: 4px;">إضافة الطلاب إلى مجموعة:</label>
+                <select id="tbulk-import-group" class="search-input" style="width: 100%; margin-bottom: 12px;">
+                    <!-- Injected dynamically -->
+                </select>
+
+                <label style="display: block; font-size: 0.84rem; color: var(--text-muted); margin-bottom: 4px;">قائمة الطلاب (كل طالب في سطر):</label>
+                <textarea id="tbulk-import-text" rows="7" class="search-input" placeholder="مثال:&#10;أحمد علي محمد - 01012345678&#10;مريم إبراهيم حسن 01198765432&#10;يوسف خالد عبد الله - 01234567890" style="width: 100%; font-family: monospace; font-size: 0.88rem; line-height: 1.6; padding: 10px;"></textarea>
+            </div>
+            <button onclick="executeBulkImportStudents()" class="btn btn-primary" style="width: 100%; font-weight: 800; font-size: 1rem; border-radius: 10px; background: #00e5ff; color: #020d1a;">
+                <i class="fa-solid fa-bolt"></i> استيراد جميع الطلاب الآن 🚀
+            </button>
+        </div>
+    </div>
+
+    <!-- 2. Teacher Classroom Quiz Timer Modal -->
+    <div id="teacher-timer-modal" class="modal">
+        <div class="modal-content" style="max-width: 440px; padding: 25px; border-radius: 20px; background: linear-gradient(145deg, #0b1329, #020617); border: 2px solid #eb4d4b; text-align: center; box-shadow: 0 10px 40px rgba(235, 77, 75, 0.3);">
+            <span class="close" onclick="closeModal('teacher-timer-modal')">&times;</span>
+            <div style="color: #eb4d4b; font-size: 1.8rem; margin-bottom: 6px;">⏱️</div>
+            <h3 style="color: #fff; margin: 0 0 6px 0; font-size: 1.3rem;">مؤقت كويز وتسميع الحصة</h3>
+            <p style="color: var(--text-muted); font-size: 0.84rem; margin: 0 0 18px 0;">شاشتك التنازلية المباشرة أمام الطلاب داخل القاعة</p>
+            
+            <div id="ttimer-digits" style="font-family: monospace; font-size: 4rem; font-weight: 900; color: #eb4d4b; background: rgba(0,0,0,0.4); border-radius: 16px; padding: 15px 0; letter-spacing: 4px; margin-bottom: 20px; border: 1px solid rgba(235, 77, 75, 0.3); text-shadow: 0 0 20px rgba(235, 77, 75, 0.5);">
+                05:00
+            </div>
+
+            <!-- Quick Presets -->
+            <div style="display: flex; gap: 8px; justify-content: center; margin-bottom: 20px; flex-wrap: wrap;">
+                <button onclick="setTeacherTimerMinutes(3)" class="btn" style="background: rgba(255,255,255,0.08); color: #fff; font-size: 0.82rem; padding: 6px 12px; border-radius: 8px;">3 دقائق</button>
+                <button onclick="setTeacherTimerMinutes(5)" class="btn" style="background: rgba(255,255,255,0.08); color: #fff; font-size: 0.82rem; padding: 6px 12px; border-radius: 8px;">5 دقائق</button>
+                <button onclick="setTeacherTimerMinutes(10)" class="btn" style="background: rgba(255,255,255,0.08); color: #fff; font-size: 0.82rem; padding: 6px 12px; border-radius: 8px;">10 دقائق</button>
+                <button onclick="setTeacherTimerMinutes(15)" class="btn" style="background: rgba(255,255,255,0.08); color: #fff; font-size: 0.82rem; padding: 6px 12px; border-radius: 8px;">15 دقيقة</button>
+            </div>
+
+            <!-- Timer Controls -->
+            <div style="display: flex; gap: 10px;">
+                <button id="ttimer-start-btn" onclick="toggleTeacherTimer()" class="btn btn-primary" style="flex: 2; font-weight: 800; font-size: 1.05rem; padding: 12px; border-radius: 12px; background: #eb4d4b; color: #fff; border: none;">
+                    <i class="fa-solid fa-play"></i> بدء الوقت
+                </button>
+                <button onclick="resetTeacherTimer()" class="btn" style="flex: 1; background: rgba(255,255,255,0.1); color: #fff; font-weight: bold; border-radius: 12px;">
+                    <i class="fa-solid fa-rotate-left"></i> تصفير
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. Teacher Certificate of Excellence Modal -->
+    <div id="teacher-certificate-modal" class="modal">
+        <div class="modal-content" style="max-width: 650px; padding: 25px; border-radius: 20px; background: var(--card-bg); border: 2px solid #fbbf24;">
+            <span class="close" onclick="closeModal('teacher-certificate-modal')">&times;</span>
+            <div class="no-print" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 10px;">
+                <h3 style="color: #fbbf24; margin: 0; font-size: 1.25rem;">
+                    <i class="fa-solid fa-award"></i> شهادة تفوق وتقدير رقمية
+                </h3>
+                <div style="display: flex; gap: 8px;">
+                    <button onclick="printStudentCertificate()" class="btn" style="background: #fbbf24; color: #020d1a; font-weight: 800; font-size: 0.84rem; padding: 7px 14px; border-radius: 8px; border: none; cursor: pointer;">
+                        <i class="fa-solid fa-print"></i> طباعة A4 🖨️
+                    </button>
+                    <button onclick="shareStudentCertificateWhatsApp()" class="btn" style="background: #25d366; color: #020d1a; font-weight: 800; font-size: 0.84rem; padding: 7px 14px; border-radius: 8px; border: none; cursor: pointer;">
+                        <i class="fa-brands fa-whatsapp"></i> إرسال لولي الأمر
+                    </button>
+                </div>
+            </div>
+
+            <!-- Printable Certificate Sheet -->
+            <div id="printable-certificate-sheet" style="background: #ffffff; color: #0f172a; border: 8px double #d97706; padding: 35px 25px; border-radius: 12px; text-align: center; position: relative; font-family: 'Tajawal', sans-serif;">
+                <div style="font-size: 2.5rem; margin-bottom: 8px;">👑</div>
+                <div style="font-size: 1.1rem; color: #b45309; font-weight: bold; letter-spacing: 1px;">جمهورية مصر العربية</div>
+                <h1 style="color: #1e293b; font-size: 1.9rem; margin: 8px 0 15px 0; font-weight: 900; text-shadow: 1px 1px 0 rgba(0,0,0,0.1);">
+                    شهادة تفوق وتقدير
+                </h1>
+                <p style="font-size: 1rem; color: #475569; margin: 0 0 15px 0;">
+                    يسر إدارة المتابعة والتقييم، بالتنسيق مع معلم المادة، أن تمنح هذه الشهادة للطالب المتميز:
+                </p>
+                <div id="cert-student-name" style="font-size: 1.7rem; font-weight: 900; color: #0284c7; border-bottom: 2px dashed #0284c7; display: inline-block; padding: 0 25px 6px; margin-bottom: 15px;">
+                    اسم الطالب
+                </div>
+                <p style="font-size: 1.05rem; color: #334155; line-height: 1.8; max-width: 500px; margin: 0 auto 20px;">
+                    تقديراً لتميزه الباهر، وحرصه على الالتزام والحضور، وتحقيقه الدرجة النهائية (<strong id="cert-score" style="color: #16a34a;">10 / 10</strong>) في اختبارات مادة <strong id="cert-subject" style="color: #d97706;">المادة</strong>.
+                </p>
+                <div style="display: flex; justify-content: space-between; align-items: flex-end; border-top: 1.5px solid #cbd5e1; padding-top: 15px; margin-top: 20px; font-size: 0.92rem; font-weight: bold;">
+                    <div style="text-align: right;">
+                        <span style="color: #64748b;">تاريخ التكريم:</span>
+                        <div id="cert-date" style="color: #0f172a; margin-top: 4px;">2026/10/18</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="display: inline-block; border: 2px solid #b45309; color: #b45309; border-radius: 50%; width: 55px; height: 55px; line-height: 50px; font-size: 0.72rem; font-weight: 900; transform: rotate(-12deg);">
+                            معتمد ★
+                        </div>
+                    </div>
+                    <div style="text-align: left;">
+                        <span style="color: #64748b;">توقيع المعلم:</span>
+                        <div id="cert-teacher" style="color: #0f172a; margin-top: 4px;">أ / معلم المادة</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 4. Teacher Master Visual Guide Modal ("دليل المعلم الشامل في دقيقة") -->
+    <div id="teacher-guide-modal" class="modal">
+        <div class="modal-content" style="max-width: 680px; max-height: 90vh; overflow-y: auto; padding: 25px; border-radius: 20px; border: 2px solid #ffa502; background: var(--card-bg);">
+            <span class="close" onclick="closeModal('teacher-guide-modal')">&times;</span>
+            <div style="text-align: center; margin-bottom: 22px;">
+                <div style="font-size: 2.8rem; margin-bottom: 8px;">👨‍🏫✨</div>
+                <h2 id="teacher-guide-title" style="color: #ffa502; margin: 0 0 6px 0; font-family: 'Tajawal', sans-serif; font-size: 1.55rem;">
+                    دليل المعلم الذكي: كيف توفر ساعات أسبوعياً؟ 🚀
+                </h2>
+                <p style="color: var(--text-muted); font-size: 0.92rem; margin: 0; line-height: 1.6;">
+                    منصتك المتكاملة لإدارة حصصك وسناترك وصناعة الامتحانات دون الحاجة لأي سكرتارية أو دفاتر ورقية!
+                </p>
+            </div>
+
+            <!-- Value Proposition Hero Box -->
+            <div style="background: linear-gradient(135deg, rgba(255, 165, 2, 0.15), rgba(0, 229, 255, 0.08)); border: 1.5px solid rgba(255, 165, 2, 0.35); border-radius: 16px; padding: 16px 20px; margin-bottom: 22px;">
+                <h4 style="margin: 0 0 8px 0; color: #fff; font-size: 1.05rem; display: flex; align-items: center; gap: 8px;">
+                    <i class="fa-solid fa-star" style="color: #ffa502;"></i>
+                    <span>ليه التطبيق ده بالذات ومميز عن أي تطبيق تاني؟</span>
+                </h4>
+                <ul style="margin: 0; padding-right: 20px; color: #cbd5e1; font-size: 0.88rem; line-height: 1.8;">
+                    <li><strong>توفير 80% من وقتك:</strong> مفيش كتابة امتحانات ولا مذكرات باليد بعد اليوم.. الذكاء الاصطناعي يجهز لك امتحان كامل بنموذج الإجابة في 5 ثواني.</li>
+                    <li><strong>راحة بال مع أولياء الأمور:</strong> تقرير فوري للحصة (حضور + واجب + درجة تسميع + ملاحظة) يوصل لواتساب ولي الأمر بنقرة زر واحدة.</li>
+                    <li><strong>بناء براند قوي لمادتك:</strong> امتحانات بعلامتك المائية، شهادات تفوق فخمة باسمك، وكارت رقمي تشاركه في كل مكان.</li>
+                    <li><strong>سريع كالبرق وبدون إنترنت:</strong> خفيف جداً، لا يعلق أبداً، ولا يستهلك باقة الموبايل.</li>
+                </ul>
+            </div>
+
+            <!-- Step by Step Features -->
+            <div style="display: flex; flex-direction: column; gap: 14px; margin-bottom: 25px;">
+                <!-- Step 1: Exam Maker -->
+                <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(0, 229, 255, 0.25); border-radius: 14px; padding: 15px; display: flex; gap: 14px; align-items: flex-start;">
+                    <div style="background: rgba(0, 229, 255, 0.15); color: #00e5ff; width: 42px; height: 42px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0;">
+                        📄
+                    </div>
+                    <div>
+                        <strong style="color: #00e5ff; font-size: 1.05rem; display: block; margin-bottom: 4px;">1. صانع الامتحانات الفوري (AI Exam Generator)</strong>
+                        <p style="margin: 0; color: #cbd5e1; font-size: 0.86rem; line-height: 1.6;">
+                            اكتب عنوان أي درس وحدد عدد الأسئلة والمرحلة، واضغط (توليد الامتحان). ستحصل على امتحان مطابق لمواصفات الوزارة مع نموذج الإجابة، جاهز للطباعة فوراً على ورق A4 بعلامتك المائية أو نسخه لبرنامج Word.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Step 2: Gradebook & WhatsApp & Fees -->
+                <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(46, 213, 115, 0.25); border-radius: 14px; padding: 15px; display: flex; gap: 14px; align-items: flex-start;">
+                    <div style="background: rgba(46, 213, 115, 0.15); color: #2ed573; width: 42px; height: 42px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0;">
+                        📲
+                    </div>
+                    <div>
+                        <strong style="color: #2ed573; font-size: 1.05rem; display: block; margin-bottom: 4px;">2. دفتر الحضور والواجب والمصروفات ورسائل أولياء الأمور</strong>
+                        <p style="margin: 0; color: #cbd5e1; font-size: 0.86rem; line-height: 1.6;">
+                            في الحصة، بلمسة زر تبدل الحضور (حاضر 🟢 / غائب 🔴)، والواجب (كامل ✅ / ناقص ⚠️ / لم يسلم ❌)، والمصروفات (سدد 🟢 / متبقي 🟡 / لم يسدد 🔴). ثم اضغط زر (واتساب) لفتح تقرير كامل منسق باسم الطالب ودرجته ومصروفاته يوصل لولي أمره فوراً!
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Step 3: Bulk Import -->
+                <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255, 165, 2, 0.25); border-radius: 14px; padding: 15px; display: flex; gap: 14px; align-items: flex-start;">
+                    <div style="background: rgba(255, 165, 2, 0.15); color: #ffa502; width: 42px; height: 42px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0;">
+                        📋
+                    </div>
+                    <div>
+                        <strong style="color: #ffa502; font-size: 1.05rem; display: block; margin-bottom: 4px;">3. الاستيراد السريع للطلاب (نسخ ولصق دفعة واحدة)</strong>
+                        <p style="margin: 0; color: #cbd5e1; font-size: 0.86rem; line-height: 1.6;">
+                            مش هتحتاج تكتب 80 أو 100 طالب واحد واحد! اضغط زر (استيراد سريع 📋) والصق قائمة أسمائهم وأرقامهم من واتساب أو إكسيل، والتطبيق هيضيفهم كلهم لمجموعتك في ثانية واحدة!
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Step 4: Hall of Fame & Certificates & Timer -->
+                <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(251, 191, 36, 0.25); border-radius: 14px; padding: 15px; display: flex; gap: 14px; align-items: flex-start;">
+                    <div style="background: rgba(251, 191, 36, 0.15); color: #fbbf24; width: 42px; height: 42px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0;">
+                        👑
+                    </div>
+                    <div>
+                        <strong style="color: #fbbf24; font-size: 1.05rem; display: block; margin-bottom: 4px;">4. لوحة شرف الأوائل، شهادات التقدير، ومؤقت الكويز</strong>
+                        <p style="margin: 0; color: #cbd5e1; font-size: 0.86rem; line-height: 1.6;">
+                            اضغط (لوحة الشرف 🏆) لترتيب أوائل المجموعة تلقائياً وتجهيز بوست تكريم فخم لجروب الواتساب والفيسبوك، مع شهادات تفوق باسمك ومادتك بنقرة زر، ومؤقت كويز تفاعلي للقاعة بدون إنترنت.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Step 5: Session Reminder -->
+                <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(0, 229, 255, 0.25); border-radius: 14px; padding: 15px; display: flex; gap: 14px; align-items: flex-start;">
+                    <div style="background: rgba(0, 229, 255, 0.15); color: #00e5ff; width: 42px; height: 42px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0;">
+                        📢
+                    </div>
+                    <div>
+                        <strong style="color: #00e5ff; font-size: 1.05rem; display: block; margin-bottom: 4px;">5. تذكير موعد الحصة القادمة بلمسة واحدة</strong>
+                        <p style="margin: 0; color: #cbd5e1; font-size: 0.86rem; line-height: 1.6;">
+                            اضغط (تذكير بالحصة 📢) لكتابة تنبيه موعد الحصة والواجب المطلوب ومشاركته على جروبات مجموعاتك على واتساب في ثانيتين بدون كتابة يدوية!
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Step 6: Digital Card & Invite -->
+                <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(192, 132, 252, 0.25); border-radius: 14px; padding: 15px; display: flex; gap: 14px; align-items: flex-start;">
+                    <div style="background: rgba(192, 132, 252, 0.15); color: #c084fc; width: 42px; height: 42px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0;">
+                        🌟
+                    </div>
+                    <div>
+                        <strong style="color: #c084fc; font-size: 1.05rem; display: block; margin-bottom: 4px;">6. كارت المعلم الرقمي وكود ربط الطلاب</strong>
+                        <p style="margin: 0; color: #cbd5e1; font-size: 0.86rem; line-height: 1.6;">
+                            انسخ كودك من أعلى الشاشة أو اضغط (دعوة الطلاب) لمشاركته على مجموعاتك، ليرتبط طلابك بحسابك وتصلهم اختباراتك وتحديثاتك تلقائياً.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <button onclick="closeTeacherGuideModal()" class="btn btn-primary btn-large" style="width: 100%; font-size: 1.1rem; font-weight: 800; border-radius: 12px; background: #ffa502; color: #020d1a;">
+                فهمت كل شيء.. لنبدأ العمل الآن! 🚀
+            </button>
+        </div>
+    </div>
+
+    <!-- 5. Teacher Hall of Fame Modal (لوحة شرف أوائل المجموعة) -->
+    <div id="teacher-hall-of-fame-modal" class="modal">
+        <div class="modal-content" style="max-width: 620px; max-height: 90vh; overflow-y: auto; padding: 25px; border-radius: 20px; border: 2px solid #fbbf24; background: var(--card-bg);">
+            <span class="close" onclick="closeModal('teacher-hall-of-fame-modal')">&times;</span>
+            <div style="text-align: center; margin-bottom: 20px;">
+                <div style="font-size: 2.8rem; margin-bottom: 6px;">🏆✨</div>
+                <h2 style="color: #fbbf24; margin: 0 0 6px 0; font-family: 'Tajawal', sans-serif; font-size: 1.5rem;">
+                    لوحة شرف المتفوقين الأسبوعية 🌟
+                </h2>
+                <p id="hall-of-fame-subtitle" style="color: var(--text-muted); font-size: 0.9rem; margin: 0;">
+                    أوائل المجموعة الأعلى التزاماً وتفوقاً في درجات التسميع والواجب
+                </p>
+            </div>
+
+            <!-- List of Top Ranked Students -->
+            <div id="hall-of-fame-list" style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 22px;">
+                <!-- Populated dynamically -->
+            </div>
+
+            <!-- Actions Bar -->
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <button onclick="copyHallOfFamePost()" class="btn" style="flex: 1; min-width: 180px; background: #25d366; color: #031024; font-weight: 800; font-size: 0.92rem; padding: 12px; border-radius: 12px; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                    <i class="fa-brands fa-whatsapp"></i> نسخ بوست التكريم للواتساب والفيسبوك 📋
+                </button>
+                <button onclick="printHallOfFameSheet()" class="btn" style="background: rgba(251, 191, 36, 0.15); color: #fbbf24; border: 1.5px solid #fbbf24; font-weight: 800; font-size: 0.92rem; padding: 12px 18px; border-radius: 12px; cursor: pointer; display: flex; align-items: center; gap: 6px;">
+                    <i class="fa-solid fa-print"></i> طباعة A4 🖨️
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 6. Teacher Session Reminder Modal (تذكير موعد الحصة القادمة) -->
+    <div id="teacher-session-reminder-modal" class="modal">
+        <div class="modal-content" style="max-width: 560px; max-height: 90vh; overflow-y: auto; padding: 25px; border-radius: 20px; border: 2px solid #00e5ff; background: var(--card-bg);">
+            <span class="close" onclick="closeModal('teacher-session-reminder-modal')">&times;</span>
+            <div style="text-align: center; margin-bottom: 18px;">
+                <div style="font-size: 2.6rem; margin-bottom: 6px;">📢⏰</div>
+                <h2 style="color: #00e5ff; margin: 0 0 6px 0; font-family: 'Tajawal', sans-serif; font-size: 1.45rem;">
+                    تذكير موعد الحصة القادمة
+                </h2>
+                <p style="color: var(--text-muted); font-size: 0.88rem; margin: 0;">
+                    أرسل رسالة تنبيه منسقة لجروب واتساب المجموعة في ثانيتين!
+                </p>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 18px;">
+                <div>
+                    <label style="display: block; font-size: 0.84rem; color: var(--text-muted); margin-bottom: 4px;">المجموعة المستهدفة:</label>
+                    <input type="text" id="reminder-group-name" class="search-input" style="width: 100%;" placeholder="مثال: 3 ثانوي - سنتر الأوائل">
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                    <div>
+                        <label style="display: block; font-size: 0.84rem; color: var(--text-muted); margin-bottom: 4px;">موعد الحصة:</label>
+                        <input type="text" id="reminder-session-time" class="search-input" style="width: 100%;" placeholder="مثال: غداً الأحد 5:30 م">
+                    </div>
+                    <div>
+                        <label style="display: block; font-size: 0.84rem; color: var(--text-muted); margin-bottom: 4px;">مكان الحصة:</label>
+                        <input type="text" id="reminder-location" class="search-input" style="width: 100%;" placeholder="مثال: قاعة 2 أو أونلاين">
+                    </div>
+                </div>
+                <div>
+                    <label style="display: block; font-size: 0.84rem; color: var(--text-muted); margin-bottom: 4px;">المطلوب تجهيزه (الواجب / كويز):</label>
+                    <input type="text" id="reminder-tasks" class="search-input" style="width: 100%;" placeholder="مثال: حل شيت 4 + تجهيز درس النحو (يوجد كويز)">
+                </div>
+                <div>
+                    <label style="display: block; font-size: 0.84rem; color: var(--text-muted); margin-bottom: 4px;">معاينة نص الرسالة:</label>
+                    <textarea id="reminder-preview-text" class="search-input" rows="5" style="width: 100%; font-size: 0.86rem; line-height: 1.6; resize: none;" readonly></textarea>
+                </div>
+            </div>
+
+            <button onclick="shareSessionReminderWhatsApp()" class="btn" style="width: 100%; background: #25d366; color: #031024; font-weight: 800; font-size: 1rem; padding: 12px; border-radius: 12px; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                <i class="fa-brands fa-whatsapp" style="font-size: 1.2rem;"></i> نسخ ومشاركة على جروب الواتساب 📲
+            </button>
+        </div>
+    </div>
+
+    <!-- 7. Teacher Add Schedule Session Modal (إضافة موعد حصة أسبوعية) -->
+    <div id="teacher-add-schedule-modal" class="modal">
+        <div class="modal-content" style="max-width: 480px; padding: 22px; border-radius: 18px; background: var(--card-bg); border: 1.5px solid #ffa502;">
+            <span class="close" onclick="closeModal('teacher-add-schedule-modal')">&times;</span>
+            <div style="text-align: center; margin-bottom: 16px;">
+                <div style="font-size: 2.4rem; margin-bottom: 4px;">🗓️⏰</div>
+                <h3 style="color: #ffa502; margin: 0 0 4px 0; font-size: 1.3rem;">
+                    إضافة موعد حصة أسبوعية
+                </h3>
+                <p style="color: var(--text-muted); font-size: 0.84rem; margin: 0;">حدد اليوم والصف الدراسي ومقر وموعد الحصة</p>
+            </div>
+            <div style="text-align: right; margin-bottom: 14px;">
+                <label style="display: block; font-size: 0.84rem; color: var(--text-muted); margin-bottom: 4px;">يوم الحصة:</label>
+                <select id="tsched-day" class="search-input" style="width: 100%; margin-bottom: 10px;">
+                    <option value="السبت">السبت</option>
+                    <option value="الأحد">الأحد</option>
+                    <option value="الإثنين">الإثنين</option>
+                    <option value="الثلاثاء">الثلاثاء</option>
+                    <option value="الأربعاء">الأربعاء</option>
+                    <option value="الخميس">الخميس</option>
+                    <option value="الجمعة">الجمعة</option>
+                </select>
+
+                <label style="display: block; font-size: 0.84rem; color: var(--text-muted); margin-bottom: 4px;">الصف الدراسي (السنة الدراسية):</label>
+                <select id="tsched-stage" class="search-input" style="width: 100%; margin-bottom: 10px;">
+                    <option value="الصف الثالث الثانوي">الصف الثالث الثانوي (ثانوية عامة)</option>
+                    <option value="الصف الثاني الثانوي">الصف الثاني الثانوي</option>
+                    <option value="الصف الأول الثانوي">الصف الأول الثانوي</option>
+                    <option value="الصف الثالث الإعدادي">الصف الثالث الإعدادي</option>
+                    <option value="الصف الثاني الإعدادي">الصف الثاني الإعدادي</option>
+                    <option value="الصف الأول الإعدادي">الصف الأول الإعدادي</option>
+                    <option value="مرحلة ابتدائية">المرحلة الابتدائية</option>
+                </select>
+
+                <label style="display: block; font-size: 0.84rem; color: var(--text-muted); margin-bottom: 4px;">اسم المجموعة والمقر (السنتر / القاعة / أونلاين):</label>
+                <input type="text" id="tsched-center" class="search-input" placeholder="مثال: سنتر الأوائل - قاعة 2" style="width: 100%; margin-bottom: 10px;">
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                    <div>
+                        <label style="display: block; font-size: 0.84rem; color: var(--text-muted); margin-bottom: 4px;">وقت البدء:</label>
+                        <input type="text" id="tsched-start-time" class="search-input" placeholder="مثال: 5:00 م" value="5:00 م" style="width: 100%;">
+                    </div>
+                    <div>
+                        <label style="display: block; font-size: 0.84rem; color: var(--text-muted); margin-bottom: 4px;">وقت الانتهاء:</label>
+                        <input type="text" id="tsched-end-time" class="search-input" placeholder="مثال: 7:00 م" value="7:00 م" style="width: 100%;">
+                    </div>
+                </div>
+            </div>
+            <button onclick="saveNewScheduleSession()" class="btn btn-primary" style="width: 100%; font-weight: 800; font-size: 1rem; border-radius: 10px; background: #ffa502; color: #020d1a;">
+                حفظ موعد الحصة بالجدول 💾
             </button>
         </div>
     </div>
