@@ -262,6 +262,17 @@
                     </div>
                 </div>
             </div>
+            <!-- Streak Flame in Desktop Sidebar -->
+            <div id="desktop-streak-badge" class="desktop-streak-pill" onclick="switchPage('challenges')" title="أيام الاستمرار اليومي المتتالي 🔥" style="margin: 0 10px 10px; padding: 10px 14px; background: linear-gradient(135deg, rgba(255, 71, 87, 0.15), rgba(255, 165, 2, 0.15)); border: 1px solid rgba(255, 107, 129, 0.4); border-radius: 12px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; transition: transform 0.2s ease;">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <span style="font-size: 1.35rem; animation: flamePulse 1.6s infinite ease-in-out; display: inline-block;">🔥</span>
+                    <div>
+                        <div style="font-size: 0.82rem; font-weight: 800; color: #ffa502;">شعلة الاستمرار اليومي</div>
+                        <div style="font-size: 0.72rem; color: var(--text-muted);">حافظ على استمرارك كل يوم</div>
+                    </div>
+                </div>
+                <div style="font-weight: 900; color: #ff4757; font-size: 1.15rem;"><span id="desktop-streak-count">1</span> <span style="font-size: 0.75rem;">يوم</span></div>
+            </div>
             <ul class="nav-links">
                 <li class="active" data-page="dashboard"><i class="fa-solid fa-chart-pie"></i> لوحة التحكم</li>
                 <li data-page="schedule"><i class="fa-solid fa-calendar-week"></i> جدول الدروس</li>
@@ -308,7 +319,12 @@
                     <span id="mobile-welcome-name" class="name">يا بطل</span>
                 </div>
             </div>
-            <div class="header-actions">
+            <div class="header-actions" style="display: flex; align-items: center; gap: 8px;">
+                <div id="header-streak-badge" class="header-streak-pill" onclick="switchPage('challenges')" title="أيام الاستمرار اليومي المتتالي 🔥">
+                    <span class="flame-icon">🔥</span>
+                    <span id="header-streak-count">1</span>
+                    <span style="font-size: 0.72rem; color: #ffa502;">يوم</span>
+                </div>
                 <button class="icon-btn" onclick="toggleSidebar()"><i class="fa-solid fa-bars"></i></button>
             </div>
         </div>
@@ -420,6 +436,109 @@
                     <button onclick="window.switchPage('challenges')" class="theme-btn btn-hover-glow" style="background: linear-gradient(135deg, #fbbf24, #f59e0b); color: #0f172a; border: none; padding: 0.7rem 1.4rem; border-radius: 12px; font-weight: 800; font-family: 'Tajawal'; font-size: 0.92rem; cursor: pointer; white-space: nowrap; display: flex; align-items: center; gap: 6px;">
                         <i class="fa-solid fa-gamepad"></i> دخول غرفة التحديات 🚀
                     </button>
+                </div>
+
+                <!-- 🎯 سؤال التحدي اليومي لطلاب مصر (Daily Challenge Question) -->
+                <div id="daily-question-container" class="daily-question-card hover-glow-box">
+                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; border-bottom: 1px solid rgba(16, 185, 129, 0.25); padding-bottom: 10px;">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <span style="font-size: 1.8rem;">🎯</span>
+                            <div>
+                                <h3 style="margin: 0; color: #34d399; font-size: 1.15rem; border: none; padding: 0;">سؤال التحدي اليومي السريع</h3>
+                                <p style="margin: 3px 0 0; color: var(--text-muted); font-size: 0.82rem;">سؤال في دقيقة واحدة يثبت معلومتك ويكسبك نقاط خبرة فورية!</p>
+                            </div>
+                        </div>
+                        <span id="daily-q-reward-badge" style="background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); padding: 4px 12px; border-radius: 20px; font-size: 0.82rem; font-weight: 800;">
+                            +50 XP ⚡
+                        </span>
+                    </div>
+
+                    <div id="daily-q-loading" style="text-align: center; padding: 15px; color: var(--text-muted); font-size: 0.9rem;">
+                        <i class="fa-solid fa-circle-notch fa-spin"></i> جاري تحضير سؤال اليوم...
+                    </div>
+
+                    <div id="daily-q-body" style="display: none;">
+                        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">
+                            <span id="daily-q-subject-tag" style="background: rgba(0, 229, 255, 0.15); color: #00e5ff; border: 1px solid rgba(0, 229, 255, 0.3); padding: 3px 10px; border-radius: 10px; font-size: 0.78rem; font-weight: 700;">اللغة العربية</span>
+                            <span id="daily-q-difficulty-tag" style="background: rgba(251, 191, 36, 0.15); color: #fbbf24; border: 1px solid rgba(251, 191, 36, 0.3); padding: 3px 10px; border-radius: 10px; font-size: 0.78rem; font-weight: 700;">تحدي ذكاء</span>
+                        </div>
+                        <h4 id="daily-q-text" style="font-size: 1.05rem; line-height: 1.6; color: var(--text-main); margin: 0 0 16px 0; font-family: 'Tajawal', sans-serif;">---</h4>
+                        
+                        <div id="daily-q-options" style="display: flex; flex-direction: column;"></div>
+
+                        <div id="daily-q-explanation" style="display: none; margin-top: 14px; padding: 12px 16px; background: rgba(0, 229, 255, 0.08); border-right: 4px solid #00e5ff; border-radius: 10px;">
+                            <div style="font-weight: 800; color: #00e5ff; font-size: 0.9rem; margin-bottom: 4px;"><i class="fa-solid fa-lightbulb"></i> الشرح والتوضيح العلمي:</div>
+                            <p id="daily-q-explanation-text" style="margin: 0; color: #cbd5e1; font-size: 0.88rem; line-height: 1.5;"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 🏆 لوحة شرف الأبطال والتنافس لايف (Live Community Leaderboard) -->
+                <div id="dashboard-leaderboard-card" class="leaderboard-card hover-glow-box">
+                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; border-bottom: 1px solid rgba(251, 191, 36, 0.25); padding-bottom: 12px;">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <span style="font-size: 2rem;">🏆</span>
+                            <div>
+                                <h3 style="margin: 0; color: #fbbf24; font-size: 1.2rem; border: none; padding: 0;">لوحة شرف الأبطال والتنافس 🌟</h3>
+                                <p style="margin: 3px 0 0; color: var(--text-muted); font-size: 0.82rem;">أكثر الطلاب التزاماً وإنجازاً للمهام وجلسات المذاكرة هذا الأسبوع!</p>
+                            </div>
+                        </div>
+                        <button onclick="renderLeaderboard(true)" class="btn" style="background: rgba(251, 191, 36, 0.15); color: #fbbf24; border: 1px solid rgba(251, 191, 36, 0.4); font-size: 0.8rem; padding: 6px 12px; border-radius: 12px; cursor: pointer; display: flex; align-items: center; gap: 6px;">
+                            <i class="fa-solid fa-arrows-rotate"></i> تحديث لايف
+                        </button>
+                    </div>
+
+                    <!-- Top 3 Podium (منصة التتويج) -->
+                    <div id="leaderboard-podium" class="leaderboard-podium">
+                        <!-- Rank 2 -->
+                        <div class="podium-slot rank-2">
+                            <div class="podium-avatar">🥈</div>
+                            <div class="podium-name" id="podium-name-2">جاري التحميل...</div>
+                            <div class="podium-stage" id="podium-stage-2">---</div>
+                            <div class="podium-pillar">
+                                <span style="font-size: 1rem;">2</span>
+                                <small id="podium-xp-2" style="font-size: 0.72rem; opacity: 0.9;">-- XP</small>
+                            </div>
+                        </div>
+                        <!-- Rank 1 -->
+                        <div class="podium-slot rank-1">
+                            <span class="podium-crown">👑</span>
+                            <div class="podium-avatar">🥇</div>
+                            <div class="podium-name" id="podium-name-1">جاري التحميل...</div>
+                            <div class="podium-stage" id="podium-stage-1">---</div>
+                            <div class="podium-pillar">
+                                <span style="font-size: 1.2rem;">1</span>
+                                <small id="podium-xp-1" style="font-size: 0.76rem; font-weight: 900;">-- XP</small>
+                            </div>
+                        </div>
+                        <!-- Rank 3 -->
+                        <div class="podium-slot rank-3">
+                            <div class="podium-avatar">🥉</div>
+                            <div class="podium-name" id="podium-name-3">جاري التحميل...</div>
+                            <div class="podium-stage" id="podium-stage-3">---</div>
+                            <div class="podium-pillar">
+                                <span style="font-size: 0.95rem;">3</span>
+                                <small id="podium-xp-3" style="font-size: 0.72rem; opacity: 0.9;">-- XP</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ranks #4 to #10 List -->
+                    <div id="leaderboard-list" class="leaderboard-list"></div>
+
+                    <!-- Current Student Rank Banner -->
+                    <div id="my-rank-banner" class="my-rank-banner">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <span style="font-size: 1.3rem;">🚀</span>
+                            <div>
+                                <strong style="color: #00e5ff; font-size: 0.92rem;">مكانك بين الأبطال:</strong>
+                                <span id="my-rank-text" style="color: #f1f5f9; font-size: 0.88rem; margin-right: 6px;">جاري الحساب...</span>
+                            </div>
+                        </div>
+                        <button onclick="switchPage('challenges')" class="btn" style="background: #00e5ff; color: #020d1a; font-weight: 800; font-size: 0.82rem; padding: 6px 14px; border-radius: 10px; border: none; cursor: pointer;">
+                            ارفع ترتيبك الآن ⚡
+                        </button>
+                    </div>
                 </div>
                 
                 <!-- My Dream Banner -->
@@ -540,9 +659,37 @@
             <!-- Subjects Page -->
             <section id="subjects" class="page">
                 <header>
-                    <h1>المواد الدراسية 📚</h1>
-                    <button class="btn btn-primary" onclick="openModal('subject-modal')">إضافة مادة</button>
+                    <div>
+                        <h1>المواد الدراسية 📚</h1>
+                        <p style="color: var(--text-muted); margin-top: 4px;">أضف موادك أو اختر قالب مرحلتك الدراسية جاهزاً بضغطة زر واحدة!</p>
+                    </div>
+                    <button class="btn btn-primary" onclick="openModal('subject-modal')"><i class="fa-solid fa-plus"></i> إضافة مادة يدوياً</button>
                 </header>
+
+                <!-- ⚡ 1-Tap Grade Subject Presets Banner -->
+                <div class="card subject-presets-banner" style="background: linear-gradient(135deg, rgba(0, 229, 255, 0.08), rgba(112, 161, 255, 0.08)); border: 1.5px dashed rgba(0, 229, 255, 0.4); border-radius: 16px; padding: 1.2rem; margin-bottom: 1.5rem;">
+                    <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 12px;">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <span style="font-size: 1.8rem;">⚡</span>
+                            <div>
+                                <h3 style="margin: 0; color: #00e5ff; font-size: 1.1rem; border: none; padding: 0;">وفّر وقتك: قوالب المناهج المصرية الجاهزة بضغطة زر</h3>
+                                <p style="margin: 3px 0 0; color: var(--text-muted); font-size: 0.85rem;">اختر شعبتك أو صفك وسيتم تنزيل جميع المواد بألوانها فوراً لتبدأ مذاكرتك بدون تعب!</p>
+                            </div>
+                        </div>
+                        <span class="badge" style="background: rgba(46, 213, 115, 0.2); color: #2ed573; border: 1px solid rgba(46, 213, 115, 0.4); padding: 4px 10px; border-radius: 20px; font-size: 0.78rem; font-weight: 700;">جاهز للاستخدام 🚀</span>
+                    </div>
+                    <div class="preset-buttons-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 8px;">
+                        <button type="button" onclick="applyGradePreset('thanawya_sci')" class="preset-btn">🧪 تالتة ثانوي (علمي علوم)</button>
+                        <button type="button" onclick="applyGradePreset('thanawya_math')" class="preset-btn">📐 تالتة ثانوي (علمي رياضة)</button>
+                        <button type="button" onclick="applyGradePreset('thanawya_lit')" class="preset-btn">📚 تالتة ثانوي (أدبي)</button>
+                        <button type="button" onclick="applyGradePreset('sec_1')" class="preset-btn">🏫 أولى ثانوي عام</button>
+                        <button type="button" onclick="applyGradePreset('sec_2_sci')" class="preset-btn">🔬 تانية ثانوي (علمي)</button>
+                        <button type="button" onclick="applyGradePreset('sec_2_lit')" class="preset-btn">📖 تانية ثانوي (أدبي)</button>
+                        <button type="button" onclick="applyGradePreset('prep')" class="preset-btn">🎒 المرحلة الإعدادية</button>
+                        <button type="button" onclick="applyGradePreset('uni')" class="preset-btn">🎓 المرحلة الجامعية</button>
+                    </div>
+                </div>
+
                 <div class="subjects-grid" id="subjects-grid"></div>
             </section>
 
