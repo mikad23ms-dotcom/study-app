@@ -473,71 +473,91 @@
                     </div>
                 </div>
 
-                <!-- 🏆 لوحة شرف الأبطال والتنافس لايف (Live Community Leaderboard) -->
-                <div id="dashboard-leaderboard-card" class="leaderboard-card hover-glow-box">
-                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; border-bottom: 1px solid rgba(251, 191, 36, 0.25); padding-bottom: 12px;">
+                <!-- 🏆 بطاقة ترتيبك وإنجازك الشخصي بين الطلاب (Personal Rank & Engagement Card) -->
+                <div id="dashboard-leaderboard-card" class="personal-rank-card hover-glow-box">
+                    <!-- Header -->
+                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; border-bottom: 1px solid rgba(251, 191, 36, 0.25); padding-bottom: 12px; margin-bottom: 16px;">
                         <div style="display: flex; align-items: center; gap: 10px;">
                             <span style="font-size: 2rem;">🏆</span>
                             <div>
-                                <h3 style="margin: 0; color: #fbbf24; font-size: 1.2rem; border: none; padding: 0;">لوحة شرف الأبطال والتنافس 🌟</h3>
-                                <p style="margin: 3px 0 0; color: var(--text-muted); font-size: 0.82rem;">أكثر الطلاب التزاماً وإنجازاً للمهام وجلسات المذاكرة هذا الأسبوع!</p>
+                                <h3 style="margin: 0; color: #fbbf24; font-size: 1.2rem; border: none; padding: 0;">مركزك ومستوى تفاعلك بين الطلاب 🌟</h3>
+                                <p style="margin: 3px 0 0; color: var(--text-muted); font-size: 0.82rem;">تقييم مباشر لمدى التزامك وإنجازك مقارنة بجميع طلاب التطبيق!</p>
                             </div>
                         </div>
-                        <button onclick="renderLeaderboard(true)" class="btn" style="background: rgba(251, 191, 36, 0.15); color: #fbbf24; border: 1px solid rgba(251, 191, 36, 0.4); font-size: 0.8rem; padding: 6px 12px; border-radius: 12px; cursor: pointer; display: flex; align-items: center; gap: 6px;">
-                            <i class="fa-solid fa-arrows-rotate"></i> تحديث لايف
-                        </button>
-                    </div>
-
-                    <!-- Top 3 Podium (منصة التتويج) -->
-                    <div id="leaderboard-podium" class="leaderboard-podium">
-                        <!-- Rank 2 -->
-                        <div class="podium-slot rank-2">
-                            <div class="podium-avatar">🥈</div>
-                            <div class="podium-name" id="podium-name-2">جاري التحميل...</div>
-                            <div class="podium-stage" id="podium-stage-2">---</div>
-                            <div class="podium-pillar">
-                                <span style="font-size: 1rem;">2</span>
-                                <small id="podium-xp-2" style="font-size: 0.72rem; opacity: 0.9;">-- XP</small>
-                            </div>
-                        </div>
-                        <!-- Rank 1 -->
-                        <div class="podium-slot rank-1">
-                            <span class="podium-crown">👑</span>
-                            <div class="podium-avatar">🥇</div>
-                            <div class="podium-name" id="podium-name-1">جاري التحميل...</div>
-                            <div class="podium-stage" id="podium-stage-1">---</div>
-                            <div class="podium-pillar">
-                                <span style="font-size: 1.2rem;">1</span>
-                                <small id="podium-xp-1" style="font-size: 0.76rem; font-weight: 900;">-- XP</small>
-                            </div>
-                        </div>
-                        <!-- Rank 3 -->
-                        <div class="podium-slot rank-3">
-                            <div class="podium-avatar">🥉</div>
-                            <div class="podium-name" id="podium-name-3">جاري التحميل...</div>
-                            <div class="podium-stage" id="podium-stage-3">---</div>
-                            <div class="podium-pillar">
-                                <span style="font-size: 0.95rem;">3</span>
-                                <small id="podium-xp-3" style="font-size: 0.72rem; opacity: 0.9;">-- XP</small>
-                            </div>
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <span class="privacy-badge" style="background: rgba(46, 213, 115, 0.15); color: #2ed573; border: 1px solid rgba(46, 213, 115, 0.35); padding: 4px 10px; border-radius: 20px; font-size: 0.78rem; font-weight: 700; display: inline-flex; align-items: center; gap: 5px;">
+                                <i class="fa-solid fa-shield-halved"></i> خصوصيتك محمية 100%
+                            </span>
+                            <button onclick="renderLeaderboard(true)" class="btn" style="background: rgba(251, 191, 36, 0.15); color: #fbbf24; border: 1px solid rgba(251, 191, 36, 0.4); font-size: 0.8rem; padding: 6px 12px; border-radius: 12px; cursor: pointer; display: flex; align-items: center; gap: 6px;">
+                                <i class="fa-solid fa-arrows-rotate"></i> تحديث
+                            </button>
                         </div>
                     </div>
 
-                    <!-- Ranks #4 to #10 List -->
-                    <div id="leaderboard-list" class="leaderboard-list"></div>
+                    <!-- Personal Rank Hero Showcase -->
+                    <div class="user-rank-hero" style="background: linear-gradient(135deg, rgba(251, 191, 36, 0.12), rgba(0, 229, 255, 0.08)); border: 1.5px solid rgba(251, 191, 36, 0.35); border-radius: 18px; padding: 1.4rem; text-align: center; margin-bottom: 16px; position: relative;">
+                        <div id="user-rank-medal-icon" style="font-size: 3.5rem; line-height: 1; margin-bottom: 8px; filter: drop-shadow(0 0 15px rgba(251, 191, 36, 0.5));">🥇</div>
+                        <div style="display: inline-block; background: rgba(251, 191, 36, 0.2); border: 1px solid #fbbf24; color: #fbbf24; padding: 4px 16px; border-radius: 20px; font-weight: 800; font-size: 0.85rem; margin-bottom: 8px;" id="user-tier-badge">
+                            🌟 متصدر الأسبوع
+                        </div>
+                        <h2 id="user-rank-title" style="margin: 0 0 6px 0; color: #f8fafc; font-size: 1.45rem; font-family: 'Tajawal', sans-serif;">
+                            أنت في المركز <span style="color: #fbbf24; font-size: 1.8rem;" id="user-rank-number">#1</span> بين جميع الطلاب!
+                        </h2>
+                        <p id="user-rank-subtitle" style="margin: 0; color: #94a3b8; font-size: 0.9rem;">
+                            مجموع نقاطك يضعك ضمن أفضل الطلاب الأكثر التزاماً ومذاكرة هذا الأسبوع! 🚀
+                        </p>
+                    </div>
 
-                    <!-- Current Student Rank Banner -->
-                    <div id="my-rank-banner" class="my-rank-banner">
+                    <!-- 4 Personal Engagement Stats Grid -->
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin-bottom: 16px;">
+                        <!-- Stat 1: Total XP -->
+                        <div style="background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(251, 191, 36, 0.25); border-radius: 14px; padding: 12px; text-align: center;">
+                            <span style="font-size: 1.5rem;">⚡</span>
+                            <div style="font-size: 0.76rem; color: var(--text-muted); margin-top: 4px;">نقاط الخبرة</div>
+                            <div id="user-stat-xp" style="font-weight: 900; font-size: 1.25rem; color: #fbbf24; margin-top: 2px;">0 XP</div>
+                        </div>
+                        <!-- Stat 2: Streak -->
+                        <div style="background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 107, 129, 0.25); border-radius: 14px; padding: 12px; text-align: center;">
+                            <span style="font-size: 1.5rem;">🔥</span>
+                            <div style="font-size: 0.76rem; color: var(--text-muted); margin-top: 4px;">شعلة الالتزام</div>
+                            <div id="user-stat-streak" style="font-weight: 900; font-size: 1.25rem; color: #ff6b81; margin-top: 2px;">1 يوم</div>
+                        </div>
+                        <!-- Stat 3: Tasks Completed -->
+                        <div style="background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(46, 213, 115, 0.25); border-radius: 14px; padding: 12px; text-align: center;">
+                            <span style="font-size: 1.5rem;">✅</span>
+                            <div style="font-size: 0.76rem; color: var(--text-muted); margin-top: 4px;">المهام المنجزة</div>
+                            <div id="user-stat-tasks" style="font-weight: 900; font-size: 1.25rem; color: #2ed573; margin-top: 2px;">0 مهمة</div>
+                        </div>
+                        <!-- Stat 4: Focus Time -->
+                        <div style="background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(0, 229, 255, 0.25); border-radius: 14px; padding: 12px; text-align: center;">
+                            <span style="font-size: 1.5rem;">⏱️</span>
+                            <div style="font-size: 0.76rem; color: var(--text-muted); margin-top: 4px;">جلسات التركيز</div>
+                            <div id="user-stat-focus" style="font-weight: 900; font-size: 1.25rem; color: #00e5ff; margin-top: 2px;">0 جلسة</div>
+                        </div>
+                    </div>
+
+                    <!-- Progress to Next Target & Action -->
+                    <div style="background: rgba(0, 229, 255, 0.06); border: 1px dashed rgba(0, 229, 255, 0.35); border-radius: 14px; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
                         <div style="display: flex; align-items: center; gap: 10px;">
-                            <span style="font-size: 1.3rem;">🚀</span>
+                            <span style="font-size: 1.5rem;">🎯</span>
                             <div>
-                                <strong style="color: #00e5ff; font-size: 0.92rem;">مكانك بين الأبطال:</strong>
-                                <span id="my-rank-text" style="color: #f1f5f9; font-size: 0.88rem; margin-right: 6px;">جاري الحساب...</span>
+                                <strong id="user-next-target-text" style="color: #00e5ff; font-size: 0.92rem; display: block;">أنت على قمة الترتيب!</strong>
+                                <small style="color: var(--text-muted); font-size: 0.78rem;">حافظ على شعلتك اليومية ومذاكرة جلسة بومودورو للبقاء في الصدارة</small>
                             </div>
                         </div>
-                        <button onclick="switchPage('challenges')" class="btn" style="background: #00e5ff; color: #020d1a; font-weight: 800; font-size: 0.82rem; padding: 6px 14px; border-radius: 10px; border: none; cursor: pointer;">
-                            ارفع ترتيبك الآن ⚡
-                        </button>
+                        <div style="display: flex; gap: 8px;">
+                            <button onclick="switchPage('pomodoro')" class="btn" style="background: #00e5ff; color: #020d1a; font-weight: 800; font-size: 0.82rem; padding: 6px 14px; border-radius: 10px; border: none; cursor: pointer;">
+                                <i class="fa-solid fa-stopwatch"></i> ابدأ مذاكرة
+                            </button>
+                            <button onclick="switchPage('challenges')" class="btn" style="background: rgba(251, 191, 36, 0.2); color: #fbbf24; border: 1px solid #fbbf24; font-weight: 800; font-size: 0.82rem; padding: 6px 14px; border-radius: 10px; cursor: pointer;">
+                                <i class="fa-solid fa-gamepad"></i> التحديات
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Privacy Guarantee Footnote -->
+                    <div style="margin-top: 12px; text-align: center; font-size: 0.76rem; color: var(--text-muted);">
+                        <i class="fa-solid fa-lock" style="color: #2ed573;"></i> نظام التنافس آمن وسري تماماً: إحصائياتك وترتيبك تظهر لك وحدك، ولا يمكن لأي طالب أو شخص آخر معرفة اسمك أو وقت مذاكرتك.
                     </div>
                 </div>
                 
