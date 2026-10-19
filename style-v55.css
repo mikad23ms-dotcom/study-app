@@ -3322,11 +3322,13 @@ body[data-theme="dark"]::after {
         visibility: hidden !important;
     }
     #printable-exam-sheet, #printable-exam-sheet *,
-    #printable-certificate-sheet, #printable-certificate-sheet * {
+    #printable-certificate-sheet, #printable-certificate-sheet *,
+    #printable-lesson-sheet, #printable-lesson-sheet * {
         visibility: visible !important;
     }
     #printable-exam-sheet,
-    #printable-certificate-sheet {
+    #printable-certificate-sheet,
+    #printable-lesson-sheet {
         position: fixed !important;
         left: 0 !important;
         top: 0 !important;
