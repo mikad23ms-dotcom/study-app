@@ -777,24 +777,26 @@ header h1:hover {
     border: 1px solid transparent; /* Ensure border exists for transition */
 }
 
-.progress-section:hover, .subject-card:hover, .pomodoro-container:hover, .ai-container:hover, .card:hover, .day-card:hover, .task-item:hover, .dashboard-widget:hover, .prayer-time-box:hover {
-    transform: translateY(-8px) !important;
-    box-shadow: 0 20px 40px rgba(0, 229, 255, 0.15) !important;
-    border-color: rgba(0, 229, 255, 0.3) !important;
-}
+@media (hover: hover) and (pointer: fine) {
+    .progress-section:hover, .subject-card:hover, .pomodoro-container:hover, .ai-container:hover, .card:hover, .day-card:hover, .task-item:hover, .dashboard-widget:hover, .prayer-time-box:hover {
+        transform: translateY(-8px) !important;
+        box-shadow: 0 20px 40px rgba(0, 229, 255, 0.15) !important;
+        border-color: rgba(0, 229, 255, 0.3) !important;
+    }
 
-/* Dark Mode Magic Glow */
-[data-theme="dark"] .progress-section:hover, 
-[data-theme="dark"] .subject-card:hover, 
-[data-theme="dark"] .pomodoro-container:hover, 
-[data-theme="dark"] .ai-container:hover, 
-[data-theme="dark"] .card:hover, 
-[data-theme="dark"] .day-card:hover, 
-[data-theme="dark"] .task-item:hover, 
-[data-theme="dark"] .dashboard-widget:hover, 
-[data-theme="dark"] .prayer-time-box:hover {
-    box-shadow: 0 15px 35px rgba(0, 229, 255, 0.4) !important;
-    border-color: rgba(0, 229, 255, 0.6) !important;
+    /* Dark Mode Magic Glow */
+    [data-theme="dark"] .progress-section:hover, 
+    [data-theme="dark"] .subject-card:hover, 
+    [data-theme="dark"] .pomodoro-container:hover, 
+    [data-theme="dark"] .ai-container:hover, 
+    [data-theme="dark"] .card:hover, 
+    [data-theme="dark"] .day-card:hover, 
+    [data-theme="dark"] .task-item:hover, 
+    [data-theme="dark"] .dashboard-widget:hover, 
+    [data-theme="dark"] .prayer-time-box:hover {
+        box-shadow: 0 15px 35px rgba(0, 229, 255, 0.4) !important;
+        border-color: rgba(0, 229, 255, 0.6) !important;
+    }
 }
 
 /* ========================================================== */
@@ -1136,7 +1138,7 @@ body[data-theme="dark"]::after {
         backdrop-filter: blur(20px) !important;
         -webkit-backdrop-filter: blur(20px) !important;
         border-radius: 40px !important;
-        display: flex !important;
+        display: flex;
         justify-content: space-around !important;
         align-items: center !important;
         border: 1px solid rgba(255, 255, 255, 0.08) !important;
@@ -1146,6 +1148,14 @@ body[data-theme="dark"]::after {
         margin: 0 !important;
         /* Default active index is 0 (first item on the right) */
         --active-index: 0;
+    }
+
+    .mobile-bottom-nav.nav-hidden,
+    .mobile-bottom-nav[style*="display: none"],
+    .mobile-bottom-nav[style*="display:none"] {
+        display: none !important;
+        visibility: hidden !important;
+        pointer-events: none !important;
     }
 
     [data-theme="light"] .mobile-bottom-nav {
@@ -3331,5 +3341,49 @@ body[data-theme="dark"]::after {
     }
     .no-print {
         display: none !important;
+    }
+}
+
+
+/* ======================================================== */
+/* 🖥️ DESKTOP HARMONIZATION & HIGH-RES DISPLAY STYLING   */
+/* ======================================================== */
+.page {
+    max-width: 1360px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+@media (min-width: 901px) {
+    .main-content {
+        padding: 32px 42px !important;
+        background: radial-gradient(circle at top right, rgba(0, 229, 255, 0.03), transparent 60%),
+                    radial-gradient(circle at bottom left, rgba(255, 165, 2, 0.02), transparent 50%);
+    }
+
+    #main-today-grid.dashboard-grid {
+        display: grid !important;
+        grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr) !important;
+        gap: 24px !important;
+        align-items: start !important;
+    }
+
+    .dash-kpi-bar {
+        display: grid !important;
+        grid-template-columns: repeat(4, 1fr) !important;
+        gap: 16px !important;
+    }
+
+    .dash-interactive-grid {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 24px !important;
+        align-items: start !important;
+    }
+
+    .teacher-kpi-strip {
+        display: grid !important;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)) !important;
+        gap: 18px !important;
     }
 }

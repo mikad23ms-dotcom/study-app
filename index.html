@@ -104,7 +104,7 @@
         </nav>
 
         <!-- Teacher Floating Bottom Nav (Shown only for Teachers) -->
-        <nav class="mobile-bottom-nav d-mobile" id="teacher-bottom-nav" style="display: none;">
+        <nav class="mobile-bottom-nav d-mobile nav-hidden" id="teacher-bottom-nav" style="display: none !important;">
             <div class="nav-item active" data-page="teacher-dashboard" onclick="switchPage('teacher-dashboard'); switchTeacherTab('overview');">
                 <i class="fa-solid fa-chart-pie"></i>
                 <span>الرئيسية</span>
@@ -319,7 +319,6 @@
                 <li data-page="notifications-settings"><i class="fa-solid fa-bell" style="color: #feca57;"></i> الإشعارات الذكية 🔔</li>
                 <li data-page="challenges"><i class="fa-solid fa-gamepad" style="color: var(--primary-color);"></i> تحديات المذاكرة 🎮</li>
                 <li data-page="comments-wall"><i class="fa-solid fa-comments" style="color: var(--primary-color);"></i> كلمة تشجعني ✨</li>
-                <li onclick="switchAppRole('teacher'); toggleSidebar();" style="cursor: pointer; background: linear-gradient(135deg, rgba(255, 165, 2, 0.15), rgba(255, 71, 87, 0.1)); border-radius: 8px; margin-top: 5px; border: 1px dashed rgba(255, 165, 2, 0.5); color: #ffa502; font-weight: bold;"><i class="fa-solid fa-chalkboard-user" style="color: #ffa502;"></i> منصة ووضع المعلم 👨‍🏫 <span style="background: #ffa502; color: #020d1a; font-size: 0.65rem; padding: 2px 6px; border-radius: 8px; font-weight: 800; margin-right: 4px;">جديد ✨</span></li>
                 <li onclick="openWhatsNew()" style="cursor: pointer; background: rgba(0, 229, 255, 0.08); border-radius: 8px; margin-top: 5px;"><i class="fa-solid fa-bullhorn" style="color: #00e5ff;"></i> مميزات التحديث الجديد 🚀</li>
                 <li onclick="openDataTransferModal()" style="cursor: pointer; background: rgba(46, 213, 115, 0.1); border-radius: 8px; margin-top: 5px;"><i class="fa-solid fa-arrows-rotate" style="color: #2ed573;"></i> نقل ونسخ البيانات 📲</li>
                 <li onclick="installPwaApp(); toggleSidebar();" style="cursor: pointer; background: rgba(0, 229, 255, 0.12); border-radius: 8px; margin-top: 5px; border: 1px solid rgba(0, 229, 255, 0.3);"><i class="fa-solid fa-mobile-screen-button" style="color: #00e5ff;"></i> تثبيت التطبيق على هاتفك (آمن 100%) 📲</li>
@@ -334,8 +333,7 @@
                 <li onclick="switchPage('teacher-dashboard'); switchTeacherTab('attendance'); toggleSidebar();"><i class="fa-solid fa-users-rectangle" style="color: #2ed573;"></i> دفتر الحضور والدرجات 📲</li>
                 <li onclick="switchPage('teacher-dashboard'); switchTeacherTab('library'); toggleSidebar();"><i class="fa-solid fa-book-bookmark" style="color: #e056fd;"></i> بنك الملازم والوزارة 📚</li>
                 <li onclick="switchPage('teacher-dashboard'); switchTeacherTab('card'); toggleSidebar();"><i class="fa-solid fa-id-card-clip" style="color: #f0932b;"></i> كارت المعلم الرقمي 🌟</li>
-                <li onclick="switchAppRole('student'); toggleSidebar();" style="background: rgba(0, 229, 255, 0.08); border-radius: 8px; margin-top: 15px; border: 1px dashed rgba(0, 229, 255, 0.3); cursor: pointer;"><i class="fa-solid fa-graduation-cap" style="color: #00e5ff;"></i> معاينة وضع الطالب 👀</li>
-                <li onclick="openDataTransferModal(); toggleSidebar();" style="background: rgba(46, 213, 115, 0.08); border-radius: 8px; margin-top: 5px; cursor: pointer;"><i class="fa-solid fa-arrows-rotate" style="color: #2ed573;"></i> نسخ ونقل البيانات 📲</li>
+                <li onclick="openDataTransferModal(); toggleSidebar();" style="background: rgba(46, 213, 115, 0.08); border-radius: 8px; margin-top: 15px; cursor: pointer;"><i class="fa-solid fa-arrows-rotate" style="color: #2ed573;"></i> نسخ ونقل البيانات 📲</li>
                 <li onclick="installPwaApp(); toggleSidebar();" style="cursor: pointer; background: rgba(0, 229, 255, 0.12); border-radius: 8px; margin-top: 5px; border: 1px solid rgba(0, 229, 255, 0.3);"><i class="fa-solid fa-mobile-screen-button" style="color: #00e5ff;"></i> تثبيت التطبيق على هاتفك 📲</li>
             </ul>
             <div class="sidebar-footer">
@@ -427,10 +425,6 @@
                     <button onclick="shareTeacherCodeOnWhatsApp()" class="btn" style="background: #25d366; color: #020d1a; font-weight: 800; font-size: 0.84rem; padding: 8px 12px; border-radius: 12px; border: none; cursor: pointer; display: flex; align-items: center; gap: 6px;">
                         <i class="fa-brands fa-whatsapp"></i>
                         <span>دعوة الطلاب</span>
-                    </button>
-                    <button onclick="switchAppRole('student')" class="btn" style="background: rgba(0, 229, 255, 0.12); color: #00e5ff; border: 1px solid rgba(0, 229, 255, 0.3); font-size: 0.82rem; padding: 8px 12px; border-radius: 12px; cursor: pointer; display: flex; align-items: center; gap: 5px;">
-                        <i class="fa-solid fa-graduation-cap"></i>
-                        <span>وضع الطالب</span>
                     </button>
                 </div>
             </header>
@@ -970,32 +964,6 @@
                         </button>
                     </div>
                 </header>
-
-                <!-- Teacher Suite Discovery Banner for Previously Registered Users -->
-                <div id="teacher-discovery-banner" style="display: none; background: linear-gradient(135deg, rgba(255, 165, 2, 0.16), rgba(255, 71, 87, 0.1)); border: 1.5px solid rgba(255, 165, 2, 0.45); border-radius: 16px; padding: 14px 18px; margin-bottom: 1.2rem; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; box-shadow: 0 4px 20px rgba(255, 165, 2, 0.15);">
-                    <div style="display: flex; align-items: center; gap: 12px;">
-                        <div style="background: rgba(255, 165, 2, 0.2); width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; flex-shrink: 0;">
-                            👨‍🏫
-                        </div>
-                        <div>
-                            <div style="display: flex; align-items: center; gap: 8px;">
-                                <strong style="color: #ffa502; font-size: 1.05rem;">هل أنت معلم أو تدير مجموعات وسناتر؟ 🚀</strong>
-                                <span style="background: #ffa502; color: #020d1a; font-size: 0.7rem; font-weight: 800; padding: 2px 8px; border-radius: 8px;">جديد وحصري</span>
-                            </div>
-                            <p style="margin: 4px 0 0; color: #cbd5e1; font-size: 0.86rem; line-height: 1.5;">
-                                تم تدشين <strong>منصة المعلم الذكية</strong> المستقلة! صانع امتحانات فوري بالـ AI مع نموذج الإجابة، دفتر غياب وواجب ودرجات بلمسة واحدة، ورسائل واتساب رسمية لأولياء الأمور.
-                            </p>
-                        </div>
-                    </div>
-                    <div style="display: flex; gap: 8px; align-items: center;">
-                        <button onclick="switchAppRole('teacher')" class="btn" style="background: #ffa502; color: #020d1a; font-weight: 800; font-size: 0.85rem; padding: 9px 18px; border-radius: 10px; border: none; cursor: pointer; display: flex; align-items: center; gap: 6px;">
-                            <span>الانتقال لمنصة المعلم 👨‍🏫</span>
-                        </button>
-                        <button onclick="dismissTeacherDiscoveryBanner()" title="إخفاء الإشعار" style="background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); color: #94a3b8; border-radius: 10px; cursor: pointer; font-size: 0.95rem; padding: 8px 12px;">
-                            تخطي ✕
-                        </button>
-                    </div>
-                </div>
 
                 <!-- ⚡ Top Daily Status Chips (Sleek Glassmorphism KPI Bar) -->
                 <div class="dash-kpi-bar" id="dash-kpi-bar">
@@ -4130,20 +4098,6 @@
                 </div>
                 <button onclick="openDataTransferModal('export')" class="btn" style="background: #2ed573; color: #031024; font-weight: 700; font-size: 0.82rem; padding: 6px 14px; border-radius: 8px; cursor: pointer; border: none;">
                     نقل بياناتي الآن 📋
-                </button>
-            </div>
-
-            <!-- Teacher Suite Grand Callout -->
-            <div style="background: linear-gradient(135deg, rgba(255, 165, 2, 0.16), rgba(255, 71, 87, 0.12)); border: 1.5px solid rgba(255, 165, 2, 0.45); border-radius: 14px; padding: 14px; margin-bottom: 1.2rem; display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap;">
-                <div style="display: flex; align-items: center; gap: 10px;">
-                    <span style="font-size: 1.8rem;">👨‍🏫</span>
-                    <div>
-                        <strong style="color: #ffa502; font-size: 1rem; display: block;">هل أنت معلم أو تدير مجموعات وسناتر؟</strong>
-                        <span style="color: #cbd5e1; font-size: 0.84rem;">تم إطلاق "منصة المعلم الذكية" المستقلة! صانع امتحانات بالـ AI، دفتر غياب، وواتساب لأولياء الأمور.</span>
-                    </div>
-                </div>
-                <button onclick="closeWhatsNew(); switchAppRole('teacher');" class="btn" style="background: #ffa502; color: #020d1a; font-weight: 800; font-size: 0.85rem; padding: 8px 16px; border-radius: 10px; cursor: pointer; border: none;">
-                    الانتقال لمنصة المعلم 🚀
                 </button>
             </div>
 
