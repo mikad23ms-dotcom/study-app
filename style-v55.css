@@ -765,7 +765,7 @@ header h1:hover {
 
 @media (min-width: 769px) {
     /* HIDDEN ON DESKTOP */
-    .mobile-bottom-nav, #sidebar-overlay, .close-sidebar-btn, .mobile-top-header, .d-mobile {
+    .mobile-bottom-nav, #student-bottom-nav, #teacher-bottom-nav, #quick-fab-container, #sidebar-overlay, .close-sidebar-btn, .mobile-top-header, .d-mobile {
         display: none !important;
     }
 }
@@ -3361,6 +3361,12 @@ body[data-theme="dark"]::after {
                     radial-gradient(circle at bottom left, rgba(255, 165, 2, 0.02), transparent 50%);
     }
 
+    .mobile-bottom-nav, #student-bottom-nav, #teacher-bottom-nav, #quick-fab-container, .mobile-top-header, .d-mobile {
+        display: none !important;
+        visibility: hidden !important;
+        pointer-events: none !important;
+    }
+
     #main-today-grid.dashboard-grid {
         display: grid !important;
         grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr) !important;
@@ -3381,9 +3387,38 @@ body[data-theme="dark"]::after {
         align-items: start !important;
     }
 
+    #spiritual-exams-grid {
+        display: grid !important;
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 20px !important;
+        align-items: stretch !important;
+    }
+
     .teacher-kpi-strip {
         display: grid !important;
         grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)) !important;
         gap: 18px !important;
+        align-items: stretch !important;
     }
 }
+
+@media (max-width: 900px) {
+    #spiritual-exams-grid {
+        grid-template-columns: 1fr !important;
+        gap: 16px !important;
+    }
+}
+
+#top-dream-hero {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+#top-dream-hero:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 35px rgba(0, 229, 255, 0.3) !important;
+}
+
+#dashboard-exams-grid .exam-card {
+    padding: 12px 14px !important;
+    margin-bottom: 0 !important;
+}
+

@@ -965,6 +965,46 @@
                     </div>
                 </header>
 
+                <!-- 🌟 HERO TOP DREAM BANNER (حلمي اللي بسعى عشانه - في قمة الشاشة ليكون أول ما يراه الطالب) -->
+                <div id="top-dream-hero" class="card hover-glow-box" style="background: linear-gradient(135deg, rgba(0, 229, 255, 0.14), rgba(15, 23, 42, 0.92)); border: 2px solid #00e5ff; border-radius: 18px; padding: 1.1rem 1.4rem; margin-bottom: 1.3rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; box-shadow: 0 6px 28px rgba(0, 229, 255, 0.22); position: relative; overflow: hidden;">
+                    <div style="display: flex; align-items: center; gap: 14px; flex-wrap: wrap;">
+                        <div style="width: 52px; height: 52px; border-radius: 16px; background: rgba(0, 229, 255, 0.2); border: 1.5px solid #00e5ff; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; flex-shrink: 0; box-shadow: 0 0 16px rgba(0, 229, 255, 0.4);">
+                            🎓
+                        </div>
+                        <div>
+                            <div style="display: flex; align-items: center; gap: 8px;">
+                                <h3 style="margin: 0; color: #00e5ff; font-size: 1.1rem; border: none; padding: 0; font-family: 'Tajawal', sans-serif;">
+                                    <i class="fa-solid fa-star" style="color: #feca57;"></i> حلمي اللي بسعى عشانه
+                                </h3>
+                                <span style="font-size: 0.72rem; color: #cbd5e1; background: rgba(255,255,255,0.08); padding: 2px 8px; border-radius: 10px;">مصدر إصرارك وطاقتك 🚀</span>
+                            </div>
+                            <div id="dream-display-container" style="display: flex; align-items: center; gap: 12px; margin-top: 4px; flex-wrap: wrap;">
+                                <span id="dream-text" style="font-size: 1.35rem; font-weight: 900; color: #fff; font-family: 'Tajawal', sans-serif; letter-spacing: 0.5px; text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);">
+                                    لم تكتب حلمك بعد..
+                                </span>
+                                <button onclick="editDream()" class="theme-btn" style="background: rgba(0, 229, 255, 0.2); color: #00e5ff; border: 1px solid rgba(0, 229, 255, 0.4); padding: 4px 12px; border-radius: 8px; font-size: 0.8rem; cursor: pointer; display: inline-flex; align-items: center; gap: 5px;">
+                                    <i class="fa-solid fa-pen"></i> تعديل
+                                </button>
+                            </div>
+                            <div id="dream-edit-container" style="display: none; align-items: center; gap: 8px; margin-top: 6px; flex-wrap: wrap;">
+                                <input type="text" id="dream-input" placeholder="نفسك تطلع إيه؟ إيه الكلية اللي بتحلم بيها؟" style="padding: 7px 14px; border: 2px solid #00e5ff; border-radius: 8px; font-family: 'Tajawal'; background: rgba(15, 23, 42, 0.95); color: #fff; font-size: 0.95rem; min-width: 250px;" onkeypress="if(event.key==='Enter') saveDream()">
+                                <button onclick="saveDream()" class="theme-btn" style="background: linear-gradient(135deg, #00e5ff, #00b8cc); color: #020d1a; font-weight: 800; padding: 7px 16px; border-radius: 8px; font-size: 0.85rem; border: none; cursor: pointer;">
+                                    <i class="fa-solid fa-check"></i> حفظ
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Inspiring Motivation Quote -->
+                    <div style="background: rgba(255, 255, 255, 0.04); border: 1px dashed rgba(0, 229, 255, 0.35); border-radius: 12px; padding: 8px 14px; text-align: right; max-width: 320px;">
+                        <span style="font-size: 0.78rem; color: #38bdf8; font-weight: bold; display: block; margin-bottom: 2px;">
+                            <i class="fa-solid fa-fire"></i> تذكّر دائماً:
+                        </span>
+                        <p style="margin: 0; font-size: 0.78rem; color: #94a3b8; line-height: 1.4;">
+                            "كل دقيقة مذاكرة اليوم تقربك خطوة حقيقية من حلمك وتصنع مستقبلك."
+                        </p>
+                    </div>
+                </div>
+
                 <!-- ⚡ Top Daily Status Chips (Sleek Glassmorphism KPI Bar) -->
                 <div class="dash-kpi-bar" id="dash-kpi-bar">
                     <div class="dash-kpi-chip" onclick="switchPage('challenges')" title="شعلة الاستمرار اليومي">
@@ -1238,94 +1278,95 @@
                     </div>
                 </div>
 
-                <!-- 🌟 SECTION 3: INSPIRATION & DAILY STREAK (شعلة الالتزام وحلمي الدراسي) -->
-                <div class="dash-interactive-grid" style="margin-bottom: 1.8rem;">
-                    <!-- Left: شعلة التزامك وصندوق المفاجأة اليومي -->
-                    <div id="dashboard-streak-banner" class="card hover-glow-box" style="background: linear-gradient(135deg, rgba(239, 68, 68, 0.12), rgba(245, 158, 11, 0.1)); border: 1.5px solid rgba(245, 158, 11, 0.45); border-radius: 18px; padding: 1.2rem; display: flex; flex-direction: column; justify-content: space-between; gap: 12px; box-shadow: 0 4px 20px rgba(245, 158, 11, 0.15); margin-bottom: 0;">
-                        <div style="display: flex; align-items: center; gap: 12px;">
-                            <span style="font-size: 2.2rem; animation: flameFlicker 2s infinite ease-in-out alternate; display: inline-block;">🔥</span>
-                            <div>
-                                <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
-                                    <strong id="dash-streak-title" style="color: #fbbf24; font-size: 1.1rem; font-family: 'Tajawal', sans-serif;">شعلة التزامك: 0 أيام متتالية! 🔥</strong>
-                                    <span id="dash-mystery-badge" style="background: rgba(245, 158, 11, 0.25); color: #fbbf24; font-size: 0.75rem; font-weight: 700; padding: 2px 8px; border-radius: 12px; border: 1px solid rgba(245, 158, 11, 0.5);">
-                                        🎁 هدية اليوم جاهزة!
-                                    </span>
-                                </div>
-                                <p id="dash-streak-sub" style="margin: 4px 0 0 0; color: #cbd5e1; font-size: 0.84rem; line-height: 1.4;">
-                                    ادخل غرفة التحديات، افتح صندوق حظك واكسب XP مضاعف!
-                                </p>
+                <!-- 🔥 SECTION 3: DAILY STREAK & CHALLENGE RIBBON -->
+                <div id="dashboard-streak-banner" class="card hover-glow-box" style="background: linear-gradient(135deg, rgba(239, 68, 68, 0.12), rgba(245, 158, 11, 0.1)); border: 1.5px solid rgba(245, 158, 11, 0.45); border-radius: 18px; padding: 1.1rem 1.6rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; box-shadow: 0 4px 20px rgba(245, 158, 11, 0.15); margin-bottom: 1.8rem;">
+                    <div style="display: flex; align-items: center; gap: 14px;">
+                        <span style="font-size: 2.2rem; animation: flameFlicker 2s infinite ease-in-out alternate; display: inline-block;">🔥</span>
+                        <div>
+                            <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                                <strong id="dash-streak-title" style="color: #fbbf24; font-size: 1.1rem; font-family: 'Tajawal', sans-serif;">شعلة التزامك: 0 أيام متتالية! 🔥</strong>
+                                <span id="dash-mystery-badge" style="background: rgba(245, 158, 11, 0.25); color: #fbbf24; font-size: 0.75rem; font-weight: 700; padding: 2px 8px; border-radius: 12px; border: 1px solid rgba(245, 158, 11, 0.5);">
+                                    🎁 هدية اليوم جاهزة!
+                                </span>
                             </div>
-                        </div>
-                        <button onclick="window.switchPage('challenges')" class="theme-btn btn-hover-glow" style="background: linear-gradient(135deg, #fbbf24, #f59e0b); color: #0f172a; border: none; padding: 0.65rem 1.2rem; border-radius: 12px; font-weight: 800; font-family: 'Tajawal'; font-size: 0.9rem; cursor: pointer; width: 100%; display: flex; align-items: center; justify-content: center; gap: 6px;">
-                            <i class="fa-solid fa-gamepad"></i> دخول غرفة التحديات 🚀
-                        </button>
-                    </div>
-
-                    <!-- Right: حلمي اللي بسعى عشانه -->
-                    <div class="card hover-glow-box" style="background: linear-gradient(135deg, rgba(0, 229, 255, 0.1), rgba(0, 229, 255, 0.05)); border: 2px dashed #00e5ff; text-align: center; border-radius: 18px; padding: 1.2rem; display: flex; flex-direction: column; justify-content: center; margin-bottom: 0;">
-                        <h3 style="color: var(--primary-color); margin: 0 0 6px 0; font-size: 1.1rem; border: none; padding: 0;"><i class="fa-solid fa-star" style="color: #feca57;"></i> حلمي اللي بسعى عشانه 🎓</h3>
-                        <div id="dream-display-container">
-                            <p id="dream-text" style="font-size: 1.2rem; font-weight: bold; color: var(--text-main); margin: 0.6rem 0; min-height: 28px;">لم تكتب حلمك بعد..</p>
-                            <button onclick="editDream()" class="theme-btn" style="background: rgba(0, 229, 255, 0.2); color: var(--primary-color); padding: 0.4rem 1rem; border-radius: 8px; font-size: 0.82rem;"><i class="fa-solid fa-pen"></i> تعديل</button>
-                        </div>
-                        <div id="dream-edit-container" style="display: none; flex-direction: column; gap: 0.8rem; align-items: center;">
-                            <input type="text" id="dream-input" placeholder="نفسك تطلع إيه؟ إيه الكلية اللي بتحلم بيها؟" style="width: 90%; padding: 0.7rem; border: 2px solid var(--border-color); border-radius: 10px; font-family: 'Tajawal'; background: var(--bg-color); color: var(--text-main); text-align: center; font-size: 1rem;">
-                            <button onclick="saveDream()" class="theme-btn" style="background: linear-gradient(135deg, #00e5ff, #00b8cc); color: white; padding: 0.5rem 1.8rem; border-radius: 8px; font-size: 0.85rem;"><i class="fa-solid fa-check"></i> حفظ</button>
+                            <p id="dash-streak-sub" style="margin: 4px 0 0 0; color: #cbd5e1; font-size: 0.84rem; line-height: 1.4;">
+                                ادخل غرفة التحديات، افتح صندوق حظك واكسب XP مضاعف وتحدي محقق القضايا العلمية! ⚡
+                            </p>
                         </div>
                     </div>
+                    <button onclick="window.switchPage('challenges')" class="theme-btn btn-hover-glow" style="background: linear-gradient(135deg, #fbbf24, #f59e0b); color: #0f172a; border: none; padding: 0.7rem 1.5rem; border-radius: 12px; font-weight: 800; font-family: 'Tajawal'; font-size: 0.92rem; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);">
+                        <i class="fa-solid fa-gamepad"></i> دخول غرفة التحديات 🚀
+                    </button>
                 </div>
 
-                <!-- 🕌 SECTION 4: SPIRITUALITY & EXAMS (مواقيت الصلاة والورد القرآني وأقرب الامتحانات) -->
-                <div class="dashboard-grid">
-                    <!-- Islamic Widget -->
-                    <div class="card hover-glow-box" id="islamic-widget">
-                        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 8px; margin-bottom: 12px;">
-                            <h3 style="margin: 0; border: none; padding: 0; font-size: 1.1rem;">مواقيت الصلاة والذكر 🕌 <small style="font-size:0.75rem; font-weight:normal; cursor:pointer; color:var(--primary-color); background:rgba(0,229,255,0.1); padding:2px 8px; border-radius:10px;" onclick="changeCity()">[تغيير المدينة]</small></h3>
-                            <span id="current-city-label" style="font-size:0.85rem; font-weight:bold; color:var(--text-muted)">القاهرة</span>
-                        </div>
-                        <div class="prayer-times" id="prayer-times-container">
-                            <p style="text-align:center; color:var(--text-muted); font-size:0.9rem; padding: 10px;">جاري التحميل...</p>
+                <!-- 🕌 SECTION 4: SPIRITUALITY & EXAMS (مواقيت الصلاة والورد القرآني وأقرب الامتحانات جنباً إلى جنب) -->
+                <div class="dashboard-grid" id="spiritual-exams-grid" style="margin-bottom: 1.8rem;">
+                    <!-- Card 1: Islamic Widget (مواقيت الصلاة والذكر) -->
+                    <div class="card hover-glow-box" id="islamic-widget" style="margin-bottom: 0; display: flex; flex-direction: column; justify-content: space-between;">
+                        <div>
+                            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 8px; margin-bottom: 12px;">
+                                <h3 style="margin: 0; border: none; padding: 0; font-size: 1.1rem;">مواقيت الصلاة والذكر 🕌 <small style="font-size:0.75rem; font-weight:normal; cursor:pointer; color:var(--primary-color); background:rgba(0,229,255,0.1); padding:2px 8px; border-radius:10px;" onclick="changeCity()">[تغيير المدينة]</small></h3>
+                                <span id="current-city-label" style="font-size:0.85rem; font-weight:bold; color:var(--text-muted)">القاهرة</span>
+                            </div>
+                            <div class="prayer-times" id="prayer-times-container">
+                                <p style="text-align:center; color:var(--text-muted); font-size:0.9rem; padding: 10px;">جاري التحميل...</p>
+                            </div>
                         </div>
                         <div class="study-dua" style="margin-top: 12px; padding: 12px; background: var(--bg-color); border-radius: 8px; border-right: 4px solid var(--primary-color);">
                             <h4 style="margin-bottom: 4px; color: var(--primary-color); font-size: 0.88rem;"><i class="fa-solid fa-hands-praying"></i> دعاء قبل المذاكرة</h4>
-                            <p style="font-size: 0.88rem; line-height: 1.5; font-weight: 500; margin: 0;">"اللهم إني أسألك فهم النبيين، وحفظ المرسلين، والملائكة المقربين. اللهم اجعل ألسنتنا عامرة بذكرك، وقلوبنا بخشيتك، وأسرارنا بطاعتك."</p>
+                            <p style="font-size: 0.84rem; line-height: 1.5; font-weight: 500; margin: 0;">"اللهم إني أسألك فهم النبيين، وحفظ المرسلين، والملائكة المقربين. اللهم اجعل ألسنتنا عامرة بذكرك، وقلوبنا بخشيتك."</p>
                         </div>
                     </div>
 
-                    <!-- Quran Wird Widget -->
-                    <div class="card hover-glow-box" id="quran-widget" style="border-right: 4px solid var(--success);">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; border-bottom: 1px solid var(--border-color); padding-bottom: 8px;">
-                            <h3 style="margin: 0; border: none; padding: 0; font-size: 1.1rem;"><i class="fa-solid fa-book-quran" style="color: var(--success);"></i> وردي القرآني اليومي</h3>
-                            <button class="btn btn-outline" onclick="openModal('quran-modal')" style="font-size: 0.78rem; padding: 4px 8px;">تحديد الورد</button>
-                        </div>
-                        <div style="display: flex; justify-content: space-between; align-items: center; background: var(--bg-color); padding: 12px; border-radius: 8px;">
-                            <div>
-                                <p style="color: var(--text-muted); font-size: 0.82rem; margin-bottom: 4px;">مقدار الورد:</p>
-                                <strong id="quran-goal-display" style="font-size: 1rem;">لم يتم التحديد</strong>
+                    <!-- Card 2: Quran Wird Widget (الورد القرآني اليومي) -->
+                    <div class="card hover-glow-box" id="quran-widget" style="border-right: 4px solid var(--success); margin-bottom: 0; display: flex; flex-direction: column; justify-content: space-between;">
+                        <div>
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; border-bottom: 1px solid var(--border-color); padding-bottom: 8px;">
+                                <h3 style="margin: 0; border: none; padding: 0; font-size: 1.1rem;"><i class="fa-solid fa-book-quran" style="color: var(--success);"></i> وردي القرآني اليومي</h3>
+                                <button class="btn btn-outline" onclick="openModal('quran-modal')" style="font-size: 0.78rem; padding: 4px 8px;">تحديد الورد</button>
                             </div>
-                            <div style="text-align: center;">
-                                <p style="color: var(--text-muted); font-size: 0.82rem; margin-bottom: 4px;">المنجز اليوم:</p>
-                                <div style="display: flex; align-items: center; gap: 8px;">
-                                    <button class="btn" style="background: var(--danger); color: white; padding: 2px 7px; border-radius: 4px;" onclick="updateQuranWird(-1)">-</button>
-                                    <strong id="quran-done-display" style="font-size: 1.3rem; color: var(--success);">0</strong>
-                                    <button class="btn" style="background: var(--success); color: white; padding: 2px 7px; border-radius: 4px;" onclick="updateQuranWird(1)">+</button>
+                            <div style="display: flex; justify-content: space-between; align-items: center; background: var(--bg-color); padding: 12px; border-radius: 8px; margin-bottom: 12px;">
+                                <div>
+                                    <p style="color: var(--text-muted); font-size: 0.82rem; margin-bottom: 4px;">مقدار الورد:</p>
+                                    <strong id="quran-goal-display" style="font-size: 1rem;">لم يتم التحديد</strong>
+                                </div>
+                                <div style="text-align: center;">
+                                    <p style="color: var(--text-muted); font-size: 0.82rem; margin-bottom: 4px;">المنجز اليوم:</p>
+                                    <div style="display: flex; align-items: center; gap: 8px;">
+                                        <button class="btn" style="background: var(--danger); color: white; padding: 2px 7px; border-radius: 4px;" onclick="updateQuranWird(-1)">-</button>
+                                        <strong id="quran-done-display" style="font-size: 1.3rem; color: var(--success);">0</strong>
+                                        <button class="btn" style="background: var(--success); color: white; padding: 2px 7px; border-radius: 4px;" onclick="updateQuranWird(1)">+</button>
+                                    </div>
+                                </div>
+                                <div style="text-align: center;">
+                                    <button class="btn btn-primary" id="btn-complete-quran" onclick="completeQuranWird()" style="background-color: var(--success); font-size: 0.82rem; padding: 6px 10px;"><i class="fa-solid fa-check"></i> أتممت الورد</button>
                                 </div>
                             </div>
-                            <div style="text-align: center;">
-                                <button class="btn btn-primary" id="btn-complete-quran" onclick="completeQuranWird()" style="background-color: var(--success); font-size: 0.82rem; padding: 6px 10px;"><i class="fa-solid fa-check"></i> أتممت الورد</button>
-                            </div>
+                        </div>
+                        <div style="padding: 10px 12px; background: rgba(46, 213, 115, 0.08); border-radius: 8px; border: 1px dashed rgba(46, 213, 115, 0.3); text-align: center;">
+                            <span style="font-size: 0.8rem; color: #2ed573; font-weight: bold;">
+                                📖 "أَلَا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ"
+                            </span>
+                            <p style="margin: 2px 0 0; font-size: 0.74rem; color: var(--text-muted);">وردك اليومي يبارك وقتك ويثبت حفظك وفهمك.</p>
                         </div>
                     </div>
 
-                    <!-- Exams Card -->
-                    <div class="card hover-glow-box" style="grid-column: 1 / -1;">
-                        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 8px; margin-bottom: 12px;">
-                            <h3 style="margin: 0; border: none; padding: 0; font-size: 1.15rem;">أقرب الامتحانات <i class="fa-solid fa-hourglass-half text-danger"></i></h3>
-                            <button class="btn btn-primary" onclick="openModal('exam-modal')" style="font-size: 0.8rem; padding: 5px 12px; border-radius: 8px; font-weight: bold;">
-                                <i class="fa-solid fa-plus"></i> إضافة موعد امتحان
+                    <!-- Card 3: Exams Card (أقرب الامتحانات - بجانب الورد القرآني مباشرة لتنسيق الشاشة ومنع الفراغ) -->
+                    <div class="card hover-glow-box" id="dashboard-exams-card" style="margin-bottom: 0; display: flex; flex-direction: column; justify-content: space-between; border-right: 4px solid #ff4757;">
+                        <div>
+                            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 8px; margin-bottom: 12px;">
+                                <h3 style="margin: 0; border: none; padding: 0; font-size: 1.15rem;">أقرب الامتحانات <i class="fa-solid fa-hourglass-half text-danger"></i></h3>
+                                <button class="btn btn-primary" onclick="openModal('exam-modal')" style="font-size: 0.78rem; padding: 4px 10px; border-radius: 8px; font-weight: bold;">
+                                    <i class="fa-solid fa-plus"></i> إضافة موعد
+                                </button>
+                            </div>
+                            <div class="exams-grid" id="dashboard-exams-grid" style="display: flex; flex-direction: column; gap: 8px;"></div>
+                        </div>
+                        <div style="margin-top: 12px; text-align: center;">
+                            <button onclick="switchPage('exams')" class="btn" style="background: rgba(255,255,255,0.05); color: var(--text-muted); border: 1px solid rgba(255,255,255,0.12); font-size: 0.8rem; padding: 6px 12px; border-radius: 8px; width: 100%; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px;">
+                                <i class="fa-regular fa-calendar-check"></i> <span>عرض كل الامتحانات والجدول 📋</span>
                             </button>
                         </div>
-                        <div class="exams-grid" id="dashboard-exams-grid"></div>
                     </div>
                 </div>
             </section>
