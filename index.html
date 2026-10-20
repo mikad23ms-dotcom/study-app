@@ -26,7 +26,12 @@
     <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
     <!-- PDF.js for reading PDF files -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-    <script src="html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script>
+        if (typeof html2canvas === 'undefined') {
+            document.write('<script src="html2canvas.min.js"><\/script>');
+        }
+    </script>
     
     <!-- Firebase Libraries -->
     <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
@@ -1712,6 +1717,7 @@
                         <button class="btn btn-primary" onclick="openModal('class-modal')"><i class="fa-solid fa-plus"></i> إضافة درس</button>
                         <button class="btn" style="background: var(--orange); color: white;" onclick="openModal('ai-schedule-modal')"><i class="fa-solid fa-wand-magic-sparkles"></i> جدول الذكاء الاصطناعي</button>
                         <button class="btn" style="background: rgba(0,229,255,0.15); color: #00e5ff; border: 1px solid rgba(0,229,255,0.4);" onclick="exportScheduleAsImage()"><i class="fa-solid fa-download"></i> تنزيل كصورة 📸</button>
+                        <button class="btn" style="background: rgba(37,211,102,0.18); color: #25d366; border: 1px solid rgba(37,211,102,0.4);" onclick="shareWeeklyScheduleToWhatsApp()"><i class="fa-brands fa-whatsapp"></i> مشاركة على واتساب 💬</button>
                         <button class="btn" style="background: rgba(255,255,255,0.08); color: var(--text-main); border: 1px solid var(--border-color);" onclick="printSchedule()"><i class="fa-solid fa-print"></i> طباعة 🖨️</button>
                     </div>
                 </header>
@@ -1727,6 +1733,7 @@
                         </div>
                         <div style="display:flex; align-items:center; gap:8px;" class="ai-result-actions">
                             <button type="button" onclick="exportScheduleAiAsImage()" class="btn" style="background:rgba(0,229,255,0.18); color:#00e5ff; border:1px solid rgba(0,229,255,0.4); padding:6px 12px; border-radius:8px; font-size:0.82rem; font-weight:600; cursor:pointer;"><i class="fa-solid fa-download"></i> تنزيل كصورة 📸</button>
+                            <button type="button" onclick="shareCurrentAiScheduleToWhatsApp()" class="btn" style="background:rgba(37,211,102,0.18); color:#25d366; border:1px solid rgba(37,211,102,0.4); padding:6px 12px; border-radius:8px; font-size:0.82rem; font-weight:600; cursor:pointer;"><i class="fa-brands fa-whatsapp"></i> مشاركة واتساب 💬</button>
                             <button type="button" onclick="printScheduleAi()" class="btn" style="background:rgba(255,255,255,0.08); color:#cbd5e1; border:1px solid rgba(255,255,255,0.15); padding:6px 12px; border-radius:8px; font-size:0.82rem; cursor:pointer;"><i class="fa-solid fa-print"></i> طباعة 🖨️</button>
                             <button type="button" onclick="document.getElementById('schedule-ai-result').style.display='none'" class="btn" style="background:rgba(239,68,68,0.15); color:#f87171; border:1px solid rgba(239,68,68,0.3); padding:6px 14px; border-radius:8px; font-size:0.85rem; cursor:pointer;"><i class="fa-solid fa-xmark"></i> إغلاق</button>
                         </div>
@@ -2402,6 +2409,7 @@
                         </div>
                         <div style="display:flex; align-items:center; gap:8px;" class="ai-result-actions">
                             <button type="button" onclick="exportBacklogPlanAsImage()" class="btn" style="background:rgba(0,229,255,0.18); color:#00e5ff; border:1px solid rgba(0,229,255,0.4); padding:6px 12px; border-radius:8px; font-size:0.82rem; font-weight:600; cursor:pointer;"><i class="fa-solid fa-download"></i> تنزيل كصورة 📸</button>
+                            <button type="button" onclick="shareCurrentBacklogPlanToWhatsApp()" class="btn" style="background:rgba(37,211,102,0.18); color:#25d366; border:1px solid rgba(37,211,102,0.4); padding:6px 12px; border-radius:8px; font-size:0.82rem; font-weight:600; cursor:pointer;"><i class="fa-brands fa-whatsapp"></i> مشاركة واتساب 💬</button>
                             <button type="button" onclick="printBacklogPlan()" class="btn" style="background:rgba(255,255,255,0.08); color:#cbd5e1; border:1px solid rgba(255,255,255,0.15); padding:6px 12px; border-radius:8px; font-size:0.82rem; cursor:pointer;"><i class="fa-solid fa-print"></i> طباعة 🖨️</button>
                             <button type="button" onclick="document.getElementById('backlog-ai-result').style.display='none'" class="btn" style="background:rgba(239,68,68,0.15); color:#f87171; border:1px solid rgba(239,68,68,0.3); padding:6px 14px; border-radius:8px; font-size:0.85rem; cursor:pointer;"><i class="fa-solid fa-xmark"></i> إغلاق</button>
                         </div>
