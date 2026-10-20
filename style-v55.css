@@ -2243,6 +2243,7 @@ body[data-theme="dark"]::after {
 /* ========================================================= */
 #nb-summary-content,
 #ai-result-content,
+#backlog-ai-content,
 .ai-formatted-report {
     direction: rtl !important;
     text-align: right !important;
@@ -2254,10 +2255,10 @@ body[data-theme="dark"]::after {
     letter-spacing: 0.2px;
 }
 
-#nb-summary-content h1, #ai-result-content h1,
-#nb-summary-content h2, #ai-result-content h2,
-#nb-summary-content h3, #ai-result-content h3,
-#nb-summary-content h4, #ai-result-content h4 {
+#nb-summary-content h1, #ai-result-content h1, #backlog-ai-content h1,
+#nb-summary-content h2, #ai-result-content h2, #backlog-ai-content h2,
+#nb-summary-content h3, #ai-result-content h3, #backlog-ai-content h3,
+#nb-summary-content h4, #ai-result-content h4, #backlog-ai-content h4 {
     direction: rtl !important;
     text-align: right !important;
     font-family: 'Tajawal', sans-serif !important;
@@ -2266,8 +2267,8 @@ body[data-theme="dark"]::after {
     line-height: 1.5 !important;
 }
 
-#nb-summary-content h2, #ai-result-content h2,
-#nb-summary-content h3, #ai-result-content h3 {
+#nb-summary-content h2, #ai-result-content h2, #backlog-ai-content h2,
+#nb-summary-content h3, #ai-result-content h3, #backlog-ai-content h3 {
     background: linear-gradient(135deg, rgba(0, 229, 255, 0.12), rgba(0, 136, 255, 0.06)) !important;
     border-right: 5px solid #00e5ff !important;
     border-radius: 10px !important;
@@ -2278,44 +2279,44 @@ body[data-theme="dark"]::after {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15) !important;
 }
 
-#nb-summary-content h4, #ai-result-content h4 {
+#nb-summary-content h4, #ai-result-content h4, #backlog-ai-content h4 {
     color: #ffb86c !important;
     font-size: 1.1rem !important;
     padding-right: 8px !important;
     border-right: 3px solid #ffb86c !important;
 }
 
-#nb-summary-content p, #ai-result-content p {
+#nb-summary-content p, #ai-result-content p, #backlog-ai-content p {
     margin-bottom: 1.1rem !important;
     font-size: 1.04rem !important;
     line-height: 1.9 !important;
     color: #cbd5e1 !important;
 }
 
-#nb-summary-content strong, #ai-result-content strong,
-#nb-summary-content b, #ai-result-content b {
+#nb-summary-content strong, #ai-result-content strong, #backlog-ai-content strong,
+#nb-summary-content b, #ai-result-content b, #backlog-ai-content b {
     color: #38bdf8 !important;
     font-weight: 700 !important;
 }
 
-#nb-summary-content ul, #ai-result-content ul,
-#nb-summary-content ol, #ai-result-content ol {
+#nb-summary-content ul, #ai-result-content ul, #backlog-ai-content ul,
+#nb-summary-content ol, #ai-result-content ol, #backlog-ai-content ol {
     padding-right: 1.8rem !important;
     margin-bottom: 1.3rem !important;
 }
 
-#nb-summary-content li, #ai-result-content li {
+#nb-summary-content li, #ai-result-content li, #backlog-ai-content li {
     margin-bottom: 0.75rem !important;
     line-height: 1.85 !important;
     color: #f1f5f9 !important;
 }
 
-#nb-summary-content li::marker, #ai-result-content li::marker {
+#nb-summary-content li::marker, #ai-result-content li::marker, #backlog-ai-content li::marker {
     color: #00e5ff !important;
     font-weight: bold !important;
 }
 
-#nb-summary-content blockquote, #ai-result-content blockquote {
+#nb-summary-content blockquote, #ai-result-content blockquote, #backlog-ai-content blockquote {
     background: rgba(0, 229, 255, 0.07) !important;
     border-right: 4px solid #00e5ff !important;
     border-radius: 10px !important;
@@ -2326,7 +2327,7 @@ body[data-theme="dark"]::after {
 }
 
 /* Beautiful responsive tables that NEVER squish or break */
-#nb-summary-content table, #ai-result-content table {
+#nb-summary-content table, #ai-result-content table, #backlog-ai-content table {
     width: 100% !important;
     max-width: 100% !important;
     border-collapse: separate !important;
@@ -2339,7 +2340,7 @@ body[data-theme="dark"]::after {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
 }
 
-#nb-summary-content th, #ai-result-content th {
+#nb-summary-content th, #ai-result-content th, #backlog-ai-content th {
     background: linear-gradient(135deg, rgba(0, 229, 255, 0.2), rgba(0, 136, 255, 0.15)) !important;
     color: #00e5ff !important;
     font-weight: 800 !important;
@@ -2350,7 +2351,7 @@ body[data-theme="dark"]::after {
     white-space: nowrap !important;
 }
 
-#nb-summary-content td, #ai-result-content td {
+#nb-summary-content td, #ai-result-content td, #backlog-ai-content td {
     padding: 13px 18px !important;
     border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
     color: #f8fafc !important;
@@ -2359,15 +2360,15 @@ body[data-theme="dark"]::after {
     vertical-align: top !important;
 }
 
-#nb-summary-content tr:last-child td, #ai-result-content tr:last-child td {
+#nb-summary-content tr:last-child td, #ai-result-content tr:last-child td, #backlog-ai-content tr:last-child td {
     border-bottom: none !important;
 }
 
-#nb-summary-content tr:hover td, #ai-result-content tr:hover td {
+#nb-summary-content tr:hover td, #ai-result-content tr:hover td, #backlog-ai-content tr:hover td {
     background: rgba(0, 229, 255, 0.06) !important;
 }
 
-#nb-summary-content hr, #ai-result-content hr {
+#nb-summary-content hr, #ai-result-content hr, #backlog-ai-content hr {
     border: none !important;
     border-top: 1px dashed rgba(0, 229, 255, 0.25) !important;
     margin: 1.8rem 0 !important;
@@ -3459,3 +3460,193 @@ body[data-theme="dark"]::after {
     transition: all 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
+
+
+/* ============================================================= */
+/* --- BACKLOG AI RESULT + SCHEDULE AI RESULT BEAUTIFUL STYLE --- */
+/* ============================================================= */
+#backlog-ai-content ol,
+#backlog-ai-content ul {
+    padding-right: 1.8rem !important;
+    margin-bottom: 1.3rem !important;
+}
+
+#backlog-ai-content ol {
+    counter-reset: ai-ol-counter;
+    list-style: none !important;
+    padding-right: 0 !important;
+}
+
+#backlog-ai-content ol > li {
+    counter-increment: ai-ol-counter;
+    position: relative;
+    padding-right: 3rem !important;
+    margin-bottom: 1rem !important;
+}
+
+#backlog-ai-content ol > li::before {
+    content: counter(ai-ol-counter);
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 2rem;
+    height: 2rem;
+    background: linear-gradient(135deg, #00e5ff, #0088ff);
+    color: #0f172a;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: 0.85rem;
+    line-height: 2rem;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0, 229, 255, 0.4);
+}
+
+#backlog-ai-content code {
+    background: rgba(0, 229, 255, 0.1) !important;
+    color: #00e5ff !important;
+    padding: 2px 8px !important;
+    border-radius: 5px !important;
+    font-family: 'Courier New', monospace !important;
+    font-size: 0.9em !important;
+}
+
+#backlog-ai-content pre {
+    background: rgba(15, 23, 42, 0.8) !important;
+    border: 1px solid rgba(0, 229, 255, 0.2) !important;
+    border-radius: 10px !important;
+    padding: 16px !important;
+    overflow-x: auto !important;
+    margin: 1rem 0 !important;
+}
+
+/* Responsive on mobile */
+@media (max-width: 600px) {
+    #backlog-ai-content ol > li {
+        padding-right: 2.5rem !important;
+    }
+    #backlog-ai-content ol > li::before {
+        width: 1.7rem;
+        height: 1.7rem;
+        line-height: 1.7rem;
+        font-size: 0.78rem;
+    }
+}
+
+
+/* Suppress Mermaid syntax error bomb entirely */
+div[id^="dmermaid"],
+.mermaid > svg[aria-roledescription="error"],
+#dmermaid {
+    display: none !important;
+}
+
+/* AI formatted report headings and elements */
+.ai-formatted-report h1,
+.ai-formatted-report h2,
+.ai-formatted-report h3 {
+    background: linear-gradient(135deg, rgba(0, 229, 255, 0.12), rgba(0, 136, 255, 0.06)) !important;
+    border-right: 5px solid #00e5ff !important;
+    border-radius: 10px !important;
+    padding: 12px 18px !important;
+    color: #00e5ff !important;
+    font-size: 1.22rem !important;
+    font-weight: 800 !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15) !important;
+    margin-top: 1.5rem !important;
+    margin-bottom: 0.9rem !important;
+}
+
+.ai-formatted-report h4 {
+    color: #ffb86c !important;
+    font-size: 1.08rem !important;
+    padding-right: 8px !important;
+    border-right: 3px solid #ffb86c !important;
+    margin-top: 1.2rem !important;
+    margin-bottom: 0.6rem !important;
+}
+
+.ai-formatted-report p {
+    margin-bottom: 1.1rem !important;
+    font-size: 1.03rem !important;
+    line-height: 1.9 !important;
+    color: #cbd5e1 !important;
+}
+
+.ai-formatted-report strong,
+.ai-formatted-report b {
+    color: #38bdf8 !important;
+    font-weight: 700 !important;
+}
+
+.ai-formatted-report ul,
+.ai-formatted-report ol {
+    padding-right: 1.8rem !important;
+    margin-bottom: 1.3rem !important;
+}
+
+.ai-formatted-report li {
+    margin-bottom: 0.75rem !important;
+    line-height: 1.85 !important;
+    color: #f1f5f9 !important;
+}
+
+.ai-formatted-report blockquote {
+    background: rgba(0, 229, 255, 0.07) !important;
+    border-right: 4px solid #00e5ff !important;
+    border-radius: 10px !important;
+    padding: 14px 20px !important;
+    margin: 1.3rem 0 !important;
+    color: #e0f2fe !important;
+    font-style: normal !important;
+}
+
+
+/* ============================================================= */
+/* --- PRINT STYLES FOR STUDY PLANS AND SCHEDULES --- */
+/* ============================================================= */
+@media print {
+    sidebar,
+    .sidebar,
+    .mobile-bottom-nav,
+    .ai-fab,
+    .btn,
+    .nav-tabs,
+    .site-footer,
+    #interactive-tour-overlay,
+    .ai-result-actions {
+        display: none !important;
+    }
+
+    body {
+        background: #ffffff !important;
+        color: #0f172a !important;
+    }
+
+    #backlog-ai-result,
+    #schedule-ai-result,
+    .days-grid,
+    .day-card {
+        box-shadow: none !important;
+        background: #ffffff !important;
+        color: #0f172a !important;
+        border: 1px solid #cbd5e1 !important;
+    }
+
+    #backlog-ai-content,
+    #schedule-ai-content,
+    .ai-formatted-report {
+        color: #0f172a !important;
+    }
+
+    #backlog-ai-content h1, #backlog-ai-content h2, #backlog-ai-content h3,
+    #schedule-ai-content h1, #schedule-ai-content h2, #schedule-ai-content h3,
+    .ai-formatted-report h1, .ai-formatted-report h2, .ai-formatted-report h3 {
+        color: #0284c7 !important;
+        background: none !important;
+        box-shadow: none !important;
+        border-right: 4px solid #0284c7 !important;
+    }
+}

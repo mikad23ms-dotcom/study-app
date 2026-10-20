@@ -26,6 +26,7 @@
     <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
     <!-- PDF.js for reading PDF files -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script src="html2canvas.min.js"></script>
     
     <!-- Firebase Libraries -->
     <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
@@ -1707,18 +1708,30 @@
                         <h1 style="margin: 0;">جدول الدروس 📅</h1>
                         <p style="color: var(--text-muted); margin-top: 5px;">نظم وقتك ومواعيدك بذكاء.</p>
                     </div>
-                    <div style="display: flex; gap: 10px;">
-                        <button class="btn btn-primary" onclick="openModal('class-modal')">إضافة درس</button>
+                    <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                        <button class="btn btn-primary" onclick="openModal('class-modal')"><i class="fa-solid fa-plus"></i> إضافة درس</button>
                         <button class="btn" style="background: var(--orange); color: white;" onclick="openModal('ai-schedule-modal')"><i class="fa-solid fa-wand-magic-sparkles"></i> جدول الذكاء الاصطناعي</button>
+                        <button class="btn" style="background: rgba(0,229,255,0.15); color: #00e5ff; border: 1px solid rgba(0,229,255,0.4);" onclick="exportScheduleAsImage()"><i class="fa-solid fa-download"></i> تنزيل كصورة 📸</button>
+                        <button class="btn" style="background: rgba(255,255,255,0.08); color: var(--text-main); border: 1px solid var(--border-color);" onclick="printSchedule()"><i class="fa-solid fa-print"></i> طباعة 🖨️</button>
                     </div>
                 </header>
                 <!-- AI Result Container for Schedule -->
-                <div id="schedule-ai-result" style="display:none; margin-bottom:20px; background:var(--bg-color); padding:20px; border-radius:12px; border:1px solid var(--border-color); box-shadow:0 4px 15px rgba(0,0,0,0.1);">
-                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px; border-bottom:1px solid var(--border-color); padding-bottom:10px;">
-                        <h3 style="color:var(--orange); margin:0;"><i class="fa-solid fa-wand-magic-sparkles"></i> جدول المذاكرة الذكي</h3>
-                        <button onclick="document.getElementById('schedule-ai-result').style.display='none'" class="btn" style="background:var(--danger); color:white; padding:5px 10px;"><i class="fa-solid fa-xmark"></i> إغلاق</button>
+                <div id="schedule-ai-result" style="display:none; margin-bottom:25px; background:linear-gradient(135deg, rgba(15,23,42,0.98), rgba(30,27,75,0.95)); padding:0; border-radius:16px; border:1px solid rgba(0,229,255,0.25); box-shadow:0 8px 32px rgba(0,0,0,0.35);">
+                    <div style="display:flex; justify-content:space-between; align-items:center; padding:18px 22px; border-bottom:1px solid rgba(0,229,255,0.15); background:linear-gradient(135deg,rgba(0,229,255,0.1),rgba(0,136,255,0.06)); border-radius:16px 16px 0 0;">
+                        <div style="display:flex; align-items:center; gap:10px;">
+                            <span style="font-size:1.5rem;">📅</span>
+                            <div>
+                                <h3 style="color:#00e5ff; margin:0; font-size:1.1rem; font-weight:800;">جدول المذاكرة الذكي</h3>
+                                <p style="margin:2px 0 0; font-size:0.78rem; color:rgba(0,229,255,0.65);">خطة متوازنة بنظام البومودورو والتركيز العالي</p>
+                            </div>
+                        </div>
+                        <div style="display:flex; align-items:center; gap:8px;" class="ai-result-actions">
+                            <button type="button" onclick="exportScheduleAiAsImage()" class="btn" style="background:rgba(0,229,255,0.18); color:#00e5ff; border:1px solid rgba(0,229,255,0.4); padding:6px 12px; border-radius:8px; font-size:0.82rem; font-weight:600; cursor:pointer;"><i class="fa-solid fa-download"></i> تنزيل كصورة 📸</button>
+                            <button type="button" onclick="printScheduleAi()" class="btn" style="background:rgba(255,255,255,0.08); color:#cbd5e1; border:1px solid rgba(255,255,255,0.15); padding:6px 12px; border-radius:8px; font-size:0.82rem; cursor:pointer;"><i class="fa-solid fa-print"></i> طباعة 🖨️</button>
+                            <button type="button" onclick="document.getElementById('schedule-ai-result').style.display='none'" class="btn" style="background:rgba(239,68,68,0.15); color:#f87171; border:1px solid rgba(239,68,68,0.3); padding:6px 14px; border-radius:8px; font-size:0.85rem; cursor:pointer;"><i class="fa-solid fa-xmark"></i> إغلاق</button>
+                        </div>
                     </div>
-                    <div id="schedule-ai-content" style="line-height:1.8; color:var(--text-main);"></div>
+                    <div id="schedule-ai-content" class="ai-formatted-report" style="padding:22px 24px;"></div>
                 </div>
                 <div class="days-grid" id="schedule-grid"></div>
             </section>
@@ -2378,12 +2391,22 @@
                 </div>
             
                 <!-- AI Result Container for Backlog -->
-                <div id="backlog-ai-result" style="display:none; margin-top:20px; background:var(--bg-color); padding:20px; border-radius:12px; border:1px solid var(--border-color); box-shadow:0 4px 15px rgba(0,0,0,0.1);">
-                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px; border-bottom:1px solid var(--border-color); padding-bottom:10px;">
-                        <h3 style="color:var(--primary-color); margin:0;"><i class="fa-solid fa-wand-magic-sparkles"></i> الخطة الذكية المقترحة</h3>
-                        <button onclick="document.getElementById('backlog-ai-result').style.display='none'" class="btn" style="background:var(--danger); color:white; padding:5px 10px;"><i class="fa-solid fa-xmark"></i> إغلاق</button>
+                <div id="backlog-ai-result" style="display:none; margin-top:25px; background:linear-gradient(135deg, rgba(15,23,42,0.98), rgba(30,27,75,0.95)); padding:0; border-radius:16px; border:1px solid rgba(0,229,255,0.25); box-shadow:0 8px 32px rgba(0,0,0,0.35);">
+                    <div style="display:flex; justify-content:space-between; align-items:center; padding:18px 22px; border-bottom:1px solid rgba(0,229,255,0.15); background:linear-gradient(135deg,rgba(0,229,255,0.1),rgba(0,136,255,0.06)); border-radius:16px 16px 0 0;">
+                        <div style="display:flex; align-items:center; gap:10px;">
+                            <span style="font-size:1.5rem;">✨</span>
+                            <div>
+                                <h3 style="color:#00e5ff; margin:0; font-size:1.1rem; font-weight:800;">الخطة الذكية المقترحة</h3>
+                                <p style="margin:2px 0 0; font-size:0.78rem; color:rgba(0,229,255,0.65);">جاهزة لك — ابدأ من اليوم!</p>
+                            </div>
+                        </div>
+                        <div style="display:flex; align-items:center; gap:8px;" class="ai-result-actions">
+                            <button type="button" onclick="exportBacklogPlanAsImage()" class="btn" style="background:rgba(0,229,255,0.18); color:#00e5ff; border:1px solid rgba(0,229,255,0.4); padding:6px 12px; border-radius:8px; font-size:0.82rem; font-weight:600; cursor:pointer;"><i class="fa-solid fa-download"></i> تنزيل كصورة 📸</button>
+                            <button type="button" onclick="printBacklogPlan()" class="btn" style="background:rgba(255,255,255,0.08); color:#cbd5e1; border:1px solid rgba(255,255,255,0.15); padding:6px 12px; border-radius:8px; font-size:0.82rem; cursor:pointer;"><i class="fa-solid fa-print"></i> طباعة 🖨️</button>
+                            <button type="button" onclick="document.getElementById('backlog-ai-result').style.display='none'" class="btn" style="background:rgba(239,68,68,0.15); color:#f87171; border:1px solid rgba(239,68,68,0.3); padding:6px 14px; border-radius:8px; font-size:0.85rem; cursor:pointer;"><i class="fa-solid fa-xmark"></i> إغلاق</button>
+                        </div>
                     </div>
-                    <div id="backlog-ai-content" style="line-height:1.8; color:var(--text-main);"></div>
+                    <div id="backlog-ai-content" class="ai-formatted-report" style="padding:22px 24px;"></div>
                 </div>
             </section>
 
