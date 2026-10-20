@@ -418,7 +418,7 @@
                         <span>دليل المعلم في دقيقة 💡</span>
                     </button>
                     <!-- Teacher Code Badge -->
-                    <div style="background: rgba(255, 165, 2, 0.15); border: 1.5px solid #ffa502; border-radius: 12px; padding: 7px 14px; display: flex; align-items: center; gap: 8px; cursor: pointer;" onclick="copyTeacherCode()" title="اضغط لنسخ الكود">
+                    <div id="teacher-code-badge" style="background: rgba(255, 165, 2, 0.15); border: 1.5px solid #ffa502; border-radius: 12px; padding: 7px 14px; display: flex; align-items: center; gap: 8px; cursor: pointer;" onclick="copyTeacherCode()" title="اضغط لنسخ الكود">
                         <span style="font-size: 0.78rem; color: #ffa502; font-weight: 700;">كودك للطلاب:</span>
                         <strong id="display-teacher-code" style="color: #fff; font-size: 1.05rem; letter-spacing: 1px;">T-....</strong>
                         <i class="fa-regular fa-copy" style="color: #ffa502; font-size: 0.9rem;"></i>
@@ -1276,7 +1276,7 @@
                 </header>
 
                 <!-- 🎯 STUDENT QUICK ONLINE EXAM ENTRY CARD (دخول امتحان أونلاين بكود المستر) -->
-                <div class="card hover-glow-box" style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.14), rgba(15, 23, 42, 0.92)); border: 1.5px solid #10b981; border-radius: 16px; padding: 1.1rem 1.4rem; margin-bottom: 1.3rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; box-shadow: 0 4px 20px rgba(16, 185, 129, 0.15);">
+                <div id="tour-student-exam-card" class="card hover-glow-box" style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.14), rgba(15, 23, 42, 0.92)); border: 1.5px solid #10b981; border-radius: 16px; padding: 1.1rem 1.4rem; margin-bottom: 1.3rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; box-shadow: 0 4px 20px rgba(16, 185, 129, 0.15);">
                     <div style="display: flex; align-items: center; gap: 14px; flex-wrap: wrap;">
                         <div style="width: 48px; height: 48px; border-radius: 14px; background: rgba(16, 185, 129, 0.2); border: 1.5px solid #10b981; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; flex-shrink: 0;">
                             📝
@@ -4935,7 +4935,32 @@
                 <p style="color: var(--text-muted); font-size: 0.9rem; margin: 0;">بسيط وسهل ومصمم خصيصاً لمساعدتك على التفوق بأقل مجهود</p>
             </div>
 
+            <!-- Interactive Live Tour Spotlight CTA Banner -->
+            <div style="background: linear-gradient(135deg, rgba(0, 229, 255, 0.16), rgba(15, 23, 42, 0.95)); border: 2px solid #00e5ff; border-radius: 16px; padding: 16px 20px; margin-bottom: 22px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; box-shadow: 0 4px 20px rgba(0, 229, 255, 0.25);">
+                <div>
+                    <strong style="color: #00e5ff; font-size: 1.1rem; display: flex; align-items: center; gap: 8px;">
+                        <span>🧭✨ جولة تفاعلية حية ترشدك خطوة بخطوة</span>
+                    </strong>
+                    <p style="margin: 4px 0 0; color: #cbd5e1; font-size: 0.86rem;">
+                        بدل القراءة، التطبيق هيشاورلك بنفسه على كل زرار وميزة ويشرحهالك في 30 ثانية!
+                    </p>
+                </div>
+                <button onclick="startStudentInteractiveTour()" class="btn btn-hover-glow" style="background: linear-gradient(135deg, #00e5ff, #00b8cc); color: #020d1a; font-weight: 800; font-size: 0.95rem; padding: 10px 20px; border-radius: 12px; border: none; cursor: pointer; display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 15px rgba(0, 229, 255, 0.4);">
+                    <i class="fa-solid fa-play"></i> ابدأ الجولة الحية الآن 🚀
+                </button>
+            </div>
+
             <div style="display: flex; flex-direction: column; gap: 14px; margin-bottom: 25px;">
+                <!-- Card 0: Online Exams by Code -->
+                <div style="background: rgba(16, 185, 129, 0.08); border: 1.5px solid #10b981; border-radius: 14px; padding: 14px; display: flex; gap: 12px; align-items: flex-start;">
+                    <span style="font-size: 1.8rem;">🎯</span>
+                    <div>
+                        <strong style="color: #34d399; font-size: 1.05rem; display: block; margin-bottom: 4px;">دخول امتحانات المستر ومعرفة درجتك لحظياً</strong>
+                        <p style="margin: 0; color: #cbd5e1; font-size: 0.86rem; line-height: 1.6;">
+                            أي مستر يديك كود امتحان (مثلاً EX-2026)، حطه في كارت الامتحان أعلى الصفحة وادخل امتحن.. درجتك وإجاباتك النموذجية بتظهرلك في ثانية واحدة وتوصل لمعلمك تلقائياً!
+                        </p>
+                    </div>
+                </div>
                 <!-- Card 1: Subjects -->
                 <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(0, 229, 255, 0.25); border-radius: 14px; padding: 14px; display: flex; gap: 12px; align-items: flex-start;">
                     <span style="font-size: 1.8rem;">📚</span>
@@ -5389,6 +5414,21 @@
                 <p style="color: var(--text-muted); font-size: 0.92rem; margin: 0; line-height: 1.6;">
                     منصتك المتكاملة لإدارة حصصك وسناترك وصناعة الامتحانات دون الحاجة لأي سكرتارية أو دفاتر ورقية!
                 </p>
+            </div>
+
+            <!-- Interactive Live Tour Spotlight CTA Banner -->
+            <div style="background: linear-gradient(135deg, rgba(255, 165, 2, 0.18), rgba(15, 23, 42, 0.95)); border: 2px solid #ffa502; border-radius: 16px; padding: 16px 20px; margin-bottom: 22px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; box-shadow: 0 4px 20px rgba(255, 165, 2, 0.25);">
+                <div>
+                    <strong style="color: #ffa502; font-size: 1.1rem; display: flex; align-items: center; gap: 8px;">
+                        <span>🧭✨ جولة حية سريعة داخل لوحة المعلم</span>
+                    </strong>
+                    <p style="margin: 4px 0 0; color: #cbd5e1; font-size: 0.86rem;">
+                        بدل قراءة الشرح، مرشد تفاعلي هيشاورلك على أدوات الامتحانات والنتائج والغياب خطوة بخطوة في دقيقة!
+                    </p>
+                </div>
+                <button onclick="startTeacherInteractiveTour()" class="btn btn-hover-glow" style="background: linear-gradient(135deg, #ffa502, #f59e0b); color: #020d1a; font-weight: 800; font-size: 0.95rem; padding: 10px 20px; border-radius: 12px; border: none; cursor: pointer; display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 15px rgba(255, 165, 2, 0.4);">
+                    <i class="fa-solid fa-play"></i> ابدأ جولة المعلم الحية 🚀
+                </button>
             </div>
 
             <!-- Value Proposition Hero Box -->
@@ -5860,6 +5900,46 @@
                     </button>
                     <button onclick="closeModal('student-online-exam-modal')" class="btn" style="background: rgba(255,255,255,0.08); color: #fff; border: 1px solid rgba(255,255,255,0.2); font-size: 0.95rem; padding: 12px; border-radius: 12px; cursor: pointer;">
                         إغلاق والرجوع للتطبيق 🏠
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ============================================== -->
+    <!-- INTERACTIVE SPOTLIGHT TOUR ENGINE OVERLAY -->
+    <!-- ============================================== -->
+    <div id="interactive-tour-overlay" style="display: none; position: fixed; inset: 0; z-index: 9999999; pointer-events: auto;">
+        <!-- Glowing Spotlight Box around target element -->
+        <div id="tour-spotlight-box"></div>
+        
+        <!-- Floating Guidance Popover Card -->
+        <div id="tour-popover-card" style="position: fixed; width: calc(100% - 32px); max-width: 370px; background: rgba(15, 23, 42, 0.96); border: 2px solid #00e5ff; border-radius: 18px; padding: 18px 20px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.85), 0 0 25px rgba(0, 229, 255, 0.3); backdrop-filter: blur(12px); color: #fff; font-family: 'Tajawal', sans-serif;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                <span id="tour-step-badge" style="font-size: 0.78rem; font-weight: 800; padding: 3px 12px; border-radius: 12px; background: rgba(0, 229, 255, 0.2); color: #00e5ff;">
+                    خطوة 1 من 5
+                </span>
+                <button onclick="endTour()" style="background: transparent; border: none; color: #94a3b8; font-size: 1.4rem; cursor: pointer; padding: 0 4px; line-height: 1;" title="إغلاق الجولة">
+                    &times;
+                </button>
+            </div>
+            
+            <h4 id="tour-step-title" style="margin: 0 0 8px 0; font-size: 1.18rem; color: #fff; font-family: 'Tajawal', sans-serif;">
+                عنوان الخطوة
+            </h4>
+            <p id="tour-step-desc" style="margin: 0 0 18px 0; color: #cbd5e1; font-size: 0.88rem; line-height: 1.65;">
+                شرح الخطوة التفاعلية هنا...
+            </p>
+            
+            <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+                <button id="tour-prev-btn" onclick="prevTourStep()" class="btn" style="background: rgba(255,255,255,0.08); color: #fff; border: 1px solid rgba(255,255,255,0.2); font-size: 0.82rem; padding: 7px 15px; border-radius: 8px; cursor: pointer;">
+                    السابق
+                </button>
+                <div style="display: flex; gap: 8px; margin-right: auto;">
+                    <button onclick="endTour()" class="btn" style="background: transparent; color: #94a3b8; border: none; font-size: 0.82rem; padding: 7px 10px; cursor: pointer;">
+                        تخطي ✕
+                    </button>
+                    <button id="tour-next-btn" onclick="nextTourStep()" class="btn btn-hover-glow" style="background: linear-gradient(135deg, #00e5ff, #00b8cc); color: #020d1a; font-weight: 800; font-size: 0.88rem; padding: 8px 20px; border-radius: 8px; border: none; cursor: pointer;">
+                        التالي ➡️
                     </button>
                 </div>
             </div>
