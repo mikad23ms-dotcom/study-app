@@ -3424,3 +3424,11 @@ body[data-theme="dark"]::after {
     margin-bottom: 0 !important;
 }
 
+
+
+/* Developer watermark responsive positioning - Mohamed feedback */
+@media (max-width: 900px) {
+    .dev-watermark {
+        display: none !important;
+    }
+}
