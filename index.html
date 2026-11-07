@@ -90,22 +90,23 @@
                 <i class="fa-solid fa-house"></i>
                 <span>الرئيسية</span>
             </div>
-            <div class="nav-item" data-page="subjects" onclick="switchPage('subjects')">
-                <i class="fa-solid fa-book-open"></i>
-                <span>المكتبة</span>
-            </div>
-            <div class="nav-item ai-fab" data-page="ai-assistant" onclick="switchPage('ai-assistant')">
-                <div class="fab-inner">
-                    <i class="fa-solid fa-wand-magic-sparkles"></i>
-                </div>
-            </div>
             <div class="nav-item" data-page="schedule" onclick="switchPage('schedule')">
                 <i class="fa-solid fa-calendar-days"></i>
-                <span>الجدول</span>
+                <span>الجدول والمهام</span>
+            </div>
+            <div class="nav-item ai-fab" data-page="pomodoro" onclick="switchPage('pomodoro')">
+                <div class="fab-inner">
+                    <i class="fa-solid fa-fire-flame-curved"></i>
+                </div>
+                <span>ابدأ مذاكرة</span>
+            </div>
+            <div class="nav-item" data-page="quiz" onclick="switchPage('quiz')">
+                <i class="fa-solid fa-brain"></i>
+                <span>اختبر نفسك</span>
             </div>
             <div class="nav-item" onclick="toggleSidebar()">
                 <i class="fa-solid fa-bars-staggered"></i>
-                <span>المزيد</span>
+                <span>كل الأدوات</span>
             </div>
         </nav>
 
@@ -300,38 +301,58 @@
                 <div style="font-weight: 900; color: #ff4757; font-size: 1.15rem;"><span id="desktop-streak-count">1</span> <span style="font-size: 0.75rem;">يوم</span></div>
             </div>
             <ul class="nav-links" id="student-nav-links">
-                <!-- المجموعة 1: التخطيط اليومي -->
-                <li class="nav-category-header"><i class="fa-solid fa-calendar-day"></i> التخطيط اليومي</li>
-                <li class="active" data-page="dashboard"><i class="fa-solid fa-chart-pie"></i> لوحة التحكم</li>
-                <li data-page="subjects"><i class="fa-solid fa-book"></i> المواد الدراسية</li>
-                <li data-page="tasks"><i class="fa-solid fa-list-check"></i> مهام المذاكرة</li>
-                <li data-page="schedule"><i class="fa-solid fa-calendar-week"></i> جدول الدروس</li>
-                <li data-page="backlog"><i class="fa-solid fa-boxes-stacked"></i> لمّ المتراكم</li>
+                <!-- 🗂️ المجموعة 1: التخطيط والجدول (مفتوحة افتراضياً) -->
+                <li class="nav-category-header open" id="header-cat-planning" onclick="toggleNavCategory('cat-planning')">
+                    <span class="nav-cat-title"><i class="fa-solid fa-folder-open"></i> التخطيط والجدول</span>
+                    <i class="fa-solid fa-chevron-down nav-cat-arrow"></i>
+                </li>
+                <div class="nav-category-body open" id="body-cat-planning">
+                    <li class="active" data-page="dashboard"><i class="fa-solid fa-chart-pie"></i> لوحة التحكم</li>
+                    <li data-page="subjects"><i class="fa-solid fa-book"></i> المواد الدراسية</li>
+                    <li data-page="schedule"><i class="fa-solid fa-calendar-week"></i> جدول الدروس</li>
+                    <li data-page="tasks"><i class="fa-solid fa-list-check"></i> مهام المذاكرة</li>
+                    <li data-page="backlog"><i class="fa-solid fa-boxes-stacked"></i> لمّ المتراكم</li>
+                </div>
 
-                <!-- المجموعة 2: أدوات التركيز والـ AI -->
-                <li class="nav-category-header"><i class="fa-solid fa-wand-magic-sparkles"></i> أدوات التركيز والـ AI</li>
-                <li data-page="pomodoro"><i class="fa-solid fa-stopwatch"></i> مؤقت بومودورو</li>
-                <li data-page="ai-assistant"><i class="fa-solid fa-robot"></i> المساعد الذكي</li>
-                <li data-page="notebook-ai"><i class="fa-solid fa-book-open-reader" style="color: #00e5ff;"></i> استوديو الكتب (Notebook AI) <span style="background:linear-gradient(135deg,#00e5ff,#ff007f); color:#fff; font-size:0.65rem; padding:2px 6px; border-radius:10px; margin-right:4px; font-weight:bold;">جديد 🔥</span></li>
-                <li data-page="flashcards"><i class="fa-solid fa-layer-group"></i> البطاقات (Flashcards)</li>
-                <li data-page="quiz"><i class="fa-solid fa-clipboard-question"></i> اختبر نفسك</li>
-                <li data-page="alarm"><i class="fa-solid fa-bell"></i> منبه النوم الثقيل</li>
+                <!-- 🤖 المجموعة 2: أدوات المذاكرة والـ AI -->
+                <li class="nav-category-header" id="header-cat-focus" onclick="toggleNavCategory('cat-focus')">
+                    <span class="nav-cat-title"><i class="fa-solid fa-wand-magic-sparkles"></i> أدوات المذاكرة والـ AI</span>
+                    <i class="fa-solid fa-chevron-down nav-cat-arrow"></i>
+                </li>
+                <div class="nav-category-body" id="body-cat-focus">
+                    <li data-page="notebook-ai"><i class="fa-solid fa-book-open-reader" style="color: #00e5ff;"></i> استوديو الكتب (Notebook AI) <span style="background:linear-gradient(135deg,#00e5ff,#ff007f); color:#fff; font-size:0.65rem; padding:2px 6px; border-radius:10px; margin-right:4px; font-weight:bold;">جديد 🔥</span></li>
+                    <li data-page="ai-assistant"><i class="fa-solid fa-robot"></i> المساعد الذكي</li>
+                    <li data-page="pomodoro"><i class="fa-solid fa-stopwatch"></i> مؤقت بومودورو</li>
+                    <li data-page="flashcards"><i class="fa-solid fa-layer-group"></i> البطاقات (Flashcards)</li>
+                </div>
 
-                <!-- المجموعة 3: المتابعة والتحفيز -->
-                <li class="nav-category-header"><i class="fa-solid fa-trophy"></i> المتابعة والتحفيز</li>
-                <li data-page="exams"><i class="fa-solid fa-file-signature"></i> الامتحانات</li>
-                <li data-page="challenges"><i class="fa-solid fa-gamepad" style="color: var(--primary-color);"></i> تحديات المذاكرة</li>
-                <li data-page="statistics"><i class="fa-solid fa-chart-simple"></i> إحصائيات المذاكرة</li>
-                <li data-page="gpa-calc"><i class="fa-solid fa-calculator"></i> حاسبة الـ GPA</li>
-                <li data-page="comments-wall"><i class="fa-solid fa-comments" style="color: var(--primary-color);"></i> كلمة تشجعني</li>
+                <!-- 🏆 المجموعة 3: الامتحانات والتحفيز -->
+                <li class="nav-category-header" id="header-cat-tracking" onclick="toggleNavCategory('cat-tracking')">
+                    <span class="nav-cat-title"><i class="fa-solid fa-trophy"></i> الامتحانات والتحفيز</span>
+                    <i class="fa-solid fa-chevron-down nav-cat-arrow"></i>
+                </li>
+                <div class="nav-category-body" id="body-cat-tracking">
+                    <li data-page="exams"><i class="fa-solid fa-file-signature"></i> الامتحانات</li>
+                    <li data-page="quiz"><i class="fa-solid fa-clipboard-question"></i> اختبر نفسك</li>
+                    <li data-page="challenges"><i class="fa-solid fa-gamepad" style="color: var(--primary-color);"></i> تحديات المذاكرة</li>
+                    <li data-page="statistics"><i class="fa-solid fa-chart-simple"></i> إحصائيات المذاكرة</li>
+                    <li data-page="gpa-calc"><i class="fa-solid fa-calculator"></i> حاسبة الـ GPA</li>
+                    <li data-page="comments-wall"><i class="fa-solid fa-comments" style="color: var(--primary-color);"></i> كلمة تشجعني</li>
+                    <li data-page="alarm"><i class="fa-solid fa-bell"></i> منبه النوم الثقيل</li>
+                </div>
 
-                <!-- المجموعة 4: الإعدادات والبيانات -->
-                <li class="nav-category-header"><i class="fa-solid fa-gear"></i> الإعدادات والبيانات</li>
-                <li data-page="notifications-settings"><i class="fa-solid fa-bell" style="color: #feca57;"></i> الإشعارات الذكية</li>
-                <li onclick="openWhatsNew()" style="cursor: pointer; background: rgba(0, 229, 255, 0.08); border-radius: 8px; margin-top: 5px;"><i class="fa-solid fa-bullhorn" style="color: #00e5ff;"></i> مميزات التحديث الجديد</li>
-                <li onclick="openDataTransferModal()" style="cursor: pointer; background: rgba(46, 213, 115, 0.1); border-radius: 8px; margin-top: 5px;"><i class="fa-solid fa-arrows-rotate" style="color: #2ed573;"></i> نقل ونسخ البيانات</li>
-                <li onclick="installPwaApp(); toggleSidebar();" style="cursor: pointer; background: rgba(0, 229, 255, 0.12); border-radius: 8px; margin-top: 5px; border: 1px solid rgba(0, 229, 255, 0.3);"><i class="fa-solid fa-mobile-screen-button" style="color: #00e5ff;"></i> تثبيت التطبيق على هاتفك (آمن 100%)</li>
-                <li data-page="admin" id="nav-admin" style="display:none;"></li>
+                <!-- ⚙️ المجموعة 4: الإعدادات والبيانات -->
+                <li class="nav-category-header" id="header-cat-settings" onclick="toggleNavCategory('cat-settings')">
+                    <span class="nav-cat-title"><i class="fa-solid fa-gear"></i> الإعدادات والبيانات</span>
+                    <i class="fa-solid fa-chevron-down nav-cat-arrow"></i>
+                </li>
+                <div class="nav-category-body" id="body-cat-settings">
+                    <li data-page="notifications-settings"><i class="fa-solid fa-bell" style="color: #feca57;"></i> الإشعارات الذكية</li>
+                    <li onclick="openWhatsNew()" style="cursor: pointer; background: rgba(0, 229, 255, 0.08); border-radius: 8px; margin-top: 5px;"><i class="fa-solid fa-bullhorn" style="color: #00e5ff;"></i> مميزات التحديث الجديد</li>
+                    <li onclick="openDataTransferModal()" style="cursor: pointer; background: rgba(46, 213, 115, 0.1); border-radius: 8px; margin-top: 5px;"><i class="fa-solid fa-arrows-rotate" style="color: #2ed573;"></i> نقل ونسخ البيانات</li>
+                    <li onclick="installPwaApp(); toggleSidebar();" style="cursor: pointer; background: rgba(0, 229, 255, 0.12); border-radius: 8px; margin-top: 5px; border: 1px solid rgba(0, 229, 255, 0.3);"><i class="fa-solid fa-mobile-screen-button" style="color: #00e5ff;"></i> تثبيت التطبيق على هاتفك (آمن 100%)</li>
+                    <li data-page="admin" id="nav-admin" style="display:none;"></li>
+                </div>
             </ul>
 
             <!-- Dedicated Teacher Sidebar Links (Shown ONLY when logged in as teacher) -->
@@ -399,7 +420,7 @@
         </div>
 
         <!-- Teacher Dashboard Page (Complete Independent Teacher Suite) -->
-        <section id="teacher-dashboard" class="page">
+        <section id="teacher-dashboard" class="page" style="display: none !important;">
             <!-- Teacher Header -->
             <header style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 1.5rem;">
                 <div>
@@ -1295,13 +1316,13 @@
                     </div>
                 </div>
 
-                <!-- 🚀 Quick-Start 3-Step Journey for Students -->
+                <!-- 🚀 Interactive Quick-Start Stepper (خارطة طريقك اليومية) -->
                 <div id="student-journey-card" class="card hover-glow-box student-journey-card" style="display: none;">
                     <div class="journey-header">
                         <div class="journey-title-group">
-                            <span class="journey-badge"><i class="fa-solid fa-flag-checkered"></i> البداية السريعة</span>
-                            <h3 class="journey-title">ابدأ رحلتك في 3 خطوات 🚀</h3>
-                            <p class="journey-subtitle">أكمل هذه الخطوات البسيطة لتستفيد بأقصى طاقة من التطبيق:</p>
+                            <span class="journey-badge"><i class="fa-solid fa-map-location-dot"></i> خارطة الطريق اليومية</span>
+                            <h3 class="journey-title">خارطة طريقك اليومية (تبدأ منين؟) 🚀</h3>
+                            <p class="journey-subtitle">3 خطوات سهلة ومباشرة لتبدأ يومك الدراسي بأعلى تركيز وإنجاز:</p>
                         </div>
                         <div class="journey-actions">
                             <span class="journey-progress-pill" id="journey-progress-pill">0 من 3 مكتملة</span>
@@ -1312,37 +1333,37 @@
                     </div>
                     
                     <div class="journey-steps-grid">
-                        <!-- Step 1: أضف موادك الدراسية -->
+                        <!-- Step 1: ظبّط جدولك ومهام اليوم -->
                         <div class="journey-step-item" id="journey-step-1" onclick="handleJourneyStep(1)">
                             <div class="journey-step-check"><i class="fa-solid fa-circle-check"></i></div>
-                            <div class="journey-step-icon"><i class="fa-solid fa-book"></i></div>
+                            <div class="journey-step-icon"><i class="fa-solid fa-calendar-check"></i></div>
                             <div class="journey-step-content">
                                 <span class="journey-step-num">الخطوة 1</span>
-                                <strong class="journey-step-name">أضف موادك الدراسية</strong>
-                                <span class="journey-step-hint">حدد المواد وساعات مذاكرتها</span>
+                                <strong class="journey-step-name">📅 ظبّط جدولك ومهام اليوم</strong>
+                                <span class="journey-step-hint">أضف مهام اليوم ونظم مواعيد حصصك</span>
                             </div>
                             <div class="journey-step-arrow"><i class="fa-solid fa-chevron-left"></i></div>
                         </div>
 
-                        <!-- Step 2: سجل مواعيد جدولك -->
+                        <!-- Step 2: لخّص درسك باستوديو الكتب AI -->
                         <div class="journey-step-item" id="journey-step-2" onclick="handleJourneyStep(2)">
                             <div class="journey-step-check"><i class="fa-solid fa-circle-check"></i></div>
-                            <div class="journey-step-icon"><i class="fa-solid fa-calendar-days"></i></div>
+                            <div class="journey-step-icon"><i class="fa-solid fa-book-open-reader"></i></div>
                             <div class="journey-step-content">
                                 <span class="journey-step-num">الخطوة 2</span>
-                                <strong class="journey-step-name">سجل مواعيد جدولك</strong>
-                                <span class="journey-step-hint">نظم حصصك الأسبوعية والسناتر</span>
+                                <strong class="journey-step-name">🤖 لخّص درسك باستوديو الكتب AI</strong>
+                                <span class="journey-step-hint">استخرج ملخصات وأسئلة ذكية للدرس</span>
                             </div>
                             <div class="journey-step-arrow"><i class="fa-solid fa-chevron-left"></i></div>
                         </div>
 
-                        <!-- Step 3: ابدأ أول جلسة بومودورو -->
+                        <!-- Step 3: ابدأ جلسة تركيز بومودورو -->
                         <div class="journey-step-item" id="journey-step-3" onclick="handleJourneyStep(3)">
                             <div class="journey-step-check"><i class="fa-solid fa-circle-check"></i></div>
                             <div class="journey-step-icon"><i class="fa-solid fa-stopwatch"></i></div>
                             <div class="journey-step-content">
                                 <span class="journey-step-num">الخطوة 3</span>
-                                <strong class="journey-step-name">ابدأ أول جلسة بومودورو</strong>
+                                <strong class="journey-step-name">⏱️ ابدأ جلسة تركيز بومودورو</strong>
                                 <span class="journey-step-hint">25 دقيقة تركيز تام بدون تشتت</span>
                             </div>
                             <div class="journey-step-arrow"><i class="fa-solid fa-chevron-left"></i></div>

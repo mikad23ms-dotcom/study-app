@@ -1236,35 +1236,49 @@ body[data-theme="dark"]::after {
         color: var(--primary-color) !important;
     }
 
-    /* Reset the old FAB completely so it fits the new design */
-    .mobile-bottom-nav .ai-fab .fab-inner {
-        width: auto !important;
-        height: auto !important;
-        border-radius: 0 !important;
-        background: transparent !important;
-        box-shadow: none !important;
-        color: inherit !important;
-        font-size: inherit !important;
-        border: none !important;
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
-        gap: 5px !important;
-    }
-    
-    .mobile-bottom-nav .ai-fab .fab-inner::after {
-        content: 'المساعد';
-        font-size: 0.75rem;
-        font-family: inherit;
+    /* Distinct Center Button ("ابدأ مذاكرة") with Flame Glow */
+    .mobile-bottom-nav .ai-fab {
+        position: relative !important;
+        top: -6px !important;
     }
 
-    .mobile-bottom-nav .ai-fab {
-        position: static !important;
-        top: 0 !important;
+    .mobile-bottom-nav .ai-fab .fab-inner {
+        width: 38px !important;
+        height: 38px !important;
+        border-radius: 50% !important;
+        background: linear-gradient(135deg, #ff7a00, #ff0055) !important;
+        box-shadow: 0 4px 14px rgba(255, 106, 0, 0.45) !important;
+        color: #ffffff !important;
+        font-size: 1.15rem !important;
+        border: 2px solid rgba(15, 23, 42, 0.8) !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+        gap: 0 !important;
     }
-    .mobile-bottom-nav .ai-fab.active i {
-        transform: translateY(-3px) scale(1.15) !important;
-        box-shadow: none !important;
+
+    [data-theme="light"] .mobile-bottom-nav .ai-fab .fab-inner {
+        border-color: #ffffff !important;
+    }
+
+    .mobile-bottom-nav .ai-fab .fab-inner::after {
+        display: none !important;
+        content: "" !important;
+    }
+
+    .mobile-bottom-nav .ai-fab span {
+        font-size: 0.68rem !important;
+        font-weight: 800 !important;
+        color: #ff7a00 !important;
+        margin-top: 2px !important;
+        white-space: nowrap !important;
+        display: block !important;
+    }
+
+    .mobile-bottom-nav .ai-fab.active .fab-inner {
+        transform: scale(1.12) !important;
+        box-shadow: 0 6px 20px rgba(255, 106, 0, 0.7) !important;
     }
 }
 
@@ -4205,31 +4219,70 @@ div[id^="dmermaid"],
    🚀 MODERN SIDEBAR & STUDENT ONBOARDING ENHANCEMENTS
    ======================================================== */
 
-/* Desktop Category Header */
+/* Collapsible Accordion Header */
 .nav-category-header {
-    font-size: 0.74rem;
-    font-weight: 800;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+    padding: 10px 14px !important;
+    margin: 8px 0 4px 0 !important;
+    background: rgba(255, 255, 255, 0.03) !important;
+    border: 1px solid rgba(255, 255, 255, 0.06) !important;
+    border-radius: 10px !important;
     color: var(--primary-color) !important;
-    opacity: 0.9;
-    padding: 12px 14px 4px 14px !important;
-    margin-top: 8px !important;
-    letter-spacing: 0.5px;
-    pointer-events: none !important;
-    user-select: none;
+    font-size: 0.82rem !important;
+    font-weight: 800 !important;
+    cursor: pointer !important;
+    pointer-events: auto !important;
+    user-select: none !important;
+    transition: all 0.25s ease !important;
+    box-sizing: border-box !important;
+    list-style: none !important;
+}
+
+.nav-category-header:hover {
+    background: rgba(0, 229, 255, 0.08) !important;
+    border-color: rgba(0, 229, 255, 0.3) !important;
+    color: #ffffff !important;
+}
+
+.nav-category-header.open {
+    background: rgba(0, 229, 255, 0.1) !important;
+    border-color: rgba(0, 229, 255, 0.35) !important;
+    color: #00e5ff !important;
+}
+
+.nav-category-header .nav-cat-title {
     display: flex;
     align-items: center;
     gap: 8px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    background: transparent !important;
-    cursor: default !important;
-    list-style: none !important;
-}
-.nav-category-header i {
-    font-size: 0.85rem;
-    opacity: 0.85;
 }
 
-/* Mobile Sidebar 2-Column Grid (max-width: 768px) */
+.nav-category-header .nav-cat-arrow {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), color 0.2s ease;
+}
+
+.nav-category-header.open .nav-cat-arrow {
+    transform: rotate(180deg);
+    color: #00e5ff;
+}
+
+/* Accordion Body */
+.nav-category-body {
+    display: none;
+    width: 100%;
+}
+
+.nav-category-body.open {
+    display: flex;
+    flex-direction: column;
+    animation: fadeIn 0.25s ease;
+}
+
+/* Mobile Sidebar 2-Column Grid inside Accordion (max-width: 768px) */
 @media (max-width: 768px) {
     .sidebar {
         width: 320px !important;
@@ -4240,33 +4293,31 @@ div[id^="dmermaid"],
         right: 0 !important;
     }
     .sidebar #student-nav-links {
-        display: grid !important;
-        grid-template-columns: repeat(2, 1fr) !important;
-        gap: 8px !important;
+        display: flex !important;
+        flex-direction: column !important;
         padding: 10px 12px !important;
+        gap: 0 !important;
         width: 100% !important;
         box-sizing: border-box !important;
     }
     .sidebar #student-nav-links .nav-category-header {
-        grid-column: 1 / -1 !important;
-        font-size: 0.78rem !important;
-        font-weight: 800 !important;
-        color: #00e5ff !important;
-        padding: 8px 4px 4px 4px !important;
-        margin-top: 6px !important;
-        display: flex !important;
-        align-items: center !important;
-        gap: 6px !important;
-        background: transparent !important;
-        border: none !important;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
-        box-shadow: none !important;
-        pointer-events: none !important;
-        width: 100% !important;
-        min-height: auto !important;
-        box-sizing: border-box !important;
+        margin: 6px 0 !important;
+        padding: 11px 14px !important;
     }
-    .sidebar #student-nav-links li:not(.nav-category-header) {
+    .sidebar #student-nav-links .nav-category-body {
+        display: none;
+        width: 100% !important;
+    }
+    .sidebar #student-nav-links .nav-category-body.open {
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 8px !important;
+        padding: 6px 0 10px 0 !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        animation: fadeIn 0.25s ease;
+    }
+    .sidebar #student-nav-links .nav-category-body li {
         width: 100% !important;
         margin: 0 !important;
         padding: 10px 6px !important;
@@ -4285,17 +4336,17 @@ div[id^="dmermaid"],
         box-sizing: border-box !important;
         transition: all 0.2s ease !important;
     }
-    .sidebar #student-nav-links li:not(.nav-category-header) i {
+    .sidebar #student-nav-links .nav-category-body li i {
         font-size: 1.15rem !important;
         margin: 0 !important;
     }
-    .sidebar #student-nav-links li:not(.nav-category-header).active {
+    .sidebar #student-nav-links .nav-category-body li.active {
         background: var(--primary-color) !important;
         color: #fff !important;
         border-color: var(--primary-color) !important;
         box-shadow: 0 4px 15px rgba(0, 229, 255, 0.3) !important;
     }
-    .sidebar #student-nav-links li:not(.nav-category-header):active {
+    .sidebar #student-nav-links .nav-category-body li:active {
         transform: scale(0.96) !important;
     }
 }
