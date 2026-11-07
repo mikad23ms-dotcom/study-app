@@ -155,14 +155,6 @@
                 <div><i class="fa-solid fa-stopwatch text-orange"></i> تايمر تركيز بدون تشتت</div>
             </div>
 
-            <!-- Existing Student Restore Link -->
-            <div style="text-align: center; margin-bottom: 14px; padding: 8px 12px; background: rgba(255,255,255,0.03); border-radius: 10px; border: 1px dashed rgba(255,255,255,0.12);">
-                <span style="font-size: 0.82rem; color: var(--text-muted);">
-                    لديك حساب وجدول سابق في المتصفح؟ 
-                    <a href="javascript:void(0)" onclick="openDataTransferModal('import')" style="color: #2ed573; font-weight: bold; text-decoration: underline;">استعد بياناتك من هنا 📥</a>
-                </span>
-            </div>
-
             <div style="display: flex; align-items: center; margin: 12px 0; color: var(--text-muted); font-size: 0.82rem;">
                 <span style="flex: 1; height: 1px; background: var(--border-color);"></span>
                 <span style="padding: 0 8px; font-weight: 700; color: #00e5ff;">سجل بياناتك للبدء فوراً 👇</span>
@@ -308,26 +300,37 @@
                 <div style="font-weight: 900; color: #ff4757; font-size: 1.15rem;"><span id="desktop-streak-count">1</span> <span style="font-size: 0.75rem;">يوم</span></div>
             </div>
             <ul class="nav-links" id="student-nav-links">
+                <!-- المجموعة 1: التخطيط اليومي -->
+                <li class="nav-category-header"><i class="fa-solid fa-calendar-day"></i> التخطيط اليومي</li>
                 <li class="active" data-page="dashboard"><i class="fa-solid fa-chart-pie"></i> لوحة التحكم</li>
                 <li data-page="subjects"><i class="fa-solid fa-book"></i> المواد الدراسية</li>
                 <li data-page="tasks"><i class="fa-solid fa-list-check"></i> مهام المذاكرة</li>
                 <li data-page="schedule"><i class="fa-solid fa-calendar-week"></i> جدول الدروس</li>
-                <li data-page="backlog"><i class="fa-solid fa-boxes-stacked"></i> لمّ المتراكم 📦</li>
-                <li data-page="challenges"><i class="fa-solid fa-gamepad" style="color: var(--primary-color);"></i> تحديات المذاكرة 🎮</li>
+                <li data-page="backlog"><i class="fa-solid fa-boxes-stacked"></i> لمّ المتراكم</li>
+
+                <!-- المجموعة 2: أدوات التركيز والـ AI -->
+                <li class="nav-category-header"><i class="fa-solid fa-wand-magic-sparkles"></i> أدوات التركيز والـ AI</li>
                 <li data-page="pomodoro"><i class="fa-solid fa-stopwatch"></i> مؤقت بومودورو</li>
-                <li data-page="exams"><i class="fa-solid fa-file-signature"></i> الامتحانات</li>
+                <li data-page="ai-assistant"><i class="fa-solid fa-robot"></i> المساعد الذكي</li>
+                <li data-page="notebook-ai"><i class="fa-solid fa-book-open-reader" style="color: #00e5ff;"></i> استوديو الكتب (Notebook AI) <span style="background:linear-gradient(135deg,#00e5ff,#ff007f); color:#fff; font-size:0.65rem; padding:2px 6px; border-radius:10px; margin-right:4px; font-weight:bold;">جديد 🔥</span></li>
                 <li data-page="flashcards"><i class="fa-solid fa-layer-group"></i> البطاقات (Flashcards)</li>
-                <li data-page="ai-assistant"><i class="fa-solid fa-robot"></i> المساعد الذكي 🌟</li>
-                <li data-page="notebook-ai"><i class="fa-solid fa-book-open-reader" style="color: #00e5ff;"></i> استوديو الكتب (Notebook AI) 📖 <span style="background:linear-gradient(135deg,#00e5ff,#ff007f); color:#fff; font-size:0.65rem; padding:2px 6px; border-radius:10px; margin-right:4px; font-weight:bold;">جديد 🔥</span></li>
-                <li data-page="quiz"><i class="fa-solid fa-clipboard-question"></i> اختبر نفسك 🧪</li>
-                <li data-page="statistics"><i class="fa-solid fa-chart-simple"></i> إحصائيات المذاكرة 📊</li>
-                <li data-page="gpa-calc"><i class="fa-solid fa-calculator"></i> حاسبة الـ GPA 🎓</li>
-                <li data-page="alarm"><i class="fa-solid fa-bell"></i> منبه النوم الثقيل ⏰</li>
-                <li data-page="notifications-settings"><i class="fa-solid fa-bell" style="color: #feca57;"></i> الإشعارات الذكية 🔔</li>
-                <li data-page="comments-wall"><i class="fa-solid fa-comments" style="color: var(--primary-color);"></i> كلمة تشجعني ✨</li>
-                <li onclick="openWhatsNew()" style="cursor: pointer; background: rgba(0, 229, 255, 0.08); border-radius: 8px; margin-top: 5px;"><i class="fa-solid fa-bullhorn" style="color: #00e5ff;"></i> مميزات التحديث الجديد 🚀</li>
-                <li onclick="openDataTransferModal()" style="cursor: pointer; background: rgba(46, 213, 115, 0.1); border-radius: 8px; margin-top: 5px;"><i class="fa-solid fa-arrows-rotate" style="color: #2ed573;"></i> نقل ونسخ البيانات 📲</li>
-                <li onclick="installPwaApp(); toggleSidebar();" style="cursor: pointer; background: rgba(0, 229, 255, 0.12); border-radius: 8px; margin-top: 5px; border: 1px solid rgba(0, 229, 255, 0.3);"><i class="fa-solid fa-mobile-screen-button" style="color: #00e5ff;"></i> تثبيت التطبيق على هاتفك (آمن 100%) 📲</li>
+                <li data-page="quiz"><i class="fa-solid fa-clipboard-question"></i> اختبر نفسك</li>
+                <li data-page="alarm"><i class="fa-solid fa-bell"></i> منبه النوم الثقيل</li>
+
+                <!-- المجموعة 3: المتابعة والتحفيز -->
+                <li class="nav-category-header"><i class="fa-solid fa-trophy"></i> المتابعة والتحفيز</li>
+                <li data-page="exams"><i class="fa-solid fa-file-signature"></i> الامتحانات</li>
+                <li data-page="challenges"><i class="fa-solid fa-gamepad" style="color: var(--primary-color);"></i> تحديات المذاكرة</li>
+                <li data-page="statistics"><i class="fa-solid fa-chart-simple"></i> إحصائيات المذاكرة</li>
+                <li data-page="gpa-calc"><i class="fa-solid fa-calculator"></i> حاسبة الـ GPA</li>
+                <li data-page="comments-wall"><i class="fa-solid fa-comments" style="color: var(--primary-color);"></i> كلمة تشجعني</li>
+
+                <!-- المجموعة 4: الإعدادات والبيانات -->
+                <li class="nav-category-header"><i class="fa-solid fa-gear"></i> الإعدادات والبيانات</li>
+                <li data-page="notifications-settings"><i class="fa-solid fa-bell" style="color: #feca57;"></i> الإشعارات الذكية</li>
+                <li onclick="openWhatsNew()" style="cursor: pointer; background: rgba(0, 229, 255, 0.08); border-radius: 8px; margin-top: 5px;"><i class="fa-solid fa-bullhorn" style="color: #00e5ff;"></i> مميزات التحديث الجديد</li>
+                <li onclick="openDataTransferModal()" style="cursor: pointer; background: rgba(46, 213, 115, 0.1); border-radius: 8px; margin-top: 5px;"><i class="fa-solid fa-arrows-rotate" style="color: #2ed573;"></i> نقل ونسخ البيانات</li>
+                <li onclick="installPwaApp(); toggleSidebar();" style="cursor: pointer; background: rgba(0, 229, 255, 0.12); border-radius: 8px; margin-top: 5px; border: 1px solid rgba(0, 229, 255, 0.3);"><i class="fa-solid fa-mobile-screen-button" style="color: #00e5ff;"></i> تثبيت التطبيق على هاتفك (آمن 100%)</li>
                 <li data-page="admin" id="nav-admin" style="display:none;"></li>
             </ul>
 
@@ -376,33 +379,22 @@
             </div>
         </div>
 
-        <!-- Smart PWA & App Install Banner (Safety First: No Downloads Required) -->
-                <!-- Smart PWA & App Install Banner (Safety First: No Downloads Required) -->
-        <div id="apk-promo-banner" class="apk-promo-banner" style="display: none; background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.9)); border: 1.5px solid #00e5ff; box-shadow: 0 8px 25px rgba(0, 229, 255, 0.25);">
-            <div class="apk-promo-content">
-                <img src="app-icon.png" alt="أيقونة تطبيق المذاكرة" class="apk-promo-icon" onerror="this.onerror=null; this.src='icons/app-icon.png';">
-                <div class="apk-promo-text">
-                    <h4 style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 4px;">
-                        <span style="color: #fff; font-size: 1.05rem;">ثبت التطبيق على شاشة هاتفك فوراً! 📲</span>
-                        <span class="apk-promo-badge" style="background: rgba(46, 213, 115, 0.2); color: #2ed573; border: 1px solid #2ed573;">
-                            🛡️ آمن 100% بدون تحميل ملفات
-                        </span>
-                    </h4>
-                    <p style="color: #cbd5e1; font-size: 0.86rem; margin: 0; line-height: 1.5;">
-                        مش محتاج تحمل ملفات ولا توقف حماية! يضاف لشاشتك الرئيسية في ثانية واحدة ويفتح شاشة كاملة وسريعة كأي تطبيق رسمي.
-                    </p>
+        <!-- Smart Compact PWA & App Install Banner -->
+        <div id="apk-promo-banner" class="apk-promo-banner compact-pwa-banner" style="display: none;">
+            <div class="compact-pwa-content">
+                <i class="fa-solid fa-mobile-screen-button compact-pwa-icon"></i>
+                <div class="compact-pwa-text">
+                    <strong>تثبيت التطبيق على هاتفك:</strong>
+                    <span>احفظ التطبيق على شاشتك الرئيسية واستخدمه بدون إنترنت وبسرعة فائقة 📲</span>
                 </div>
             </div>
-            <div class="apk-promo-actions" style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
-                <button type="button" onclick="installPwaApp()" class="btn btn-hover-glow" style="background: linear-gradient(135deg, #00e5ff, #00b8cc); color: #020d1a !important; font-weight: 800; font-size: 0.92rem; padding: 0.65rem 1.2rem; border-radius: 12px; border: none; cursor: pointer; display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 15px rgba(0, 229, 255, 0.35);">
-                    <i class="fa-solid fa-mobile-screen-button" style="font-size: 1.1rem;"></i>
-                    <span>تثبيت على الشاشة الآن</span>
+            <div class="compact-pwa-actions">
+                <button type="button" onclick="installPwaApp()" class="compact-install-btn">
+                    <i class="fa-solid fa-cloud-arrow-down"></i> تثبيت الآن
                 </button>
-                <button type="button" onclick="openWhatsNew()" class="btn" style="background: rgba(255, 255, 255, 0.06); color: var(--text-main); border: 1px solid rgba(255, 255, 255, 0.2); padding: 0.65rem 0.9rem; border-radius: 12px; font-weight: 600; font-size: 0.82rem; cursor: pointer; display: inline-flex; align-items: center; gap: 5px;">
-                    <i class="fa-solid fa-download"></i>
-                    <span>أو تحميل APK</span>
+                <button type="button" class="compact-close-btn" onclick="dismissApkBanner()" title="إغلاق نهائي" aria-label="إغلاق">
+                    <i class="fa-solid fa-xmark"></i>
                 </button>
-                <button class="apk-close-btn" onclick="dismissApkBanner()" title="إغلاق"><i class="fa-solid fa-xmark"></i></button>
             </div>
         </div>
 
@@ -1303,6 +1295,61 @@
                     </div>
                 </div>
 
+                <!-- 🚀 Quick-Start 3-Step Journey for Students -->
+                <div id="student-journey-card" class="card hover-glow-box student-journey-card" style="display: none;">
+                    <div class="journey-header">
+                        <div class="journey-title-group">
+                            <span class="journey-badge"><i class="fa-solid fa-flag-checkered"></i> البداية السريعة</span>
+                            <h3 class="journey-title">ابدأ رحلتك في 3 خطوات 🚀</h3>
+                            <p class="journey-subtitle">أكمل هذه الخطوات البسيطة لتستفيد بأقصى طاقة من التطبيق:</p>
+                        </div>
+                        <div class="journey-actions">
+                            <span class="journey-progress-pill" id="journey-progress-pill">0 من 3 مكتملة</span>
+                            <button type="button" class="journey-dismiss-btn" onclick="dismissStudentJourney()" title="إخفاء هذه الخطوات" aria-label="إخفاء">
+                                <i class="fa-solid fa-xmark"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="journey-steps-grid">
+                        <!-- Step 1: أضف موادك الدراسية -->
+                        <div class="journey-step-item" id="journey-step-1" onclick="handleJourneyStep(1)">
+                            <div class="journey-step-check"><i class="fa-solid fa-circle-check"></i></div>
+                            <div class="journey-step-icon"><i class="fa-solid fa-book"></i></div>
+                            <div class="journey-step-content">
+                                <span class="journey-step-num">الخطوة 1</span>
+                                <strong class="journey-step-name">أضف موادك الدراسية</strong>
+                                <span class="journey-step-hint">حدد المواد وساعات مذاكرتها</span>
+                            </div>
+                            <div class="journey-step-arrow"><i class="fa-solid fa-chevron-left"></i></div>
+                        </div>
+
+                        <!-- Step 2: سجل مواعيد جدولك -->
+                        <div class="journey-step-item" id="journey-step-2" onclick="handleJourneyStep(2)">
+                            <div class="journey-step-check"><i class="fa-solid fa-circle-check"></i></div>
+                            <div class="journey-step-icon"><i class="fa-solid fa-calendar-days"></i></div>
+                            <div class="journey-step-content">
+                                <span class="journey-step-num">الخطوة 2</span>
+                                <strong class="journey-step-name">سجل مواعيد جدولك</strong>
+                                <span class="journey-step-hint">نظم حصصك الأسبوعية والسناتر</span>
+                            </div>
+                            <div class="journey-step-arrow"><i class="fa-solid fa-chevron-left"></i></div>
+                        </div>
+
+                        <!-- Step 3: ابدأ أول جلسة بومودورو -->
+                        <div class="journey-step-item" id="journey-step-3" onclick="handleJourneyStep(3)">
+                            <div class="journey-step-check"><i class="fa-solid fa-circle-check"></i></div>
+                            <div class="journey-step-icon"><i class="fa-solid fa-stopwatch"></i></div>
+                            <div class="journey-step-content">
+                                <span class="journey-step-num">الخطوة 3</span>
+                                <strong class="journey-step-name">ابدأ أول جلسة بومودورو</strong>
+                                <span class="journey-step-hint">25 دقيقة تركيز تام بدون تشتت</span>
+                            </div>
+                            <div class="journey-step-arrow"><i class="fa-solid fa-chevron-left"></i></div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- 🏛️ 3. THE 4 CORE STUDY PORTALS (أعمدة المذاكرة الأساسية الأربعة - بتصميم مريح جداً للعين) -->
                 <div class="core-study-portals" id="core-study-portals">
                     <!-- Portal 1: جدول الدروس والمذاكرة -->
@@ -1514,6 +1561,22 @@
                             <button id="quick-preset-btn" onclick="applySmartStagePreset()"><span id="quick-preset-label"></span></button>
                             <input type="text" id="hero-quick-task">
                         </div>
+                    </div>
+
+                    <!-- University GPA Quick Access Card (Auto-controlled by applyEducationalStageCustomization) -->
+                    <div class="card hover-glow-box" id="dash-gpa-card" style="display: none; background: linear-gradient(135deg, rgba(168, 85, 247, 0.12), rgba(15, 23, 42, 0.94)); border: 1.5px solid #a855f7; border-radius: 16px; padding: 14px 20px; margin-bottom: 1.5rem; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px; box-shadow: 0 4px 20px rgba(168, 85, 247, 0.15);">
+                        <div style="display: flex; align-items: center; gap: 14px; flex-wrap: wrap;">
+                            <div style="width: 44px; height: 44px; border-radius: 12px; background: rgba(168, 85, 247, 0.2); border: 1.5px solid #a855f7; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0;">
+                                🎓
+                            </div>
+                            <div>
+                                <strong style="color: #c084fc; font-size: 1rem; display: block;">حاسبة المعدل التراكمي (GPA) 📊</strong>
+                                <span style="color: #cbd5e1; font-size: 0.82rem;">احسب معدلك الفصلي والتراكمي لجميع ساعاتك الدراسية بدقة وسرعة.</span>
+                            </div>
+                        </div>
+                        <button onclick="switchPage('gpa-calc')" class="btn" style="background: #a855f7; color: #fff; font-weight: 800; font-size: 0.88rem; padding: 8px 18px; border-radius: 10px; border: none; cursor: pointer; display: flex; align-items: center; gap: 6px;">
+                            <i class="fa-solid fa-calculator"></i> فتح الحاسبة
+                        </button>
                     </div>
 
                     <!-- Spiritual Grid: مواقيت الصلاة والورد القرآني وأقرب الامتحانات -->
