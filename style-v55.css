@@ -692,57 +692,32 @@ header h1:hover {
         background: rgba(0,0,0,0.6); backdrop-filter: blur(3px); z-index: 10000; opacity: 0; transition: opacity 0.3s;
     }
 
-    /* The Glass Premium Bottom Nav (Full Width) */
-    .mobile-bottom-nav {
+    /* Mobile Bottom Nav base (Unified with #0E1B28) */
+    .mobile-bottom-nav,
+    .bottom-nav {
         position: fixed;
         bottom: 0;
         left: 0; right: 0;
         width: 100%;
-        height: 70px;
-        background: rgba(20, 15, 40, 0.85) !important;
-        backdrop-filter: blur(20px) !important;
-        -webkit-backdrop-filter: blur(20px) !important;
+        height: 65px;
+        background: #0E1B28 !important;
         border: none !important;
         border-top: 1px solid rgba(255,255,255,0.1) !important;
-        border-radius: 30px 30px 0 0 !important;
+        border-radius: 0 !important;
         display: flex;
         justify-content: space-around;
         align-items: center;
-        z-index: 990;
-        box-shadow: 0 -10px 30px rgba(0,0,0,0.5), inset 0 1px 1px rgba(255,255,255,0.1) !important;
+        padding-bottom: env(safe-area-inset-bottom, 10px);
+        z-index: 999;
+        box-shadow: 0 -4px 20px rgba(0,0,0,0.35) !important;
     }
     
-    [data-theme="light"] .mobile-bottom-nav {
-        background: rgba(255, 255, 255, 0.9) !important;
-        border-top: 1px solid rgba(0,0,0,0.05) !important;
-        box-shadow: 0 -10px 30px rgba(0,0,0,0.1) !important;
+    [data-theme="light"] .mobile-bottom-nav,
+    [data-theme="light"] .bottom-nav {
+        background: #ffffff !important;
+        border-top: 1px solid rgba(0,0,0,0.08) !important;
+        box-shadow: 0 -4px 20px rgba(0,0,0,0.06) !important;
     }
-
-    .mobile-bottom-nav .nav-item {
-        display: flex; flex-direction: column; align-items: center; justify-content: center;
-        color: rgba(255,255,255,0.5); font-size: 0.7rem; gap: 4px; cursor: pointer; transition: 0.3s;
-        width: 20%;
-    }
-    [data-theme="light"] .mobile-bottom-nav .nav-item { color: rgba(0,0,0,0.5); }
-
-    .mobile-bottom-nav .nav-item i { font-size: 1.3rem; transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-    
-    .mobile-bottom-nav .nav-item.active { color: var(--primary-color); }
-    .mobile-bottom-nav .nav-item.active i { transform: translateY(-3px) scale(1.1); }
-
-    /* The Magical AI Center FAB (Glass distinct) */
-    .mobile-bottom-nav .ai-fab { position: relative; top: -25px !important; }
-    .mobile-bottom-nav .fab-inner {
-        width: 60px !important; height: 60px !important; border-radius: 50%;
-        background: linear-gradient(135deg, #00e5ff, #00e5ff) !important;
-        display: flex; justify-content: center; align-items: center;
-        color: white; font-size: 1.8rem;
-        box-shadow: 0 10px 20px rgba(0, 229, 255, 0.4), inset 0 -3px 5px rgba(0,0,0,0.2) !important;
-        border: 4px solid rgba(20, 15, 40, 0.95) !important; 
-        transition: transform 0.3s;
-    }
-    [data-theme="light"] .mobile-bottom-nav .fab-inner { border-color: white !important; }
-    .mobile-bottom-nav .ai-fab.active .fab-inner { transform: scale(1.1) rotate(10deg); box-shadow: 0 10px 25px rgba(0, 229, 255, 0.6) !important; }
 
     /* Cards Redesign for Mobile (Glass effect) */
     .card {
@@ -1125,31 +1100,43 @@ body[data-theme="dark"]::after {
 
 
 /* ======================================================== */
-/* --- NEW PREMIUM SLIDING PILL BOTTOM NAV (RTL) --- */
+/* ======================================================== */
+/* --- FIXED BOTTOM NAVIGATION BAR CONTAINER (MOBILE PWA) --- */
 /* ======================================================== */
 @media (max-width: 900px) {
+    .bottom-nav,
     .mobile-bottom-nav {
         position: fixed !important;
-        bottom: 20px !important;
-        left: 5% !important;
-        width: 90% !important;
-        height: 75px !important;
-        background: rgba(15, 15, 20, 0.85) !important;
-        backdrop-filter: blur(20px) !important;
-        -webkit-backdrop-filter: blur(20px) !important;
-        border-radius: 40px !important;
-        display: flex;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        height: 65px !important;
+        background: #0E1B28 !important; /* match your dark theme */
+        border: none !important;
+        border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+        border-radius: 0 !important;
+        display: flex !important;
         justify-content: space-around !important;
         align-items: center !important;
-        border: 1px solid rgba(255, 255, 255, 0.08) !important;
-        box-shadow: 0 15px 35px rgba(0,0,0,0.5), inset 0 1px 1px rgba(255,255,255,0.1) !important;
-        z-index: 10000 !important;
-        padding: 0 !important;
+        padding-bottom: env(safe-area-inset-bottom, 10px) !important;
+        padding-top: 0 !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
         margin: 0 !important;
-        /* Default active index is 0 (first item on the right) */
-        --active-index: 0;
+        z-index: 999 !important;
+        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.35) !important;
+        box-sizing: border-box !important;
     }
 
+    [data-theme="light"] .bottom-nav,
+    [data-theme="light"] .mobile-bottom-nav {
+        background: #ffffff !important;
+        border-top: 1px solid rgba(0, 0, 0, 0.08) !important;
+        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.06) !important;
+    }
+
+    .bottom-nav.nav-hidden,
     .mobile-bottom-nav.nav-hidden,
     .mobile-bottom-nav[style*="display: none"],
     .mobile-bottom-nav[style*="display:none"] {
@@ -1158,40 +1145,12 @@ body[data-theme="dark"]::after {
         pointer-events: none !important;
     }
 
-    [data-theme="light"] .mobile-bottom-nav {
-        background: rgba(255, 255, 255, 0.9) !important;
-        border: 1px solid rgba(0, 0, 0, 0.05) !important;
-        box-shadow: 0 15px 35px rgba(0,0,0,0.1) !important;
-    }
-
-    /* The Magical Sliding Bubble */
+    .bottom-nav::before,
     .mobile-bottom-nav::before {
-        content: '' !important;
-        position: absolute !important;
-        top: 8px !important;
-        bottom: 8px !important;
-        width: calc(20% - 16px) !important; /* 5 items, minus padding */
-        right: calc(var(--active-index) * 20% + 8px) !important; /* Move based on active index */
-        background: rgba(255, 255, 255, 0.05) !important;
-        border-radius: 35px !important;
-        z-index: -1 !important;
-        transition: right 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
-        
-        /* Chromatic/Glowing Ring Effect */
-        box-shadow: 
-            inset 0 0 0 1px rgba(255,255,255,0.1),
-            0 0 15px rgba(0, 229, 255, 0.4),
-            inset 2px 0 5px rgba(255, 0, 0, 0.3),
-            inset -2px 0 5px rgba(0, 255, 0, 0.3) !important;
+        display: none !important;
     }
 
-    [data-theme="light"] .mobile-bottom-nav::before {
-        background: rgba(0, 229, 255, 0.1) !important;
-        box-shadow: 
-            inset 0 0 0 1px rgba(0, 229, 255, 0.3),
-            0 0 15px rgba(0, 229, 255, 0.2) !important;
-    }
-
+    .bottom-nav .nav-item,
     .mobile-bottom-nav .nav-item {
         flex: 1 !important;
         width: 20% !important;
@@ -1200,86 +1159,150 @@ body[data-theme="dark"]::after {
         flex-direction: column !important;
         align-items: center !important;
         justify-content: center !important;
-        gap: 5px !important;
-        color: rgba(255,255,255,0.4) !important;
-        font-size: 0.75rem !important;
+        gap: 3px !important;
+        color: #94A3B8 !important;
+        font-size: 0.72rem !important;
         font-weight: 500 !important;
         cursor: pointer !important;
-        transition: all 0.4s ease !important;
+        transition: all 0.2s ease !important;
         position: relative !important;
         z-index: 2 !important;
-        top: 0 !important; /* Override previous FAB offset */
+        top: 0 !important;
+        padding: 4px 0 !important;
+        margin: 0 !important;
+        background: transparent !important;
+        border: none !important;
+        text-decoration: none !important;
+        box-sizing: border-box !important;
     }
 
+    [data-theme="light"] .bottom-nav .nav-item,
     [data-theme="light"] .mobile-bottom-nav .nav-item {
-        color: rgba(0,0,0,0.4) !important;
+        color: #64748B !important;
     }
 
+    .bottom-nav .nav-item i,
     .mobile-bottom-nav .nav-item i {
-        font-size: 1.4rem !important;
-        transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+        font-size: 1.25rem !important;
+        transition: transform 0.25s ease, color 0.25s ease !important;
         display: block !important;
+        line-height: 1 !important;
     }
 
-    /* Active Item Styles */
-    .mobile-bottom-nav .nav-item.active {
-        color: var(--primary-color) !important;
-        text-shadow: 0 0 10px rgba(0, 229, 255, 0.5) !important;
-    }
-
-    [data-theme="light"] .mobile-bottom-nav .nav-item.active {
-        text-shadow: none !important;
-    }
-
-    .mobile-bottom-nav .nav-item.active i {
-        transform: translateY(-3px) scale(1.15) !important;
-        color: var(--primary-color) !important;
-    }
-
-    /* Distinct Center Button ("ابدأ مذاكرة") with Flame Glow */
-    .mobile-bottom-nav .ai-fab {
-        position: relative !important;
-        top: -6px !important;
-    }
-
-    .mobile-bottom-nav .ai-fab .fab-inner {
-        width: 38px !important;
-        height: 38px !important;
-        border-radius: 50% !important;
-        background: linear-gradient(135deg, #ff7a00, #ff0055) !important;
-        box-shadow: 0 4px 14px rgba(255, 106, 0, 0.45) !important;
-        color: #ffffff !important;
-        font-size: 1.15rem !important;
-        border: 2px solid rgba(15, 23, 42, 0.8) !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        transition: transform 0.3s ease, box-shadow 0.3s ease !important;
-        gap: 0 !important;
-    }
-
-    [data-theme="light"] .mobile-bottom-nav .ai-fab .fab-inner {
-        border-color: #ffffff !important;
-    }
-
-    .mobile-bottom-nav .ai-fab .fab-inner::after {
-        display: none !important;
-        content: "" !important;
-    }
-
-    .mobile-bottom-nav .ai-fab span {
+    .bottom-nav .nav-item span,
+    .mobile-bottom-nav .nav-item span {
         font-size: 0.68rem !important;
-        font-weight: 800 !important;
-        color: #ff7a00 !important;
-        margin-top: 2px !important;
+        line-height: 1.2 !important;
         white-space: nowrap !important;
         display: block !important;
     }
 
-    .mobile-bottom-nav .ai-fab.active .fab-inner {
-        transform: scale(1.12) !important;
-        box-shadow: 0 6px 20px rgba(255, 106, 0, 0.7) !important;
+    .bottom-nav .nav-item.active,
+    .mobile-bottom-nav .nav-item.active {
+        color: var(--primary-color, #00e5ff) !important;
     }
+
+    .bottom-nav .nav-item.active i,
+    .mobile-bottom-nav .nav-item.active i {
+        transform: translateY(-2px) !important;
+        color: var(--primary-color, #00e5ff) !important;
+    }
+
+    /* Distinct Center Button ("ابدأ مذاكرة") */
+    .mobile-bottom-nav .ai-fab,
+    .bottom-nav .ai-fab {
+        position: relative !important;
+        top: -4px !important;
+    }
+
+    .mobile-bottom-nav .ai-fab .fab-inner,
+    .bottom-nav .ai-fab .fab-inner {
+        width: 34px !important;
+        height: 34px !important;
+        border-radius: 50% !important;
+        background: linear-gradient(135deg, #ff7a00, #ff0055) !important;
+        box-shadow: 0 3px 10px rgba(255, 106, 0, 0.45) !important;
+        color: #ffffff !important;
+        font-size: 1rem !important;
+        border: 2px solid #0E1B28 !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        transition: transform 0.25s ease, box-shadow 0.25s ease !important;
+        gap: 0 !important;
+    }
+
+    [data-theme="light"] .mobile-bottom-nav .ai-fab .fab-inner,
+    [data-theme="light"] .bottom-nav .ai-fab .fab-inner {
+        border-color: #ffffff !important;
+    }
+
+    .mobile-bottom-nav .ai-fab .fab-inner::after,
+    .bottom-nav .ai-fab .fab-inner::after {
+        display: none !important;
+        content: "" !important;
+    }
+
+    .mobile-bottom-nav .ai-fab span,
+    .bottom-nav .ai-fab span {
+        font-size: 0.65rem !important;
+        font-weight: 800 !important;
+        color: #ff7a00 !important;
+        margin-top: 1px !important;
+        white-space: nowrap !important;
+        display: block !important;
+    }
+
+    .mobile-bottom-nav .ai-fab.active .fab-inner,
+    .bottom-nav .ai-fab.active .fab-inner {
+        transform: scale(1.1) !important;
+        box-shadow: 0 4px 14px rgba(255, 106, 0, 0.7) !important;
+    }
+}
+
+/* ======================================================== */
+/* --- FLOATING ACTION BUTTON (+) RULES --- */
+/* ======================================================== */
+#quick-fab-container,
+.quick-fab-wrapper {
+    position: fixed !important;
+    bottom: 85px !important;
+    right: 20px !important;
+    left: auto !important;
+    z-index: 1000 !important;
+}
+
+#quick-fab-btn,
+.quick-fab-trigger {
+    width: 52px !important;
+    height: 52px !important;
+    border-radius: 50% !important;
+    background: linear-gradient(135deg, #00e5ff, #00b8cc) !important;
+    color: #020d1a !important;
+    border: none !important;
+    font-size: 1.35rem !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-shadow: 0 4px 18px rgba(0, 229, 255, 0.45) !important;
+    cursor: pointer !important;
+    transition: transform 0.25s ease, box-shadow 0.25s ease !important;
+}
+
+#quick-fab-btn:hover {
+    transform: scale(1.06) !important;
+    box-shadow: 0 6px 22px rgba(0, 229, 255, 0.6) !important;
+}
+
+#quick-fab-btn:active {
+    transform: scale(0.95) !important;
+}
+
+#quick-fab-menu {
+    position: absolute !important;
+    bottom: 64px !important;
+    right: 0 !important;
+    left: auto !important;
 }
 
 /* ========================================================= */
@@ -4216,138 +4239,280 @@ div[id^="dmermaid"],
 
 
 /* ========================================================
-   🚀 MODERN SIDEBAR & STUDENT ONBOARDING ENHANCEMENTS
+   🚀 CLEAN, MODERN SIDEBAR NAVIGATION (RTL ARABIC PWA)
    ======================================================== */
 
-/* Collapsible Accordion Header */
+/* Sidebar Container: Fixed 260px width, clean scrollbar, proper overflow */
+.sidebar {
+    width: 260px !important;
+    min-width: 260px !important;
+    max-width: 260px !important;
+    height: 100vh !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    background-color: var(--card-bg, #0B0F19) !important;
+    border-left: 1px solid var(--border-color, rgba(255, 255, 255, 0.08)) !important;
+    border-right: none !important;
+    border-top: none !important;
+    border-bottom: none !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    flex-direction: column !important;
+    padding: 16px 10px !important;
+    scrollbar-width: thin !important;
+    scrollbar-color: rgba(255, 255, 255, 0.15) transparent !important;
+}
+
+[data-theme="light"] .sidebar {
+    background-color: #ffffff !important;
+    border-left: 1px solid rgba(0, 0, 0, 0.08) !important;
+    scrollbar-color: rgba(0, 0, 0, 0.15) transparent !important;
+}
+
+/* Clean Custom Scrollbar */
+.sidebar::-webkit-scrollbar {
+    width: 5px !important;
+    display: block !important;
+}
+.sidebar::-webkit-scrollbar-track {
+    background: transparent !important;
+}
+.sidebar::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.15) !important;
+    border-radius: 10px !important;
+}
+.sidebar::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3) !important;
+}
+[data-theme="light"] .sidebar::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Category Headers: Subtle section heading style with dropdown arrow */
 .nav-category-header {
     display: flex !important;
     align-items: center !important;
     justify-content: space-between !important;
     width: 100% !important;
-    padding: 10px 14px !important;
-    margin: 8px 0 4px 0 !important;
-    background: rgba(255, 255, 255, 0.03) !important;
-    border: 1px solid rgba(255, 255, 255, 0.06) !important;
-    border-radius: 10px !important;
-    color: var(--primary-color) !important;
-    font-size: 0.82rem !important;
-    font-weight: 800 !important;
+    padding: 8px 12px !important;
+    margin: 12px 0 4px 0 !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    border-radius: 6px !important;
+    color: #94A3B8 !important;
+    font-size: 0.78rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.3px !important;
     cursor: pointer !important;
-    pointer-events: auto !important;
     user-select: none !important;
-    transition: all 0.25s ease !important;
+    transition: color 0.2s ease, background-color 0.2s ease !important;
     box-sizing: border-box !important;
     list-style: none !important;
 }
 
 .nav-category-header:hover {
-    background: rgba(0, 229, 255, 0.08) !important;
-    border-color: rgba(0, 229, 255, 0.3) !important;
-    color: #ffffff !important;
+    color: #f1f5f9 !important;
+    background: rgba(255, 255, 255, 0.03) !important;
+    border: none !important;
 }
 
 .nav-category-header.open {
-    background: rgba(0, 229, 255, 0.1) !important;
-    border-color: rgba(0, 229, 255, 0.35) !important;
-    color: #00e5ff !important;
+    color: #cbd5e1 !important;
+    background: transparent !important;
+    border: none !important;
 }
 
 .nav-category-header .nav-cat-title {
-    display: flex;
-    align-items: center;
-    gap: 8px;
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    font-size: 0.78rem !important;
+}
+
+.nav-category-header .nav-cat-title i {
+    font-size: 0.85rem !important;
+    opacity: 0.85 !important;
+    width: 16px !important;
+    text-align: center !important;
 }
 
 .nav-category-header .nav-cat-arrow {
-    font-size: 0.72rem;
-    color: var(--text-muted);
-    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), color 0.2s ease;
+    font-size: 0.7rem !important;
+    color: #64748B !important;
+    transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), color 0.2s ease !important;
 }
 
 .nav-category-header.open .nav-cat-arrow {
-    transform: rotate(180deg);
-    color: #00e5ff;
+    transform: rotate(180deg) !important;
+    color: var(--primary-color, #00e5ff) !important;
 }
 
-/* Accordion Body */
+/* Accordion Sub-Menu Body */
 .nav-category-body {
-    display: none;
-    width: 100%;
+    display: none !important;
+    width: 100% !important;
+    flex-direction: column !important;
+    gap: 2px !important;
+    padding: 2px 0 4px 0 !important;
+    box-sizing: border-box !important;
 }
 
 .nav-category-body.open {
-    display: flex;
-    flex-direction: column;
-    animation: fadeIn 0.25s ease;
+    display: flex !important;
+    flex-direction: column !important;
+    animation: fadeIn 0.2s ease;
 }
 
-/* Mobile Sidebar 2-Column Grid inside Accordion (max-width: 768px) */
+/* Standard Navigation Links (<li>): Clean, Flat Design, Proper Spacing & Alignment */
+.sidebar .nav-links {
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 2px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+.sidebar .nav-links li:not(.nav-category-header),
+.sidebar .nav-category-body li {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    text-align: right !important;
+    gap: 12px !important;
+    padding: 10px 14px !important;
+    margin: 2px 0 !important;
+    border-radius: 8px !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    color: var(--text-muted, #94A3B8) !important;
+    font-size: 0.88rem !important;
+    font-weight: 500 !important;
+    cursor: pointer !important;
+    transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease !important;
+    box-sizing: border-box !important;
+    width: 100% !important;
+    min-height: auto !important;
+}
+
+.sidebar .nav-links li:not(.nav-category-header) i,
+.sidebar .nav-category-body li i {
+    font-size: 1.05rem !important;
+    width: 20px !important;
+    text-align: center !important;
+    flex-shrink: 0 !important;
+    color: inherit !important;
+    margin: 0 !important;
+}
+
+/* Soft hover background */
+.sidebar .nav-links li:not(.nav-category-header):hover,
+.sidebar .nav-category-body li:hover {
+    background: rgba(255, 255, 255, 0.04) !important;
+    color: #ffffff !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+[data-theme="light"] .sidebar .nav-links li:not(.nav-category-header):hover,
+[data-theme="light"] .sidebar .nav-category-body li:hover {
+    background: rgba(0, 0, 0, 0.04) !important;
+    color: #0f172a !important;
+}
+
+/* Clean Flat Active State */
+.sidebar .nav-links li:not(.nav-category-header).active,
+.sidebar .nav-category-body li.active {
+    background: rgba(0, 229, 255, 0.12) !important;
+    color: var(--primary-color, #00e5ff) !important;
+    font-weight: 700 !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.sidebar .nav-links li:not(.nav-category-header).active i,
+.sidebar .nav-category-body li.active i {
+    color: var(--primary-color, #00e5ff) !important;
+}
+
+[data-theme="light"] .sidebar .nav-links li:not(.nav-category-header).active,
+[data-theme="light"] .sidebar .nav-category-body li.active {
+    background: rgba(0, 229, 255, 0.14) !important;
+    color: #0284c7 !important;
+}
+
+/* Mobile Sidebar Drawer (max-width: 768px): Maintains clean list layout without cramped boxing */
 @media (max-width: 768px) {
     .sidebar {
-        width: 320px !important;
-        max-width: 92vw !important;
-        right: -340px !important;
+        position: fixed !important;
+        top: 0 !important;
+        bottom: 0 !important;
+        right: -280px !important;
+        left: auto !important;
+        width: 260px !important;
+        min-width: 260px !important;
+        max-width: 85vw !important;
+        height: 100% !important;
+        max-height: 100dvh !important;
+        z-index: 100000 !important;
+        background: #0B0F19 !important;
+        border-left: 1px solid rgba(255, 255, 255, 0.1) !important;
+        box-shadow: -8px 0 30px rgba(0, 0, 0, 0.7) !important;
+        transition: right 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+        padding: 16px 10px !important;
     }
     .sidebar.open {
         right: 0 !important;
     }
-    .sidebar #student-nav-links {
+    .sidebar #student-nav-links,
+    .sidebar #teacher-nav-links {
         display: flex !important;
         flex-direction: column !important;
-        padding: 10px 12px !important;
-        gap: 0 !important;
         width: 100% !important;
-        box-sizing: border-box !important;
+        padding: 0 !important;
+        gap: 2px !important;
     }
     .sidebar #student-nav-links .nav-category-header {
-        margin: 6px 0 !important;
-        padding: 11px 14px !important;
+        margin: 10px 0 4px 0 !important;
+        padding: 8px 12px !important;
     }
     .sidebar #student-nav-links .nav-category-body {
-        display: none;
+        display: none !important;
         width: 100% !important;
     }
     .sidebar #student-nav-links .nav-category-body.open {
-        display: grid !important;
-        grid-template-columns: repeat(2, 1fr) !important;
-        gap: 8px !important;
-        padding: 6px 0 10px 0 !important;
+        display: flex !important;
+        flex-direction: column !important;
         width: 100% !important;
-        box-sizing: border-box !important;
-        animation: fadeIn 0.25s ease;
+        gap: 2px !important;
+        padding: 2px 0 4px 0 !important;
     }
     .sidebar #student-nav-links .nav-category-body li {
         width: 100% !important;
-        margin: 0 !important;
-        padding: 10px 6px !important;
+        margin: 2px 0 !important;
+        padding: 10px 14px !important;
         display: flex !important;
-        flex-direction: column !important;
+        flex-direction: row !important;
         align-items: center !important;
-        justify-content: center !important;
-        text-align: center !important;
-        gap: 6px !important;
-        border-radius: 12px !important;
-        font-size: 0.78rem !important;
-        line-height: 1.25 !important;
-        background: rgba(255, 255, 255, 0.04) !important;
-        border: 1px solid rgba(255, 255, 255, 0.08) !important;
-        min-height: 62px !important;
-        box-sizing: border-box !important;
-        transition: all 0.2s ease !important;
+        justify-content: flex-start !important;
+        text-align: right !important;
+        gap: 12px !important;
+        border-radius: 8px !important;
+        font-size: 0.88rem !important;
+        line-height: 1.4 !important;
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        min-height: auto !important;
     }
     .sidebar #student-nav-links .nav-category-body li i {
-        font-size: 1.15rem !important;
+        font-size: 1.05rem !important;
         margin: 0 !important;
-    }
-    .sidebar #student-nav-links .nav-category-body li.active {
-        background: var(--primary-color) !important;
-        color: #fff !important;
-        border-color: var(--primary-color) !important;
-        box-shadow: 0 4px 15px rgba(0, 229, 255, 0.3) !important;
-    }
-    .sidebar #student-nav-links .nav-category-body li:active {
-        transform: scale(0.96) !important;
     }
 }
 

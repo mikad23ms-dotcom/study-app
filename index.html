@@ -85,7 +85,7 @@
     </div>
 
             <!-- Student Floating Bottom Nav -->
-        <nav class="mobile-bottom-nav d-mobile" id="student-bottom-nav">
+        <nav class="mobile-bottom-nav bottom-nav d-mobile" id="student-bottom-nav">
             <div class="nav-item active" data-page="dashboard" onclick="switchPage('dashboard')">
                 <i class="fa-solid fa-house"></i>
                 <span>الرئيسية</span>
@@ -111,7 +111,7 @@
         </nav>
 
         <!-- Teacher Floating Bottom Nav (Shown only for Teachers) -->
-        <nav class="mobile-bottom-nav d-mobile nav-hidden" id="teacher-bottom-nav" style="display: none !important;">
+        <nav class="mobile-bottom-nav bottom-nav d-mobile nav-hidden" id="teacher-bottom-nav" style="display: none !important;">
             <div class="nav-item active" data-page="teacher-dashboard" onclick="switchPage('teacher-dashboard'); switchTeacherTab('overview');">
                 <i class="fa-solid fa-chart-pie"></i>
                 <span>الرئيسية</span>
@@ -4991,7 +4991,7 @@
 
 
     <!-- Floating Action Button (FAB) for Quick Addition from Anywhere -->
-    <div id="quick-fab-container" style="position: fixed; bottom: 85px; left: 20px; z-index: 9999;">
+    <div id="quick-fab-container" class="quick-fab-wrapper" style="position: fixed; bottom: 85px; right: 20px; z-index: 1000;">
         <!-- Quick Action Menu Sheet -->
         <div id="quick-fab-menu" style="display: none; flex-direction: column; gap: 8px; margin-bottom: 12px; background: rgba(15, 23, 42, 0.96); padding: 12px; border-radius: 16px; border: 1.5px solid #00e5ff; box-shadow: 0 10px 30px rgba(0,0,0,0.6); backdrop-filter: blur(12px); min-width: 210px;">
             <span style="font-size: 0.78rem; color: #00e5ff; font-weight: bold; display: block; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 6px; margin-bottom: 4px; text-align: right;">إضافة سريعة لمذاكرتك 👇</span>
@@ -5009,7 +5009,7 @@
             </button>
         </div>
         <!-- Main Floating Trigger Button -->
-        <button id="quick-fab-btn" onclick="toggleQuickFab()" style="width: 55px; height: 55px; border-radius: 50%; background: linear-gradient(135deg, #00e5ff, #00b8cc); color: #020d1a; border: none; font-size: 1.5rem; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(0, 229, 255, 0.5); cursor: pointer; transition: transform 0.25s ease;" title="إضافة سريعة لمذاكرتك">
+        <button id="quick-fab-btn" class="quick-fab-trigger" onclick="toggleQuickFab()" style="width: 52px; height: 52px; border-radius: 50%; background: linear-gradient(135deg, #00e5ff, #00b8cc); color: #020d1a; border: none; font-size: 1.4rem; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 18px rgba(0, 229, 255, 0.45); cursor: pointer; transition: transform 0.25s ease;" title="إضافة سريعة لمذاكرتك">
             <i class="fa-solid fa-plus" id="quick-fab-icon"></i>
         </button>
     </div>
